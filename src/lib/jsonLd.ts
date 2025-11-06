@@ -99,28 +99,29 @@ export function generateJsonLd<T extends keyof JsonLdData>({
   const baseUrl = 'https://lledo-industries.com'
 
   switch (type) {
-    case 'Organization':
+    case 'Organization': {
+      const orgData = data as OrganizationData
       return {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: data.name,
-        url: data.url,
-        logo: data.logo,
-        description: data.description,
+        name: orgData.name,
+        url: orgData.url,
+        logo: orgData.logo,
+        description: orgData.description,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: data.address.streetAddress,
-          addressLocality: data.address.addressLocality,
-          postalCode: data.address.postalCode,
-          addressCountry: data.address.addressCountry,
+          streetAddress: orgData.address.streetAddress,
+          addressLocality: orgData.address.addressLocality,
+          postalCode: orgData.address.postalCode,
+          addressCountry: orgData.address.addressCountry,
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: data.contactPoint.telephone,
-          contactType: data.contactPoint.contactType,
-          email: data.contactPoint.email,
+          telephone: orgData.contactPoint.telephone,
+          contactType: orgData.contactPoint.contactType,
+          email: orgData.contactPoint.email,
         },
-        sameAs: data.sameAs,
+        sameAs: orgData.sameAs,
         foundingDate: '1989',
         numberOfEmployees: '70',
         industry: 'Aéronautique',
@@ -132,34 +133,36 @@ export function generateJsonLd<T extends keyof JsonLdData>({
           'Conformité normes aéronautiques',
         ],
       }
+    }
 
-    case 'Product':
+    case 'Product': {
+      const productData = data as ProductData
       return {
         '@context': 'https://schema.org',
         '@type': 'Product',
-        name: data.name,
-        description: data.description,
-        sku: data.sku,
+        name: productData.name,
+        description: productData.description,
+        sku: productData.sku,
         brand: {
           '@type': 'Brand',
-          name: data.brand.name,
+          name: productData.brand.name,
         },
         manufacturer: {
           '@type': 'Organization',
-          name: data.manufacturer.name,
+          name: productData.manufacturer.name,
         },
-        category: data.category,
+        category: productData.category,
         offers: {
           '@type': 'Offer',
-          price: data.offers.price,
-          priceCurrency: data.offers.priceCurrency,
-          availability: data.offers.availability,
+          price: productData.offers.price,
+          priceCurrency: productData.offers.priceCurrency,
+          availability: productData.offers.availability,
           seller: {
             '@type': 'Organization',
-            name: data.offers.seller.name,
+            name: productData.offers.seller.name,
           },
         },
-        image: data.image,
+        image: productData.image,
         additionalProperty: [
           {
             '@type': 'PropertyValue',
@@ -178,12 +181,14 @@ export function generateJsonLd<T extends keyof JsonLdData>({
           },
         ],
       }
+    }
 
-    case 'FAQPage':
+    case 'FAQPage': {
+      const faqData = data as FAQData[]
       return {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: data.map((faq) => ({
+        mainEntity: faqData.map((faq) => ({
           '@type': 'Question',
           name: faq.question,
           acceptedAnswer: {
@@ -192,84 +197,93 @@ export function generateJsonLd<T extends keyof JsonLdData>({
           },
         })),
       }
+    }
 
-    case 'BreadcrumbList':
+    case 'BreadcrumbList': {
+      const breadcrumbData = data as BreadcrumbData[]
       return {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
-        itemListElement: data.map((item, index) => ({
+        itemListElement: breadcrumbData.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           name: item.name,
           item: `${baseUrl}${item.item}`,
         })),
       }
+    }
 
-    case 'Article':
+    case 'Article': {
+      const articleData = data as ArticleData
       return {
         '@context': 'https://schema.org',
         '@type': 'Article',
-        headline: data.headline,
-        description: data.description,
-        image: data.image,
-        datePublished: data.datePublished,
-        dateModified: data.dateModified,
+        headline: articleData.headline,
+        description: articleData.description,
+        image: articleData.image,
+        datePublished: articleData.datePublished,
+        dateModified: articleData.dateModified,
         author: {
           '@type': 'Person',
-          name: data.author.name,
+          name: articleData.author.name,
         },
         publisher: {
           '@type': 'Organization',
-          name: data.publisher.name,
+          name: articleData.publisher.name,
           logo: {
             '@type': 'ImageObject',
-            url: data.publisher.logo,
+            url: articleData.publisher.logo,
           },
         },
       }
+    }
 
-    case 'WebPage':
+    case 'WebPage': {
+      const webPageData = data as WebPageData
       return {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: data.name,
-        description: data.description,
-        url: data.url,
+        name: webPageData.name,
+        description: webPageData.description,
+        url: webPageData.url,
       }
+    }
 
-    case 'LocalBusiness':
+    case 'LocalBusiness': {
+      const localBusinessData = data as LocalBusinessData
       return {
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
-        name: data.name,
-        url: data.url,
-        logo: data.logo,
-        description: data.description,
-        priceRange: data.priceRange,
+        name: localBusinessData.name,
+        url: localBusinessData.url,
+        logo: localBusinessData.logo,
+        description: localBusinessData.description,
+        priceRange: localBusinessData.priceRange,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: data.address.streetAddress,
-          addressLocality: data.address.addressLocality,
-          postalCode: data.address.postalCode,
-          addressCountry: data.address.addressCountry,
+          streetAddress: localBusinessData.address.streetAddress,
+          addressLocality: localBusinessData.address.addressLocality,
+          postalCode: localBusinessData.address.postalCode,
+          addressCountry: localBusinessData.address.addressCountry,
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: data.geo.latitude,
-          longitude: data.geo.longitude,
+          latitude: localBusinessData.geo.latitude,
+          longitude: localBusinessData.geo.longitude,
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: data.contactPoint.telephone,
-          contactType: data.contactPoint.contactType,
-          email: data.contactPoint.email,
+          telephone: localBusinessData.contactPoint.telephone,
+          contactType: localBusinessData.contactPoint.contactType,
+          email: localBusinessData.contactPoint.email,
         },
-        openingHoursSpecification: data.openingHours.map((hours) => ({
+        openingHoursSpecification: localBusinessData.openingHours.map((hours) => ({
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: hours,
         })),
-        sameAs: data.sameAs,
+        sameAs: localBusinessData.sameAs,
       }
+    }
 
     default:
       return {}

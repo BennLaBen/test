@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
-import type { BlogPost } from '@/lib/posts'
+import type { Post } from '@/lib/posts'
 import {
   Clock,
   Calendar,
@@ -26,8 +26,8 @@ export default function BlogPostPage() {
   const slug = params.slug as string
   const { t, i18n } = useTranslation('blog')
   
-  const [post, setPost] = useState<BlogPost | null>(null)
-  const [allPosts, setAllPosts] = useState<BlogPost[]>([])
+  const [post, setPost] = useState<Post | null>(null)
+  const [allPosts, setAllPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

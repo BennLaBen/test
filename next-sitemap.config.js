@@ -7,26 +7,20 @@ module.exports = {
     const result = []
     
     // Add blog posts
-    const { allPosts } = await import('./contentlayer/generated')
-    allPosts.forEach((post) => {
-      result.push({
-        loc: `/blog/${post.slug}`,
-        lastmod: new Date(post.date).toISOString(),
-        changefreq: 'monthly',
-        priority: 0.7,
+    try {
+      const { getAllPosts } = await import('./src/lib/posts.ts')
+      const allPosts = getAllPosts()
+      allPosts.forEach((post) => {
+        result.push({
+          loc: `/blog/${post.slug}`,
+          lastmod: new Date(post.date).toISOString(),
+          changefreq: 'monthly',
+          priority: 0.7,
+        })
       })
-    })
-    
-    // Add products
-    const { allProducts } = await import('./contentlayer/generated')
-    allProducts.forEach((product) => {
-      result.push({
-        loc: `/produits/${product.slug}`,
-        lastmod: new Date().toISOString(),
-        changefreq: 'monthly',
-        priority: 0.8,
-      })
-    })
+    } catch (error) {
+      console.warn('Could not load blog posts for sitemap:', error.message)
+    }
     
     return result
   },

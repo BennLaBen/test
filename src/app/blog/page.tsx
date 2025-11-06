@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { useTranslation } from 'react-i18next'
-import type { BlogPost } from '@/lib/posts'
+import type { Post } from '@/lib/posts'
 
 export default function BlogPage() {
   const { t, i18n } = useTranslation('blog')
-  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
