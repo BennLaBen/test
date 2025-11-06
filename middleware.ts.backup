@@ -1,0 +1,35 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  
+  console.log('🔍 [Middleware] Incoming request:', {
+    pathname,
+    method: request.method,
+    url: request.url,
+    locale: pathname.startsWith('/en') ? 'en' : 'fr',
+  })
+
+  // Vérifier si c'est une route /en
+  if (pathname.startsWith('/en')) {
+    console.log('✅ [Middleware] Route /en détectée, passage autorisé')
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - images (public images)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico|images|logo.png).*)',
+  ],
+}
+

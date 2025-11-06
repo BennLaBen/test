@@ -1,0 +1,192 @@
+{
+  "products": {
+    "badge": "LLEDO AEROTOOLS",
+    "title": "Équipements GSE certifiés",
+    "subtitle": "Barres de remorquage et rollers hydrauliques conçus et fabriqués en France. Conformes Directive Machines 2006/42-CE et ISO 9667.",
+    "cards": [
+      {
+        "id": "rl-r125",
+        "badge": "Best-seller",
+        "category": "Barre de remorquage",
+        "name": "RL125-02",
+        "description": "Chariot de déplacement hydraulique pour H125/AS350 avec patins Ø80mm conformes Airbus.",
+        "features": [
+          "CMU 3 500 kg testée à 4 375 kg",
+          "Vérin hydraulique 350 bar certifié",
+          "Patins Ø80mm homologués Airbus",
+          "Conforme EN 12312 & Directive Machines"
+        ],
+        "link": "/aerotools/rl-r125"
+      },
+      {
+        "id": "platform",
+        "badge": "Nouveau",
+        "category": "Maintenance",
+        "name": "Plateforme d'accès",
+        "description": "Plateforme mobile ergonomique pour interventions en hauteur. Hauteur ajustable 2 à 4 m avec garde-corps conformes.",
+        "features": [
+          "Hauteur ajustable 2-4 m",
+          "Charge maximale 250 kg",
+          "Garde-corps sécurisés",
+          "Roues pivotantes verrouillables"
+        ],
+        "link": "/aerotools"
+      },
+      {
+        "id": "tools-kit",
+        "badge": "",
+        "category": "Maintenance",
+        "name": "Kit outillage MRO",
+        "description": "Ensemble d'outillage spécialisé aéronautique avec traçabilité complète et mallette de transport.",
+        "features": [
+          "Outillage certifié aéronautique",
+          "Traçabilité complète",
+          "Mallette de transport",
+          "Documentation technique incluse"
+        ],
+        "link": "/aerotools"
+      }
+    ],
+    "cardCta": "Voir les détails",
+    "footerCta": "Découvrir AEROTOOLS"
+  },
+  "process": {
+    "badge": "Notre process",
+    "title": "De votre besoin à la livraison",
+    "subtitle": "Un accompagnement expert à chaque étape pour garantir des équipements parfaitement adaptés à votre flotte.",
+    "stepLabel": "Étape {{number}}",
+    "steps": [
+      {
+        "title": "Consultation",
+        "description": "Diagnostic de votre flotte, définition du besoin et première recommandation technique.",
+        "details": [
+          "Analyse de vos appareils",
+          "Étude de faisabilité",
+          "Planning projet"
+        ]
+      },
+      {
+        "title": "Étude & conception",
+        "description": "Proposition technique détaillée et validation des spécifications sur-mesure.",
+        "details": [
+          "Retour sous 48 h",
+          "Plans techniques",
+          "Validation client"
+        ]
+      },
+      {
+        "title": "Fabrication",
+        "description": "Fabrication en atelier certifié ISO 9001 et contrôles qualité systématiques.",
+        "details": [
+          "Fabrication certifiée",
+          "Contrôles non destructifs",
+          "Tests CMU 1,25×"
+        ]
+      },
+      {
+        "title": "Livraison",
+        "description": "Logistique internationale sécurisée, documentation complète et formation initiale.",
+        "details": [
+          "Transport sécurisé",
+          "Formation opérateurs",
+          "Mise en service"
+        ]
+      },
+      {
+        "title": "Installation et validation",
+        "description": "Installation sur site, vérifications fonctionnelles et remise des certificats de conformité.",
+        "details": [
+          "Installation et mise en service",
+          "Tests fonctionnels",
+          "Certification CE",
+          "Rapport de conformité"
+        ]
+      },
+      {
+        "title": "Support et maintien opérationnel",
+        "description": "Maintenance préventive, support technique continu et pièces de rechange pour garantir la disponibilité de vos équipements.",
+        "details": [
+          "Hotline 7j/7",
+          "Maintenance préventive",
+          "Contrats de maintien en condition opérationnelle",
+          "Pièces d'origine et documentation"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Questions fréquentes",
+    "subtitle": "Tout ce que vous devez savoir sur nos équipements GSE et services associés.",
+    "items": [
+      {
+        "question": "Quelles certifications possèdent vos équipements ?",
+        "answer": "Tous nos équipements sont conformes à la Directive Machines 2006/42/CE et à la norme EN 12312-1. Chaque produit est livré avec déclaration de conformité UE, certificat de test CMU et notice d'utilisation."
+      },
+      {
+        "question": "Le RL125-02 est-il compatible avec mon hélicoptère ?",
+        "answer": "Le RL125-02 est conçu pour les H125/AS350 (patins Ø80 mm). Des adaptations sont disponibles pour EC120, EC130 et autres modèles via kits patins interchangeables."
+      },
+      {
+        "question": "Quels sont vos délais de livraison ?",
+        "answer": "Pour les références stockées (RL125-02, plateformes standard), comptez 2 à 4 semaines en France métropolitaine. Les productions sur-mesure nécessitent 6 à 10 semaines."
+      },
+      {
+        "question": "Proposez-vous des contrats de maintenance ?",
+        "answer": "Oui, LLEDO Industries propose des contrats de maintenance préventive incluant inspection complète, contrôles hydrauliques, test CMU et remplacement des pièces d'usure."
+      },
+      {
+        "question": "Quelle est la garantie ?",
+        "answer": "La garantie standard est de 24 mois pièces et main d'œuvre. Des extensions jusqu'à 5 ans sont disponibles, incluant maintenance préventive et prêt d'équipement."
+      },
+      {
+        "question": "Comment obtenir une étude personnalisée ?",
+        "answer": "Contactez-nous via le formulaire en ligne, par téléphone ou email. Indiquez le modèle d'hélicoptère, le volume et vos contraintes opérationnelles pour recevoir une recommandation sous 48 h."
+      }
+    ],
+    "contactCta": "Vous ne trouvez pas la réponse ?",
+    "contactDescription": "Nos experts sont disponibles pour répondre à vos questions et organiser une démonstration.",
+    "contactButton": "Nous contacter"
+  },
+  "cta": {
+    "title": "Équipez votre flotte avec des solutions certifiées",
+    "subtitle": "Rejoignez plus de 70 opérateurs et centres MRO qui font confiance à LLEDO Industries.",
+    "primary": "Nous contacter",
+    "secondary": "Découvrir nos produits",
+    "contacts": {
+      "phone": {
+        "label": "Téléphone",
+        "value": "+33 4 42 02 96 74",
+        "info": "Lun-Ven 8h-18h"
+      },
+      "email": {
+        "label": "Email",
+        "value": "contact@lledo-industries.com",
+        "info": "Réponse sous 24 h"
+      },
+      "address": {
+        "label": "Adresse",
+        "value": "9-11 Bd de la Capelane, 13170 Les Pennes-Mirabeau",
+        "info": "France"
+      }
+    },
+    "stats": [
+      {
+        "label": "Clients satisfaits",
+        "value": "70+"
+      },
+      {
+        "label": "Années d'expérience",
+        "value": "35"
+      },
+      {
+        "label": "Certifié CE",
+        "value": "100%"
+      },
+      {
+        "label": "Qualité ISO 9001",
+        "value": "ISO 9001"
+      }
+    ]
+  }
+}

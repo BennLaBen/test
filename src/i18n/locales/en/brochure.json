@@ -1,0 +1,41 @@
+{
+  "badge": "Documentation technique",
+  "title": "Télécharger notre plaquette",
+  "subtitle": "Accédez à toute notre documentation technique : parc machines, certifications, moyens de contrôle et capacités.",
+  "downloadAll": "Télécharger la plaquette complète",
+  "items": [
+    {
+      "title": "Parc machines",
+      "description": "Liste complète de nos équipements CNC 3, 4 et 5 axes, capacités d'usinage",
+      "size": "PDF - 2.3 Mo"
+    },
+    {
+      "title": "Outils informatiques",
+      "description": "Logiciels CAO/DAO, ERP, systèmes de gestion de production",
+      "size": "PDF - 1.8 Mo"
+    },
+    {
+      "title": "Certifications",
+      "description": "ISO 9001, EN 9100, Interchangeabilité AIRBUS, qualifications",
+      "size": "PDF - 3.1 Mo"
+    },
+    {
+      "title": "Moyens de contrôle",
+      "description": "Contrôle 3D, métrologie, bancs de tests, équipements de mesure",
+      "size": "PDF - 2.5 Mo"
+    },
+    {
+      "title": "Capacités techniques",
+      "description": "Tolérances, matériaux usinables, traitements de surface disponibles",
+      "size": "PDF - 2.0 Mo"
+    },
+    {
+      "title": "Infrastructure",
+      "description": "Surface des ateliers, zones de stockage, capacités logistiques",
+      "size": "PDF - 1.5 Mo"
+    }
+  ],
+  "downloadButton": "Télécharger",
+  "downloadAlert": "Téléchargement de \"{{title}}\" - Fonctionnalité à venir. Les PDF seront disponibles prochainement.",
+  "downloadCompleteAlert": "Téléchargement de la plaquette complète - Fonctionnalité à venir. Le PDF sera disponible prochainement."
+}

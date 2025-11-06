@@ -1,0 +1,145 @@
+---
+title: "Dans les coulisses d'un projet : Le banc de test hydraulique pour Safran"
+description: "Comment LLEDO Industries a conçu, fabriqué et installé un banc de test 350 bar pour Safran en 4 mois. Récit d'un projet de A à Z."
+date: "2024-10-15"
+author: "Marc, Responsable Bureau d'Études EGI"
+tags: ["Projet client", "Safran", "Banc de test", "Réalisation"]
+locale: "fr"
+featured: false
+image: "/images/blog/projet-safran.jpg"
+---
+
+# Quand Safran nous appelle : « On a besoin d'un banc de test. Vous pouvez nous aider ? »
+
+**Mars 2023.** Le téléphone sonne au bureau d'études EGI. C'est Christophe, acheteur chez Safran Helicopter Engines à Bordes (64).
+
+"Marc, on a un problème. Notre banc de test hydraulique pour vérins moteurs, il est HS. Fuite irréparable. On doit en refaire un. Vous êtes partants ?"
+
+Je regarde mon planning. On est chargés, mais... Safran, c'est Safran. On ne dit pas non à un client comme ça.
+
+"Envoie-moi ton CDC, je te fais une proposition sous 48h."
+
+## J+2 : L'étude de faisabilité
+
+Cahier des charges reçu. Je le décortique avec Sophie, notre ingénieure conception.
+
+**Specs :**
+- Test de vérins hydrauliques Ø40 à Ø80mm
+- Pression : 0 à 350 bar
+- Course : 100 à 500mm
+- Mesure force, pression, course
+- Centrale hydraulique intégrée
+- Sécurité : carter de protection, arrêts d'urgence
+- Normes : Directive Machines, dossier technique complet
+
+"C'est faisable", me dit Sophie. "Bâti mécanique usiné par MPEB, structure tubulaire par MGP, montage chez nous, installation par FREM."
+
+**Devis : 78 000€ HT. Délai : 4 mois.**
+
+Christophe valide le lendemain. C'est parti.
+
+## Semaine 1-2 : Conception sur CATIA V5
+
+Sophie se met au travail. Elle modélise l'ensemble sur CATIA V5 :
+- Bâti principal en aluminium 6082 (800 x 600 x 400mm)
+- Structure support en tubes acier 80x80
+- Système de fixation vérin (modulable)
+- Intégration centrale hydraulique
+- Carter de protection polycarbonate
+
+Moi je m'occupe des calculs. Le vérin peut pousser jusqu'à 15 tonnes. Il faut que le bâti encaisse sans déformer.
+
+**Calcul RDM + Éléments Finis (Ansys) :**
+- Contrainte maxi : 180 MPa (limite élastique alu 6082 : 250 MPa) ✅
+- Flèche maxi : 0.15mm (acceptable) ✅
+- Coefficient de sécurité : 1.4 ✅
+
+On valide la conception. Claire, notre dessinatrice, sort les plans d'exécution. 45 plans au total.
+
+## Semaine 3-4 : Fabrication MPEB
+
+Les plans partent à l'atelier. Patrick, le chef d'atelier, les étudie.
+
+"Le bâti, je le mets sur la Mazak n°3. Ça va prendre 22h d'usinage. Les supports, je les fais sur la DMU. Délai : 3 semaines."
+
+Jean-Marc prend en charge le bâti. C'est lui le spécialiste alu sur 5 axes. La pièce fait 60 kg de brut, elle va en faire 28 finie. 32 kg de copeaux !
+
+**Usinage :**
+- Jour 1-2 : Ébauche (fraises Ø20 et Ø12)
+- Jour 3 : Finition (fraise Ø6 à 8000 tr/min)
+- Jour 4 : Perçages, taraudages, alésages
+
+Contrôle sur la MMT par Rachid : 100% conforme. Les tolérances IT7 sont respectées.
+
+## Semaine 5 : Structure MGP
+
+Pendant ce temps, à Saint-Bauzille-de-Putois (34), l'équipe MGP découpe et soude la structure tubulaire.
+
+**Fabrication :**
+- Découpe tubes au laser Bystronic
+- Soudure MAG par Jean-Pierre (8h de soudure)
+- Peinture époxy RAL 7035
+
+Poids final : 185 kg. Transport MPEB → MGP par notre camion.
+
+## Semaine 6-8 : Assemblage et intégration
+
+Retour de toutes les pièces aux Pennes-Mirabeau. On assemble dans notre zone montage.
+
+**Composants :**
+- Bâti MPEB + structure MGP
+- Centrale hydraulique (achetée chez Bosch Rexroth - 18 000€)
+- Capteurs pression, force (HBM)
+- Automate Siemens S7-1200
+- Pupitre tactile 10"
+
+L'assemblage prend 2 semaines. Karim, de FREM, nous aide pour la partie élec/hydraulique. Il est habilité BR.
+
+## Semaine 9 : Tests en atelier
+
+Ça y est, le banc est monté. On fait les tests ici avant de l'expédier.
+
+**Programme de tests :**
+- Test étanchéité (eau, puis huile)
+- Montée en pression progressive (50, 100, 200, 300, 350 bar)
+- Mesure précision capteurs
+- Test arrêts d'urgence
+- Essais avec vérin témoin
+
+Tout fonctionne ! Christophe de Safran fait le déplacement pour voir. Il est bluffé.
+
+"Les gars, c'est exactement ce qu'on voulait. Nickel."
+
+## Semaine 10 : Installation à Bordes (64)
+
+Patrick et David (FREM) partent avec le Ford Transit. 7h de route vers les Pyrénées.
+
+**Installation (3 jours) :**
+- Jour 1 : Déchargement, pose au sol, nivellement
+- Jour 2 : Raccordements électriques, essais à vide
+- Jour 3 : Essais en charge, formation opérateurs (4 personnes)
+
+Mise en service officielle : **Juillet 2023**
+
+## Bilan du projet
+
+**En chiffres :**
+- Délai annoncé : 4 mois → Délai réel : 3 mois et 3 semaines ✅
+- Budget : 78 000€ → Dépensé : 76 500€ ✅
+- Taux de conformité : 100%
+- Client satisfait : Oui !
+
+**Ce qu'on a appris :**
+- L'importance de la conception en amont (2 semaines d'études évitent 2 mois de galère)
+- La synergie MPEB + MGP + FREM fonctionne parfaitement
+- La proximité client est clé (on a fait 4 réunions d'avancement avec Safran)
+
+**La suite :**
+Safran nous a rappelés en février 2024 pour un deuxième banc, légèrement différent. Preuve que le premier fonctionne bien !
+
+---
+
+*Vous avez un projet d'équipement sur-mesure ? Contactez EGI : 📞 +33 4 42 02 96 74 - 📧 contact@lledo-industries.com*
+
+*Étude de faisabilité gratuite sous 1 semaine.*
+

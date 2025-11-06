@@ -1,0 +1,126 @@
+{
+  "title": "Nos Expertises",
+  "subtitle": "Un collectif de 5 entités complémentaires pour couvrir l'ensemble de vos besoins en ingénierie industrielle",
+  "list": [
+    {
+      "id": "mpeb",
+      "name": "MPEB",
+      "tagline": "Usinage de précision et mécanique générale",
+      "description": "Cœur historique du groupe depuis 1989, MPEB est spécialisée dans l'usinage de précision 3, 4 et 5 axes, la fabrication de pièces mécaniques complexes et l'assemblage d'ensembles mécaniques pour l'aéronautique et la défense.",
+      "expertise": [
+        "Usinage de précision sur machines CNC 3, 4 et 5 axes",
+        "Fabrication de pièces unitaires et petites séries",
+        "Assemblage d'ensembles mécaniques complexes",
+        "Contrôle dimensionnel 3D et métrologie",
+        "Électro-érosion à fil et par enfonçage",
+        "Découpe jet d'eau haute pression"
+      ],
+      "capabilities": {
+        "capacity": "100 000 heures/an",
+        "precision": "Tolérance ±0.01mm",
+        "machines": "15+ machines CNC"
+      },
+      "certifications": ["ISO 9001:2015", "EN 9100:2018", "Interchangeabilité AIRBUS"],
+      "ctaLabel": "Découvrir MPEB"
+    },
+    {
+      "id": "egi",
+      "name": "EGI",
+      "tagline": "Bureau d'études et ingénierie",
+      "description": "EGI apporte son expertise en conception technique, calculs de structures et développement de solutions sur mesure. Notre bureau d'études accompagne nos clients de l'idée initiale jusqu'à la validation du produit fini.",
+      "expertise": [
+        "Conception mécanique et études techniques",
+        "Modélisation 3D et simulations (CAO/DAO)",
+        "Calculs de structures et résistance des matériaux",
+        "Plans d'exécution et documentation technique",
+        "Reverse engineering et amélioration de produits",
+        "Accompagnement certification et homologation"
+      ],
+      "capabilities": {
+        "capacity": "Bureau d'études intégré",
+        "precision": "Logiciels CAO dernière génération",
+        "machines": "SolidWorks, CATIA V5"
+      },
+      "certifications": ["Expertise certifiée", "Agrément Airbus", "Méthodes APQP"],
+      "ctaLabel": "Découvrir EGI"
+    },
+    {
+      "id": "frem",
+      "name": "FREM",
+      "tagline": "Maintenance industrielle et installation",
+      "description": "FREM assure la maintenance préventive et curative, l'installation d'équipements sur site et le support technique. Notre équipe intervient chez nos clients pour garantir la disponibilité et la performance de leurs équipements.",
+      "expertise": [
+        "Maintenance préventive et curative d'équipements industriels",
+        "Installation et mise en service sur site client",
+        "Support technique et dépannage d'urgence",
+        "Contrôles périodiques et vérifications réglementaires",
+        "Formation des équipes d'exploitation",
+        "Contrats de maintenance sur mesure"
+      ],
+      "capabilities": {
+        "capacity": "Disponibilité 7j/7",
+        "precision": "Intervention sous 48h",
+        "machines": "Équipes mobiles"
+      },
+      "certifications": ["Techniciens certifiés", "Habilitations électriques", "CACES"],
+      "ctaLabel": "Découvrir FREM"
+    },
+    {
+      "id": "mgp",
+      "name": "MGP",
+      "tagline": "Tôlerie, chaudronnerie et assemblage",
+      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Basée à Saint-Bauzille-de-Putois, MGP apporte une expertise complémentaire sur des marchés diversifiés.",
+      "expertise": [
+        "Tôlerie industrielle et découpe laser",
+        "Chaudronnerie et travail des métaux",
+        "Soudure tous procédés (TIG, MIG, ARC)",
+        "Pliage, roulage et formage de tôles",
+        "Assemblage d'ensembles mécaniques et sous-ensembles",
+        "Traitement de surface et peinture industrielle"
+      ],
+      "capabilities": {
+        "capacity": "2000m² d'atelier",
+        "precision": "8 soudeurs qualifiés",
+        "machines": "Laser, presse plieuse, rouleuse"
+      },
+      "certifications": ["ISO 9001", "Soudeurs certifiés EN 287", "Marquage CE"],
+      "ctaLabel": "Découvrir MGP"
+    },
+    {
+      "id": "aerotools",
+      "name": "LLEDO Aerotools",
+      "tagline": "Équipements GSE pour hélicoptères",
+      "description": "Division dédiée au développement et à la commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères légers. Barres de remorquage, chariots de levage et outillages spécialisés conformes aux normes aéronautiques.",
+      "expertise": [
+        "Barres de remorquage certifiées EN 12312 et EN 1915",
+        "Chariots de levage et manutention hélicoptères",
+        "Outillages spécialisés maintenance rotor",
+        "Équipements sur mesure selon spécifications client",
+        "Formation à l'utilisation des équipements",
+        "Support technique et SAV"
+      ],
+      "capabilities": {
+        "capacity": "Gamme complète GSE hélico",
+        "precision": "Test 1,25× CMU",
+        "machines": "Certification CE et aéronautique"
+      },
+      "certifications": ["Directive Machines 2006/42/CE", "EN 12312", "EN 1915"],
+      "ctaLabel": "Découvrir LLEDO Aerotools"
+    }
+  ],
+  "stats": {
+    "title": "Le Groupe LLEDO en chiffres",
+    "list": [
+      { "value": "36 ans", "label": "d'expérience" },
+      { "value": "70", "label": "collaborateurs" },
+      { "value": "100 000h", "label": "de production/an" },
+      { "value": "5", "label": "entités complémentaires" }
+    ]
+  },
+  "cta": {
+    "title": "Besoin d'un partenaire industriel complet ?",
+    "subtitle": "Contactez-nous pour discuter de votre projet et découvrir comment nos expertises peuvent répondre à vos besoins.",
+    "button": "Demander un devis"
+  }
+}
+

@@ -1,0 +1,182 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "expertises": "Nos Expertises",
+    "gerard": "Notre Vision",
+    "caseStudies": "Cas clients",
+    "blog": "Blog",
+    "contact": "Contact",
+    "careers": "Carrières",
+    "quote": "Votre projet nous intéresse"
+  },
+  "hero": {
+    "chip": "Collectif d'ingénierie",
+    "headline": "LLEDO Industries",
+    "headlineAccent": "groupe industriel intégré",
+    "subheadline": "Ingénierie, usinage de précision et maintenance pour l'aéronautique et la défense depuis 1989. Un collectif d'experts réunissant MPEB, EGI, FREM et MGP pour piloter vos projets de bout en bout.",
+    "ctaPrimary": "Nous contacter",
+    "ctaSecondary": "Découvrir nos expertises",
+    "badges": {
+      "compliance": "Ingénierie & usinage intégrés",
+      "cmu": "70 collaborateurs certifiés EN 9100",
+      "certs": "ISO 9001 & EN 9100"
+    },
+    "productLabel": "Division AEROTOOLS – expertise GSE",
+    "trust": {
+      "title": "Plus de 70 clients nous font confiance",
+      "brands": [
+        "Airbus Helicopters",
+        "Safran",
+        "Thales",
+        "Dassault"
+      ]
+    }
+  },
+  "features": {
+    "title": "Pourquoi choisir LLEDO Industries ?",
+    "subtitle": "Notre expertise technique et notre engagement qualité nous positionnent comme le partenaire de référence pour vos besoins en outillage aéronautique.",
+    "stats": {
+      "years": "{{count}}+ Années d'expertise",
+      "employees": "{{count}}+ Collaborateurs",
+      "countries": "{{count}}+ Pays exportés",
+      "compliance": "{{percent}} Conformité normes"
+    },
+    "list": [
+      {
+        "title": "Conformité garantie",
+        "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
+        "benefits": [
+          "Test 1,25× CMU",
+          "Traçabilité complète",
+          "Certifications aéronautiques"
+        ]
+      },
+      {
+        "title": "Précision technique",
+        "description": "Usinage de précision 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
+        "benefits": [
+          "Tolérance ±0.01mm",
+          "Contrôle qualité",
+          "Expertise technique"
+        ]
+      },
+      {
+        "title": "Délais respectés",
+        "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
+        "benefits": [
+          "100 000h/an",
+          "Planification rigoureuse",
+          "Suivi projet"
+        ]
+      },
+      {
+        "title": "Équipe experte",
+        "description": "Plus de 70 collaborateurs spécialisés dans l'outillage aéronautique et les équipements GSE.",
+        "benefits": [
+          "Formation continue",
+          "Expertise métier",
+          "Support technique"
+        ]
+      },
+      {
+        "title": "Innovation continue",
+        "description": "R&D permanente pour développer des solutions techniques de pointe et améliorer nos produits.",
+        "benefits": [
+          "Bureau d'études intégré",
+          "Prototypage",
+          "Amélioration continue"
+        ]
+      },
+      {
+        "title": "Service international",
+        "description": "Export vers plus de 20 pays avec support technique local et formation des équipes.",
+        "benefits": [
+          "Export international",
+          "Support local",
+          "Formation équipes"
+        ]
+      }
+    ],
+    "process": {
+      "title": "Processus qualité intégré",
+      "subtitle": "De la conception à la mise en service, nous maîtrisons l'ensemble de la chaîne de valeur pour garantir la qualité et la conformité de nos solutions.",
+      "steps": [
+        {
+          "title": "Conception",
+          "subtitle": "Bureau d'études intégré"
+        },
+        {
+          "title": "Fabrication",
+          "subtitle": "Usinage de précision"
+        },
+        {
+          "title": "Contrôle",
+          "subtitle": "Tests et certifications"
+        },
+        {
+          "title": "Service",
+          "subtitle": "Support et maintenance"
+        }
+      ]
+    }
+  },
+  "language": {
+    "switchLabel": "Changer de langue",
+    "current": "Langue actuelle"
+  },
+  "theme": {
+    "industrial": {
+      "label": "Mode Métal",
+      "description": "Clair & premium"
+    },
+    "onyx": {
+      "label": "Mode Onyx",
+      "description": "Nocturne néon"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Entreprise",
+      "links": {
+        "about": "Notre Vision",
+        "expertises": "Nos Expertises",
+        "careers": "Carrières",
+        "contact": "Contact"
+      }
+    },
+    "services": {
+      "title": "Nos Services",
+      "links": {
+        "expertises": "Nos Expertises",
+        "brochure": "Télécharger la plaquette",
+        "caseStudies": "Cas clients",
+        "quote": "Votre projet nous intéresse"
+      }
+    },
+    "resources": {
+      "title": "Ressources",
+      "links": {
+        "blog": "Blog",
+        "caseStudies": "Cas clients",
+        "docs": "Documentation",
+        "support": "Support technique"
+      }
+    },
+    "legal": {
+      "title": "Légal",
+      "links": {
+        "mentions": "Mentions légales",
+        "privacy": "Politique de confidentialité",
+        "terms": "CGV",
+        "cookies": "Cookies"
+      }
+    },
+    "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau",
+    "phone": "+33 4 42 02 96 74",
+    "email": "contact@lledo-industries.com",
+    "bottom": {
+      "madeInFrance": "Fabriqué en France 🇫🇷",
+      "copyright": "© {{year}} LLEDO Industries. Tous droits réservés."
+    }
+  }
+}

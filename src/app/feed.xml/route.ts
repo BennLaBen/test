@@ -1,0 +1,40 @@
+import { getAllPosts } from '@/lib/posts'
+
+export async function GET() {
+  const posts = getAllPosts()
+  const baseUrl = 'https://lledo-industries.com'
+
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLEDO Industries - Blog</title>
+    <link>${baseUrl}</link>
+    <description>Blog LLEDO Industries : expertise en usinage de précision, tôlerie, maintenance industrielle et conception mécanique</description>
+    <language>fr-FR</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
+    ${posts
+      .map(
+        (post) => `
+    <item>
+      <title><![CDATA[${post.title}]]></title>
+      <link>${baseUrl}/blog/${post.slug}</link>
+      <description><![CDATA[${post.description}]]></description>
+      <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+      <author>${post.author}</author>
+      <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
+      ${post.tags?.map((tag) => `<category>${tag}</category>`).join('\n      ')}
+    </item>`
+      )
+      .join('')}
+  </channel>
+</rss>`
+
+  return new Response(rss, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+    },
+  })
+}
+

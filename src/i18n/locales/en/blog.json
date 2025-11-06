@@ -1,0 +1,20 @@
+{
+  "title": "Blog & Actualités - LLEDO Industries",
+  "description": "Découvrez nos articles techniques sur l'usinage de précision, la conception mécanique, la maintenance industrielle et l'histoire du Groupe LLEDO Industries.",
+  "hero": {
+    "badge": "Blog LLEDO Industries",
+    "title": "Expertise & Savoir-Faire",
+    "subtitle": "Découvrez nos ateliers, nos équipements et nos réalisations. Articles techniques rédigés par nos experts.",
+    "featured": "À LA UNE",
+    "stats": {
+      "articles": "Articles publiés",
+      "entities": "Entités",
+      "experience": "Ans d'expertise"
+    }
+  },
+  "sections": {
+    "latestArticles": "Articles à la une",
+    "allArticles": "Tous nos articles"
+  },
+  "cardCta": "Lire l'article"
+}

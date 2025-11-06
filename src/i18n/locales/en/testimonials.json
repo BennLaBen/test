@@ -1,0 +1,65 @@
+{
+  "title": "Témoignages clients",
+  "subtitle": "Ils nous font confiance pour leurs projets critiques",
+  "filterAll": "Tous les secteurs",
+  "sectors": [
+    {
+      "id": "aeronautique",
+      "name": "Aéronautique"
+    },
+    {
+      "id": "defense",
+      "name": "Défense"
+    },
+    {
+      "id": "industrie",
+      "name": "Industrie"
+    },
+    {
+      "id": "energie",
+      "name": "Énergie"
+    }
+  ],
+  "list": [
+    {
+      "sector": "aeronautique",
+      "company": "Airbus Helicopters",
+      "author": "Jean-Marc D.",
+      "role": "Responsable Supply Chain",
+      "content": "Partenaire fiable depuis plus de 10 ans. La qualité des pièces usinées par MPEB et la réactivité du bureau d'études EGI nous permettent de tenir nos délais de production. L'interchangeabilité Airbus est un vrai plus.",
+      "rating": 5,
+      "project": "Pièces de précision pour H145"
+    },
+    {
+      "sector": "aeronautique",
+      "company": "Safran Helicopter Engines",
+      "author": "Claire M.",
+      "role": "Ingénieure Projet",
+      "content": "Le niveau de précision et la traçabilité des pièces sont exemplaires. EGI nous a accompagnés sur des études complexes avec un niveau d'expertise remarquable. Une équipe technique de haut niveau.",
+      "rating": 5,
+      "project": "Équipements de test moteurs"
+    },
+    {
+      "sector": "defense",
+      "company": "Armée de l'Air et de l'Espace",
+      "author": "Colonel Philippe R.",
+      "role": "Chef de projet OPEX",
+      "content": "Équipements robustes et fiables, parfaitement adaptés aux contraintes opérationnelles. Le support de FREM en conditions OPEX est exceptionnel. Disponibilité et réactivité au rendez-vous.",
+      "rating": 5,
+      "project": "Équipements GSE déployables"
+    },
+    {
+      "sector": "defense",
+      "company": "DGA - Direction Générale de l'Armement",
+      "author": "Marie-Laure B.",
+      "role": "Responsable Qualité Fournisseurs",
+      "content": "LLEDO Industries démontre une maîtrise parfaite des exigences défense. Les certifications sont à jour, les process qualité rigoureux. Un acteur de confiance pour nos projets stratégiques.",
+      "rating": 5,
+      "project": "Systèmes mécaniques certifiés"
+    }
+  ],
+  "cta": {
+    "title": "Votre projet nous intéresse",
+    "button": "Nous contacter"
+  }
+}

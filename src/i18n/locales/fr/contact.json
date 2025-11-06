@@ -1,0 +1,39 @@
+{
+  "title": "Contact - LLEDO Industries",
+  "description": "Contactez LLEDO Industries pour vos projets d'outillage aéronautique et de maintenance GSE. Conseil d'experts et accompagnement personnalisé.",
+  "hero": {
+    "title": "Contactez-nous",
+    "subtitle": "Notre équipe d'experts est à votre disposition pour répondre à vos questions et vous accompagner dans vos projets."
+  },
+  "form": {
+    "title": "Échangez avec notre équipe"
+  },
+  "info": {
+    "title": "Informations de contact",
+    "phone": {
+      "label": "Téléphone",
+      "value": "+33 4 42 02 96 74",
+      "hours": "Lun-Ven 8h-18h"
+    },
+    "email": {
+      "label": "Email",
+      "value": "contact@lledo-industries.com",
+      "response": "Réponse sous 24h"
+    },
+    "address": {
+      "label": "Adresse",
+      "value": "9-11 Boulevard de la Capelane",
+      "city": "13170 Les Pennes-Mirabeau",
+      "country": "France"
+    }
+  },
+  "hours": {
+    "title": "Horaires d'ouverture",
+    "weekdays": "Lundi - Vendredi : 8h00 - 12h00 / 13h30 - 18h00",
+    "weekend": "Samedi - Dimanche : Fermé"
+  },
+  "map": {
+    "title": "Localisation"
+  }
+}
+
