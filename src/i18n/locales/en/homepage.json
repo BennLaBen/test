@@ -51,68 +51,71 @@
     "footerCta": "Découvrir AEROTOOLS"
   },
   "process": {
-    "badge": "Notre process",
-    "title": "De votre besoin à la livraison",
-    "subtitle": "Un accompagnement expert à chaque étape pour garantir des équipements parfaitement adaptés à votre flotte.",
-    "stepLabel": "Étape {{number}}",
+    "badge": "Our process",
+    "title": "Integrated quality process",
+    "subtitle": "From design to commissioning, we master the entire value chain to guarantee the quality and compliance of our solutions.",
+    "stepLabel": "Step {{number}}",
     "steps": [
       {
-        "title": "Consultation",
-        "description": "Diagnostic de votre flotte, définition du besoin et première recommandation technique.",
+        "title": "Quotation and specification",
+        "description": "Detailed analysis of your needs, precise quotation and definition of technical specifications.",
         "details": [
-          "Analyse de vos appareils",
-          "Étude de faisabilité",
-          "Planning projet"
+          "Feasibility study",
+          "Detailed quote",
+          "Specifications"
         ]
       },
       {
-        "title": "Étude & conception",
-        "description": "Proposition technique détaillée et validation des spécifications sur-mesure.",
+        "title": "Design",
+        "description": "Integrated design office for technical design and plan validation.",
         "details": [
-          "Retour sous 48 h",
-          "Plans techniques",
-          "Validation client"
+          "Technical drawings",
+          "Strength calculations",
+          "Client validation"
         ]
       },
       {
-        "title": "Fabrication",
-        "description": "Fabrication en atelier certifié ISO 9001 et contrôles qualité systématiques.",
+        "title": "Technical documentation and calculation notes",
+        "description": "Development of complete technical documentation and calculation notes for validation.",
         "details": [
-          "Fabrication certifiée",
-          "Contrôles non destructifs",
-          "Tests CMU 1,25×"
+          "Validated calculation note",
+          "Technical file",
+          "Normative documentation"
         ]
       },
       {
-        "title": "Livraison",
-        "description": "Logistique internationale sécurisée, documentation complète et formation initiale.",
+        "title": "Manufacturing",
+        "description": "Precision machining in certified workshop with systematic quality controls.",
         "details": [
-          "Transport sécurisé",
-          "Formation opérateurs",
-          "Mise en service"
+          "5-axis machining",
+          "Non-destructive testing",
+          "Full traceability"
         ]
       },
       {
-        "title": "Installation et validation",
-        "description": "Installation sur site, vérifications fonctionnelles et remise des certificats de conformité.",
+        "title": "Control",
+        "description": "Tests and certifications compliant with aerospace standards.",
         "details": [
-          "Installation et mise en service",
-          "Tests fonctionnels",
-          "Certification CE",
-          "Rapport de conformité"
+          "CMU 1.25× tests",
+          "Quality control",
+          "CE certification"
         ]
       },
       {
-        "title": "Support et maintien opérationnel",
-        "description": "Maintenance préventive, support technique continu et pièces de rechange pour garantir la disponibilité de vos équipements.",
+        "title": "Service",
+        "description": "Support and maintenance to ensure the availability of your equipment.",
         "details": [
-          "Hotline 7j/7",
-          "Maintenance préventive",
-          "Contrats de maintien en condition opérationnelle",
-          "Pièces d'origine et documentation"
+          "Team training",
+          "Preventive maintenance",
+          "Technical support"
         ]
       }
-    ]
+    ],
+    "cta": {
+      "title": "Ready to start your project?",
+      "subtitle": "Contact us to discuss your needs and receive a tailored proposal.",
+      "button": "Start a project"
+    }
   },
   "faq": {
     "badge": "FAQ",

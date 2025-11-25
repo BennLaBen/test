@@ -66,32 +66,6 @@ export function Expertises() {
           </p>
         </motion.div>
 
-        {/* Group Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 gap-6 md:grid-cols-4 mb-20"
-        >
-          {stats.map((stat: any, index: number) => {
-            const Icon = statsIconMap[index]
-            const colorClass = statsColorMap[index]
-            return (
-              <div key={index} className="glass-card p-6 text-center">
-                <div className={`inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 mb-3 ${colorClass}`}>
-                  <Icon className="h-6 w-6" />
-                </div>
-                <div className="text-2xl font-bold text-gradient mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted">
-                  {stat.label}
-                </div>
-              </div>
-            )
-          })}
-        </motion.div>
-
         {/* Expertises */}
         <div className="space-y-24">
           {expertises.map((expertise: any, index: number) => {

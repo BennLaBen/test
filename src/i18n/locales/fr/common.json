@@ -3,7 +3,7 @@
     "home": "Accueil",
     "expertises": "Nos Expertises",
     "gerard": "Notre Vision",
-    "caseStudies": "Cas clients",
+    "caseStudies": "Ils nous font confiance",
     "blog": "Blog",
     "contact": "Contact",
     "careers": "Carrières",
@@ -13,17 +13,17 @@
     "chip": "Collectif d'ingénierie",
     "headline": "LLEDO Industries",
     "headlineAccent": "groupe industriel intégré",
-    "subheadline": "Ingénierie, usinage de précision et maintenance pour l'aéronautique et la défense depuis 1989. Un collectif d'experts réunissant MPEB, EGI, FREM et MGP pour piloter vos projets de bout en bout.",
+    "subheadline": "Ingénierie, usinage de précision et maintenance industrielle pour l'aéronautique et la défense depuis 1989. Un collectif d'experts réunissant MPEB, EGI, FREM et MGP pour piloter vos projets de bout en bout.",
     "ctaPrimary": "Nous contacter",
     "ctaSecondary": "Découvrir nos expertises",
     "badges": {
       "compliance": "Ingénierie & usinage intégrés",
-      "cmu": "70 collaborateurs certifiés EN 9100",
+      "cmu": "5 sociétés sur 2 sites",
       "certs": "ISO 9001 & EN 9100"
     },
     "productLabel": "Division AEROTOOLS – expertise GSE",
     "trust": {
-      "title": "Plus de 70 clients nous font confiance",
+      "title": "De nombreux clients prestigieux nous font déjà confiance, et pourquoi pas vous ?",
       "brands": [
         "Airbus Helicopters",
         "Safran",

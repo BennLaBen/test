@@ -111,7 +111,7 @@ export function Testimonials() {
               <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
                 <div className="font-semibold text-muted-strong">{testimonial.author}</div>
                 <div className="text-sm text-muted">{testimonial.role}</div>
-                <div className="text-sm font-medium text-primary-600 dark:text-primary-400 mt-1">
+                <div className="text-sm font-medium text-muted-strong mt-1">
                   {testimonial.company}
                 </div>
                 {testimonial.project && (

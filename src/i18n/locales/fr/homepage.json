@@ -52,67 +52,70 @@
   },
   "process": {
     "badge": "Notre process",
-    "title": "De votre besoin à la livraison",
-    "subtitle": "Un accompagnement expert à chaque étape pour garantir des équipements parfaitement adaptés à votre flotte.",
+    "title": "Processus qualité intégré",
+    "subtitle": "De la conception à la mise en service, nous maîtrisons l'ensemble de la chaîne de valeur pour garantir la qualité et la conformité de nos solutions.",
     "stepLabel": "Étape {{number}}",
     "steps": [
       {
-        "title": "Consultation",
-        "description": "Diagnostic de votre flotte, définition du besoin et première recommandation technique.",
+        "title": "Chiffrage et spécification",
+        "description": "Analyse détaillée de votre besoin, chiffrage précis et définition des spécifications techniques.",
         "details": [
-          "Analyse de vos appareils",
           "Étude de faisabilité",
-          "Planning projet"
+          "Devis détaillé",
+          "Cahier des charges"
         ]
       },
       {
-        "title": "Étude & conception",
-        "description": "Proposition technique détaillée et validation des spécifications sur-mesure.",
+        "title": "Conception",
+        "description": "Bureau d'études intégré pour la conception technique et la validation des plans.",
         "details": [
-          "Retour sous 48 h",
           "Plans techniques",
+          "Calculs de résistance",
           "Validation client"
         ]
       },
       {
+        "title": "Documentation techniques et note de calcul",
+        "description": "Élaboration de la documentation technique complète et des notes de calcul pour validation.",
+        "details": [
+          "Note de calcul validée",
+          "Dossier technique",
+          "Documentation normative"
+        ]
+      },
+      {
         "title": "Fabrication",
-        "description": "Fabrication en atelier certifié ISO 9001 et contrôles qualité systématiques.",
+        "description": "Usinage de précision en atelier certifié avec contrôles qualité systématiques.",
         "details": [
-          "Fabrication certifiée",
+          "Usinage 5 axes",
           "Contrôles non destructifs",
-          "Tests CMU 1,25×"
+          "Traçabilité complète"
         ]
       },
       {
-        "title": "Livraison",
-        "description": "Logistique internationale sécurisée, documentation complète et formation initiale.",
+        "title": "Contrôle",
+        "description": "Tests et certifications conformes aux normes aéronautiques.",
         "details": [
-          "Transport sécurisé",
-          "Formation opérateurs",
-          "Mise en service"
+          "Tests CMU 1,25×",
+          "Contrôle qualité",
+          "Certification CE"
         ]
       },
       {
-        "title": "Installation et validation",
-        "description": "Installation sur site, vérifications fonctionnelles et remise des certificats de conformité.",
+        "title": "Service",
+        "description": "Support et maintenance pour garantir la disponibilité de vos équipements.",
         "details": [
-          "Installation et mise en service",
-          "Tests fonctionnels",
-          "Certification CE",
-          "Rapport de conformité"
-        ]
-      },
-      {
-        "title": "Support et maintien opérationnel",
-        "description": "Maintenance préventive, support technique continu et pièces de rechange pour garantir la disponibilité de vos équipements.",
-        "details": [
-          "Hotline 7j/7",
+          "Formation équipes",
           "Maintenance préventive",
-          "Contrats de maintien en condition opérationnelle",
-          "Pièces d'origine et documentation"
+          "Support technique"
         ]
       }
-    ]
+    ],
+    "cta": {
+      "title": "Prêt à démarrer votre projet ?",
+      "subtitle": "Contactez-nous pour discuter de vos besoins et recevoir une proposition adaptée.",
+      "button": "Démarrer un projet"
+    }
   },
   "faq": {
     "badge": "FAQ",

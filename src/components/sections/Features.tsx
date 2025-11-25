@@ -46,31 +46,6 @@ export function Features() {
           </p>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4"
-        >
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gradient">36+</div>
-            <div className="mt-2 text-sm text-muted">{t('features.stats.years', { count: 36 })}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gradient">70+</div>
-            <div className="mt-2 text-sm text-muted">{t('features.stats.employees', { count: 70 })}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gradient">20+</div>
-            <div className="mt-2 text-sm text-muted">{t('features.stats.countries', { count: 20 })}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gradient">100%</div>
-            <div className="mt-2 text-sm text-muted">{t('features.stats.compliance', { percent: '100%' })}</div>
-          </div>
-        </motion.div>
-
         {/* Features Grid */}
         <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (

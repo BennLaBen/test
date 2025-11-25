@@ -124,22 +124,6 @@ export function CTA() {
               </p>
             </div>
           </motion.div>
-
-          {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-8 border-t border-primary-400/30 pt-8 text-primary-100"
-          >
-            {stats.map((stat, index) => (
-              <div key={`${locale}-stat-${index}`} className="text-center">
-                <div className="mb-1 text-2xl font-bold text-white">{stat.value}</div>
-                <div className="text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
