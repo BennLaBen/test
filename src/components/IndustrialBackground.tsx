@@ -8,13 +8,15 @@ interface IndustrialBackgroundProps {
   showGears?: boolean
   showGrid?: boolean
   intensity?: 'light' | 'medium' | 'strong'
+  className?: string
 }
 
 export function IndustrialBackground({ 
   variant = 'grid',
   showGears = true,
   showGrid = true,
-  intensity = 'medium'
+  intensity = 'medium',
+  className = ''
 }: IndustrialBackgroundProps) {
   
   const opacityMap = {
@@ -26,7 +28,7 @@ export function IndustrialBackground({
   const opacity = opacityMap[intensity]
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
       {/* Grille de fond */}
       {showGrid && (
         <div 
