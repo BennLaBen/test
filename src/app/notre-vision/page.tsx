@@ -183,21 +183,46 @@ export default function NotreVisionPage() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -10, scale: 1.02 }}
                 >
+                  {/* Animated wave effect */}
+                  <motion.div
+                    className="absolute inset-0 opacity-30"
+                    animate={{ 
+                      backgroundPosition: ['0% 0%', '100% 100%'],
+                    }}
+                    transition={{ 
+                      duration: 8, 
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
+                    style={{ 
+                      background: 'linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.05) 50%, transparent 70%)',
+                      backgroundSize: '200% 200%'
+                    }}
+                  />
+                  
                   {/* Hover shimmer effect */}
                   <motion.div
                     className="absolute inset-0 -translate-x-full"
                     whileHover={{ translateX: '100%' }}
                     transition={{ duration: 0.6 }}
-                    style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent)' }}
+                    style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent)' }}
                   />
                   
                   <motion.div 
                     className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary-500/15 text-primary-600 transition-colors group-hover:bg-primary-500/25 tech-corner relative z-10"
                     whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    animate={{ 
+                      rotate: [0, 5, -5, 0],
+                      y: [0, -3, 0]
+                    }}
+                    transition={{ 
+                      duration: 4 + index * 0.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: index * 0.3
+                    }}
                   >
                     <Icon className="h-7 w-7" />
                   </motion.div>
@@ -435,57 +460,22 @@ export default function NotreVisionPage() {
             ))}
           </div>
 
+          {/* Note de confidentialité */}
           <motion.div 
-            className="mb-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="mb-8 text-2xl font-bold text-muted-strong">{t('testimonials.logos.title')}</h3>
-            <div className="flex flex-wrap justify-center gap-8">
-              {companies.map((company: string, index: number) => (
-                <motion.div 
-                  key={index} 
-                  className="rounded-lg bg-white px-6 py-4 shadow-sm dark:bg-gray-800 tech-border"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                >
-                  <span className="font-semibold text-muted-strong">{company}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="glass-card glass-card--muted p-8 tech-border relative overflow-hidden"
+            className="glass-card glass-card--muted p-8 tech-border relative overflow-hidden mx-auto max-w-3xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <IndustrialBackground variant="circuit" className="opacity-5" />
-            <h3 className="mb-8 text-center text-2xl font-bold text-muted-strong relative z-10">
-              {t('testimonials.stats.title')}
-            </h3>
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-4 relative z-10">
-              {testimonialsStats.map((stat: any, index: number) => (
-                <motion.div 
-                  key={index} 
-                  className="text-center group"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                >
-                  <div className="text-3xl font-bold text-gradient shimmer-text">{stat.value}</div>
-                  <div className="mt-2 text-sm text-muted">{stat.label}</div>
-                </motion.div>
-              ))}
+            <div className="text-center relative z-10">
+              <Shield className="h-12 w-12 mx-auto mb-4 text-primary-600" />
+              <h3 className="mb-4 text-xl font-bold text-muted-strong">Confidentialité client</h3>
+              <p className="text-muted leading-relaxed">
+                Par respect de la confidentialité de nos partenaires et clients, nous ne pouvons pas divulguer publiquement les noms des grandes entreprises avec lesquelles nous collaborons. 
+                Nos relations clients sont fondées sur la confiance mutuelle et la discrétion professionnelle.
+              </p>
             </div>
           </motion.div>
         </div>
