@@ -6,57 +6,54 @@ import { motion } from 'framer-motion'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
 import { useState } from 'react'
 import { 
-  Factory,
+  Settings,
   ArrowRight,
   CheckCircle,
   Award,
-  Wrench,
-  Settings,
   Target,
   TrendingUp,
   Users,
   Sparkles,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Factory,
+  Wrench
 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 
-export default function MPEBPage() {
-  const { t } = useTranslation('expertises')
+export default function MGPPage() {
   const [currentImage, setCurrentImage] = useState(0)
 
-  // Placeholder data - sera remplacé par les vraies données
   const expertise = {
-    name: 'MPEB',
-    tagline: 'Usinage de précision',
-    description: 'MPEB est spécialisée dans l\'usinage de pièces complexes pour l\'aéronautique. Notre expertise technique et nos équipements de pointe nous permettent de répondre aux exigences les plus strictes du secteur.',
+    name: 'MGP',
+    tagline: 'Tôlerie & chaudronnerie',
+    description: 'MGP (Mécanique Générale de Précision) est spécialisée dans la tôlerie fine et la chaudronnerie de précision. Notre savoir-faire couvre la découpe, le pliage, le soudage et l\'assemblage de pièces métalliques pour des applications industrielles exigeantes.',
     capabilities: {
-      capacity: '100 000h/an',
-      precision: '±0.01mm',
-      machines: '25+ machines CNC'
+      capacity: '50 000h/an',
+      precision: 'Tôlerie fine ±0.1mm',
+      machines: '15+ machines CNC'
     },
     expertise: [
-      'Usinage 3, 4 et 5 axes',
-      'Tournage et fraisage',
-      'Alésage de précision',
-      'Surfaçage et rectification',
-      'Contrôle dimensionnel'
+      'Découpe laser et plasma',
+      'Pliage et formage de tôles',
+      'Soudage TIG, MIG et arc',
+      'Assemblage et montage',
+      'Traitement de surface'
     ],
-    certifications: ['EN 9100', 'ISO 9001', 'NADCAP'],
+    certifications: ['EN 9100', 'ISO 9001', 'ISO 3834'],
     stats: [
-      { label: 'Années d\'expérience', value: '36+', icon: TrendingUp, color: 'from-blue-500 to-blue-600' },
-      { label: 'Pièces produites/an', value: '10k+', icon: Factory, color: 'from-purple-500 to-purple-600' },
-      { label: 'Collaborateurs', value: '25', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Taux de conformité', value: '99.8%', icon: Target, color: 'from-amber-500 to-amber-600' },
+      { label: 'Années d\'expérience', value: '28+', icon: TrendingUp, color: 'from-gray-500 to-gray-600' },
+      { label: 'Projets réalisés', value: '2000+', icon: Target, color: 'from-blue-500 to-blue-600' },
+      { label: 'Collaborateurs', value: '20', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Taux de conformité', value: '99.5%', icon: Settings, color: 'from-amber-500 to-amber-600' },
     ]
   }
 
   // Placeholder images - à remplacer par les vraies photos
   const images = [
-    { id: 1, alt: 'Atelier MPEB - Vue 1' },
-    { id: 2, alt: 'Atelier MPEB - Vue 2' },
-    { id: 3, alt: 'Atelier MPEB - Vue 3' },
-    { id: 4, alt: 'Atelier MPEB - Vue 4' },
+    { id: 1, alt: 'Atelier MGP - Vue 1' },
+    { id: 2, alt: 'Atelier MGP - Vue 2' },
+    { id: 3, alt: 'Atelier MGP - Vue 3' },
+    { id: 4, alt: 'Atelier MGP - Vue 4' },
   ]
 
   const nextImage = () => {
@@ -70,14 +67,14 @@ export default function MPEBPage() {
   return (
     <>
       <SEO
-        title="MPEB - Usinage de précision aéronautique"
-        description="Spécialiste de l'usinage de précision pour l'aéronautique. Usinage 3, 4 et 5 axes, tournage et fraisage de haute précision."
-        canonical="/societes/mpeb"
+        title="MGP - Tôlerie & chaudronnerie de précision"
+        description="Spécialiste de la tôlerie fine et chaudronnerie. Découpe laser, pliage, soudage TIG/MIG, assemblage de précision."
+        canonical="/societes/mgp"
       />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 to-blue-800 py-20 text-white dark:from-blue-700 dark:to-blue-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
+      <section className="relative bg-gradient-to-br from-gray-600 to-gray-800 py-20 text-white dark:from-gray-700 dark:to-gray-900 lg:py-32 overflow-hidden">
+        <IndustrialBackground variant="blueprint" className="opacity-20" />
         
         <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full industrial-grid bg-center" />
@@ -91,7 +88,7 @@ export default function MPEBPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Factory className="h-4 w-4 mr-2" />
+              <Settings className="h-4 w-4 mr-2" />
               {expertise.name}
             </motion.span>
             
@@ -251,7 +248,7 @@ export default function MPEBPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="glass-card relative overflow-hidden p-8 tech-border group hover:shadow-2xl transition-shadow">
+              <div className="glass-card relative overflow-hidden p-8 tech-border group hover:shadow-2xl transition-shadow mb-8">
                 <motion.div
                   className="absolute inset-0 -translate-x-full"
                   animate={{
@@ -278,7 +275,7 @@ export default function MPEBPage() {
                   {[
                     { icon: Factory, label: 'Capacité', value: expertise.capabilities.capacity },
                     { icon: Target, label: 'Précision', value: expertise.capabilities.precision },
-                    { icon: Settings, label: 'Équipements', value: expertise.capabilities.machines }
+                    { icon: Wrench, label: 'Équipements', value: expertise.capabilities.machines }
                   ].map((cap, idx) => (
                     <motion.div 
                       key={idx}
@@ -313,7 +310,6 @@ export default function MPEBPage() {
                   ))}
                 </div>
                 
-                {/* Sparkles */}
                 <motion.div
                   className="absolute top-4 right-4"
                   animate={{ 
@@ -334,16 +330,16 @@ export default function MPEBPage() {
 
               {/* Image Carousel */}
               <motion.div
-                className="mt-8 glass-card relative overflow-hidden tech-border"
+                className="glass-card relative overflow-hidden tech-border"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="relative h-80 bg-gradient-to-br from-blue-500/10 to-blue-600/5">
+                <div className="relative h-80 bg-gradient-to-br from-gray-500/10 to-gray-600/5">
                   {/* Placeholder image */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Factory className="h-32 w-32 text-blue-500 opacity-20" />
+                    <Settings className="h-32 w-32 text-gray-500 opacity-20" />
                   </div>
                   
                   {/* Image counter */}
@@ -378,7 +374,7 @@ export default function MPEBPage() {
                       key={idx}
                       onClick={() => setCurrentImage(idx)}
                       className={`h-2 rounded-full transition-all ${
-                        currentImage === idx ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300 dark:bg-gray-600'
+                        currentImage === idx ? 'w-8 bg-gray-600' : 'w-2 bg-gray-300 dark:bg-gray-600'
                       }`}
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
@@ -388,7 +384,7 @@ export default function MPEBPage() {
 
                 <div className="p-4 text-center">
                   <p className="text-sm text-muted">
-                    📸 Photos de l'atelier MPEB à venir
+                    📸 Photos de l'atelier MGP à venir
                   </p>
                 </div>
               </motion.div>
@@ -410,10 +406,10 @@ export default function MPEBPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-4xl">
-              Besoin d'un devis ou d'informations ?
+              Un projet de tôlerie ou chaudronnerie ?
             </h2>
             <p className="mb-10 text-lg text-muted">
-              Notre équipe MPEB est à votre disposition pour répondre à vos besoins en usinage de précision.
+              Notre équipe MGP est à votre disposition pour réaliser vos pièces métalliques de précision.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
