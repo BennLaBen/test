@@ -1,13 +1,16 @@
 {
   "nav": {
     "home": "Accueil",
-    "expertises": "Nos Expertises",
-    "gerard": "Notre Vision",
-    "caseStudies": "Ils nous font confiance",
+    "expertises": "Nos moyens et outils industriels",
+    "vision": "Le groupe LLEDO Industrie",
+    "trust": "Ils nous font confiance",
     "blog": "Blog",
+    "products": "Produits",
     "contact": "Contact",
+    "gerard": "Le groupe LLEDO Industrie",
+    "caseStudies": "Ils nous font confiance",
     "careers": "Carrières",
-    "quote": "Votre projet nous intéresse"
+    "quote": "Obtenir un devis"
   },
   "hero": {
     "chip": "Collectif d'ingénierie",
@@ -18,6 +21,7 @@
     "ctaSecondary": "Découvrir nos expertises",
     "badges": {
       "compliance": "Ingénierie & usinage intégrés",
+      "experience": "Plus de 36 ans d'expertises",
       "cmu": "5 sociétés sur 2 sites",
       "certs": "ISO 9001 & EN 9100"
     },
@@ -114,7 +118,7 @@
         "expertises": "Nos Expertises",
         "brochure": "Télécharger la plaquette",
         "caseStudies": "Cas clients",
-        "quote": "Votre projet nous intéresse"
+        "quote": "Obtenir un devis"
       }
     },
     "resources": {

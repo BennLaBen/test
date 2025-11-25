@@ -12,10 +12,9 @@ import { useTranslation } from 'react-i18next'
 
 const navigation = [
   { key: 'nav.home', href: '/' },
+  { key: 'nav.vision', href: '/notre-vision' },
   { key: 'nav.expertises', href: '/nos-expertises' },
-  { key: 'nav.gerard', href: '/notre-vision' },
   { key: 'nav.caseStudies', href: '/cas-clients' },
-  { key: 'nav.blog', href: '/blog' },
 ]
 
 const secondaryNavigation = [

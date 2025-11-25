@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/Navigation'
 import { Footer } from '@/components/Footer'
+import { SmartNavigator } from '@/components/SmartNavigator'
+import { SectionPagination } from '@/components/SectionPagination'
+import { TopInfoBar } from '@/components/TopInfoBar'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ClientI18nWrapper } from '@/components/ClientI18nWrapper'
 
@@ -157,7 +160,10 @@ export default function RootLayout({
           <ClientI18nWrapper>
             <div className="flex min-h-screen flex-col">
               <Navigation />
-              <main id="main-content" className="flex-1 pt-24">
+              <TopInfoBar />
+              <SmartNavigator />
+              <SectionPagination />
+              <main id="main-content" className="flex-1 pt-32">
                 {children}
               </main>
               <Footer />

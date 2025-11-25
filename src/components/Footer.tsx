@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react'
 
 interface FooterLink {
@@ -36,8 +37,9 @@ export function Footer() {
       <li key={key}>
         <Link
           href={resolveHref(mapping[key] ?? '#')}
-          className="text-sm transition-colors hover:text-white"
+          className="group flex items-center text-sm transition-colors hover:text-primary-400"
         >
+          <span className="mr-2 text-primary-500 opacity-0 transition-opacity group-hover:opacity-100">→</span>
           {label}
         </Link>
       </li>
@@ -68,7 +70,10 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="relative bg-gray-900 text-gray-300 overflow-hidden">
+      {/* Grille industrielle en fond */}
+      <div className="absolute inset-0 opacity-5 industrial-grid pointer-events-none" />
+
       {/* Main Footer */}
       <div className="border-b border-gray-800">
         <div className="container py-12 lg:py-16">
@@ -76,7 +81,7 @@ export function Footer() {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <Link href={resolveHref('/')} className="flex items-center space-x-3 group">
+                <Link href={resolveHref('/')} className="group flex items-center space-x-3">
                   <div className="relative h-12 w-12 flex-shrink-0">
                     <Image
                       src="/logo.png"
@@ -95,30 +100,31 @@ export function Footer() {
                 {t('hero.subheadline')}
               </p>
               
-              {/* Contact Info */}
+              {/* Contact Info avec style industriel */}
               <div className="space-y-3 text-sm">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 flex-shrink-0 text-primary-400" />
+                <div className="group flex items-start gap-3 transition-colors hover:text-primary-400">
+                  <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-400" />
                   <span>{t('footer.address')}</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="group flex items-center gap-3 transition-colors hover:text-primary-400">
                   <Phone className="h-5 w-5 flex-shrink-0 text-primary-400" />
-                  <a href={`tel:${t('footer.phone').replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+                  <a href={`tel:${t('footer.phone').replace(/\s+/g, '')}`} className="font-mono">
                     {t('footer.phone')}
                   </a>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="group flex items-center gap-3 transition-colors hover:text-primary-400">
                   <Mail className="h-5 w-5 flex-shrink-0 text-primary-400" />
-                  <a href={`mailto:${t('footer.email')}`} className="hover:text-white transition-colors">
+                  <a href={`mailto:${t('footer.email')}`}>
                     {t('footer.email')}
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Links Columns */}
+            {/* Links Columns avec bordures techniques */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
+                <span className="mr-2 h-px w-4 bg-primary-500" />
                 {t('footer.company.title')}
               </h3>
               <ul className="space-y-3">
@@ -126,7 +132,8 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
+                <span className="mr-2 h-px w-4 bg-primary-500" />
                 {t('footer.services.title')}
               </h3>
               <ul className="space-y-3">
@@ -134,7 +141,8 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
+                <span className="mr-2 h-px w-4 bg-primary-500" />
                 {t('footer.resources.title')}
               </h3>
               <ul className="space-y-3">
@@ -142,7 +150,8 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
+                <span className="mr-2 h-px w-4 bg-primary-500" />
                 {t('footer.legal.title')}
               </h3>
               <ul className="space-y-3">
@@ -153,47 +162,56 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Footer */}
+      {/* Bottom Footer avec certifications */}
       <div className="container py-6">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center text-sm md:text-left">
-            {t('footer.bottom.madeInFrance')}
-            <span className="mx-2">•</span>
-            {t('footer.bottom.copyright', { year: new Date().getFullYear() })}
+            <span className="font-semibold text-white">{t('footer.bottom.madeInFrance')}</span>
+            <span className="mx-2 text-gray-600">•</span>
+            <span>{t('footer.bottom.copyright', { year: new Date().getFullYear() })}</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          {/* Social Links avec style industriel */}
+          <div className="flex items-center gap-3">
             {socialLinks.map((social, index) => {
               const Icon = social.icon
               return (
-                <a
+                <motion.a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 text-gray-400 transition-all hover:bg-primary-600 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 text-gray-400 transition-all hover:bg-primary-600 hover:text-white hover:shadow-lg tech-corner"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <Icon className="h-5 w-5" />
-                </a>
+                </motion.a>
               )
             })}
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-6 border-t border-gray-800 pt-6 text-xs text-gray-400">
-          <span className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 font-semibold text-primary-400">
-              CE
-            </span>
-            <span>Marquage CE</span>
-          </span>
-          <span>•</span>
-          <span>ISO 9001:2015</span>
-          <span>•</span>
-          <span>EN 12312-1</span>
-          <span>•</span>
-          <span>Directive Machines 2006/42/CE</span>
+        {/* Certifications avec badges industriels */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-gray-800 pt-6">
+          {[
+            { icon: 'CE', label: 'Marquage CE' },
+            { icon: '9001', label: 'ISO 9001:2015' },
+            { icon: '9100', label: 'EN 9100' },
+            { icon: '12312', label: 'EN 12312-1' },
+          ].map((cert, index) => (
+            <motion.div
+              key={index}
+              className="industrial-badge flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded bg-primary-500/20 text-xs font-bold text-primary-400">
+                {cert.icon}
+              </span>
+              <span className="text-xs">{cert.label}</span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </footer>

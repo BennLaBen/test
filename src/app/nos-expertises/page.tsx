@@ -1,6 +1,8 @@
 'use client'
 
 import { Expertises } from '@/components/sections/Expertises'
+import { Process } from '@/components/sections/Process'
+import { DownloadBrochure } from '@/components/sections/DownloadBrochure'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
 import { useTranslation } from 'react-i18next'
@@ -43,6 +45,8 @@ export default function ExpertisesPage() {
       />
       <div className="pt-20">
         <Expertises />
+        <Process />
+        <DownloadBrochure />
       </div>
     </>
   )

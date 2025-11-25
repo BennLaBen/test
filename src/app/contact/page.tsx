@@ -2,6 +2,7 @@
 
 import { SEO } from '@/components/SEO'
 import { ContactForm } from '@/components/forms/ContactForm'
+import { FAQ } from '@/components/sections/FAQ'
 import { useTranslation } from 'react-i18next'
 
 export default function ContactPage() {
@@ -126,6 +127,9 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <FAQ />
     </>
   )
 }

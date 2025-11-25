@@ -52,7 +52,7 @@ export default function NotreVisionPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
+      <section id="vision-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full bg-[url('/images/grid.svg')] bg-center" />
         </div>
@@ -94,7 +94,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 lg:py-32">
+      <section id="nos-valeurs" className="py-20 lg:py-32">
         <div className="container">
           <div className="mb-16 text-center">
             <span className="chip mb-4">{t('values.badge')}</span>
@@ -124,7 +124,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* History Section */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32">
+      <section id="notre-histoire" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32">
         <div className="container">
           <div className="mb-16 text-center">
             <span className="chip mb-4">{t('history.badge')}</span>
@@ -156,7 +156,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* Industrial Vision Section */}
-      <section className="py-20 lg:py-32">
+      <section id="vision-industrielle" className="py-20 lg:py-32">
         <div className="container">
           <div className="mb-16 text-center">
             <span className="chip mb-4">{t('industrialVision.badge')}</span>
@@ -201,7 +201,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32">
+      <section id="temoignages" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32">
         <div className="container">
           <div className="mb-16 text-center">
             <span className="chip mb-4">{t('testimonials.badge')}</span>
@@ -261,7 +261,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-32">
+      <section id="contact-vision" className="py-20 lg:py-32">
         <div className="container">
           <div className="glass-card glass-card--muted mx-auto max-w-4xl p-12 text-center">
             <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-4xl">

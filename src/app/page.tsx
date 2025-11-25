@@ -1,10 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { Features } from '@/components/sections/Features'
-import { Expertises } from '@/components/sections/Expertises'
-import { Process } from '@/components/sections/Process'
-import { Testimonials } from '@/components/sections/Testimonials'
 import { DownloadBrochure } from '@/components/sections/DownloadBrochure'
-import { FAQ } from '@/components/sections/FAQ'
 import { CTA } from '@/components/sections/CTA'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
@@ -45,12 +41,8 @@ export default function HomePage() {
       />
       <Hero />
       <Features />
-      <Expertises />
-      <Process />
-      <Testimonials />
-      <DownloadBrochure />
-      <FAQ />
       <CTA />
+      <DownloadBrochure />
     </>
   )
 }

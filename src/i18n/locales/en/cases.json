@@ -25,83 +25,83 @@
   },
   "caseStudies": [
     {
-      "id": "airbus-helicopters",
-      "client": "Airbus Helicopters",
-      "sector": "Aviation civile",
-      "location": "Marignane, France",
-      "title": "Optimisation de la chaîne de production H125",
-      "challenge": "Airbus Helicopters Marignane avait besoin de moderniser son parc de chariots de déplacement pour la ligne d'assemblage des H125/AS350. L'ancien système était vieillissant, peu ergonomique et ne permettait pas de répondre aux cadences de production croissantes. Les équipes de production faisaient face à des risques de TMS (Troubles Musculo-Squelettiques) lors des manipulations répétées.",
-      "solution": "LLEDO AEROTOOLS a développé une solution sur-mesure basée sur le RL125-02, avec des adaptations spécifiques : système hydraulique à commande ergonomique, patins renforcés pour une utilisation intensive (3 cycles/jour), système de verrouillage rapide pour réduire le temps de préparation, et revêtement anti-rayures pour préserver l'état des patins d'hélicoptère.",
+      "id": "aviation-civile-1",
+      "client": "Major European Aerospace Manufacturer",
+      "sector": "Civil Aviation",
+      "location": "France",
+      "title": "Optimization of Helicopter Production Line",
+      "challenge": "A major European aerospace manufacturer needed to modernize their fleet of transport trolleys for their light helicopter assembly line. The old system was aging, not ergonomic, and couldn't keep up with increasing production rates. Production teams faced risks of MSDs (Musculoskeletal Disorders) during repeated handling.",
+      "solution": "LLEDO AEROTOOLS developed a custom solution with specific adaptations: ergonomic hydraulic control system, reinforced skids for intensive use (3 cycles/day), quick-lock system to reduce preparation time, and anti-scratch coating to preserve helicopter skid conditions.",
       "results": [
-        "Réduction de 40% du temps de déplacement des appareils",
-        "Zéro accident du travail lié à la manutention depuis la mise en service",
-        "Augmentation de 25% de la cadence de production",
-        "ROI atteint en 14 mois",
-        "Extension de la commande à 8 unités supplémentaires"
+        "40% reduction in aircraft movement time",
+        "Zero work accidents related to handling since commissioning",
+        "25% increase in production rate",
+        "ROI achieved in 14 months",
+        "Order extended to 8 additional units"
       ],
       "stats": {
         "gain": "40%",
-        "roi": "14 mois",
+        "roi": "14 months",
         "units": "12"
       },
       "testimonial": {
-        "quote": "Les chariots LLEDO ont transformé notre ligne de production. La fiabilité et l'ergonomie sont au rendez-vous. Nos équipes apprécient particulièrement la fluidité de manœuvre.",
+        "quote": "LLEDO trolleys transformed our production line. Reliability and ergonomics are there. Our teams particularly appreciate the smooth handling.",
         "author": "Jean-Marc D.",
-        "position": "Responsable Production, Airbus Helicopters"
+        "position": "Production Manager"
       },
-      "image": "/images/case-studies/airbus.jpg"
+      "image": "/images/case-studies/aviation.jpg"
     },
     {
       "id": "securite-civile",
-      "client": "Sécurité Civile - Dragon 13",
-      "sector": "Secours & urgences",
-      "location": "Marignane, France",
-      "title": "Déploiement rapide pour interventions d'urgence",
-      "challenge": "La base de la Sécurité Civile de Marignane (Dragon 13) avait besoin d'équipements GSE permettant un déploiement ultra-rapide des hélicoptères EC145 et H145. Dans le contexte des interventions d'urgence (incendies, secours en montagne, SMUR héliporté), chaque seconde compte. L'ancien système nécessitait 3 opérateurs et 5 minutes de préparation.",
-      "solution": "LLEDO DEFENSE a conçu un chariot de déplacement spécial \"Rapid Deploy\" : système hydraulique à démarrage instantané, commande sans fil à distance de sécurité, autonomie batterie 72h sans recharge, patins universels compatibles EC145/H145/H160, et kit de transport rapide pour détachements mobiles.",
+      "client": "Government Air Rescue Service",
+      "sector": "Emergency & Rescue",
+      "location": "France",
+      "title": "Rapid Deployment for Emergency Operations",
+      "challenge": "A government air rescue base needed GSE equipment allowing ultra-fast deployment of intervention helicopters. In the context of emergency operations (fires, mountain rescue, airborne SAMU), every second counts. The old system required 3 operators and 5 minutes of preparation.",
+      "solution": "LLEDO DEFENSE designed a special 'Rapid Deploy' transport trolley: instant start hydraulic system, wireless remote safety control, 72h battery autonomy without recharging, universal multi-type skids, and rapid transport kit for mobile detachments.",
       "results": [
-        "Temps de préparation réduit à 90 secondes",
-        "Opération possible avec 1 seul opérateur qualifié",
-        "Disponibilité opérationnelle 24/7 garantie",
-        "Utilisé dans +150 interventions sans défaillance",
-        "Adopté par 4 autres bases Dragon"
+        "Preparation time reduced to 90 seconds",
+        "Operation possible with only 1 qualified operator",
+        "24/7 operational availability guaranteed",
+        "Used in +150 operations without failure",
+        "Adopted by 4 other intervention bases"
       ],
       "stats": {
         "gain": "70%",
-        "roi": "Immédiat",
+        "roi": "Immediate",
         "units": "5"
       },
       "testimonial": {
-        "quote": "En intervention d'urgence, la rapidité est vitale. Le système LLEDO nous fait gagner 3 à 4 minutes sur chaque décollage. C'est énorme pour les victimes.",
-        "author": "Commandant Pierre L.",
-        "position": "Chef de base Dragon 13"
+        "quote": "In emergency operations, speed is vital. The LLEDO system saves us 3 to 4 minutes on each takeoff. That's huge for victims.",
+        "author": "Commander Pierre L.",
+        "position": "Intervention Base Chief"
       },
-      "image": "/images/case-studies/dragon.jpg"
+      "image": "/images/case-studies/urgences.jpg"
     },
     {
-      "id": "heli-union",
-      "client": "Héli-Union",
-      "sector": "Aviation offshore",
-      "location": "Toussus-le-Noble & Marseille",
-      "title": "Maintenance préventive pour flotte offshore",
-      "challenge": "Héli-Union, opérateur majeur d'hélicoptères offshore, cherchait à standardiser ses équipements de maintenance sur ses 3 bases françaises. La flotte mixte (H225, AS365, AW139) nécessitait des équipements polyvalents, résistants à la corrosion (environnement marin), et conformes aux standards pétroliers (ATEX).",
-      "solution": "LLEDO Industries a fourni une gamme complète : chariots de déplacement modulaires avec patins interchangeables (3 jeux par base), plateformes d'accès télescopiques 2-5m certifiées offshore, outillage de maintenance en acier inoxydable 316L (anti-corrosion), chariots de transport équipements avec protection IP65, et contrat de maintenance préventive 5 ans.",
+      "id": "aviation-offshore",
+      "client": "European Offshore Operator",
+      "sector": "Offshore Aviation",
+      "location": "France",
+      "title": "Preventive Maintenance for Offshore Fleet",
+      "challenge": "A major offshore helicopter operator sought to standardize maintenance equipment across their 3 French bases. The mixed fleet required versatile equipment, resistant to corrosion (marine environment), and compliant with petroleum standards (ATEX).",
+      "solution": "LLEDO Industries provided a complete range: modular transport trolleys with interchangeable skids (3 sets per base), 2-5m telescopic access platforms certified offshore, 316L stainless steel maintenance tools (anti-corrosion), IP65 protected equipment transport trolleys, and 5-year preventive maintenance contract.",
       "results": [
-        "Standardisation complète sur 3 bases",
-        "Réduction de 60% des temps d'immobilisation",
-        "Zéro défaillance en 3 ans d'exploitation",
-        "Certification IOGP (International Oil & Gas Producers)",
-        "Extension du contrat sur bases internationales"
+        "Complete standardization across 3 bases",
+        "60% reduction in downtime",
+        "Zero failures in 3 years of operation",
+        "IOGP (International Oil & Gas Producers) certification",
+        "Contract extension to international bases"
       ],
       "stats": {
         "gain": "60%",
-        "roi": "18 mois",
+        "roi": "18 months",
         "units": "24"
       },
       "testimonial": {
-        "quote": "La fiabilité des équipements LLEDO en environnement offshore est exceptionnelle. Après 3 ans, aucun signe de corrosion. La disponibilité de notre flotte s'est nettement améliorée.",
+        "quote": "The reliability of LLEDO equipment in offshore environments is exceptional. After 3 years, no signs of corrosion. Our fleet availability has significantly improved.",
         "author": "Marc S.",
-        "position": "Directeur Maintenance, Héli-Union"
+        "position": "Maintenance Director"
       },
       "image": "/images/case-studies/offshore.jpg"
     }

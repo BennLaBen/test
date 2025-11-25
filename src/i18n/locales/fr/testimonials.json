@@ -11,16 +11,16 @@
   "list": [
     {
       "sector": "aeronautique",
-      "company": "Airbus Helicopters",
+      "company": "Grand groupe aéronautique européen",
       "author": "Jean-Marc D.",
       "role": "Responsable Supply Chain",
-      "content": "Partenaire fiable depuis plus de 10 ans. La qualité des pièces usinées par MPEB et la réactivité du bureau d'études EGI nous permettent de tenir nos délais de production. L'interchangeabilité Airbus est un vrai plus.",
+      "content": "Partenaire fiable depuis plus de 10 ans. La qualité des pièces usinées par MPEB et la réactivité du bureau d'études EGI nous permettent de tenir nos délais de production. Un partenaire de confiance.",
       "rating": 5,
-      "project": "Pièces de précision pour H145"
+      "project": "Pièces de précision pour hélicoptères"
     },
     {
       "sector": "aeronautique",
-      "company": "Safran Helicopter Engines",
+      "company": "Motoriste aéronautique leader",
       "author": "Claire M.",
       "role": "Ingénieure Projet",
       "content": "Le niveau de précision et la traçabilité des pièces sont exemplaires. EGI nous a accompagnés sur des études complexes avec un niveau d'expertise remarquable. Une équipe technique de haut niveau.",
@@ -29,7 +29,7 @@
     },
     {
       "sector": "defense",
-      "company": "Armée de l'Air et de l'Espace",
+      "company": "Forces armées françaises",
       "author": "Colonel Philippe R.",
       "role": "Chef de projet OPEX",
       "content": "Équipements robustes et fiables, parfaitement adaptés aux contraintes opérationnelles. Le support de FREM en conditions OPEX est exceptionnel. Disponibilité et réactivité au rendez-vous.",
@@ -38,7 +38,7 @@
     },
     {
       "sector": "defense",
-      "company": "DGA - Direction Générale de l'Armement",
+      "company": "Organisme d'État - Défense",
       "author": "Marie-Laure B.",
       "role": "Responsable Qualité Fournisseurs",
       "content": "LLEDO Industries démontre une maîtrise parfaite des exigences défense. Les certifications sont à jour, les process qualité rigoureux. Un acteur de confiance pour nos projets stratégiques.",
@@ -46,6 +46,32 @@
       "project": "Systèmes mécaniques certifiés"
     }
   ],
+  "satisfaction": {
+    "title": "Résultats de nos sondages de satisfaction",
+    "subtitle": "Enquête réalisée auprès de nos clients en 2024",
+    "stats": [
+      {
+        "label": "Qualité des produits",
+        "value": 98,
+        "description": "Taux de satisfaction sur la qualité"
+      },
+      {
+        "label": "Respect des délais",
+        "value": 96,
+        "description": "Livraisons dans les temps"
+      },
+      {
+        "label": "Service client",
+        "value": 97,
+        "description": "Réactivité et accompagnement"
+      },
+      {
+        "label": "Recommandation",
+        "value": 95,
+        "description": "Clients qui nous recommandent"
+      }
+    ]
+  },
   "cta": {
     "title": "Votre projet nous intéresse",
     "button": "Nous contacter"
