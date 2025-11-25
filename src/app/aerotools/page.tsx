@@ -33,6 +33,10 @@ export default function AerotoolsPage() {
         contactType: 'customer service',
         email: 'contact@lledo-industries.com',
       },
+      sameAs: [
+        'https://www.linkedin.com/company/lledo-industries',
+        'https://www.youtube.com/channel/lledo-industries',
+      ],
     },
   })
 
