@@ -105,13 +105,34 @@ export default function MPEBPage() {
             </motion.h1>
             
             <motion.p 
-              className="mb-12 text-xl opacity-90"
+              className="mb-6 text-xl opacity-90"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.9 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               {expertise.tagline}
             </motion.p>
+
+            {/* CTA Button in Hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mb-12"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, x: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href="/contact"
+                  className="btn-primary inline-flex items-center gap-2 tech-border bg-white text-blue-600 hover:bg-gray-100"
+                >
+                  Nous contacter
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </motion.div>
+            </motion.div>
 
             {/* Stats */}
             <motion.div 
@@ -214,34 +235,19 @@ export default function MPEBPage() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4">
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.3 }}
+              <motion.div
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <a
+                  href="/plaquette-lledo-industries.pdf"
+                  download
+                  className="btn-primary inline-flex items-center gap-2 tech-border"
                 >
-                  <Link
-                    href="/contact"
-                    className="btn-primary inline-flex items-center gap-2 tech-border"
-                  >
-                    Nous contacter
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <a
-                    href="/plaquette-lledo-industries.pdf"
-                    download
-                    className="btn-secondary inline-flex items-center gap-2 tech-border"
-                  >
-                    Obtenir un devis
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </motion.div>
-              </div>
+                  Obtenir un devis
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </motion.div>
             </motion.div>
 
             {/* Capabilities Card */}
