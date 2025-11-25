@@ -105,7 +105,7 @@ export function Hero() {
                   whileHover={{ rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.6 }}
                   animate={{ rotate: [0, 10, -10, 0] }}
-                  style={{ transition: 'all 4s ease-in-out', repeat: Infinity }}
+                  style={{ transition: 'all 4s ease-in-out' }}
                 >
                   <Sparkles className="h-5 w-5 flex-shrink-0 text-blue-500 relative z-10" />
                 </motion.div>
