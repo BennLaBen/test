@@ -179,55 +179,125 @@ export default function NotreVisionPage() {
               return (
                 <motion.div 
                   key={index} 
-                  className="glass-card group p-8 tech-border relative overflow-hidden"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="glass-card group p-8 relative overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                  initial={{ opacity: 0, y: 50, rotateX: -15 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -10, scale: 1.02 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: index * 0.15,
+                    type: "spring",
+                    stiffness: 80
+                  }}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3 }
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Animated wave effect */}
-                  <motion.div
-                    className="absolute inset-0 opacity-30"
-                    animate={{ 
-                      backgroundPosition: ['0% 0%', '100% 100%'],
-                    }}
-                    transition={{ 
-                      duration: 8, 
-                      repeat: Infinity, 
-                      ease: "linear" 
-                    }}
-                    style={{ 
-                      background: 'linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.05) 50%, transparent 70%)',
-                      backgroundSize: '200% 200%'
-                    }}
-                  />
-                  
-                  {/* Hover shimmer effect */}
+                  {/* Shimmer effect traversant */}
                   <motion.div
                     className="absolute inset-0 -translate-x-full"
-                    whileHover={{ translateX: '100%' }}
-                    transition={{ duration: 0.6 }}
-                    style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent)' }}
+                    animate={{
+                      translateX: ['100%', '-100%']
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      delay: index * 0.3 + 1.5,
+                      repeat: Infinity,
+                      repeatDelay: 3,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)',
+                      pointerEvents: 'none'
+                    }}
                   />
                   
-                  <motion.div 
-                    className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary-500/15 text-primary-600 transition-colors group-hover:bg-primary-500/25 tech-corner relative z-10"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    animate={{ 
-                      rotate: [0, 5, -5, 0],
-                      y: [0, -3, 0]
+                  {/* Animated gradient background on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/10 opacity-0"
+                    whileHover={{ 
+                      opacity: 1,
+                      scale: 1.05,
                     }}
-                    transition={{ 
-                      duration: 4 + index * 0.5, 
-                      repeat: Infinity, 
-                      ease: "easeInOut",
-                      delay: index * 0.3
+                    transition={{ duration: 0.4 }}
+                  />
+                  
+                  {/* Border glow on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl"
+                    whileHover={{
+                      boxShadow: [
+                        '0 0 0 0 rgba(59, 130, 246, 0)',
+                        '0 0 20px 2px rgba(59, 130, 246, 0.3)',
+                        '0 0 0 0 rgba(59, 130, 246, 0)'
+                      ]
                     }}
-                  >
-                    <Icon className="h-7 w-7" />
-                  </motion.div>
-                  <h3 className="mb-3 text-xl font-bold text-muted-strong relative z-10">{value.title}</h3>
-                  <p className="text-muted relative z-10">{value.description}</p>
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                  
+                  <div className="relative">
+                    {/* Icon avec animation float */}
+                    <motion.div
+                      animate={{ 
+                        y: [0, -12, 0],
+                        rotate: [0, 5, -5, 0]
+                      }}
+                      transition={{ 
+                        duration: 4, 
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2
+                      }}
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl mb-6 group-hover:shadow-2xl transition-shadow duration-300"
+                      whileHover={{ 
+                        rotate: [0, -10, 10, -10, 0],
+                        scale: 1.1
+                      }}
+                    >
+                      <motion.div
+                        whileHover={{ 
+                          rotate: 360,
+                          scale: [1, 1.2, 1]
+                        }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Icon className="h-7 w-7" />
+                      </motion.div>
+                    </motion.div>
+                    
+                    {/* Title with gradient on hover */}
+                    <motion.h3 
+                      className="text-xl font-bold text-muted-strong mb-3 group-hover:text-primary-600 transition-colors"
+                      whileHover={{ x: 5 }}
+                    >
+                      {value.title}
+                    </motion.h3>
+                    
+                    <p className="text-muted leading-relaxed">
+                      {value.description}
+                    </p>
+                    
+                    {/* Sparkle effect */}
+                    <motion.div
+                      className="absolute top-2 right-2"
+                      animate={{ 
+                        scale: [0, 1, 0],
+                        rotate: [0, 180, 360]
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        delay: index * 0.3 + 0.5,
+                        repeat: Infinity,
+                        repeatDelay: 4,
+                        ease: "easeOut"
+                      }}
+                    >
+                      <Sparkles className="h-4 w-4 text-yellow-400" />
+                    </motion.div>
+                  </div>
                 </motion.div>
               )
             })}
