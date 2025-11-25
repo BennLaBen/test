@@ -129,7 +129,7 @@ export function Hero() {
                   whileHover={{ rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.6 }}
                   animate={{ scale: [1, 1.1, 1] }}
-                  style={{ transition: 'all 2s ease-in-out', repeat: Infinity }}
+                  style={{ transition: 'all 2s ease-in-out' }}
                 >
                   <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500 relative z-10" />
                 </motion.div>
@@ -156,7 +156,7 @@ export function Hero() {
                     rotate: [0, 5, -5, 0],
                     y: [0, -3, 0]
                   }}
-                  style={{ transition: 'all 3s ease-in-out', repeat: Infinity }}
+                  style={{ transition: 'all 3s ease-in-out' }}
                 >
                   <Award className="h-5 w-5 flex-shrink-0 text-amber-400 relative z-10" />
                 </motion.div>
