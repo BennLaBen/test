@@ -194,18 +194,34 @@ export default function MPEBPage() {
                 ))}
               </div>
 
-              <motion.div
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Link
-                  href="/contact"
-                  className="btn-primary inline-flex items-center gap-2 tech-border"
+              <div className="flex flex-wrap gap-4">
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  Demander un devis
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
+                  <Link
+                    href="/contact"
+                    className="btn-primary inline-flex items-center gap-2 tech-border"
+                  >
+                    Nous contacter
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <a
+                    href="/plaquette-lledo-industries.pdf"
+                    download
+                    className="btn-secondary inline-flex items-center gap-2 tech-border"
+                  >
+                    Obtenir un devis
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </motion.div>
+              </div>
             </motion.div>
 
             {/* Capabilities Card */}
