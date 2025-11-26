@@ -693,6 +693,28 @@ html {
     html {
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      /* Ultra smooth scroll pour mobile */
+      scroll-snap-type: none;
+      overscroll-behavior-y: none;
+    }
+    
+    /* Accélération GPU pour scroll fluide */
+    * {
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      perspective: 1000;
+    }
+    
+    /* Désactiver le momentum scroll sur les éléments */
+    body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
     }
     
     /* Désactiver le zoom sur les inputs */
@@ -779,6 +801,38 @@ html {
     .overflow-y-auto, .overflow-x-auto {
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
+    }
+    
+    /* Optimisation des espacements sur mobile */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    section {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+    }
+    
+    /* Cards mobile optimisées */
+    .glass-card, [class*="card"] {
+      margin-bottom: 0.75rem;
+    }
+    
+    /* Réduire les gaps sur mobile */
+    .grid {
+      gap: 0.75rem !important;
+    }
+    
+    .flex {
+      gap: 0.5rem !important;
+    }
+    
+    /* Hero optimisé mobile */
+    [class*="hero"] {
+      padding-top: 6rem !important;
+      padding-bottom: 2rem !important;
+      min-height: auto !important;
     }
   }
 }

@@ -44,7 +44,7 @@ export function TopInfoBar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.2 }}
-      className="fixed top-20 left-0 right-0 z-40 border-b border-gray-300/30 bg-white/98 backdrop-blur-xl dark:border-gray-700/40 dark:bg-gray-900/98 shadow-sm overflow-hidden"
+      className="hidden lg:block fixed top-20 left-0 right-0 z-40 border-b border-gray-300/30 bg-white/98 backdrop-blur-xl dark:border-gray-700/40 dark:bg-gray-900/98 shadow-sm overflow-hidden"
     >
       {/* Grille industrielle + lignes de mesure */}
       <div className="absolute inset-0 opacity-[0.03] industrial-grid pointer-events-none" />

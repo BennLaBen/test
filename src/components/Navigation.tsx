@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { LanguageToggle } from '@/components/LanguageToggle'
-import { Menu, X, User, LogOut } from 'lucide-react'
+import { Menu, X, User, LogOut, Package, Phone, Users, Download, Newspaper } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/contexts/AuthContext'
 import { AuthModal } from '@/components/auth/AuthModal'
@@ -22,6 +22,40 @@ const navigation = [
 const secondaryNavigation = [
   { key: 'nav.contact', href: '/contact' },
   { key: 'nav.careers', href: '/carriere' },
+]
+
+const quickLinks = [
+  { 
+    icon: Package, 
+    label: 'Produits Aerotools', 
+    href: '/aerotools',
+    color: 'from-orange-500 to-orange-600'
+  },
+  { 
+    icon: Phone, 
+    label: 'Contact', 
+    href: '/contact',
+    color: 'from-primary-500 to-primary-600'
+  },
+  { 
+    icon: Users, 
+    label: 'Recrutement', 
+    href: '/carriere',
+    color: 'from-amber-500 to-amber-600'
+  },
+  { 
+    icon: Newspaper, 
+    label: 'Blog', 
+    href: '/blog',
+    color: 'from-indigo-500 to-indigo-600'
+  },
+  { 
+    icon: Download, 
+    label: 'Plaquette PDF', 
+    href: '/plaquette-lledo-industries.pdf',
+    color: 'from-gray-500 to-gray-600',
+    isDownload: true
+  },
 ]
 
 export function Navigation() {
@@ -249,24 +283,55 @@ export function Navigation() {
                   ))}
                 </div>
 
-                {/* Secondary Links */}
-                <div className="space-y-1 mb-4">
-                  {secondaryNavigation.map((item, index) => (
-                    <motion.div
-                      key={item.key}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="block rounded-xl px-4 py-2.5 text-sm font-medium text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-all active:scale-95"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {t(item.key)}
-                      </Link>
-                    </motion.div>
-                  ))}
+                {/* Quick Links - Mobile avec icônes */}
+                <div className="mb-4">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-muted mb-2 px-2">
+                    Accès Rapide
+                  </h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {quickLinks.map((link, index) => {
+                      const Icon = link.icon
+                      const isDownload = link.isDownload || false
+                      
+                      return (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                        >
+                          {isDownload ? (
+                            <a
+                              href={link.href}
+                              download
+                              className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all active:scale-95 min-h-[88px]"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${link.color}`}>
+                                <Icon className="h-5 w-5 text-white" />
+                              </div>
+                              <span className="text-xs font-semibold text-muted-strong text-center leading-tight">
+                                {link.label}
+                              </span>
+                            </a>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all active:scale-95 min-h-[88px]"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${link.color}`}>
+                                <Icon className="h-5 w-5 text-white" />
+                              </div>
+                              <span className="text-xs font-semibold text-muted-strong text-center leading-tight">
+                                {link.label}
+                              </span>
+                            </Link>
+                          )}
+                        </motion.div>
+                      )
+                    })}
+                  </div>
                 </div>
 
                 {/* Auth Button - Mobile */}
