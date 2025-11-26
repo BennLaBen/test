@@ -834,6 +834,27 @@ html {
       padding-bottom: 2rem !important;
       min-height: auto !important;
     }
+    
+    /* Scroll horizontal fluide sans scrollbar visible */
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Snap scroll pour navigation rapide */
+    .snap-x {
+      scroll-snap-type: x proximity;
+    }
+    
+    .snap-center {
+      scroll-snap-align: center;
+    }
   }
 }
 

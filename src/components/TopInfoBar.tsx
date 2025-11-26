@@ -44,7 +44,7 @@ export function TopInfoBar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.2 }}
-      className="hidden lg:block fixed top-20 left-0 right-0 z-40 border-b border-gray-300/30 bg-white/98 backdrop-blur-xl dark:border-gray-700/40 dark:bg-gray-900/98 shadow-sm overflow-hidden"
+      className="fixed top-20 left-0 right-0 z-40 border-b border-gray-300/30 bg-white/98 backdrop-blur-xl dark:border-gray-700/40 dark:bg-gray-900/98 shadow-sm overflow-hidden"
     >
       {/* Grille industrielle + lignes de mesure */}
       <div className="absolute inset-0 opacity-[0.03] industrial-grid pointer-events-none" />
@@ -55,8 +55,9 @@ export function TopInfoBar() {
       <div className="absolute left-4 top-0 h-1 w-8 bg-primary-500/30" />
       <div className="absolute right-4 top-0 h-1 w-8 bg-primary-500/30" />
       
-      <div className="relative py-2 px-4">
-        <div className="flex items-center justify-center gap-1.5 mx-auto max-w-7xl">
+      <div className="relative py-2 px-2 lg:px-4">
+        {/* Desktop: centré */}
+        <div className="hidden lg:flex items-center justify-center gap-1.5 mx-auto max-w-7xl">
           {quickLinks.map((link, index) => {
             const Icon = link.icon
             const isDownload = link.isDownload || false
@@ -123,6 +124,64 @@ export function TopInfoBar() {
               </motion.div>
             )
           })}
+        </div>
+        
+        {/* Mobile: scroll horizontal avec boutons tactiles optimisés */}
+        <div className="lg:hidden overflow-x-auto hide-scrollbar">
+          <div className="flex items-center gap-2 px-2 min-w-max">
+            {quickLinks.map((link, index) => {
+              const Icon = link.icon
+              const isDownload = link.isDownload || false
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 + index * 0.05, duration: 0.3 }}
+                >
+                  {isDownload ? (
+                    <a
+                      href={link.href}
+                      download
+                      className="group relative flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-bold tracking-wide text-gray-700 transition-all active:scale-95 dark:text-gray-300 flex-shrink-0 rounded-lg overflow-hidden"
+                    >
+                      {/* Fond avec bordure technique */}
+                      <div className="absolute inset-0 bg-gray-100/90 dark:bg-gray-800/90 transition-all active:bg-primary-50 dark:active:bg-primary-900/30" />
+                      <div className="absolute inset-0 border-2 border-gray-300/50 dark:border-gray-700/50 transition-all active:border-primary-400" />
+                      
+                      {/* Icon avec gradient - Plus grand sur mobile */}
+                      <div className={`relative flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${link.color} transition-transform active:scale-110 shadow-lg`}>
+                        <Icon className="h-4 w-4 text-white" />
+                      </div>
+                      
+                      <span className="relative whitespace-nowrap font-bold">
+                        {link.label}
+                      </span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="group relative flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-xs font-bold tracking-wide text-gray-700 transition-all active:scale-95 dark:text-gray-300 flex-shrink-0 rounded-lg overflow-hidden"
+                    >
+                      {/* Fond avec bordure technique */}
+                      <div className="absolute inset-0 bg-gray-100/90 dark:bg-gray-800/90 transition-all active:bg-primary-50 dark:active:bg-primary-900/30" />
+                      <div className="absolute inset-0 border-2 border-gray-300/50 dark:border-gray-700/50 transition-all active:border-primary-400" />
+                      
+                      {/* Icon avec gradient - Plus grand sur mobile */}
+                      <div className={`relative flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${link.color} transition-transform active:scale-110 shadow-lg`}>
+                        <Icon className="h-4 w-4 text-white" />
+                      </div>
+                      
+                      <span className="relative whitespace-nowrap font-bold">
+                        {link.label}
+                      </span>
+                    </Link>
+                  )}
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </div>
       
