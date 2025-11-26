@@ -9,6 +9,7 @@ import { TopInfoBar } from '@/components/TopInfoBar'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ClientI18nWrapper } from '@/components/ClientI18nWrapper'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { FloatingCTA } from '@/components/FloatingCTA'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -165,6 +166,7 @@ export default function RootLayout({
                 <TopInfoBar />
                 <SmartNavigator />
                 <SectionPagination />
+                <FloatingCTA />
                 <main id="main-content" className="flex-1 pt-32">
                   {children}
                 </main>

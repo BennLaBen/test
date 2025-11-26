@@ -142,8 +142,30 @@ export function Navigation() {
             defaultMode="login"
           />
 
-          {/* Mobile menu button & actions */}
+          {/* Mobile menu button & actions - MENU À GAUCHE */}
           <div className="flex items-center gap-2 lg:hidden">
+            {/* Menu Hamburger À GAUCHE */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center rounded-lg p-2.5 text-muted-strong hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 active:scale-95 transition-all"
+              aria-expanded={isOpen}
+            >
+              <span className="sr-only">Ouvrir le menu principal</span>
+              <motion.div
+                animate={{ rotate: isOpen ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isOpen ? (
+                  <X className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Menu className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </motion.div>
+            </button>
+            
+            {/* Spacer pour pousser les icônes à droite */}
+            <div className="flex-1" />
+            
             {/* User Avatar on Mobile */}
             {isAuthenticated && user ? (
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-sm font-bold">
@@ -159,57 +181,72 @@ export function Navigation() {
             )}
             <LanguageToggle />
             <ThemeToggle />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center rounded-full p-2 text-muted hover:text-muted-strong focus:outline-none focus:ring-2 focus:ring-primary-500 active:scale-95 transition-transform"
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">Ouvrir le menu principal</span>
-              <motion.div
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {isOpen ? (
-                  <X className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Menu className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </motion.div>
-            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation - ULTRA OPTIMISÉ */}
+        {/* Mobile Navigation - DRAWER GAUCHE style Leboncoin */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden"
-            >
-              <motion.div 
-                className="px-4 pb-6 pt-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-gray-200 dark:border-gray-700"
-                initial={{ y: -20 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
+            <>
+              {/* Overlay sombre */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+                onClick={() => setIsOpen(false)}
+              />
+              
+              {/* Drawer menu depuis la gauche */}
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="lg:hidden fixed left-0 top-0 h-full w-[85%] max-w-[320px] bg-white dark:bg-gray-900 shadow-2xl z-[70] overflow-y-auto"
               >
-                {/* User Profile Section - Mobile */}
+              <motion.div 
+                className="flex flex-col h-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.15 }}
+              >
+                {/* Header du drawer avec logo */}
+                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 dark:border-gray-800">
+                  <div className="relative h-10 w-auto" style={{ width: '140px' }}>
+                    <Image
+                      src="/logo.png"
+                      alt="LLEDO Industries"
+                      fill
+                      className="object-contain object-left"
+                    />
+                  </div>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    <X className="h-5 w-5 text-muted-strong" />
+                  </button>
+                </div>
+                
+                {/* Contenu scrollable */}
+                <div className="flex-1 overflow-y-auto px-5 py-4">
+                {/* User Profile Section - Mobile Style Leboncoin */}
                 {isAuthenticated && user && (
                   <motion.div 
-                    className="mb-4 p-4 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-950/30 dark:to-primary-900/30"
+                    className="mb-5 p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.2 }}
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-lg font-bold shadow-lg">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-xl font-bold shadow-md">
                         {user.firstName.charAt(0)}
                       </div>
-                      <div>
-                        <p className="text-sm font-bold text-muted-strong">{user.firstName} {user.lastName}</p>
-                        <p className="text-xs text-muted">{user.email}</p>
+                      <div className="flex-1">
+                        <p className="text-[15px] font-bold text-gray-900 dark:text-white">{user.firstName} {user.lastName}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
                       </div>
                     </div>
                     <button
@@ -217,7 +254,7 @@ export function Navigation() {
                         logout()
                         setIsOpen(false)
                       }}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-[14px] font-semibold text-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg active:scale-[0.98] transition-all border border-red-200 dark:border-red-900/30"
                     >
                       <LogOut className="h-4 w-4" />
                       Déconnexion
@@ -225,8 +262,8 @@ export function Navigation() {
                   </motion.div>
                 )}
 
-                {/* Navigation Links */}
-                <div className="space-y-1 mb-4">
+                {/* Navigation Links - Style Leboncoin */}
+                <div className="space-y-2 mb-6">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.key}
@@ -236,10 +273,10 @@ export function Navigation() {
                     >
                       <Link
                         href={item.href}
-                        className={`block rounded-xl px-4 py-3.5 text-base font-semibold transition-all active:scale-95 ${
+                        className={`block rounded-lg px-4 py-3 text-[15px] font-medium transition-all active:scale-[0.98] border ${
                           isActive(item.href)
-                            ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30'
-                            : 'bg-gray-100 dark:bg-gray-800 text-muted-strong hover:bg-gray-200 dark:hover:bg-gray-700'
+                            ? 'bg-primary-500 text-white shadow-md border-primary-600'
+                            : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700'
                         }`}
                         onClick={() => setIsOpen(false)}
                       >
@@ -249,8 +286,8 @@ export function Navigation() {
                   ))}
                 </div>
 
-                {/* Secondary Links */}
-                <div className="space-y-1 mb-4">
+                {/* Secondary Links - Style minimal */}
+                <div className="space-y-1 mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
                   {secondaryNavigation.map((item, index) => (
                     <motion.div
                       key={item.key}
@@ -260,7 +297,7 @@ export function Navigation() {
                     >
                       <Link
                         href={item.href}
-                        className="block rounded-xl px-4 py-2.5 text-sm font-medium text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-all active:scale-95"
+                        className="block rounded-lg px-4 py-2.5 text-[14px] font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200 transition-all active:scale-[0.98]"
                         onClick={() => setIsOpen(false)}
                       >
                         {t(item.key)}
@@ -276,7 +313,7 @@ export function Navigation() {
                       setShowAuthModal(true)
                       setIsOpen(false)
                     }}
-                    className="w-full mb-3 btn-secondary justify-center text-base py-3.5 active:scale-95"
+                    className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3 text-[15px] font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-lg active:scale-[0.98] transition-all border border-primary-200 dark:border-primary-800"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.4 }}
@@ -286,7 +323,7 @@ export function Navigation() {
                   </motion.button>
                 )}
 
-                {/* CTA Button */}
+                {/* CTA Button - Style Leboncoin */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -294,14 +331,17 @@ export function Navigation() {
                 >
                   <Link
                     href="/contact"
-                    className="btn-primary w-full justify-center text-base py-3.5 active:scale-95"
+                    className="w-full flex items-center justify-center px-6 py-3.5 text-[15px] font-bold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg shadow-lg shadow-primary-500/30 active:scale-[0.98] transition-all"
                     onClick={() => setIsOpen(false)}
                   >
                     {t('nav.quote')}
                   </Link>
                 </motion.div>
+                </div>
+                {/* Fin contenu scrollable */}
               </motion.div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>

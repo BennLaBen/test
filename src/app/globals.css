@@ -803,6 +803,32 @@ html {
       overscroll-behavior: contain;
     }
     
+    /* Réduction légère de la taille de police sur mobile */
+    html {
+      font-size: 15px; /* Au lieu de 16px par défaut */
+    }
+    
+    body {
+      font-size: 0.9375rem; /* 15px */
+      line-height: 1.6;
+    }
+    
+    h1 {
+      font-size: 1.875rem !important; /* 30px au lieu de 32px */
+    }
+    
+    h2 {
+      font-size: 1.5rem !important; /* 24px au lieu de 28px */
+    }
+    
+    h3 {
+      font-size: 1.25rem !important; /* 20px au lieu de 24px */
+    }
+    
+    p, span, div {
+      font-size: 0.9375rem; /* 15px */
+    }
+    
     /* Optimisation des espacements sur mobile */
     .container {
       padding-left: 1rem;
