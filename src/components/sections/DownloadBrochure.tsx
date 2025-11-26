@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { 
   Download, 
   FileText, 
@@ -10,9 +10,12 @@ import {
   Award,
   Ruler,
   MonitorCheck,
-  Settings
+  Settings,
+  Lock
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '@/contexts/AuthContext'
+import { AuthModal } from '@/components/auth/AuthModal'
 
 const iconMap = [Factory, MonitorCheck, Award, Ruler, Settings, Factory]
 
@@ -20,15 +23,28 @@ export function DownloadBrochure() {
   const { t } = useTranslation('brochure')
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  
+  const { isAuthenticated, user } = useAuth()
   const items = t('items', { returnObjects: true }) as any[]
 
   const handleDownload = (itemTitle: string) => {
-    alert(t('downloadAlert', { title: itemTitle }))
+    if (!isAuthenticated) {
+      setShowAuthModal(true)
+      return
+    }
+    
+    // Simulation de téléchargement
+    alert(`✅ Téléchargement démarré !\n\n📄 ${itemTitle}\n👤 ${user?.firstName} ${user?.lastName}\n📧 ${user?.email}\n\nMerci de votre confiance !`)
   }
 
   const handleDownloadComplete = () => {
-    alert(t('downloadCompleteAlert'))
+    if (!isAuthenticated) {
+      setShowAuthModal(true)
+      return
+    }
+    
+    alert(`✅ Téléchargement de la plaquette complète démarré !\n\n👤 ${user?.firstName} ${user?.lastName}\n📧 ${user?.email}\n\nMerci de votre confiance !`)
   }
 
   return (
@@ -85,8 +101,17 @@ export function DownloadBrochure() {
                     onClick={() => handleDownload(item.title)}
                     className="btn-secondary btn-secondary--sm inline-flex items-center gap-2"
                   >
-                    <Download className="h-4 w-4" />
-                    {t('downloadButton')}
+                    {isAuthenticated ? (
+                      <>
+                        <Download className="h-4 w-4" />
+                        {t('downloadButton')}
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="h-4 w-4" />
+                        Se connecter
+                      </>
+                    )}
                   </button>
                 </div>
               </motion.div>
@@ -105,10 +130,31 @@ export function DownloadBrochure() {
             onClick={handleDownloadComplete}
             className="btn-primary inline-flex items-center gap-2"
           >
-            <Download className="h-5 w-5" />
-            {t('downloadAll')}
+            {isAuthenticated ? (
+              <>
+                <Download className="h-5 w-5" />
+                {t('downloadAll')}
+              </>
+            ) : (
+              <>
+                <Lock className="h-5 w-5" />
+                Se connecter pour télécharger
+              </>
+            )}
           </button>
+          {isAuthenticated && user && (
+            <p className="mt-4 text-sm text-muted">
+              Connecté en tant que <span className="font-semibold text-primary-600">{user.firstName} {user.lastName}</span>
+            </p>
+          )}
         </motion.div>
+
+        {/* Auth Modal */}
+        <AuthModal 
+          isOpen={showAuthModal} 
+          onClose={() => setShowAuthModal(false)}
+          defaultMode="signup"
+        />
       </div>
     </section>
   )

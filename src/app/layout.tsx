@@ -8,6 +8,7 @@ import { SectionPagination } from '@/components/SectionPagination'
 import { TopInfoBar } from '@/components/TopInfoBar'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ClientI18nWrapper } from '@/components/ClientI18nWrapper'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -158,16 +159,18 @@ export default function RootLayout({
         )}
         <ThemeProvider defaultTheme="industrial">
           <ClientI18nWrapper>
-            <div className="flex min-h-screen flex-col">
-              <Navigation />
-              <TopInfoBar />
-              <SmartNavigator />
-              <SectionPagination />
-              <main id="main-content" className="flex-1 pt-32">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <AuthProvider>
+              <div className="flex min-h-screen flex-col">
+                <Navigation />
+                <TopInfoBar />
+                <SmartNavigator />
+                <SectionPagination />
+                <main id="main-content" className="flex-1 pt-32">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </AuthProvider>
           </ClientI18nWrapper>
         </ThemeProvider>
       </body>

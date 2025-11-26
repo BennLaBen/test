@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { Star, Quote, Plane, Shield, Factory, Zap } from 'lucide-react'
+import { Star, Quote, Plane, Shield, Factory, Zap, MessageSquarePlus, Lock } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '@/contexts/AuthContext'
+import { AuthModal } from '@/components/auth/AuthModal'
 
 const iconMap: Record<string, any> = {
   aeronautique: Plane,
@@ -18,6 +20,12 @@ export function Testimonials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [activeSector, setActiveSector] = useState<string>('all')
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showReviewForm, setShowReviewForm] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  
+  const { isAuthenticated, user } = useAuth()
 
   const sectors = t('sectors', { returnObjects: true }) as any[]
   const testimonials = t('list', { returnObjects: true }) as any[]
@@ -26,6 +34,57 @@ export function Testimonials() {
   const filteredTestimonials = activeSector === 'all' 
     ? testimonials 
     : testimonials.filter((t: any) => t.sector === activeSector)
+
+  const [reviewData, setReviewData] = useState({
+    rating: 5,
+    content: '',
+    sector: 'industrie'
+  })
+
+  const handleSubmitReview = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!user) return
+
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userEmail: user.email,
+          userName: `${user.firstName} ${user.lastName}`,
+          company: user.company,
+          rating: reviewData.rating,
+          content: reviewData.content,
+          sector: reviewData.sector
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitSuccess(true)
+        setReviewData({ rating: 5, content: '', sector: 'industrie' })
+        setTimeout(() => {
+          setShowReviewForm(false)
+          setSubmitSuccess(false)
+        }, 3000)
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleAddReviewClick = () => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true)
+    } else {
+      setShowReviewForm(true)
+    }
+  }
 
   return (
     <section id="testimonials" ref={ref} className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
@@ -176,22 +235,145 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA & Add Review Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
+          className="mt-16 flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <div className="glass-card glass-card--muted p-8 inline-block">
-            <h3 className="text-xl font-bold text-muted-strong mb-4">
-              {t('cta.title')}
-            </h3>
-            <a href="/contact" className="btn-primary">
-              {t('cta.button')}
-            </a>
-          </div>
+          <button
+            onClick={handleAddReviewClick}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            {isAuthenticated ? (
+              <>
+                <MessageSquarePlus className="h-5 w-5" />
+                Laisser un avis
+              </>
+            ) : (
+              <>
+                <Lock className="h-5 w-5" />
+                Se connecter pour laisser un avis
+              </>
+            )}
+          </button>
+          <a href="/contact" className="btn-secondary">
+            {t('cta.button')}
+          </a>
         </motion.div>
+
+        {/* Review Form Modal */}
+        {showReviewForm && isAuthenticated && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setShowReviewForm(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card w-full max-w-2xl p-8 tech-border relative"
+            >
+              {submitSuccess ? (
+                <div className="text-center py-8">
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 mb-4">
+                    <Star className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-muted-strong mb-2">Merci {user?.firstName} !</h3>
+                  <p className="text-muted">
+                    Votre avis a été soumis avec succès. Il sera publié après validation par notre équipe.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold text-muted-strong mb-6">Partagez votre expérience</h3>
+                  <form onSubmit={handleSubmitReview} className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-muted-strong mb-2">
+                        Votre note
+                      </label>
+                      <div className="flex gap-2">
+                        {[1, 2, 3, 4, 5].map((rating) => (
+                          <button
+                            key={rating}
+                            type="button"
+                            onClick={() => setReviewData({ ...reviewData, rating })}
+                            className="transition-transform hover:scale-110"
+                          >
+                            <Star
+                              className={`h-8 w-8 ${
+                                rating <= reviewData.rating
+                                  ? 'fill-amber-400 text-amber-400'
+                                  : 'text-gray-300 dark:text-gray-600'
+                              }`}
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-muted-strong mb-2">
+                        Secteur d'activité
+                      </label>
+                      <select
+                        value={reviewData.sector}
+                        onChange={(e) => setReviewData({ ...reviewData, sector: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-muted-strong focus:ring-2 focus:ring-primary-500"
+                      >
+                        {sectors.map((sector: any) => (
+                          <option key={sector.id} value={sector.id}>{sector.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-muted-strong mb-2">
+                        Votre avis
+                      </label>
+                      <textarea
+                        required
+                        value={reviewData.content}
+                        onChange={(e) => setReviewData({ ...reviewData, content: e.target.value })}
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-muted-strong focus:ring-2 focus:ring-primary-500"
+                        placeholder="Partagez votre expérience avec LLEDO Industries..."
+                      />
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="btn-primary flex-1 disabled:opacity-50"
+                      >
+                        {isSubmitting ? 'Envoi en cours...' : 'Publier mon avis'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowReviewForm(false)}
+                        className="btn-secondary"
+                      >
+                        Annuler
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Auth Modal */}
+        <AuthModal 
+          isOpen={showAuthModal} 
+          onClose={() => setShowAuthModal(false)}
+          defaultMode="login"
+        />
       </div>
     </section>
   )

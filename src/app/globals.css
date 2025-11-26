@@ -643,3 +643,149 @@ html {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(400%); }
 }
+
+/* ====================================
+   OPTIMISATIONS MOBILE ULTRA-RESPONSIVE
+   ==================================== */
+
+@layer utilities {
+  /* Touch-friendly tap targets */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile text sizes */
+  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
+  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  
+  /* Mobile spacing */
+  .mobile-px { padding-left: 1rem; padding-right: 1rem; }
+  .mobile-py { padding-top: 1rem; padding-bottom: 1rem; }
+  .mobile-p { padding: 1rem; }
+  
+  /* Mobile-optimized glass card */
+  @media (max-width: 640px) {
+    .glass-card {
+      padding: 1rem !important;
+      border-radius: 1rem !important;
+    }
+    
+    .glass-card--muted {
+      padding: 1.25rem !important;
+    }
+  }
+  
+  /* Safe area pour notch iPhone */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Scroll smooth sur mobile */
+  @media (max-width: 768px) {
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Désactiver le zoom sur les inputs */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+  
+  /* Container mobile optimized */
+  @media (max-width: 640px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Buttons mobile-friendly */
+  @media (max-width: 640px) {
+    .btn-primary, .btn-secondary {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9375rem;
+      min-height: 44px;
+    }
+    
+    .btn-primary--sm, .btn-secondary--sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      min-height: 36px;
+    }
+  }
+  
+  /* Navigation mobile */
+  @media (max-width: 1024px) {
+    .nav-solid, .nav-transparent {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Mobile-friendly hover states (use active instead) */
+  @media (hover: none) {
+    .hover\:scale-105:active { transform: scale(1.05); }
+    .hover\:scale-110:active { transform: scale(1.1); }
+    .hover\:-translate-y-1:active { transform: translateY(-0.25rem); }
+    .hover\:-translate-y-2:active { transform: translateY(-0.5rem); }
+  }
+  
+  /* iOS-specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    /* Fix pour les cards qui débordent */
+    .glass-card {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    
+    /* Fix pour le blur qui lag */
+    .backdrop-blur-sm {
+      -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .backdrop-blur {
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: blur(24px);
+    }
+  }
+  
+  /* Android-specific fixes */
+  @media (pointer: coarse) {
+    /* Améliorer la performance des animations */
+    * {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    
+    /* Optimiser le scroll */
+    .overflow-y-auto, .overflow-x-auto {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+  }
+}
+
+/* Mobile viewport height fix pour 100vh */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
