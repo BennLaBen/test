@@ -71,31 +71,36 @@ export default function EGIPage() {
         canonical="/societes/egi"
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-600 to-purple-800 py-20 text-white dark:from-purple-700 dark:to-purple-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="blueprint" className="opacity-20" />
-        
+      {/* Hero Section - Tony Stark */}
+      <section className="relative bg-gradient-to-br from-purple-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(147, 51, 234, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(147, 51, 234, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
         </div>
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-purple-500/20 backdrop-blur-xl border-2 border-purple-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(147, 51, 234, 0.6)' }}
             >
-              <Lightbulb className="h-4 w-4 mr-2" />
-              {expertise.name}
-            </motion.span>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <Lightbulb className="h-5 w-5 text-purple-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{expertise.name}</span>
+            </motion.div>
             
             <motion.h1 
-              className="mb-4 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-5xl font-black tracking-tight lg:text-7xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ textShadow: '0 0 40px rgba(147, 51, 234, 0.8)', lineHeight: '1.2' }}
             >
               {expertise.name}
             </motion.h1>

@@ -75,147 +75,119 @@ export function Features() {
   ]
 
   return (
-    <section id="features" ref={ref} className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="features" ref={ref} className="py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+      {/* Grille industrielle en fond */}
+      <div className="absolute inset-0 opacity-10">
+        <div 
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+          className="h-full w-full"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Tony Stark Style */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-muted-strong sm:text-4xl mb-4">
+          <motion.h2
+            className="text-5xl font-black tracking-tight text-white sm:text-6xl mb-6 uppercase"
+            style={{
+              textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
+            }}
+            animate={{
+              textShadow: [
+                '0 0 20px rgba(59, 130, 246, 0.6)',
+                '0 0 40px rgba(59, 130, 246, 1)',
+                '0 0 20px rgba(59, 130, 246, 0.6)'
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
             {t('features.title')}
-          </h2>
-          <p className="text-lg text-muted max-w-3xl mx-auto">
+          </motion.h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             {t('features.subtitle')}
           </p>
         </motion.div>
 
-        {/* Stats Section */}
-        <div ref={statsRef} className="mb-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Stats Section - Ultra Modern */}
+        <div ref={statsRef} className="mb-24 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8, y: 50 }}
-                animate={statsInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 50 }}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                animate={statsInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 40 }}
                 transition={{ 
                   duration: 0.6, 
-                  delay: index * 0.15,
-                  type: "spring",
-                  stiffness: 100
+                  delay: index * 0.1
                 }}
                 whileHover={{ 
-                  scale: 1.05,
-                  rotate: [0, -1, 1, 0],
-                  transition: { duration: 0.3 }
+                  scale: 1.03,
+                  y: -5
                 }}
-                className="glass-card relative overflow-hidden p-6 group hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                className="relative overflow-hidden p-8 group cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-2xl"
+                style={{
+                  boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)',
+                  willChange: 'transform'
+                }}
               >
-                {/* Shimmer effect */}
+                {/* Scan line */}
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{
-                    translateX: statsInView ? ['100%', '-100%'] : '100%'
-                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
                   transition={{
-                    duration: 2,
-                    delay: index * 0.2 + 1,
-                    ease: "easeInOut"
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: index * 0.5
                   }}
-                  style={{
-                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)'
-                  }}
+                  style={{ willChange: 'transform' }}
                 />
                 
-                {/* Background gradient on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                
-                {/* Pulse ring on hover */}
+                {/* Glow on hover */}
                 <motion.div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${stat.color} opacity-0`}
-                  whileHover={{
-                    opacity: [0, 0.2, 0],
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{ duration: 1, repeat: Infinity }}
+                  className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
                 />
                 
                 <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    {/* Floating icon */}
-                    <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg group-hover:shadow-2xl transition-shadow`}
-                    >
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <Icon className="h-6 w-6 text-white" />
-                      </motion.div>
-                    </motion.div>
+                  <div className="flex items-center justify-between mb-6">
+                    {/* Icon */}
+                    <div className={`flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}>
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
                     
-                    <motion.div
-                      animate={{ 
-                        y: [0, -4, 0],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <TrendingUp className="h-5 w-5 text-green-500" />
-                    </motion.div>
+                    <TrendingUp className="h-6 w-6 text-green-400" />
                   </div>
                   
                   {/* Animated counter */}
-                  <motion.div 
-                    className="text-3xl font-bold text-muted-strong mb-1"
-                    initial={{ scale: 0.5 }}
-                    animate={statsInView ? { scale: 1 } : { scale: 0.5 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                  >
+                  <div className="text-4xl font-black text-white mb-2">
                     <AnimatedCounter value={stat.value} duration={2} />
-                  </motion.div>
-                  <div className="text-sm text-muted mb-3">{stat.label}</div>
+                  </div>
+                  <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</div>
                   
-                  {/* Progress bar with glow */}
-                  <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 relative">
+                  {/* Progress bar */}
+                  <div className="mt-4 h-2 w-full bg-white/10 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={statsInView ? { width: `${stat.progress}%` } : { width: 0 }}
-                      transition={{ duration: 1.5, delay: index * 0.1 + 0.5, ease: 'easeOut' }}
-                      className={`h-full bg-gradient-to-r ${stat.color} relative`}
-                    >
-                      {/* Glow effect */}
-                      <motion.div
-                        className="absolute right-0 top-0 h-full w-8 blur-sm"
-                        animate={{ opacity: [0.5, 1, 0.5] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        style={{
-                          background: 'linear-gradient(90deg, transparent, white)'
-                        }}
-                      />
-                    </motion.div>
+                      transition={{ duration: 1.5, delay: index * 0.1 + 0.4, ease: 'easeOut' }}
+                      className={`h-full bg-gradient-to-r ${stat.color}`}
+                      style={{
+                        boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+                      }}
+                    />
                   </div>
-                  
-                  {/* Sparkle effect */}
-                  <motion.div
-                    className="absolute top-2 right-2"
-                    animate={{ 
-                      scale: [0, 1, 0],
-                      rotate: [0, 180, 360]
-                    }}
-                    transition={{ 
-                      duration: 2,
-                      delay: index * 0.3 + 0.5,
-                      ease: "easeOut"
-                    }}
-                  >
-                    <Sparkles className="h-4 w-4 text-yellow-400" />
-                  </motion.div>
                 </div>
               </motion.div>
             )
@@ -238,130 +210,71 @@ export function Features() {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 50, rotateX: -15 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
                 transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.15,
-                  type: "spring",
-                  stiffness: 80
+                  duration: 0.6, 
+                  delay: index * 0.1
                 }}
                 whileHover={{ 
-                  y: -8,
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
+                  y: -6,
+                  scale: 1.02
                 }}
-                className={`glass-card group relative overflow-hidden p-8 hover:shadow-2xl transition-all duration-300 cursor-pointer ${spanClasses[index]}`}
-                style={{ transformStyle: 'preserve-3d' }}
+                className={`group relative overflow-hidden p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl ${spanClasses[index]}`}
+                style={{
+                  boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
+                  willChange: 'transform'
+                }}
               >
-                {/* Shimmer effect traversant */}
+                {/* Scan line */}
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{
-                    translateX: isInView ? ['100%', '-100%'] : '100%'
-                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
                   transition={{
-                    duration: 2.5,
-                    delay: index * 0.3 + 1.5,
-                    ease: "easeInOut"
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: index * 0.7
                   }}
-                  style={{
-                    background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)',
-                    pointerEvents: 'none'
-                  }}
+                  style={{ willChange: 'transform' }}
                 />
                 
-                {/* Animated gradient background on hover */}
+                {/* Glow on hover */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/10 opacity-0"
-                  whileHover={{ 
-                    opacity: 1,
-                    scale: 1.05,
-                  }}
-                  transition={{ duration: 0.4 }}
-                />
-                
-                {/* Border glow on hover */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl"
-                  whileHover={{
-                    boxShadow: [
-                      '0 0 0 0 rgba(59, 130, 246, 0)',
-                      '0 0 20px 2px rgba(59, 130, 246, 0.3)',
-                      '0 0 0 0 rgba(59, 130, 246, 0)'
-                    ]
-                  }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
                 
                 <div className="relative">
-                  {/* Icon avec animation float */}
-                  <motion.div
-                    animate={{ 
-                      y: [0, -12, 0],
-                      rotate: [0, 5, -5, 0]
-                    }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: index * 0.2
-                    }}
-                    className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl mb-6 group-hover:shadow-2xl transition-shadow duration-300"
-                    whileHover={{ 
-                      rotate: [0, -10, 10, -10, 0],
-                      scale: 1.1
-                    }}
-                  >
-                    <motion.div
-                      whileHover={{ 
-                        rotate: 360,
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <feature.icon className="h-7 w-7" />
-                    </motion.div>
-                  </motion.div>
+                  {/* Icon */}
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow-xl mb-6">
+                    <feature.icon className="h-8 w-8" />
+                  </div>
                   
-                  {/* Title with gradient on hover */}
-                  <motion.h3 
-                    className="text-xl font-bold text-muted-strong mb-3 group-hover:text-primary-600 transition-colors"
-                    whileHover={{ x: 5 }}
-                  >
+                  {/* Title */}
+                  <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
                     {feature.title}
-                  </motion.h3>
+                  </h3>
                   
-                  <p className="text-muted leading-relaxed mb-5">
+                  <p className="text-gray-300 leading-relaxed mb-5">
                     {feature.description}
                   </p>
                   
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-3">
                     {feature.benefits.map((benefit: string, benefitIndex: number) => (
                       <motion.li
                         key={benefitIndex}
-                        initial={{ opacity: 0, x: -20, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: -20, scale: 0.8 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                         transition={{ 
-                          duration: 0.5, 
-                          delay: index * 0.1 + benefitIndex * 0.08,
-                          type: "spring",
-                          stiffness: 100
+                          duration: 0.4, 
+                          delay: index * 0.1 + benefitIndex * 0.05
                         }}
-                        whileHover={{ x: 5, scale: 1.05 }}
-                        className="flex items-center text-sm text-muted group-hover:text-muted-strong transition-colors"
+                        className="flex items-center text-sm text-gray-300"
                       >
-                        <motion.div 
-                          className="mr-3 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30"
-                          whileHover={{ 
-                            scale: 1.3,
-                            rotate: 360
-                          }}
-                          transition={{ duration: 0.4 }}
-                        >
-                          <CheckCircle className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-                        </motion.div>
-                        {benefit}
+                        <div className="mr-3 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-500/20">
+                          <CheckCircle className="h-4 w-4 text-green-400" />
+                        </div>
+                        <span className="font-medium">{benefit}</span>
                       </motion.li>
                     ))}
                   </ul>

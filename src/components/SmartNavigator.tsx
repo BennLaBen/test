@@ -96,8 +96,8 @@ export function SmartNavigator() {
     }
   }
 
-  // Ne rien afficher si pas de sections
-  if (sections.length === 0) {
+  // Ne rien afficher sur la boutique ou si pas de sections
+  if (pathname?.startsWith('/boutique') || sections.length === 0) {
     return null
   }
 

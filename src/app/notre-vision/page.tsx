@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
@@ -15,7 +16,6 @@ import {
   Handshake,
   ArrowRight,
   Quote,
-  Star,
   Factory,
   Wrench,
   Zap,
@@ -38,23 +38,19 @@ export default function NotreVisionPage() {
   const { t } = useTranslation('vision')
 
   const values = t('values.list', { returnObjects: true }) as any[]
-  const milestones = t('history.milestones', { returnObjects: true }) as any[]
   const paragraphs = t('industrialVision.paragraphs', { returnObjects: true }) as string[]
   const objectives = t('industrialVision.objectives.list', { returnObjects: true }) as any[]
-  const testimonials = t('testimonials.list', { returnObjects: true }) as any[]
-  const companies = t('testimonials.logos.companies', { returnObjects: true }) as string[]
   const heroStats = t('hero.stats', { returnObjects: true }) as any[]
-  const testimonialsStats = t('testimonials.stats.list', { returnObjects: true }) as any[]
 
   return (
-    <>
+    <React.Fragment>
       <SEO
         title={t('title')}
         description={t('description')}
         canonical="/notre-vision"
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - TONY STARK STYLE */}
       <section id="vision-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
         <IndustrialBackground variant="circuit" className="opacity-20" />
         
@@ -62,29 +58,123 @@ export default function NotreVisionPage() {
           <div className="h-full w-full industrial-grid bg-center" />
         </div>
 
-        {/* Animated corner accents */}
-        <div className="absolute top-0 left-0 w-32 h-32 tech-corner opacity-30" />
-        <div className="absolute top-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-90" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 tech-corner opacity-30 -rotate-90" />
-        <div className="absolute bottom-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-180" />
+        {/* Particules ultra-optimisées */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1.5 h-1.5 bg-white rounded-full"
+              style={{
+                left: `${(i * 16.67) % 100}%`,
+                top: `${(i * 20) % 100}%`,
+                willChange: 'transform',
+              }}
+              animate={{
+                y: [0, -50, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                delay: i * 1,
+                ease: "linear"
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Cercles holographiques optimisés */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none">
+          <motion.div
+            className="absolute inset-0 rounded-full border border-white/15"
+            style={{ willChange: 'transform, opacity' }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </div>
+
+        {/* Lignes holographiques optimisées */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+          animate={{
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
+          style={{ willChange: 'opacity' }}
+        />
+
+        {/* Animated corner accents - MEGA VERSION */}
+        <motion.div 
+          className="absolute top-0 left-0 w-32 h-32 tech-corner opacity-40"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute top-0 right-0 w-32 h-32 tech-corner opacity-40 rotate-90"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+        />
+        <motion.div 
+          className="absolute bottom-0 left-0 w-32 h-32 tech-corner opacity-40 -rotate-90"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-0 w-32 h-32 tech-corner opacity-40 rotate-180"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+        />
 
         <div className="container relative">
           <div className="mx-auto max-w-4xl text-center">
             <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
+              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border px-6 py-3 text-base relative overflow-hidden"
+              initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              style={{
+                boxShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
+                willChange: 'transform'
+              }}
             >
-              <Sparkles className="h-4 w-4 mr-2" />
-              {t('hero.badge')}
+              {/* Scan holographique */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              />
+              
+              {/* Anneau d'énergie optimisé */}
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-white/30"
+                animate={{
+                  scale: [1, 1.3],
+                  opacity: [0.6, 0]
+                }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                style={{ willChange: 'transform, opacity' }}
+              />
+              
+              <Sparkles className="h-5 w-5 mr-2 relative z-10 inline-block" />
+              <span className="relative z-10 font-bold">{t('hero.badge')}</span>
             </motion.span>
             
             <motion.h1 
-              className="mb-4 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mb-6 text-5xl font-bold tracking-tight lg:text-7xl relative"
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ 
+                transformStyle: 'preserve-3d',
+                textShadow: '0 0 40px rgba(255, 255, 255, 0.5)'
+              }}
             >
               {t('hero.title')}
             </motion.h1>
@@ -108,40 +198,121 @@ export default function NotreVisionPage() {
             </motion.p>
 
             <motion.div 
-              className="glass-card mb-12 bg-white/10 p-8 backdrop-blur-sm tech-border relative overflow-hidden"
-              initial={{ opacity: 0, scale: 0.95 }}
+              className="glass-card mb-12 bg-white/10 p-10 backdrop-blur-sm tech-border relative overflow-hidden"
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ scale: 1.02, y: -3 }}
+              style={{ 
+                willChange: 'transform',
+                boxShadow: '0 0 40px rgba(255, 255, 255, 0.2)'
+              }}
             >
+              {/* Scan holographique optimisé */}
               <motion.div
-                className="absolute inset-0 -translate-x-full"
-                animate={{ translateX: ['100%', '-100%'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                style={{ background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)' }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                style={{ willChange: 'transform' }}
               />
-              <Quote className="mx-auto mb-4 h-12 w-12 opacity-60" />
-              <blockquote className="text-xl font-medium italic leading-relaxed relative z-10">
+
+              {/* Grille technique */}
+              <div className="absolute inset-0 opacity-10" style={{
+                backgroundImage: `
+                  linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
+                `,
+                backgroundSize: '20px 20px'
+              }} />
+
+              {/* Coins HUD statiques */}
+              <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-white/60" />
+              <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-white/60" />
+              <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-white/60" />
+              <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-white/60" />
+
+              {/* Icône Quote holographique */}
+              <div className="relative mb-4">
+                <motion.div
+                  className="absolute inset-0 rounded-full blur-xl bg-white/20"
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <Quote className="mx-auto h-14 w-14 opacity-80 relative z-10" />
+              </div>
+              
+              <blockquote 
+                className="text-2xl font-medium italic leading-relaxed relative z-10"
+                style={{
+                  textShadow: '0 0 25px rgba(255, 255, 255, 0.4)'
+                }}
+              >
                 "{t('hero.quote')}"
               </blockquote>
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-2 gap-6 md:grid-cols-4"
-              initial={{ opacity: 0, y: 20 }}
+              className="grid grid-cols-2 gap-8 md:grid-cols-4"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
             >
               {heroStats.map((stat: any, index: number) => (
                 <motion.div 
                   key={index} 
                   className="text-center relative group"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 1 + index * 0.08
+                  }}
+                  whileHover={{ scale: 1.15, y: -10, z: 30 }}
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
-                  <div className="absolute inset-0 bg-white/5 rounded-lg tech-border opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="text-3xl font-bold relative z-10 shimmer-text">{stat.value}</div>
-                  <div className="mt-1 text-sm opacity-80 relative z-10">{stat.label}</div>
+                  {/* Anneau d'énergie optimisé */}
+                  <motion.div
+                    className="absolute inset-0 rounded-lg border-2 border-white/30"
+                    animate={{
+                      scale: [1, 1.3],
+                      opacity: [0.5, 0]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: index * 0.2
+                    }}
+                    style={{ willChange: 'transform, opacity' }}
+                  />
+
+                  {/* Grille holographique */}
+                  <div className="absolute inset-0 bg-white/5 rounded-lg tech-border opacity-0 group-hover:opacity-100 transition-opacity overflow-hidden">
+                    <div className="absolute inset-0 opacity-30" style={{
+                      backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
+                      backgroundSize: '8px 8px'
+                    }} />
+                  </div>
+
+                  {/* Bordure glow optimisée */}
+                  <div
+                    className="absolute inset-0 rounded-lg"
+                    style={{
+                      boxShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
+                    }}
+                  />
+                  
+                  <div 
+                    className="text-4xl font-bold relative z-10"
+                    style={{
+                      textShadow: '0 0 25px rgba(255, 255, 255, 0.5)'
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="mt-2 text-sm opacity-90 relative z-10 font-semibold">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -149,9 +320,33 @@ export default function NotreVisionPage() {
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Values Section - TONY STARK UPGRADED */}
       <section id="nos-valeurs" className="py-20 lg:py-32 relative overflow-hidden">
         <IndustrialBackground variant="grid" />
+        
+        {/* Particules ultra-optimisées */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary-500 rounded-full opacity-40"
+              style={{
+                left: `${(i * 20) % 100}%`,
+                top: `${(i * 25) % 100}%`,
+                willChange: 'transform',
+              }}
+              animate={{
+                y: [0, -35, 0],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                delay: i * 1,
+                ease: "linear"
+              }}
+            />
+          ))}
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
@@ -180,14 +375,12 @@ export default function NotreVisionPage() {
                 <motion.div 
                   key={index} 
                   className="glass-card group p-8 relative overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                  initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 0.8, 
-                    delay: index * 0.15,
-                    type: "spring",
-                    stiffness: 80
+                    duration: 0.6, 
+                    delay: index * 0.1
                   }}
                   whileHover={{ 
                     y: -8,
@@ -196,24 +389,36 @@ export default function NotreVisionPage() {
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Shimmer effect traversant */}
+                  {/* Holographic scan multi-directionnel */}
                   <motion.div
-                    className="absolute inset-0 -translate-x-full"
+                    className="absolute inset-0 bg-gradient-to-br from-transparent via-primary-500/25 to-transparent"
                     animate={{
-                      translateX: ['100%', '-100%']
+                      x: ['-100%', '100%'],
+                      y: ['-100%', '100%']
                     }}
                     transition={{
-                      duration: 2.5,
-                      delay: index * 0.3 + 1.5,
+                      duration: 3,
+                      delay: index * 0.3 + 1,
                       repeat: Infinity,
-                      repeatDelay: 3,
+                      repeatDelay: 2,
                       ease: "easeInOut"
                     }}
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)',
-                      pointerEvents: 'none'
-                    }}
                   />
+
+                  {/* Grille holographique */}
+                  <div className="absolute inset-0 opacity-5" style={{
+                    backgroundImage: `
+                      linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '15px 15px'
+                  }} />
+
+                  {/* Coins HUD statiques */}
+                  <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-primary-500/60" />
+                  <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary-500/60" />
+                  <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-primary-500/60" />
+                  <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-primary-500/60" />
                   
                   {/* Animated gradient background on hover */}
                   <motion.div
@@ -239,10 +444,36 @@ export default function NotreVisionPage() {
                   />
                   
                   <div className="relative">
-                    {/* Icon avec animation float */}
+                    {/* Anneaux d'énergie Arc Reactor */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl border-2 border-primary-500/30"
+                      animate={{
+                        scale: [1, 1.5],
+                        opacity: [0.6, 0]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: index * 0.2
+                      }}
+                    />
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl border-2 border-primary-400/20"
+                      animate={{
+                        scale: [1, 1.5],
+                        opacity: [0.5, 0]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: index * 0.2 + 0.5
+                      }}
+                    />
+
+                    {/* Icon avec animation float holographique */}
                     <motion.div
                       animate={{ 
-                        y: [0, -12, 0],
+                        y: [0, -15, 0],
                         rotate: [0, 5, -5, 0]
                       }}
                       transition={{ 
@@ -251,20 +482,31 @@ export default function NotreVisionPage() {
                         ease: "easeInOut",
                         delay: index * 0.2
                       }}
-                      className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl mb-6 group-hover:shadow-2xl transition-shadow duration-300"
+                      className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white mb-6 group-hover:shadow-2xl transition-shadow duration-300"
+                      style={{
+                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2)'
+                      }}
                       whileHover={{ 
-                        rotate: [0, -10, 10, -10, 0],
-                        scale: 1.1
+                        rotate: [0, 360],
+                        scale: 1.15,
+                        boxShadow: '0 0 40px rgba(59, 130, 246, 0.7), inset 0 0 25px rgba(255, 255, 255, 0.3)'
                       }}
                     >
+                      {/* Grille radiale */}
+                      <div className="absolute inset-0 opacity-20 rounded-2xl" style={{
+                        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)',
+                        backgroundSize: '8px 8px'
+                      }} />
+                      
                       <motion.div
                         whileHover={{ 
                           rotate: 360,
                           scale: [1, 1.2, 1]
                         }}
                         transition={{ duration: 0.6 }}
+                        className="relative z-10"
                       >
-                        <Icon className="h-7 w-7" />
+                        <Icon className="h-8 w-8" />
                       </motion.div>
                     </motion.div>
                     
@@ -301,79 +543,6 @@ export default function NotreVisionPage() {
                 </motion.div>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* History Section */}
-      <section id="notre-histoire" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="blueprint" />
-        
-        <div className="container relative z-10">
-          <motion.div 
-            className="mb-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="chip mb-4 tech-border">
-              <TrendingUp className="h-4 w-4 mr-2 inline-block" />
-              {t('history.badge')}
-            </span>
-            <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-5xl">
-              {t('history.title')}
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted">
-              {t('history.subtitle')}
-            </p>
-          </motion.div>
-
-          <div className="relative mx-auto max-w-4xl">
-            <motion.div 
-              className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-primary-500/50 via-primary-500 to-primary-500/50"
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              style={{ transformOrigin: 'top' }}
-            />
-            
-            {milestones.map((milestone: any, index: number) => (
-              <motion.div 
-                key={index} 
-                className={`relative mb-12 grid grid-cols-2 gap-8 ${index % 2 === 0 ? '' : 'flex-row-reverse'}`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-              >
-                <div className={index % 2 === 0 ? 'text-right' : 'col-start-2'}>
-                  <motion.div 
-                    className="glass-card inline-block p-6 text-left tech-border relative overflow-hidden"
-                    whileHover={{ scale: 1.05, x: index % 2 === 0 ? -5 : 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 opacity-0"
-                      whileHover={{ opacity: 1 }}
-                      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05), transparent)' }}
-                    />
-                    <div className="mb-2 text-sm font-semibold text-primary-600 relative z-10 industrial-badge">{milestone.year}</div>
-                    <h3 className="mb-2 text-lg font-bold text-muted-strong relative z-10">{milestone.event}</h3>
-                    <p className="text-sm text-muted relative z-10">{milestone.description}</p>
-                  </motion.div>
-                </div>
-                <motion.div 
-                  className="absolute left-1/2 top-6 flex h-6 w-6 -translate-x-1/2 items-center justify-center rounded-full border-4 border-white bg-primary-600 dark:border-gray-900 tech-indicator"
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-                  whileHover={{ scale: 1.3, rotate: 360 }}
-                />
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -465,92 +634,6 @@ export default function NotreVisionPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="temoignages" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="grid" />
-        
-        <div className="container relative z-10">
-          <motion.div 
-            className="mb-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="chip mb-4 tech-border">
-              <Star className="h-4 w-4 mr-2 inline-block" />
-              {t('testimonials.badge')}
-            </span>
-            <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-5xl">
-              {t('testimonials.title')}
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted">
-              {t('testimonials.subtitle')}
-            </p>
-          </motion.div>
-
-          <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {testimonials.map((testimonial: any, index: number) => (
-              <motion.div 
-                key={index} 
-                className="glass-card relative p-8 tech-border overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-              >
-                <motion.div
-                  className="absolute inset-0 opacity-0"
-                  whileHover={{ opacity: 1 }}
-                  style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent)' }}
-                />
-                <Quote className="absolute right-6 top-6 h-12 w-12 text-primary-200 dark:text-primary-900 opacity-20" />
-                <div className="mb-4 flex gap-1 relative z-10">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.1 + i * 0.05 }}
-                    >
-                      <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    </motion.div>
-                  ))}
-                </div>
-                <blockquote className="relative z-10 mb-6 text-muted">
-                  "{testimonial.content}"
-                </blockquote>
-                <div className="border-t border-gray-200 pt-4 dark:border-gray-700 relative z-10">
-                  <div className="font-semibold text-muted-strong">{testimonial.author}</div>
-                  <div className="text-sm text-primary-600">{testimonial.company}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Note de confidentialité */}
-          <motion.div 
-            className="glass-card glass-card--muted p-8 tech-border relative overflow-hidden mx-auto max-w-3xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <IndustrialBackground variant="circuit" className="opacity-5" />
-            <div className="text-center relative z-10">
-              <Shield className="h-12 w-12 mx-auto mb-4 text-primary-600" />
-              <h3 className="mb-4 text-xl font-bold text-muted-strong">Confidentialité client</h3>
-              <p className="text-muted leading-relaxed">
-                Par respect de la confidentialité de nos partenaires et clients, nous ne pouvons pas divulguer publiquement les noms des grandes entreprises avec lesquelles nous collaborons. 
-                Nos relations clients sont fondées sur la confiance mutuelle et la discrétion professionnelle.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section id="contact-vision" className="py-20 lg:py-32 relative overflow-hidden">
         <IndustrialBackground variant="circuit" />
@@ -626,6 +709,6 @@ export default function NotreVisionPage() {
           </motion.div>
         </div>
       </section>
-    </>
+    </React.Fragment>
   )
 }

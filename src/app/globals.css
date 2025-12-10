@@ -890,3 +890,66 @@ html {
     min-height: -webkit-fill-available;
   }
 }
+
+/* Perspective 3D - Style Tony Stark/Holographique */
+@layer utilities {
+  .perspective-2000 {
+    perspective: 2000px;
+    perspective-origin: center;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Effet holographique scanline */
+  .holographic-scan {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(59, 130, 246, 0.1) 50%,
+      transparent 100%
+    );
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Effet de lueur Arc Reactor */
+  .arc-reactor-glow {
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.3),
+      0 0 60px rgba(59, 130, 246, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px rgba(59, 130, 246, 0.4),
+        0 0 40px rgba(59, 130, 246, 0.3),
+        0 0 60px rgba(59, 130, 246, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px rgba(59, 130, 246, 0.6),
+        0 0 60px rgba(59, 130, 246, 0.5),
+        0 0 90px rgba(59, 130, 246, 0.3),
+        inset 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+  }
+}

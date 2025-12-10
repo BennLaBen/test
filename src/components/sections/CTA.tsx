@@ -71,54 +71,93 @@ export function CTA() {
   const address = t('cta.contacts.address', { returnObjects: true }) as ContactCard
 
   return (
-    <section id="cta" className="relative overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 py-20 dark:from-primary-700 dark:to-primary-900 lg:py-32">
-      {/* Industrial Background */}
-      <IndustrialBackground variant="blueprint" showGears showGrid intensity="light" />
+    <section id="cta" className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 lg:py-32">
+      {/* Grille industrielle animée */}
+      <div className="absolute inset-0 opacity-10">
+        <div 
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
+          className="h-full w-full"
+        />
+      </div>
       
-      {/* Background Pattern */}
-      <div className="absolute inset-0 blueprint-pattern opacity-20" />
+      {/* Particules flottantes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-400 rounded-full"
+            style={{
+              left: `${(i * 7) % 100}%`,
+              top: `${(i * 11) % 100}%`,
+            }}
+            animate={{
+              y: [0, -80, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
+      </div>
       
       <div className="container relative">
         <div className="mx-auto max-w-4xl text-center">
           {/* Main CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.8 }}
             className="mb-12"
           >
-            {/* Badge industriel */}
+            {/* Badge Arc Reactor */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="mb-6 inline-flex"
+              transition={{ delay: 0.2, type: "spring" }}
+              className="mb-8 inline-flex"
             >
-              <div className="industrial-badge flex items-center gap-2">
+              <div className="flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+                style={{
+                  boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)'
+                }}
+              >
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 >
-                  <Factory className="h-4 w-4" />
+                  <Factory className="h-5 w-5 text-blue-300" />
                 </motion.div>
-                PROJET INDUSTRIEL
+                <span className="font-black text-white text-sm uppercase tracking-widest">Projet Industriel</span>
               </div>
             </motion.div>
 
             <motion.h2
-              className="mb-6 text-3xl font-bold text-white lg:text-5xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
+              style={{
+                textShadow: '0 0 40px rgba(59, 130, 246, 0.8)'
+              }}
             >
               {t('cta.title')}
             </motion.h2>
             
             <motion.p
-              className="mb-8 text-lg text-primary-100 lg:text-xl"
+              className="mb-10 text-xl text-gray-300 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -134,36 +173,26 @@ export function CTA() {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Link
-                  href={resolveHref('/contact')}
-                  className="group relative inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-4 font-semibold text-primary-700 overflow-hidden tech-border"
+              <Link href={resolveHref('/contact')}>
+                <motion.div
+                  className="relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-black text-lg text-white overflow-hidden uppercase tracking-wider"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    boxShadow: '0 0 40px rgba(59, 130, 246, 0.7)',
+                    willChange: 'transform'
+                  }}
                 >
-                  {/* Shimmer effect */}
                   <motion.div
-                    className="absolute inset-0"
-                    animate={{
-                      x: ['-200%', '200%']
-                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    animate={{ x: ['-200%', '200%'] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)'
-                    }}
+                    style={{ willChange: 'transform' }}
                   />
                   <span className="relative z-10">{t('cta.primary')}</span>
-                  <motion.div
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="relative z-10"
-                  >
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </motion.div>
-                </Link>
-              </motion.div>
+                  <ArrowRight className="h-6 w-6 relative z-10" />
+                </motion.div>
+              </Link>
               
               <motion.div
                 whileHover={{ scale: 1.05, y: -3 }}

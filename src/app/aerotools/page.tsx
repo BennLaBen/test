@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
 import { 
@@ -78,51 +79,43 @@ export default function AerotoolsPage() {
         jsonLd={jsonLd}
       />
 
-      {/* Main CTA Section - Similar to image */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32">
-        {/* Industrial Background */}
-        <div className="absolute inset-0 opacity-5 industrial-grid" />
-        <div className="absolute inset-0 opacity-[0.03] blueprint-pattern" />
-        
-        {/* Animated scanning line */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{ y: ['-100%', '100%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-          style={{ background: 'linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent)' }}
-        />
+      {/* Main CTA Section - Tony Stark */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32">
+        {/* Grille industrielle */}
+        <div className="absolute inset-0 opacity-10">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
+        </div>
 
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
-            {/* Badge */}
+            {/* Badge Tony Stark */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white px-4 py-2 text-sm font-bold uppercase tracking-wide text-primary-700"
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
             >
-              <Package className="h-4 w-4" />
-              LLEDO AEROTOOLS
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <Package className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">LLEDO AEROTOOLS</span>
             </motion.div>
 
-            {/* Main Title */}
+            {/* Main Title Tony Stark */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-6 text-5xl font-black leading-tight sm:text-6xl lg:text-7xl uppercase"
+              style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.8)', lineHeight: '1.2' }}
             >
               Équipez votre flotte avec des solutions{' '}
-              <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                  certifiées
-                </span>
-                <motion.span
-                  className="absolute inset-x-0 bottom-2 h-3 bg-white/20"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                />
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                certifiées
               </span>
             </motion.h1>
 
@@ -130,8 +123,8 @@ export default function AerotoolsPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-12 text-lg text-white/90 sm:text-xl"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mb-12 text-xl text-gray-300 max-w-3xl mx-auto"
             >
               Rejoignez plus de 70 opérateurs et centres MRO qui font confiance à LLEDO Industries.
             </motion.p>
@@ -143,21 +136,23 @@ export default function AerotoolsPage() {
               transition={{ delay: 0.4 }}
               className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
-              <a
-                href="https://lledo-aerotools.fr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center gap-2 bg-white text-primary-700 hover:bg-gray-100 shadow-xl"
+              <Link
+                href="/boutique"
+                className="group relative overflow-hidden rounded bg-white text-gray-900 px-8 py-4 font-black uppercase tracking-wider text-sm hover:bg-blue-50 transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.5)]"
               >
-                Découvrir nos produits
-                <ExternalLink className="h-5 w-5" />
-              </a>
+                <span className="relative z-10 flex items-center gap-2">
+                  Accéder au catalogue <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                {/* Shine effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12" />
+              </Link>
+              
               <a
                 href="tel:+33442029674"
-                className="btn-secondary inline-flex items-center gap-2 border-white/30 text-white hover:bg-white/10"
+                className="px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-wider text-sm hover:bg-white/10 rounded transition-all flex items-center gap-2"
               >
                 <Phone className="h-5 w-5" />
-                Nous contacter
+                Ligne Directe
               </a>
             </motion.div>
 
@@ -171,10 +166,17 @@ export default function AerotoolsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10 hover:shadow-2xl tech-corner"
+                    className="group relative overflow-hidden rounded-2xl border border-blue-400/20 bg-white/5 p-6 backdrop-blur-sm transition-all hover:shadow-2xl"
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
+                    whileHover={{ scale: 1.03, y: -5 }}
                   >
-                    {/* Industrial grid background */}
-                    <div className="absolute inset-0 opacity-[0.02] industrial-grid" />
+                    {/* Scan line */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/15 to-transparent"
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: index * 0.7 }}
+                      style={{ willChange: 'transform' }}
+                    />
                     
                     {/* Icon */}
                     <div className="mb-4 flex justify-center">
@@ -211,12 +213,12 @@ export default function AerotoolsPage() {
                   <motion.p
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1 + index * 0.1, type: 'spring' }}
-                    className="mb-2 text-3xl font-bold text-white sm:text-4xl"
+                    transition={{ delay: 1 + index * 0.1 }}
+                    className="mb-2 text-4xl font-black text-white sm:text-5xl"
                   >
                     {stat.value}
                   </motion.p>
-                  <p className="text-sm text-white/70">{stat.label}</p>
+                  <p className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</p>
                 </div>
               ))}
             </motion.div>

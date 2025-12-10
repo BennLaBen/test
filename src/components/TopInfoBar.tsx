@@ -3,8 +3,14 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Building2, Wrench, Package, Phone, Users, Download, Newspaper } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export function TopInfoBar() {
+  const pathname = usePathname()
+
+  // Ne rien afficher sur la boutique
+  if (pathname?.startsWith('/boutique')) return null
+
   const quickLinks = [
     { 
       icon: Package, 

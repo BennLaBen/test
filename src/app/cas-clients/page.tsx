@@ -1,11 +1,26 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { SEO } from '@/components/SEO'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { BarChart3, ThumbsUp, Star, Award, Shield, Target } from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function CasClientsPage() {
+  const { isAuthenticated } = useAuth()
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showReviewForm, setShowReviewForm] = useState(false)
+
+  // Fonction pour ouvrir le formulaire d'avis (ou la modale de connexion si non connecté)
+  const handleAddReviewClick = () => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true)
+    } else {
+      setShowReviewForm(true)
+    }
+  }
+  
   
   // Statistiques de satisfaction
   const satisfactionStats = [
@@ -40,34 +55,119 @@ export default function CasClientsPage() {
         canonical="/cas-clients"
       />
 
-      {/* Hero */}
-      <section id="clients-hero" className="bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32">
-        <div className="container">
+      {/* Hero - Style Tony Stark */}
+      <section id="clients-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
+        {/* Grille industrielle */}
+        <div className="absolute inset-0 opacity-10">
+          <div 
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px'
+            }}
+            className="h-full w-full"
+          />
+        </div>
+
+        <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <span className="mb-4 inline-block rounded-full bg-white/20 px-4 py-1.5 text-sm font-semibold backdrop-blur-sm">
-              Satisfaction Client
-            </span>
-            <h1 className="mb-6 text-4xl font-bold lg:text-6xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{
+                boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)'
+              }}
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <ThumbsUp className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">
+                Satisfaction Client
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-6 text-5xl font-black lg:text-7xl uppercase"
+              style={{
+                textShadow: '0 0 40px rgba(59, 130, 246, 0.8)',
+                lineHeight: '1.2'
+              }}
+            >
               Ils nous font confiance
-            </h1>
-            <p className="text-lg text-primary-100 lg:text-xl">
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+            >
               Plus de 150 clients dans 4 secteurs d'activité nous font confiance pour leurs projets critiques
-            </p>
+            </motion.p>
+
+            {/* Bouton d'action Rapide - Donner un avis */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <button 
+                onClick={handleAddReviewClick}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-wider rounded-lg transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_50px_rgba(37,99,235,0.5)] hover:scale-105"
+              >
+                <Star className="h-5 w-5 fill-current" />
+                {isAuthenticated ? 'Évaluer nos services' : 'Se connecter pour évaluer'}
+                <div className="absolute inset-0 rounded-lg ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
+              </button>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Statistics de satisfaction */}
-      <section id="statistiques" className="bg-white py-20 dark:bg-gray-900">
-        <div className="container">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white lg:text-4xl">
-              Résultats de nos enquêtes de satisfaction
+      {/* Statistics de satisfaction - Dark Mode */}
+      <section id="statistiques" className="bg-gradient-to-b from-gray-900 to-gray-800 py-24 relative overflow-hidden">
+        {/* Grille industrielle */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+            className="h-full w-full"
+          />
+        </div>
+
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-20 text-center"
+          >
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
+              style={{
+                textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
+              }}
+            >
+              Résultats de nos enquêtes
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">
               Basés sur plus de 200 réponses collectées en 2024
             </p>
-          </div>
+          </motion.div>
 
           {/* Cards statistiques */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -76,19 +176,31 @@ export default function CasClientsPage() {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-card group relative overflow-hidden p-6 text-center"
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -8 }}
+                  className="relative overflow-hidden p-8 text-center bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl"
+                  style={{
+                    boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
+                    willChange: 'transform'
+                  }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity`} />
-                  <div className="relative">
-                    <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-750">
-                      <Icon className={`h-8 w-8 bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`} />
+                  {/* Scan line */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.7 }}
+                    style={{ willChange: 'transform' }}
+                  />
+                  
+                  <div className="relative z-10">
+                    <div className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}>
+                      <Icon className="h-8 w-8 text-white" />
                     </div>
-                    <div className="mb-2 text-4xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                    <div className="mb-3 text-5xl font-black text-white">{stat.value}</div>
+                    <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</div>
                   </div>
                 </motion.div>
               )
@@ -97,103 +209,187 @@ export default function CasClientsPage() {
         </div>
       </section>
 
-      {/* Sondages détaillés */}
-      <section id="sondages" className="bg-gray-50 py-20 dark:bg-gray-800">
-        <div className="container">
-          <div className="mx-auto max-w-4xl">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-                <BarChart3 className="mb-2 inline-block h-8 w-8 text-primary-600" />
-                <br />
-                Évaluations détaillées
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                Notation moyenne sur 5 étoiles
-              </p>
-            </div>
+      {/* Sondages détaillés - Style Dashboard Industriel */}
+      <section id="sondages" className="bg-gray-900 py-24 relative overflow-hidden border-t border-gray-800">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
+        </div>
 
-            <div className="glass-card space-y-6 p-8">
-              {surveys.map((survey, index) => (
+        <div className="container relative z-10">
+          <motion.div 
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="mb-6 inline-block"
+            >
+              <BarChart3 className="h-12 w-12 text-blue-500" />
+            </motion.div>
+            <h2 className="mb-4 text-4xl font-black text-white uppercase tracking-tight lg:text-5xl">
+              Analyse Détaillée
+            </h2>
+            <p className="text-blue-400 font-mono text-sm uppercase tracking-widest">
+              Données temps réel • Base de sondage 2024
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {surveys.map((survey, index) => {
+              const percentage = (survey.score / survey.max) * 100
+              const radius = 30
+              const circumference = 2 * Math.PI * radius
+              const strokeDashoffset = circumference - (percentage / 100) * circumference
+
+              return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 40px -10px rgba(59, 130, 246, 0.3)' }}
+                  className="group relative flex flex-col items-center justify-center p-6 bg-gray-800/50 backdrop-blur-md border border-gray-700 rounded-2xl hover:border-blue-500/50 transition-colors"
                 >
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {survey.question}
-                    </span>
-                    <span className="text-2xl font-bold text-primary-600">
-                      {survey.score}/{survey.max}
-                    </span>
+                  {/* Titre */}
+                  <h3 className="mb-6 h-12 flex items-center justify-center text-center font-bold text-white uppercase text-sm tracking-wider">
+                    {survey.question}
+                  </h3>
+
+                  {/* Jauge Circulaire */}
+                  <div className="relative h-32 w-32 flex items-center justify-center mb-4">
+                    {/* Cercle de fond */}
+                    <svg className="absolute inset-0 h-full w-full transform -rotate-90" viewBox="0 0 100 100">
+                      <circle
+                        className="text-gray-700"
+                        strokeWidth="8"
+                        stroke="currentColor"
+                        fill="transparent"
+                        r={radius}
+                        cx="50"
+                        cy="50"
+                      />
+                      {/* Cercle de progression */}
+                      <motion.circle
+                        className="text-blue-500"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        stroke="currentColor"
+                        fill="transparent"
+                        r={radius}
+                        cx="50"
+                        cy="50"
+                        strokeDasharray={circumference}
+                        initial={{ strokeDashoffset: circumference }}
+                        whileInView={{ strokeDashoffset: strokeDashoffset }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.5, delay: 0.5 + index * 0.1, ease: "easeOut" }}
+                      />
+                    </svg>
+                    
+                    {/* Score au centre */}
+                    <div className="flex flex-col items-center">
+                      <span className="text-3xl font-black text-white">{survey.score}</span>
+                      <span className="text-[10px] text-gray-500 font-bold">SUR 5</span>
+                    </div>
                   </div>
-                  <div className="h-3 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                    <motion.div
+
+                  {/* Barre visuelle bas */}
+                  <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden mt-auto">
+                    <motion.div 
+                      className="h-full bg-blue-500"
                       initial={{ width: 0 }}
-                      whileInView={{ width: `${(survey.score / survey.max) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                      className="h-full rounded-full bg-gradient-to-r from-primary-500 to-primary-600"
+                      whileInView={{ width: `${percentage}%` }}
+                      transition={{ duration: 1, delay: 1 }}
                     />
                   </div>
                 </motion.div>
-              ))}
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Note de confidentialité */}
-      <section id="confidentialite" className="bg-gradient-to-br from-gray-100 to-gray-50 py-16 dark:from-gray-800 dark:to-gray-900">
+      {/* Note de confidentialité - Dark Mode */}
+      <section id="confidentialite" className="bg-gray-900 py-16 border-t border-gray-800">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card mx-auto max-w-3xl p-8 text-center"
+            className="glass-card mx-auto max-w-3xl p-8 text-center bg-blue-900/10 border border-blue-500/20 rounded-2xl"
           >
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/30">
-              <Shield className="h-8 w-8 text-primary-600" />
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-500/10 border border-blue-400/30">
+              <Shield className="h-8 w-8 text-blue-400" />
             </div>
-            <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
+            <h3 className="mb-4 text-2xl font-black text-white uppercase">
               Confidentialité garantie
             </h3>
-            <p className="leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="leading-relaxed text-gray-400">
               Par respect pour nos clients et pour des raisons de confidentialité, nous ne mentionnons pas publiquement les noms de nos partenaires. Les données ci-dessous sont issues d'enquêtes réelles menées auprès de nos clients actifs.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Secteurs d'activité */}
-      <section id="secteurs" className="bg-white py-20 dark:bg-gray-900">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white lg:text-4xl">
+      {/* Secteurs d'activité - Dark Mode */}
+      <section id="secteurs" className="bg-gradient-to-b from-gray-900 to-gray-800 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
+
+        <div className="container relative z-10">
+          <motion.div 
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
+              style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}
+            >
               Nos secteurs d'activité
             </h2>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-gray-300 text-lg">
               Clients confidentiels dans 4 secteurs stratégiques
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {sectors.map((sector, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-card p-6 text-center"
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="p-8 text-center bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden"
+                style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
               >
-                <div className="mb-4 text-5xl font-bold text-gradient">{sector.clients}</div>
-                <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">{sector.name}</h3>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700 dark:bg-green-900/30 dark:text-green-300">
-                  <ThumbsUp className="h-4 w-4" />
-                  {sector.satisfaction} satisfaits
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: index * 1 }}
+                  style={{ willChange: 'transform' }}
+                />
+                
+                <div className="relative z-10">
+                  <div className="mb-4 text-6xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{sector.clients}</div>
+                  <h3 className="mb-4 text-2xl font-black text-white uppercase">{sector.name}</h3>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-green-500/20 backdrop-blur-sm border border-green-400/30 px-5 py-2.5 text-sm font-bold text-green-300">
+                    <ThumbsUp className="h-4 w-4" />
+                    {sector.satisfaction} satisfaits
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -202,7 +398,12 @@ export default function CasClientsPage() {
       </section>
 
       {/* Témoignages anonymisés */}
-      <Testimonials />
+      <Testimonials 
+        externalShowAuthModal={showAuthModal}
+        externalSetShowAuthModal={setShowAuthModal}
+        externalShowReviewForm={showReviewForm}
+        externalSetShowReviewForm={setShowReviewForm}
+      />
 
     </>
   )

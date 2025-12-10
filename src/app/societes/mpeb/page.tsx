@@ -75,40 +75,45 @@ export default function MPEBPage() {
         canonical="/societes/mpeb"
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 to-blue-800 py-20 text-white dark:from-blue-700 dark:to-blue-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
+      {/* Hero Section - Tony Stark */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
         </div>
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
             >
-              <Factory className="h-4 w-4 mr-2" />
-              {expertise.name}
-            </motion.span>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <Factory className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{expertise.name}</span>
+            </motion.div>
             
             <motion.h1 
-              className="mb-4 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-5xl font-black tracking-tight lg:text-7xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.8)', lineHeight: '1.2' }}
             >
               {expertise.name}
             </motion.h1>
             
             <motion.p 
-              className="mb-6 text-xl opacity-90"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-8 text-2xl text-gray-300 font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               {expertise.tagline}
             </motion.p>
@@ -124,12 +129,22 @@ export default function MPEBPage() {
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link
-                  href="/contact"
-                  className="btn-primary inline-flex items-center gap-2 tech-border bg-white text-blue-600 hover:bg-gray-100"
-                >
-                  Nous contacter
-                  <ArrowRight className="h-5 w-5" />
+                <Link href="/contact">
+                  <motion.div
+                    className="relative inline-flex items-center gap-3 px-10 py-4 bg-white text-blue-900 rounded-xl font-black text-lg overflow-hidden uppercase tracking-wider"
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.5)', willChange: 'transform' }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200 to-transparent"
+                      animate={{ x: ['-200%', '200%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                      style={{ willChange: 'transform' }}
+                    />
+                    <span className="relative z-10">Nous contacter</span>
+                    <ArrowRight className="h-6 w-6 relative z-10" />
+                  </motion.div>
                 </Link>
               </motion.div>
             </motion.div>
@@ -146,16 +161,12 @@ export default function MPEBPage() {
                 return (
                   <motion.div 
                     key={index}
-                    className="glass-card relative overflow-hidden p-6 bg-white/10 backdrop-blur-sm group hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    className="relative overflow-hidden p-6 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl group cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: 0.8 + index * 0.1,
-                      type: "spring",
-                      stiffness: 100
-                    }}
+                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                   >
                     <motion.div
                       animate={{ y: [0, -8, 0] }}

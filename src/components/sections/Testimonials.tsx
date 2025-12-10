@@ -15,13 +15,34 @@ const iconMap: Record<string, any> = {
   energie: Zap
 }
 
-export function Testimonials() {
+interface TestimonialsProps {
+  externalShowAuthModal?: boolean
+  externalSetShowAuthModal?: (show: boolean) => void
+  externalShowReviewForm?: boolean
+  externalSetShowReviewForm?: (show: boolean) => void
+}
+
+export function Testimonials({
+  externalShowAuthModal,
+  externalSetShowAuthModal,
+  externalShowReviewForm,
+  externalSetShowReviewForm
+}: TestimonialsProps = {}) {
   const { t } = useTranslation('testimonials')
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [activeSector, setActiveSector] = useState<string>('all')
-  const [showAuthModal, setShowAuthModal] = useState(false)
-  const [showReviewForm, setShowReviewForm] = useState(false)
+  
+  // States internes (utilisés seulement si les props externes ne sont pas fournies)
+  const [internalShowAuthModal, setInternalShowAuthModal] = useState(false)
+  const [internalShowReviewForm, setInternalShowReviewForm] = useState(false)
+  
+  // Utiliser les props externes si fournies, sinon utiliser les states internes
+  const showAuthModal = externalShowAuthModal ?? internalShowAuthModal
+  const setShowAuthModal = externalSetShowAuthModal ?? setInternalShowAuthModal
+  const showReviewForm = externalShowReviewForm ?? internalShowReviewForm
+  const setShowReviewForm = externalSetShowReviewForm ?? setInternalShowReviewForm
+  
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   
@@ -87,19 +108,25 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" ref={ref} className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="testimonials" ref={ref} className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <div style={{
+          backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} className="h-full w-full" />
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Tony Stark */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-muted-strong sm:text-4xl mb-4">
+          <h2 className="text-4xl font-black tracking-tight text-white sm:text-6xl mb-6 uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
             {t('title')}
           </h2>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>

@@ -104,46 +104,45 @@ export default function CareersPage() {
         canonical="/carriere"
       />
 
-      {/* Hero Section */}
-      <section id="careers-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
+      {/* Hero Section - Tony Stark */}
+      <section id="careers-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
         </div>
-
-        {/* Animated corner accents */}
-        <div className="absolute top-0 left-0 w-32 h-32 tech-corner opacity-30" />
-        <div className="absolute top-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-90" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 tech-corner opacity-30 -rotate-90" />
-        <div className="absolute bottom-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-180" />
 
         <div className="container relative">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
             >
-              <Rocket className="h-4 w-4 mr-2" />
-              Rejoignez l'aventure
-            </motion.span>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <Rocket className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">Rejoignez l'aventure</span>
+            </motion.div>
             
             <motion.h1 
-              className="mb-4 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-5xl font-black tracking-tight lg:text-7xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.8)', lineHeight: '1.2' }}
             >
               {t('hero.title')}
             </motion.h1>
             
             <motion.p 
-              className="mb-12 text-xl opacity-90 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-12 text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -157,13 +156,12 @@ export default function CareersPage() {
               {stats.map((stat, index) => (
                 <motion.div 
                   key={index} 
-                  className="text-center relative group"
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="text-center relative p-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  style={{ boxShadow: '0 4px 20px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                 >
-                  <div className="absolute inset-0 bg-white/5 rounded-lg tech-border opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="text-3xl font-bold relative z-10 shimmer-text">{stat.value}</div>
-                  <div className="mt-1 text-sm opacity-80 relative z-10">{stat.label}</div>
+                  <div className="text-4xl font-black relative z-10 text-white">{stat.value}</div>
+                  <div className="mt-2 text-sm font-semibold uppercase tracking-wider text-gray-400 relative z-10">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -171,9 +169,14 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Culture Section */}
-      <section id="culture" className="py-20 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="grid" />
+      {/* Culture Section - Dark Mode */}
+      <section id="culture" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
@@ -183,14 +186,14 @@ export default function CareersPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="chip mb-4 tech-border">
-              <Heart className="h-4 w-4 mr-2 inline-block" />
-              Notre Culture
-            </span>
-            <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-5xl">
+            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <Heart className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">Notre Culture</span>
+            </div>
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
               Notre culture d'entreprise
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted">
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">
               Rejoignez une équipe passionnée par l'excellence et l'innovation dans le secteur aéronautique
             </p>
           </motion.div>
@@ -201,22 +204,13 @@ export default function CareersPage() {
               return (
                 <motion.div 
                   key={index} 
-                  className="glass-card group p-8 relative overflow-hidden hover:shadow-2xl transition-all duration-300"
-                  initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  className="group p-8 relative overflow-hidden bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl"
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: index * 0.15,
-                    type: "spring",
-                    stiffness: 80
-                  }}
-                  whileHover={{ 
-                    y: -8,
-                    scale: 1.02,
-                    transition: { duration: 0.3 }
-                  }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.03 }}
+                  style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                 >
                   {/* Shimmer effect */}
                   <motion.div
@@ -273,14 +267,11 @@ export default function CareersPage() {
                       </motion.div>
                     </motion.div>
                     
-                    <motion.h3 
-                      className="text-xl font-bold text-muted-strong mb-3 group-hover:text-primary-600 transition-colors"
-                      whileHover={{ x: 5 }}
-                    >
+                    <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
                       {item.title}
-                    </motion.h3>
+                    </h3>
                     
-                    <p className="text-muted leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed">
                       {item.description}
                     </p>
                     
@@ -308,9 +299,14 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section id="benefits" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="blueprint" />
+      {/* Benefits Section - Dark Mode */}
+      <section id="benefits" className="bg-gray-800 py-24 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
@@ -320,14 +316,14 @@ export default function CareersPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="chip mb-4 tech-border">
-              <Award className="h-4 w-4 mr-2 inline-block" />
-              Avantages
-            </span>
-            <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-5xl">
+            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <Award className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">Avantages</span>
+            </div>
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
               Nos avantages
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted">
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">
               Des conditions de travail optimales pour votre épanouissement professionnel
             </p>
           </motion.div>
@@ -338,12 +334,13 @@ export default function CareersPage() {
               return (
                 <motion.div 
                   key={index} 
-                  className="glass-card flex items-center gap-4 p-6 tech-border relative overflow-hidden group"
+                  className="flex items-center gap-4 p-6 bg-white/5 backdrop-blur-sm border border-green-400/20 rounded-xl relative overflow-hidden group"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, x: 5 }}
+                  whileHover={{ scale: 1.03, x: 8 }}
+                  style={{ boxShadow: '0 4px 20px rgba(34, 197, 94, 0.15)', willChange: 'transform' }}
                 >
                   <motion.div
                     className="absolute inset-0 -translate-y-full opacity-0 group-hover:opacity-100"
@@ -358,7 +355,7 @@ export default function CareersPage() {
                   >
                     <Icon className="h-6 w-6" />
                   </motion.div>
-                  <span className="font-medium text-muted-strong relative z-10">{benefit}</span>
+                  <span className="font-bold text-white relative z-10">{benefit}</span>
                 </motion.div>
               )
             })}
@@ -366,9 +363,14 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Job Openings Section */}
-      <section id="jobs" className="py-20 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="precision" />
+      {/* Job Openings Section - Dark Mode */}
+      <section id="jobs" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
@@ -378,14 +380,14 @@ export default function CareersPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="chip mb-4 tech-border">
-              <Briefcase className="h-4 w-4 mr-2 inline-block" />
-              Offres d'emploi
-            </span>
-            <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-5xl">
+            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <Briefcase className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">Offres d'emploi</span>
+            </div>
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
               Postes disponibles
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted">
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">
               Découvrez nos opportunités de carrière et trouvez le poste qui vous correspond
             </p>
           </motion.div>
@@ -396,12 +398,13 @@ export default function CareersPage() {
               return (
                 <motion.div 
                   key={index} 
-                  className="glass-card p-8 tech-border relative overflow-hidden group cursor-pointer"
+                  className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group cursor-pointer"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.15 }}
-                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileHover={{ scale: 1.03, y: -8 }}
+                  style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                 >
                   <motion.div
                     className="absolute inset-0 opacity-0"
@@ -419,29 +422,29 @@ export default function CareersPage() {
                     </motion.div>
                     
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-muted-strong mb-2 group-hover:text-primary-600 transition-colors">
+                      <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
                         {job.title}
                       </h3>
-                      <div className="flex flex-wrap gap-4 mb-3 text-sm text-muted">
-                        <span className="flex items-center gap-1">
+                      <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-400">
+                        <span className="flex items-center gap-1.5 font-semibold">
                           <Calendar className="h-4 w-4" />
                           {job.type}
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1.5 font-semibold">
                           <MapPin className="h-4 w-4" />
                           {job.location}
                         </span>
                       </div>
-                      <p className="text-muted">
+                      <p className="text-gray-300">
                         {job.description}
                       </p>
                     </div>
                     
                     <motion.div
-                      whileHover={{ x: 5 }}
-                      className="flex items-center text-primary-600"
+                      whileHover={{ x: 8 }}
+                      className="flex items-center text-blue-400"
                     >
-                      <ArrowRight className="h-6 w-6" />
+                      <ArrowRight className="h-7 w-7" />
                     </motion.div>
                   </div>
                 </motion.div>
@@ -451,17 +454,23 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="grid" />
+      {/* Contact Section - Dark Mode */}
+      <section id="contact" className="bg-gray-800 py-24 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
-            className="glass-card glass-card--muted mx-auto max-w-3xl p-12 tech-border relative overflow-hidden"
+            className="mx-auto max-w-3xl p-12 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.2)' }}
           >
             {/* Animated corners */}
             <div className="absolute top-0 left-0 w-20 h-20 tech-corner opacity-20" />
@@ -489,10 +498,10 @@ export default function CareersPage() {
                 </div>
               </motion.div>
               
-              <h2 className="mb-4 text-3xl font-bold text-muted-strong lg:text-4xl">
+              <h2 className="mb-6 text-4xl font-black text-white lg:text-5xl uppercase" style={{ textShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }}>
                 Candidature spontanée
               </h2>
-              <p className="mb-8 text-lg text-muted">
+              <p className="mb-8 text-xl text-gray-300">
                 Vous ne trouvez pas le poste qui vous correspond ? Envoyez-nous votre candidature spontanée.
               </p>
               
@@ -526,9 +535,22 @@ export default function CareersPage() {
                 whileHover={{ scale: 1.05 }} 
                 whileTap={{ scale: 0.95 }}
               >
-                <Link href="/contact" className="btn-primary inline-flex items-center gap-2 tech-border">
-                  Nous contacter
-                  <ArrowRight className="h-5 w-5" />
+                <Link href="/contact">
+                  <motion.div
+                    className="relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-black text-lg text-white overflow-hidden uppercase tracking-wider"
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)', willChange: 'transform' }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                      animate={{ x: ['-200%', '200%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                      style={{ willChange: 'transform' }}
+                    />
+                    <span className="relative z-10">Nous contacter</span>
+                    <ArrowRight className="h-6 w-6 relative z-10" />
+                  </motion.div>
                 </Link>
               </motion.div>
             </div>

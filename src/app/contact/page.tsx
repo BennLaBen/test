@@ -113,40 +113,45 @@ export default function ContactPage() {
         canonical="/contact"
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
+      {/* Hero Section - Tony Stark */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
         </div>
 
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
             >
-              <Zap className="h-4 w-4 mr-2" />
-              Contact
-            </motion.span>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <Zap className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">Contact</span>
+            </motion.div>
             
             <motion.h1 
-              className="mb-4 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-5xl font-black tracking-tight lg:text-7xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.8)', lineHeight: '1.2' }}
             >
               {t('hero.title')}
             </motion.h1>
             
             <motion.p 
-              className="mb-12 text-xl opacity-90"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-12 text-xl text-gray-300 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -163,26 +168,24 @@ export default function ContactPage() {
                 return (
                   <motion.div 
                     key={index}
-                    className="glass-card relative overflow-hidden p-6 bg-white/10 backdrop-blur-sm group hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    className="relative overflow-hidden p-6 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl group cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: 0.8 + index * 0.1,
-                      type: "spring",
-                      stiffness: 100
-                    }}
+                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                     whileHover={{ scale: 1.05, y: -5 }}
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                   >
                     <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 mx-auto`}
-                    >
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/15 to-transparent"
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
+                      style={{ willChange: 'transform' }}
+                    />
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 mx-auto`}>
                       <Icon className="h-6 w-6 text-white" />
-                    </motion.div>
-                    <div className="text-3xl font-bold shimmer-text">{stat.value}</div>
-                    <div className="mt-1 text-sm opacity-80">{stat.label}</div>
+                    </div>
+                    <div className="text-3xl font-black text-white relative z-10">{stat.value}</div>
+                    <div className="mt-2 text-sm text-gray-400 font-semibold uppercase tracking-wider relative z-10">{stat.label}</div>
                   </motion.div>
                 )
               })}
@@ -191,9 +194,14 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Main Contact Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="grid" />
+      {/* Main Contact Section - Dark Mode */}
+      <section className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -204,13 +212,13 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="mb-6 text-3xl font-bold text-muted-strong">
+              <h2 className="mb-6 text-3xl font-black text-white uppercase">
                 {t('form.title')}
               </h2>
-              <p className="text-muted mb-8">
+              <p className="text-gray-300 mb-8 text-lg">
                 Remplissez ce formulaire et notre équipe vous répondra dans les plus brefs délais.
               </p>
-              <div className="glass-card p-8 tech-border relative overflow-hidden group">
+              <div className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group" style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)' }}>
                 <motion.div
                   className="absolute inset-0 -translate-x-full"
                   animate={{
@@ -259,7 +267,7 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <h2 className="mb-6 text-3xl font-bold text-muted-strong">
+              <h2 className="mb-8 text-3xl font-black text-white uppercase">
                 {t('info.title')}
               </h2>
               
@@ -268,12 +276,13 @@ export default function ContactPage() {
                 return (
                   <motion.div
                     key={index}
-                    className="glass-card p-6 tech-border relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-shadow"
+                    className="p-6 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl relative overflow-hidden group cursor-pointer"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02, x: 5 }}
+                    whileHover={{ scale: 1.03, x: 8 }}
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
                   >
                     <motion.div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100"
@@ -298,8 +307,8 @@ export default function ContactPage() {
                       </motion.div>
                       
                       <div className="flex-1">
-                        <h3 className="text-lg font-bold text-muted-strong mb-2">{method.title}</h3>
-                        <div className="text-muted mb-3">
+                        <h3 className="text-lg font-black text-white mb-2 uppercase">{method.title}</h3>
+                        <div className="text-gray-300 mb-3">
                           {method.content}
                         </div>
                         {method.action && method.href && (

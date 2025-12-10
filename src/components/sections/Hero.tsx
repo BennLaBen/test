@@ -1,14 +1,25 @@
 'use client'
 
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Shield, Award, Sparkles, Factory, Settings } from 'lucide-react'
+import { ArrowRight, CheckCircle, Shield, Award, Sparkles, Factory, Settings, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
-import { useEffect } from 'react'
+import { ScrollDrivenBackground } from '@/components/ScrollDrivenBackground'
+import { useEffect, useRef } from 'react'
 
 export function Hero() {
   const { t } = useTranslation('common')
+  const containerRef = useRef<HTMLElement>(null)
+  
+  // Scroll-driven animations
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   
   // Parallax mouse effect
   const mouseX = useMotionValue(0)
@@ -26,300 +37,429 @@ export function Hero() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [mouseX, mouseY])
+  
+  // Sociétés avec leurs vraies URLs
+  const companies = [
+    { id: 'mpeb', name: 'MPEB', desc: 'Usinage de précision', detail: '100 000h/an', color: 'from-blue-600 to-blue-800', icon: '⚙️' },
+    { id: 'egi', name: 'EGI', desc: "Bureau d'études", detail: 'Ingénierie intégrée', color: 'from-purple-600 to-purple-800', icon: '💡' },
+    { id: 'frem', name: 'FREM', desc: 'Maintenance', detail: 'Support OPEX', color: 'from-orange-600 to-orange-800', icon: '🔧' },
+    { id: 'mgp', name: 'MGP', desc: 'Tôlerie chaudronnerie', detail: '2 000m² atelier', color: 'from-gray-600 to-gray-800', icon: '🏭' },
+  ]
 
   return (
-    <section id="hero" className="hero-section relative">
-      {/* Industrial Background */}
-      <IndustrialBackground variant="precision" showGears showGrid intensity="medium" />
+    <section ref={containerRef} id="hero" className="hero-section relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+      {/* Fond industriel animé par scroll - comme une vidéo qui avance ! */}
+      <ScrollDrivenBackground />
       
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 scale-[1.015] bg-[url('/images/hero-industrial.jpg')] bg-cover bg-center opacity-50 blur-md" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/45 to-white/25 dark:from-gray-950/70 dark:via-gray-950/52 dark:to-gray-950/38" />
+      {/* Overlay avec gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/30 to-gray-900/70 pointer-events-none" />
+      
+      {/* Scan lines futuristes */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="h-full w-full" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.05) 3px)',
+          backgroundSize: '100% 4px'
+        }} />
       </div>
 
-      <div className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Content */}
-          <div className="flex flex-col justify-center">
+      <motion.div 
+        className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8"
+        style={{ y, opacity }}
+      >
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+          {/* Content - Style IRON MAN */}
+          <div className="flex flex-col justify-center text-white relative z-10">
+            {/* Arc Reactor Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, type: "spring" }}
+              className="mb-8 relative inline-block"
             >
-              <span className="chip mb-6 inline-flex items-center gap-2">
-                <Sparkles className="h-4 w-4" />
-                {t('hero.chip')}
-              </span>
-              <h1 className="text-4xl font-bold tracking-tight text-muted-strong sm:text-5xl lg:text-6xl break-words leading-tight pb-2">
-                <span className="uppercase">{t('hero.headline')}</span>{' '}
-                <span className="text-gradient">{t('hero.headlineAccent')}</span>
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg text-muted">
-                {t('hero.subheadline')}
-              </p>
+              <motion.div
+                className="relative inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+                animate={{
+                  boxShadow: [
+                    '0 0 20px rgba(59, 130, 246, 0.5)',
+                    '0 0 40px rgba(59, 130, 246, 0.8)',
+                    '0 0 20px rgba(59, 130, 246, 0.5)'
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{ willChange: 'box-shadow' }}
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                >
+                  <Zap className="h-5 w-5 text-blue-300" />
+                </motion.div>
+                <span className="font-bold text-white text-sm tracking-wider uppercase">
+                  {t('hero.chip')}
+                </span>
+              </motion.div>
             </motion.div>
 
-            {/* Key Benefits */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            {/* Titre OPTIMISÉ */}
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-10 grid gap-3 sm:grid-cols-2"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl mb-6"
+              style={{
+                textShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
+                lineHeight: '1.3'
+              }}
+            >
+              <motion.span
+                className="block uppercase text-white"
+                animate={{
+                  textShadow: [
+                    '0 0 20px rgba(255, 255, 255, 0.5)',
+                    '0 0 40px rgba(255, 255, 255, 0.8)',
+                    '0 0 20px rgba(255, 255, 255, 0.5)'
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+                style={{ lineHeight: '1.3' }}
+              >
+                {t('hero.headline')}
+              </motion.span>
+              <motion.span
+                className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent mt-3"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                }}
+                transition={{ duration: 5, repeat: Infinity }}
+                style={{ 
+                  backgroundSize: '200% auto',
+                  lineHeight: '1.3',
+                  paddingTop: '4px',
+                  paddingBottom: '4px'
+                }}
+              >
+                {t('hero.headlineAccent')}
+              </motion.span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg text-gray-300 leading-relaxed max-w-2xl mb-8"
+            >
+              {t('hero.subheadline')}
+            </motion.p>
+
+            {/* Stats rapides - Style HUD */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid gap-3 sm:grid-cols-2 mb-8"
             >
               <motion.div 
-                className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 shadow-sm tech-border relative overflow-hidden"
-                whileHover={{ scale: 1.05, x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-lg px-4 py-3 overflow-hidden group"
+                whileHover={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.8)' }}
+                transition={{ duration: 0.2 }}
+                style={{ willChange: 'transform' }}
               >
-                {/* Shimmer effect */}
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{ translateX: ['100%', '-100%'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent)' }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/15 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  style={{ willChange: 'transform' }}
                 />
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <Shield className="h-5 w-5 flex-shrink-0 text-primary-500 relative z-10" />
-                </motion.div>
-                <span className="text-sm font-semibold text-muted-strong group-hover:text-primary-600 transition-colors relative z-10">
-                  {t('hero.badges.compliance')}
-                </span>
+                <div className="flex items-center gap-2 relative z-10">
+                  <Shield className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">
+                    {t('hero.badges.compliance')}
+                  </span>
+                </div>
               </motion.div>
               
               <motion.div 
-                className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 shadow-sm tech-border relative overflow-hidden"
-                whileHover={{ scale: 1.05, x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative bg-white/5 backdrop-blur-sm border border-cyan-400/30 rounded-lg px-4 py-3 overflow-hidden group"
+                whileHover={{ scale: 1.02, borderColor: 'rgba(34, 211, 238, 0.8)' }}
+                transition={{ duration: 0.2 }}
+                style={{ willChange: 'transform' }}
               >
-                {/* Shimmer effect */}
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{ translateX: ['100%', '-100%'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent)' }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/15 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                  style={{ willChange: 'transform' }}
                 />
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  style={{ transition: 'all 4s ease-in-out' }}
-                >
-                  <Sparkles className="h-5 w-5 flex-shrink-0 text-blue-500 relative z-10" />
-                </motion.div>
-                <span className="text-sm font-semibold text-muted-strong group-hover:text-primary-600 transition-colors relative z-10">
-                  {t('hero.badges.experience')}
-                </span>
+                <div className="flex items-center gap-2 relative z-10">
+                  <Sparkles className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">
+                    {t('hero.badges.experience')}
+                  </span>
+                </div>
               </motion.div>
 
               <motion.div 
-                className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 shadow-sm tech-border relative overflow-hidden"
-                whileHover={{ scale: 1.05, x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative bg-white/5 backdrop-blur-sm border border-green-400/30 rounded-lg px-4 py-3 overflow-hidden group"
+                whileHover={{ scale: 1.02, borderColor: 'rgba(34, 197, 94, 0.8)' }}
+                transition={{ duration: 0.2 }}
+                style={{ willChange: 'transform' }}
               >
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{ translateX: ['100%', '-100%'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent)' }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-green-400/15 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1 }}
+                  style={{ willChange: 'transform' }}
                 />
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  animate={{ scale: [1, 1.1, 1] }}
-                  style={{ transition: 'all 2s ease-in-out' }}
-                >
-                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500 relative z-10" />
-                </motion.div>
-                <span className="text-sm font-semibold text-muted-strong group-hover:text-primary-600 transition-colors relative z-10">
-                  {t('hero.badges.cmu')}
-                </span>
+                <div className="flex items-center gap-2 relative z-10">
+                  <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">
+                    {t('hero.badges.cmu')}
+                  </span>
+                </div>
               </motion.div>
 
               <motion.div 
-                className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 shadow-sm tech-border relative overflow-hidden"
-                whileHover={{ scale: 1.05, x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative bg-white/5 backdrop-blur-sm border border-amber-400/30 rounded-lg px-4 py-3 overflow-hidden group"
+                whileHover={{ scale: 1.02, borderColor: 'rgba(251, 191, 36, 0.8)' }}
+                transition={{ duration: 0.2 }}
+                style={{ willChange: 'transform' }}
               >
                 <motion.div
-                  className="absolute inset-0 -translate-x-full"
-                  animate={{ translateX: ['100%', '-100%'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-                  style={{ background: 'linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.2), transparent)' }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/15 to-transparent"
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 1.5 }}
+                  style={{ willChange: 'transform' }}
                 />
-                <motion.div
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.6 }}
-                  animate={{ 
-                    rotate: [0, 5, -5, 0],
-                    y: [0, -3, 0]
-                  }}
-                  style={{ transition: 'all 3s ease-in-out' }}
-                >
-                  <Award className="h-5 w-5 flex-shrink-0 text-amber-400 relative z-10" />
-                </motion.div>
-                <span className="text-sm font-semibold text-muted-strong group-hover:text-primary-600 transition-colors relative z-10">
-                  {t('hero.badges.certs')}
-                </span>
+                <div className="flex items-center gap-2 relative z-10">
+                  <Award className="h-5 w-5 text-amber-400 flex-shrink-0" />
+                  <span className="text-xs font-bold text-white">
+                    {t('hero.badges.certs')}
+                  </span>
+                </div>
               </motion.div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Style Tony Stark */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 flex flex-col gap-4 sm:flex-row"
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-col gap-5 sm:flex-row"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Link
-                  href="/contact"
-                  className="btn-primary group inline-flex items-center justify-center relative overflow-hidden"
+              <Link href="/contact">
+                <motion.div
+                  className="relative inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-xl font-bold text-lg text-white overflow-hidden group cursor-pointer"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
+                    willChange: 'transform'
+                  }}
                 >
+                  {/* Animated shine */}
                   <motion.div
-                    className="absolute inset-0"
-                    animate={{
-                      background: [
-                        'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%)',
-                        'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%)'
-                      ],
-                      x: ['-200%', '200%']
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    animate={{ x: ['-200%', '200%'] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    style={{ willChange: 'transform' }}
                   />
                   <span className="relative z-10">{t('hero.ctaPrimary')}</span>
-                  <motion.div
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
-                  </motion.div>
-                </Link>
-              </motion.div>
+                  <ArrowRight className="h-5 w-5 relative z-10" />
+                </motion.div>
+              </Link>
 
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Link
-                  href="/nos-expertises"
-                  className="btn-secondary inline-flex items-center justify-center tech-border relative overflow-hidden"
+              <Link href="/nos-expertises">
+                <motion.div
+                  className="relative inline-flex items-center gap-3 px-8 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl font-bold text-lg text-white overflow-hidden cursor-pointer"
+                  whileHover={{ scale: 1.05, y: -3, borderColor: 'rgba(255,255,255,0.6)' }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ willChange: 'transform' }}
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-primary-500/5"
-                    whileHover={{ scale: 1.5, opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                  />
                   <span className="relative z-10">{t('hero.ctaSecondary')}</span>
-                </Link>
-              </motion.div>
+                </motion.div>
+              </Link>
             </motion.div>
           </div>
 
-          {/* Visual - Entities Cards */}
+          {/* Visual - Nos Entités CLIQUABLES Style JARVIS */}
           <div className="relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 1, delay: 0.4 }}
               className="relative"
             >
-              <div className="hero-card p-6">
-                <h3 className="mb-6 text-center text-lg font-bold text-muted-strong">
-                  Nos Entités
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {/* MPEB */}
+              {/* Titre attractif avec effet */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="text-center mb-6"
+              >
+                <motion.div
+                  className="inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full mb-6"
+                  style={{
+                    boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)'
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                >
                   <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="group cursor-pointer rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 p-5 shadow-lg transition-all hover:shadow-2xl"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                   >
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
-                      <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                      </svg>
-                    </div>
-                    <h4 className="mb-2 text-xl font-bold text-white">MPEB</h4>
-                    <p className="text-sm text-white/90">Usinage de précision</p>
-                    <p className="mt-2 text-xs text-white/70">100 000h/an</p>
+                    <Zap className="h-5 w-5 text-blue-300" />
                   </motion.div>
+                  <span className="font-black text-white text-sm uppercase tracking-widest">
+                    Découvrir nos entités
+                  </span>
+                </motion.div>
+              </motion.div>
 
-                  {/* EGI */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="group cursor-pointer rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 p-5 shadow-lg transition-all hover:shadow-2xl"
-                  >
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
-                      <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <h4 className="mb-2 text-xl font-bold text-white">EGI</h4>
-                    <p className="text-sm text-white/90">Bureau d'études</p>
-                    <p className="mt-2 text-xs text-white/70">Ingénierie intégrée</p>
-                  </motion.div>
+              <div className="grid grid-cols-2 gap-4">
+                {companies.map((company, index) => (
+                  <Link key={company.id} href={`/societes/${company.id}`}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                      whileHover={{ 
+                        scale: 1.08, 
+                        y: -12,
+                        rotate: [0, -2, 2, 0]
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`relative group cursor-pointer rounded-xl bg-gradient-to-br ${company.color} p-5 overflow-hidden border-2 border-transparent hover:border-white/30 transition-all duration-300`}
+                      style={{
+                        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
+                        willChange: 'transform'
+                      }}
+                    >
+                      {/* Scan line horizontal - Plus visible au hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100"
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{ 
+                          duration: 1.5, 
+                          repeat: Infinity, 
+                          ease: "linear"
+                        }}
+                        style={{ willChange: 'transform' }}
+                      />
+                      
+                      {/* Glow effect intense au hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
 
-                  {/* FREM */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="group cursor-pointer rounded-xl bg-gradient-to-br from-orange-600 to-orange-800 p-5 shadow-lg transition-all hover:shadow-2xl"
-                  >
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
-                      <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                    <h4 className="mb-2 text-xl font-bold text-white">FREM</h4>
-                    <p className="text-sm text-white/90">Maintenance</p>
-                    <p className="mt-2 text-xs text-white/70">Support OPEX</p>
-                  </motion.div>
+                      {/* Corners HUD - Animés au hover */}
+                      <motion.div 
+                        className="absolute top-2 left-2 w-5 h-5 border-t-2 border-l-2 border-white/60"
+                        whileHover={{ scale: 1.2, opacity: 1 }}
+                        style={{ opacity: 0.6 }}
+                      />
+                      <motion.div 
+                        className="absolute top-2 right-2 w-5 h-5 border-t-2 border-r-2 border-white/60"
+                        whileHover={{ scale: 1.2, opacity: 1 }}
+                        style={{ opacity: 0.6 }}
+                      />
+                      <motion.div 
+                        className="absolute bottom-2 left-2 w-5 h-5 border-b-2 border-l-2 border-white/60"
+                        whileHover={{ scale: 1.2, opacity: 1 }}
+                        style={{ opacity: 0.6 }}
+                      />
+                      <motion.div 
+                        className="absolute bottom-2 right-2 w-5 h-5 border-b-2 border-r-2 border-white/60"
+                        whileHover={{ scale: 1.2, opacity: 1 }}
+                        style={{ opacity: 0.6 }}
+                      />
 
-                  {/* MGP */}
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="group cursor-pointer rounded-xl bg-gradient-to-br from-gray-600 to-gray-800 p-5 shadow-lg transition-all hover:shadow-2xl"
-                  >
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
-                      <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                      </svg>
-                    </div>
-                    <h4 className="mb-2 text-xl font-bold text-white">MGP</h4>
-                    <p className="text-sm text-white/90">Tôlerie chaudronnerie</p>
-                    <p className="mt-2 text-xs text-white/70">2 000m² atelier</p>
-                  </motion.div>
-                </div>
+                      {/* Icon Badge - Animé au hover */}
+                      <motion.div 
+                        className="mb-3 text-3xl"
+                        whileHover={{ 
+                          scale: 1.2,
+                          rotate: [0, -10, 10, 0]
+                        }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {company.icon}
+                      </motion.div>
+
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <h4 className="mb-1.5 text-xl font-black text-white uppercase tracking-wide">
+                          {company.name}
+                        </h4>
+                        <p className="text-sm text-white/95 font-semibold mb-1">
+                          {company.desc}
+                        </p>
+                        <p className="text-xs text-white/70">
+                          {company.detail}
+                        </p>
+
+                        {/* Arrow on hover - Ultra visible */}
+                        <motion.div
+                          className="mt-4 flex items-center gap-2 text-white font-black px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
+                          style={{
+                            boxShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
+                          }}
+                        >
+                          <span className="text-sm uppercase tracking-wider">Découvrir</span>
+                          <motion.div
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          >
+                            <ArrowRight className="h-5 w-5" />
+                          </motion.div>
+                        </motion.div>
+                      </div>
+
+                      {/* Pulse effect puissant au hover */}
+                      <motion.div
+                        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100"
+                        animate={{
+                          boxShadow: [
+                            '0 0 0 0 rgba(255, 255, 255, 0)',
+                            '0 0 0 8px rgba(255, 255, 255, 0.2)',
+                            '0 0 0 16px rgba(255, 255, 255, 0)'
+                          ]
+                        }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
+                    </motion.div>
+                  </Link>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator Futuriste */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-center"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="h-8 w-5 rounded-full border-2 border-white/40"
-        >
+        <motion.div className="flex flex-col items-center gap-2">
+          <span className="text-xs font-bold text-white/60 uppercase tracking-widest">
+            Scroll
+          </span>
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="mx-auto mt-2 h-2 w-1 rounded-full bg-white/60"
-          />
+            className="h-12 w-7 rounded-full border-2 border-white/40 bg-white/5 backdrop-blur-sm relative"
+          >
+            <motion.div
+              animate={{ y: [2, 16, 2], opacity: [1, 1, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-2 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-white"
+              style={{
+                boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+              }}
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

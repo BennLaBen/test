@@ -105,10 +105,10 @@ export default function BlogPostPage() {
         canonical={`/blog/${post.slug}`}
       />
       
-      <article className="bg-white dark:bg-gray-900">
-        {/* Hero Section avec Image - VERSION COMPACTE */}
+      <article className="bg-gray-900">
+        {/* Hero Section avec Image - Tony Stark */}
         {post.image && (
-          <div className="relative h-[300px] lg:h-[350px] overflow-hidden bg-gray-900">
+          <div className="relative h-[350px] lg:h-[400px] overflow-hidden bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900">
             {/* Image de fond */}
             <motion.img
               src={post.image}
@@ -218,16 +218,17 @@ export default function BlogPostPage() {
           </div>
         )}
 
-        {/* Description en vedette - COMPACT */}
+        {/* Description en vedette - Tony Stark */}
         {post.description && (
           <motion.div 
-            className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-950/20 py-4 -mt-6 relative z-10"
+            className="border-l-4 border-blue-500 bg-blue-500/10 backdrop-blur-sm py-6 -mt-6 relative z-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.2)' }}
           >
             <div className="container">
-              <p className="text-sm lg:text-base text-gray-700 dark:text-gray-300 font-medium leading-relaxed max-w-4xl">
+              <p className="text-base lg:text-lg text-white font-semibold leading-relaxed max-w-4xl">
                 {post.description}
               </p>
             </div>

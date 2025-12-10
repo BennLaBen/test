@@ -3,8 +3,14 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { MessageSquare } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export function FloatingCTA() {
+  const pathname = usePathname()
+  
+  // Ne rien afficher sur la boutique
+  if (pathname?.startsWith('/boutique')) return null
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

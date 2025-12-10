@@ -63,31 +63,29 @@ export default function BlogPage() {
         canonical="/blog"
       />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
+      {/* Hero Section - Tony Stark */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} className="h-full w-full" />
         </div>
-
-        {/* Animated corner accents */}
-        <div className="absolute top-0 left-0 w-32 h-32 tech-corner opacity-30" />
-        <div className="absolute top-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-90" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 tech-corner opacity-30 -rotate-90" />
-        <div className="absolute bottom-0 right-0 w-32 h-32 tech-corner opacity-30 rotate-180" />
         
         <div className="container relative">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.span 
-              className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className="mb-8 inline-flex items-center gap-3 px-6 py-3 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full"
+              style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
             >
-              <BookOpen className="h-4 w-4 mr-2" />
-              {t('hero.badge')}
-            </motion.span>
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                <BookOpen className="h-5 w-5 text-blue-300" />
+              </motion.div>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('hero.badge')}</span>
+            </motion.div>
             
             {/* Badge "Articles en français" si interface en anglais */}
             {i18n.language === 'en' && (
@@ -102,19 +100,20 @@ export default function BlogPage() {
             )}
             
             <motion.h1 
-              className="mb-6 text-5xl font-bold tracking-tight lg:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
+              className="mb-6 text-5xl font-black tracking-tight lg:text-7xl uppercase"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.8)', lineHeight: '1.2' }}
             >
               {t('hero.title')}
             </motion.h1>
             
             <motion.p 
-              className="mx-auto max-w-2xl text-xl opacity-90 leading-relaxed mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.9 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mx-auto max-w-3xl text-xl text-gray-300 leading-relaxed mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -127,13 +126,12 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <motion.div 
-                className="relative group"
-                whileHover={{ scale: 1.1, y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="relative p-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl"
+                whileHover={{ scale: 1.05, y: -5 }}
+                style={{ boxShadow: '0 4px 20px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
               >
-                <div className="absolute inset-0 bg-white/5 rounded-lg tech-border opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="text-4xl font-bold relative z-10 shimmer-text">{posts.length}</div>
-                <div className="mt-1 text-sm opacity-80 relative z-10">{t('hero.stats.articles')}</div>
+                <div className="text-5xl font-black relative z-10 text-white">{posts.length}</div>
+                <div className="mt-2 text-sm font-semibold uppercase tracking-wider text-gray-400 relative z-10">{t('hero.stats.articles')}</div>
               </motion.div>
               <motion.div 
                 className="relative group"
@@ -158,10 +156,15 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Featured Posts */}
+      {/* Featured Posts - Dark Mode */}
       {featuredPosts.length > 0 && (
-        <section className="py-20 lg:py-32 relative overflow-hidden">
-          <IndustrialBackground variant="grid" />
+        <section className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+          <div className="absolute inset-0 opacity-5">
+            <div style={{
+              backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }} className="h-full w-full" />
+          </div>
           
           <div className="container relative z-10">
             <motion.div 
@@ -171,11 +174,11 @@ export default function BlogPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="chip mb-4 tech-border">
-                <Star className="h-4 w-4 mr-2 inline-block" />
-                Articles à la une
-              </span>
-              <h2 className="text-3xl font-bold text-muted-strong lg:text-5xl">
+              <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+                <Star className="h-5 w-5 text-blue-300" />
+                <span className="font-black text-white text-sm uppercase tracking-widest">Articles à la une</span>
+              </div>
+              <h2 className="text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
                 {t('sections.latestArticles')}
               </h2>
             </motion.div>
@@ -301,9 +304,14 @@ export default function BlogPage() {
         </section>
       )}
 
-      {/* All Articles Grid */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="blueprint" />
+      {/* All Articles Grid - Dark Mode */}
+      <section className="bg-gray-800 py-24 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
           <motion.div 
@@ -313,11 +321,11 @@ export default function BlogPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="chip mb-4 tech-border">
-              <TrendingUp className="h-4 w-4 mr-2 inline-block" />
-              Tous nos articles
-            </span>
-            <h2 className="text-3xl font-bold text-muted-strong lg:text-5xl">
+            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <TrendingUp className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">Tous nos articles</span>
+            </div>
+            <h2 className="text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
               {t('sections.allArticles')}
             </h2>
           </motion.div>

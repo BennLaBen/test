@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
+import { Logo } from '@/components/Logo'
 import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react'
 
 interface FooterLink {
@@ -15,7 +16,11 @@ interface FooterLink {
 export function Footer() {
   const { t } = useTranslation('common')
   const pathname = usePathname()
-  const locale = pathname.startsWith('/en') ? 'en' : 'fr'
+
+  // Si on est sur la partie boutique, on n'affiche pas ce footer
+  if (pathname?.startsWith('/boutique')) return null
+
+  const locale = pathname?.startsWith('/en') ? 'en' : 'fr'
   const localePrefix = locale === 'en' ? '/en' : ''
 
   const resolveHref = (href: string) => {
@@ -81,20 +86,7 @@ export function Footer() {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <Link href={resolveHref('/')} className="group flex items-center space-x-3">
-                  <div className="relative h-12 w-12 flex-shrink-0">
-                    <Image
-                      src="/logo.png"
-                      alt="LLEDO Industries Logo"
-                      fill
-                      className="object-contain transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-2xl font-bold text-white">LLEDO</span>
-                    <span className="ml-1 text-sm text-primary-400">Industries</span>
-                  </div>
-                </Link>
+                <Logo size="small" showText={true} href={resolveHref('/')} />
               </div>
               <p className="mb-6 text-sm leading-relaxed">
                 {t('hero.subheadline')}

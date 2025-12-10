@@ -9,6 +9,7 @@ import { TopInfoBar } from '@/components/TopInfoBar'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ClientI18nWrapper } from '@/components/ClientI18nWrapper'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { QuoteProvider } from '@/contexts/QuoteContext'
 import { FloatingCTA } from '@/components/FloatingCTA'
 
 const inter = Inter({ 
@@ -161,17 +162,19 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="industrial">
           <ClientI18nWrapper>
             <AuthProvider>
-              <div className="flex min-h-screen flex-col">
-                <Navigation />
-                <TopInfoBar />
-                <SmartNavigator />
-                <SectionPagination />
-                <FloatingCTA />
-                <main id="main-content" className="flex-1 pt-32">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <QuoteProvider>
+                <div className="flex min-h-screen flex-col">
+                  <Navigation />
+                  <TopInfoBar />
+                  <SmartNavigator />
+                  <SectionPagination />
+                  <FloatingCTA />
+                  <main id="main-content" className="flex-1 pt-32">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </QuoteProvider>
             </AuthProvider>
           </ClientI18nWrapper>
         </ThemeProvider>

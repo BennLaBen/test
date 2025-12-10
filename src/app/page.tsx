@@ -1,6 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { Features } from '@/components/sections/Features'
-import { DownloadBrochure } from '@/components/sections/DownloadBrochure'
+import { Process } from '@/components/sections/Process'
 import { CTA } from '@/components/sections/CTA'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
@@ -41,8 +41,8 @@ export default function HomePage() {
       />
       <Hero />
       <Features />
+      <Process />
       <CTA />
-      <DownloadBrochure />
     </>
   )
 }
