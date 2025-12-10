@@ -86,7 +86,7 @@ export function Footer() {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <Logo size="small" showText={true} href={resolveHref('/')} />
+                <Logo size="small" href={resolveHref('/')} />
               </div>
               <p className="mb-6 text-sm leading-relaxed">
                 {t('hero.subheadline')}

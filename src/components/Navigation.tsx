@@ -63,7 +63,7 @@ export function Navigation() {
       <nav id="navigation" aria-label="Navigation principale" role="navigation" className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between gap-8">
           {/* Logo - Version moderne */}
-          <Logo size="medium" showText={true} href="/" />
+          <Logo size="medium" href="/" />
 
           {/* Desktop Navigation - Style Tony Stark */}
           <div className="hidden lg:flex lg:items-center lg:justify-center lg:flex-1 lg:gap-6 xl:gap-10">
