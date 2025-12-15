@@ -194,19 +194,9 @@ export function Features() {
           })}
         </div>
 
-        {/* Bento Grid Features */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-6 lg:grid-cols-12">
+        {/* Grid Features - Toutes les cartes de la même taille */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
-            // Layout Bento: certaines cartes plus grandes
-            const spanClasses = [
-              'md:col-span-6 lg:col-span-4', // Conformité (grande)
-              'md:col-span-6 lg:col-span-4', // Précision (grande)
-              'md:col-span-6 lg:col-span-4', // Délais (grande)
-              'md:col-span-6 lg:col-span-6', // Équipe (très grande)
-              'md:col-span-3 lg:col-span-3', // Innovation (medium)
-              'md:col-span-3 lg:col-span-3', // Service (medium)
-            ]
-
             return (
               <motion.div
                 key={index}
@@ -220,7 +210,7 @@ export function Features() {
                   y: -6,
                   scale: 1.02
                 }}
-                className={`group relative overflow-hidden p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl ${spanClasses[index]}`}
+                className="group relative overflow-hidden p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl h-full"
                 style={{
                   boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
                   willChange: 'transform'
