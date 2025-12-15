@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
@@ -51,15 +52,24 @@ export default function NotreVisionPage() {
       />
 
       {/* Hero Section - TONY STARK STYLE */}
-      <section id="vision-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
-        <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+      <section id="vision-hero" className="relative min-h-[80vh] py-20 text-white lg:py-32 overflow-hidden flex items-center">
+        {/* Image de fond réelle */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-vision.png"
+            alt="Vision industrielle LLEDO Industries"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={90}
+          />
+          {/* Overlay Bleu Profond */}
+          <div className="absolute inset-0 bg-blue-900/75" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50" />
         </div>
 
         {/* Particules ultra-optimisées */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
@@ -143,19 +153,12 @@ export default function NotreVisionPage() {
                 boxShadow: '0 0 40px rgba(255, 255, 255, 0.2)'
               }}
             >
-              {/* Placeholder pour la photo de Gérard Lledo */}
-              <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                <Users className="h-16 w-16 text-gray-600" />
-              </div>
-              {/* 
-                 Décommenter et utiliser une vraie image :
-                 <Image 
-                   src="/images/gerard-lledo.jpg" 
-                   alt="Gérard Lledo" 
-                   fill 
-                   className="object-cover"
-                 /> 
-              */}
+              <Image 
+                src="/images/gerard-lledo.jpg" 
+                alt="Gérard Lledo - Fondateur LLEDO Industries" 
+                fill 
+                className="object-cover"
+              />
             </motion.div>
 
             <motion.span 

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
@@ -107,8 +108,22 @@ export default function ContactPage() {
       />
 
       {/* Hero Section - Tony Stark */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      <section className="relative py-24 text-white lg:py-32 overflow-hidden min-h-[60vh] flex items-center">
+        {/* Image de fond */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-contact.jpg"
+            alt="Contact LLEDO Industries"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-gray-900/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-transparent" />
+        </div>
+
+        <div className="absolute inset-0 opacity-10 z-10 pointer-events-none">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
