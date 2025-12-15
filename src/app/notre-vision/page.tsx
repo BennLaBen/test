@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
@@ -51,15 +52,24 @@ export default function NotreVisionPage() {
       />
 
       {/* Hero Section - TONY STARK STYLE */}
-      <section id="vision-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
-        <IndustrialBackground variant="circuit" className="opacity-20" />
-        
-        <div className="absolute inset-0 opacity-10">
-          <div className="h-full w-full industrial-grid bg-center" />
+      <section id="vision-hero" className="relative min-h-[80vh] py-20 text-white lg:py-32 overflow-hidden flex items-center">
+        {/* Image de fond réelle */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-industrial.jpg"
+            alt="Vision industrielle LLEDO"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={90}
+          />
+          {/* Overlay Bleu Profond */}
+          <div className="absolute inset-0 bg-blue-900/80 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
         </div>
-
+        
         {/* Particules ultra-optimisées */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
@@ -133,6 +143,31 @@ export default function NotreVisionPage() {
 
         <div className="container relative">
           <div className="mx-auto max-w-4xl text-center">
+            {/* Photo Fondateur */}
+            <motion.div
+              className="relative mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-4 border-white/20 shadow-2xl"
+              initial={{ opacity: 0, scale: 0.5, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              style={{
+                boxShadow: '0 0 40px rgba(255, 255, 255, 0.2)'
+              }}
+            >
+              {/* Placeholder pour la photo de Gérard Lledo */}
+              <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                <Users className="h-16 w-16 text-gray-600" />
+              </div>
+              {/* 
+                 Décommenter et utiliser une vraie image :
+                 <Image 
+                   src="/images/gerard-lledo.jpg" 
+                   alt="Gérard Lledo" 
+                   fill 
+                   className="object-cover"
+                 /> 
+              */}
+            </motion.div>
+
             <motion.span 
               className="chip mb-6 inline-flex bg-white/20 text-white backdrop-blur-sm tech-border px-6 py-3 text-base relative overflow-hidden"
               initial={{ opacity: 0, y: -30 }}

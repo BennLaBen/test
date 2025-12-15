@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { FAQ } from '@/components/sections/FAQ'
@@ -27,13 +28,6 @@ import {
 
 export default function ContactPage() {
   const { t } = useTranslation('contact')
-
-  const contactStats = [
-    { icon: Clock, label: 'Temps de réponse', value: '<24h', color: 'from-blue-500 to-blue-600' },
-    { icon: TrendingUp, label: 'Taux de satisfaction', value: '98%', color: 'from-green-500 to-green-600' },
-    { icon: MessageCircle, label: 'Projets traités/an', value: '500+', color: 'from-purple-500 to-purple-600' },
-    { icon: Award, label: 'Certifications', value: 'EN 9100', color: 'from-amber-500 to-amber-600' },
-  ]
 
   const contactMethods = [
     {
@@ -114,8 +108,22 @@ export default function ContactPage() {
       />
 
       {/* Hero Section - Tony Stark */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      <section className="relative py-24 text-white lg:py-32 overflow-hidden min-h-[60vh] flex items-center">
+        {/* Image de fond */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-industrial.jpg"
+            alt="Contact LLEDO Industries"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-gray-900/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 to-transparent" />
+        </div>
+
+        <div className="absolute inset-0 opacity-10 z-0 pointer-events-none">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
@@ -155,41 +163,6 @@ export default function ContactPage() {
             >
               {t('hero.subtitle')}
             </motion.p>
-
-            {/* Stats */}
-            <motion.div 
-              className="grid grid-cols-2 gap-6 md:grid-cols-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              {contactStats.map((stat, index) => {
-                const Icon = stat.icon
-                return (
-                  <motion.div 
-                    key={index}
-                    className="relative overflow-hidden p-6 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl group cursor-pointer"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/15 to-transparent"
-                      animate={{ x: ['-100%', '200%'] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
-                      style={{ willChange: 'transform' }}
-                    />
-                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} shadow-lg mb-4 mx-auto`}>
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="text-3xl font-black text-white relative z-10">{stat.value}</div>
-                    <div className="mt-2 text-sm text-gray-400 font-semibold uppercase tracking-wider relative z-10">{stat.label}</div>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
           </div>
         </div>
       </section>
