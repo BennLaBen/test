@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
@@ -52,24 +51,15 @@ export default function NotreVisionPage() {
       />
 
       {/* Hero Section - TONY STARK STYLE */}
-      <section id="vision-hero" className="relative min-h-[80vh] py-20 text-white lg:py-32 overflow-hidden flex items-center">
-        {/* Image de fond réelle */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-industrial.jpg"
-            alt="Vision industrielle LLEDO"
-            fill
-            className="object-cover object-center"
-            priority
-            quality={90}
-          />
-          {/* Overlay Bleu Profond */}
-          <div className="absolute inset-0 bg-blue-900/80 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
-        </div>
+      <section id="vision-hero" className="relative bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white dark:from-primary-700 dark:to-primary-900 lg:py-32 overflow-hidden">
+        <IndustrialBackground variant="circuit" className="opacity-20" />
         
+        <div className="absolute inset-0 opacity-10">
+          <div className="h-full w-full industrial-grid bg-center" />
+        </div>
+
         {/* Particules ultra-optimisées */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}

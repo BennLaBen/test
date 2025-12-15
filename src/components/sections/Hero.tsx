@@ -1,10 +1,11 @@
 'use client'
 
-import Image from 'next/image'
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Shield, Award, Sparkles, Factory, Settings, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { IndustrialBackground } from '@/components/IndustrialBackground'
+import { ScrollDrivenBackground } from '@/components/ScrollDrivenBackground'
 import { useEffect, useRef } from 'react'
 
 export function Hero() {
@@ -46,23 +47,15 @@ export function Hero() {
   ]
 
   return (
-    <section ref={containerRef} id="hero" className="hero-section relative min-h-screen overflow-hidden">
-      {/* Image de fond réelle avec Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-industrial.jpg"
-          alt="Atelier industriel de haute précision LLEDO Industries"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-        />
-        {/* Overlay pour la lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-blue-900/40" />
-      </div>
+    <section ref={containerRef} id="hero" className="hero-section relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+      {/* Fond industriel animé par scroll - comme une vidéo qui avance ! */}
+      <ScrollDrivenBackground />
       
-      {/* Scan lines futuristes - Plus subtiles */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none z-0">
+      {/* Overlay avec gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/30 to-gray-900/70 pointer-events-none" />
+      
+      {/* Scan lines futuristes */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="h-full w-full" style={{
           backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.05) 3px)',
           backgroundSize: '100% 4px'
@@ -70,7 +63,7 @@ export function Hero() {
       </div>
 
       <motion.div 
-        className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8 z-10"
+        className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8"
         style={{ y, opacity }}
       >
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
