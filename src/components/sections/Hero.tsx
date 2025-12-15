@@ -133,16 +133,17 @@ export function Hero() {
                 {t('hero.headline')}
               </motion.span>
               <motion.span
-                className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent mt-3"
+                className="block text-white mt-3"
                 animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                  textShadow: [
+                    '0 0 20px rgba(59, 130, 246, 0.8)',
+                    '0 0 30px rgba(59, 130, 246, 1)',
+                    '0 0 20px rgba(59, 130, 246, 0.8)'
+                  ]
                 }}
-                transition={{ duration: 5, repeat: Infinity }}
+                transition={{ duration: 3, repeat: Infinity }}
                 style={{ 
-                  backgroundSize: '200% auto',
-                  lineHeight: '1.3',
-                  paddingTop: '4px',
-                  paddingBottom: '4px'
+                  lineHeight: '1.3'
                 }}
               >
                 {t('hero.headlineAccent')}

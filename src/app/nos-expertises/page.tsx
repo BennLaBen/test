@@ -42,10 +42,10 @@ export default function ExpertisesPage() {
         canonical="/nos-expertises"
         jsonLd={jsonLd}
       />
-      <div className="pt-20">
+      <>
         <Expertises />
         <History />
-      </div>
+      </>
     </>
   )
 }

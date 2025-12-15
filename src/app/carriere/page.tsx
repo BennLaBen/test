@@ -105,7 +105,7 @@ export default function CareersPage() {
       />
 
       {/* Hero Section - Tony Stark */}
-      <section id="careers-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
+      <section id="careers-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-12 text-white lg:py-16 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
@@ -170,7 +170,7 @@ export default function CareersPage() {
       </section>
 
       {/* Culture Section - Dark Mode */}
-      <section id="culture" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+      <section id="culture" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
@@ -300,7 +300,7 @@ export default function CareersPage() {
       </section>
 
       {/* Benefits Section - Dark Mode */}
-      <section id="benefits" className="bg-gray-800 py-24 lg:py-32 relative overflow-hidden">
+      <section id="benefits" className="bg-gray-800 py-16 lg:py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
@@ -364,7 +364,7 @@ export default function CareersPage() {
       </section>
 
       {/* Job Openings Section - Dark Mode */}
-      <section id="jobs" className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+      <section id="jobs" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
@@ -455,7 +455,7 @@ export default function CareersPage() {
       </section>
 
       {/* Contact Section - Dark Mode */}
-      <section id="contact" className="bg-gray-800 py-24 lg:py-32 relative overflow-hidden">
+      <section id="contact" className="bg-gray-800 py-16 lg:py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,

@@ -56,7 +56,7 @@ export default function CasClientsPage() {
       />
 
       {/* Hero - Style Tony Stark */}
-      <section id="clients-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
+      <section id="clients-hero" className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-12 text-white lg:py-16 overflow-hidden">
         {/* Grille industrielle */}
         <div className="absolute inset-0 opacity-10">
           <div 

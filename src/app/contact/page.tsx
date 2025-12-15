@@ -108,7 +108,7 @@ export default function ContactPage() {
       />
 
       {/* Hero Section - Tony Stark */}
-      <section className="relative py-24 text-white lg:py-32 overflow-hidden min-h-[60vh] flex items-center">
+      <section className="relative py-12 text-white lg:py-16 overflow-hidden min-h-[60vh] flex items-center">
         {/* Image de fond */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -168,7 +168,7 @@ export default function ContactPage() {
       </section>
 
       {/* Main Contact Section - Dark Mode */}
-      <section className="py-24 lg:py-32 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+      <section className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,

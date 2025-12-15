@@ -52,7 +52,7 @@ export default function NotreVisionPage() {
       />
 
       {/* Hero Section - TONY STARK STYLE */}
-      <section id="vision-hero" className="relative min-h-[80vh] py-20 text-white lg:py-32 overflow-hidden flex items-center">
+      <section id="vision-hero" className="relative min-h-[80vh] py-12 text-white lg:py-16 overflow-hidden flex items-center">
         {/* Image de fond réelle */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -349,7 +349,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* Values Section - TONY STARK UPGRADED */}
-      <section id="nos-valeurs" className="py-20 lg:py-32 relative overflow-hidden">
+      <section id="nos-valeurs" className="py-16 lg:py-20 relative overflow-hidden">
         <IndustrialBackground variant="grid" />
         
         {/* Particules ultra-optimisées */}
@@ -576,7 +576,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* Industrial Vision Section */}
-      <section id="vision-industrielle" className="py-20 lg:py-32 relative overflow-hidden">
+      <section id="vision-industrielle" className="py-16 lg:py-20 relative overflow-hidden">
         <IndustrialBackground variant="precision" />
         
         <div className="container relative z-10">
@@ -663,7 +663,7 @@ export default function NotreVisionPage() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact-vision" className="py-20 lg:py-32 relative overflow-hidden">
+      <section id="contact-vision" className="py-16 lg:py-20 relative overflow-hidden">
         <IndustrialBackground variant="circuit" />
         
         <div className="container relative z-10">
