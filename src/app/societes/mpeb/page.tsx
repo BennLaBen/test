@@ -40,13 +40,14 @@ export default function MPEBPage() {
       'Tournage et fraisage',
       'Alésage de précision',
       'Surfaçage et rectification',
+      'Gravure laser',
       'Contrôle dimensionnel'
     ],
     certifications: ['EN 9100', 'ISO 9001', 'NADCAP'],
     stats: [
       { label: 'Années d\'expérience', value: '36+', icon: TrendingUp, color: 'from-blue-500 to-blue-600' },
       { label: 'Pièces produites/an', value: '10k+', icon: Factory, color: 'from-purple-500 to-purple-600' },
-      { label: 'Collaborateurs', value: '25', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Collaborateurs', value: '+100', icon: Users, color: 'from-green-500 to-green-600' },
       { label: 'Taux de conformité', value: '99.8%', icon: Target, color: 'from-amber-500 to-amber-600' },
     ]
   }
@@ -441,7 +442,7 @@ export default function MPEBPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Voir toutes nos expertises
+                  Toutes nos entreprises
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

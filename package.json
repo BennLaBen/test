@@ -6,16 +6,27 @@
     "dev": "next dev",
     "dev:fresh": "powershell -Command \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; npm run dev\"",
     "dev:kill": "powershell -Command \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue\"",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "postbuild": "next-sitemap",
     "translate": "node scripts/translate.js",
-    "translate:i18n": "node scripts/translate-i18n.js"
+    "translate:i18n": "node scripts/translate-i18n.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
     "@hookform/resolvers": "^3.3.2",
+    "@prisma/client": "^6.19.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
@@ -24,6 +35,7 @@
     "@types/react-dom": "^18.2.18",
     "@vercel/analytics": "^1.1.1",
     "autoprefixer": "^10.4.16",
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.0.0",
     "contentlayer": "^0.3.4",
     "date-fns": "^3.0.6",
@@ -32,10 +44,12 @@
     "i18next": "^25.6.0",
     "lucide-react": "^0.548.0",
     "next": "^14.2.33",
+    "next-auth": "^5.0.0-beta.30",
     "next-seo": "^6.4.0",
     "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.7",
     "postcss": "^8.4.32",
+    "prisma": "^6.19.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.48.2",
@@ -47,8 +61,10 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/nodemailer": "^6.4.14",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.2.33"
+    "eslint-config-next": "^14.2.33",
+    "tsx": "^4.21.0"
   }
 }

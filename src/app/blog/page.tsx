@@ -120,7 +120,7 @@ export default function BlogPage() {
 
             {/* Stats */}
             <motion.div 
-              className="grid grid-cols-3 gap-8"
+              className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -183,7 +183,7 @@ export default function BlogPage() {
               </h2>
             </motion.div>
 
-          <div className="grid gap-8 lg:grid-cols-12">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-12">
             {/* Premier article à la une - Span 8 colonnes */}
             {featuredPosts[0] && (
               <motion.div 
@@ -330,7 +330,7 @@ export default function BlogPage() {
             </h2>
           </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {regularPosts.map((post, index) => (
             <motion.div
               key={post.slug}

@@ -8,7 +8,7 @@
     "products": "Products",
     "contact": "Contact",
     "gerard": "LLEDO Industries Group",
-    "caseStudies": "They Trust Us",
+    "caseStudies": "Customer Reviews",
     "careers": "Careers",
     "quote": "Get a quote"
   },
@@ -18,7 +18,7 @@
     "headlineAccent": "integrated industrial group",
     "subheadline": "Engineering, precision machining and industrial maintenance for aerospace and defense since 1989. A collective of experts bringing together MPEB, EGI, FREM and MGP to manage your projects from start to finish.",
     "ctaPrimary": "Contact us",
-    "ctaSecondary": "Discover our expertise",
+    "ctaSecondary": "Discover our companies",
     "badges": {
       "compliance": "Integrated engineering & machining",
       "experience": "Over 36 years of expertise",
@@ -177,7 +177,7 @@
     },
     "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau",
     "phone": "+33 4 42 02 96 74",
-    "email": "contact@lledo-industries.com",
+    "email": "contact@mpeb13.com",
     "bottom": {
       "madeInFrance": "Fabriqué en France 🇫🇷",
       "copyright": "© {{year}} LLEDO Industries. Tous droits réservés."

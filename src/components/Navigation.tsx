@@ -130,13 +130,13 @@ export function Navigation() {
                 </div>
               </div>
             ) : (
-              <button
-                onClick={() => setShowAuthModal(true)}
+              <Link
+                href="/connexion"
                 className="btn-secondary text-sm px-4 whitespace-nowrap inline-flex items-center gap-2"
               >
                 <User className="h-4 w-4" />
                 Connexion
-              </button>
+              </Link>
             )}
             
             {/* CTA principal - Style Arc Reactor */}
@@ -172,12 +172,12 @@ export function Navigation() {
                 {user.firstName.charAt(0)}
               </div>
             ) : (
-              <button
-                onClick={() => setShowAuthModal(true)}
+              <Link
+                href="/connexion"
                 className="p-2 rounded-lg hover:bg-blue-500/20 border border-blue-400/30 transition-all"
               >
                 <User className="h-5 w-5 text-gray-300" />
-              </button>
+              </Link>
             )}
             
             <LanguageToggle />
@@ -365,19 +365,20 @@ export function Navigation() {
 
                 {/* Auth Button - DARK MODE */}
                 {!isAuthenticated && (
-                  <motion.button
-                    onClick={() => {
-                      setShowAuthModal(true)
-                      setIsOpen(false)
-                    }}
-                    className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3 text-[15px] font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] transition-all hover:bg-blue-500/20"
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.4 }}
                   >
-                    <User className="h-5 w-5" />
-                    Connexion / Inscription
-                  </motion.button>
+                    <Link
+                      href="/connexion"
+                      onClick={() => setIsOpen(false)}
+                      className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3 text-[15px] font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] transition-all hover:bg-blue-500/20"
+                    >
+                      <User className="h-5 w-5" />
+                      Connexion / Inscription
+                    </Link>
+                  </motion.div>
                 )}
 
                 {/* CTA Button - TONY STARK */}

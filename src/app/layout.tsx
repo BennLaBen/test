@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Navigation } from '@/components/Navigation'
-import { Footer } from '@/components/Footer'
-import { SmartNavigator } from '@/components/SmartNavigator'
-import { SectionPagination } from '@/components/SectionPagination'
-import { TopInfoBar } from '@/components/TopInfoBar'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ClientI18nWrapper } from '@/components/ClientI18nWrapper'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { QuoteProvider } from '@/contexts/QuoteContext'
-import { FloatingCTA } from '@/components/FloatingCTA'
+import { PublicLayout } from '@/components/PublicLayout'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -163,17 +158,9 @@ export default function RootLayout({
           <ClientI18nWrapper>
             <AuthProvider>
               <QuoteProvider>
-                <div className="flex min-h-screen flex-col">
-                  <Navigation />
-                  <TopInfoBar />
-                  <SmartNavigator />
-                  <SectionPagination />
-                  <FloatingCTA />
-                  <main id="main-content" className="flex-1 pt-[80px]">
-                    {children}
-                  </main>
-                  <Footer />
-                </div>
+                <PublicLayout>
+                  {children}
+                </PublicLayout>
               </QuoteProvider>
             </AuthProvider>
           </ClientI18nWrapper>

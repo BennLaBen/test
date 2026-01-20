@@ -308,7 +308,7 @@ export function generateOrganizationJsonLd() {
       contactPoint: {
         telephone: '+33-4-42-02-96-74',
         contactType: 'customer service',
-        email: 'contact@lledo-industries.com',
+        email: 'contact@mpeb13.com',
       },
       sameAs: [
         'https://www.linkedin.com/company/lledo-industries',
@@ -395,7 +395,7 @@ export function generateLocalBusinessJsonLd() {
       contactPoint: {
         telephone: '+33-4-42-02-96-74',
         contactType: 'customer service',
-        email: 'contact@lledo-industries.com',
+        email: 'contact@mpeb13.com',
       },
       openingHours: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       sameAs: [

@@ -57,8 +57,10 @@ export function Hero() {
           priority
           quality={90}
         />
-        {/* Overlay pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/60 to-blue-900/50" />
+        {/* Overlay pour lisibilité - Renforcé pour mettre en avant le texte */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/75 to-blue-900/65" />
+        {/* Blur léger sur l'image */}
+        <div className="absolute inset-0 backdrop-blur-[2px]" />
       </div>
       
       {/* Scan lines futuristes */}
@@ -73,7 +75,7 @@ export function Hero() {
         className="container relative mx-auto px-4 py-12 sm:px-6 lg:px-8 z-10"
         style={{ y, opacity }}
       >
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content - Style IRON MAN */}
           <div className="flex flex-col justify-center text-white relative z-10">
             {/* Arc Reactor Badge */}

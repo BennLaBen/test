@@ -65,15 +65,15 @@ export default function ContactPage() {
       title: t('info.email.label'),
       content: (
         <>
-          <a href="mailto:contact@lledo-industries.com" className="hover:text-primary-600 font-semibold">
-            {t('info.email.value')}
+          <a href="mailto:contact@mpeb13.com" className="hover:text-primary-600 font-semibold">
+            contact@mpeb13.com
           </a>
           <br />
-          <span className="text-sm">{t('info.email.response')}</span>
+          <span className="text-sm">Réponse garantie sous 24h en semaine</span>
         </>
       ),
       action: 'Envoyer un email',
-      href: 'mailto:contact@lledo-industries.com',
+      href: 'mailto:contact@mpeb13.com',
       color: 'from-purple-500 to-purple-600'
     },
     {
@@ -82,7 +82,7 @@ export default function ContactPage() {
       content: (
         <>
           Lundi - Vendredi : 8h00 - 18h00<br />
-          Samedi : 8h00 - 12h00<br />
+          Samedi : Fermé<br />
           Dimanche : Fermé
         </>
       ),
@@ -177,7 +177,7 @@ export default function ContactPage() {
         </div>
         
         <div className="container relative z-10">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="grid gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}

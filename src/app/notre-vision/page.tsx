@@ -93,7 +93,7 @@ export default function NotreVisionPage() {
         </div>
 
         {/* Cercles holographiques optimisés */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square pointer-events-none">
           <motion.div
             className="absolute inset-0 rounded-full border border-white/15"
             style={{ willChange: 'transform, opacity' }}
@@ -154,10 +154,11 @@ export default function NotreVisionPage() {
               }}
             >
               <Image 
-                src="/images/gerard-lledo.jpg" 
+                src="/images/gerard-lledo.jpeg" 
                 alt="Gérard Lledo - Fondateur LLEDO Industries" 
                 fill 
                 className="object-cover"
+                style={{ objectPosition: 'center 49%' }}
               />
             </motion.div>
 

@@ -57,3 +57,5 @@ Thumbs.db
 # Cache
 .cache
 .turbo
+
+/generated/prisma

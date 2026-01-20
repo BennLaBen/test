@@ -33,15 +33,16 @@ export default function MGPPage() {
       machines: '15+ machines CNC'
     },
     expertise: [
-      'Découpe laser et plasma',
+      'Découpe au jet d\'eau',
       'Pliage et formage de tôles',
       'Soudage TIG, MIG et arc',
-      'Assemblage et montage',
-      'Traitement de surface'
+      'Usinage',
+      'Tournage',
+      'Fraisage'
     ],
     certifications: ['EN 9100', 'ISO 9001', 'ISO 3834'],
     stats: [
-      { label: 'Années d\'expérience', value: '28+', icon: TrendingUp, color: 'from-gray-500 to-gray-600' },
+      { label: 'Années d\'expérience', value: '50+', icon: TrendingUp, color: 'from-gray-500 to-gray-600' },
       { label: 'Projets réalisés', value: '2000+', icon: Target, color: 'from-blue-500 to-blue-600' },
       { label: 'Collaborateurs', value: '20', icon: Users, color: 'from-green-500 to-green-600' },
       { label: 'Taux de conformité', value: '99.5%', icon: Settings, color: 'from-amber-500 to-amber-600' },
@@ -431,7 +432,7 @@ export default function MGPPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Voir toutes nos expertises
+                  Toutes nos entreprises
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

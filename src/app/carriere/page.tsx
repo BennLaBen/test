@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
@@ -34,32 +35,38 @@ import { useTranslation } from 'react-i18next'
 const cultureIcons = [Lightbulb, Users, Award, GraduationCap]
 const benefitIcons = [Shield, Heart, Coffee, GraduationCap, Clock, Car]
 
+interface Job {
+  id: string
+  title: string
+  slug: string
+  type: string
+  location: string
+  department?: string
+  description: string
+  published: boolean
+}
+
 export default function CareersPage() {
   const { t } = useTranslation('careers')
-  
-  const jobs = [
-    {
-      title: "Ingénieur Mécanique",
-      type: "CDI • Temps plein",
-      location: "Les Pennes-Mirabeau",
-      description: "Conception et développement d'outillages aéronautiques",
-      icon: Building2
-    },
-    {
-      title: "Technicien Usinage",
-      type: "CDI • Temps plein",
-      location: "Les Pennes-Mirabeau",
-      description: "Usinage de précision sur machines 5 axes",
-      icon: Target
-    },
-    {
-      title: "Commercial Technique",
-      type: "CDI • Temps plein",
-      location: "Région Sud",
-      description: "Développement commercial secteur aéronautique",
-      icon: TrendingUp
+  const [jobs, setJobs] = useState<Job[]>([])
+  const [loadingJobs, setLoadingJobs] = useState(true)
+
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        const res = await fetch('/api/jobs')
+        const data = await res.json()
+        if (data.success) {
+          setJobs(data.jobs.filter((j: Job) => j.published))
+        }
+      } catch (err) {
+        console.error('Error fetching jobs:', err)
+      } finally {
+        setLoadingJobs(false)
+      }
     }
-  ]
+    fetchJobs()
+  }, [])
 
   const culture = [
     {
@@ -148,7 +155,7 @@ export default function CareersPage() {
             </motion.p>
 
             <motion.div 
-              className="grid grid-cols-2 gap-6 md:grid-cols-4"
+              className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -198,7 +205,7 @@ export default function CareersPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:gap-8 md:grid-cols-2">
             {culture.map((item, index) => {
               const Icon = cultureIcons[index]
               return (
@@ -328,7 +335,7 @@ export default function CareersPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
             {benefits.map((benefit, index) => {
               const Icon = benefitIcons[index]
               return (
@@ -392,64 +399,80 @@ export default function CareersPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-            {jobs.map((job, index) => {
-              const Icon = job.icon
-              return (
-                <motion.div 
-                  key={index} 
-                  className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group cursor-pointer"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.15 }}
-                  whileHover={{ scale: 1.03, y: -8 }}
-                  style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
-                >
-                  <motion.div
-                    className="absolute inset-0 opacity-0"
-                    whileHover={{ opacity: 1 }}
-                    style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent)' }}
-                  />
-                  
-                  <div className="flex items-start gap-6 relative z-10">
-                    <motion.div 
-                      className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <Icon className="h-8 w-8" />
-                    </motion.div>
-                    
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
-                        {job.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-400">
-                        <span className="flex items-center gap-1.5 font-semibold">
-                          <Calendar className="h-4 w-4" />
-                          {job.type}
-                        </span>
-                        <span className="flex items-center gap-1.5 font-semibold">
-                          <MapPin className="h-4 w-4" />
-                          {job.location}
-                        </span>
-                      </div>
-                      <p className="text-gray-300">
-                        {job.description}
-                      </p>
-                    </div>
-                    
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            {loadingJobs ? (
+              <div className="text-center py-12">
+                <div className="animate-spin h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
+                <p className="text-gray-400">Chargement des offres...</p>
+              </div>
+            ) : jobs.length === 0 ? (
+              <div className="text-center py-12 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl">
+                <Briefcase className="h-12 w-12 text-gray-500 mx-auto mb-4" />
+                <p className="text-gray-400">Aucune offre disponible pour le moment</p>
+              </div>
+            ) : (
+              jobs.map((job, index) => (
+                <Link href={`/carriere/${job.slug}`} key={job.id}>
+                  <motion.div 
+                    className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group cursor-pointer"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                    whileHover={{ scale: 1.03, y: -8 }}
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
+                  >
                     <motion.div
-                      whileHover={{ x: 8 }}
-                      className="flex items-center text-blue-400"
-                    >
-                      <ArrowRight className="h-7 w-7" />
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )
-            })}
+                      className="absolute inset-0 opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent)' }}
+                    />
+                    
+                    <div className="flex items-start gap-6 relative z-10">
+                      <motion.div 
+                        className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Briefcase className="h-8 w-8" />
+                      </motion.div>
+                      
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
+                          {job.title}
+                        </h3>
+                        <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-400">
+                          <span className="flex items-center gap-1.5 font-semibold">
+                            <Calendar className="h-4 w-4" />
+                            {job.type}
+                          </span>
+                          <span className="flex items-center gap-1.5 font-semibold">
+                            <MapPin className="h-4 w-4" />
+                            {job.location}
+                          </span>
+                          {job.department && (
+                            <span className="flex items-center gap-1.5 font-semibold">
+                              <Building2 className="h-4 w-4" />
+                              {job.department}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-300 line-clamp-2">
+                          {job.description.substring(0, 150)}...
+                        </p>
+                      </div>
+                      
+                      <motion.div
+                        whileHover={{ x: 8 }}
+                        className="flex items-center text-blue-400"
+                      >
+                        <ArrowRight className="h-7 w-7" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>

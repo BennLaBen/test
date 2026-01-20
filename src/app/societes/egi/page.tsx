@@ -430,7 +430,7 @@ export default function EGIPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Voir toutes nos expertises
+                  Toutes nos entreprises
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

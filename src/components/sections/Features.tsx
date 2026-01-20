@@ -120,7 +120,7 @@ export function Features() {
         </motion.div>
 
         {/* Stats Section - Ultra Modern */}
-        <div ref={statsRef} className="mb-24 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={statsRef} className="mb-16 sm:mb-20 lg:mb-24 grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-4">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
@@ -195,7 +195,7 @@ export function Features() {
         </div>
 
         {/* Grid Features - Toutes les cartes de la même taille */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             return (
               <motion.div

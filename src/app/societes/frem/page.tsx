@@ -28,7 +28,7 @@ export default function FREMPage() {
     tagline: 'Maintenance industrielle',
     description: 'FREM (Fabrication Réparation Entretien Mécanique) est spécialisée dans la maintenance préventive et corrective d\'équipements industriels. Notre expertise couvre l\'ensemble des interventions de maintenance pour garantir la disponibilité et la performance de vos installations.',
     capabilities: {
-      capacity: 'Intervention 24/7',
+      capacity: 'Intervention rapide',
       precision: 'Maintenance préventive',
       machines: 'Équipes mobiles'
     },
@@ -44,7 +44,7 @@ export default function FREMPage() {
       { label: 'Années d\'expérience', value: '25+', icon: TrendingUp, color: 'from-orange-500 to-orange-600' },
       { label: 'Interventions/an', value: '1000+', icon: Target, color: 'from-blue-500 to-blue-600' },
       { label: 'Techniciens', value: '15', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Disponibilité', value: '24/7', icon: Wrench, color: 'from-amber-500 to-amber-600' },
+      { label: 'Taux de satisfaction', value: '98%', icon: Wrench, color: 'from-amber-500 to-amber-600' },
     ]
   }
 
@@ -284,7 +284,7 @@ export default function FREMPage() {
 
                 <div className="space-y-4 relative z-10">
                   {[
-                    { icon: Wrench, label: 'Disponibilité', value: expertise.capabilities.capacity },
+                    { icon: Wrench, label: 'Réactivité', value: expertise.capabilities.capacity },
                     { icon: Target, label: 'Type', value: expertise.capabilities.precision },
                     { icon: Factory, label: 'Organisation', value: expertise.capabilities.machines }
                   ].map((cap, idx) => (
@@ -431,7 +431,7 @@ export default function FREMPage() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Voir toutes nos expertises
+                  Toutes nos entreprises
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

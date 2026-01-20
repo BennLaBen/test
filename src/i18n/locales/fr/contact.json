@@ -17,8 +17,8 @@
     },
     "email": {
       "label": "Email",
-      "value": "contact@lledo-industries.com",
-      "response": "Réponse sous 24h"
+      "value": "contact@mpeb13.com",
+      "response": "Réponse garantie sous 24h en semaine"
     },
     "address": {
       "label": "Adresse",
@@ -29,7 +29,7 @@
   },
   "hours": {
     "title": "Horaires d'ouverture",
-    "weekdays": "Lundi - Vendredi : 8h00 - 12h00 / 13h30 - 18h00",
+    "weekdays": "Lundi - Vendredi : 8h00 - 18h00",
     "weekend": "Samedi - Dimanche : Fermé"
   },
   "map": {

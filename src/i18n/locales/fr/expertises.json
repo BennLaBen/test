@@ -13,7 +13,7 @@
         "Assemblage d'ensembles mécaniques complexes",
         "Contrôle dimensionnel 3D et métrologie",
         "Électro-érosion à fil et par enfonçage",
-        "Découpe jet d'eau haute pression"
+        "Gravure laser"
       ],
       "capabilities": {
         "capacity": "100 000 heures/an",
@@ -69,14 +69,14 @@
       "id": "mgp",
       "name": "MGP",
       "tagline": "Tôlerie, chaudronnerie et assemblage",
-      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Basée à Saint-Bauzille-de-Putois, MGP apporte une expertise complémentaire sur des marchés diversifiés.",
+      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Basée à Saint-Bauzille-de-Putois, MGP apporte une expertise complémentaire sur des marchés diversifiés avec 50 ans d'expérience.",
       "expertise": [
-        "Tôlerie industrielle et découpe laser",
+        "Découpe au jet d'eau haute pression",
         "Chaudronnerie et travail des métaux",
         "Soudure tous procédés (TIG, MIG, ARC)",
-        "Pliage, roulage et formage de tôles",
-        "Assemblage d'ensembles mécaniques et sous-ensembles",
-        "Traitement de surface et peinture industrielle"
+        "Usinage",
+        "Tournage",
+        "Fraisage"
       ],
       "capabilities": {
         "capacity": "2000m² d'atelier",

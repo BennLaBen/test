@@ -88,7 +88,7 @@ export function Process() {
             }}
           />
 
-          <div className="space-y-12 lg:space-y-24">
+          <div className="space-y-8 sm:space-y-12 lg:space-y-24">
             {steps.map((step, index) => {
               const Icon = icons[index] || MessageSquare
               const isEven = index % 2 === 0
@@ -102,7 +102,7 @@ export function Process() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="relative"
                 >
-                  <div className={`lg:grid lg:grid-cols-2 lg:gap-12 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
+                  <div className={`lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-12 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
                     <div className={`${isEven ? 'lg:text-right' : 'lg:col-start-2'}`}>
                       <div className="inline-block w-full max-w-xl rounded-2xl p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 relative overflow-hidden"
                         style={{
