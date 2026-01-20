@@ -71,7 +71,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const company = await prisma.company.create({ data })
+    const company = await prisma.company.create({ 
+      data: {
+        slug: data.slug,
+        name: data.name,
+        tagline: data.tagline,
+        description: data.description,
+        logoUrl: data.logoUrl,
+        heroImage: data.heroImage,
+        galleryImages: data.galleryImages,
+        capabilities: data.capabilities,
+        expertise: data.expertise,
+        certifications: data.certifications,
+        stats: data.stats,
+        contactEmail: data.contactEmail,
+        contactPhone: data.contactPhone,
+        address: data.address,
+        published: data.published,
+        order: data.order,
+      }
+    })
 
     // Revalidate pages
     revalidatePath('/nos-expertises')
