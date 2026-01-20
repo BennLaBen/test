@@ -99,7 +99,14 @@ export async function POST(request: NextRequest) {
 
     const application = await prisma.application.create({
       data: {
-        ...data,
+        jobId: data.jobId,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        message: data.message,
+        cvUrl: data.cvUrl,
+        cvName: data.cvName,
         userId,
       },
       include: {
