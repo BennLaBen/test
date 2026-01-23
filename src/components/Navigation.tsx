@@ -52,7 +52,7 @@ export function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? 'bg-gray-900/95 backdrop-blur-xl border-b border-blue-500/20 shadow-lg shadow-blue-500/10' : 'bg-gray-900/80 backdrop-blur-sm'
+        scrolled ? 'bg-[#0a0a12] backdrop-blur-xl border-b border-blue-500/30 shadow-lg shadow-blue-500/10' : 'bg-[#0a0a12]/95 backdrop-blur-sm'
       }`}
       style={{
         ...(scrolled && {
