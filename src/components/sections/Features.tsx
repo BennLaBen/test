@@ -66,12 +66,12 @@ export function Features() {
     icon: iconMap[idx]
   }))
 
-  // Statistiques clés
+  // Points forts qualitatifs
   const stats = [
-    { label: 'Collaborateurs experts', value: '70+', icon: Users, color: 'from-blue-500 to-blue-600', progress: 100 },
-    { label: 'Heures de production/an', value: '100k', icon: Factory, color: 'from-purple-500 to-purple-600', progress: 95 },
-    { label: 'Pays exportés', value: '20+', icon: Globe, color: 'from-green-500 to-green-600', progress: 90 },
-    { label: 'Taux de satisfaction', value: '98%', icon: Target, color: 'from-amber-500 to-amber-600', progress: 98 },
+    { label: 'Équipe experte', value: 'Savoir-faire', icon: Users, color: 'from-blue-500 to-blue-600', progress: 100 },
+    { label: 'Capacité industrielle', value: 'Production', icon: Factory, color: 'from-purple-500 to-purple-600', progress: 100 },
+    { label: 'Rayonnement', value: 'International', icon: Globe, color: 'from-green-500 to-green-600', progress: 100 },
+    { label: 'Engagement qualité', value: 'Excellence', icon: Target, color: 'from-amber-500 to-amber-600', progress: 100 },
   ]
 
   return (

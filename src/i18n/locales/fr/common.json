@@ -20,9 +20,9 @@
     "ctaPrimary": "Nous contacter",
     "ctaSecondary": "Découvrir nos entreprises",
     "badges": {
-      "compliance": "Ingénierie & usinage intégrés",
-      "experience": "Plus de 36 ans d'expertises",
-      "cmu": "5 sociétés sur 2 sites",
+      "compliance": "Fabrication d'outillage et intégration industrielle",
+      "experience": "Interchangeabilité des composants",
+      "cmu": "Groupe multi-entités",
       "certs": "ISO 9001 & EN 9100"
     },
     "productLabel": "Division AEROTOOLS – expertise GSE",
@@ -38,7 +38,7 @@
   },
   "features": {
     "title": "Pourquoi choisir LLEDO Industries ?",
-    "subtitle": "Notre expertise technique et notre engagement qualité nous positionnent comme le partenaire de référence pour vos besoins en outillage aéronautique.",
+    "subtitle": "Notre expertise technique et notre engagement qualité nous positionnent comme le partenaire de référence pour répondre à vos besoins industriels.",
     "stats": {
       "years": "{{count}}+ Années d'expertise",
       "employees": "{{count}}+ Collaborateurs",
@@ -49,22 +49,22 @@
       {
         "title": "Conformité garantie",
         "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
-        "benefits": ["Test 1,25× CMU", "Traçabilité complète", "Certifications aéronautiques"]
+        "benefits": ["Interchangeabilité des composants", "Traçabilité complète", "Certifications industrielles"]
       },
       {
-        "title": "Précision technique",
-        "description": "Usinage de précision 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
-        "benefits": ["Tolérance ±0.01mm", "Contrôle qualité", "Expertise technique"]
+        "title": "Usinage de précision",
+        "description": "Usinage de précision 3 à 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
+        "benefits": ["Usinage 3 à 5 axes", "Contrôle qualité", "Expertise technique"]
       },
       {
         "title": "Délais respectés",
         "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
-        "benefits": ["100 000h/an", "Planification rigoureuse", "Suivi projet"]
+        "benefits": ["Suivi numérique des projets", "Planification rigoureuse", "Pilotage des opérations"]
       },
       {
         "title": "Équipe experte",
-        "description": "Plus de 70 collaborateurs spécialisés dans l'outillage aéronautique et les équipements GSE.",
-        "benefits": ["Formation continue", "Expertise métier", "Support technique"]
+        "description": "Collaborateurs spécialisés dans la fabrication de pièces élémentaires, l'outillage et les machines spéciales.",
+        "benefits": ["Fabrication de pièces élémentaires", "Outillage industriel", "Machines spéciales"]
       },
       {
         "title": "Innovation continue",
@@ -72,9 +72,9 @@
         "benefits": ["Bureau d'études intégré", "Prototypage", "Amélioration continue"]
       },
       {
-        "title": "Service international",
-        "description": "Export vers plus de 20 pays avec support technique local et formation des équipes.",
-        "benefits": ["Export international", "Support local", "Formation équipes"]
+        "title": "Accompagnement",
+        "description": "Support technique et formation des équipes clients pour garantir la maîtrise de vos équipements.",
+        "benefits": ["Formation des équipes", "Maintenance sur site", "Support technique"]
       }
     ],
     "process": {

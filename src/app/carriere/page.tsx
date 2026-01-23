@@ -92,15 +92,15 @@ export default function CareersPage() {
     "Prévoyance",
     "Ticket restaurant",
     "Formation continue",
-    "Horaires flexibles",
-    "Parking gratuit"
+    "Cadre de travail agréable",
+    "Ambiance chaleureuse"
   ]
 
   const stats = [
-    { value: "25+", label: "Années d'expérience" },
-    { value: "50+", label: "Collaborateurs" },
-    { value: "100%", label: "Taux de satisfaction" },
-    { value: "3", label: "Postes ouverts" }
+    { value: "Expertise", label: "Savoir-faire reconnu" },
+    { value: "Équipe", label: "Collaborateurs engagés" },
+    { value: "Qualité", label: "Excellence opérationnelle" },
+    { value: "Évolution", label: "Opportunités de carrière" }
   ]
   
   return (

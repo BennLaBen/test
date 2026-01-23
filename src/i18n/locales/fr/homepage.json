@@ -67,11 +67,11 @@
       },
       {
         "title": "Conception",
-        "description": "Bureau d'études intégré pour la conception technique et la validation des plans.",
+        "description": "Bureau d'études intégré pour la conception technique et la validation.",
         "details": [
-          "Plans techniques",
-          "Calculs de résistance",
-          "Validation client"
+          "Modélisation 3D",
+          "Tolérancement dimensionnel et géométrique",
+          "Simulation numérique (calculs par éléments finis)"
         ]
       },
       {
@@ -88,26 +88,25 @@
         "description": "Usinage de précision en atelier certifié avec contrôles qualité systématiques.",
         "details": [
           "Usinage 5 axes",
-          "Contrôles non destructifs",
-          "Traçabilité complète"
+          "Chaudronnerie",
+          "Usinage et montage"
         ]
       },
       {
-        "title": "Contrôle",
-        "description": "Tests et certifications conformes aux normes aéronautiques.",
+        "title": "Validation",
+        "description": "Tests et certifications conformes aux exigences industrielles.",
         "details": [
-          "Tests CMU 1,25×",
-          "Contrôle qualité",
-          "Certification CE"
+          "Tests en charge statique et dynamique",
+          "Qualité",
+          "Normes en charge"
         ]
       },
       {
-        "title": "Service",
-        "description": "Support et maintenance pour garantir la disponibilité de vos équipements.",
+        "title": "Accompagnement",
+        "description": "Support continu pour garantir la disponibilité de vos équipements.",
         "details": [
-          "Formation équipes",
-          "Maintenance préventive",
-          "Support technique"
+          "Formation des équipes clients",
+          "Maintenance sur site"
         ]
       }
     ],
@@ -153,7 +152,7 @@
   },
   "cta": {
     "title": "Équipez votre flotte avec des solutions certifiées",
-    "subtitle": "Rejoignez plus de 70 opérateurs et centres MRO qui font confiance à LLEDO Industries.",
+    "subtitle": "Faites confiance à un partenaire industriel engagé dans la qualité et l'accompagnement.",
     "primary": "Nous contacter",
     "secondary": "Découvrir nos produits",
     "contacts": {
@@ -174,10 +173,10 @@
       }
     },
     "stats": [
-      { "label": "Clients satisfaits", "value": "70+" },
-      { "label": "Années d'expérience", "value": "35" },
-      { "label": "Certifié CE", "value": "100%" },
-      { "label": "Qualité ISO 9001", "value": "ISO 9001" }
+      { "label": "Expertise", "value": "Savoir-faire" },
+      { "label": "Expérience", "value": "Historique" },
+      { "label": "Conformité", "value": "Certifié" },
+      { "label": "Qualité", "value": "ISO 9001" }
     ]
   }
 }

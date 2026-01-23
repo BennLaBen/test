@@ -39,10 +39,10 @@ export function Hero() {
   
   // Sociétés avec leurs vraies URLs
   const companies = [
-    { id: 'mpeb', name: 'MPEB', desc: 'Usinage de précision', detail: '100 000h/an', color: 'from-blue-600 to-blue-800', icon: '⚙️' },
+    { id: 'mpeb', name: 'MPEB', desc: 'Usinage de précision', detail: 'Fabrication de pièces unitaires', color: 'from-blue-600 to-blue-800', icon: '⚙️' },
     { id: 'egi', name: 'EGI', desc: "Bureau d'études", detail: 'Ingénierie intégrée', color: 'from-purple-600 to-purple-800', icon: '💡' },
-    { id: 'frem', name: 'FREM', desc: 'Maintenance', detail: 'Support OPEX', color: 'from-orange-600 to-orange-800', icon: '🔧' },
-    { id: 'mgp', name: 'MGP', desc: 'Tôlerie chaudronnerie', detail: '2 000m² atelier', color: 'from-gray-600 to-gray-800', icon: '🏭' },
+    { id: 'frem', name: 'FREM', desc: 'Maintenance', detail: 'Réactivité et interchangeabilité', color: 'from-orange-600 to-orange-800', icon: '🔧' },
+    { id: 'mgp', name: 'MGP', desc: 'Tôlerie chaudronnerie', detail: 'Usinage 3 à 5 axes', color: 'from-gray-600 to-gray-800', icon: '🏭' },
   ]
 
   return (
