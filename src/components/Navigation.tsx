@@ -9,8 +9,8 @@ import { LanguageToggle } from '@/components/LanguageToggle'
 import { Logo } from '@/components/Logo'
 import { Menu, X, User, LogOut } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { useAuth } from '@/contexts/AuthContext'
 import { AuthModal } from '@/components/auth/AuthModal'
+import { useSession, signOut } from 'next-auth/react'
 
 const navigation = [
   { key: 'nav.home', href: '/' },
@@ -30,7 +30,9 @@ export function Navigation() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const pathname = usePathname()
   const { t } = useTranslation('common')
-  const { isAuthenticated, user, logout } = useAuth()
+  const { data: session } = useSession()
+  const isAuthenticated = !!session?.user
+  const user = session?.user
 
   const isActive = (href: string) => pathname === href
 
@@ -63,7 +65,7 @@ export function Navigation() {
       <nav id="navigation" aria-label="Navigation principale" role="navigation" className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between gap-8">
           {/* Logo - Version moderne */}
-          <Logo size="medium" href="/" />
+          <Logo size="large" href="/" />
 
           {/* Desktop Navigation - Style Tony Stark */}
           <div className="hidden lg:flex lg:items-center lg:justify-center lg:flex-1 lg:gap-6 xl:gap-10">
@@ -109,9 +111,9 @@ export function Navigation() {
               <div className="relative group">
                 <button className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-sm font-bold">
-                    {user.firstName.charAt(0)}
+                    {(user.firstName || user.email || '?').charAt(0)}
                   </div>
-                  <span className="text-sm font-medium text-muted-strong">{user.firstName}</span>
+                  <span className="text-sm font-medium text-muted-strong">{user.firstName || user.email}</span>
                 </button>
                 
                 {/* Dropdown menu */}
@@ -121,7 +123,7 @@ export function Navigation() {
                     <p className="text-xs text-muted">{user.email}</p>
                   </div>
                   <button
-                    onClick={logout}
+                    onClick={() => signOut({ callbackUrl: '/' })}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors mt-1"
                   >
                     <LogOut className="h-4 w-4" />
@@ -169,7 +171,7 @@ export function Navigation() {
             {/* User Avatar on Mobile */}
             {isAuthenticated && user ? (
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-sm font-bold border-2 border-blue-400/50">
-                {user.firstName.charAt(0)}
+                {(user.firstName || user.email || '?').charAt(0)}
               </div>
             ) : (
               <Link
@@ -269,7 +271,7 @@ export function Navigation() {
                     </div>
                     <button
                       onClick={() => {
-                        logout()
+                        signOut({ callbackUrl: '/' })
                         setIsOpen(false)
                       }}
                       className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-[14px] font-semibold text-red-300 bg-red-900/30 rounded-lg active:scale-[0.98] transition-all border border-red-500/30"
