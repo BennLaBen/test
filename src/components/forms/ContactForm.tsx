@@ -50,40 +50,40 @@ export function ContactForm() {
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-300">
             Prénom *
           </label>
-          <input id="firstName" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('firstName')} />
+          <input id="firstName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('firstName')} />
           {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>}
         </div>
         <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="lastName" className="block text-sm font-medium text-gray-300">
             Nom *
           </label>
-          <input id="lastName" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('lastName')} />
+          <input id="lastName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('lastName')} />
           {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>}
         </div>
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email *</label>
-        <input id="email" type="email" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('email')} />
+        <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email *</label>
+        <input id="email" type="email" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('email')} />
         {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
       </div>
 
       <div>
-        <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Société</label>
-        <input id="company" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('company')} />
+        <label htmlFor="company" className="block text-sm font-medium text-gray-300">Société</label>
+        <input id="company" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('company')} />
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Téléphone</label>
-        <input id="phone" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('phone')} />
+        <label htmlFor="phone" className="block text-sm font-medium text-gray-300">Téléphone</label>
+        <input id="phone" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('phone')} />
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Sujet *</label>
-        <select id="subject" className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" {...register('subject')}>
+        <label htmlFor="subject" className="block text-sm font-medium text-gray-300">Sujet *</label>
+        <select id="subject" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white" {...register('subject')}>
           <option value="">Sélectionnez un sujet</option>
           <option value="contact">Prise de contact</option>
           <option value="information">Demande d'information</option>
@@ -95,14 +95,14 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Message *</label>
-        <textarea id="message" rows={6} className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" placeholder="Décrivez votre projet ou votre demande..." {...register('message')} />
+        <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message *</label>
+        <textarea id="message" rows={6} className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" placeholder="Décrivez votre projet ou votre demande..." {...register('message')} />
         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
       </div>
 
       <div className="flex items-start">
         <input id="consent" type="checkbox" className="mt-1 h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500" {...register('consent')} />
-        <label htmlFor="consent" className="ml-2 text-sm text-gray-600 dark:text-gray-300">
+        <label htmlFor="consent" className="ml-2 text-sm text-gray-300">
           J'accepte que mes données soient utilisées pour traiter ma demande conformément à la <a href="/privacy" className="text-primary-600 hover:text-primary-500">politique de confidentialité</a>. *
         </label>
       </div>
