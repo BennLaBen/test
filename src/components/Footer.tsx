@@ -92,23 +92,29 @@ export function Footer() {
                 {t('hero.subheadline')}
               </p>
               
-              {/* Contact Info avec style industriel */}
-              <div className="space-y-3 text-sm">
-                <div className="group flex items-start gap-3 transition-colors hover:text-primary-400">
-                  <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary-400" />
-                  <span>{t('footer.address')}</span>
+              {/* Contact Info simplifié */}
+              <div className="space-y-4 text-sm">
+                <div className="p-3 bg-white/5 rounded-lg border border-blue-400/20">
+                  <div className="font-bold text-white mb-2">MPEB / FREM / EGI</div>
+                  <div className="flex items-center gap-2 text-gray-300">
+                    <Phone className="h-4 w-4 text-primary-400" />
+                    <a href="tel:+33442029674" className="font-mono">04 42 02 96 74</a>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-300 mt-1">
+                    <Mail className="h-4 w-4 text-primary-400" />
+                    <a href="mailto:contact@mpeb13.com">contact@mpeb13.com</a>
+                  </div>
                 </div>
-                <div className="group flex items-center gap-3 transition-colors hover:text-primary-400">
-                  <Phone className="h-5 w-5 flex-shrink-0 text-primary-400" />
-                  <a href={`tel:${t('footer.phone').replace(/\s+/g, '')}`} className="font-mono">
-                    {t('footer.phone')}
-                  </a>
-                </div>
-                <div className="group flex items-center gap-3 transition-colors hover:text-primary-400">
-                  <Mail className="h-5 w-5 flex-shrink-0 text-primary-400" />
-                  <a href={`mailto:${t('footer.email')}`}>
-                    {t('footer.email')}
-                  </a>
+                <div className="p-3 bg-white/5 rounded-lg border border-blue-400/20">
+                  <div className="font-bold text-white mb-2">MGP</div>
+                  <div className="flex items-center gap-2 text-gray-300">
+                    <Phone className="h-4 w-4 text-primary-400" />
+                    <a href="tel:+33467737090" className="font-mono">04 67 73 70 90</a>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-300 mt-1">
+                    <Mail className="h-4 w-4 text-primary-400" />
+                    <a href="mailto:mega.gen.pro@wanadoo.fr">mega.gen.pro@wanadoo.fr</a>
+                  </div>
                 </div>
               </div>
             </div>

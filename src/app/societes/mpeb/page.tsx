@@ -25,30 +25,30 @@ export default function MPEBPage() {
   const { t } = useTranslation('expertises')
   const [currentImage, setCurrentImage] = useState(0)
 
-  // Placeholder data - sera remplacé par les vraies données
+  // Données MPEB - sans chiffres marketing
   const expertise = {
     name: 'MPEB',
     tagline: 'Usinage de précision',
-    description: 'MPEB est spécialisée dans l\'usinage de pièces complexes pour l\'aéronautique. Notre expertise technique et nos équipements de pointe nous permettent de répondre aux exigences les plus strictes du secteur.',
+    description: 'MPEB est spécialisée dans la fabrication de pièces unitaires et l\'usinage de pièces complexes pour l\'industrie. Notre expertise technique et nos équipements de pointe nous permettent de répondre aux exigences les plus strictes. Il n\'existe pas uniquement des outillages mécaniques : MPEB conçoit et fabrique tout type de solutions adaptées aux environnements industriels.',
     capabilities: {
-      capacity: '100 000h/an',
-      precision: '±0.01mm',
-      machines: '25+ machines CNC'
+      capacity: 'Fabrication de pièces unitaires',
+      precision: 'Rectification plane et cylindrique',
+      machines: 'Parc machines CNC'
     },
     expertise: [
       'Usinage 3, 4 et 5 axes',
-      'Tournage et fraisage',
+      'Rectification plane et cylindrique',
       'Alésage de précision',
-      'Surfaçage et rectification',
-      'Gravure laser',
-      'Contrôle dimensionnel'
+      'Fabrication de pièces élémentaires',
+      'Assemblage',
+      'Contrôle qualité'
     ],
     certifications: ['EN 9100', 'ISO 9001', 'NADCAP'],
     stats: [
-      { label: 'Années d\'expérience', value: '36+', icon: TrendingUp, color: 'from-blue-500 to-blue-600' },
-      { label: 'Pièces produites/an', value: '10k+', icon: Factory, color: 'from-purple-500 to-purple-600' },
-      { label: 'Collaborateurs', value: '+100', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Taux de conformité', value: '99.8%', icon: Target, color: 'from-amber-500 to-amber-600' },
+      { label: 'Expertise reconnue', value: 'Savoir-faire', icon: TrendingUp, color: 'from-blue-500 to-blue-600' },
+      { label: 'Production maîtrisée', value: 'Fabrication', icon: Factory, color: 'from-purple-500 to-purple-600' },
+      { label: 'Équipe qualifiée', value: 'Collaborateurs', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Qualité garantie', value: 'Excellence', icon: Target, color: 'from-amber-500 to-amber-600' },
     ]
   }
 

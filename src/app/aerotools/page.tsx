@@ -42,10 +42,10 @@ export default function AerotoolsPage() {
   })
 
   const stats = [
-    { label: 'Clients satisfaits', value: '70+' },
-    { label: 'Années d\'expérience', value: '35' },
-    { label: 'Certifié CE', value: '100%' },
-    { label: 'Qualité ISO 9001', value: 'ISO 9001' },
+    { label: 'Ergonomie', value: 'Confort' },
+    { label: 'Délais courts', value: 'Réactivité' },
+    { label: 'Logistique maîtrisée', value: 'Livraison' },
+    { label: 'Adaptation client', value: 'Sur-mesure' },
   ]
 
   const contactCards = [

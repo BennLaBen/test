@@ -28,24 +28,24 @@ export default function MGPPage() {
     tagline: 'Tôlerie & chaudronnerie',
     description: 'MGP (Mécanique Générale de Précision) est spécialisée dans la tôlerie fine et la chaudronnerie de précision. Notre savoir-faire couvre la découpe, le pliage, le soudage et l\'assemblage de pièces métalliques pour des applications industrielles exigeantes.',
     capabilities: {
-      capacity: '50 000h/an',
-      precision: 'Tôlerie fine ±0.1mm',
-      machines: '15+ machines CNC'
+      capacity: 'Usinage 3 à 5 axes',
+      precision: 'Mise en charge',
+      machines: 'Parc machines CNC'
     },
     expertise: [
-      'Découpe au jet d\'eau',
+      'Usinage 3 à 5 axes',
       'Pliage et formage de tôles',
       'Soudage TIG, MIG et arc',
-      'Usinage',
-      'Tournage',
-      'Fraisage'
+      'Peinture',
+      'Assemblage',
+      'Mise en charge'
     ],
     certifications: ['EN 9100', 'ISO 9001', 'ISO 3834'],
     stats: [
-      { label: 'Années d\'expérience', value: '50+', icon: TrendingUp, color: 'from-gray-500 to-gray-600' },
-      { label: 'Projets réalisés', value: '2000+', icon: Target, color: 'from-blue-500 to-blue-600' },
-      { label: 'Collaborateurs', value: '20', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Taux de conformité', value: '99.5%', icon: Settings, color: 'from-amber-500 to-amber-600' },
+      { label: 'Expertise reconnue', value: 'Savoir-faire', icon: TrendingUp, color: 'from-gray-500 to-gray-600' },
+      { label: 'Production maîtrisée', value: 'Fabrication', icon: Target, color: 'from-blue-500 to-blue-600' },
+      { label: 'Équipe qualifiée', value: 'Collaborateurs', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Qualité garantie', value: 'Excellence', icon: Settings, color: 'from-amber-500 to-amber-600' },
     ]
   }
 

@@ -26,25 +26,25 @@ export default function FREMPage() {
   const expertise = {
     name: 'FREM',
     tagline: 'Maintenance industrielle',
-    description: 'FREM (Fabrication Réparation Entretien Mécanique) est spécialisée dans la maintenance préventive et corrective d\'équipements industriels. Notre expertise couvre l\'ensemble des interventions de maintenance pour garantir la disponibilité et la performance de vos installations.',
+    description: 'FREM (Fabrication Réparation Entretien Mécanique) est spécialisée dans la maintenance préventive et corrective d\'équipements industriels. Notre forte réactivité et notre capacité d\'intervention rapide garantissent la disponibilité et la performance de vos installations.',
     capabilities: {
       capacity: 'Intervention rapide',
-      precision: 'Maintenance préventive',
-      machines: 'Équipes mobiles'
+      precision: 'Forte réactivité',
+      machines: 'Interchangeabilité'
     },
     expertise: [
       'Maintenance préventive et corrective',
       'Révision et réparation d\'équipements',
-      'Dépannage d\'urgence',
-      'Modernisation d\'installations',
+      'Intervention rapide',
+      'Interchangeabilité des composants',
       'Gestion de parc machines'
     ],
     certifications: ['EN 9100', 'ISO 9001'],
     stats: [
-      { label: 'Années d\'expérience', value: '25+', icon: TrendingUp, color: 'from-orange-500 to-orange-600' },
-      { label: 'Interventions/an', value: '1000+', icon: Target, color: 'from-blue-500 to-blue-600' },
-      { label: 'Techniciens', value: '15', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Taux de satisfaction', value: '98%', icon: Wrench, color: 'from-amber-500 to-amber-600' },
+      { label: 'Expertise reconnue', value: 'Maintenance', icon: TrendingUp, color: 'from-orange-500 to-orange-600' },
+      { label: 'Réactivité', value: 'Intervention', icon: Target, color: 'from-blue-500 to-blue-600' },
+      { label: 'Équipe qualifiée', value: 'Techniciens', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Qualité garantie', value: 'Fiabilité', icon: Wrench, color: 'from-amber-500 to-amber-600' },
     ]
   }
 

@@ -32,18 +32,18 @@ export default function EGIPage() {
       machines: 'CATIA V5 / SolidWorks'
     },
     expertise: [
-      'Conception et design de pièces',
-      'Optimisation topologique',
+      'Conception 3D',
+      'Mise en plan',
       'Calculs de structures (FEM)',
       'Documentation technique complète',
       'Support technique projet'
     ],
     certifications: ['EN 9100', 'ISO 9001'],
     stats: [
-      { label: 'Années d\'expérience', value: '30+', icon: TrendingUp, color: 'from-purple-500 to-purple-600' },
-      { label: 'Projets réalisés', value: '500+', icon: Target, color: 'from-blue-500 to-blue-600' },
-      { label: 'Ingénieurs', value: '8', icon: Users, color: 'from-green-500 to-green-600' },
-      { label: 'Taux de satisfaction', value: '98%', icon: Lightbulb, color: 'from-amber-500 to-amber-600' },
+      { label: 'Expertise reconnue', value: 'Ingénierie', icon: TrendingUp, color: 'from-purple-500 to-purple-600' },
+      { label: 'Projets maîtrisés', value: 'Conception', icon: Target, color: 'from-blue-500 to-blue-600' },
+      { label: 'Équipe qualifiée', value: 'Ingénieurs', icon: Users, color: 'from-green-500 to-green-600' },
+      { label: 'Qualité garantie', value: 'Excellence', icon: Lightbulb, color: 'from-amber-500 to-amber-600' },
     ]
   }
 
