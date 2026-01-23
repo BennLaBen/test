@@ -83,14 +83,14 @@
       {
         "year": "2024",
         "event": "Groupe LLEDO Industries",
-        "description": "Le groupe emploie 70 collaborateurs et réalise un CA de ~10M€."
+        "description": "Le groupe réunit plusieurs entités complémentaires sur deux sites en France."
       }
     ]
   },
   "industrialVision": {
     "badge": "Vision Industrielle",
     "title": "Notre ambition pour l'avenir",
-    "subtitle": "Construire le leader français de l'ingénierie industrielle intégrée",
+    "subtitle": "Rester partenaire de tous types d'acteurs industriels, du plus petit au plus structuré, dans une relation de proximité, de confiance et de continuité",
     "paragraphs": [
       "Dans un contexte de relocalisation industrielle et de souveraineté technologique, le Groupe LLEDO Industries a un rôle à jouer. Notre ambition est de devenir le partenaire de référence des grands donneurs d'ordres de l'aéronautique et de la défense.",
       "Nous investissons massivement dans nos équipements : usinage 5 axes dernière génération, outils de métrologie 3D, logiciels de simulation et d'optimisation. Notre objectif : être à la pointe de la technologie pour répondre aux cahiers des charges les plus exigeants.",
@@ -100,10 +100,10 @@
     "objectives": {
       "title": "Nos objectifs à 5 ans",
       "list": [
-        { "title": "Croissance organique", "description": "Doubler notre chiffre d'affaires par le développement de nouveaux marchés" },
-        { "title": "Innovation produit", "description": "Développer une gamme complète d'équipements GSE pour hélicoptères" },
-        { "title": "Excellence opérationnelle", "description": "Atteindre un taux de service client de 98%" },
-        { "title": "Développement RH", "description": "Recruter 30 nouveaux collaborateurs et renforcer nos compétences clés" }
+        { "title": "Développement de produits propres", "description": "Concevoir et commercialiser des équipements innovants sous nos marques" },
+        { "title": "Intégration sur d'autres machines", "description": "Diversifier nos capacités d'intégration industrielle" },
+        { "title": "Croissance organique maîtrisée", "description": "Développer notre activité de manière durable et structurée" },
+        { "title": "Excellence opérationnelle", "description": "Maintenir un haut niveau de performance et de fiabilité" }
       ]
     }
   },

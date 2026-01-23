@@ -22,29 +22,29 @@ export default function CasClientsPage() {
   }
   
   
-  // Statistiques de satisfaction
+  // Points forts qualitatifs
   const satisfactionStats = [
-    { label: 'Taux de satisfaction global', value: '98%', icon: ThumbsUp, color: 'from-green-500 to-green-600' },
-    { label: 'Recommandation client', value: '96%', icon: Star, color: 'from-amber-500 to-amber-600' },
-    { label: 'Respect des délais', value: '94%', icon: Target, color: 'from-blue-500 to-blue-600' },
-    { label: 'Qualité produits', value: '99%', icon: Award, color: 'from-purple-500 to-purple-600' },
+    { label: 'Satisfaction client', value: 'Excellence', icon: ThumbsUp, color: 'from-green-500 to-green-600' },
+    { label: 'Recommandation', value: 'Confiance', icon: Star, color: 'from-amber-500 to-amber-600' },
+    { label: 'Respect des délais', value: 'Fiabilité', icon: Target, color: 'from-blue-500 to-blue-600' },
+    { label: 'Qualité produits', value: 'Expertise', icon: Award, color: 'from-purple-500 to-purple-600' },
   ]
 
-  // Sondages détaillés
+  // Critères qualitatifs
   const surveys = [
-    { question: 'Qualité de nos prestations', score: 4.9, max: 5 },
-    { question: 'Réactivité et communication', score: 4.8, max: 5 },
-    { question: 'Expertise technique', score: 4.9, max: 5 },
-    { question: 'Rapport qualité/prix', score: 4.7, max: 5 },
-    { question: 'Support après-vente', score: 4.8, max: 5 },
+    { question: 'Qualité de nos prestations', score: 'Excellent', max: '' },
+    { question: 'Réactivité et communication', score: 'Très bien', max: '' },
+    { question: 'Expertise technique', score: 'Excellent', max: '' },
+    { question: 'Rapport qualité/prix', score: 'Très bien', max: '' },
+    { question: 'Support après-vente', score: 'Très bien', max: '' },
   ]
 
-  // Secteurs d'activité (anonymisés)
+  // Secteurs d'activité
   const sectors = [
-    { name: 'Aéronautique', clients: '70+', satisfaction: '98%' },
-    { name: 'Défense', clients: '25+', satisfaction: '97%' },
-    { name: 'Industrie', clients: '40+', satisfaction: '96%' },
-    { name: 'Énergie', clients: '15+', satisfaction: '95%' },
+    { name: 'Aéronautique', clients: 'Nombreux clients', satisfaction: 'Excellence' },
+    { name: 'Défense', clients: 'Partenaires réguliers', satisfaction: 'Confiance' },
+    { name: 'Industrie', clients: 'Relations durables', satisfaction: 'Fiabilité' },
+    { name: 'Énergie', clients: 'Collaboration établie', satisfaction: 'Qualité' },
   ]
   
   return (
@@ -112,7 +112,7 @@ export default function CasClientsPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
             >
-              Plus de 150 clients dans 4 secteurs d'activité nous font confiance pour leurs projets critiques
+              Des clients dans de nombreux secteurs d'activité nous font confiance pour leurs projets critiques
             </motion.p>
 
             {/* Bouton d'action Rapide - Donner un avis */}
@@ -242,11 +242,6 @@ export default function CasClientsPage() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {surveys.map((survey, index) => {
-              const percentage = (survey.score / survey.max) * 100
-              const radius = 30
-              const circumference = 2 * Math.PI * radius
-              const strokeDashoffset = circumference - (percentage / 100) * circumference
-
               return (
                 <motion.div
                   key={index}
@@ -262,41 +257,12 @@ export default function CasClientsPage() {
                     {survey.question}
                   </h3>
 
-                  {/* Jauge Circulaire */}
+                  {/* Badge qualitatif */}
                   <div className="relative h-32 w-32 flex items-center justify-center mb-4">
-                    {/* Cercle de fond */}
-                    <svg className="absolute inset-0 h-full w-full transform -rotate-90" viewBox="0 0 100 100">
-                      <circle
-                        className="text-gray-700"
-                        strokeWidth="8"
-                        stroke="currentColor"
-                        fill="transparent"
-                        r={radius}
-                        cx="50"
-                        cy="50"
-                      />
-                      {/* Cercle de progression */}
-                      <motion.circle
-                        className="text-blue-500"
-                        strokeWidth="8"
-                        strokeLinecap="round"
-                        stroke="currentColor"
-                        fill="transparent"
-                        r={radius}
-                        cx="50"
-                        cy="50"
-                        strokeDasharray={circumference}
-                        initial={{ strokeDashoffset: circumference }}
-                        whileInView={{ strokeDashoffset: strokeDashoffset }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.5, delay: 0.5 + index * 0.1, ease: "easeOut" }}
-                      />
-                    </svg>
-                    
-                    {/* Score au centre */}
+                    <div className="absolute inset-0 rounded-full border-4 border-blue-500/30" />
+                    <div className="absolute inset-2 rounded-full border-2 border-blue-400/20" />
                     <div className="flex flex-col items-center">
-                      <span className="text-3xl font-black text-white">{survey.score}</span>
-                      <span className="text-[10px] text-gray-500 font-bold">SUR 5</span>
+                      <span className="text-xl font-black text-white text-center">{survey.score}</span>
                     </div>
                   </div>
 
@@ -305,7 +271,7 @@ export default function CasClientsPage() {
                     <motion.div 
                       className="h-full bg-blue-500"
                       initial={{ width: 0 }}
-                      whileInView={{ width: `${percentage}%` }}
+                      whileInView={{ width: '100%' }}
                       transition={{ duration: 1, delay: 1 }}
                     />
                   </div>
