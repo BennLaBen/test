@@ -56,30 +56,62 @@ export function Navigation() {
     setIsOpen(false)
   }, [])
 
-  // Bloquer le scroll du body quand le menu est ouvert
+  // Bloquer le scroll du body quand le menu est ouvert (iOS Safari fix)
   useEffect(() => {
     if (isOpen) {
+      // Sauvegarder la position de scroll actuelle
+      const scrollY = window.scrollY
+      const scrollX = window.scrollX
+      
+      // iOS Safari: bloquer le scroll de manière robuste
       document.body.style.overflow = 'hidden'
       document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.left = `-${scrollX}px`
+      document.body.style.right = '0'
       document.body.style.width = '100%'
-      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.height = '100%'
+      // Empêcher le bounce scroll iOS
+      document.body.style.overscrollBehavior = 'none'
+      document.documentElement.style.overflow = 'hidden'
+      document.documentElement.style.height = '100%'
+      
       // Focus sur le bouton fermer à l'ouverture
       setTimeout(() => closeButtonRef.current?.focus(), 100)
     } else {
+      // Récupérer la position sauvegardée
       const scrollY = document.body.style.top
+      
+      // Restaurer les styles
       document.body.style.overflow = ''
       document.body.style.position = ''
-      document.body.style.width = ''
       document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.width = ''
+      document.body.style.height = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overflow = ''
+      document.documentElement.style.height = ''
+      
+      // Restaurer la position de scroll
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1)
       }
     }
+    
     return () => {
+      // Cleanup complet
       document.body.style.overflow = ''
       document.body.style.position = ''
-      document.body.style.width = ''
       document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.width = ''
+      document.body.style.height = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overflow = ''
+      document.documentElement.style.height = ''
     }
   }, [isOpen])
 
@@ -317,19 +349,33 @@ export function Navigation() {
         <AnimatePresence>
           {isOpen && (
             <>
-              {/* Overlay sombre avec blur */}
+              {/* Overlay sombre avec blur - z-index élevé pour iOS */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998]"
-                style={{ touchAction: 'none' }}
+                className="lg:hidden fixed bg-black/80 backdrop-blur-sm"
+                style={{ 
+                  touchAction: 'none',
+                  // iOS Safari: position fixe robuste
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: '100%',
+                  height: '100%',
+                  zIndex: 99998,
+                  // Empêcher tout scroll/touch sur l'overlay
+                  WebkitOverflowScrolling: 'auto',
+                  overscrollBehavior: 'none'
+                }}
                 onClick={closeMenu}
+                onTouchMove={(e) => e.preventDefault()}
                 aria-hidden="true"
               />
               
-              {/* Menu plein écran */}
+              {/* Menu plein écran - iOS Safari optimisé */}
               <motion.div
                 ref={menuRef}
                 role="dialog"
@@ -339,10 +385,24 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                className="lg:hidden fixed inset-0 z-[9999] flex flex-col bg-gradient-to-b from-[#0a0a12] via-[#0d0d18] to-[#0a0a12]"
+                className="lg:hidden fixed flex flex-col bg-gradient-to-b from-[#0a0a12] via-[#0d0d18] to-[#0a0a12]"
                 style={{ 
-                  height: '100dvh',
-                  paddingTop: 'env(safe-area-inset-top)'
+                  // iOS Safari: position fixe robuste
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: '100%',
+                  // 100dvh pour iOS 15.4+, fallback via CSS variable
+                  height: 'var(--mobile-menu-height, 100dvh)',
+                  // Safe area pour notch iPhone
+                  paddingTop: 'env(safe-area-inset-top, 0px)',
+                  paddingLeft: 'env(safe-area-inset-left, 0px)',
+                  paddingRight: 'env(safe-area-inset-right, 0px)',
+                  // z-index très élevé pour passer au-dessus de tout
+                  zIndex: 99999,
+                  // Empêcher le bounce scroll iOS sur le conteneur principal
+                  overscrollBehavior: 'contain'
                 }}
               >
                 {/* Header fixe */}
@@ -360,10 +420,19 @@ export function Navigation() {
                   </button>
                 </div>
                 
-                {/* Contenu scrollable */}
+                {/* Contenu scrollable - iOS Safari optimisé */}
                 <div 
-                  className="flex-1 overflow-y-auto overscroll-contain"
-                  style={{ WebkitOverflowScrolling: 'touch' }}
+                  className="flex-1 overflow-y-auto"
+                  style={{ 
+                    // iOS Safari: scroll fluide
+                    WebkitOverflowScrolling: 'touch',
+                    // Empêcher le scroll de "passer" au body
+                    overscrollBehavior: 'contain',
+                    // Permettre le scroll tactile
+                    touchAction: 'pan-y',
+                    // Fix pour le scroll sur iOS
+                    minHeight: 0
+                  }}
                 >
                   <div className="px-4 py-5 space-y-4">
                     
@@ -436,10 +505,13 @@ export function Navigation() {
                   </div>
                 </div>
 
-                {/* CTA Sticky en bas */}
+                {/* CTA Sticky en bas - Safe area iPhone */}
                 <div 
-                  className="flex-shrink-0 px-4 py-4 border-t border-blue-500/20 bg-[#0a0a12]/95 backdrop-blur-lg"
-                  style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }}
+                  className="flex-shrink-0 px-4 pt-4 border-t border-blue-500/20 bg-[#0a0a12]/95 backdrop-blur-lg"
+                  style={{ 
+                    // Safe area bottom pour home indicator iPhone X+
+                    paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)'
+                  }}
                 >
                   <div className="flex gap-3">
                     {/* Contact */}

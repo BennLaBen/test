@@ -3,6 +3,30 @@
 @tailwind utilities;
 
 /* ============================================
+   iOS SAFARI FIXES
+   ============================================ */
+
+/* Fallback pour 100dvh sur iOS < 15.4 */
+:root {
+  --mobile-menu-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --mobile-menu-height: 100dvh;
+  }
+}
+
+/* Fix iOS Safari: empêcher le bounce scroll quand menu ouvert */
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+/* ============================================
    MOBILE-FIRST OPTIMIZATIONS
    iPhone SE (375px) → iPhone 15 Pro Max (430px)
    Android (360px → 412px)
