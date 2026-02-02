@@ -247,7 +247,7 @@ export function Navigation() {
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="lg:hidden fixed left-0 top-0 h-full w-full bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 z-[70] overflow-y-auto"
+                className="lg:hidden fixed left-0 top-0 h-full w-full bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 z-[70] overflow-y-auto pb-safe"
                 style={{ boxShadow: '0 0 100px rgba(59, 130, 246, 0.5)' }}
               >
               <motion.div 

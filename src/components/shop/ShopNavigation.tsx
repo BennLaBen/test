@@ -18,15 +18,19 @@ export function ShopNavigation() {
       {/* Top Bar - System Status */}
       <div className="bg-gray-950 border-b border-gray-800 py-1 px-4">
         <div className="container mx-auto flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase">
-          <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-4">
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
               SYSTEM_ONLINE
             </span>
-            <span>SECURE_CONNECTION: TLS 1.3</span>
+            <span className="hidden md:inline">SECURE_CONNECTION: TLS 1.3</span>
+          </div>
+          <div className="flex sm:hidden items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span>ONLINE</span>
           </div>
           <Link href="/" className="hover:text-blue-400 transition-colors flex items-center gap-1">
-            <ArrowLeft className="h-3 w-3" /> RETOUR GROUPE LLEDO
+            <ArrowLeft className="h-3 w-3" /> <span className="hidden xs:inline">RETOUR</span> <span className="hidden sm:inline">GROUPE LLEDO</span>
           </Link>
         </div>
       </div>

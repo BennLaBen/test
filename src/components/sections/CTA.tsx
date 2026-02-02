@@ -144,7 +144,7 @@ export function CTA() {
             </motion.div>
 
             <motion.h2
-              className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
+              className="mb-6 text-2xl font-black text-white sm:text-3xl lg:text-4xl xl:text-6xl uppercase"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

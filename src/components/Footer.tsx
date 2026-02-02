@@ -82,7 +82,7 @@ export function Footer() {
       {/* Main Footer */}
       <div className="border-b border-gray-800">
         <div className="container py-12 lg:py-16">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6">
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">

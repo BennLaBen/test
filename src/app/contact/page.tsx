@@ -108,7 +108,7 @@ export default function ContactPage() {
       />
 
       {/* Hero Section - Tony Stark */}
-      <section className="relative py-12 text-white lg:py-16 overflow-hidden min-h-[60vh] flex items-center">
+      <section className="relative py-12 text-white lg:py-16 overflow-hidden min-h-[40vh] sm:min-h-[50vh] lg:min-h-[60vh] flex items-center">
         {/* Image de fond */}
         <div className="absolute inset-0 z-0">
           <Image

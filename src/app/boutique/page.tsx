@@ -416,7 +416,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       />
 
       {/* Image / Preview */}
-      <div className="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 p-8 flex items-center justify-center overflow-hidden border-b-2 border-blue-400/20">
+      <div className="relative h-48 sm:h-64 bg-gradient-to-br from-slate-800 to-slate-900 p-6 sm:p-8 flex items-center justify-center overflow-hidden border-b-2 border-blue-400/20">
          {/* Fond Tech */}
          <div className="absolute inset-0 opacity-[0.05] bg-[url('/grid.svg')] scale-150 transition-transform duration-1000 group-hover:scale-125 invert-[0.1]" />
          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/10 via-transparent to-transparent" />

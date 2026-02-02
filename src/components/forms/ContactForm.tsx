@@ -53,32 +53,32 @@ export function ContactForm() {
           <label htmlFor="firstName" className="block text-sm font-medium text-gray-300">
             Prénom *
           </label>
-          <input id="firstName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('firstName')} />
+          <input id="firstName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('firstName')} />
           {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>}
         </div>
         <div>
           <label htmlFor="lastName" className="block text-sm font-medium text-gray-300">
             Nom *
           </label>
-          <input id="lastName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('lastName')} />
+          <input id="lastName" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('lastName')} />
           {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>}
         </div>
       </div>
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email *</label>
-        <input id="email" type="email" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('email')} />
+        <input id="email" type="email" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('email')} />
         {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
       </div>
 
       <div>
         <label htmlFor="company" className="block text-sm font-medium text-gray-300">Société</label>
-        <input id="company" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('company')} />
+        <input id="company" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('company')} />
       </div>
 
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-300">Téléphone</label>
-        <input id="phone" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('phone')} />
+        <input id="phone" className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" {...register('phone')} />
       </div>
 
       <div>
@@ -96,7 +96,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message *</label>
-        <textarea id="message" rows={6} className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" placeholder="Décrivez votre projet ou votre demande..." {...register('message')} />
+        <textarea id="message" rows={6} className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white placeholder-gray-400" placeholder="Décrivez votre projet ou votre demande..." {...register('message')} />
         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
       </div>
 

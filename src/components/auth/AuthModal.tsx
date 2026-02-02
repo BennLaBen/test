@@ -219,7 +219,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
             </form>
           ) : (
             <form onSubmit={handleSignup} className="space-y-3 sm:space-y-4 relative z-10">
-              <div className="grid grid-cols-2 gap-2 sm:gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-muted-strong mb-1.5 sm:mb-2">
                     Prénom

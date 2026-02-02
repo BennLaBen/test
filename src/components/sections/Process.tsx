@@ -58,7 +58,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
+            className="mb-6 text-2xl font-black text-white sm:text-3xl lg:text-4xl xl:text-6xl uppercase"
             style={{
               textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
             }}

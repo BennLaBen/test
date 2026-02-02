@@ -114,7 +114,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl mb-6"
+              className="text-2xl font-black tracking-tight xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mb-6"
               style={{
                 textShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
                 lineHeight: '1.3'
@@ -258,7 +258,7 @@ export function Hero() {
             >
               <Link href="/contact">
                 <motion.div
-                  className="relative inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-xl font-bold text-lg text-white overflow-hidden group cursor-pointer"
+                  className="relative inline-flex items-center gap-2 sm:gap-3 px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-xl font-bold text-base sm:text-lg text-white overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.98 }}
                   style={{
@@ -280,7 +280,7 @@ export function Hero() {
 
               <Link href="/nos-expertises">
                 <motion.div
-                  className="relative inline-flex items-center gap-3 px-8 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl font-bold text-lg text-white overflow-hidden cursor-pointer"
+                  className="relative inline-flex items-center gap-2 sm:gap-3 px-6 py-4 sm:px-8 sm:py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl font-bold text-base sm:text-lg text-white overflow-hidden cursor-pointer"
                   whileHover={{ scale: 1.05, y: -3, borderColor: 'rgba(255,255,255,0.6)' }}
                   whileTap={{ scale: 0.98 }}
                   style={{ willChange: 'transform' }}
@@ -325,7 +325,7 @@ export function Hero() {
                 </motion.div>
               </motion.div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
                 {companies.map((company, index) => (
                   <Link key={company.id} href={`/societes/${company.id}`}>
                     <motion.div
@@ -450,7 +450,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-center"
+        className="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 z-20 text-center hidden sm:block"
       >
         <motion.div className="flex flex-col items-center gap-2">
           <span className="text-xs font-bold text-white/60 uppercase tracking-widest">

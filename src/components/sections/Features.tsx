@@ -99,7 +99,7 @@ export function Features() {
           className="text-center mb-20"
         >
           <motion.h2
-            className="text-5xl font-black tracking-tight text-white sm:text-6xl mb-6 uppercase"
+            className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl mb-6 uppercase"
             style={{
               textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
             }}
@@ -136,7 +136,7 @@ export function Features() {
                   scale: 1.03,
                   y: -5
                 }}
-                className="relative overflow-hidden p-8 group cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-2xl"
+                className="relative overflow-hidden p-5 sm:p-8 group cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-2xl"
                 style={{
                   boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)',
                   willChange: 'transform'
@@ -210,7 +210,7 @@ export function Features() {
                   y: -6,
                   scale: 1.02
                 }}
-                className="group relative overflow-hidden p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl h-full"
+                className="group relative overflow-hidden p-5 sm:p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl h-full"
                 style={{
                   boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
                   willChange: 'transform'

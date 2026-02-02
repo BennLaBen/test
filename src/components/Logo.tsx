@@ -11,9 +11,9 @@ interface LogoProps {
 
 export function Logo({ size = 'medium', href = '/' }: LogoProps) {
   const sizes = {
-    small: { height: 52, width: 72 },
-    medium: { height: 64, width: 100 },
-    large: { height: 72, width: 130 }
+    small: { height: 44, width: 60 },
+    medium: { height: 52, width: 80 },
+    large: { height: 56, width: 100 }
   }
 
   const currentSize = sizes[size]
