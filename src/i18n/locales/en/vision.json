@@ -5,19 +5,19 @@
     "badge": "La vision du fondateur",
     "title": "Gérard Lledo",
     "subtitle": "Fondateur et Président",
-    "intro": "My vision is simple: to build a French industrial group of excellence, capable of meeting the most demanding needs of the aerospace and defense industries. Today, LLEDO Industries Group brings together passionate employees around shared values.",
+    "intro": "Since 1989, my vision is simple: to build a French industrial group of excellence, capable of meeting the most demanding needs of the aerospace and defense industries. Today, LLEDO Industries Group brings together 70 passionate employees around shared values.",
     "quote": "Notre force réside dans la complémentarité de nos expertises et l'engagement de chaque collaborateur. Ensemble, nous relevons les défis techniques les plus complexes.",
     "stats": [
-      { "value": "Expertise", "label": "Recognized know-how" },
-      { "value": "Team", "label": "Committed employees" },
-      { "value": "Synergy", "label": "Multi-entity" },
-      { "value": "Growth", "label": "Controlled development" }
+      { "value": "36 years", "label": "Of experience" },
+      { "value": "70", "label": "Employees" },
+      { "value": "5", "label": "Entities" },
+      { "value": "~10M€", "label": "Revenue" }
     ]
   },
   "values": {
     "badge": "Nos Valeurs",
     "title": "Les piliers de notre réussite",
-    "subtitle": "Strong values that guide our daily actions",
+    "subtitle": "Strong values that have guided our daily actions for 36 years",
     "list": [
       {
         "title": "Excellence technique",
@@ -25,7 +25,7 @@
       },
       {
         "title": "Capital humain",
-        "description": "Our employees are our greatest asset. We invest in their skills and professional development."
+        "description": "Our 70 employees are our greatest asset. We invest in their skills and professional development."
       },
       {
         "title": "Engagement client",
@@ -47,7 +47,7 @@
   },
   "history": {
     "badge": "Notre Histoire",
-    "title": "A history of growth and innovation",
+    "title": "36 years of growth and innovation",
     "subtitle": "Un parcours marqué par l'excellence et l'audace entrepreneuriale",
     "milestones": [
       {

@@ -5,19 +5,19 @@
     "badge": "La vision du fondateur",
     "title": "Gérard Lledo",
     "subtitle": "Fondateur et Président",
-    "intro": "Ma vision est simple : bâtir un groupe industriel français d'excellence, capable de répondre aux besoins les plus exigeants de l'aéronautique et de la défense. Aujourd'hui, le Groupe LLEDO Industries réunit des collaborateurs passionnés autour de valeurs communes.",
+    "intro": "Depuis 1989, ma vision est simple : bâtir un groupe industriel français d'excellence, capable de répondre aux besoins les plus exigeants de l'aéronautique et de la défense. Aujourd'hui, le Groupe LLEDO Industries réunit 70 collaborateurs passionnés autour de valeurs communes.",
     "quote": "Notre force réside dans la complémentarité de nos expertises et l'engagement de chaque collaborateur. Ensemble, nous relevons les défis techniques les plus complexes.",
     "stats": [
-      { "value": "Expertise", "label": "Savoir-faire reconnu" },
-      { "value": "Équipe", "label": "Collaborateurs engagés" },
-      { "value": "Synergie", "label": "Multi-entités" },
-      { "value": "Croissance", "label": "Développement maîtrisé" }
+      { "value": "36 ans", "label": "D'expérience" },
+      { "value": "70", "label": "Collaborateurs" },
+      { "value": "5", "label": "Entités" },
+      { "value": "~10M€", "label": "Chiffre d'affaires" }
     ]
   },
   "values": {
     "badge": "Nos Valeurs",
     "title": "Les piliers de notre réussite",
-    "subtitle": "Des valeurs fortes qui guident nos actions au quotidien",
+    "subtitle": "Des valeurs fortes qui guident nos actions au quotidien depuis 36 ans",
     "list": [
       {
         "title": "Excellence technique",
@@ -25,7 +25,7 @@
       },
       {
         "title": "Capital humain",
-        "description": "Nos collaborateurs sont notre première richesse. Nous investissons dans leurs compétences et leur épanouissement professionnel."
+        "description": "Nos 70 collaborateurs sont notre première richesse. Nous investissons dans leurs compétences et leur épanouissement professionnel."
       },
       {
         "title": "Engagement client",
@@ -47,7 +47,7 @@
   },
   "history": {
     "badge": "Notre Histoire",
-    "title": "Une histoire de croissance et d'innovation",
+    "title": "36 ans de croissance et d'innovation",
     "subtitle": "Un parcours marqué par l'excellence et l'audace entrepreneuriale",
     "milestones": [
       {
