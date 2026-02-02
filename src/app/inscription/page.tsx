@@ -20,6 +20,7 @@ import {
   AlertCircle,
   CheckCircle
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const registerSchema = z.object({
   firstName: z.string().min(1, 'Le prénom est requis'),
@@ -41,6 +42,7 @@ export default function InscriptionPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const { t } = useTranslation('common')
 
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema)
@@ -81,10 +83,10 @@ export default function InscriptionPage() {
           router.refresh()
         }
       } else {
-        setError(result.error || 'Erreur lors de l\'inscription')
+        setError(result.error || t('auth.registerError'))
       }
     } catch (err) {
-      setError('Une erreur est survenue')
+      setError(t('ui.error'))
     } finally {
       setLoading(false)
     }
@@ -93,7 +95,7 @@ export default function InscriptionPage() {
   if (success) {
     return (
       <>
-        <SEO title="Inscription réussie" />
+        <SEO title={t('auth.registerSuccess')} />
         <section className="min-h-screen flex items-center justify-center py-20 px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -103,12 +105,12 @@ export default function InscriptionPage() {
             <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="h-10 w-10 text-green-600" />
             </div>
-            <h1 className="text-2xl font-bold text-muted-strong mb-4">Compte créé !</h1>
+            <h1 className="text-2xl font-bold text-muted-strong mb-4">{t('auth.accountCreatedTitle')}</h1>
             <p className="text-muted mb-6">
-              Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.
+              {t('auth.accountCreated')}. {t('auth.canNowLogin')}.
             </p>
             <Link href="/connexion" className="btn-primary">
-              Se connecter
+              {t('auth.login')}
             </Link>
           </motion.div>
         </section>
@@ -119,8 +121,8 @@ export default function InscriptionPage() {
   return (
     <>
       <SEO
-        title="Inscription"
-        description="Créez votre compte LLEDO Industries pour accéder à votre espace personnel."
+        title={t('auth.register')}
+        description={t('auth.registerSubtitle')}
       />
 
       <section className="min-h-screen flex items-center justify-center py-20 px-4">
@@ -135,8 +137,8 @@ export default function InscriptionPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="h-8 w-8 text-primary-600" />
               </div>
-              <h1 className="text-2xl font-bold text-muted-strong">Créer un compte</h1>
-              <p className="text-muted mt-2">Rejoignez LLEDO Industries</p>
+              <h1 className="text-2xl font-bold text-muted-strong">{t('auth.createAccount')}</h1>
+              <p className="text-muted mt-2">{t('auth.registerSubtitle')}</p>
             </div>
 
             {/* Error */}
@@ -153,7 +155,7 @@ export default function InscriptionPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <User className="h-4 w-4 inline mr-2" />
-                    Prénom *
+                    {t('auth.firstName')} *
                   </label>
                   <input
                     {...register('firstName')}
@@ -168,7 +170,7 @@ export default function InscriptionPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <User className="h-4 w-4 inline mr-2" />
-                    Nom *
+                    {t('auth.lastName')} *
                   </label>
                   <input
                     {...register('lastName')}
@@ -184,7 +186,7 @@ export default function InscriptionPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Mail className="h-4 w-4 inline mr-2" />
-                  Email *
+                  {t('auth.email')} *
                 </label>
                 <input
                   {...register('email')}
@@ -201,7 +203,7 @@ export default function InscriptionPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <Building2 className="h-4 w-4 inline mr-2" />
-                    Entreprise
+                    {t('auth.company')}
                   </label>
                   <input
                     {...register('company')}
@@ -213,7 +215,7 @@ export default function InscriptionPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <Phone className="h-4 w-4 inline mr-2" />
-                    Téléphone
+                    {t('auth.phone')}
                   </label>
                   <input
                     {...register('phone')}
@@ -227,7 +229,7 @@ export default function InscriptionPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Lock className="h-4 w-4 inline mr-2" />
-                  Mot de passe *
+                  {t('auth.password')} *
                 </label>
                 <input
                   {...register('password')}
@@ -243,7 +245,7 @@ export default function InscriptionPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Lock className="h-4 w-4 inline mr-2" />
-                  Confirmer le mot de passe *
+                  {t('auth.confirmPassword')} *
                 </label>
                 <input
                   {...register('confirmPassword')}
@@ -264,12 +266,12 @@ export default function InscriptionPage() {
                 {loading ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    Création...
+                    {t('auth.creating')}
                   </>
                 ) : (
                   <>
                     <UserPlus className="h-5 w-5" />
-                    Créer mon compte
+                    {t('auth.createAccount')}
                   </>
                 )}
               </button>
@@ -278,9 +280,9 @@ export default function InscriptionPage() {
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
               <p className="text-muted">
-                Déjà un compte ?{' '}
+                {t('auth.alreadyHaveAccountLogin').split('?')[0]}?{' '}
                 <Link href="/connexion" className="text-primary-600 hover:text-primary-700 font-medium">
-                  Se connecter
+                  {t('auth.login')}
                 </Link>
               </p>
             </div>

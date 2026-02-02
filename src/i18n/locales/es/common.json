@@ -131,7 +131,9 @@
     "loginSubtitle": "Inicie sesión para acceder a su cuenta",
     "registerSubtitle": "Únase a nuestra comunidad de clientes",
     "noAccountSignup": "¿No tiene cuenta? Regístrese",
-    "alreadyHaveAccountLogin": "¿Ya tiene cuenta? Inicie sesión"
+    "alreadyHaveAccountLogin": "¿Ya tiene cuenta? Inicie sesión",
+    "registerSuccess": "Registro exitoso",
+    "accountCreatedTitle": "¡Cuenta creada!"
   },
   "ui": {
     "loading": "Cargando...",

@@ -18,6 +18,7 @@ import {
   ArrowRight,
   Building2
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const loginSchema = z.object({
   email: z.string().email('Email invalide'),
@@ -33,7 +34,8 @@ export default function ConnexionPage() {
   const errorParam = searchParams.get('error')
   
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(errorParam === 'admin_required' ? 'Accès réservé aux administrateurs' : '')
+  const { t } = useTranslation('common')
+  const [error, setError] = useState(errorParam === 'admin_required' ? t('auth.adminRequired') : '')
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema)
@@ -51,7 +53,7 @@ export default function ConnexionPage() {
       })
 
       if (result?.error) {
-        setError('Email ou mot de passe incorrect')
+        setError(t('auth.invalidCredentials'))
       } else {
         // Get session to check user role
         const session = await getSession()
@@ -65,7 +67,7 @@ export default function ConnexionPage() {
         router.refresh()
       }
     } catch (err) {
-      setError('Une erreur est survenue')
+      setError(t('ui.error'))
     } finally {
       setLoading(false)
     }
@@ -74,8 +76,8 @@ export default function ConnexionPage() {
   return (
     <>
       <SEO
-        title="Connexion"
-        description="Connectez-vous à votre espace LLEDO Industries."
+        title={t('auth.login')}
+        description={t('auth.loginSubtitle')}
       />
 
       <section className="min-h-screen flex items-center justify-center py-20 px-4">
@@ -90,8 +92,8 @@ export default function ConnexionPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Building2 className="h-8 w-8 text-primary-600" />
               </div>
-              <h1 className="text-2xl font-bold text-muted-strong">Connexion</h1>
-              <p className="text-muted mt-2">Accédez à votre espace personnel</p>
+              <h1 className="text-2xl font-bold text-muted-strong">{t('auth.login')}</h1>
+              <p className="text-muted mt-2">{t('auth.loginSubtitle')}</p>
             </div>
 
             {/* Error */}
@@ -107,7 +109,7 @@ export default function ConnexionPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Mail className="h-4 w-4 inline mr-2" />
-                  Email
+                  {t('auth.email')}
                 </label>
                 <input
                   {...register('email')}
@@ -123,7 +125,7 @@ export default function ConnexionPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Lock className="h-4 w-4 inline mr-2" />
-                  Mot de passe
+                  {t('auth.password')}
                 </label>
                 <input
                   {...register('password')}
@@ -144,12 +146,12 @@ export default function ConnexionPage() {
                 {loading ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    Connexion...
+                    {t('auth.connecting')}
                   </>
                 ) : (
                   <>
                     <LogIn className="h-5 w-5" />
-                    Se connecter
+                    {t('auth.login')}
                   </>
                 )}
               </button>
@@ -158,9 +160,9 @@ export default function ConnexionPage() {
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
               <p className="text-muted">
-                Pas encore de compte ?{' '}
+                {t('auth.noAccountSignup').split('?')[0]}?{' '}
                 <Link href="/inscription" className="text-primary-600 hover:text-primary-700 font-medium">
-                  Créer un compte
+                  {t('auth.createAccount')}
                 </Link>
               </p>
             </div>

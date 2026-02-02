@@ -131,7 +131,9 @@
     "loginSubtitle": "Connectez-vous pour accéder à votre espace",
     "registerSubtitle": "Rejoignez notre communauté de clients",
     "noAccountSignup": "Pas encore de compte ? Inscrivez-vous",
-    "alreadyHaveAccountLogin": "Déjà un compte ? Connectez-vous"
+    "alreadyHaveAccountLogin": "Déjà un compte ? Connectez-vous",
+    "registerSuccess": "Inscription réussie",
+    "accountCreatedTitle": "Compte créé !"
   },
   "ui": {
     "loading": "Chargement...",

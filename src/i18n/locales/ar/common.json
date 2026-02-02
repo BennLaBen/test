@@ -131,7 +131,9 @@
     "loginSubtitle": "سجل الدخول للوصول إلى حسابك",
     "registerSubtitle": "انضم إلى مجتمع عملائنا",
     "noAccountSignup": "ليس لديك حساب؟ سجل الآن",
-    "alreadyHaveAccountLogin": "لديك حساب بالفعل؟ سجل الدخول"
+    "alreadyHaveAccountLogin": "لديك حساب بالفعل؟ سجل الدخول",
+    "registerSuccess": "تم التسجيل بنجاح",
+    "accountCreatedTitle": "تم إنشاء الحساب!"
   },
   "ui": {
     "loading": "جاري التحميل...",

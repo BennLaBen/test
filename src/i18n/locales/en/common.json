@@ -131,7 +131,9 @@
     "loginSubtitle": "Log in to access your account",
     "registerSubtitle": "Join our client community",
     "noAccountSignup": "Don't have an account? Sign up",
-    "alreadyHaveAccountLogin": "Already have an account? Log in"
+    "alreadyHaveAccountLogin": "Already have an account? Log in",
+    "registerSuccess": "Registration successful",
+    "accountCreatedTitle": "Account created!"
   },
   "ui": {
     "loading": "Loading...",
