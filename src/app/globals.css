@@ -255,8 +255,8 @@
     --section-overlay: linear-gradient(120deg, rgba(14, 165, 233, 0.15), rgba(2, 6, 23, 0));
     --theme-accent-start: #38bdf8;
     --theme-accent-end: #0ea5e9;
-    --text-muted: rgba(226, 232, 240, 0.7);
-    --text-muted-strong: rgba(226, 232, 240, 0.85);
+    --text-muted: rgba(226, 232, 240, 0.9);
+    --text-muted-strong: rgba(255, 255, 255, 0.95);
   }
 
   /* Mode sombre générique (utilisé par le ThemeToggle) */
@@ -280,8 +280,8 @@
     --section-overlay: linear-gradient(120deg, rgba(14, 165, 233, 0.15), rgba(2, 6, 23, 0));
     --theme-accent-start: #38bdf8;
     --theme-accent-end: #0ea5e9;
-    --text-muted: rgba(226, 232, 240, 0.7);
-    --text-muted-strong: rgba(226, 232, 240, 0.85);
+    --text-muted: rgba(226, 232, 240, 0.9);
+    --text-muted-strong: rgba(255, 255, 255, 0.95);
   }
 }
 

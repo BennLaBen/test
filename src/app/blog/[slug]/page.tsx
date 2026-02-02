@@ -379,11 +379,11 @@ export default function BlogPostPage() {
                   prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-6 prose-h2:border-l-4 prose-h2:border-primary-500 prose-h2:pl-3 prose-h2:bg-gradient-to-r prose-h2:from-primary-50 prose-h2:to-transparent dark:prose-h2:from-primary-950/20 prose-h2:py-2 prose-h2:rounded-r-lg
                   prose-h3:text-lg prose-h3:mb-2 prose-h3:mt-4 prose-h3:text-primary-700 dark:prose-h3:text-primary-400 prose-h3:flex prose-h3:items-center prose-h3:gap-2 prose-h3:before:content-['▸'] prose-h3:before:text-primary-500
                   prose-h4:text-base prose-h4:mb-2 prose-h4:mt-3 prose-h4:text-gray-900 dark:prose-h4:text-gray-100 prose-h4:font-semibold
-                  prose-p:text-sm prose-p:leading-[1.6] prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:mb-3
+                  prose-p:text-sm prose-p:leading-[1.6] prose-p:text-gray-800 dark:prose-p:text-gray-100 prose-p:mb-3
                   prose-a:text-primary-600 dark:prose-a:text-primary-400 prose-a:no-underline prose-a:font-semibold hover:prose-a:underline
                   prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-bold prose-strong:bg-yellow-100 dark:prose-strong:bg-yellow-900/30 prose-strong:px-1 prose-strong:rounded prose-strong:text-sm
                   prose-ul:my-3 prose-ul:space-y-1 prose-ul:list-none prose-ul:pl-0
-                  prose-li:text-sm prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-li:leading-relaxed prose-li:pl-6 prose-li:relative prose-li:before:content-['✓'] prose-li:before:absolute prose-li:before:left-0 prose-li:before:text-primary-500 prose-li:before:font-bold
+                  prose-li:text-sm prose-li:text-gray-800 dark:prose-li:text-gray-100 prose-li:leading-relaxed prose-li:pl-6 prose-li:relative prose-li:before:content-['✓'] prose-li:before:absolute prose-li:before:left-0 prose-li:before:text-blue-400 prose-li:before:font-bold
                   prose-blockquote:border-l-4 prose-blockquote:border-accent-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-accent-50 prose-blockquote:to-transparent dark:prose-blockquote:from-accent-950/20 prose-blockquote:py-2 prose-blockquote:pr-3 prose-blockquote:my-4 prose-blockquote:italic prose-blockquote:font-medium prose-blockquote:text-gray-800 dark:prose-blockquote:text-gray-200 prose-blockquote:shadow-sm prose-blockquote:rounded-r-lg prose-blockquote:text-sm
                   prose-code:bg-primary-100 dark:prose-code:bg-primary-900/30 prose-code:text-primary-700 dark:prose-code:text-primary-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:font-semibold prose-code:before:content-[''] prose-code:after:content-['']
                   prose-pre:bg-gray-900 dark:prose-pre:bg-gray-800 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:shadow-lg prose-pre:border prose-pre:border-gray-700 prose-pre:text-xs prose-pre:p-3
@@ -414,7 +414,7 @@ export default function BlogPostPage() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white m-0">Points clés de l'article</h3>
                 </div>
-                <div className="grid gap-3 text-sm text-gray-700 dark:text-gray-300">
+                <div className="grid gap-3 text-sm text-gray-800 dark:text-gray-100">
                   {post.tags && post.tags.slice(0, 5).map((tag, idx) => (
                     <motion.div 
                       key={idx}
@@ -459,7 +459,7 @@ export default function BlogPostPage() {
                     </motion.div>
                     <div>
                       <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-0.5">Expertise Technique</h3>
-                      <p className="text-xs text-gray-700 dark:text-gray-300">
+                      <p className="text-xs text-gray-800 dark:text-gray-100">
                         Accompagnement projets complexes
                       </p>
                     </div>
@@ -486,7 +486,7 @@ export default function BlogPostPage() {
                     </motion.div>
                     <div>
                       <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-0.5">Certifié EN 9100</h3>
-                      <p className="text-xs text-gray-700 dark:text-gray-300">
+                      <p className="text-xs text-gray-800 dark:text-gray-100">
                         Standards aéronautiques exigeants
                       </p>
                     </div>
