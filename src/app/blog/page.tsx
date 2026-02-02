@@ -194,7 +194,7 @@ export default function BlogPage() {
             >
               <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
                 <Star className="h-5 w-5 text-blue-300" />
-                <span className="font-black text-white text-sm uppercase tracking-widest">Articles à la une</span>
+                <span className="font-black text-white text-sm uppercase tracking-widest">{t('sections.featured')}</span>
               </div>
               <h2 className="text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
                 {t('sections.latestArticles')}
@@ -341,7 +341,7 @@ export default function BlogPage() {
           >
             <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
               <TrendingUp className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">Tous nos articles</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('sections.allArticlesBadge')}</span>
             </div>
             <h2 className="text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
               {t('sections.allArticles')}
@@ -385,13 +385,13 @@ export default function BlogPage() {
             </motion.div>
 
             <h3 className="text-2xl font-black text-white mb-4 uppercase">
-              Nos rédacteurs sont à l'usinage...
+              {t('empty.title')}
             </h3>
             <p className="text-gray-400 text-lg mb-2">
-              Les articles sont en cours de fabrication dans notre atelier éditorial.
+              {t('empty.subtitle')}
             </p>
             <p className="text-gray-500 text-sm mb-8">
-              Précision, qualité, délais respectés — même pour le contenu. 🔧
+              {t('empty.description')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -402,7 +402,7 @@ export default function BlogPage() {
                   whileTap={{ scale: 0.98 }}
                   style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
                 >
-                  <span>Nous contacter</span>
+                  <span>{t('empty.contactUs')}</span>
                   <ArrowRight className="h-4 w-4" />
                 </motion.div>
               </Link>
@@ -412,7 +412,7 @@ export default function BlogPage() {
                   whileHover={{ scale: 1.05, y: -2, borderColor: 'rgba(255,255,255,0.4)' }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Découvrir nos expertises</span>
+                  <span>{t('empty.discoverExpertises')}</span>
                 </motion.div>
               </Link>
             </div>

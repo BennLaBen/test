@@ -13,13 +13,17 @@
     }
   },
   "sections": {
+    "featured": "Featured Articles",
     "latestArticles": "Featured Articles",
+    "allArticlesBadge": "All Our Articles",
     "allArticles": "All Our Articles"
   },
-  "cardCta": "Read Article",
-  "emptyState": {
+  "empty": {
     "title": "Our writers are at the workbench...",
     "subtitle": "Articles are being crafted in our editorial workshop.",
-    "hint": "Precision, quality, deadlines met — even for content."
-  }
+    "description": "Precision, quality, deadlines met — even for content. 🔧",
+    "contactUs": "Contact Us",
+    "discoverExpertises": "Discover Our Expertise"
+  },
+  "cardCta": "Read Article"
 }

@@ -13,13 +13,17 @@
     }
   },
   "sections": {
+    "featured": "Artículos Destacados",
     "latestArticles": "Artículos Destacados",
+    "allArticlesBadge": "Todos Nuestros Artículos",
     "allArticles": "Todos Nuestros Artículos"
   },
-  "cardCta": "Leer Artículo",
-  "emptyState": {
+  "empty": {
     "title": "Nuestros redactores están en el taller...",
     "subtitle": "Los artículos se están elaborando en nuestro taller editorial.",
-    "hint": "Precisión, calidad, plazos cumplidos — incluso para el contenido."
-  }
+    "description": "Precisión, calidad, plazos cumplidos — incluso para el contenido. 🔧",
+    "contactUs": "Contáctenos",
+    "discoverExpertises": "Descubrir Nuestras Especialidades"
+  },
+  "cardCta": "Leer Artículo"
 }

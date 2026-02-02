@@ -13,13 +13,17 @@
     }
   },
   "sections": {
+    "featured": "Artigos em Destaque",
     "latestArticles": "Artigos em Destaque",
+    "allArticlesBadge": "Todos os Nossos Artigos",
     "allArticles": "Todos os Nossos Artigos"
   },
-  "cardCta": "Ler Artigo",
-  "emptyState": {
+  "empty": {
     "title": "Nossos redatores estão na oficina...",
     "subtitle": "Os artigos estão sendo elaborados em nossa oficina editorial.",
-    "hint": "Precisão, qualidade, prazos cumpridos — até para o conteúdo."
-  }
+    "description": "Precisão, qualidade, prazos cumpridos — até para o conteúdo. 🔧",
+    "contactUs": "Entre em Contato",
+    "discoverExpertises": "Descobrir Nossas Especialidades"
+  },
+  "cardCta": "Ler Artigo"
 }

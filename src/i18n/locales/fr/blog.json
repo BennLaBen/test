@@ -13,8 +13,17 @@
     }
   },
   "sections": {
+    "featured": "Articles à la une",
     "latestArticles": "Articles à la une",
+    "allArticlesBadge": "Tous nos articles",
     "allArticles": "Tous nos articles"
+  },
+  "empty": {
+    "title": "Nos rédacteurs sont à l'usinage...",
+    "subtitle": "Les articles sont en cours de fabrication dans notre atelier éditorial.",
+    "description": "Précision, qualité, délais respectés — même pour le contenu. 🔧",
+    "contactUs": "Nous contacter",
+    "discoverExpertises": "Découvrir nos expertises"
   },
   "cardCta": "Lire l'article"
 }
