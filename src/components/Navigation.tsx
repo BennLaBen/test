@@ -45,6 +45,31 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Bloquer le scroll du body quand le menu est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+      document.body.style.top = `-${window.scrollY}px`
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+    }
+  }, [isOpen])
+
   // Si on est sur la partie boutique, on n'affiche pas cette navigation
   if (pathname?.startsWith('/boutique')) return null
 
@@ -207,22 +232,23 @@ export function Navigation() {
             
             {/* Menu Hamburger - STYLE TONY STARK */}
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center rounded-lg p-2.5 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all"
-              style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)' }}
+              onTouchEnd={(e) => {
+                e.preventDefault()
+                setIsOpen(!isOpen)
+              }}
+              className="inline-flex items-center justify-center rounded-lg p-3 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all touch-manipulation"
+              style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)', WebkitTapHighlightColor: 'transparent' }}
               aria-expanded={isOpen}
+              aria-label="Menu principal"
             >
               <span className="sr-only">Ouvrir le menu principal</span>
-              <motion.div
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isOpen ? (
-                  <X className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Menu className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </motion.div>
+              {isOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -237,7 +263,7 @@ export function Navigation() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+                className="lg:hidden fixed inset-0 bg-black/70 z-[9998]" style={{ touchAction: 'none' }}
                 onClick={() => setIsOpen(false)}
               />
               
@@ -247,7 +273,7 @@ export function Navigation() {
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="lg:hidden fixed left-0 top-0 h-full w-full bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 z-[70] overflow-y-auto pb-safe"
+                className="lg:hidden fixed inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 z-[9999] overflow-y-auto overscroll-contain"
                 style={{ boxShadow: '0 0 100px rgba(59, 130, 246, 0.5)' }}
               >
               <motion.div 
@@ -259,19 +285,23 @@ export function Navigation() {
                 {/* Header moderne avec bouton fermer */}
                 <div className="flex items-center justify-between px-6 py-5 border-b border-blue-500/20">
                   <Logo size="small" />
-                  <motion.button
+                  <button
+                    type="button"
                     onClick={() => setIsOpen(false)}
-                    className="p-3 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 transition-all"
-                    style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
-                    whileHover={{ scale: 1.05, rotate: 90 }}
-                    whileTap={{ scale: 0.95 }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault()
+                      setIsOpen(false)
+                    }}
+                    className="p-3 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 active:scale-95 transition-all touch-manipulation"
+                    style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)', WebkitTapHighlightColor: 'transparent' }}
+                    aria-label="Fermer le menu"
                   >
                     <X className="h-6 w-6 text-white" />
-                  </motion.button>
+                  </button>
                 </div>
                 
                 {/* Contenu scrollable */}
-                <div className="flex-1 overflow-y-auto px-5 py-4">
+                <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4 pb-[env(safe-area-inset-bottom,20px)]">
                 {/* User Profile Section - DARK MODE */}
                 {isAuthenticated && user && (
                   <motion.div 
@@ -303,128 +333,74 @@ export function Navigation() {
                   </motion.div>
                 )}
 
-                {/* Navigation Links - Ultra moderne */}
-                <div className="space-y-4 mb-8">
-                  {navigation.map((item, index) => (
-                    <motion.div
-                      key={item.key}
-                      initial={{ opacity: 0, x: -50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.1 + index * 0.1, type: "spring" }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="group relative block"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <motion.div
-                          className={`relative px-6 py-5 rounded-2xl overflow-hidden ${
-                            isActive(item.href)
-                              ? 'bg-gradient-to-r from-blue-600 to-blue-500 border-2 border-blue-400/50'
-                              : 'bg-gray-800/30 border-2 border-gray-700/50 hover:border-blue-400/50'
-                          }`}
-                          whileHover={{ scale: 1.02, x: 10 }}
-                          whileTap={{ scale: 0.98 }}
-                          style={{
-                            ...(isActive(item.href) && {
-                              boxShadow: '0 0 30px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(255,255,255,0.1)'
-                            })
-                          }}
-                        >
-                          {/* Effet de scan */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                            initial={{ x: '-100%' }}
-                            animate={{ x: isActive(item.href) ? ['  -100%', '200%'] : '-100%' }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: isActive(item.href) ? Infinity : 0,
-                              ease: "linear" 
-                            }}
-                          />
-                          
-                          <span className={`relative z-10 text-lg font-black uppercase tracking-wider ${
-                            isActive(item.href) ? 'text-white' : 'text-gray-300 group-hover:text-white'
-                          }`}>
-                            {t(item.key)}
-                          </span>
-                          
-                          {/* Indicateur actif */}
-                          {isActive(item.href) && (
-                            <motion.div
-                              className="absolute right-4 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white"
-                              animate={{
-                                scale: [1, 1.3, 1],
-                                opacity: [1, 0.5, 1]
-                              }}
-                              transition={{ duration: 2, repeat: Infinity }}
-                            />
-                          )}
-                        </motion.div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Secondary Links - Moderne */}
-                <div className="grid grid-cols-2 gap-3 mb-6 pb-6 border-b border-blue-500/20">
-                  {secondaryNavigation.map((item, index) => (
-                    <motion.div
-                      key={item.key}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="block rounded-xl px-4 py-4 text-sm font-bold text-center text-white bg-gray-800/50 border border-gray-700 hover:border-blue-400/50 hover:bg-blue-600/20 transition-all active:scale-95"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {t(item.key)}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Auth Button - DARK MODE */}
-                {!isAuthenticated && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 }}
-                  >
+                {/* Navigation Links - Optimisé Mobile */}
+                <div className="space-y-3 mb-8">
+                  {navigation.map((item) => (
                     <Link
-                      href="/connexion"
+                      key={item.key}
+                      href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3 text-[15px] font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] transition-all hover:bg-blue-500/20"
+                      className={`block px-6 py-4 rounded-2xl transition-all active:scale-[0.98] touch-manipulation ${
+                        isActive(item.href)
+                          ? 'bg-gradient-to-r from-blue-600 to-blue-500 border-2 border-blue-400/50'
+                          : 'bg-gray-800/30 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/10'
+                      }`}
+                      style={{
+                        WebkitTapHighlightColor: 'transparent',
+                        ...(isActive(item.href) && {
+                          boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)'
+                        })
+                      }}
                     >
-                      <User className="h-5 w-5" />
-                      Connexion / Inscription
+                      <span className={`text-lg font-black uppercase tracking-wider ${
+                        isActive(item.href) ? 'text-white' : 'text-gray-300'
+                      }`}>
+                        {t(item.key)}
+                      </span>
+                      {isActive(item.href) && (
+                        <span className="float-right mt-1.5 w-3 h-3 rounded-full bg-white animate-pulse" />
+                      )}
                     </Link>
-                  </motion.div>
+                  ))}
+                </div>
+
+                {/* Secondary Links - Optimisé Mobile */}
+                <div className="grid grid-cols-2 gap-3 mb-6 pb-6 border-b border-blue-500/20">
+                  {secondaryNavigation.map((item) => (
+                    <Link
+                      key={item.key}
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block rounded-xl px-4 py-4 text-sm font-bold text-center text-white bg-gray-800/50 border border-gray-700 active:border-blue-400/50 active:bg-blue-600/20 transition-all active:scale-95 touch-manipulation"
+                      style={{ WebkitTapHighlightColor: 'transparent' }}
+                    >
+                      {t(item.key)}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Auth Button - Optimisé Mobile */}
+                {!isAuthenticated && (
+                  <Link
+                    href="/connexion"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-4 text-[15px] font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] active:bg-blue-500/20 transition-all touch-manipulation"
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
+                  >
+                    <User className="h-5 w-5" />
+                    Connexion / Inscription
+                  </Link>
                 )}
 
-                {/* CTA Button - TONY STARK */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.45 }}
+                {/* CTA Button - Optimisé Mobile */}
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center px-6 py-4 text-[15px] font-black uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl active:scale-[0.98] transition-all touch-manipulation"
+                  style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)', WebkitTapHighlightColor: 'transparent' }}
                 >
-                  <Link
-                    href="/contact"
-                    className="relative w-full flex items-center justify-center px-6 py-4 text-[15px] font-black uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl overflow-hidden active:scale-[0.98] transition-all"
-                    style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                      animate={{ x: ['-200%', '200%'] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      style={{ willChange: 'transform' }}
-                    />
-                    <span className="relative z-10">{t('nav.quote')}</span>
-                  </Link>
-                </motion.div>
+                  {t('nav.quote')}
+                </Link>
                 </div>
                 {/* Fin contenu scrollable */}
               </motion.div>
