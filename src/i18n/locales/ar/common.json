@@ -176,6 +176,33 @@
     "saving": "جاري الحفظ...",
     "saveChanges": "حفظ التغييرات"
   },
+  "contactForm": {
+    "subject": "الموضوع",
+    "selectSubject": "اختر موضوعاً",
+    "subjects": {
+      "contact": "طلب اتصال",
+      "information": "طلب معلومات",
+      "support": "الدعم الفني",
+      "partnership": "شراكة",
+      "other": "أخرى"
+    },
+    "message": "الرسالة",
+    "messagePlaceholder": "صف مشروعك أو طلبك...",
+    "consent": "أوافق على استخدام بياناتي لمعالجة طلبي وفقًا لـ",
+    "privacyPolicy": "سياسة الخصوصية",
+    "sending": "جاري الإرسال...",
+    "submit": "إرسال الطلب",
+    "success": "تم إرسال رسالتك. شكرًا، سنعود إليك خلال 24 ساعة.",
+    "error": "حدث خطأ. يرجى المحاولة مرة أخرى أو الاتصال بنا هاتفيًا.",
+    "errors": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "emailInvalid": "بريد إلكتروني غير صالح",
+      "subjectRequired": "الموضوع مطلوب",
+      "messageMinLength": "يجب أن تحتوي الرسالة على 10 أحرف على الأقل",
+      "consentRequired": "يجب قبول سياسة الخصوصية"
+    }
+  },
   "admin": {
     "panel": "لوحة الإدارة",
     "dashboard": "لوحة التحكم",

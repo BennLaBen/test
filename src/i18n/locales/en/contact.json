@@ -6,7 +6,8 @@
     "subtitle": "Our team of experts is at your disposal to answer your questions and support you in your projects."
   },
   "form": {
-    "title": "Get in Touch"
+    "title": "Get in Touch",
+    "subtitle": "Fill out this form and our team will get back to you as soon as possible."
   },
   "info": {
     "title": "Contact Information",
@@ -18,7 +19,7 @@
     "email": {
       "label": "Email",
       "value": "contact@mpeb13.com",
-      "response": "We respond promptly on weekdays"
+      "response": "Guaranteed response within 24h on weekdays"
     },
     "address": {
       "label": "Address",
@@ -29,10 +30,33 @@
   },
   "hours": {
     "title": "Opening Hours",
-    "weekdays": "Monday - Friday: 8:00am - 6:00pm CET",
-    "weekend": "Saturday - Sunday: Closed"
+    "weekdays": "Monday - Friday: 8:00am - 6:00pm",
+    "saturday": "Saturday: Closed",
+    "sunday": "Sunday: Closed"
+  },
+  "actions": {
+    "viewOnMap": "View on map",
+    "callNow": "Call now",
+    "sendEmail": "Send an email",
+    "openGoogleMaps": "Open in Google Maps",
+    "learnMore": "Learn more"
+  },
+  "companies": {
+    "title": "Our Group Companies",
+    "subtitle": "Contact the company that matches your needs directly",
+    "mpeb": "Precision machining",
+    "egi": "Engineering office",
+    "frem": "Industrial maintenance",
+    "mgp": "Sheet metal & boilermaking"
   },
   "map": {
-    "title": "Location"
+    "badge": "Find us",
+    "title": "Our Location"
+  },
+  "cta": {
+    "title": "Need our company brochure?",
+    "subtitle": "Download our complete documentation to discover all our capabilities.",
+    "downloadPdf": "Download PDF brochure",
+    "discoverExpertises": "Discover our expertise"
   }
 }

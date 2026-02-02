@@ -18,8 +18,10 @@ import {
   ChevronRight,
   Settings
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function EGIPage() {
+  const { t } = useTranslation('expertises')
   const [currentImage, setCurrentImage] = useState(0)
 
   const expertise = {
@@ -66,8 +68,8 @@ export default function EGIPage() {
   return (
     <>
       <SEO
-        title="EGI - Bureau d'études intégré"
-        description="Bureau d'études spécialisé en conception et optimisation de pièces aéronautiques. CAO/FAO 3D, calculs FEM, documentation technique."
+        title={t('pages.egi.seoTitle')}
+        description={t('pages.egi.seoDescription')}
         canonical="/societes/egi"
       />
 

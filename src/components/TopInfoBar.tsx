@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Building2, Wrench, Package, Phone, Users, Download, Newspaper } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 
 export function TopInfoBar() {
+  const { t } = useTranslation('common')
   const pathname = usePathname()
 
   // Ne rien afficher sur la boutique
@@ -14,31 +16,31 @@ export function TopInfoBar() {
   const quickLinks = [
     { 
       icon: Package, 
-      label: 'Produits Aerotools', 
+      label: t('topBar.products'), 
       href: '/aerotools',
       color: 'from-orange-500 to-orange-600'
     },
     { 
       icon: Phone, 
-      label: 'Contact', 
+      label: t('nav.contact'), 
       href: '/contact',
       color: 'from-primary-500 to-primary-600'
     },
     { 
       icon: Users, 
-      label: 'Recrutement', 
+      label: t('topBar.recruitment'), 
       href: '/carriere',
       color: 'from-amber-500 to-amber-600'
     },
     { 
       icon: Newspaper, 
-      label: 'Blog', 
+      label: t('nav.blog'), 
       href: '/blog',
       color: 'from-indigo-500 to-indigo-600'
     },
     { 
       icon: Download, 
-      label: 'Plaquette PDF', 
+      label: t('topBar.brochure'), 
       href: '/plaquette-lledo-industries.pdf',
       color: 'from-gray-500 to-gray-600',
       isDownload: true

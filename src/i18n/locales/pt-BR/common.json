@@ -176,6 +176,33 @@
     "saving": "Salvando...",
     "saveChanges": "Salvar alterações"
   },
+  "contactForm": {
+    "subject": "Assunto",
+    "selectSubject": "Selecione um assunto",
+    "subjects": {
+      "contact": "Contato",
+      "information": "Solicitação de informação",
+      "support": "Suporte técnico",
+      "partnership": "Parceria",
+      "other": "Outro"
+    },
+    "message": "Mensagem",
+    "messagePlaceholder": "Descreva seu projeto ou solicitação...",
+    "consent": "Aceito que meus dados sejam utilizados para processar minha solicitação de acordo com a",
+    "privacyPolicy": "política de privacidade",
+    "sending": "Enviando...",
+    "submit": "Enviar solicitação",
+    "success": "Sua mensagem foi enviada. Obrigado, retornaremos em 24 horas.",
+    "error": "Ocorreu um erro. Por favor, tente novamente ou entre em contato por telefone.",
+    "errors": {
+      "firstNameRequired": "O nome é obrigatório",
+      "lastNameRequired": "O sobrenome é obrigatório",
+      "emailInvalid": "Email inválido",
+      "subjectRequired": "O assunto é obrigatório",
+      "messageMinLength": "A mensagem deve ter pelo menos 10 caracteres",
+      "consentRequired": "Você deve aceitar a política de privacidade"
+    }
+  },
   "admin": {
     "panel": "Painel de administração",
     "dashboard": "Painel de controle",

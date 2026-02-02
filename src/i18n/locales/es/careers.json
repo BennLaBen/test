@@ -2,7 +2,69 @@
   "title": "Empleo - LLEDO Industries",
   "description": "Únase al equipo de LLEDO Industries y participe en la innovación del utillaje aeronáutico. Descubra nuestras ofertas de empleo.",
   "hero": {
+    "badge": "Únase a la aventura",
     "title": "Empleo en LLEDO Industries",
     "subtitle": "Únase a un equipo apasionado y participe en la innovación del utillaje aeronáutico y los equipos GSE."
+  },
+  "stats": {
+    "expertise": { "value": "Experiencia", "label": "Know-how reconocido" },
+    "team": { "value": "Equipo", "label": "Colaboradores comprometidos" },
+    "quality": { "value": "Calidad", "label": "Excelencia operacional" },
+    "evolution": { "value": "Evolución", "label": "Oportunidades de carrera" }
+  },
+  "apply": {
+    "title": "¿Listo para unirse a nosotros?",
+    "subtitle": "Postule en unos clics o contacte a nuestro equipo de RRHH",
+    "submitApplication": "Enviar mi candidatura",
+    "contactTeam": "Contactar al equipo",
+    "viewOffers": "Ver ofertas",
+    "applicationSent": "¡Candidatura enviada!",
+    "applicationSentMessage": "Nos pondremos en contacto con usted pronto.",
+    "quickApplication": "Candidatura rápida",
+    "yourName": "Su nombre completo",
+    "yourEmail": "Su email",
+    "desiredPosition": "Puesto deseado",
+    "spontaneousApplication": "Candidatura espontánea",
+    "yourMessage": "Su mensaje (motivación, disponibilidad...)",
+    "attachCV": "Adjuntar su CV (PDF, DOC)",
+    "sending": "Enviando...",
+    "sendApplication": "Enviar mi candidatura",
+    "error": "Ha ocurrido un error. Por favor, inténtelo de nuevo."
+  },
+  "culture": {
+    "badge": "Nuestra Cultura",
+    "title": "Nuestra cultura empresarial",
+    "subtitle": "Únase a un equipo apasionado por la excelencia y la innovación en el sector aeronáutico",
+    "items": [
+      { "title": "Innovación", "description": "Fomentamos la creatividad y la innovación para desarrollar soluciones técnicas de vanguardia." },
+      { "title": "Equipo", "description": "Trabajamos juntos en un entorno colaborativo y solidario." },
+      { "title": "Calidad", "description": "Nos comprometemos con la excelencia y la calidad en todos nuestros proyectos." },
+      { "title": "Formación", "description": "Invertimos en la formación y el desarrollo de nuestros colaboradores." }
+    ]
+  },
+  "benefits": {
+    "badge": "Beneficios",
+    "title": "Nuestros beneficios",
+    "subtitle": "Condiciones de trabajo óptimas para su desarrollo profesional",
+    "list": [
+      "Seguro médico de empresa",
+      "Previsión social",
+      "Vales de comida",
+      "Formación continua",
+      "Entorno de trabajo agradable",
+      "Ambiente acogedor"
+    ]
+  },
+  "jobs": {
+    "badge": "Ofertas de empleo",
+    "title": "Puestos disponibles",
+    "subtitle": "Descubra nuestras oportunidades de carrera y encuentre el puesto que le corresponde",
+    "loading": "Cargando ofertas...",
+    "noOffers": "No hay ofertas disponibles en este momento"
+  },
+  "contact": {
+    "title": "Candidatura espontánea",
+    "subtitle": "¿No encuentra el puesto que le corresponde? Envíenos su candidatura espontánea.",
+    "contactUs": "Contáctenos"
   }
 }

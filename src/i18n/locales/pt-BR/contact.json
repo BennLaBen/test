@@ -6,7 +6,8 @@
     "subtitle": "Nossa equipe de especialistas está à sua disposição para responder às suas perguntas e acompanhá-lo em seus projetos."
   },
   "form": {
-    "title": "Fale com Nossa Equipe"
+    "title": "Fale com Nossa Equipe",
+    "subtitle": "Preencha este formulário e nossa equipe entrará em contato o mais rápido possível."
   },
   "info": {
     "title": "Informações de Contato",
@@ -18,7 +19,7 @@
     "email": {
       "label": "Email",
       "value": "contact@mpeb13.com",
-      "response": "Respondemos rapidamente em dias úteis"
+      "response": "Resposta garantida em 24h em dias úteis"
     },
     "address": {
       "label": "Endereço",
@@ -29,10 +30,33 @@
   },
   "hours": {
     "title": "Horário de Funcionamento",
-    "weekdays": "Segunda - Sexta: 8:00 - 18:00 CET",
-    "weekend": "Sábado - Domingo: Fechado"
+    "weekdays": "Segunda - Sexta: 8:00 - 18:00",
+    "saturday": "Sábado: Fechado",
+    "sunday": "Domingo: Fechado"
+  },
+  "actions": {
+    "viewOnMap": "Ver no mapa",
+    "callNow": "Ligar agora",
+    "sendEmail": "Enviar um email",
+    "openGoogleMaps": "Abrir no Google Maps",
+    "learnMore": "Saiba mais"
+  },
+  "companies": {
+    "title": "Nossas Empresas do Grupo",
+    "subtitle": "Entre em contato diretamente com a empresa que corresponde às suas necessidades",
+    "mpeb": "Usinagem de precisão",
+    "egi": "Escritório de engenharia",
+    "frem": "Manutenção industrial",
+    "mgp": "Caldeiraria e chaparia"
   },
   "map": {
-    "title": "Localização"
+    "badge": "Encontre-nos",
+    "title": "Nossa Localização"
+  },
+  "cta": {
+    "title": "Precisa do nosso folheto comercial?",
+    "subtitle": "Baixe nossa documentação completa para descobrir todas as nossas capacidades.",
+    "downloadPdf": "Baixar folheto PDF",
+    "discoverExpertises": "Descobrir nossas especialidades"
   }
 }

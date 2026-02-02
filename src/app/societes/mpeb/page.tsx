@@ -71,8 +71,8 @@ export default function MPEBPage() {
   return (
     <>
       <SEO
-        title="MPEB - Usinage de précision aéronautique"
-        description="Spécialiste de l'usinage de précision pour l'aéronautique. Usinage 3, 4 et 5 axes, tournage et fraisage de haute précision."
+        title={t('pages.mpeb.seoTitle')}
+        description={t('pages.mpeb.seoDescription')}
         canonical="/societes/mpeb"
       />
 
@@ -143,7 +143,7 @@ export default function MPEBPage() {
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                       style={{ willChange: 'transform' }}
                     />
-                    <span className="relative z-10">Nous contacter</span>
+                    <span className="relative z-10">{t('pages.common.contactUs')}</span>
                     <ArrowRight className="h-6 w-6 relative z-10" />
                   </motion.div>
                 </Link>
@@ -200,7 +200,7 @@ export default function MPEBPage() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl font-bold text-muted-strong mb-6">
-                Notre expertise
+                {t('pages.common.ourExpertise')}
               </h2>
               <p className="text-muted text-lg leading-relaxed mb-8">
                 {expertise.description}
@@ -256,7 +256,7 @@ export default function MPEBPage() {
                   download
                   className="btn-primary inline-flex items-center gap-2 tech-border"
                 >
-                  Obtenir un devis
+                  {t('pages.common.getQuote')}
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </motion.div>
@@ -289,14 +289,14 @@ export default function MPEBPage() {
                 />
                 
                 <h3 className="text-2xl font-bold text-muted-strong mb-6 relative z-10">
-                  Capacités techniques
+                  {t('pages.common.technicalCapabilities')}
                 </h3>
 
                 <div className="space-y-4 relative z-10">
                   {[
-                    { icon: Factory, label: 'Capacité', value: expertise.capabilities.capacity },
-                    { icon: Target, label: 'Précision', value: expertise.capabilities.precision },
-                    { icon: Settings, label: 'Équipements', value: expertise.capabilities.machines }
+                    { icon: Factory, label: t('pages.common.capacity'), value: expertise.capabilities.capacity },
+                    { icon: Target, label: t('pages.common.precision'), value: expertise.capabilities.precision },
+                    { icon: Settings, label: t('pages.common.equipment'), value: expertise.capabilities.machines }
                   ].map((cap, idx) => (
                     <motion.div 
                       key={idx}
@@ -406,7 +406,7 @@ export default function MPEBPage() {
 
                 <div className="p-4 text-center">
                   <p className="text-sm text-muted">
-                    📸 Photos de l'atelier MPEB à venir
+                    📸 {t('pages.common.photosComingSoon')}
                   </p>
                 </div>
               </motion.div>
@@ -428,21 +428,21 @@ export default function MPEBPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-4xl">
-              Besoin d'un devis ou d'informations ?
+              {t('pages.common.needQuote')}
             </h2>
             <p className="mb-10 text-lg text-muted">
-              Notre équipe MPEB est à votre disposition pour répondre à vos besoins en usinage de précision.
+              {t('pages.mpeb.ctaDescription')}
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/contact" className="btn-primary inline-flex items-center gap-2 tech-border">
-                  Nous contacter
+                  {t('pages.common.contactUs')}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Toutes nos entreprises
+                  {t('pages.common.allCompanies')}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

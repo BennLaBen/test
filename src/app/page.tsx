@@ -1,11 +1,15 @@
+'use client'
+
 import { Hero } from '@/components/sections/Hero'
 import { Features } from '@/components/sections/Features'
 import { Process } from '@/components/sections/Process'
 import { CTA } from '@/components/sections/CTA'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
+import { useTranslation } from 'react-i18next'
 
 export default function HomePage() {
+  const { t } = useTranslation('common')
   const jsonLd = generateJsonLd({
     type: 'Organization',
     data: {
@@ -34,8 +38,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="LLEDO Industries - Ingénierie, Usinage & Maintenance | Aéronautique & Défense"
-        description="LLEDO Industries - Groupe industriel intégré : ingénierie, usinage de précision et maintenance pour l'aéronautique et la défense. 70 collaborateurs, certifié ISO 9001 & EN 9100."
+        title={t('seo.home.title')}
+        description={t('seo.home.description')}
         canonical="/"
         jsonLd={jsonLd}
       />

@@ -6,8 +6,10 @@ import { SEO } from '@/components/SEO'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { BarChart3, ThumbsUp, Star, Award, Shield, Target } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useTranslation } from 'react-i18next'
 
 export default function CasClientsPage() {
+  const { t } = useTranslation('testimonials')
   const { isAuthenticated } = useAuth()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showReviewForm, setShowReviewForm] = useState(false)
@@ -24,34 +26,34 @@ export default function CasClientsPage() {
   
   // Points forts qualitatifs
   const satisfactionStats = [
-    { label: 'Satisfaction client', value: 'Excellence', icon: ThumbsUp, color: 'from-green-500 to-green-600' },
-    { label: 'Recommandation', value: 'Confiance', icon: Star, color: 'from-amber-500 to-amber-600' },
-    { label: 'Respect des délais', value: 'Fiabilité', icon: Target, color: 'from-blue-500 to-blue-600' },
-    { label: 'Qualité produits', value: 'Expertise', icon: Award, color: 'from-purple-500 to-purple-600' },
+    { label: t('page.stats.satisfaction.label'), value: t('page.stats.satisfaction.value'), icon: ThumbsUp, color: 'from-green-500 to-green-600' },
+    { label: t('page.stats.recommendation.label'), value: t('page.stats.recommendation.value'), icon: Star, color: 'from-amber-500 to-amber-600' },
+    { label: t('page.stats.deadlines.label'), value: t('page.stats.deadlines.value'), icon: Target, color: 'from-blue-500 to-blue-600' },
+    { label: t('page.stats.quality.label'), value: t('page.stats.quality.value'), icon: Award, color: 'from-purple-500 to-purple-600' },
   ]
 
   // Critères qualitatifs
   const surveys = [
-    { question: 'Qualité de nos prestations', score: 'Excellent', max: '' },
-    { question: 'Réactivité et communication', score: 'Très bien', max: '' },
-    { question: 'Expertise technique', score: 'Excellent', max: '' },
-    { question: 'Rapport qualité/prix', score: 'Très bien', max: '' },
-    { question: 'Support après-vente', score: 'Très bien', max: '' },
+    { question: t('page.surveys.quality.question'), score: t('page.surveys.quality.score') },
+    { question: t('page.surveys.reactivity.question'), score: t('page.surveys.reactivity.score') },
+    { question: t('page.surveys.expertise.question'), score: t('page.surveys.expertise.score') },
+    { question: t('page.surveys.value.question'), score: t('page.surveys.value.score') },
+    { question: t('page.surveys.support.question'), score: t('page.surveys.support.score') },
   ]
 
   // Secteurs d'activité
   const sectors = [
-    { name: 'Aéronautique', clients: 'Nombreux clients', satisfaction: 'Excellence' },
-    { name: 'Défense', clients: 'Partenaires réguliers', satisfaction: 'Confiance' },
-    { name: 'Industrie', clients: 'Relations durables', satisfaction: 'Fiabilité' },
-    { name: 'Énergie', clients: 'Collaboration établie', satisfaction: 'Qualité' },
+    { name: t('page.sectors.aeronautics.name'), clients: t('page.sectors.aeronautics.clients'), satisfaction: t('page.sectors.aeronautics.satisfaction') },
+    { name: t('page.sectors.defense.name'), clients: t('page.sectors.defense.clients'), satisfaction: t('page.sectors.defense.satisfaction') },
+    { name: t('page.sectors.industry.name'), clients: t('page.sectors.industry.clients'), satisfaction: t('page.sectors.industry.satisfaction') },
+    { name: t('page.sectors.energy.name'), clients: t('page.sectors.energy.clients'), satisfaction: t('page.sectors.energy.satisfaction') },
   ]
   
   return (
     <>
       <SEO
-        title="Ils nous font confiance - Satisfaction Client"
-        description="Découvrez les résultats de nos enquêtes de satisfaction client et pourquoi plus de 150 entreprises nous font confiance."
+        title={t('page.seoTitle')}
+        description={t('page.seoDescription')}
         canonical="/cas-clients"
       />
 
@@ -89,7 +91,7 @@ export default function CasClientsPage() {
                 <ThumbsUp className="h-5 w-5 text-blue-300" />
               </motion.div>
               <span className="font-black text-white text-sm uppercase tracking-widest">
-                Satisfaction Client
+                {t('page.heroBadge')}
               </span>
             </motion.div>
 
@@ -103,7 +105,7 @@ export default function CasClientsPage() {
                 lineHeight: '1.2'
               }}
             >
-              Ils nous font confiance
+              {t('page.heroTitle')}
             </motion.h1>
             
             <motion.p
@@ -112,7 +114,7 @@ export default function CasClientsPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-gray-300 max-w-3xl mx-auto mb-10"
             >
-              Des clients dans de nombreux secteurs d'activité nous font confiance pour leurs projets critiques
+              {t('page.heroSubtitle')}
             </motion.p>
 
             {/* Bouton d'action Rapide - Donner un avis */}
@@ -126,7 +128,7 @@ export default function CasClientsPage() {
                 className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase tracking-wider rounded-lg transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_50px_rgba(37,99,235,0.5)] hover:scale-105"
               >
                 <Star className="h-5 w-5 fill-current" />
-                {isAuthenticated ? 'Évaluer nos services' : 'Se connecter pour évaluer'}
+                {isAuthenticated ? t('page.evaluateServices') : t('page.loginToEvaluate')}
                 <div className="absolute inset-0 rounded-lg ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
               </button>
             </motion.div>
@@ -162,10 +164,10 @@ export default function CasClientsPage() {
                 textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
               }}
             >
-              Résultats de nos enquêtes
+              {t('page.surveysTitle')}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              Basés sur plus de 200 réponses collectées en 2024
+              {t('page.surveysSubtitle')}
             </p>
           </motion.div>
 
@@ -233,10 +235,10 @@ export default function CasClientsPage() {
               <BarChart3 className="h-12 w-12 text-blue-500" />
             </motion.div>
             <h2 className="mb-4 text-4xl font-black text-white uppercase tracking-tight lg:text-5xl">
-              Analyse Détaillée
+              {t('page.analysisTitle')}
             </h2>
             <p className="text-blue-400 font-mono text-sm uppercase tracking-widest">
-              Données temps réel • Base de sondage 2024
+              {t('page.analysisSubtitle')}
             </p>
           </motion.div>
 
@@ -295,10 +297,10 @@ export default function CasClientsPage() {
               <Shield className="h-8 w-8 text-blue-400" />
             </div>
             <h3 className="mb-4 text-2xl font-black text-white uppercase">
-              Confidentialité garantie
+              {t('page.confidentialityTitle')}
             </h3>
             <p className="leading-relaxed text-gray-400">
-              Par respect pour nos clients et pour des raisons de confidentialité, nous ne mentionnons pas publiquement les noms de nos partenaires. Les données ci-dessous sont issues d'enquêtes réelles menées auprès de nos clients actifs.
+              {t('page.confidentialityText')}
             </p>
           </motion.div>
         </div>
@@ -323,10 +325,10 @@ export default function CasClientsPage() {
             <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase"
               style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}
             >
-              Nos secteurs d'activité
+              {t('page.sectorsTitle')}
             </h2>
             <p className="text-gray-300 text-lg">
-              Clients confidentiels dans 4 secteurs stratégiques
+              {t('page.sectorsSubtitle')}
             </p>
           </motion.div>
 
@@ -354,7 +356,7 @@ export default function CasClientsPage() {
                   <h3 className="mb-4 text-2xl font-black text-white uppercase">{sector.name}</h3>
                   <div className="inline-flex items-center gap-2 rounded-full bg-green-500/20 backdrop-blur-sm border border-green-400/30 px-5 py-2.5 text-sm font-bold text-green-300">
                     <ThumbsUp className="h-4 w-4" />
-                    {sector.satisfaction} satisfaits
+                    {sector.satisfaction} {t('page.satisfied')}
                   </div>
                 </div>
               </motion.div>

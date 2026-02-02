@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { MessageSquare } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 
 export function FloatingCTA() {
+  const { t } = useTranslation('common')
   const pathname = usePathname()
   
   // Ne rien afficher sur la boutique
@@ -23,7 +25,7 @@ export function FloatingCTA() {
         className="flex items-center gap-2 px-5 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold rounded-full shadow-2xl shadow-primary-500/40 hover:shadow-primary-500/60 active:scale-95 transition-all"
       >
         <MessageSquare className="h-5 w-5" />
-        <span className="text-sm">Obtenir un devis</span>
+        <span className="text-sm">{t('nav.quote')}</span>
       </Link>
     </motion.div>
   )

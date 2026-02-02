@@ -19,8 +19,10 @@ import {
   Factory,
   Wrench
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function MGPPage() {
+  const { t } = useTranslation('expertises')
   const [currentImage, setCurrentImage] = useState(0)
 
   const expertise = {
@@ -68,8 +70,8 @@ export default function MGPPage() {
   return (
     <>
       <SEO
-        title="MGP - Tôlerie & chaudronnerie de précision"
-        description="Spécialiste de la tôlerie fine et chaudronnerie. Découpe laser, pliage, soudage TIG/MIG, assemblage de précision."
+        title={t('pages.mgp.seoTitle')}
+        description={t('pages.mgp.seoDescription')}
         canonical="/societes/mgp"
       />
 

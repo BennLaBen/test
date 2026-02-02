@@ -1,4 +1,15 @@
 {
+  "seo": {
+    "home": {
+      "title": "LLEDO Industries - Ingénierie, Usinage & Maintenance | Aéronautique & Défense",
+      "description": "LLEDO Industries - Groupe industriel intégré : ingénierie, usinage de précision et maintenance pour l'aéronautique et la défense. 70 collaborateurs, certifié ISO 9001 & EN 9100."
+    }
+  },
+  "topBar": {
+    "products": "Produits Aerotools",
+    "recruitment": "Recrutement",
+    "brochure": "Plaquette PDF"
+  },
   "nav": {
     "home": "Accueil",
     "expertises": "Le groupe LLEDO",
@@ -19,6 +30,15 @@
     "subheadline": "Ingénierie, usinage de précision et maintenance industrielle pour l'aéronautique et la défense depuis 1989. Un collectif d'experts réunissant MPEB, EGI, FREM et MGP pour piloter vos projets de bout en bout.",
     "ctaPrimary": "Nous contacter",
     "ctaSecondary": "Découvrir nos entreprises",
+    "discoverEntities": "Découvrir nos entités",
+    "discover": "Découvrir",
+    "scroll": "Scroll",
+    "companies": {
+      "mpeb": { "desc": "Usinage de précision", "detail": "Fabrication de pièces unitaires" },
+      "egi": { "desc": "Bureau d'études", "detail": "Ingénierie intégrée" },
+      "frem": { "desc": "Maintenance", "detail": "Réactivité et interchangeabilité" },
+      "mgp": { "desc": "Tôlerie chaudronnerie", "detail": "Usinage 3 à 5 axes" }
+    },
     "badges": {
       "compliance": "Fabrication d'outillage et intégration industrielle",
       "experience": "Interchangeabilité des composants",
@@ -39,6 +59,12 @@
   "features": {
     "title": "Pourquoi choisir LLEDO Industries ?",
     "subtitle": "Une expertise technique reconnue et un engagement qualité pour répondre à vos besoins industriels.",
+    "stats": {
+      "team": { "label": "Équipe experte", "value": "Savoir-faire" },
+      "capacity": { "label": "Capacité industrielle", "value": "Production" },
+      "reach": { "label": "Rayonnement", "value": "International" },
+      "quality": { "label": "Engagement qualité", "value": "Excellence" }
+    },
         "list": [
       {
         "title": "Conformité normative",
@@ -175,6 +201,33 @@
     "emailCannotBeChanged": "L'email ne peut pas être modifié",
     "saving": "Enregistrement...",
     "saveChanges": "Enregistrer les modifications"
+  },
+  "contactForm": {
+    "subject": "Sujet",
+    "selectSubject": "Sélectionnez un sujet",
+    "subjects": {
+      "contact": "Prise de contact",
+      "information": "Demande d'information",
+      "support": "Support technique",
+      "partnership": "Partenariat",
+      "other": "Autre"
+    },
+    "message": "Message",
+    "messagePlaceholder": "Décrivez votre projet ou votre demande...",
+    "consent": "J'accepte que mes données soient utilisées pour traiter ma demande conformément à la",
+    "privacyPolicy": "politique de confidentialité",
+    "sending": "Envoi...",
+    "submit": "Envoyer la demande",
+    "success": "Votre message a été envoyé. Merci, nous revenons vers vous sous 24h.",
+    "error": "Une erreur est survenue. Merci de réessayer ou de nous contacter par téléphone.",
+    "errors": {
+      "firstNameRequired": "Le prénom est requis",
+      "lastNameRequired": "Le nom est requis",
+      "emailInvalid": "Email invalide",
+      "subjectRequired": "Le sujet est requis",
+      "messageMinLength": "Le message doit contenir au moins 10 caractères",
+      "consentRequired": "Vous devez accepter la politique de confidentialité"
+    }
   },
   "admin": {
     "panel": "Panneau d'administration",

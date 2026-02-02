@@ -121,6 +121,40 @@
     "title": "Besoin d'un partenaire industriel complet ?",
     "subtitle": "Contactez-nous pour discuter de votre projet et découvrir comment nos expertises peuvent répondre à vos besoins.",
     "button": "Demander un devis"
+  },
+  "pages": {
+    "common": {
+      "contactUs": "Nous contacter",
+      "getQuote": "Obtenir un devis",
+      "ourExpertise": "Notre expertise",
+      "technicalCapabilities": "Capacités techniques",
+      "capacity": "Capacité",
+      "precision": "Précision",
+      "equipment": "Équipements",
+      "photosComingSoon": "Photos de l'atelier à venir",
+      "needQuote": "Besoin d'un devis ou d'informations ?",
+      "allCompanies": "Toutes nos entreprises"
+    },
+    "mpeb": {
+      "seoTitle": "MPEB - Usinage de précision aéronautique",
+      "seoDescription": "Spécialiste de l'usinage de précision pour l'aéronautique. Usinage 3, 4 et 5 axes, tournage et fraisage de haute précision.",
+      "ctaDescription": "Notre équipe MPEB est à votre disposition pour répondre à vos besoins en usinage de précision."
+    },
+    "egi": {
+      "seoTitle": "EGI - Bureau d'études et ingénierie",
+      "seoDescription": "Bureau d'études spécialisé en conception mécanique, calculs de structures et développement de solutions sur mesure.",
+      "ctaDescription": "Notre équipe EGI est à votre disposition pour répondre à vos besoins en ingénierie."
+    },
+    "frem": {
+      "seoTitle": "FREM - Maintenance industrielle et installation",
+      "seoDescription": "Maintenance préventive et curative, installation d'équipements sur site et support technique pour l'industrie.",
+      "ctaDescription": "Notre équipe FREM est à votre disposition pour répondre à vos besoins en maintenance."
+    },
+    "mgp": {
+      "seoTitle": "MGP - Tôlerie, chaudronnerie et assemblage",
+      "seoDescription": "Spécialiste en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques.",
+      "ctaDescription": "Notre équipe MGP est à votre disposition pour répondre à vos besoins en tôlerie et chaudronnerie."
+    }
   }
 }
 

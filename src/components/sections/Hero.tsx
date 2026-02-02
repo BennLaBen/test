@@ -39,10 +39,10 @@ export function Hero() {
   
   // Sociétés avec leurs vraies URLs
   const companies = [
-    { id: 'mpeb', name: 'MPEB', desc: 'Usinage de précision', detail: 'Fabrication de pièces unitaires', color: 'from-blue-600 to-blue-800', icon: '⚙️' },
-    { id: 'egi', name: 'EGI', desc: "Bureau d'études", detail: 'Ingénierie intégrée', color: 'from-purple-600 to-purple-800', icon: '💡' },
-    { id: 'frem', name: 'FREM', desc: 'Maintenance', detail: 'Réactivité et interchangeabilité', color: 'from-orange-600 to-orange-800', icon: '🔧' },
-    { id: 'mgp', name: 'MGP', desc: 'Tôlerie chaudronnerie', detail: 'Usinage 3 à 5 axes', color: 'from-gray-600 to-gray-800', icon: '🏭' },
+    { id: 'mpeb', name: 'MPEB', desc: t('hero.companies.mpeb.desc'), detail: t('hero.companies.mpeb.detail'), color: 'from-blue-600 to-blue-800', icon: '⚙️' },
+    { id: 'egi', name: 'EGI', desc: t('hero.companies.egi.desc'), detail: t('hero.companies.egi.detail'), color: 'from-purple-600 to-purple-800', icon: '💡' },
+    { id: 'frem', name: 'FREM', desc: t('hero.companies.frem.desc'), detail: t('hero.companies.frem.detail'), color: 'from-orange-600 to-orange-800', icon: '🔧' },
+    { id: 'mgp', name: 'MGP', desc: t('hero.companies.mgp.desc'), detail: t('hero.companies.mgp.detail'), color: 'from-gray-600 to-gray-800', icon: '🏭' },
   ]
 
   return (
@@ -320,7 +320,7 @@ export function Hero() {
                     <Zap className="h-5 w-5 text-blue-300" />
                   </motion.div>
                   <span className="font-black text-white text-sm uppercase tracking-widest">
-                    Découvrir nos entités
+                    {t('hero.discoverEntities')}
                   </span>
                 </motion.div>
               </motion.div>
@@ -414,7 +414,7 @@ export function Hero() {
                             boxShadow: '0 0 20px rgba(255, 255, 255, 0.3)'
                           }}
                         >
-                          <span className="text-sm uppercase tracking-wider">Découvrir</span>
+                          <span className="text-sm uppercase tracking-wider">{t('hero.discover')}</span>
                           <motion.div
                             animate={{ x: [0, 5, 0] }}
                             transition={{ duration: 1, repeat: Infinity }}
@@ -454,7 +454,7 @@ export function Hero() {
       >
         <motion.div className="flex flex-col items-center gap-2">
           <span className="text-xs font-bold text-white/60 uppercase tracking-widest">
-            Scroll
+            {t('hero.scroll')}
           </span>
           <motion.div
             animate={{ y: [0, 12, 0] }}

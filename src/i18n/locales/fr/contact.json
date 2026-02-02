@@ -6,7 +6,8 @@
     "subtitle": "Notre équipe d'experts est à votre disposition pour répondre à vos questions et vous accompagner dans vos projets."
   },
   "form": {
-    "title": "Échangez avec notre équipe"
+    "title": "Échangez avec notre équipe",
+    "subtitle": "Remplissez ce formulaire et notre équipe vous répondra dans les plus brefs délais."
   },
   "info": {
     "title": "Informations de contact",
@@ -30,10 +31,33 @@
   "hours": {
     "title": "Horaires d'ouverture",
     "weekdays": "Lundi - Vendredi : 8h00 - 18h00",
-    "weekend": "Samedi - Dimanche : Fermé"
+    "saturday": "Samedi : Fermé",
+    "sunday": "Dimanche : Fermé"
+  },
+  "actions": {
+    "viewOnMap": "Voir sur la carte",
+    "callNow": "Appeler maintenant",
+    "sendEmail": "Envoyer un email",
+    "openGoogleMaps": "Ouvrir dans Google Maps",
+    "learnMore": "En savoir plus"
+  },
+  "companies": {
+    "title": "Nos sociétés du groupe",
+    "subtitle": "Contactez directement la société correspondant à vos besoins",
+    "mpeb": "Usinage de précision",
+    "egi": "Bureau d'études",
+    "frem": "Maintenance industrielle",
+    "mgp": "Tôlerie & chaudronnerie"
   },
   "map": {
-    "title": "Localisation"
+    "badge": "Nous trouver",
+    "title": "Notre localisation"
+  },
+  "cta": {
+    "title": "Besoin de notre plaquette commerciale ?",
+    "subtitle": "Téléchargez notre documentation complète pour découvrir toutes nos capacités.",
+    "downloadPdf": "Télécharger la plaquette PDF",
+    "discoverExpertises": "Découvrir nos expertises"
   }
 }
 

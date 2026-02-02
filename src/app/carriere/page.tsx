@@ -102,7 +102,7 @@ export default function CareersPage() {
       }, 3000)
     } catch (error) {
       console.error('Application error:', error)
-      alert('Une erreur est survenue. Veuillez réessayer.')
+      alert(t('apply.error'))
     } finally {
       setIsSubmitting(false)
     }
@@ -129,39 +129,14 @@ export default function CareersPage() {
     fetchJobs()
   }, [])
 
-  const culture = [
-    {
-      title: "Innovation",
-      description: "Nous encourageons la créativité et l'innovation pour développer des solutions techniques de pointe."
-    },
-    {
-      title: "Équipe",
-      description: "Nous travaillons ensemble dans un environnement collaboratif et bienveillant."
-    },
-    {
-      title: "Qualité",
-      description: "Nous nous engageons pour l'excellence et la qualité dans tous nos projets."
-    },
-    {
-      title: "Formation",
-      description: "Nous investissons dans la formation et le développement de nos collaborateurs."
-    }
-  ]
-
-  const benefits = [
-    "Mutuelle d'entreprise",
-    "Prévoyance",
-    "Ticket restaurant",
-    "Formation continue",
-    "Cadre de travail agréable",
-    "Ambiance chaleureuse"
-  ]
+  const culture = t('culture.items', { returnObjects: true }) as { title: string; description: string }[]
+  const benefits = t('benefits.list', { returnObjects: true }) as string[]
 
   const stats = [
-    { value: "Expertise", label: "Savoir-faire reconnu" },
-    { value: "Équipe", label: "Collaborateurs engagés" },
-    { value: "Qualité", label: "Excellence opérationnelle" },
-    { value: "Évolution", label: "Opportunités de carrière" }
+    { value: t('stats.expertise.value'), label: t('stats.expertise.label') },
+    { value: t('stats.team.value'), label: t('stats.team.label') },
+    { value: t('stats.quality.value'), label: t('stats.quality.label') },
+    { value: t('stats.evolution.value'), label: t('stats.evolution.label') }
   ]
   
   return (
@@ -193,7 +168,7 @@ export default function CareersPage() {
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
                 <Rocket className="h-5 w-5 text-blue-300" />
               </motion.div>
-              <span className="font-black text-white text-sm uppercase tracking-widest">Rejoignez l'aventure</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('hero.badge')}</span>
             </motion.div>
             
             <motion.h1 
@@ -262,10 +237,10 @@ export default function CareersPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase mb-2" style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.3)' }}>
-                Prêt à nous rejoindre ?
+                {t('apply.title')}
               </h2>
               <p className="text-blue-200 text-sm sm:text-base">
-                Postulez en quelques clics ou contactez notre équipe RH
+                {t('apply.subtitle')}
               </p>
             </motion.div>
 
@@ -291,7 +266,7 @@ export default function CareersPage() {
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                   />
                   <Upload className="h-5 w-5 relative z-10" />
-                  <span className="relative z-10">Déposer ma candidature</span>
+                  <span className="relative z-10">{t('apply.submitApplication')}</span>
                 </motion.button>
 
                 {/* Bouton Secondaire - Contacter l'équipe */}
@@ -302,7 +277,7 @@ export default function CareersPage() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Mail className="h-5 w-5" />
-                  <span>Contacter l'équipe</span>
+                  <span>{t('apply.contactTeam')}</span>
                 </motion.a>
 
                 {/* Lien vers les offres */}
@@ -311,7 +286,7 @@ export default function CareersPage() {
                   className="text-blue-200 hover:text-white text-sm font-semibold flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4 touch-manipulation"
                   whileHover={{ x: 5 }}
                 >
-                  <span>Voir les offres</span>
+                  <span>{t('apply.viewOffers')}</span>
                   <ArrowRight className="h-4 w-4" />
                 </motion.button>
               </motion.div>
@@ -338,13 +313,13 @@ export default function CareersPage() {
                     >
                       <CheckCircle className="h-10 w-10 text-white" />
                     </motion.div>
-                    <h3 className="text-2xl font-black text-white mb-2">Candidature envoyée !</h3>
-                    <p className="text-blue-200">Nous reviendrons vers vous rapidement.</p>
+                    <h3 className="text-2xl font-black text-white mb-2">{t('apply.applicationSent')}</h3>
+                    <p className="text-blue-200">{t('apply.applicationSentMessage')}</p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleApplicationSubmit} className="space-y-4">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-xl font-black text-white uppercase">Candidature rapide</h3>
+                      <h3 className="text-xl font-black text-white uppercase">{t('apply.quickApplication')}</h3>
                       <button
                         type="button"
                         onClick={() => setShowApplicationForm(false)}
@@ -360,7 +335,7 @@ export default function CareersPage() {
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
                         <input
                           type="text"
-                          placeholder="Votre nom complet"
+                          placeholder={t('apply.yourName')}
                           required
                           value={applicationData.name}
                           onChange={(e) => setApplicationData({ ...applicationData, name: e.target.value })}
@@ -373,7 +348,7 @@ export default function CareersPage() {
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
                         <input
                           type="email"
-                          placeholder="Votre email"
+                          placeholder={t('apply.yourEmail')}
                           required
                           value={applicationData.email}
                           onChange={(e) => setApplicationData({ ...applicationData, email: e.target.value })}
@@ -391,8 +366,8 @@ export default function CareersPage() {
                         onChange={(e) => setApplicationData({ ...applicationData, position: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 appearance-none"
                       >
-                        <option value="" className="bg-gray-800">Poste souhaité</option>
-                        <option value="spontanee" className="bg-gray-800">Candidature spontanée</option>
+                        <option value="" className="bg-gray-800">{t('apply.desiredPosition')}</option>
+                        <option value="spontanee" className="bg-gray-800">{t('apply.spontaneousApplication')}</option>
                         {jobs.map(job => (
                           <option key={job.id} value={job.title} className="bg-gray-800">{job.title}</option>
                         ))}
@@ -403,7 +378,7 @@ export default function CareersPage() {
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-blue-300" />
                       <textarea
-                        placeholder="Votre message (motivation, disponibilité...)"
+                        placeholder={t('apply.yourMessage')}
                         rows={3}
                         value={applicationData.message}
                         onChange={(e) => setApplicationData({ ...applicationData, message: e.target.value })}
@@ -416,7 +391,7 @@ export default function CareersPage() {
                       <label className="flex items-center justify-center gap-3 w-full py-4 bg-white/5 border-2 border-dashed border-white/30 rounded-xl cursor-pointer hover:bg-white/10 hover:border-white/50 transition-all touch-manipulation">
                         <FileText className="h-5 w-5 text-blue-300" />
                         <span className="text-blue-200 font-medium">
-                          {applicationData.cv ? applicationData.cv.name : 'Joindre votre CV (PDF, DOC)'}
+                          {applicationData.cv ? applicationData.cv.name : t('apply.attachCV')}
                         </span>
                         <input
                           type="file"
@@ -439,12 +414,12 @@ export default function CareersPage() {
                       {isSubmitting ? (
                         <>
                           <div className="animate-spin h-5 w-5 border-2 border-blue-900 border-t-transparent rounded-full" />
-                          <span>Envoi en cours...</span>
+                          <span>{t('apply.sending')}</span>
                         </>
                       ) : (
                         <>
                           <Send className="h-5 w-5" />
-                          <span>Envoyer ma candidature</span>
+                          <span>{t('apply.sendApplication')}</span>
                         </>
                       )}
                     </motion.button>
@@ -476,13 +451,13 @@ export default function CareersPage() {
           >
             <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
               <Heart className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">Notre Culture</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('culture.badge')}</span>
             </div>
             <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
-              Notre culture d'entreprise
+              {t('culture.title')}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              Rejoignez une équipe passionnée par l'excellence et l'innovation dans le secteur aéronautique
+              {t('culture.subtitle')}
             </p>
           </motion.div>
 
@@ -606,13 +581,13 @@ export default function CareersPage() {
           >
             <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
               <Award className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">Avantages</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('benefits.badge')}</span>
             </div>
             <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
-              Nos avantages
+              {t('benefits.title')}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              Des conditions de travail optimales pour votre épanouissement professionnel
+              {t('benefits.subtitle')}
             </p>
           </motion.div>
 
@@ -670,13 +645,13 @@ export default function CareersPage() {
           >
             <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
               <Briefcase className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">Offres d'emploi</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('jobs.badge')}</span>
             </div>
             <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
-              Postes disponibles
+              {t('jobs.title')}
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              Découvrez nos opportunités de carrière et trouvez le poste qui vous correspond
+              {t('jobs.subtitle')}
             </p>
           </motion.div>
 
@@ -684,12 +659,12 @@ export default function CareersPage() {
             {loadingJobs ? (
               <div className="text-center py-12">
                 <div className="animate-spin h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
-                <p className="text-gray-400">Chargement des offres...</p>
+                <p className="text-gray-400">{t('jobs.loading')}</p>
               </div>
             ) : jobs.length === 0 ? (
               <div className="text-center py-12 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl">
                 <Briefcase className="h-12 w-12 text-gray-500 mx-auto mb-4" />
-                <p className="text-gray-400">Aucune offre disponible pour le moment</p>
+                <p className="text-gray-400">{t('jobs.noOffers')}</p>
               </div>
             ) : (
               jobs.map((job, index) => (
@@ -803,10 +778,10 @@ export default function CareersPage() {
               </motion.div>
               
               <h2 className="mb-6 text-4xl font-black text-white lg:text-5xl uppercase" style={{ textShadow: '0 0 20px rgba(59, 130, 246, 0.8)' }}>
-                Candidature spontanée
+                {t('contact.title')}
               </h2>
               <p className="mb-8 text-xl text-gray-300">
-                Vous ne trouvez pas le poste qui vous correspond ? Envoyez-nous votre candidature spontanée.
+                {t('contact.subtitle')}
               </p>
               
               <div className="space-y-6 mb-10">
@@ -852,7 +827,7 @@ export default function CareersPage() {
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                       style={{ willChange: 'transform' }}
                     />
-                    <span className="relative z-10">Nous contacter</span>
+                    <span className="relative z-10">{t('contact.contactUs')}</span>
                     <ArrowRight className="h-6 w-6 relative z-10" />
                   </motion.div>
                 </Link>

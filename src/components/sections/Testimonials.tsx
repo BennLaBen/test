@@ -254,7 +254,7 @@ export function Testimonials({
                 </div>
                 {testimonial.project && (
                   <div className="text-xs text-muted mt-2 italic">
-                    Projet : {testimonial.project}
+                    {t('reviewForm.project')} : {testimonial.project}
                   </div>
                 )}
               </div>
@@ -276,12 +276,12 @@ export function Testimonials({
             {isAuthenticated ? (
               <>
                 <MessageSquarePlus className="h-5 w-5" />
-                Laisser un avis
+                {t('reviewForm.leaveReview')}
               </>
             ) : (
               <>
                 <Lock className="h-5 w-5" />
-                Se connecter pour laisser un avis
+                {t('reviewForm.loginToReview')}
               </>
             )}
           </button>
@@ -310,18 +310,18 @@ export function Testimonials({
                   <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 mb-4">
                     <Star className="h-8 w-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-muted-strong mb-2">Merci {user?.firstName} !</h3>
+                  <h3 className="text-2xl font-bold text-muted-strong mb-2">{t('reviewForm.thankYou')} {user?.firstName} !</h3>
                   <p className="text-muted">
-                    Votre avis a été soumis avec succès. Il sera publié après validation par notre équipe.
+                    {t('reviewForm.submittedMessage')}
                   </p>
                 </div>
               ) : (
                 <>
-                  <h3 className="text-2xl font-bold text-muted-strong mb-6">Partagez votre expérience</h3>
+                  <h3 className="text-2xl font-bold text-muted-strong mb-6">{t('reviewForm.shareExperience')}</h3>
                   <form onSubmit={handleSubmitReview} className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-muted-strong mb-2">
-                        Votre note
+                        {t('reviewForm.yourRating')}
                       </label>
                       <div className="flex gap-2">
                         {[1, 2, 3, 4, 5].map((rating) => (
@@ -345,7 +345,7 @@ export function Testimonials({
 
                     <div>
                       <label className="block text-sm font-medium text-muted-strong mb-2">
-                        Secteur d'activité
+                        {t('reviewForm.sector')}
                       </label>
                       <select
                         value={reviewData.sector}
@@ -360,7 +360,7 @@ export function Testimonials({
 
                     <div>
                       <label className="block text-sm font-medium text-muted-strong mb-2">
-                        Votre avis
+                        {t('reviewForm.yourReview')}
                       </label>
                       <textarea
                         required
@@ -368,7 +368,7 @@ export function Testimonials({
                         onChange={(e) => setReviewData({ ...reviewData, content: e.target.value })}
                         rows={5}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-muted-strong focus:ring-2 focus:ring-primary-500"
-                        placeholder="Partagez votre expérience avec LLEDO Industries..."
+                        placeholder={t('reviewForm.placeholder')}
                       />
                     </div>
 
@@ -378,14 +378,14 @@ export function Testimonials({
                         disabled={isSubmitting}
                         className="btn-primary flex-1 disabled:opacity-50"
                       >
-                        {isSubmitting ? 'Envoi en cours...' : 'Publier mon avis'}
+                        {isSubmitting ? t('reviewForm.sending') : t('reviewForm.publish')}
                       </button>
                       <button
                         type="button"
                         onClick={() => setShowReviewForm(false)}
                         className="btn-secondary"
                       >
-                        Annuler
+                        {t('reviewForm.cancel')}
                       </button>
                     </div>
                   </form>

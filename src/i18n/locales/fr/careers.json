@@ -2,8 +2,70 @@
   "title": "Carrières - LLEDO Industries",
   "description": "Rejoignez l'équipe LLEDO Industries et participez à l'innovation dans l'outillage aéronautique. Découvrez nos offres d'emploi.",
   "hero": {
+    "badge": "Rejoignez l'aventure",
     "title": "Carrières chez LLEDO Industries",
     "subtitle": "Rejoignez une équipe passionnée et participez à l'innovation dans l'outillage aéronautique et les équipements GSE."
+  },
+  "stats": {
+    "expertise": { "value": "Expertise", "label": "Savoir-faire reconnu" },
+    "team": { "value": "Équipe", "label": "Collaborateurs engagés" },
+    "quality": { "value": "Qualité", "label": "Excellence opérationnelle" },
+    "evolution": { "value": "Évolution", "label": "Opportunités de carrière" }
+  },
+  "apply": {
+    "title": "Prêt à nous rejoindre ?",
+    "subtitle": "Postulez en quelques clics ou contactez notre équipe RH",
+    "submitApplication": "Déposer ma candidature",
+    "contactTeam": "Contacter l'équipe",
+    "viewOffers": "Voir les offres",
+    "applicationSent": "Candidature envoyée !",
+    "applicationSentMessage": "Nous reviendrons vers vous rapidement.",
+    "quickApplication": "Candidature rapide",
+    "yourName": "Votre nom complet",
+    "yourEmail": "Votre email",
+    "desiredPosition": "Poste souhaité",
+    "spontaneousApplication": "Candidature spontanée",
+    "yourMessage": "Votre message (motivation, disponibilité...)",
+    "attachCV": "Joindre votre CV (PDF, DOC)",
+    "sending": "Envoi en cours...",
+    "sendApplication": "Envoyer ma candidature",
+    "error": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "culture": {
+    "badge": "Notre Culture",
+    "title": "Notre culture d'entreprise",
+    "subtitle": "Rejoignez une équipe passionnée par l'excellence et l'innovation dans le secteur aéronautique",
+    "items": [
+      { "title": "Innovation", "description": "Nous encourageons la créativité et l'innovation pour développer des solutions techniques de pointe." },
+      { "title": "Équipe", "description": "Nous travaillons ensemble dans un environnement collaboratif et bienveillant." },
+      { "title": "Qualité", "description": "Nous nous engageons pour l'excellence et la qualité dans tous nos projets." },
+      { "title": "Formation", "description": "Nous investissons dans la formation et le développement de nos collaborateurs." }
+    ]
+  },
+  "benefits": {
+    "badge": "Avantages",
+    "title": "Nos avantages",
+    "subtitle": "Des conditions de travail optimales pour votre épanouissement professionnel",
+    "list": [
+      "Mutuelle d'entreprise",
+      "Prévoyance",
+      "Ticket restaurant",
+      "Formation continue",
+      "Cadre de travail agréable",
+      "Ambiance chaleureuse"
+    ]
+  },
+  "jobs": {
+    "badge": "Offres d'emploi",
+    "title": "Postes disponibles",
+    "subtitle": "Découvrez nos opportunités de carrière et trouvez le poste qui vous correspond",
+    "loading": "Chargement des offres...",
+    "noOffers": "Aucune offre disponible pour le moment"
+  },
+  "contact": {
+    "title": "Candidature spontanée",
+    "subtitle": "Vous ne trouvez pas le poste qui vous correspond ? Envoyez-nous votre candidature spontanée.",
+    "contactUs": "Nous contacter"
   }
 }
 

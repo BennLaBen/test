@@ -68,10 +68,10 @@ export function Features() {
 
   // Points forts qualitatifs
   const stats = [
-    { label: 'Équipe experte', value: 'Savoir-faire', icon: Users, color: 'from-blue-500 to-blue-600', progress: 100 },
-    { label: 'Capacité industrielle', value: 'Production', icon: Factory, color: 'from-purple-500 to-purple-600', progress: 100 },
-    { label: 'Rayonnement', value: 'International', icon: Globe, color: 'from-green-500 to-green-600', progress: 100 },
-    { label: 'Engagement qualité', value: 'Excellence', icon: Target, color: 'from-amber-500 to-amber-600', progress: 100 },
+    { label: t('features.stats.team.label'), value: t('features.stats.team.value'), icon: Users, color: 'from-blue-500 to-blue-600', progress: 100 },
+    { label: t('features.stats.capacity.label'), value: t('features.stats.capacity.value'), icon: Factory, color: 'from-purple-500 to-purple-600', progress: 100 },
+    { label: t('features.stats.reach.label'), value: t('features.stats.reach.value'), icon: Globe, color: 'from-green-500 to-green-600', progress: 100 },
+    { label: t('features.stats.quality.label'), value: t('features.stats.quality.value'), icon: Target, color: 'from-amber-500 to-amber-600', progress: 100 },
   ]
 
   return (

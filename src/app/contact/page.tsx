@@ -40,7 +40,7 @@ export default function ContactPage() {
           {t('info.address.country')}
         </>
       ),
-      action: 'Voir sur la carte',
+      action: t('actions.viewOnMap'),
       href: '#map',
       color: 'from-blue-500 to-blue-600'
     },
@@ -56,7 +56,7 @@ export default function ContactPage() {
           <span className="text-sm">{t('info.phone.hours')}</span>
         </>
       ),
-      action: 'Appeler maintenant',
+      action: t('actions.callNow'),
       href: 'tel:+33442029674',
       color: 'from-green-500 to-green-600'
     },
@@ -69,21 +69,21 @@ export default function ContactPage() {
             contact@mpeb13.com
           </a>
           <br />
-          <span className="text-sm">Réponse garantie sous 24h en semaine</span>
+          <span className="text-sm">{t('info.email.response')}</span>
         </>
       ),
-      action: 'Envoyer un email',
+      action: t('actions.sendEmail'),
       href: 'mailto:contact@mpeb13.com',
       color: 'from-purple-500 to-purple-600'
     },
     {
       icon: Clock,
-      title: 'Horaires d\'ouverture',
+      title: t('hours.title'),
       content: (
         <>
-          Lundi - Vendredi : 8h00 - 18h00<br />
-          Samedi : Fermé<br />
-          Dimanche : Fermé
+          {t('hours.weekdays')}<br />
+          {t('hours.saturday')}<br />
+          {t('hours.sunday')}
         </>
       ),
       action: null,
@@ -93,10 +93,10 @@ export default function ContactPage() {
   ]
 
   const companies = [
-    { id: 'mpeb', name: 'MPEB', icon: Factory, tagline: 'Usinage de précision', color: 'from-blue-600 to-blue-800' },
-    { id: 'egi', name: 'EGI', icon: Lightbulb, tagline: 'Bureau d\'études', color: 'from-purple-600 to-purple-800' },
-    { id: 'frem', name: 'FREM', icon: Wrench, tagline: 'Maintenance industrielle', color: 'from-orange-600 to-orange-800' },
-    { id: 'mgp', name: 'MGP', icon: Settings, tagline: 'Tôlerie & chaudronnerie', color: 'from-gray-600 to-gray-800' },
+    { id: 'mpeb', name: 'MPEB', icon: Factory, tagline: t('companies.mpeb'), color: 'from-blue-600 to-blue-800' },
+    { id: 'egi', name: 'EGI', icon: Lightbulb, tagline: t('companies.egi'), color: 'from-purple-600 to-purple-800' },
+    { id: 'frem', name: 'FREM', icon: Wrench, tagline: t('companies.frem'), color: 'from-orange-600 to-orange-800' },
+    { id: 'mgp', name: 'MGP', icon: Settings, tagline: t('companies.mgp'), color: 'from-gray-600 to-gray-800' },
   ]
 
   return (
@@ -189,7 +189,7 @@ export default function ContactPage() {
                 {t('form.title')}
               </h2>
               <p className="text-gray-300 mb-8 text-lg">
-                Remplissez ce formulaire et notre équipe vous répondra dans les plus brefs délais.
+                {t('form.subtitle')}
               </p>
               <div className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group" style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)' }}>
                 <motion.div
@@ -317,10 +317,10 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl font-bold text-muted-strong mb-4">
-              Nos sociétés du groupe
+              {t('companies.title')}
             </h2>
             <p className="text-muted max-w-2xl mx-auto">
-              Contactez directement la société correspondant à vos besoins
+              {t('companies.subtitle')}
             </p>
           </motion.div>
 
@@ -376,7 +376,7 @@ export default function ContactPage() {
                         className="flex items-center gap-2 text-sm font-semibold"
                         whileHover={{ x: 5 }}
                       >
-                        En savoir plus
+                        {t('actions.learnMore')}
                         <ArrowRight className="h-4 w-4" />
                       </motion.div>
                     </div>
@@ -408,10 +408,10 @@ export default function ContactPage() {
           >
             <div className="mb-4 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
               <MapPin className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">Nous trouver</span>
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('map.badge')}</span>
             </div>
             <h2 className="text-3xl font-black text-white lg:text-4xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
-              Notre localisation
+              {t('map.title')}
             </h2>
           </motion.div>
 
@@ -466,7 +466,7 @@ export default function ContactPage() {
                   <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                   </svg>
-                  <span>Ouvrir dans Google Maps</span>
+                  <span>{t('actions.openGoogleMaps')}</span>
                   <ArrowRight className="h-4 w-4" />
                 </motion.a>
               </div>
@@ -488,10 +488,10 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="mb-6 text-3xl font-bold text-muted-strong lg:text-4xl">
-              Besoin de notre plaquette commerciale ?
+              {t('cta.title')}
             </h2>
             <p className="mb-10 text-lg text-muted">
-              Téléchargez notre documentation complète pour découvrir toutes nos capacités.
+              {t('cta.subtitle')}
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
@@ -500,13 +500,13 @@ export default function ContactPage() {
                   download
                   className="btn-primary inline-flex items-center gap-2 tech-border"
                 >
-                  Télécharger la plaquette PDF
+                  {t('cta.downloadPdf')}
                   <ArrowRight className="h-5 w-5" />
                 </a>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/nos-expertises" className="btn-secondary inline-flex items-center gap-2 tech-border">
-                  Découvrir nos expertises
+                  {t('cta.discoverExpertises')}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>

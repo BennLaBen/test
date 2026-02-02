@@ -2,7 +2,69 @@
   "title": "Careers - LLEDO Industries",
   "description": "Join the LLEDO Industries team and participate in aerospace tooling innovation. Discover our job opportunities.",
   "hero": {
+    "badge": "Join the adventure",
     "title": "Careers at LLEDO Industries",
     "subtitle": "Join a passionate team and participate in aerospace tooling and GSE equipment innovation."
+  },
+  "stats": {
+    "expertise": { "value": "Expertise", "label": "Recognized know-how" },
+    "team": { "value": "Team", "label": "Engaged collaborators" },
+    "quality": { "value": "Quality", "label": "Operational excellence" },
+    "evolution": { "value": "Growth", "label": "Career opportunities" }
+  },
+  "apply": {
+    "title": "Ready to join us?",
+    "subtitle": "Apply in a few clicks or contact our HR team",
+    "submitApplication": "Submit my application",
+    "contactTeam": "Contact the team",
+    "viewOffers": "View offers",
+    "applicationSent": "Application sent!",
+    "applicationSentMessage": "We will get back to you shortly.",
+    "quickApplication": "Quick application",
+    "yourName": "Your full name",
+    "yourEmail": "Your email",
+    "desiredPosition": "Desired position",
+    "spontaneousApplication": "Spontaneous application",
+    "yourMessage": "Your message (motivation, availability...)",
+    "attachCV": "Attach your CV (PDF, DOC)",
+    "sending": "Sending...",
+    "sendApplication": "Send my application",
+    "error": "An error occurred. Please try again."
+  },
+  "culture": {
+    "badge": "Our Culture",
+    "title": "Our company culture",
+    "subtitle": "Join a team passionate about excellence and innovation in the aerospace sector",
+    "items": [
+      { "title": "Innovation", "description": "We encourage creativity and innovation to develop cutting-edge technical solutions." },
+      { "title": "Team", "description": "We work together in a collaborative and supportive environment." },
+      { "title": "Quality", "description": "We are committed to excellence and quality in all our projects." },
+      { "title": "Training", "description": "We invest in the training and development of our employees." }
+    ]
+  },
+  "benefits": {
+    "badge": "Benefits",
+    "title": "Our benefits",
+    "subtitle": "Optimal working conditions for your professional development",
+    "list": [
+      "Company health insurance",
+      "Provident fund",
+      "Meal vouchers",
+      "Continuous training",
+      "Pleasant work environment",
+      "Friendly atmosphere"
+    ]
+  },
+  "jobs": {
+    "badge": "Job offers",
+    "title": "Available positions",
+    "subtitle": "Discover our career opportunities and find the position that suits you",
+    "loading": "Loading offers...",
+    "noOffers": "No offers available at the moment"
+  },
+  "contact": {
+    "title": "Spontaneous application",
+    "subtitle": "Can't find the position that suits you? Send us your spontaneous application.",
+    "contactUs": "Contact us"
   }
 }

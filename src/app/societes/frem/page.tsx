@@ -19,8 +19,10 @@ import {
   Settings,
   Factory
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function FREMPage() {
+  const { t } = useTranslation('expertises')
   const [currentImage, setCurrentImage] = useState(0)
 
   const expertise = {
@@ -67,8 +69,8 @@ export default function FREMPage() {
   return (
     <>
       <SEO
-        title="FREM - Maintenance industrielle"
-        description="Spécialiste de la maintenance préventive et corrective. Interventions 24/7, révision d'équipements, dépannage d'urgence."
+        title={t('pages.frem.seoTitle')}
+        description={t('pages.frem.seoDescription')}
         canonical="/societes/frem"
       />
 

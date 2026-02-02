@@ -1,7 +1,59 @@
 {
-  "title": "Témoignages clients",
-  "subtitle": "Ils nous font confiance pour leurs projets critiques",
-  "filterAll": "Tous les secteurs",
+  "title": "Client testimonials",
+  "subtitle": "They trust us for their critical projects",
+  "page": {
+    "seoTitle": "They trust us - Customer Satisfaction",
+    "seoDescription": "Discover the results of our customer satisfaction surveys and why over 150 companies trust us.",
+    "heroBadge": "Customer Satisfaction",
+    "heroTitle": "They trust us",
+    "heroSubtitle": "Clients in many industries trust us for their critical projects",
+    "evaluateServices": "Evaluate our services",
+    "loginToEvaluate": "Login to evaluate",
+    "surveysTitle": "Survey results",
+    "surveysSubtitle": "Based on over 200 responses collected in 2024",
+    "analysisTitle": "Detailed Analysis",
+    "analysisSubtitle": "Real-time data • 2024 survey base",
+    "confidentialityTitle": "Guaranteed confidentiality",
+    "confidentialityText": "Out of respect for our clients and for confidentiality reasons, we do not publicly mention the names of our partners. The data below comes from real surveys conducted with our active clients.",
+    "sectorsTitle": "Our business sectors",
+    "sectorsSubtitle": "Confidential clients in 4 strategic sectors",
+    "satisfied": "satisfied",
+    "stats": {
+      "satisfaction": { "label": "Customer satisfaction", "value": "Excellence" },
+      "recommendation": { "label": "Recommendation", "value": "Trust" },
+      "deadlines": { "label": "Meeting deadlines", "value": "Reliability" },
+      "quality": { "label": "Product quality", "value": "Expertise" }
+    },
+    "surveys": {
+      "quality": { "question": "Quality of our services", "score": "Excellent" },
+      "reactivity": { "question": "Responsiveness and communication", "score": "Very good" },
+      "expertise": { "question": "Technical expertise", "score": "Excellent" },
+      "value": { "question": "Value for money", "score": "Very good" },
+      "support": { "question": "After-sales support", "score": "Very good" }
+    },
+    "sectors": {
+      "aeronautics": { "name": "Aeronautics", "clients": "Many clients", "satisfaction": "Excellence" },
+      "defense": { "name": "Defense", "clients": "Regular partners", "satisfaction": "Trust" },
+      "industry": { "name": "Industry", "clients": "Long-term relationships", "satisfaction": "Reliability" },
+      "energy": { "name": "Energy", "clients": "Established collaboration", "satisfaction": "Quality" }
+    }
+  },
+  "reviewForm": {
+    "thankYou": "Thank you",
+    "submittedMessage": "Your review has been submitted successfully. It will be published after validation by our team.",
+    "shareExperience": "Share your experience",
+    "yourRating": "Your rating",
+    "sector": "Business sector",
+    "yourReview": "Your review",
+    "placeholder": "Share your experience with LLEDO Industries...",
+    "sending": "Sending...",
+    "publish": "Publish my review",
+    "cancel": "Cancel",
+    "leaveReview": "Leave a review",
+    "loginToReview": "Login to leave a review",
+    "project": "Project"
+  },
+  "filterAll": "All sectors",
   "sectors": [
     {
       "id": "aeronautique",
