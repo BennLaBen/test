@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import { z } from 'zod'
+import { rateLimit, rateLimitResponse } from '@/lib/rate-limit'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'Le prénom est requis'),
@@ -13,30 +16,28 @@ const contactSchema = z.object({
   consent: z.boolean().refine(val => val === true, 'Vous devez accepter la politique de confidentialité'),
 })
 
-export const runtime = 'nodejs'
-
 export async function POST(request: NextRequest) {
+  const { success, remaining } = rateLimit(request, 5, 300000)
+  
+  if (!success) {
+    return rateLimitResponse(remaining)
+  }
+
   try {
     const body = await request.json()
-    
-    // Validate the form data
     const validatedData = contactSchema.parse(body)
     
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY missing')
+      return NextResponse.json(
+        { success: false, message: 'Service email non configuré' },
+        { status: 503 }
+      )
+    }
 
-    // Email content
-    const mailOptions = {
-      from: process.env.SMTP_FROM || 'noreply@lledo-industries.com',
-      to: process.env.CONTACT_EMAIL || 'contact@lledo-industries.com',
+    await resend.emails.send({
+      from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
+      to: process.env.CONTACT_EMAIL || 'contact@mpeb13.com',
       subject: `Nouveau message de contact - ${validatedData.subject}`,
       html: `
         <h2>Nouveau message de contact</h2>
@@ -50,14 +51,10 @@ export async function POST(request: NextRequest) {
         <hr>
         <p><em>Message envoyé depuis le formulaire de contact du site LLEDO Industries</em></p>
       `,
-    }
+    })
 
-    // Send email
-    await transporter.sendMail(mailOptions)
-
-    // Send confirmation email to user
-    const confirmationOptions = {
-      from: process.env.SMTP_FROM || 'noreply@lledo-industries.com',
+    await resend.emails.send({
+      from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
       to: validatedData.email,
       subject: 'Confirmation de réception - LLEDO Industries',
       html: `
@@ -69,13 +66,14 @@ export async function POST(request: NextRequest) {
         <hr>
         <p><em>Ce message a été envoyé automatiquement, merci de ne pas y répondre.</em></p>
       `,
-    }
-
-    await transporter.sendMail(confirmationOptions)
+    })
 
     return NextResponse.json(
       { success: true, message: 'Message envoyé avec succès' },
-      { status: 200 }
+      { 
+        status: 200,
+        headers: { 'X-RateLimit-Remaining': remaining.toString() }
+      }
     )
   } catch (error) {
     console.error('Contact form error:', error)

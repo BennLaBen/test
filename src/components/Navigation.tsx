@@ -109,22 +109,43 @@ export function Navigation() {
             {/* Auth Button/User Menu */}
             {isAuthenticated && user ? (
               <div className="relative group">
-                <button className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-sm font-bold">
-                    {(user.firstName || user.email || '?').charAt(0)}
+                <button className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-500/30">
+                    {(user.firstName || user.email || '?').charAt(0).toUpperCase()}
                   </div>
-                  <span className="text-sm font-medium text-muted-strong">{user.firstName || user.email}</span>
+                  <span className="text-sm font-semibold text-white">{user.firstName || user.email}</span>
                 </button>
                 
                 {/* Dropdown menu */}
-                <div className="absolute right-0 top-full mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-2">
-                  <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-700">
-                    <p className="text-sm font-medium text-muted-strong">{user.firstName} {user.lastName}</p>
-                    <p className="text-xs text-muted">{user.email}</p>
+                <div className="absolute right-0 top-full mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all bg-gray-900 rounded-xl shadow-2xl border border-blue-500/30 p-2" style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.3)' }}>
+                  <div className="px-3 py-2 border-b border-blue-500/20">
+                    <p className="text-sm font-bold text-white">{user.firstName} {user.lastName}</p>
+                    <p className="text-xs text-gray-400">{user.email}</p>
+                    {user.role === 'ADMIN' && (
+                      <span className="inline-flex items-center px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                        Administrateur
+                      </span>
+                    )}
                   </div>
+                  {user.role === 'ADMIN' && (
+                    <Link
+                      href="/admin"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors mt-1"
+                    >
+                      <User className="h-4 w-4" />
+                      Tableau de bord
+                    </Link>
+                  )}
+                  <Link
+                    href="/espace-client/profil"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    <User className="h-4 w-4" />
+                    Mon profil
+                  </Link>
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors mt-1"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-1"
                   >
                     <LogOut className="h-4 w-4" />
                     Déconnexion

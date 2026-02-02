@@ -72,12 +72,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      // Première connexion : stocker les données de l'utilisateur
       if (user) {
         token.role = user.role
         token.firstName = user.firstName
         token.lastName = user.lastName
       }
+      
+      // Mise à jour de session demandée (après modification du profil)
+      if (trigger === 'update' && token.sub) {
+        const freshUser = await prisma.user.findUnique({
+          where: { id: token.sub },
+          select: { firstName: true, lastName: true, role: true }
+        })
+        if (freshUser) {
+          token.firstName = freshUser.firstName
+          token.lastName = freshUser.lastName
+          token.role = freshUser.role
+        }
+      }
+      
       return token
     },
     async session({ session, token }) {
