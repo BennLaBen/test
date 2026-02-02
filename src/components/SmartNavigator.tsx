@@ -87,12 +87,12 @@ export function SmartNavigator() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [sections])
 
-  // Scroll smooth vers une section
+  // Scroll smooth vers une section (utilise scroll-margin-top CSS)
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 100
-      window.scrollTo({ top, behavior: 'smooth' })
+      // Le scroll-margin-top est géré par CSS via --anchor-offset
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 

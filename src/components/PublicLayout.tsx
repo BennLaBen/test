@@ -24,7 +24,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
       <SmartNavigator />
       <SectionPagination />
       <FloatingCTA />
-      <main id="main-content" className="flex-1 pt-[80px]">
+      <main id="main-content" className="flex-1" style={{ paddingTop: 'var(--content-offset)' }}>
         {children}
       </main>
       <Footer />

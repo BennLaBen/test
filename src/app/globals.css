@@ -3,19 +3,79 @@
 @tailwind utilities;
 
 /* ============================================
-   iOS SAFARI FIXES
+   HEADER HEIGHT & LAYOUT COMPENSATION
+   Solution globale pour éviter que le header cache le contenu
    ============================================ */
 
-/* Fallback pour 100dvh sur iOS < 15.4 */
 :root {
+  /* Safe area iOS (notch) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  
+  /* Hauteurs des éléments fixes */
+  --header-height: 64px;           /* Mobile: h-16 */
+  --topbar-height: 44px;           /* TopInfoBar mobile */
+  
+  /* Hauteur totale des éléments fixes */
+  --total-header-height: calc(var(--header-height) + var(--topbar-height));
+  
+  /* Offset pour le contenu principal (avec safe-area) */
+  --content-offset: calc(var(--total-header-height) + var(--safe-top));
+  
+  /* Offset pour les ancres (avec marge supplémentaire) */
+  --anchor-offset: calc(var(--content-offset) + 16px);
+  
+  /* Fallback pour 100dvh sur iOS < 15.4 */
   --mobile-menu-height: 100vh;
 }
 
+/* Desktop: header plus grand */
+@media (min-width: 640px) {
+  :root {
+    --header-height: 80px;         /* Desktop: h-20 */
+    --topbar-height: 40px;         /* TopInfoBar desktop (plus compact) */
+  }
+}
+
+/* Support 100dvh pour iOS 15.4+ */
 @supports (height: 100dvh) {
   :root {
     --mobile-menu-height: 100dvh;
   }
 }
+
+/* ============================================
+   SCROLL BEHAVIOR & ANCHOR OFFSET
+   ============================================ */
+
+/* Scroll smooth global */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Désactiver smooth scroll si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Offset pour TOUTES les ancres et sections ciblables */
+[id],
+section[id],
+h1[id], h2[id], h3[id], h4[id],
+.anchor-target {
+  scroll-margin-top: var(--anchor-offset);
+}
+
+/* Classe utilitaire pour forcer l'offset */
+.anchor-offset {
+  scroll-margin-top: var(--anchor-offset);
+}
+
+/* ============================================
+   iOS SAFARI FIXES
+   ============================================ */
 
 /* Fix iOS Safari: empêcher le bounce scroll quand menu ouvert */
 html.menu-open,
