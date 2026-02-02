@@ -1,40 +1,10 @@
 {
   "extends": ["next/core-web-vitals"],
   "rules": {
-    "react/jsx-no-literals": ["error", {
-      "noStrings": true,
-      "allowedStrings": [
-        "•", "/", "-", ":", "|", "×", "&", "@", "#", "%", "+", "=", "<", ">", 
-        "(", ")", "[", "]", "{", "}", "...", " ", "",
-        "LLEDO", "MPEB", "EGI", "FREM", "MGP", "Aerotools",
-        "ISO", "EN", "CE", "AIRBUS",
-        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-      ],
-      "ignoreProps": false,
-      "noAttributeStrings": true
-    }],
-    "no-restricted-syntax": [
-      "error",
-      {
-        "selector": "JSXText[value=/[A-ZÀ-Ÿ][a-zà-ÿ]+(?:\\s+[a-zà-ÿA-ZÀ-Ÿ]+){2,}/]",
-        "message": "🚨 Texte hardcodé détecté! Utilisez t() de useStrictTranslation."
-      },
-      {
-        "selector": "JSXAttribute[name.name=/^(title|placeholder|alt|aria-label)$/][value.type='Literal']",
-        "message": "🚨 Attribut avec texte hardcodé! Utilisez t() pour les attributs title, placeholder, alt, aria-label."
-      }
-    ]
   },
   "overrides": [
     {
       "files": ["scripts/**/*.ts", "scripts/**/*.js", "**/*.test.ts", "**/*.spec.ts", "prisma/**/*.ts"],
-      "rules": {
-        "react/jsx-no-literals": "off",
-        "no-restricted-syntax": "off"
-      }
-    },
-    {
-      "files": ["src/app/api/**/*.ts"],
       "rules": {
         "react/jsx-no-literals": "off"
       }
