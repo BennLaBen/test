@@ -435,54 +435,20 @@ export function Navigation() {
                   }}
                 >
                   <div className="px-4 py-5 space-y-4">
-                    
-                    {/* User Profile Section */}
-                    {isAuthenticated && user && (
-                      <motion.div 
-                        className="p-4 rounded-xl bg-gray-800/40 border border-blue-500/30"
-                        style={{ boxShadow: '0 0 25px rgba(59, 130, 246, 0.15)' }}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                      >
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-lg font-bold shadow-lg border-2 border-blue-400/50">
-                            {user.firstName?.charAt(0) || user.email?.charAt(0) || '?'}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-bold text-white truncate">{user.firstName} {user.lastName}</p>
-                            <p className="text-xs text-gray-400 truncate">{user.email}</p>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          {user.role === 'ADMIN' && (
-                            <Link
-                              href="/admin"
-                              onClick={closeMenu}
-                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-bold text-blue-300 bg-blue-900/40 rounded-lg active:scale-[0.98] transition-all border border-blue-500/30 touch-manipulation"
-                              style={{ WebkitTapHighlightColor: 'transparent' }}
-                            >
-                              <User className="h-4 w-4" />
-                              {t('auth.dashboard')}
-                            </Link>
-                          )}
-                          <button
-                            onClick={() => {
-                              signOut({ callbackUrl: '/' })
-                              closeMenu()
-                            }}
-                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-bold text-red-300 bg-red-900/30 rounded-lg active:scale-[0.98] transition-all border border-red-500/30 touch-manipulation"
-                            style={{ WebkitTapHighlightColor: 'transparent' }}
-                          >
-                            <LogOut className="h-4 w-4" />
-                            {t('auth.logout')}
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Navigation avec accordéons */}
-                    <MobileMenuAccordion onClose={closeMenu} isActive={isActive} />
+                    {/* Navigation avec accordéons - inclut section compte si connecté */}
+                    <MobileMenuAccordion 
+                      onClose={closeMenu} 
+                      isActive={isActive}
+                      isAuthenticated={isAuthenticated}
+                      user={user ? {
+                        email: user.email,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email,
+                        role: user.role
+                      } : null}
+                      onLogout={() => signOut({ callbackUrl: '/' })}
+                    />
 
                     {/* Auth Button si non connecté */}
                     {!isAuthenticated && (

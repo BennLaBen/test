@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, Building2, Briefcase, Users, FileText, Phone, Home } from 'lucide-react'
+import { ChevronDown, Building2, Briefcase, Users, FileText, Home, User, LogOut, Settings, Shield } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { usePathname } from 'next/navigation'
 
@@ -73,12 +73,23 @@ const mobileNavSections: NavSection[] = [
   },
 ]
 
+interface UserData {
+  email?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  name?: string | null
+  role?: string
+}
+
 interface MobileMenuAccordionProps {
   onClose: () => void
   isActive: (href: string) => boolean
+  isAuthenticated?: boolean
+  user?: UserData | null
+  onLogout?: () => void
 }
 
-export function MobileMenuAccordion({ onClose, isActive }: MobileMenuAccordionProps) {
+export function MobileMenuAccordion({ onClose, isActive, isAuthenticated, user, onLogout }: MobileMenuAccordionProps) {
   const { t } = useTranslation('common')
   const pathname = usePathname()
   const [openSections, setOpenSections] = useState<string[]>([])
@@ -99,8 +110,127 @@ export function MobileMenuAccordion({ onClose, isActive }: MobileMenuAccordionPr
     return section.items.some(item => isActive(item.href))
   }
 
+  // Obtenir les initiales de l'utilisateur
+  const getUserInitials = () => {
+    if (user?.firstName && user?.lastName) {
+      return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase()
+    }
+    if (user?.name) {
+      const parts = user.name.split(' ')
+      return parts.length > 1 
+        ? `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase()
+        : user.name.charAt(0).toUpperCase()
+    }
+    return user?.email?.charAt(0).toUpperCase() || '?'
+  }
+
+  // Obtenir le nom d'affichage
+  const getDisplayName = () => {
+    if (user?.firstName && user?.lastName) {
+      return `${user.firstName} ${user.lastName}`
+    }
+    return user?.name || user?.email || ''
+  }
+
   return (
     <nav className="space-y-2" aria-label="Navigation principale">
+      {/* Section Compte Utilisateur - En haut si connecté */}
+      {isAuthenticated && user && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mb-4"
+        >
+          {/* Header utilisateur */}
+          <div className="flex items-center gap-4 px-5 py-4 mb-2 rounded-xl bg-gradient-to-r from-blue-600/20 to-blue-500/10 border-2 border-blue-400/30">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-lg font-bold border-2 border-blue-400/50 shadow-lg shadow-blue-500/30">
+              {getUserInitials()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-bold truncate">{getDisplayName()}</p>
+              <p className="text-sm text-blue-300/80 truncate">{user.email}</p>
+              {user.role === 'ADMIN' && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase bg-blue-500/30 text-blue-300 border border-blue-400/30">
+                  <Shield className="h-3 w-3" />
+                  {t('auth.administrator')}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Liens du compte */}
+          <div className="rounded-xl overflow-hidden border-2 border-gray-700/50 bg-gray-800/20">
+            {/* Admin Dashboard - si admin */}
+            {user.role === 'ADMIN' && (
+              <Link
+                href="/admin"
+                onClick={onClose}
+                className={`flex items-center gap-4 px-5 py-4 transition-all active:scale-[0.98] touch-manipulation border-b border-gray-700/30 ${
+                  pathname?.startsWith('/admin')
+                    ? 'bg-blue-600/20 text-blue-400'
+                    : 'text-gray-300 active:bg-blue-600/10'
+                }`}
+                style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+              >
+                <Shield className="h-5 w-5 text-blue-400" />
+                <span className="text-base font-bold uppercase tracking-wide">
+                  {t('auth.dashboard')}
+                </span>
+              </Link>
+            )}
+
+            {/* Mon profil */}
+            <Link
+              href="/espace-client/profil"
+              onClick={onClose}
+              className={`flex items-center gap-4 px-5 py-4 transition-all active:scale-[0.98] touch-manipulation border-b border-gray-700/30 ${
+                pathname === '/espace-client/profil'
+                  ? 'bg-blue-600/20 text-blue-400'
+                  : 'text-gray-300 active:bg-blue-600/10'
+              }`}
+              style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+            >
+              <User className="h-5 w-5 text-blue-400" />
+              <span className="text-base font-bold uppercase tracking-wide">
+                {t('auth.myProfile')}
+              </span>
+            </Link>
+
+            {/* Espace client */}
+            <Link
+              href="/espace-client"
+              onClick={onClose}
+              className={`flex items-center gap-4 px-5 py-4 transition-all active:scale-[0.98] touch-manipulation border-b border-gray-700/30 ${
+                pathname === '/espace-client'
+                  ? 'bg-blue-600/20 text-blue-400'
+                  : 'text-gray-300 active:bg-blue-600/10'
+              }`}
+              style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+            >
+              <Settings className="h-5 w-5 text-blue-400" />
+              <span className="text-base font-bold uppercase tracking-wide">
+                {t('auth.clientSpace')}
+              </span>
+            </Link>
+
+            {/* Déconnexion */}
+            <button
+              onClick={() => {
+                onLogout?.()
+                onClose()
+              }}
+              className="w-full flex items-center gap-4 px-5 py-4 transition-all active:scale-[0.98] touch-manipulation text-red-400 active:bg-red-600/10"
+              style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+            >
+              <LogOut className="h-5 w-5" />
+              <span className="text-base font-bold uppercase tracking-wide">
+                {t('auth.logout')}
+              </span>
+            </button>
+          </div>
+        </motion.div>
+      )}
       {mobileNavSections.map((section, sectionIndex) => (
         <motion.div
           key={section.id}
