@@ -157,6 +157,13 @@
     "openMenu": "فتح القائمة الرئيسية",
     "closeMenu": "إغلاق القائمة"
   },
+  "profile": {
+    "backToSpace": "العودة إلى مساحتي",
+    "updateSuccess": "تم تحديث الملف الشخصي بنجاح",
+    "emailCannotBeChanged": "لا يمكن تغيير البريد الإلكتروني",
+    "saving": "جاري الحفظ...",
+    "saveChanges": "حفظ التغييرات"
+  },
   "admin": {
     "panel": "لوحة الإدارة",
     "dashboard": "لوحة التحكم",

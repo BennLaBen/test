@@ -16,6 +16,7 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 
 interface ProfileForm {
   firstName: string
@@ -28,6 +29,7 @@ export default function ProfilPage() {
   const { data: session, update } = useSession()
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const { t } = useTranslation('common')
 
   const { register, handleSubmit } = useForm<ProfileForm>({
     defaultValues: {
@@ -62,7 +64,7 @@ export default function ProfilPage() {
 
   return (
     <>
-      <SEO title="Mon profil" />
+      <SEO title={t('auth.myProfile')} />
 
       <section className="py-12 lg:py-16">
         <div className="container max-w-2xl">
@@ -71,7 +73,7 @@ export default function ProfilPage() {
             className="inline-flex items-center gap-2 text-muted hover:text-primary-600 mb-8 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Retour à mon espace
+            {t('profile.backToSpace')}
           </Link>
 
           <motion.div
@@ -84,7 +86,7 @@ export default function ProfilPage() {
                 <User className="h-8 w-8 text-primary-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-muted-strong">Mon profil</h1>
+                <h1 className="text-2xl font-bold text-muted-strong">{t('auth.myProfile')}</h1>
                 <p className="text-muted">{session?.user?.email}</p>
               </div>
             </div>
@@ -92,7 +94,7 @@ export default function ProfilPage() {
             {success && (
               <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center gap-3 text-green-700 dark:text-green-400">
                 <CheckCircle className="h-5 w-5" />
-                Profil mis à jour avec succès
+                {t('profile.updateSuccess')}
               </div>
             )}
 
@@ -101,7 +103,7 @@ export default function ProfilPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <User className="h-4 w-4 inline mr-2" />
-                    Prénom
+                    {t('auth.firstName')}
                   </label>
                   <input
                     {...register('firstName')}
@@ -112,7 +114,7 @@ export default function ProfilPage() {
                 <div>
                   <label className="block text-sm font-medium text-muted-strong mb-2">
                     <User className="h-4 w-4 inline mr-2" />
-                    Nom
+                    {t('auth.lastName')}
                   </label>
                   <input
                     {...register('lastName')}
@@ -132,13 +134,13 @@ export default function ProfilPage() {
                   disabled
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-muted cursor-not-allowed"
                 />
-                <p className="text-sm text-muted mt-1">L'email ne peut pas être modifié</p>
+                <p className="text-sm text-muted mt-1">{t('profile.emailCannotBeChanged')}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Building2 className="h-4 w-4 inline mr-2" />
-                  Entreprise
+                  {t('auth.company')}
                 </label>
                 <input
                   {...register('company')}
@@ -150,7 +152,7 @@ export default function ProfilPage() {
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
                   <Phone className="h-4 w-4 inline mr-2" />
-                  Téléphone
+                  {t('auth.phone')}
                 </label>
                 <input
                   {...register('phone')}
@@ -168,12 +170,12 @@ export default function ProfilPage() {
                 {loading ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    Enregistrement...
+                    {t('profile.saving')}
                   </>
                 ) : (
                   <>
                     <Save className="h-5 w-5" />
-                    Enregistrer les modifications
+                    {t('profile.saveChanges')}
                   </>
                 )}
               </button>

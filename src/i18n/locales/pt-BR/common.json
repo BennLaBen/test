@@ -157,6 +157,13 @@
     "openMenu": "Abrir menu principal",
     "closeMenu": "Fechar menu"
   },
+  "profile": {
+    "backToSpace": "Voltar ao meu espaço",
+    "updateSuccess": "Perfil atualizado com sucesso",
+    "emailCannotBeChanged": "O email não pode ser alterado",
+    "saving": "Salvando...",
+    "saveChanges": "Salvar alterações"
+  },
   "admin": {
     "panel": "Painel de administração",
     "dashboard": "Painel de controle",
