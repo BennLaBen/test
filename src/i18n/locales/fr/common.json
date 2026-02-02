@@ -23,6 +23,19 @@
     "careers": "Carrières",
     "quote": "Obtenir un devis"
   },
+  "mobileNav": {
+    "entreprise": "L'entreprise",
+    "services": "Services",
+    "recrutement": "Recrutement",
+    "mpeb": "MPEB - Usinage",
+    "egi": "EGI - Bureau d'études",
+    "frem": "FREM - Maintenance",
+    "mgp": "MGP - Tôlerie",
+    "brochure": "Plaquette PDF",
+    "offres": "Offres d'emploi",
+    "candidature": "Candidature spontanée",
+    "devis": "Demander un devis"
+  },
   "hero": {
     "chip": "Collectif d'ingénierie",
     "headline": "LLEDO Industries",

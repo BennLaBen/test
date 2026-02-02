@@ -23,6 +23,19 @@
     "careers": "Empleo",
     "quote": "Solicitar Presupuesto"
   },
+  "mobileNav": {
+    "entreprise": "Empresa",
+    "services": "Servicios",
+    "recrutement": "Empleo",
+    "mpeb": "MPEB - Mecanizado",
+    "egi": "EGI - Ingeniería",
+    "frem": "FREM - Mantenimiento",
+    "mgp": "MGP - Calderería",
+    "brochure": "Catálogo PDF",
+    "offres": "Ofertas de empleo",
+    "candidature": "Candidatura espontánea",
+    "devis": "Solicitar presupuesto"
+  },
   "hero": {
     "chip": "Colectivo de Ingeniería",
     "headline": "LLEDO Industries",

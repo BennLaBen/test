@@ -7,10 +7,11 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { Logo } from '@/components/Logo'
-import { Menu, X, User, LogOut } from 'lucide-react'
+import { Menu, X, User, LogOut, Phone, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AuthModal } from '@/components/auth/AuthModal'
 import { useSession, signOut } from 'next-auth/react'
+import { MobileMenuAccordion } from '@/components/MobileMenuAccordion'
 
 const navigation = [
   { key: 'nav.home', href: '/' },
@@ -312,7 +313,7 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation - FULLSCREEN OVERLAY */}
+        {/* Mobile Navigation - FULLSCREEN OVERLAY avec Accordéons */}
         <AnimatePresence>
           {isOpen && (
             <>
@@ -341,8 +342,7 @@ export function Navigation() {
                 className="lg:hidden fixed inset-0 z-[9999] flex flex-col bg-gradient-to-b from-[#0a0a12] via-[#0d0d18] to-[#0a0a12]"
                 style={{ 
                   height: '100dvh',
-                  paddingTop: 'env(safe-area-inset-top)',
-                  paddingBottom: 'env(safe-area-inset-bottom)'
+                  paddingTop: 'env(safe-area-inset-top)'
                 }}
               >
                 {/* Header fixe */}
@@ -365,115 +365,57 @@ export function Navigation() {
                   className="flex-1 overflow-y-auto overscroll-contain"
                   style={{ WebkitOverflowScrolling: 'touch' }}
                 >
-                  <div className="px-5 py-6 space-y-4">
+                  <div className="px-4 py-5 space-y-4">
                     
                     {/* User Profile Section */}
                     {isAuthenticated && user && (
                       <motion.div 
-                        className="p-5 rounded-2xl bg-gray-800/40 border border-blue-500/30"
+                        className="p-4 rounded-xl bg-gray-800/40 border border-blue-500/30"
                         style={{ boxShadow: '0 0 25px rgba(59, 130, 246, 0.15)' }}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 0.1 }}
                       >
-                        <div className="flex items-center gap-4 mb-4">
-                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xl font-bold shadow-lg border-2 border-blue-400/50">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-lg font-bold shadow-lg border-2 border-blue-400/50">
                             {user.firstName?.charAt(0) || user.email?.charAt(0) || '?'}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-base font-bold text-white truncate">{user.firstName} {user.lastName}</p>
-                            <p className="text-sm text-gray-400 truncate">{user.email}</p>
+                            <p className="text-sm font-bold text-white truncate">{user.firstName} {user.lastName}</p>
+                            <p className="text-xs text-gray-400 truncate">{user.email}</p>
                           </div>
                         </div>
-                        {user.role === 'ADMIN' && (
-                          <Link
-                            href="/admin"
-                            onClick={closeMenu}
-                            className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-blue-300 bg-blue-900/40 rounded-xl active:scale-[0.98] transition-all border border-blue-500/30 touch-manipulation"
+                        <div className="flex gap-2">
+                          {user.role === 'ADMIN' && (
+                            <Link
+                              href="/admin"
+                              onClick={closeMenu}
+                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-bold text-blue-300 bg-blue-900/40 rounded-lg active:scale-[0.98] transition-all border border-blue-500/30 touch-manipulation"
+                              style={{ WebkitTapHighlightColor: 'transparent' }}
+                            >
+                              <User className="h-4 w-4" />
+                              {t('auth.dashboard')}
+                            </Link>
+                          )}
+                          <button
+                            onClick={() => {
+                              signOut({ callbackUrl: '/' })
+                              closeMenu()
+                            }}
+                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-bold text-red-300 bg-red-900/30 rounded-lg active:scale-[0.98] transition-all border border-red-500/30 touch-manipulation"
                             style={{ WebkitTapHighlightColor: 'transparent' }}
                           >
-                            <User className="h-5 w-5" />
-                            {t('auth.dashboard')}
-                          </Link>
-                        )}
-                        <button
-                          onClick={() => {
-                            signOut({ callbackUrl: '/' })
-                            closeMenu()
-                          }}
-                          className="w-full flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-red-300 bg-red-900/30 rounded-xl active:scale-[0.98] transition-all border border-red-500/30 touch-manipulation"
-                          style={{ WebkitTapHighlightColor: 'transparent' }}
-                        >
-                          <LogOut className="h-5 w-5" />
-                          {t('auth.logout')}
-                        </button>
+                            <LogOut className="h-4 w-4" />
+                            {t('auth.logout')}
+                          </button>
+                        </div>
                       </motion.div>
                     )}
 
-                    {/* Navigation principale */}
-                    <nav className="space-y-3" aria-label="Navigation principale">
-                      {navigation.map((item, index) => (
-                        <motion.div
-                          key={item.key}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: 0.05 * index }}
-                        >
-                          <Link
-                            ref={index === 0 ? firstFocusableRef : undefined}
-                            href={item.href}
-                            onClick={closeMenu}
-                            className={`flex items-center justify-between px-6 py-5 rounded-2xl transition-all active:scale-[0.98] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                              isActive(item.href)
-                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 border-2 border-blue-400/50'
-                                : 'bg-gray-800/30 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/10'
-                            }`}
-                            style={{
-                              WebkitTapHighlightColor: 'transparent',
-                              minHeight: '64px',
-                              ...(isActive(item.href) && {
-                                boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)'
-                              })
-                            }}
-                          >
-                            <span className={`text-lg font-black uppercase tracking-wider ${
-                              isActive(item.href) ? 'text-white' : 'text-gray-200'
-                            }`}>
-                              {t(item.key)}
-                            </span>
-                            {isActive(item.href) && (
-                              <span className="w-3 h-3 rounded-full bg-white animate-pulse" />
-                            )}
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </nav>
+                    {/* Navigation avec accordéons */}
+                    <MobileMenuAccordion onClose={closeMenu} isActive={isActive} />
 
-                    {/* Navigation secondaire */}
-                    <div className="grid grid-cols-2 gap-3 pt-2">
-                      {secondaryNavigation.map((item, index) => (
-                        <motion.div
-                          key={item.key}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.2 + 0.05 * index }}
-                        >
-                          <Link
-                            href={item.href}
-                            onClick={closeMenu}
-                            className="flex items-center justify-center rounded-xl px-4 py-4 text-base font-bold text-center text-white bg-gray-800/50 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/20 transition-all active:scale-95 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
-                          >
-                            {t(item.key)}
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Séparateur */}
-                    <div className="border-t border-blue-500/20 my-4" />
-
-                    {/* Auth Button */}
+                    {/* Auth Button si non connecté */}
                     {!isAuthenticated && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -483,42 +425,49 @@ export function Navigation() {
                         <Link
                           href="/connexion"
                           onClick={closeMenu}
-                          className="w-full flex items-center justify-center gap-3 px-6 py-5 text-base font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] active:bg-blue-500/20 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
-                          style={{ WebkitTapHighlightColor: 'transparent', minHeight: '64px' }}
+                          className="w-full flex items-center justify-center gap-3 px-5 py-4 text-sm font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] active:bg-blue-500/20 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
                         >
-                          <User className="h-6 w-6" />
+                          <User className="h-5 w-5" />
                           {t('auth.loginRegister')}
                         </Link>
                       </motion.div>
                     )}
-
-                    {/* CTA principal */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.35 }}
-                    >
-                      <Link
-                        href="/contact"
-                        onClick={closeMenu}
-                        className="w-full flex items-center justify-center px-6 py-5 text-base font-black uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl active:scale-[0.98] transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-300"
-                        style={{ 
-                          boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)', 
-                          WebkitTapHighlightColor: 'transparent',
-                          minHeight: '64px'
-                        }}
-                      >
-                        {t('nav.quote')}
-                      </Link>
-                    </motion.div>
                   </div>
                 </div>
 
-                {/* Footer avec indication de fermeture */}
-                <div className="flex-shrink-0 px-5 py-4 border-t border-blue-500/20">
-                  <p className="text-center text-xs text-gray-500">
-                    {t('ui.pressEscToClose', 'Appuyez sur ESC ou touchez pour fermer')}
-                  </p>
+                {/* CTA Sticky en bas */}
+                <div 
+                  className="flex-shrink-0 px-4 py-4 border-t border-blue-500/20 bg-[#0a0a12]/95 backdrop-blur-lg"
+                  style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }}
+                >
+                  <div className="flex gap-3">
+                    {/* Contact */}
+                    <Link
+                      href="/contact"
+                      onClick={closeMenu}
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-4 text-sm font-bold text-white bg-gray-800/60 border-2 border-gray-600/50 rounded-xl active:scale-[0.98] transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+                    >
+                      <Phone className="h-5 w-5" />
+                      {t('nav.contact')}
+                    </Link>
+                    
+                    {/* Devis - CTA principal */}
+                    <Link
+                      href="/contact?type=devis"
+                      onClick={closeMenu}
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-4 text-sm font-black uppercase tracking-wide text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl active:scale-[0.98] transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-300"
+                      style={{ 
+                        boxShadow: '0 0 25px rgba(59, 130, 246, 0.5)', 
+                        WebkitTapHighlightColor: 'transparent',
+                        minHeight: '56px'
+                      }}
+                    >
+                      <FileText className="h-5 w-5" />
+                      {t('nav.quote')}
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             </>

@@ -23,6 +23,19 @@
     "careers": "Careers",
     "quote": "Request a Quote"
   },
+  "mobileNav": {
+    "entreprise": "Company",
+    "services": "Services",
+    "recrutement": "Careers",
+    "mpeb": "MPEB - Machining",
+    "egi": "EGI - Engineering",
+    "frem": "FREM - Maintenance",
+    "mgp": "MGP - Sheet Metal",
+    "brochure": "PDF Brochure",
+    "offres": "Job Offers",
+    "candidature": "Spontaneous Application",
+    "devis": "Request a Quote"
+  },
   "hero": {
     "chip": "Engineering Collective",
     "headline": "LLEDO Industries",

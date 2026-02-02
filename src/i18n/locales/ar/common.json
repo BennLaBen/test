@@ -23,6 +23,19 @@
     "careers": "الوظائف",
     "quote": "طلب عرض أسعار"
   },
+  "mobileNav": {
+    "entreprise": "الشركة",
+    "services": "الخدمات",
+    "recrutement": "التوظيف",
+    "mpeb": "MPEB - التصنيع",
+    "egi": "EGI - الهندسة",
+    "frem": "FREM - الصيانة",
+    "mgp": "MGP - الصفائح المعدنية",
+    "brochure": "كتيب PDF",
+    "offres": "عروض العمل",
+    "candidature": "ترشيح عفوي",
+    "devis": "طلب عرض أسعار"
+  },
   "hero": {
     "chip": "تجمع هندسي",
     "headline": "LLEDO Industries",
