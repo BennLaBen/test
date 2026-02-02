@@ -1,0 +1,50 @@
+{
+  "home": {
+    "metaTitle": "LLEDO Industries | Precision Machining & Industrial Maintenance for Aerospace",
+    "metaDescription": "French industrial group specializing in precision machining, sheet metal work, and GSE equipment for aerospace and defense. ISO 9001 & EN 9100 certified. 36 years of expertise.",
+    "h1": "Integrated Industrial Group for Aerospace & Defense",
+    "slug": "/"
+  },
+  "vision": {
+    "metaTitle": "Our Vision | LLEDO Industries Group - French Industrial Excellence",
+    "metaDescription": "Discover the vision of Gérard Lledo, founder of LLEDO Industries. 70 employees, 5 entities, and a commitment to technical excellence since 1989.",
+    "h1": "The Founder's Vision",
+    "slug": "/our-vision"
+  },
+  "expertises": {
+    "metaTitle": "Our Companies | MPEB, EGI, FREM, MGP & LLEDO Aerotools",
+    "metaDescription": "5 complementary entities: precision machining (MPEB), engineering (EGI), maintenance (FREM), sheet metal (MGP), and helicopter GSE (Aerotools).",
+    "h1": "Discover LLEDO Group Companies",
+    "slug": "/our-companies"
+  },
+  "contact": {
+    "metaTitle": "Contact LLEDO Industries | Request a Quote for Aerospace Tooling",
+    "metaDescription": "Contact our team for your precision machining, industrial maintenance, or GSE equipment projects. Located in Les Pennes-Mirabeau, France.",
+    "h1": "Contact Us",
+    "slug": "/contact"
+  },
+  "careers": {
+    "metaTitle": "Careers at LLEDO Industries | Join Our Aerospace Team",
+    "metaDescription": "Join a passionate team of 70 professionals. Discover job opportunities in precision machining, engineering, and industrial maintenance.",
+    "h1": "Careers at LLEDO Industries",
+    "slug": "/careers"
+  },
+  "blog": {
+    "metaTitle": "Blog & Technical Insights | LLEDO Industries",
+    "metaDescription": "Technical articles on precision machining, mechanical design, industrial maintenance, and aerospace tooling. Written by our experts.",
+    "h1": "Expertise & Know-How",
+    "slug": "/blog"
+  },
+  "testimonials": {
+    "metaTitle": "Client Testimonials | Aerospace & Defense Partners Trust LLEDO",
+    "metaDescription": "Discover what Airbus Helicopters, Safran, Thales, and other aerospace leaders say about working with LLEDO Industries.",
+    "h1": "They Trust Us",
+    "slug": "/testimonials"
+  },
+  "cases": {
+    "metaTitle": "Case Studies | Aerospace & Defense Projects by LLEDO Industries",
+    "metaDescription": "Detailed case studies showcasing our precision machining, GSE equipment, and industrial maintenance solutions for major aerospace clients.",
+    "h1": "Client Success Stories",
+    "slug": "/case-studies"
+  }
+}

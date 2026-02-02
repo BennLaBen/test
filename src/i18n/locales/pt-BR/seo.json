@@ -1,0 +1,50 @@
+{
+  "home": {
+    "metaTitle": "LLEDO Industries | Usinagem de Precisão e Manutenção Industrial Aeronáutica",
+    "metaDescription": "Grupo industrial francês especializado em usinagem de precisão, caldeiraria e equipamentos GSE para aeronáutica e defesa. Certificado ISO 9001 e EN 9100.",
+    "h1": "Grupo Industrial Integrado para Aeronáutica e Defesa",
+    "slug": "/"
+  },
+  "vision": {
+    "metaTitle": "Nossa Visão | Grupo LLEDO Industries - Excelência Industrial Francesa",
+    "metaDescription": "Conheça a visão de Gérard Lledo, fundador da LLEDO Industries. 70 colaboradores, 5 entidades e compromisso com a excelência técnica desde 1989.",
+    "h1": "A Visão do Fundador",
+    "slug": "/nossa-visao"
+  },
+  "expertises": {
+    "metaTitle": "Nossas Empresas | MPEB, EGI, FREM, MGP e LLEDO Aerotools",
+    "metaDescription": "5 entidades complementares: usinagem de precisão (MPEB), engenharia (EGI), manutenção (FREM), chaparia (MGP) e equipamentos GSE helicópteros (Aerotools).",
+    "h1": "Conheça as Empresas do Grupo LLEDO",
+    "slug": "/nossas-empresas"
+  },
+  "contact": {
+    "metaTitle": "Contato LLEDO Industries | Solicite Orçamento de Ferramental Aeronáutico",
+    "metaDescription": "Entre em contato com nossa equipe para seus projetos de usinagem de precisão, manutenção industrial ou equipamentos GSE. Localizados na França.",
+    "h1": "Entre em Contato",
+    "slug": "/contato"
+  },
+  "careers": {
+    "metaTitle": "Carreiras na LLEDO Industries | Junte-se à Nossa Equipe Aeronáutica",
+    "metaDescription": "Junte-se a uma equipe apaixonada de 70 profissionais. Descubra oportunidades de emprego em usinagem de precisão, engenharia e manutenção industrial.",
+    "h1": "Carreiras na LLEDO Industries",
+    "slug": "/carreiras"
+  },
+  "blog": {
+    "metaTitle": "Blog e Artigos Técnicos | LLEDO Industries",
+    "metaDescription": "Artigos técnicos sobre usinagem de precisão, projeto mecânico, manutenção industrial e ferramental aeronáutico. Escritos por nossos especialistas.",
+    "h1": "Expertise e Know-How",
+    "slug": "/blog"
+  },
+  "testimonials": {
+    "metaTitle": "Depoimentos de Clientes | Parceiros Aeronáuticos e de Defesa da LLEDO",
+    "metaDescription": "Descubra o que dizem Airbus Helicopters, Safran, Thales e outros líderes aeronáuticos sobre sua colaboração com a LLEDO Industries.",
+    "h1": "Confiam em Nós",
+    "slug": "/depoimentos"
+  },
+  "cases": {
+    "metaTitle": "Casos de Sucesso | Projetos Aeronáuticos e de Defesa pela LLEDO Industries",
+    "metaDescription": "Casos de sucesso detalhados mostrando nossas soluções de usinagem de precisão, equipamentos GSE e manutenção industrial para grandes clientes aeronáuticos.",
+    "h1": "Casos de Sucesso",
+    "slug": "/casos-de-sucesso"
+  }
+}

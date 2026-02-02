@@ -1,0 +1,50 @@
+{
+  "home": {
+    "metaTitle": "LLEDO Industries | Mecanizado de Precisión y Mantenimiento Industrial Aeronáutico",
+    "metaDescription": "Grupo industrial francés especializado en mecanizado de precisión, calderería y equipos GSE para aeronáutica y defensa. Certificado ISO 9001 y EN 9100.",
+    "h1": "Grupo Industrial Integrado para Aeronáutica y Defensa",
+    "slug": "/"
+  },
+  "vision": {
+    "metaTitle": "Nuestra Visión | Grupo LLEDO Industries - Excelencia Industrial Francesa",
+    "metaDescription": "Conozca la visión de Gérard Lledo, fundador de LLEDO Industries. 70 colaboradores, 5 entidades y compromiso con la excelencia técnica desde 1989.",
+    "h1": "La Visión del Fundador",
+    "slug": "/nuestra-vision"
+  },
+  "expertises": {
+    "metaTitle": "Nuestras Empresas | MPEB, EGI, FREM, MGP y LLEDO Aerotools",
+    "metaDescription": "5 entidades complementarias: mecanizado de precisión (MPEB), ingeniería (EGI), mantenimiento (FREM), chapa (MGP) y equipos GSE helicópteros (Aerotools).",
+    "h1": "Descubra las Empresas del Grupo LLEDO",
+    "slug": "/nuestras-empresas"
+  },
+  "contact": {
+    "metaTitle": "Contacto LLEDO Industries | Solicite Presupuesto de Utillaje Aeronáutico",
+    "metaDescription": "Contacte con nuestro equipo para sus proyectos de mecanizado de precisión, mantenimiento industrial o equipos GSE. Ubicados en Francia.",
+    "h1": "Contáctenos",
+    "slug": "/contacto"
+  },
+  "careers": {
+    "metaTitle": "Empleo en LLEDO Industries | Únase a Nuestro Equipo Aeronáutico",
+    "metaDescription": "Únase a un equipo apasionado de 70 profesionales. Descubra oportunidades de empleo en mecanizado de precisión, ingeniería y mantenimiento industrial.",
+    "h1": "Empleo en LLEDO Industries",
+    "slug": "/empleo"
+  },
+  "blog": {
+    "metaTitle": "Blog y Artículos Técnicos | LLEDO Industries",
+    "metaDescription": "Artículos técnicos sobre mecanizado de precisión, diseño mecánico, mantenimiento industrial y utillaje aeronáutico. Escritos por nuestros expertos.",
+    "h1": "Experiencia y Saber Hacer",
+    "slug": "/blog"
+  },
+  "testimonials": {
+    "metaTitle": "Testimonios de Clientes | Socios Aeronáuticos y de Defensa de LLEDO",
+    "metaDescription": "Descubra lo que dicen Airbus Helicopters, Safran, Thales y otros líderes aeronáuticos sobre su colaboración con LLEDO Industries.",
+    "h1": "Confían en Nosotros",
+    "slug": "/testimonios"
+  },
+  "cases": {
+    "metaTitle": "Casos de Éxito | Proyectos Aeronáuticos y de Defensa por LLEDO Industries",
+    "metaDescription": "Casos de éxito detallados que muestran nuestras soluciones de mecanizado de precisión, equipos GSE y mantenimiento industrial para grandes clientes aeronáuticos.",
+    "h1": "Casos de Éxito",
+    "slug": "/casos-de-exito"
+  }
+}

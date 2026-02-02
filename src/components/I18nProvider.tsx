@@ -15,6 +15,7 @@ import frContact from '@/i18n/locales/fr/contact.json'
 import frBlog from '@/i18n/locales/fr/blog.json'
 import frCases from '@/i18n/locales/fr/cases.json'
 import frCareers from '@/i18n/locales/fr/careers.json'
+import frSeo from '@/i18n/locales/fr/seo.json'
 
 // EN
 import enCommon from '@/i18n/locales/en/common.json'
@@ -27,6 +28,7 @@ import enContact from '@/i18n/locales/en/contact.json'
 import enBlog from '@/i18n/locales/en/blog.json'
 import enCases from '@/i18n/locales/en/cases.json'
 import enCareers from '@/i18n/locales/en/careers.json'
+import enSeo from '@/i18n/locales/en/seo.json'
 
 // ES
 import esCommon from '@/i18n/locales/es/common.json'
@@ -39,6 +41,7 @@ import esContact from '@/i18n/locales/es/contact.json'
 import esBlog from '@/i18n/locales/es/blog.json'
 import esCases from '@/i18n/locales/es/cases.json'
 import esCareers from '@/i18n/locales/es/careers.json'
+import esSeo from '@/i18n/locales/es/seo.json'
 
 // PT-BR
 import ptBRCommon from '@/i18n/locales/pt-BR/common.json'
@@ -51,6 +54,7 @@ import ptBRContact from '@/i18n/locales/pt-BR/contact.json'
 import ptBRBlog from '@/i18n/locales/pt-BR/blog.json'
 import ptBRCases from '@/i18n/locales/pt-BR/cases.json'
 import ptBRCareers from '@/i18n/locales/pt-BR/careers.json'
+import ptBRSeo from '@/i18n/locales/pt-BR/seo.json'
 
 // AR
 import arCommon from '@/i18n/locales/ar/common.json'
@@ -63,6 +67,7 @@ import arContact from '@/i18n/locales/ar/contact.json'
 import arBlog from '@/i18n/locales/ar/blog.json'
 import arCases from '@/i18n/locales/ar/cases.json'
 import arCareers from '@/i18n/locales/ar/careers.json'
+import arSeo from '@/i18n/locales/ar/seo.json'
 
 export type SupportedLocale = 'fr' | 'en' | 'es' | 'pt-BR' | 'ar'
 
@@ -82,7 +87,8 @@ const resources: Resource = {
     contact: frContact,
     blog: frBlog,
     cases: frCases,
-    careers: frCareers
+    careers: frCareers,
+    seo: frSeo
   },
   en: { 
     common: enCommon, 
@@ -94,7 +100,8 @@ const resources: Resource = {
     contact: enContact,
     blog: enBlog,
     cases: enCases,
-    careers: enCareers
+    careers: enCareers,
+    seo: enSeo
   },
   es: { 
     common: esCommon, 
@@ -106,7 +113,8 @@ const resources: Resource = {
     contact: esContact,
     blog: esBlog,
     cases: esCases,
-    careers: esCareers
+    careers: esCareers,
+    seo: esSeo
   },
   'pt-BR': { 
     common: ptBRCommon, 
@@ -118,7 +126,8 @@ const resources: Resource = {
     contact: ptBRContact,
     blog: ptBRBlog,
     cases: ptBRCases,
-    careers: ptBRCareers
+    careers: ptBRCareers,
+    seo: ptBRSeo
   },
   ar: { 
     common: arCommon, 
@@ -130,7 +139,8 @@ const resources: Resource = {
     contact: arContact,
     blog: arBlog,
     cases: arCases,
-    careers: arCareers
+    careers: arCareers,
+    seo: arSeo
   },
 }
 
@@ -142,7 +152,7 @@ if (!i18next.isInitialized) {
       lng: 'fr',
       fallbackLng: 'fr',
       defaultNS: 'common',
-      ns: ['common', 'homepage', 'expertises', 'testimonials', 'brochure', 'vision', 'contact', 'blog', 'cases', 'careers'],
+      ns: ['common', 'homepage', 'expertises', 'testimonials', 'brochure', 'vision', 'contact', 'blog', 'cases', 'careers', 'seo'],
       resources,
       interpolation: { escapeValue: false },
       react: { 

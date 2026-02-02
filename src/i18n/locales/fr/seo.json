@@ -1,0 +1,50 @@
+{
+  "home": {
+    "metaTitle": "LLEDO Industries | Usinage de Précision & Maintenance Industrielle Aéronautique",
+    "metaDescription": "Groupe industriel français spécialisé en usinage de précision, tôlerie-chaudronnerie et équipements GSE pour l'aéronautique et la défense. Certifié ISO 9001 & EN 9100.",
+    "h1": "Groupe Industriel Intégré pour l'Aéronautique et la Défense",
+    "slug": "/"
+  },
+  "vision": {
+    "metaTitle": "Notre Vision | Groupe LLEDO Industries - Excellence Industrielle Française",
+    "metaDescription": "Découvrez la vision de Gérard Lledo, fondateur de LLEDO Industries. 70 collaborateurs, 5 entités et un engagement pour l'excellence technique depuis 1989.",
+    "h1": "La Vision du Fondateur",
+    "slug": "/notre-vision"
+  },
+  "expertises": {
+    "metaTitle": "Nos Entreprises | MPEB, EGI, FREM, MGP & LLEDO Aerotools",
+    "metaDescription": "5 entités complémentaires : usinage de précision (MPEB), ingénierie (EGI), maintenance (FREM), tôlerie (MGP) et équipements GSE hélicoptères (Aerotools).",
+    "h1": "Découvrez les Entreprises du Groupe LLEDO",
+    "slug": "/nos-expertises"
+  },
+  "contact": {
+    "metaTitle": "Contact LLEDO Industries | Demande de Devis Outillage Aéronautique",
+    "metaDescription": "Contactez notre équipe pour vos projets d'usinage de précision, maintenance industrielle ou équipements GSE. Basés aux Pennes-Mirabeau, France.",
+    "h1": "Contactez-nous",
+    "slug": "/contact"
+  },
+  "careers": {
+    "metaTitle": "Carrières chez LLEDO Industries | Rejoignez Notre Équipe Aéronautique",
+    "metaDescription": "Rejoignez une équipe passionnée de 70 professionnels. Découvrez nos offres d'emploi en usinage de précision, ingénierie et maintenance industrielle.",
+    "h1": "Carrières chez LLEDO Industries",
+    "slug": "/carriere"
+  },
+  "blog": {
+    "metaTitle": "Blog & Articles Techniques | LLEDO Industries",
+    "metaDescription": "Articles techniques sur l'usinage de précision, la conception mécanique, la maintenance industrielle et l'outillage aéronautique. Rédigés par nos experts.",
+    "h1": "Expertise & Savoir-Faire",
+    "slug": "/blog"
+  },
+  "testimonials": {
+    "metaTitle": "Témoignages Clients | Partenaires Aéronautique & Défense de LLEDO",
+    "metaDescription": "Découvrez ce que disent Airbus Helicopters, Safran, Thales et d'autres leaders de l'aéronautique sur leur collaboration avec LLEDO Industries.",
+    "h1": "Ils Nous Font Confiance",
+    "slug": "/temoignages"
+  },
+  "cases": {
+    "metaTitle": "Études de Cas | Projets Aéronautique & Défense par LLEDO Industries",
+    "metaDescription": "Études de cas détaillées présentant nos solutions d'usinage de précision, équipements GSE et maintenance industrielle pour les grands comptes aéronautiques.",
+    "h1": "Cas Clients",
+    "slug": "/cas-clients"
+  }
+}
