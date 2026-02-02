@@ -6,7 +6,7 @@
     "cards": [
       {
         "id": "rl-r125",
-        "badge": "Best-seller",
+        "badge": "Référence",
         "category": "Barre de remorquage",
         "name": "RL125-02",
         "description": "Chariot de déplacement hydraulique pour H125/AS350 avec patins Ø80mm conformes Airbus.",
@@ -164,7 +164,7 @@
       "email": {
         "label": "Email",
         "value": "contact@lledo-industries.com",
-        "info": "Réponse sous 24 h"
+        "info": "Nous vous répondons rapidement"
       },
       "address": {
         "label": "Adresse",

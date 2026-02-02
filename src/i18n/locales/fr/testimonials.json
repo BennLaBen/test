@@ -20,7 +20,7 @@
     },
     {
       "sector": "aeronautique",
-      "company": "Motoriste aéronautique leader",
+      "company": "Motoriste aéronautique français",
       "author": "Claire M.",
       "role": "Ingénieure Projet",
       "content": "Le niveau de précision et la traçabilité des pièces sont exemplaires. EGI nous a accompagnés sur des études complexes avec un niveau d'expertise remarquable. Une équipe technique de haut niveau.",
@@ -47,28 +47,28 @@
     }
   ],
   "satisfaction": {
-    "title": "Résultats de nos sondages de satisfaction",
-    "subtitle": "Enquête réalisée auprès de nos clients en 2024",
+    "title": "Nos engagements qualité",
+    "subtitle": "Ce qui guide notre relation client",
     "stats": [
       {
         "label": "Qualité des produits",
-        "value": 98,
-        "description": "Taux de satisfaction sur la qualité"
+        "value": "Exigence",
+        "description": "Standards élevés sur chaque pièce"
       },
       {
         "label": "Respect des délais",
-        "value": 96,
-        "description": "Livraisons dans les temps"
+        "value": "Rigueur",
+        "description": "Planification et suivi"
       },
       {
         "label": "Service client",
-        "value": 97,
+        "value": "Proximité",
         "description": "Réactivité et accompagnement"
       },
       {
         "label": "Recommandation",
-        "value": 95,
-        "description": "Clients qui nous recommandent"
+        "value": "Confiance",
+        "description": "Relations durables"
       }
     ]
   },

@@ -33,16 +33,16 @@
       "challenge": "Un grand constructeur aéronautique européen avait besoin de moderniser son parc de chariots de déplacement pour sa ligne d'assemblage d'hélicoptères légers. L'ancien système était vieillissant, peu ergonomique et ne permettait pas de répondre aux cadences de production croissantes. Les équipes de production faisaient face à des risques de TMS (Troubles Musculo-Squelettiques) lors des manipulations répétées.",
       "solution": "LLEDO AEROTOOLS a développé une solution sur-mesure avec des adaptations spécifiques : système hydraulique à commande ergonomique, patins renforcés pour une utilisation intensive (3 cycles/jour), système de verrouillage rapide pour réduire le temps de préparation, et revêtement anti-rayures pour préserver l'état des patins d'hélicoptère.",
       "results": [
-        "Réduction de 40% du temps de déplacement des appareils",
-        "Zéro accident du travail lié à la manutention depuis la mise en service",
-        "Augmentation de 25% de la cadence de production",
-        "ROI atteint en 14 mois",
-        "Extension de la commande à 8 unités supplémentaires"
+        "Réduction significative du temps de déplacement des appareils",
+        "Amélioration des conditions de travail pour les équipes",
+        "Augmentation de la cadence de production",
+        "Retour sur investissement rapide",
+        "Extension de la commande à plusieurs unités supplémentaires"
       ],
       "stats": {
-        "gain": "40%",
-        "roi": "14 mois",
-        "units": "12"
+        "gain": "Efficacité",
+        "roi": "Rapide",
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "Les chariots LLEDO ont transformé notre ligne de production. La fiabilité et l'ergonomie sont au rendez-vous. Nos équipes apprécient particulièrement la fluidité de manœuvre.",
@@ -60,16 +60,16 @@
       "challenge": "Une base de secours aérien gouvernementale avait besoin d'équipements GSE permettant un déploiement ultra-rapide des hélicoptères d'intervention. Dans le contexte des interventions d'urgence (incendies, secours en montagne, SMUR héliporté), chaque seconde compte. L'ancien système nécessitait 3 opérateurs et 5 minutes de préparation.",
       "solution": "LLEDO DEFENSE a conçu un chariot de déplacement spécial \"Rapid Deploy\" : système hydraulique à démarrage instantané, commande sans fil à distance de sécurité, autonomie batterie 72h sans recharge, patins universels multi-types, et kit de transport rapide pour détachements mobiles.",
       "results": [
-        "Temps de préparation réduit à 90 secondes",
-        "Opération possible avec 1 seul opérateur qualifié",
-        "Disponibilité opérationnelle 24/7 garantie",
-        "Utilisé dans +150 interventions sans défaillance",
-        "Adopté par 4 autres bases d'intervention"
+        "Temps de préparation fortement réduit",
+        "Opération possible avec un seul opérateur qualifié",
+        "Disponibilité opérationnelle améliorée",
+        "Fiabilité prouvée en conditions réelles",
+        "Adopté par d'autres bases d'intervention"
       ],
       "stats": {
-        "gain": "70%",
+        "gain": "Rapidité",
         "roi": "Immédiat",
-        "units": "5"
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "En intervention d'urgence, la rapidité est vitale. Le système LLEDO nous fait gagner 3 à 4 minutes sur chaque décollage. C'est énorme pour les victimes.",
@@ -87,16 +87,16 @@
       "challenge": "Un opérateur majeur d'hélicoptères offshore cherchait à standardiser ses équipements de maintenance sur ses 3 bases françaises. La flotte mixte nécessitait des équipements polyvalents, résistants à la corrosion (environnement marin), et conformes aux standards pétroliers (ATEX).",
       "solution": "LLEDO Industries a fourni une gamme complète : chariots de déplacement modulaires avec patins interchangeables (3 jeux par base), plateformes d'accès télescopiques 2-5m certifiées offshore, outillage de maintenance en acier inoxydable 316L (anti-corrosion), chariots de transport équipements avec protection IP65, et contrat de maintenance préventive 5 ans.",
       "results": [
-        "Standardisation complète sur 3 bases",
-        "Réduction de 60% des temps d'immobilisation",
-        "Zéro défaillance en 3 ans d'exploitation",
+        "Standardisation complète sur plusieurs bases",
+        "Réduction des temps d'immobilisation",
+        "Fiabilité prouvée sur plusieurs années d'exploitation",
         "Certification IOGP (International Oil & Gas Producers)",
         "Extension du contrat sur bases internationales"
       ],
       "stats": {
-        "gain": "60%",
-        "roi": "18 mois",
-        "units": "24"
+        "gain": "Fiabilité",
+        "roi": "Prouvé",
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "La fiabilité des équipements LLEDO en environnement offshore est exceptionnelle. Après 3 ans, aucun signe de corrosion. La disponibilité de notre flotte s'est nettement améliorée.",
