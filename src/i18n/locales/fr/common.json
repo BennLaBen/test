@@ -39,13 +39,7 @@
   "features": {
     "title": "Pourquoi choisir LLEDO Industries ?",
     "subtitle": "Notre expertise technique et notre engagement qualité nous positionnent comme le partenaire de référence pour répondre à vos besoins industriels.",
-    "stats": {
-      "years": "{{count}}+ Années d'expertise",
-      "employees": "{{count}}+ Collaborateurs",
-      "countries": "{{count}}+ Pays exportés",
-      "compliance": "{{percent}} Conformité normes"
-    },
-    "list": [
+        "list": [
       {
         "title": "Conformité garantie",
         "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",

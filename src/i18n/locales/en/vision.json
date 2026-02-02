@@ -1,35 +1,23 @@
 {
   "title": "Notre Vision - Gérard Lledo | LLEDO Industries",
-  "description": "Découvrez la vision de Gérard Lledo, fondateur et président du Groupe LLEDO Industries. 36 ans d'engagement pour l'excellence industrielle française.",
+  "description": "Discover the vision of Gérard Lledo, founder and president of LLEDO Industries Group. A constant commitment to French industrial excellence.",
   "hero": {
     "badge": "La vision du fondateur",
     "title": "Gérard Lledo",
     "subtitle": "Fondateur et Président",
-    "intro": "Depuis 1989, ma vision est simple : bâtir un groupe industriel français d'excellence, capable de répondre aux besoins les plus exigeants de l'aéronautique et de la défense. Aujourd'hui, le Groupe LLEDO Industries réunit 70 collaborateurs passionnés autour de valeurs communes.",
+    "intro": "My vision is simple: to build a French industrial group of excellence, capable of meeting the most demanding needs of the aerospace and defense industries. Today, LLEDO Industries Group brings together passionate employees around shared values.",
     "quote": "Notre force réside dans la complémentarité de nos expertises et l'engagement de chaque collaborateur. Ensemble, nous relevons les défis techniques les plus complexes.",
     "stats": [
-      {
-        "value": "36 ans",
-        "label": "D'expérience"
-      },
-      {
-        "value": "70",
-        "label": "Collaborateurs"
-      },
-      {
-        "value": "5",
-        "label": "Entités"
-      },
-      {
-        "value": "~10M€",
-        "label": "Chiffre d'affaires"
-      }
+      { "value": "Expertise", "label": "Recognized know-how" },
+      { "value": "Team", "label": "Committed employees" },
+      { "value": "Synergy", "label": "Multi-entity" },
+      { "value": "Growth", "label": "Controlled development" }
     ]
   },
   "values": {
     "badge": "Nos Valeurs",
     "title": "Les piliers de notre réussite",
-    "subtitle": "Des valeurs fortes qui guident nos actions au quotidien depuis 36 ans",
+    "subtitle": "Strong values that guide our daily actions",
     "list": [
       {
         "title": "Excellence technique",
@@ -37,7 +25,7 @@
       },
       {
         "title": "Capital humain",
-        "description": "Nos 70 collaborateurs sont notre première richesse. Nous investissons dans leurs compétences et leur épanouissement professionnel."
+        "description": "Our employees are our greatest asset. We invest in their skills and professional development."
       },
       {
         "title": "Engagement client",
@@ -59,7 +47,7 @@
   },
   "history": {
     "badge": "Notre Histoire",
-    "title": "36 ans de croissance et d'innovation",
+    "title": "A history of growth and innovation",
     "subtitle": "Un parcours marqué par l'excellence et l'audace entrepreneuriale",
     "milestones": [
       {
@@ -95,7 +83,7 @@
       {
         "year": "2024",
         "event": "Groupe LLEDO Industries",
-        "description": "Le groupe emploie 70 collaborateurs et réalise un CA de ~10M€."
+        "description": "The group continues its development with multiple complementary entities."
       }
     ]
   },
@@ -110,11 +98,11 @@
       "Nous développons également une activité de conception et commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères sous la marque LLEDO Aerotools, en capitalisant sur notre expertise en mécanique de précision et notre connaissance du secteur aéronautique."
     ],
     "objectives": {
-      "title": "Nos objectifs à 5 ans",
+      "title": "Our strategic objectives",
       "list": [
         {
           "title": "Croissance organique",
-          "description": "Doubler notre chiffre d'affaires par le développement de nouveaux marchés"
+          "description": "Develop new markets and strengthen our position"
         },
         {
           "title": "Innovation produit",
@@ -122,11 +110,11 @@
         },
         {
           "title": "Excellence opérationnelle",
-          "description": "Atteindre un taux de service client de 98%"
+          "description": "Achieve the highest level of customer service"
         },
         {
           "title": "Développement RH",
-          "description": "Recruter 30 nouveaux collaborateurs et renforcer nos compétences clés"
+          "description": "Strengthen our teams and develop key skills"
         }
       ]
     }
@@ -167,24 +155,12 @@
       ]
     },
     "stats": {
-      "title": "En chiffres",
+      "title": "Our commitments",
       "list": [
-        {
-          "value": "70+",
-          "label": "Clients actifs"
-        },
-        {
-          "value": "98%",
-          "label": "Satisfaction client"
-        },
-        {
-          "value": "36 ans",
-          "label": "D'expérience"
-        },
-        {
-          "value": "100%",
-          "label": "Projets livrés"
-        }
+        { "value": "Loyalty", "label": "Recurring clients" },
+        { "value": "Excellence", "label": "Customer satisfaction" },
+        { "value": "Experience", "label": "Recognized expertise" },
+        { "value": "Reliability", "label": "Projects delivered" }
       ]
     }
   },
