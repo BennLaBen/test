@@ -70,18 +70,42 @@ export default function CareersPage() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simuler l'envoi (à remplacer par un vrai appel API)
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    
-    // Reset après 3 secondes
-    setTimeout(() => {
-      setSubmitSuccess(false)
-      setShowApplicationForm(false)
-      setApplicationData({ name: '', email: '', position: '', message: '', cv: null })
-    }, 3000)
+    try {
+      // Créer FormData pour envoyer le fichier
+      const formData = new FormData()
+      formData.append('name', applicationData.name)
+      formData.append('email', applicationData.email)
+      formData.append('position', applicationData.position)
+      formData.append('message', applicationData.message)
+      if (applicationData.cv) {
+        formData.append('cv', applicationData.cv)
+      }
+
+      const response = await fetch('/api/applications/quick', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Erreur lors de l\'envoi')
+      }
+
+      setSubmitSuccess(true)
+      
+      // Reset après 3 secondes
+      setTimeout(() => {
+        setSubmitSuccess(false)
+        setShowApplicationForm(false)
+        setApplicationData({ name: '', email: '', position: '', message: '', cv: null })
+      }, 3000)
+    } catch (error) {
+      console.error('Application error:', error)
+      alert('Une erreur est survenue. Veuillez réessayer.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const scrollToJobs = () => {
