@@ -159,6 +159,16 @@
     "openMenu": "فتح القائمة الرئيسية",
     "closeMenu": "إغلاق القائمة"
   },
+  "clientArea": {
+    "title": "مساحتي",
+    "description": "إدارة ملفك الشخصي ومتابعة طلباتك",
+    "welcome": "مرحباً",
+    "quickActions": "إجراءات سريعة",
+    "viewOffers": "عرض العروض",
+    "myApplications": "طلباتي",
+    "noApplications": "لم تتقدم بعد",
+    "viewJobOffers": "عرض عروض العمل"
+  },
   "profile": {
     "backToSpace": "العودة إلى مساحتي",
     "updateSuccess": "تم تحديث الملف الشخصي بنجاح",

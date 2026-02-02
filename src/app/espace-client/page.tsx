@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Loader2
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface Application {
   id: string
@@ -41,6 +42,7 @@ export default function EspaceClientPage() {
   const { data: session } = useSession()
   const [applications, setApplications] = useState<Application[]>([])
   const [loading, setLoading] = useState(true)
+  const { t } = useTranslation('common')
 
   useEffect(() => {
     async function fetchApplications() {
@@ -63,8 +65,8 @@ export default function EspaceClientPage() {
   return (
     <>
       <SEO
-        title="Mon espace"
-        description="Gérez votre profil et suivez vos candidatures LLEDO Industries."
+        title={t('clientArea.title')}
+        description={t('clientArea.description')}
       />
 
       <section className="py-12 lg:py-16">
@@ -76,10 +78,10 @@ export default function EspaceClientPage() {
             className="mb-12"
           >
             <h1 className="text-3xl lg:text-4xl font-bold text-muted-strong mb-2">
-              Bienvenue, {session?.user?.firstName} !
+              {t('clientArea.welcome')}, {session?.user?.firstName} !
             </h1>
             <p className="text-muted text-lg">
-              Gérez votre profil et suivez vos candidatures.
+              {t('clientArea.description')}
             </p>
           </motion.div>
 
@@ -92,7 +94,7 @@ export default function EspaceClientPage() {
               className="lg:col-span-1"
             >
               <div className="glass-card p-6 space-y-4">
-                <h2 className="text-xl font-bold text-muted-strong mb-4">Actions rapides</h2>
+                <h2 className="text-xl font-bold text-muted-strong mb-4">{t('clientArea.quickActions')}</h2>
                 
                 <Link
                   href="/espace-client/profil"
@@ -100,7 +102,7 @@ export default function EspaceClientPage() {
                 >
                   <div className="flex items-center gap-3">
                     <User className="h-5 w-5 text-primary-600" />
-                    <span className="font-medium">Mon profil</span>
+                    <span className="font-medium">{t('auth.myProfile')}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
                 </Link>
@@ -111,7 +113,7 @@ export default function EspaceClientPage() {
                 >
                   <div className="flex items-center gap-3">
                     <Briefcase className="h-5 w-5 text-primary-600" />
-                    <span className="font-medium">Voir les offres</span>
+                    <span className="font-medium">{t('clientArea.viewOffers')}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
                 </Link>
@@ -122,7 +124,7 @@ export default function EspaceClientPage() {
                 >
                   <div className="flex items-center gap-3">
                     <FileText className="h-5 w-5 text-primary-600" />
-                    <span className="font-medium">Nous contacter</span>
+                    <span className="font-medium">{t('nav.contact')}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary-600 transition-colors" />
                 </Link>
@@ -138,7 +140,7 @@ export default function EspaceClientPage() {
             >
               <div className="glass-card p-6">
                 <h2 className="text-xl font-bold text-muted-strong mb-6">
-                  Mes candidatures ({applications.length})
+                  {t('clientArea.myApplications')} ({applications.length})
                 </h2>
 
                 {loading ? (
@@ -148,9 +150,9 @@ export default function EspaceClientPage() {
                 ) : applications.length === 0 ? (
                   <div className="text-center py-12">
                     <Briefcase className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                    <p className="text-muted mb-4">Vous n'avez pas encore postulé.</p>
+                    <p className="text-muted mb-4">{t('clientArea.noApplications')}</p>
                     <Link href="/carriere" className="btn-primary">
-                      Voir les offres d'emploi
+                      {t('clientArea.viewJobOffers')}
                     </Link>
                   </div>
                 ) : (

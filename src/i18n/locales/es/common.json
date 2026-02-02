@@ -159,6 +159,16 @@
     "openMenu": "Abrir menú principal",
     "closeMenu": "Cerrar menú"
   },
+  "clientArea": {
+    "title": "Mi espacio",
+    "description": "Gestione su perfil y siga sus candidaturas",
+    "welcome": "Bienvenido",
+    "quickActions": "Acciones rápidas",
+    "viewOffers": "Ver ofertas",
+    "myApplications": "Mis candidaturas",
+    "noApplications": "Aún no ha postulado",
+    "viewJobOffers": "Ver ofertas de empleo"
+  },
   "profile": {
     "backToSpace": "Volver a mi espacio",
     "updateSuccess": "Perfil actualizado con éxito",

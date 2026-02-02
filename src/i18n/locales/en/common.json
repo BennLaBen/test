@@ -159,6 +159,16 @@
     "openMenu": "Open main menu",
     "closeMenu": "Close menu"
   },
+  "clientArea": {
+    "title": "My Space",
+    "description": "Manage your profile and track your applications",
+    "welcome": "Welcome",
+    "quickActions": "Quick Actions",
+    "viewOffers": "View Offers",
+    "myApplications": "My Applications",
+    "noApplications": "You haven't applied yet",
+    "viewJobOffers": "View Job Offers"
+  },
   "profile": {
     "backToSpace": "Back to my space",
     "updateSuccess": "Profile updated successfully",
