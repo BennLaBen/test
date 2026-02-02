@@ -1,0 +1,79 @@
+{
+  "title": "Testimonios de clientes",
+  "subtitle": "Confían en nosotros para sus proyectos críticos",
+  "filterAll": "Todos los sectores",
+  "sectors": [
+    { "id": "aeronautique", "name": "Aeronáutica" },
+    { "id": "defense", "name": "Defensa" },
+    { "id": "industrie", "name": "Industria" },
+    { "id": "energie", "name": "Energía" }
+  ],
+  "list": [
+    {
+      "sector": "aeronautique",
+      "company": "Gran grupo aeronáutico europeo",
+      "author": "Jean-Marc D.",
+      "role": "Responsable Supply Chain",
+      "content": "Socio fiable desde hace más de 10 años. La calidad de las piezas mecanizadas por MPEB y la reactividad de la oficina técnica EGI nos permiten cumplir nuestros plazos de producción. Un socio de confianza.",
+      "rating": 5,
+      "project": "Piezas de precisión para helicópteros"
+    },
+    {
+      "sector": "aeronautique",
+      "company": "Motorista aeronáutico francés",
+      "author": "Claire M.",
+      "role": "Ingeniera de Proyecto",
+      "content": "El nivel de precisión y la trazabilidad de las piezas son ejemplares. EGI nos ha acompañado en estudios complejos con un nivel de experiencia notable. Un equipo técnico de alto nivel.",
+      "rating": 5,
+      "project": "Equipos de prueba de motores"
+    },
+    {
+      "sector": "defense",
+      "company": "Fuerzas armadas francesas",
+      "author": "Coronel Philippe R.",
+      "role": "Jefe de proyecto OPEX",
+      "content": "Equipos robustos y fiables, perfectamente adaptados a las restricciones operacionales. El soporte de FREM en condiciones OPEX es excepcional. Disponibilidad y reactividad garantizadas.",
+      "rating": 5,
+      "project": "Equipos GSE desplegables"
+    },
+    {
+      "sector": "defense",
+      "company": "Organismo estatal - Defensa",
+      "author": "Marie-Laure B.",
+      "role": "Responsable de Calidad de Proveedores",
+      "content": "LLEDO Industries demuestra un dominio perfecto de las exigencias de defensa. Las certificaciones están al día, los procesos de calidad son rigurosos. Un actor de confianza para nuestros proyectos estratégicos.",
+      "rating": 5,
+      "project": "Sistemas mecánicos certificados"
+    }
+  ],
+  "satisfaction": {
+    "title": "Nuestros compromisos de calidad",
+    "subtitle": "Lo que guía nuestra relación con el cliente",
+    "stats": [
+      {
+        "label": "Calidad de productos",
+        "value": "Exigencia",
+        "description": "Estándares elevados en cada pieza"
+      },
+      {
+        "label": "Cumplimiento de plazos",
+        "value": "Rigor",
+        "description": "Planificación y seguimiento"
+      },
+      {
+        "label": "Servicio al cliente",
+        "value": "Proximidad",
+        "description": "Reactividad y acompañamiento"
+      },
+      {
+        "label": "Recomendación",
+        "value": "Confianza",
+        "description": "Relaciones duraderas"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Su proyecto nos interesa",
+    "button": "Contáctenos"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Casos de Sucesso - LLEDO Industries",
+  "description": "Descubra como nossos clientes utilizam nossos equipamentos GSE e ferramental aeronáutico. Depoimentos e estudos de caso detalhados.",
+  "hero": {
+    "badge": "Depoimentos de clientes",
+    "title": "Confiam em nós",
+    "subtitle": "Descubra como nossos clientes utilizam nossos equipamentos e serviços para otimizar suas operações"
+  },
+  "stats": {
+    "clients": "Clientes ativos",
+    "satisfaction": "Satisfação",
+    "experience": "De experiência",
+    "projects": "Projetos realizados"
+  },
+  "sections": {
+    "challenge": "O desafio",
+    "solution": "Nossa solução",
+    "results": "Resultados obtidos",
+    "keyFigures": "Dados-chave"
+  },
+  "cta": {
+    "title": "Seu projeto nos interessa",
+    "subtitle": "Entre em contato com nossa equipe para discutir suas necessidades e descobrir como podemos acompanhá-lo.",
+    "button": "Entre em contato"
+  }
+}

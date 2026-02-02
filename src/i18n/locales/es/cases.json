@@ -1,0 +1,26 @@
+{
+  "title": "Casos de Éxito - LLEDO Industries",
+  "description": "Descubra cómo nuestros clientes utilizan nuestros equipos GSE y utillaje aeronáutico. Testimonios y estudios de caso detallados.",
+  "hero": {
+    "badge": "Testimonios de clientes",
+    "title": "Confían en nosotros",
+    "subtitle": "Descubra cómo nuestros clientes utilizan nuestros equipos y servicios para optimizar sus operaciones"
+  },
+  "stats": {
+    "clients": "Clientes activos",
+    "satisfaction": "Satisfacción",
+    "experience": "De experiencia",
+    "projects": "Proyectos realizados"
+  },
+  "sections": {
+    "challenge": "El desafío",
+    "solution": "Nuestra solución",
+    "results": "Resultados obtenidos",
+    "keyFigures": "Datos clave"
+  },
+  "cta": {
+    "title": "Su proyecto nos interesa",
+    "subtitle": "Contacte con nuestro equipo para discutir sus necesidades y descubrir cómo podemos acompañarle.",
+    "button": "Contáctenos"
+  }
+}

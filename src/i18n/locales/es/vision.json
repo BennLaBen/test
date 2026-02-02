@@ -1,0 +1,157 @@
+{
+  "title": "Nuestra Visión - Gérard Lledo | LLEDO Industries",
+  "description": "Descubra la visión de Gérard Lledo, fundador y presidente del Grupo LLEDO Industries. Un compromiso constante con la excelencia industrial francesa.",
+  "hero": {
+    "badge": "La visión del fundador",
+    "title": "Gérard Lledo",
+    "subtitle": "Fundador y Presidente",
+    "intro": "Desde 1989, mi visión es simple: construir un grupo industrial francés de excelencia, capaz de responder a las necesidades más exigentes de la aeronáutica y la defensa. Hoy, el Grupo LLEDO Industries reúne a 70 colaboradores apasionados en torno a valores comunes.",
+    "quote": "Nuestra fuerza reside en la complementariedad de nuestras especialidades y el compromiso de cada colaborador. Juntos, superamos los desafíos técnicos más complejos.",
+    "stats": [
+      { "value": "36 años", "label": "De experiencia" },
+      { "value": "70", "label": "Colaboradores" },
+      { "value": "5", "label": "Entidades" },
+      { "value": "~10M€", "label": "Facturación" }
+    ]
+  },
+  "values": {
+    "badge": "Nuestros Valores",
+    "title": "Los pilares de nuestro éxito",
+    "subtitle": "Valores sólidos que guían nuestras acciones diarias desde hace 36 años",
+    "list": [
+      {
+        "title": "Excelencia técnica",
+        "description": "Perseguimos la excelencia en nuestras realizaciones, con estándares de calidad elevados."
+      },
+      {
+        "title": "Capital humano",
+        "description": "Nuestros 70 colaboradores son nuestra primera riqueza. Invertimos en sus competencias y su desarrollo profesional."
+      },
+      {
+        "title": "Compromiso con el cliente",
+        "description": "Cada proyecto es único. Nos comprometemos a entender sus necesidades para aportar la mejor respuesta técnica y humana."
+      },
+      {
+        "title": "Innovación continua",
+        "description": "La innovación está en el corazón de nuestro ADN. Invertimos en nuestras herramientas, métodos y vigilancia tecnológica."
+      },
+      {
+        "title": "Reactividad",
+        "description": "En un entorno industrial exigente, la reactividad es esencial. Nos comprometemos con los plazos y la disponibilidad."
+      },
+      {
+        "title": "Certificaciones",
+        "description": "ISO 9001, EN 9100, intercambiabilidad Airbus: nuestras certificaciones demuestran nuestro compromiso con la calidad y la seguridad."
+      }
+    ]
+  },
+  "history": {
+    "badge": "Nuestra Historia",
+    "title": "36 años de crecimiento e innovación",
+    "subtitle": "Un recorrido marcado por la excelencia y la audacia empresarial",
+    "milestones": [
+      {
+        "year": "1989",
+        "event": "Creación de MPEB",
+        "description": "Gérard Lledo crea MPEB, especializada en mecanizado de precisión para aeronáutica."
+      },
+      {
+        "year": "2000",
+        "event": "Certificación ISO 9001",
+        "description": "Reconocimiento de nuestro sistema de calidad y procesos industriales."
+      },
+      {
+        "year": "2008",
+        "event": "Creación de EGI",
+        "description": "Integración de una oficina técnica para reforzar nuestra oferta técnica."
+      },
+      {
+        "year": "2012",
+        "event": "Lanzamiento de FREM",
+        "description": "Extensión hacia el mantenimiento y la instalación para ofrecer un servicio completo."
+      },
+      {
+        "year": "2015",
+        "event": "Certificación EN 9100",
+        "description": "Obtención de la certificación aeronáutica más exigente."
+      },
+      {
+        "year": "2018",
+        "event": "Integración de MGP",
+        "description": "Adquisición de competencias en chapa y calderería."
+      },
+      {
+        "year": "2024",
+        "event": "Grupo LLEDO Industries",
+        "description": "El grupo reúne varias entidades complementarias en dos sedes en Francia."
+      }
+    ]
+  },
+  "industrialVision": {
+    "badge": "Visión Industrial",
+    "title": "Nuestra ambición para el futuro",
+    "subtitle": "Seguir siendo socio de todo tipo de actores industriales, del más pequeño al más estructurado, en una relación de proximidad, confianza y continuidad",
+    "paragraphs": [
+      "En un contexto de relocalización industrial y soberanía tecnológica, el Grupo LLEDO Industries tiene un papel que desempeñar. Nuestra ambición es acompañar a los principales contratistas de la aeronáutica y la defensa.",
+      "Invertimos en nuestros equipos: mecanizado de 5 ejes de última generación, herramientas de metrología 3D, software de simulación y optimización. Nuestro objetivo: estar a la vanguardia de la tecnología para responder a los pliegos de condiciones más exigentes.",
+      "El desarrollo de nuestros equipos está en el corazón de nuestra estrategia. Formación continua, desarrollo de competencias, transmisión del saber hacer: preparamos el futuro cultivando la excelencia técnica de nuestros colaboradores.",
+      "También desarrollamos una actividad de diseño y comercialización de equipos GSE (Ground Support Equipment) para helicópteros bajo la marca LLEDO Aerotools, capitalizando nuestra experiencia en mecánica de precisión y nuestro conocimiento del sector aeronáutico."
+    ],
+    "objectives": {
+      "title": "Nuestros objetivos a 5 años",
+      "list": [
+        { "title": "Desarrollo de productos propios", "description": "Diseñar y comercializar equipos innovadores bajo nuestras marcas" },
+        { "title": "Integración en otras máquinas", "description": "Diversificar nuestras capacidades de integración industrial" },
+        { "title": "Crecimiento orgánico controlado", "description": "Desarrollar nuestra actividad de manera sostenible y estructurada" },
+        { "title": "Excelencia operacional", "description": "Mantener un alto nivel de rendimiento y fiabilidad" }
+      ]
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonios de Clientes",
+    "title": "La confianza de nuestros socios",
+    "subtitle": "Lo que piensan de LLEDO Industries y su visión",
+    "list": [
+      {
+        "author": "Director Supply Chain",
+        "company": "Airbus Helicopters",
+        "content": "LLEDO Industries es un socio estratégico. La visión a largo plazo de Gérard Lledo y su compromiso con la calidad marcan la diferencia.",
+        "rating": 5
+      },
+      {
+        "author": "Responsable de Compras",
+        "company": "Safran",
+        "content": "Una empresa familiar con valores sólidos. Se siente una verdadera proximidad y un compromiso personal en cada proyecto.",
+        "rating": 5
+      },
+      {
+        "author": "Jefe de Proyecto",
+        "company": "DGA",
+        "content": "El espíritu emprendedor y la reactividad de LLEDO Industries son activos importantes para nuestros proyectos de defensa.",
+        "rating": 5
+      }
+    ],
+    "logos": {
+      "title": "Confían en nosotros",
+      "companies": ["Airbus Helicopters", "Safran", "Thales", "Dassault", "Liebherr", "DGA"]
+    },
+    "stats": {
+      "title": "Nuestros compromisos",
+      "list": [
+        { "value": "Fidelidad", "label": "Clientes recurrentes" },
+        { "value": "Excelencia", "label": "Satisfacción del cliente" },
+        { "value": "Experiencia", "label": "Experiencia reconocida" },
+        { "value": "Fiabilidad", "label": "Proyectos entregados" }
+      ]
+    }
+  },
+  "cta": {
+    "title": "Únase a la aventura LLEDO Industries",
+    "subtitle": "Ya sea cliente, socio o futuro colaborador, estaremos encantados de hablar con usted.",
+    "buttons": {
+      "contact": "Contáctenos",
+      "careers": "Unirse al equipo",
+      "expertises": "Descubrir nuestras especialidades"
+    }
+  }
+}

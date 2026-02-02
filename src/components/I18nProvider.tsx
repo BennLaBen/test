@@ -3,30 +3,72 @@
 import { useEffect, useState } from 'react'
 import i18next, { Resource } from 'i18next'
 import { initReactI18next, I18nextProvider } from 'react-i18next'
+
+// FR
 import frCommon from '@/i18n/locales/fr/common.json'
-import enCommon from '@/i18n/locales/en/common.json'
 import frHomepage from '@/i18n/locales/fr/homepage.json'
-import enHomepage from '@/i18n/locales/en/homepage.json'
 import frExpertises from '@/i18n/locales/fr/expertises.json'
-import enExpertises from '@/i18n/locales/en/expertises.json'
 import frTestimonials from '@/i18n/locales/fr/testimonials.json'
-import enTestimonials from '@/i18n/locales/en/testimonials.json'
 import frBrochure from '@/i18n/locales/fr/brochure.json'
-import enBrochure from '@/i18n/locales/en/brochure.json'
 import frVision from '@/i18n/locales/fr/vision.json'
-import enVision from '@/i18n/locales/en/vision.json'
 import frContact from '@/i18n/locales/fr/contact.json'
-import enContact from '@/i18n/locales/en/contact.json'
 import frBlog from '@/i18n/locales/fr/blog.json'
-import enBlog from '@/i18n/locales/en/blog.json'
 import frCases from '@/i18n/locales/fr/cases.json'
-import enCases from '@/i18n/locales/en/cases.json'
 import frCareers from '@/i18n/locales/fr/careers.json'
+
+// EN
+import enCommon from '@/i18n/locales/en/common.json'
+import enHomepage from '@/i18n/locales/en/homepage.json'
+import enExpertises from '@/i18n/locales/en/expertises.json'
+import enTestimonials from '@/i18n/locales/en/testimonials.json'
+import enBrochure from '@/i18n/locales/en/brochure.json'
+import enVision from '@/i18n/locales/en/vision.json'
+import enContact from '@/i18n/locales/en/contact.json'
+import enBlog from '@/i18n/locales/en/blog.json'
+import enCases from '@/i18n/locales/en/cases.json'
 import enCareers from '@/i18n/locales/en/careers.json'
+
+// ES
+import esCommon from '@/i18n/locales/es/common.json'
+import esHomepage from '@/i18n/locales/es/homepage.json'
+import esExpertises from '@/i18n/locales/es/expertises.json'
+import esTestimonials from '@/i18n/locales/es/testimonials.json'
+import esBrochure from '@/i18n/locales/es/brochure.json'
+import esVision from '@/i18n/locales/es/vision.json'
+import esContact from '@/i18n/locales/es/contact.json'
+import esBlog from '@/i18n/locales/es/blog.json'
+import esCases from '@/i18n/locales/es/cases.json'
+import esCareers from '@/i18n/locales/es/careers.json'
+
+// PT-BR
+import ptBRCommon from '@/i18n/locales/pt-BR/common.json'
+import ptBRHomepage from '@/i18n/locales/pt-BR/homepage.json'
+import ptBRExpertises from '@/i18n/locales/pt-BR/expertises.json'
+import ptBRTestimonials from '@/i18n/locales/pt-BR/testimonials.json'
+import ptBRBrochure from '@/i18n/locales/pt-BR/brochure.json'
+import ptBRVision from '@/i18n/locales/pt-BR/vision.json'
+import ptBRContact from '@/i18n/locales/pt-BR/contact.json'
+import ptBRBlog from '@/i18n/locales/pt-BR/blog.json'
+import ptBRCases from '@/i18n/locales/pt-BR/cases.json'
+import ptBRCareers from '@/i18n/locales/pt-BR/careers.json'
+
+// AR
+import arCommon from '@/i18n/locales/ar/common.json'
+import arHomepage from '@/i18n/locales/ar/homepage.json'
+import arExpertises from '@/i18n/locales/ar/expertises.json'
+import arTestimonials from '@/i18n/locales/ar/testimonials.json'
+import arBrochure from '@/i18n/locales/ar/brochure.json'
+import arVision from '@/i18n/locales/ar/vision.json'
+import arContact from '@/i18n/locales/ar/contact.json'
+import arBlog from '@/i18n/locales/ar/blog.json'
+import arCases from '@/i18n/locales/ar/cases.json'
+import arCareers from '@/i18n/locales/ar/careers.json'
+
+export type SupportedLocale = 'fr' | 'en' | 'es' | 'pt-BR' | 'ar'
 
 type Props = {
   children: React.ReactNode
-  locale?: 'fr' | 'en'
+  locale?: SupportedLocale
 }
 
 const resources: Resource = {
@@ -53,6 +95,42 @@ const resources: Resource = {
     blog: enBlog,
     cases: enCases,
     careers: enCareers
+  },
+  es: { 
+    common: esCommon, 
+    homepage: esHomepage,
+    expertises: esExpertises,
+    testimonials: esTestimonials,
+    brochure: esBrochure,
+    vision: esVision,
+    contact: esContact,
+    blog: esBlog,
+    cases: esCases,
+    careers: esCareers
+  },
+  'pt-BR': { 
+    common: ptBRCommon, 
+    homepage: ptBRHomepage,
+    expertises: ptBRExpertises,
+    testimonials: ptBRTestimonials,
+    brochure: ptBRBrochure,
+    vision: ptBRVision,
+    contact: ptBRContact,
+    blog: ptBRBlog,
+    cases: ptBRCases,
+    careers: ptBRCareers
+  },
+  ar: { 
+    common: arCommon, 
+    homepage: arHomepage,
+    expertises: arExpertises,
+    testimonials: arTestimonials,
+    brochure: arBrochure,
+    vision: arVision,
+    contact: arContact,
+    blog: arBlog,
+    cases: arCases,
+    careers: arCareers
   },
 }
 

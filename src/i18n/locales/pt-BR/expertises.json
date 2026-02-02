@@ -1,0 +1,125 @@
+{
+  "title": "Descubra as empresas do grupo LLEDO",
+  "subtitle": "Um coletivo de 5 entidades complementares para cobrir todas as suas necessidades em engenharia industrial",
+  "list": [
+    {
+      "id": "mpeb",
+      "name": "MPEB",
+      "tagline": "Usinagem de precisão e mecânica geral",
+      "description": "Coração histórico do grupo desde 1989, a MPEB é especializada em usinagem de precisão de 3, 4 e 5 eixos, fabricação de peças mecânicas complexas e montagem de conjuntos mecânicos para aeronáutica e defesa.",
+      "expertise": [
+        "Usinagem de precisão em máquinas CNC de 3, 4 e 5 eixos",
+        "Fabricação de peças unitárias e pequenas séries",
+        "Montagem de conjuntos mecânicos complexos",
+        "Controle dimensional 3D e metrologia",
+        "Eletroerosão a fio e por penetração",
+        "Gravação a laser"
+      ],
+      "capabilities": {
+        "capacity": "Capacidade adaptada",
+        "precision": "Tolerância ±0.01mm",
+        "machines": "Parque de máquinas CNC"
+      },
+      "certifications": ["ISO 9001:2015", "EN 9100:2018", "Intercambialidade AIRBUS"],
+      "ctaLabel": "Descobrir MPEB"
+    },
+    {
+      "id": "egi",
+      "name": "EGI",
+      "tagline": "Escritório técnico e engenharia",
+      "description": "A EGI traz sua expertise em design técnico, cálculos de estruturas e desenvolvimento de soluções sob medida. Nosso escritório técnico acompanha nossos clientes da ideia inicial até a validação do produto final.",
+      "expertise": [
+        "Design mecânico e estudos técnicos",
+        "Modelagem 3D e simulações (CAD/CAM)",
+        "Cálculos de estruturas e resistência de materiais",
+        "Planos de execução e documentação técnica",
+        "Engenharia reversa e melhoria de produtos",
+        "Acompanhamento em certificação e homologação"
+      ],
+      "capabilities": {
+        "capacity": "Escritório técnico integrado",
+        "precision": "Software CAD de última geração",
+        "machines": "SolidWorks, CATIA V5"
+      },
+      "certifications": ["Expertise certificada", "Credenciamento Airbus", "Métodos APQP"],
+      "ctaLabel": "Descobrir EGI"
+    },
+    {
+      "id": "frem",
+      "name": "FREM",
+      "tagline": "Manutenção industrial e instalação",
+      "description": "A FREM assegura a manutenção preventiva e corretiva, a instalação de equipamentos no local e o suporte técnico. Nossa equipe intervém nas instalações de nossos clientes para garantir a disponibilidade e o desempenho de seus equipamentos.",
+      "expertise": [
+        "Manutenção preventiva e corretiva de equipamentos industriais",
+        "Instalação e comissionamento no local",
+        "Suporte técnico e reparo de emergência",
+        "Controles periódicos e verificações regulamentares",
+        "Treinamento de equipes de operação",
+        "Contratos de manutenção sob medida"
+      ],
+      "capabilities": {
+        "capacity": "Disponibilidade 7/7",
+        "precision": "Intervenção em 48h",
+        "machines": "Equipes móveis"
+      },
+      "certifications": ["Técnicos certificados", "Habilitações elétricas", "CACES"],
+      "ctaLabel": "Descobrir FREM"
+    },
+    {
+      "id": "mgp",
+      "name": "MGP",
+      "tagline": "Chaparia, caldeiraria e montagem",
+      "description": "A MGP completa a oferta do grupo com suas competências em chaparia, caldeiraria, solda e montagem de elementos mecânicos. Sediada em Saint-Bauzille-de-Putois, a MGP traz uma expertise complementar em mercados diversificados com 50 anos de experiência.",
+      "expertise": [
+        "Corte por jato de água de alta pressão",
+        "Caldeiraria e trabalho de metais",
+        "Solda todos os processos (TIG, MIG, ARC)",
+        "Usinagem",
+        "Torneamento",
+        "Fresagem"
+      ],
+      "capabilities": {
+        "capacity": "2000m² de oficina",
+        "precision": "8 soldadores qualificados",
+        "machines": "Laser, dobradeira, calandra"
+      },
+      "certifications": ["ISO 9001", "Soldadores certificados EN 287", "Marcação CE"],
+      "ctaLabel": "Descobrir MGP"
+    },
+    {
+      "id": "aerotools",
+      "name": "LLEDO Aerotools",
+      "tagline": "Equipamentos GSE para helicópteros",
+      "description": "Divisão dedicada ao desenvolvimento e comercialização de equipamentos GSE (Ground Support Equipment) para helicópteros leves. Barras de reboque, carrinhos de elevação e ferramentas especializadas em conformidade com as normas aeronáuticas.",
+      "expertise": [
+        "Barras de reboque certificadas EN 12312 e EN 1915",
+        "Carrinhos de elevação e movimentação de helicópteros",
+        "Ferramentas especializadas para manutenção de rotor",
+        "Equipamentos sob medida conforme especificações do cliente",
+        "Treinamento no uso de equipamentos",
+        "Suporte técnico e pós-venda"
+      ],
+      "capabilities": {
+        "capacity": "Linha completa GSE helicópteros",
+        "precision": "Teste 1,25× CMU",
+        "machines": "Certificação CE e aeronáutica"
+      },
+      "certifications": ["Diretiva Máquinas 2006/42/CE", "EN 12312", "EN 1915"],
+      "ctaLabel": "Descobrir LLEDO Aerotools"
+    }
+  ],
+  "stats": {
+    "title": "O Grupo LLEDO",
+    "list": [
+      { "value": "36 anos", "label": "de experiência" },
+      { "value": "70", "label": "colaboradores" },
+      { "value": "Capacidade", "label": "de produção" },
+      { "value": "5", "label": "entidades complementares" }
+    ]
+  },
+  "cta": {
+    "title": "Precisa de um parceiro industrial completo?",
+    "subtitle": "Entre em contato para discutir seu projeto e descobrir como nossas especialidades podem atender às suas necessidades.",
+    "button": "Solicitar orçamento"
+  }
+}

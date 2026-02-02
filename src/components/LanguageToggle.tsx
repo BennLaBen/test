@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next'
 const languages = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'pt-BR', name: 'Português', flag: '🇧🇷' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦', rtl: true },
 ]
 
 export function LanguageToggle() {
@@ -50,6 +53,16 @@ export function LanguageToggle() {
     // Changer la langue dans i18next (SANS navigation)
     await i18n.changeLanguage(langCode)
     console.log('✅ [LanguageToggle] Langue changée avec succès vers:', langCode)
+
+    // Gérer RTL pour l'arabe
+    const selectedLang = languages.find(l => l.code === langCode)
+    if (selectedLang?.rtl) {
+      document.documentElement.setAttribute('dir', 'rtl')
+      document.documentElement.setAttribute('lang', langCode)
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr')
+      document.documentElement.setAttribute('lang', langCode)
+    }
 
     // Réinitialiser après un délai court
     setTimeout(() => setIsChanging(false), 300)
