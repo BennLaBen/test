@@ -1,0 +1,38 @@
+{
+  "title": "Contato - LLEDO Industries",
+  "description": "Entre em contato com a LLEDO Industries para seus projetos de ferramental aeronáutico e manutenção GSE. Consultoria especializada e acompanhamento personalizado.",
+  "hero": {
+    "title": "Entre em Contato",
+    "subtitle": "Nossa equipe de especialistas está à sua disposição para responder às suas perguntas e acompanhá-lo em seus projetos."
+  },
+  "form": {
+    "title": "Fale com Nossa Equipe"
+  },
+  "info": {
+    "title": "Informações de Contato",
+    "phone": {
+      "label": "Telefone",
+      "value": "+33 4 42 02 96 74",
+      "hours": "Seg-Sex 8h-18h CET"
+    },
+    "email": {
+      "label": "Email",
+      "value": "contact@mpeb13.com",
+      "response": "Respondemos rapidamente em dias úteis"
+    },
+    "address": {
+      "label": "Endereço",
+      "value": "9-11 Boulevard de la Capelane",
+      "city": "13170 Les Pennes-Mirabeau",
+      "country": "França"
+    }
+  },
+  "hours": {
+    "title": "Horário de Funcionamento",
+    "weekdays": "Segunda - Sexta: 8:00 - 18:00 CET",
+    "weekend": "Sábado - Domingo: Fechado"
+  },
+  "map": {
+    "title": "Localização"
+  }
+}

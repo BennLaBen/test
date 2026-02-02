@@ -1,20 +1,25 @@
 {
-  "title": "Blog & Actualités - LLEDO Industries",
-  "description": "Découvrez nos articles techniques sur l'usinage de précision, la conception mécanique, la maintenance industrielle et l'histoire du Groupe LLEDO Industries.",
+  "title": "Blog & News - LLEDO Industries",
+  "description": "Discover our technical articles on precision machining, mechanical design, industrial maintenance and the history of LLEDO Industries Group.",
   "hero": {
-    "badge": "Blog LLEDO Industries",
-    "title": "Expertise & Savoir-Faire",
-    "subtitle": "Découvrez nos ateliers, nos équipements et nos réalisations. Articles techniques rédigés par nos experts.",
-    "featured": "À LA UNE",
+    "badge": "LLEDO Industries Blog",
+    "title": "Expertise & Know-How",
+    "subtitle": "Discover our workshops, equipment and achievements. Technical articles written by our experts.",
+    "featured": "FEATURED",
     "stats": {
-      "articles": "Articles publiés",
-      "entities": "Entités",
-      "experience": "Ans d'expertise"
+      "articles": "Published articles",
+      "entities": "Entities",
+      "experience": "Years of expertise"
     }
   },
   "sections": {
-    "latestArticles": "Articles à la une",
-    "allArticles": "Tous nos articles"
+    "latestArticles": "Featured Articles",
+    "allArticles": "All Our Articles"
   },
-  "cardCta": "Lire l'article"
+  "cardCta": "Read Article",
+  "emptyState": {
+    "title": "Our writers are at the workbench...",
+    "subtitle": "Articles are being crafted in our editorial workshop.",
+    "hint": "Precision, quality, deadlines met — even for content."
+  }
 }

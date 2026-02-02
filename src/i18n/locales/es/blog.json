@@ -1,0 +1,25 @@
+{
+  "title": "Blog y Noticias - LLEDO Industries",
+  "description": "Descubra nuestros artículos técnicos sobre mecanizado de precisión, diseño mecánico, mantenimiento industrial y la historia del Grupo LLEDO Industries.",
+  "hero": {
+    "badge": "Blog LLEDO Industries",
+    "title": "Experiencia y Saber Hacer",
+    "subtitle": "Descubra nuestros talleres, equipos y realizaciones. Artículos técnicos redactados por nuestros expertos.",
+    "featured": "DESTACADO",
+    "stats": {
+      "articles": "Artículos publicados",
+      "entities": "Entidades",
+      "experience": "Años de experiencia"
+    }
+  },
+  "sections": {
+    "latestArticles": "Artículos Destacados",
+    "allArticles": "Todos Nuestros Artículos"
+  },
+  "cardCta": "Leer Artículo",
+  "emptyState": {
+    "title": "Nuestros redactores están en el taller...",
+    "subtitle": "Los artículos se están elaborando en nuestro taller editorial.",
+    "hint": "Precisión, calidad, plazos cumplidos — incluso para el contenido."
+  }
+}

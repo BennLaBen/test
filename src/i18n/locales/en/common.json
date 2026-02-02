@@ -1,33 +1,33 @@
 {
   "nav": {
     "home": "Home",
-    "expertises": "Our means and industrial tools",
-    "vision": "LLEDO Industries Group",
+    "expertises": "LLEDO Group",
+    "vision": "Our Vision",
     "trust": "They Trust Us",
     "blog": "Blog",
     "products": "Products",
     "contact": "Contact",
-    "gerard": "LLEDO Industries Group",
-    "caseStudies": "Customer Reviews",
+    "gerard": "LLEDO Group",
+    "caseStudies": "Client Reviews",
     "careers": "Careers",
-    "quote": "Get a quote"
+    "quote": "Request a Quote"
   },
   "hero": {
     "chip": "Engineering Collective",
     "headline": "LLEDO Industries",
     "headlineAccent": "integrated industrial group",
-    "subheadline": "Engineering, precision machining and industrial maintenance for aerospace and defense since 1989. A collective of experts bringing together MPEB, EGI, FREM and MGP to manage your projects from start to finish.",
-    "ctaPrimary": "Contact us",
-    "ctaSecondary": "Discover our companies",
+    "subheadline": "Engineering, precision machining and industrial maintenance for aerospace and defense since 1989. A collective of experts bringing together MPEB, EGI, FREM and MGP to manage your projects end-to-end.",
+    "ctaPrimary": "Contact Us",
+    "ctaSecondary": "Discover Our Companies",
     "badges": {
-      "compliance": "Integrated engineering & machining",
-      "experience": "Over 36 years of expertise",
-      "cmu": "5 companies on 2 sites",
+      "compliance": "Tooling manufacturing and industrial integration",
+      "experience": "Component interchangeability",
+      "cmu": "Multi-entity group",
       "certs": "ISO 9001 & EN 9100"
     },
     "productLabel": "AEROTOOLS Division – GSE expertise",
     "trust": {
-      "title": "Many prestigious clients already trust us, why not you?",
+      "title": "They Trust Us",
       "brands": [
         "Airbus Helicopters",
         "Safran",
@@ -37,141 +37,99 @@
     }
   },
   "features": {
-    "title": "Pourquoi choisir LLEDO Industries ?",
-    "subtitle": "Notre expertise technique et notre engagement qualité nous positionnent comme le partenaire de référence pour vos besoins en outillage aéronautique.",
-    "stats": {
-      "years": "{{count}}+ Années d'expertise",
-      "employees": "{{count}}+ Collaborateurs",
-      "countries": "{{count}}+ Pays exportés",
-      "compliance": "{{percent}} Conformité normes"
-    },
+    "title": "Why Choose LLEDO Industries?",
+    "subtitle": "Recognized technical expertise and quality commitment to meet your industrial needs.",
     "list": [
       {
-        "title": "Conformité garantie",
-        "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
-        "benefits": [
-          "Test 1,25× CMU",
-          "Traçabilité complète",
-          "Certifications aéronautiques"
-        ]
+        "title": "Regulatory Compliance",
+        "description": "All our equipment complies with EN 12312, EN 1915 standards and the Machinery Directive 2006/42/EC.",
+        "benefits": ["Component interchangeability", "Full traceability", "Industrial certifications"]
       },
       {
-        "title": "Précision technique",
-        "description": "Usinage de précision 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
-        "benefits": [
-          "Tolérance ±0.01mm",
-          "Contrôle qualité",
-          "Expertise technique"
-        ]
+        "title": "Precision Machining",
+        "description": "3 to 5-axis precision machining and mechanical part fitting according to client specifications.",
+        "benefits": ["3 to 5-axis machining", "Quality control", "Technical expertise"]
       },
       {
-        "title": "Délais respectés",
-        "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
-        "benefits": [
-          "100 000h/an",
-          "Planification rigoureuse",
-          "Suivi projet"
-        ]
+        "title": "On-Time Delivery",
+        "description": "Meeting agreed deadlines through optimized organization and production capacity.",
+        "benefits": ["Digital project tracking", "Rigorous planning", "Operations management"]
       },
       {
-        "title": "Équipe experte",
-        "description": "Plus de 70 collaborateurs spécialisés dans l'outillage aéronautique et les équipements GSE.",
-        "benefits": [
-          "Formation continue",
-          "Expertise métier",
-          "Support technique"
-        ]
+        "title": "Expert Team",
+        "description": "Specialists in elementary part manufacturing, tooling and special machinery.",
+        "benefits": ["Elementary part manufacturing", "Industrial tooling", "Special machinery"]
       },
       {
-        "title": "Innovation continue",
-        "description": "R&D permanente pour développer des solutions techniques de pointe et améliorer nos produits.",
-        "benefits": [
-          "Bureau d'études intégré",
-          "Prototypage",
-          "Amélioration continue"
-        ]
+        "title": "Continuous Innovation",
+        "description": "Ongoing R&D to develop cutting-edge technical solutions and improve our products.",
+        "benefits": ["Integrated design office", "Prototyping", "Continuous improvement"]
       },
       {
-        "title": "Service international",
-        "description": "Export vers plus de 20 pays avec support technique local et formation des équipes.",
-        "benefits": [
-          "Export international",
-          "Support local",
-          "Formation équipes"
-        ]
+        "title": "Support",
+        "description": "Technical support and client team training to ensure equipment mastery.",
+        "benefits": ["Team training", "On-site maintenance", "Technical support"]
       }
     ],
     "process": {
-      "title": "Processus qualité intégré",
-      "subtitle": "De la conception à la mise en service, nous maîtrisons l'ensemble de la chaîne de valeur pour garantir la qualité et la conformité de nos solutions.",
+      "title": "Integrated Quality Process",
+      "subtitle": "From design to commissioning, we master the entire value chain to ensure quality and compliance of our solutions.",
       "steps": [
-        {
-          "title": "Conception",
-          "subtitle": "Bureau d'études intégré"
-        },
-        {
-          "title": "Fabrication",
-          "subtitle": "Usinage de précision"
-        },
-        {
-          "title": "Contrôle",
-          "subtitle": "Tests et certifications"
-        },
-        {
-          "title": "Service",
-          "subtitle": "Support et maintenance"
-        }
+        { "title": "Design", "subtitle": "Integrated design office" },
+        { "title": "Manufacturing", "subtitle": "Precision machining" },
+        { "title": "Control", "subtitle": "Testing and certifications" },
+        { "title": "Service", "subtitle": "Support and maintenance" }
       ]
     }
   },
   "language": {
-    "switchLabel": "Changer de langue",
-    "current": "Langue actuelle"
+    "switchLabel": "Change language",
+    "current": "Current language"
   },
   "theme": {
     "industrial": {
-      "label": "Mode Métal",
-      "description": "Clair & premium"
+      "label": "Metal Mode",
+      "description": "Light & premium"
     },
     "onyx": {
-      "label": "Mode Onyx",
-      "description": "Nocturne néon"
+      "label": "Onyx Mode",
+      "description": "Dark neon"
     }
   },
   "footer": {
     "company": {
-      "title": "Entreprise",
+      "title": "Company",
       "links": {
-        "about": "Notre Vision",
-        "expertises": "Nos Expertises",
-        "careers": "Carrières",
+        "about": "Our Vision",
+        "expertises": "Our Expertise",
+        "careers": "Careers",
         "contact": "Contact"
       }
     },
     "services": {
-      "title": "Nos Services",
+      "title": "Our Services",
       "links": {
-        "expertises": "Nos Expertises",
-        "brochure": "Télécharger la plaquette",
-        "caseStudies": "Cas clients",
-        "quote": "Get a quote"
+        "expertises": "Our Expertise",
+        "brochure": "Download Brochure",
+        "caseStudies": "Case Studies",
+        "quote": "Request a Quote"
       }
     },
     "resources": {
-      "title": "Ressources",
+      "title": "Resources",
       "links": {
         "blog": "Blog",
-        "caseStudies": "Cas clients",
+        "caseStudies": "Case Studies",
         "docs": "Documentation",
-        "support": "Support technique"
+        "support": "Technical Support"
       }
     },
     "legal": {
-      "title": "Légal",
+      "title": "Legal",
       "links": {
-        "mentions": "Mentions légales",
-        "privacy": "Politique de confidentialité",
-        "terms": "CGV",
+        "mentions": "Legal Notice",
+        "privacy": "Privacy Policy",
+        "terms": "Terms & Conditions",
         "cookies": "Cookies"
       }
     },
@@ -179,8 +137,8 @@
     "phone": "+33 4 42 02 96 74",
     "email": "contact@mpeb13.com",
     "bottom": {
-      "madeInFrance": "Fabriqué en France 🇫🇷",
-      "copyright": "© {{year}} LLEDO Industries. Tous droits réservés."
+      "madeInFrance": "Made in France 🇫🇷",
+      "copyright": "© {{year}} LLEDO Industries. All rights reserved."
     }
   }
 }

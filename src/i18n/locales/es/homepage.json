@@ -1,0 +1,182 @@
+{
+  "products": {
+    "badge": "LLEDO AEROTOOLS",
+    "title": "Equipos GSE Certificados",
+    "subtitle": "Barras de remolque y rodillos hidráulicos diseñados y fabricados en Francia. Conformes con la Directiva de Máquinas 2006/42/CE e ISO 9667.",
+    "cards": [
+      {
+        "id": "rl-r125",
+        "badge": "Referencia",
+        "category": "Barra de remolque",
+        "name": "RL125-02",
+        "description": "Carro de desplazamiento hidráulico para H125/AS350 con patines Ø80mm conformes Airbus.",
+        "features": [
+          "CMU 3.500 kg probada a 4.375 kg",
+          "Cilindro hidráulico 350 bar certificado",
+          "Patines Ø80mm homologados Airbus",
+          "Conforme EN 12312 y Directiva de Máquinas"
+        ],
+        "link": "/aerotools/rl-r125"
+      },
+      {
+        "id": "platform",
+        "badge": "Nuevo",
+        "category": "Mantenimiento",
+        "name": "Plataforma de Acceso",
+        "description": "Plataforma móvil ergonómica para trabajos en altura. Altura ajustable de 2 a 4 m con barandillas conformes.",
+        "features": [
+          "Altura ajustable 2-4 m",
+          "Carga máxima 250 kg",
+          "Barandillas de seguridad",
+          "Ruedas giratorias con freno"
+        ],
+        "link": "/aerotools"
+      },
+      {
+        "id": "tools-kit",
+        "badge": "",
+        "category": "Mantenimiento",
+        "name": "Kit de Herramientas MRO",
+        "description": "Conjunto de herramientas especializadas aeronáuticas con trazabilidad completa y maletín de transporte.",
+        "features": [
+          "Herramientas certificadas aeronáuticas",
+          "Trazabilidad completa",
+          "Maletín de transporte",
+          "Documentación técnica incluida"
+        ],
+        "link": "/aerotools"
+      }
+    ],
+    "cardCta": "Ver Detalles",
+    "footerCta": "Descubrir AEROTOOLS"
+  },
+  "process": {
+    "badge": "Nuestro proceso",
+    "title": "Proceso de Calidad Integrado",
+    "subtitle": "Desde el diseño hasta la puesta en servicio, dominamos toda la cadena de valor para garantizar la calidad y conformidad de nuestras soluciones.",
+    "stepLabel": "Paso {{number}}",
+    "steps": [
+      {
+        "title": "Presupuesto y especificación",
+        "description": "Análisis detallado de sus necesidades, presupuesto preciso y definición de especificaciones técnicas.",
+        "details": [
+          "Estudio de viabilidad",
+          "Presupuesto detallado",
+          "Pliego de condiciones"
+        ]
+      },
+      {
+        "title": "Diseño",
+        "description": "Oficina técnica integrada para el diseño técnico y la validación.",
+        "details": [
+          "Modelado 3D",
+          "Tolerancias dimensionales y geométricas",
+          "Simulación numérica (cálculos por elementos finitos)"
+        ]
+      },
+      {
+        "title": "Documentación técnica y notas de cálculo",
+        "description": "Elaboración de documentación técnica completa y notas de cálculo para validación.",
+        "details": [
+          "Nota de cálculo validada",
+          "Expediente técnico",
+          "Documentación normativa"
+        ]
+      },
+      {
+        "title": "Fabricación",
+        "description": "Mecanizado de precisión en taller certificado con controles de calidad sistemáticos.",
+        "details": [
+          "Mecanizado 5 ejes",
+          "Calderería",
+          "Mecanizado y montaje"
+        ]
+      },
+      {
+        "title": "Validación",
+        "description": "Pruebas y certificaciones conformes a las exigencias industriales.",
+        "details": [
+          "Pruebas de carga estática y dinámica",
+          "Calidad",
+          "Normas de carga"
+        ]
+      },
+      {
+        "title": "Acompañamiento",
+        "description": "Soporte continuo para garantizar la disponibilidad de sus equipos.",
+        "details": [
+          "Formación de equipos cliente",
+          "Mantenimiento in situ"
+        ]
+      }
+    ],
+    "cta": {
+      "title": "¿Listo para iniciar su proyecto?",
+      "subtitle": "Contáctenos para discutir sus necesidades y recibir una propuesta adaptada.",
+      "button": "Iniciar un proyecto"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesita saber sobre nuestros equipos GSE y servicios asociados.",
+    "items": [
+      {
+        "question": "¿Qué certificaciones tienen sus equipos?",
+        "answer": "Todos nuestros equipos cumplen con la Directiva de Máquinas 2006/42/CE y la norma EN 12312-1. Cada producto se entrega con declaración de conformidad UE, certificado de prueba CMU y manual de usuario."
+      },
+      {
+        "question": "¿El RL125-02 es compatible con mi helicóptero?",
+        "answer": "El RL125-02 está diseñado para H125/AS350 (patines Ø80 mm). Hay adaptaciones disponibles para EC120, EC130 y otros modelos mediante kits de patines intercambiables."
+      },
+      {
+        "question": "¿Cuáles son sus plazos de entrega?",
+        "answer": "Para referencias en stock (RL125-02, plataformas estándar), cuente con 2 a 4 semanas para Francia metropolitana. Las producciones a medida requieren de 6 a 10 semanas."
+      },
+      {
+        "question": "¿Ofrecen contratos de mantenimiento?",
+        "answer": "Sí, LLEDO Industries ofrece contratos de mantenimiento preventivo que incluyen inspección completa, controles hidráulicos, prueba CMU y reemplazo de piezas de desgaste."
+      },
+      {
+        "question": "¿Cuál es la garantía?",
+        "answer": "La garantía estándar es de 24 meses en piezas y mano de obra. Hay extensiones disponibles hasta 5 años, incluyendo mantenimiento preventivo y préstamo de equipo."
+      },
+      {
+        "question": "¿Cómo obtener un estudio personalizado?",
+        "answer": "Contáctenos a través del formulario en línea, por teléfono o email. Indique el modelo de helicóptero, el volumen y sus restricciones operativas para recibir una recomendación."
+      }
+    ],
+    "contactCta": "¿No encuentra la respuesta?",
+    "contactDescription": "Nuestros expertos están disponibles para responder a sus preguntas y organizar una demostración.",
+    "contactButton": "Contáctenos"
+  },
+  "cta": {
+    "title": "Equipe su flota con soluciones certificadas",
+    "subtitle": "Confíe en un socio industrial comprometido con la calidad y el acompañamiento.",
+    "primary": "Contáctenos",
+    "secondary": "Descubrir Nuestros Productos",
+    "contacts": {
+      "phone": {
+        "label": "Teléfono",
+        "value": "+33 4 42 02 96 74",
+        "info": "Lun-Vie 8h-18h CET"
+      },
+      "email": {
+        "label": "Email",
+        "value": "contact@lledo-industries.com",
+        "info": "Respondemos rápidamente"
+      },
+      "address": {
+        "label": "Dirección",
+        "value": "9-11 Bd de la Capelane, 13170 Les Pennes-Mirabeau",
+        "info": "Francia"
+      }
+    },
+    "stats": [
+      { "label": "Experiencia", "value": "Saber hacer" },
+      { "label": "Trayectoria", "value": "Historial" },
+      { "label": "Conformidad", "value": "Certificado" },
+      { "label": "Calidad", "value": "ISO 9001" }
+    ]
+  }
+}

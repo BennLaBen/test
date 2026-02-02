@@ -1,0 +1,25 @@
+{
+  "title": "Blog e Notícias - LLEDO Industries",
+  "description": "Descubra nossos artigos técnicos sobre usinagem de precisão, projeto mecânico, manutenção industrial e a história do Grupo LLEDO Industries.",
+  "hero": {
+    "badge": "Blog LLEDO Industries",
+    "title": "Expertise e Know-How",
+    "subtitle": "Descubra nossas oficinas, equipamentos e realizações. Artigos técnicos escritos por nossos especialistas.",
+    "featured": "DESTAQUE",
+    "stats": {
+      "articles": "Artigos publicados",
+      "entities": "Entidades",
+      "experience": "Anos de experiência"
+    }
+  },
+  "sections": {
+    "latestArticles": "Artigos em Destaque",
+    "allArticles": "Todos os Nossos Artigos"
+  },
+  "cardCta": "Ler Artigo",
+  "emptyState": {
+    "title": "Nossos redatores estão na oficina...",
+    "subtitle": "Os artigos estão sendo elaborados em nossa oficina editorial.",
+    "hint": "Precisão, qualidade, prazos cumpridos — até para o conteúdo."
+  }
+}

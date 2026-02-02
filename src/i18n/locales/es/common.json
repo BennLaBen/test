@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "expertises": "Grupo LLEDO",
+    "vision": "Nuestra Visión",
+    "trust": "Confían en Nosotros",
+    "blog": "Blog",
+    "products": "Productos",
+    "contact": "Contacto",
+    "gerard": "Grupo LLEDO",
+    "caseStudies": "Opiniones de Clientes",
+    "careers": "Empleo",
+    "quote": "Solicitar Presupuesto"
+  },
+  "hero": {
+    "chip": "Colectivo de Ingeniería",
+    "headline": "LLEDO Industries",
+    "headlineAccent": "grupo industrial integrado",
+    "subheadline": "Ingeniería, mecanizado de precisión y mantenimiento industrial para aeronáutica y defensa desde 1989. Un colectivo de expertos que reúne MPEB, EGI, FREM y MGP para gestionar sus proyectos de principio a fin.",
+    "ctaPrimary": "Contáctenos",
+    "ctaSecondary": "Descubra Nuestras Empresas",
+    "badges": {
+      "compliance": "Fabricación de utillaje e integración industrial",
+      "experience": "Intercambiabilidad de componentes",
+      "cmu": "Grupo multi-entidad",
+      "certs": "ISO 9001 & EN 9100"
+    },
+    "productLabel": "División AEROTOOLS – experiencia GSE",
+    "trust": {
+      "title": "Confían en Nosotros",
+      "brands": [
+        "Airbus Helicopters",
+        "Safran",
+        "Thales",
+        "Dassault"
+      ]
+    }
+  },
+  "features": {
+    "title": "¿Por qué elegir LLEDO Industries?",
+    "subtitle": "Experiencia técnica reconocida y compromiso de calidad para satisfacer sus necesidades industriales.",
+    "list": [
+      {
+        "title": "Conformidad Normativa",
+        "description": "Todos nuestros equipos cumplen con las normas EN 12312, EN 1915 y la Directiva de Máquinas 2006/42/CE.",
+        "benefits": ["Intercambiabilidad de componentes", "Trazabilidad completa", "Certificaciones industriales"]
+      },
+      {
+        "title": "Mecanizado de Precisión",
+        "description": "Mecanizado de precisión de 3 a 5 ejes y ajuste de piezas mecánicas según especificaciones del cliente.",
+        "benefits": ["Mecanizado de 3 a 5 ejes", "Control de calidad", "Experiencia técnica"]
+      },
+      {
+        "title": "Plazos Cumplidos",
+        "description": "Cumplimiento de plazos acordados gracias a nuestra organización optimizada y capacidad de producción.",
+        "benefits": ["Seguimiento digital de proyectos", "Planificación rigurosa", "Gestión de operaciones"]
+      },
+      {
+        "title": "Equipo Experto",
+        "description": "Especialistas en fabricación de piezas elementales, utillaje y maquinaria especial.",
+        "benefits": ["Fabricación de piezas elementales", "Utillaje industrial", "Maquinaria especial"]
+      },
+      {
+        "title": "Innovación Continua",
+        "description": "I+D permanente para desarrollar soluciones técnicas de vanguardia y mejorar nuestros productos.",
+        "benefits": ["Oficina técnica integrada", "Prototipado", "Mejora continua"]
+      },
+      {
+        "title": "Acompañamiento",
+        "description": "Soporte técnico y formación de equipos cliente para garantizar el dominio de sus equipos.",
+        "benefits": ["Formación de equipos", "Mantenimiento in situ", "Soporte técnico"]
+      }
+    ],
+    "process": {
+      "title": "Proceso de Calidad Integrado",
+      "subtitle": "Desde el diseño hasta la puesta en servicio, dominamos toda la cadena de valor para garantizar la calidad y conformidad de nuestras soluciones.",
+      "steps": [
+        { "title": "Diseño", "subtitle": "Oficina técnica integrada" },
+        { "title": "Fabricación", "subtitle": "Mecanizado de precisión" },
+        { "title": "Control", "subtitle": "Pruebas y certificaciones" },
+        { "title": "Servicio", "subtitle": "Soporte y mantenimiento" }
+      ]
+    }
+  },
+  "language": {
+    "switchLabel": "Cambiar idioma",
+    "current": "Idioma actual"
+  },
+  "theme": {
+    "industrial": {
+      "label": "Modo Metal",
+      "description": "Claro y premium"
+    },
+    "onyx": {
+      "label": "Modo Onyx",
+      "description": "Oscuro neón"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Empresa",
+      "links": {
+        "about": "Nuestra Visión",
+        "expertises": "Nuestras Especialidades",
+        "careers": "Empleo",
+        "contact": "Contacto"
+      }
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "links": {
+        "expertises": "Nuestras Especialidades",
+        "brochure": "Descargar Catálogo",
+        "caseStudies": "Casos de Éxito",
+        "quote": "Solicitar Presupuesto"
+      }
+    },
+    "resources": {
+      "title": "Recursos",
+      "links": {
+        "blog": "Blog",
+        "caseStudies": "Casos de Éxito",
+        "docs": "Documentación",
+        "support": "Soporte Técnico"
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "links": {
+        "mentions": "Aviso Legal",
+        "privacy": "Política de Privacidad",
+        "terms": "Términos y Condiciones",
+        "cookies": "Cookies"
+      }
+    },
+    "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau",
+    "phone": "+33 4 42 02 96 74",
+    "email": "contact@mpeb13.com",
+    "bottom": {
+      "madeInFrance": "Fabricado en Francia 🇫🇷",
+      "copyright": "© {{year}} LLEDO Industries. Todos los derechos reservados."
+    }
+  }
+}
