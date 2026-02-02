@@ -1,0 +1,19 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "react/jsx-no-literals": ["warn", {
+      "noStrings": true,
+      "allowedStrings": ["•", "/", "-", ":", "|", "×", "📸", "⚙️", "💡", "🔧", "🏭", "&", "@", "#", "%", "+", "=", "<", ">", "(", ")", "[", "]", "{", "}", "...", "LLEDO", "MPEB", "EGI", "FREM", "MGP"],
+      "ignoreProps": true,
+      "noAttributeStrings": false
+    }]
+  },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.ts", "**/*.test.ts", "**/*.spec.ts"],
+      "rules": {
+        "react/jsx-no-literals": "off"
+      }
+    }
+  ]
+}

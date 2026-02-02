@@ -144,16 +144,46 @@ const resources: Resource = {
   },
 }
 
+// Configuration stricte pour détecter les clés manquantes
+const isDev = process.env.NODE_ENV === 'development'
+
 // Initialiser i18next une seule fois au chargement du module
 if (!i18next.isInitialized) {
   i18next
     .use(initReactI18next)
     .init({
       lng: 'fr',
-      fallbackLng: 'fr',
+      // En dev: pas de fallback pour détecter les clés manquantes
+      // En prod: fallback vers fr pour éviter les erreurs
+      fallbackLng: isDev ? false : 'fr',
       defaultNS: 'common',
       ns: ['common', 'homepage', 'expertises', 'testimonials', 'brochure', 'vision', 'contact', 'blog', 'cases', 'careers', 'seo'],
       resources,
+      
+      // Configuration stricte
+      returnEmptyString: false,
+      returnNull: false,
+      
+      // Activer le tracking des clés manquantes
+      saveMissing: isDev,
+      missingKeyHandler: (lngs, ns, key, fallbackValue) => {
+        if (isDev) {
+          console.error(`\n🚨 [i18n] MISSING KEY DETECTED:`)
+          console.error(`   Namespace: ${ns}`)
+          console.error(`   Key: ${key}`)
+          console.error(`   Languages: ${lngs.join(', ')}`)
+          console.error(`   Fallback: ${fallbackValue}\n`)
+        }
+      },
+      
+      // Formater les clés manquantes de façon visible en dev
+      parseMissingKeyHandler: (key: string) => {
+        if (isDev) {
+          return `⚠️ ${key}`
+        }
+        return key
+      },
+      
       interpolation: { escapeValue: false },
       react: { 
         useSuspense: false,
@@ -161,6 +191,13 @@ if (!i18next.isInitialized) {
         bindI18nStore: 'added removed',
       },
     })
+    
+  // Listener global pour les clés manquantes
+  if (isDev) {
+    i18next.on('missingKey', (lngs, namespace, key) => {
+      console.warn(`🔍 [i18n] Missing: ${namespace}:${key} (${lngs})`)
+    })
+  }
 }
 
 export function I18nProvider({ children, locale = 'fr' }: Props) {
