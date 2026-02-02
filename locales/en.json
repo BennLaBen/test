@@ -1,0 +1,226 @@
+{
+  "nav": {
+    "home": "Home",
+    "expertises": "LLEDO Group",
+    "vision": "Our Vision",
+    "trust": "They Trust Us",
+    "blog": "Blog",
+    "products": "Products",
+    "contact": "Contact",
+    "caseStudies": "Client Reviews",
+    "careers": "Careers",
+    "quote": "Request a Quote"
+  },
+  "hero": {
+    "chip": "Engineering Collective",
+    "headline": "LLEDO Industries",
+    "headlineAccent": "integrated industrial group",
+    "subheadline": "Engineering, precision machining and industrial maintenance for aerospace and defense since 1989.",
+    "ctaPrimary": "Contact Us",
+    "ctaSecondary": "Discover Our Companies",
+    "badges": {
+      "compliance": "Tooling & integration",
+      "experience": "36 years expertise",
+      "cmu": "Multi-entity group",
+      "certs": "ISO 9001 & EN 9100"
+    }
+  },
+  "features": {
+    "title": "Why Choose LLEDO Industries?",
+    "subtitle": "Technical expertise and quality commitment for your industrial needs.",
+    "list": [
+      { "title": "Regulatory Compliance", "description": "EN 12312, EN 1915, Machinery Directive 2006/42/EC" },
+      { "title": "Precision Machining", "description": "3 to 5-axis CNC machining" },
+      { "title": "On-Time Delivery", "description": "Rigorous planning and tracking" },
+      { "title": "Expert Team", "description": "70 specialized professionals" },
+      { "title": "Continuous Innovation", "description": "Integrated design office" },
+      { "title": "Support", "description": "Training and maintenance" }
+    ]
+  },
+  "products": {
+    "badge": "LLEDO AEROTOOLS",
+    "title": "Certified GSE Equipment",
+    "subtitle": "Towbars and hydraulic rollers designed in France.",
+    "cardCta": "View Details",
+    "footerCta": "Discover AEROTOOLS"
+  },
+  "process": {
+    "badge": "Our process",
+    "title": "Integrated Quality Process",
+    "subtitle": "From design to commissioning.",
+    "steps": [
+      { "title": "Quote", "subtitle": "Feasibility study" },
+      { "title": "Design", "subtitle": "3D modeling" },
+      { "title": "Manufacturing", "subtitle": "5-axis machining" },
+      { "title": "Validation", "subtitle": "Load testing" },
+      { "title": "Support", "subtitle": "Training" }
+    ]
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently Asked Questions",
+    "subtitle": "GSE equipment and services.",
+    "contactCta": "Can't find the answer?",
+    "contactButton": "Contact Us"
+  },
+  "cta": {
+    "title": "Equip your fleet with certified solutions",
+    "subtitle": "Trust an industrial partner committed to quality.",
+    "primary": "Contact Us",
+    "secondary": "Discover Products"
+  },
+  "vision": {
+    "badge": "Founder's Vision",
+    "title": "Gérard Lledo",
+    "subtitle": "Founder & President",
+    "intro": "Building French industrial excellence since 1989.",
+    "stats": [
+      { "value": "36 yrs", "label": "Experience" },
+      { "value": "70", "label": "Employees" },
+      { "value": "5", "label": "Entities" },
+      { "value": "~10M€", "label": "Revenue" }
+    ]
+  },
+  "values": {
+    "badge": "Our Values",
+    "title": "Pillars of Success",
+    "list": [
+      { "title": "Technical Excellence", "description": "High quality standards" },
+      { "title": "Human Capital", "description": "Investing in our team" },
+      { "title": "Client Commitment", "description": "Tailored solutions" },
+      { "title": "Innovation", "description": "Continuous improvement" },
+      { "title": "Responsiveness", "description": "Meeting deadlines" },
+      { "title": "Certifications", "description": "ISO 9001, EN 9100" }
+    ]
+  },
+  "history": {
+    "badge": "Our History",
+    "title": "36 Years of Growth",
+    "milestones": [
+      { "year": "1989", "event": "MPEB founded" },
+      { "year": "2000", "event": "ISO 9001 certified" },
+      { "year": "2008", "event": "EGI created" },
+      { "year": "2015", "event": "EN 9100 certified" },
+      { "year": "2024", "event": "LLEDO Industries Group" }
+    ]
+  },
+  "expertises": {
+    "title": "Discover LLEDO Group Companies",
+    "subtitle": "5 complementary entities for your industrial needs.",
+    "entities": [
+      { "name": "MPEB", "tagline": "Precision machining" },
+      { "name": "EGI", "tagline": "Engineering office" },
+      { "name": "FREM", "tagline": "Industrial maintenance" },
+      { "name": "MGP", "tagline": "Sheet metal & welding" },
+      { "name": "LLEDO Aerotools", "tagline": "Helicopter GSE" }
+    ]
+  },
+  "testimonials": {
+    "title": "Client Testimonials",
+    "subtitle": "They trust us for critical projects.",
+    "satisfaction": {
+      "title": "Quality Commitments",
+      "stats": [
+        { "label": "Product Quality", "value": "Excellence" },
+        { "label": "On-Time Delivery", "value": "Rigor" },
+        { "label": "Customer Service", "value": "Proximity" },
+        { "label": "Recommendation", "value": "Trust" }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Our experts are at your disposal.",
+    "form": { "title": "Get in Touch" },
+    "info": {
+      "phone": { "label": "Phone", "value": "+33 4 42 02 96 74" },
+      "email": { "label": "Email", "value": "contact@mpeb13.com" },
+      "address": { "label": "Address", "value": "Les Pennes-Mirabeau, France" }
+    },
+    "hours": {
+      "title": "Opening Hours",
+      "weekdays": "Mon-Fri: 8am-6pm CET",
+      "weekend": "Sat-Sun: Closed"
+    }
+  },
+  "careers": {
+    "title": "Careers at LLEDO Industries",
+    "subtitle": "Join a passionate team in aerospace innovation."
+  },
+  "blog": {
+    "title": "Blog & News",
+    "subtitle": "Technical articles by our experts.",
+    "featured": "FEATURED",
+    "cardCta": "Read Article",
+    "emptyState": {
+      "title": "Writers at the workbench...",
+      "subtitle": "Articles coming soon.",
+      "hint": "Precision, quality, deadlines — even for content."
+    }
+  },
+  "footer": {
+    "company": { "title": "Company" },
+    "services": { "title": "Services" },
+    "resources": { "title": "Resources" },
+    "legal": { "title": "Legal" },
+    "madeInFrance": "Made in France 🇫🇷",
+    "copyright": "© {{year}} LLEDO Industries. All rights reserved."
+  },
+  "ui": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "viewMore": "View More",
+    "viewLess": "View Less",
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "requestQuote": "Request Quote",
+    "downloadBrochure": "Download Brochure"
+  },
+  "seo": {
+    "home": {
+      "metaTitle": "LLEDO Industries | Precision Machining & Industrial Maintenance for Aerospace",
+      "metaDescription": "French industrial group for aerospace and defense. ISO 9001 & EN 9100 certified.",
+      "h1": "Integrated Industrial Group for Aerospace & Defense"
+    },
+    "vision": {
+      "metaTitle": "Our Vision | LLEDO Industries Group",
+      "metaDescription": "Discover the vision of Gérard Lledo, founder of LLEDO Industries.",
+      "h1": "The Founder's Vision"
+    },
+    "expertises": {
+      "metaTitle": "Our Companies | MPEB, EGI, FREM, MGP & LLEDO Aerotools",
+      "metaDescription": "5 complementary entities for precision machining, engineering, and GSE.",
+      "h1": "Discover LLEDO Group Companies"
+    },
+    "contact": {
+      "metaTitle": "Contact LLEDO Industries | Request a Quote",
+      "metaDescription": "Contact our team for aerospace tooling and GSE projects.",
+      "h1": "Contact Us"
+    },
+    "careers": {
+      "metaTitle": "Careers at LLEDO Industries",
+      "metaDescription": "Join our team of 70 aerospace professionals.",
+      "h1": "Careers at LLEDO Industries"
+    },
+    "blog": {
+      "metaTitle": "Blog & Technical Insights | LLEDO Industries",
+      "metaDescription": "Technical articles on precision machining and aerospace tooling.",
+      "h1": "Expertise & Know-How"
+    }
+  }
+}

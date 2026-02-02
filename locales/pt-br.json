@@ -1,0 +1,226 @@
+{
+  "nav": {
+    "home": "Início",
+    "expertises": "Grupo LLEDO",
+    "vision": "Nossa Visão",
+    "trust": "Confiam em Nós",
+    "blog": "Blog",
+    "products": "Produtos",
+    "contact": "Contato",
+    "caseStudies": "Avaliações de Clientes",
+    "careers": "Carreiras",
+    "quote": "Solicitar Orçamento"
+  },
+  "hero": {
+    "chip": "Coletivo de Engenharia",
+    "headline": "LLEDO Industries",
+    "headlineAccent": "grupo industrial integrado",
+    "subheadline": "Engenharia, usinagem de precisão e manutenção industrial para aeronáutica e defesa desde 1989.",
+    "ctaPrimary": "Entre em Contato",
+    "ctaSecondary": "Conheça Nossas Empresas",
+    "badges": {
+      "compliance": "Ferramental e integração",
+      "experience": "36 anos de experiência",
+      "cmu": "Grupo multi-entidade",
+      "certs": "ISO 9001 & EN 9100"
+    }
+  },
+  "features": {
+    "title": "Por que Escolher a LLEDO Industries?",
+    "subtitle": "Expertise técnica e compromisso com qualidade para suas necessidades industriais.",
+    "list": [
+      { "title": "Conformidade Normativa", "description": "EN 12312, EN 1915, Diretiva Máquinas 2006/42/CE" },
+      { "title": "Usinagem de Precisão", "description": "Usinagem CNC de 3 a 5 eixos" },
+      { "title": "Prazos Cumpridos", "description": "Planejamento e acompanhamento rigoroso" },
+      { "title": "Equipe Especializada", "description": "70 profissionais especializados" },
+      { "title": "Inovação Contínua", "description": "Escritório técnico integrado" },
+      { "title": "Acompanhamento", "description": "Treinamento e manutenção" }
+    ]
+  },
+  "products": {
+    "badge": "LLEDO AEROTOOLS",
+    "title": "Equipamentos GSE Certificados",
+    "subtitle": "Barras de reboque e rolos hidráulicos projetados na França.",
+    "cardCta": "Ver Detalhes",
+    "footerCta": "Descobrir AEROTOOLS"
+  },
+  "process": {
+    "badge": "Nosso processo",
+    "title": "Processo de Qualidade Integrado",
+    "subtitle": "Do projeto à entrega.",
+    "steps": [
+      { "title": "Orçamento", "subtitle": "Estudo de viabilidade" },
+      { "title": "Projeto", "subtitle": "Modelagem 3D" },
+      { "title": "Fabricação", "subtitle": "Usinagem 5 eixos" },
+      { "title": "Validação", "subtitle": "Testes de carga" },
+      { "title": "Acompanhamento", "subtitle": "Treinamento" }
+    ]
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Perguntas Frequentes",
+    "subtitle": "Equipamentos GSE e serviços.",
+    "contactCta": "Não encontrou a resposta?",
+    "contactButton": "Entre em Contato"
+  },
+  "cta": {
+    "title": "Equipe sua frota com soluções certificadas",
+    "subtitle": "Confie em um parceiro industrial comprometido com a qualidade.",
+    "primary": "Entre em Contato",
+    "secondary": "Descobrir Produtos"
+  },
+  "vision": {
+    "badge": "Visão do Fundador",
+    "title": "Gérard Lledo",
+    "subtitle": "Fundador e Presidente",
+    "intro": "Construindo a excelência industrial francesa desde 1989.",
+    "stats": [
+      { "value": "36 anos", "label": "Experiência" },
+      { "value": "70", "label": "Colaboradores" },
+      { "value": "5", "label": "Entidades" },
+      { "value": "~10M€", "label": "Faturamento" }
+    ]
+  },
+  "values": {
+    "badge": "Nossos Valores",
+    "title": "Pilares do Sucesso",
+    "list": [
+      { "title": "Excelência Técnica", "description": "Padrões de qualidade elevados" },
+      { "title": "Capital Humano", "description": "Investir em nossa equipe" },
+      { "title": "Compromisso Cliente", "description": "Soluções sob medida" },
+      { "title": "Inovação", "description": "Melhoria contínua" },
+      { "title": "Reatividade", "description": "Cumprimento de prazos" },
+      { "title": "Certificações", "description": "ISO 9001, EN 9100" }
+    ]
+  },
+  "history": {
+    "badge": "Nossa História",
+    "title": "36 Anos de Crescimento",
+    "milestones": [
+      { "year": "1989", "event": "Criação da MPEB" },
+      { "year": "2000", "event": "Certificação ISO 9001" },
+      { "year": "2008", "event": "Criação da EGI" },
+      { "year": "2015", "event": "Certificação EN 9100" },
+      { "year": "2024", "event": "Grupo LLEDO Industries" }
+    ]
+  },
+  "expertises": {
+    "title": "Conheça as Empresas do Grupo LLEDO",
+    "subtitle": "5 entidades complementares para suas necessidades industriais.",
+    "entities": [
+      { "name": "MPEB", "tagline": "Usinagem de precisão" },
+      { "name": "EGI", "tagline": "Escritório técnico" },
+      { "name": "FREM", "tagline": "Manutenção industrial" },
+      { "name": "MGP", "tagline": "Chaparia e solda" },
+      { "name": "LLEDO Aerotools", "tagline": "GSE helicópteros" }
+    ]
+  },
+  "testimonials": {
+    "title": "Depoimentos de Clientes",
+    "subtitle": "Confiam em nós para seus projetos críticos.",
+    "satisfaction": {
+      "title": "Compromissos de Qualidade",
+      "stats": [
+        { "label": "Qualidade Produtos", "value": "Exigência" },
+        { "label": "Cumprimento Prazos", "value": "Rigor" },
+        { "label": "Atendimento Cliente", "value": "Proximidade" },
+        { "label": "Recomendação", "value": "Confiança" }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Nossos especialistas estão à sua disposição.",
+    "form": { "title": "Fale com Nossa Equipe" },
+    "info": {
+      "phone": { "label": "Telefone", "value": "+33 4 42 02 96 74" },
+      "email": { "label": "Email", "value": "contact@mpeb13.com" },
+      "address": { "label": "Endereço", "value": "Les Pennes-Mirabeau, França" }
+    },
+    "hours": {
+      "title": "Horário de Funcionamento",
+      "weekdays": "Seg-Sex: 8h-18h CET",
+      "weekend": "Sáb-Dom: Fechado"
+    }
+  },
+  "careers": {
+    "title": "Carreiras na LLEDO Industries",
+    "subtitle": "Junte-se a uma equipe apaixonada pela inovação aeronáutica."
+  },
+  "blog": {
+    "title": "Blog e Notícias",
+    "subtitle": "Artigos técnicos por nossos especialistas.",
+    "featured": "DESTAQUE",
+    "cardCta": "Ler Artigo",
+    "emptyState": {
+      "title": "Nossos redatores estão na oficina...",
+      "subtitle": "Artigos em preparação.",
+      "hint": "Precisão, qualidade, prazos — até para o conteúdo."
+    }
+  },
+  "footer": {
+    "company": { "title": "Empresa" },
+    "services": { "title": "Serviços" },
+    "resources": { "title": "Recursos" },
+    "legal": { "title": "Legal" },
+    "madeInFrance": "Fabricado na França 🇫🇷",
+    "copyright": "© {{year}} LLEDO Industries. Todos os direitos reservados."
+  },
+  "ui": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "viewMore": "Ver Mais",
+    "viewLess": "Ver Menos",
+    "readMore": "Ler Mais",
+    "learnMore": "Saiba Mais",
+    "getStarted": "Começar",
+    "contactUs": "Entre em Contato",
+    "requestQuote": "Solicitar Orçamento",
+    "downloadBrochure": "Baixar Catálogo"
+  },
+  "seo": {
+    "home": {
+      "metaTitle": "LLEDO Industries | Usinagem de Precisão e Manutenção Industrial Aeronáutica",
+      "metaDescription": "Grupo industrial francês para aeronáutica e defesa. Certificado ISO 9001 e EN 9100.",
+      "h1": "Grupo Industrial Integrado para Aeronáutica e Defesa"
+    },
+    "vision": {
+      "metaTitle": "Nossa Visão | Grupo LLEDO Industries",
+      "metaDescription": "Conheça a visão de Gérard Lledo, fundador da LLEDO Industries.",
+      "h1": "A Visão do Fundador"
+    },
+    "expertises": {
+      "metaTitle": "Nossas Empresas | MPEB, EGI, FREM, MGP e LLEDO Aerotools",
+      "metaDescription": "5 entidades complementares para usinagem de precisão, engenharia e GSE.",
+      "h1": "Conheça as Empresas do Grupo LLEDO"
+    },
+    "contact": {
+      "metaTitle": "Contato LLEDO Industries | Solicite Orçamento",
+      "metaDescription": "Entre em contato para projetos de ferramental aeronáutico e GSE.",
+      "h1": "Entre em Contato"
+    },
+    "careers": {
+      "metaTitle": "Carreiras na LLEDO Industries",
+      "metaDescription": "Junte-se à nossa equipe de 70 profissionais aeronáuticos.",
+      "h1": "Carreiras na LLEDO Industries"
+    },
+    "blog": {
+      "metaTitle": "Blog e Artigos Técnicos | LLEDO Industries",
+      "metaDescription": "Artigos técnicos sobre usinagem de precisão e ferramental aeronáutico.",
+      "h1": "Expertise e Know-How"
+    }
+  }
+}
