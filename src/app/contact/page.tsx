@@ -389,26 +389,86 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section id="map" className="py-20 lg:py-32 relative overflow-hidden">
-        <IndustrialBackground variant="precision" />
+      <section id="map" className="py-16 lg:py-24 relative overflow-hidden bg-gray-900">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
         
         <div className="container relative z-10">
+          {/* Header */}
           <motion.div
-            className="glass-card tech-border relative overflow-hidden"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative h-96 bg-gradient-to-br from-primary-500/10 to-primary-600/5 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="h-24 w-24 mx-auto mb-4 text-primary-500 opacity-50" />
-                <p className="text-muted text-lg">
-                  📍 Carte interactive à venir
-                </p>
-                <p className="text-sm text-muted mt-2">
-                  9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau
-                </p>
+            <div className="mb-4 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <MapPin className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">Nous trouver</span>
+            </div>
+            <h2 className="text-3xl font-black text-white lg:text-4xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
+              Notre localisation
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="rounded-2xl overflow-hidden border-2 border-blue-400/30 relative"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ boxShadow: '0 0 60px rgba(59, 130, 246, 0.2)' }}
+          >
+            {/* Carte OpenStreetMap */}
+            <div className="relative h-80 sm:h-96 lg:h-[450px] w-full">
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=5.3000%2C43.4000%2C5.3500%2C43.4300&layer=mapnik&marker=43.4150%2C5.3250"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localisation LLEDO Industries - Les Pennes-Mirabeau"
+                style={{ filter: 'saturate(0.8) contrast(1.1)' }}
+              />
+              
+              {/* Overlay gradient en bas */}
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 to-transparent pointer-events-none" />
+            </div>
+
+            {/* Barre d'infos en bas */}
+            <div className="bg-gray-800/95 backdrop-blur-xl p-4 sm:p-6 border-t border-blue-400/20">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                {/* Adresse */}
+                <div className="flex items-start gap-3">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-white text-lg">LLEDO Industries</h3>
+                    <p className="text-gray-300 text-sm">9-11 Boulevard de la Capelane</p>
+                    <p className="text-gray-400 text-sm">13170 Les Pennes-Mirabeau, France</p>
+                  </div>
+                </div>
+
+                {/* Bouton Google Maps */}
+                <motion.a
+                  href="https://www.google.com/maps/search/?api=1&query=9-11+Boulevard+de+la+Capelane+13170+Les+Pennes-Mirabeau+France"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl font-bold text-sm uppercase tracking-wider touch-manipulation"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <span>Ouvrir dans Google Maps</span>
+                  <ArrowRight className="h-4 w-4" />
+                </motion.a>
               </div>
             </div>
           </motion.div>
