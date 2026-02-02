@@ -194,10 +194,10 @@ export function Footer() {
         {/* Certifications avec badges industriels */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-gray-800 pt-6">
           {[
-            { icon: 'CE', label: 'Marquage CE' },
-            { icon: '9001', label: 'ISO 9001:2015' },
-            { icon: '9100', label: 'EN 9100' },
-            { icon: '12312', label: 'EN 12312-1' },
+            { icon: 'CE', labelKey: 'certifications.ce' },
+            { icon: '9001', labelKey: 'certifications.iso9001' },
+            { icon: '9100', labelKey: 'certifications.en9100' },
+            { icon: '12312', labelKey: 'certifications.en12312' },
           ].map((cert, index) => (
             <motion.div
               key={index}
@@ -207,7 +207,7 @@ export function Footer() {
               <span className="flex h-6 w-6 items-center justify-center rounded bg-primary-500/20 text-xs font-bold text-primary-400">
                 {cert.icon}
               </span>
-              <span className="text-xs">{cert.label}</span>
+              <span className="text-xs">{t(cert.labelKey)}</span>
             </motion.div>
           ))}
         </div>

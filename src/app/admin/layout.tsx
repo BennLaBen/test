@@ -19,19 +19,21 @@ import {
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { ToastProvider } from '@/components/admin/Toast'
+import { useTranslation } from 'react-i18next'
 
 const adminNav = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/entreprises', label: 'Entreprises', icon: Building2 },
-  { href: '/admin/offres', label: 'Offres d\'emploi', icon: Briefcase },
-  { href: '/admin/candidatures', label: 'Candidatures', icon: Users },
-  { href: '/admin/blog', label: 'Blog', icon: FileText },
-  { href: '/admin/medias', label: 'Médiathèque', icon: ImageIcon },
-  { href: '/admin/avis', label: 'Avis clients', icon: Star },
+  { href: '/admin', labelKey: 'admin.dashboard', icon: LayoutDashboard },
+  { href: '/admin/entreprises', labelKey: 'admin.companies', icon: Building2 },
+  { href: '/admin/offres', labelKey: 'admin.jobOffers', icon: Briefcase },
+  { href: '/admin/candidatures', labelKey: 'admin.applications', icon: Users },
+  { href: '/admin/blog', labelKey: 'admin.blog', icon: FileText },
+  { href: '/admin/medias', labelKey: 'admin.mediaLibrary', icon: ImageIcon },
+  { href: '/admin/avis', labelKey: 'admin.reviews', icon: Star },
 ]
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const pathname = usePathname()
+  const { t } = useTranslation('common')
 
   return (
     <>
@@ -61,7 +63,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
             <Building2 className="h-8 w-8 text-primary-400" />
             <div>
               <p className="font-bold">LLEDO Admin</p>
-              <p className="text-xs text-gray-400">Panneau d'administration</p>
+              <p className="text-xs text-gray-400">{t('admin.panel')}</p>
             </div>
           </div>
 
@@ -83,7 +85,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                   }`}
                 >
                   <Icon className="h-5 w-5" />
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               )
             })}
@@ -95,7 +97,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors w-full"
             >
               <LogOut className="h-5 w-5" />
-              Déconnexion
+              {t('auth.logout')}
             </button>
           </div>
         </div>

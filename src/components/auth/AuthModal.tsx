@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Mail, Lock, User, Building2, LogIn, UserPlus, Eye, EyeOff, Sparkles } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
+import { useTranslation } from 'react-i18next'
 
 interface AuthModalProps {
   isOpen: boolean
@@ -18,6 +19,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
   const [error, setError] = useState('')
   
   const { login, signup } = useAuth()
+  const { t } = useTranslation('common')
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -44,7 +46,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
       onClose()
       setLoginData({ email: '', password: '' })
     } else {
-      setError(result.error || 'Erreur de connexion')
+      setError(result.error || t('auth.loginError'))
     }
     
     setIsLoading(false)
@@ -56,12 +58,12 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
     // Validations
     if (signupData.password !== signupData.confirmPassword) {
-      setError('Les mots de passe ne correspondent pas')
+      setError(t('auth.passwordMismatch'))
       return
     }
 
     if (signupData.password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères')
+      setError(t('auth.passwordTooShort'))
       return
     }
 
@@ -86,7 +88,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
         company: ''
       })
     } else {
-      setError(result.error || 'Erreur lors de l\'inscription')
+      setError(result.error || t('auth.registerError'))
     }
     
     setIsLoading(false)
@@ -133,12 +135,12 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               {mode === 'login' ? <LogIn className="h-7 w-7 sm:h-8 sm:w-8" /> : <UserPlus className="h-7 w-7 sm:h-8 sm:w-8" />}
             </motion.div>
             <h2 className="text-xl sm:text-2xl font-bold text-muted-strong mb-2">
-              {mode === 'login' ? 'Connexion' : 'Créer un compte'}
+              {mode === 'login' ? t('auth.login') : t('auth.createAccount')}
             </h2>
             <p className="text-xs sm:text-sm text-muted px-2">
               {mode === 'login' 
-                ? 'Connectez-vous pour laisser un avis ou télécharger des documents' 
-                : 'Rejoignez notre communauté de clients satisfaits'}
+                ? t('auth.loginSubtitle') 
+                : t('auth.registerSubtitle')}
             </p>
           </div>
 
@@ -158,7 +160,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
             <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4 relative z-10">
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-muted-strong mb-1.5 sm:mb-2">
-                  Email
+                  {t('auth.email')}
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted" />
@@ -175,7 +177,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-muted-strong mb-1.5 sm:mb-2">
-                  Mot de passe
+                  {t('auth.password')}
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted" />
@@ -207,12 +209,12 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
                 {isLoading ? (
                   <>
                     <div className="h-4 w-4 sm:h-5 sm:w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    <span className="text-sm sm:text-base">Connexion...</span>
+                    <span className="text-sm sm:text-base">{t('auth.connecting')}</span>
                   </>
                 ) : (
                   <>
                     <LogIn className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="text-sm sm:text-base">Se connecter</span>
+                    <span className="text-sm sm:text-base">{t('auth.login')}</span>
                   </>
                 )}
               </motion.button>
@@ -222,7 +224,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-muted-strong mb-1.5 sm:mb-2">
-                    Prénom
+                    {t('auth.firstName')}
                   </label>
                   <div className="relative">
                     <User className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted" />
@@ -239,7 +241,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
                 <div>
                   <label className="block text-xs sm:text-sm font-medium text-muted-strong mb-1.5 sm:mb-2">
-                    Nom
+                    {t('auth.lastName')}
                   </label>
                   <input
                     type="text"
@@ -254,7 +256,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
-                  Email
+                  {t('auth.email')}
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" />
@@ -271,7 +273,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
-                  Entreprise <span className="text-muted text-xs">(optionnel)</span>
+                  {t('auth.company')} <span className="text-muted text-xs">({t('auth.optional')})</span>
                 </label>
                 <div className="relative">
                   <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" />
@@ -287,7 +289,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
-                  Mot de passe
+                  {t('auth.password')}
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" />
@@ -311,7 +313,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
               <div>
                 <label className="block text-sm font-medium text-muted-strong mb-2">
-                  Confirmer le mot de passe
+                  {t('auth.confirmPassword')}
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted" />
@@ -336,12 +338,12 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
                 {isLoading ? (
                   <>
                     <div className="h-4 w-4 sm:h-5 sm:w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    <span className="text-sm sm:text-base">Création...</span>
+                    <span className="text-sm sm:text-base">{t('auth.creating')}</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <span className="text-sm sm:text-base">Créer mon compte</span>
+                    <span className="text-sm sm:text-base">{t('auth.createAccount')}</span>
                   </>
                 )}
               </motion.button>
@@ -358,8 +360,8 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               className="text-xs sm:text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors px-2 py-1"
             >
               {mode === 'login' 
-                ? "Pas encore de compte ? Inscrivez-vous"
-                : "Déjà un compte ? Connectez-vous"}
+                ? t('auth.noAccountSignup')
+                : t('auth.alreadyHaveAccountLogin')}
             </button>
           </div>
         </motion.div>

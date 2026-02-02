@@ -148,7 +148,7 @@ export function Navigation() {
                     <p className="text-xs text-gray-400">{user.email}</p>
                     {user.role === 'ADMIN' && (
                       <span className="inline-flex items-center px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                        Administrateur
+                        {t('auth.administrator')}
                       </span>
                     )}
                   </div>
@@ -158,7 +158,7 @@ export function Navigation() {
                       className="w-full flex items-center gap-2 px-3 py-2 text-sm text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors mt-1"
                     >
                       <User className="h-4 w-4" />
-                      Tableau de bord
+                      {t('auth.dashboard')}
                     </Link>
                   )}
                   <Link
@@ -166,14 +166,14 @@ export function Navigation() {
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
                   >
                     <User className="h-4 w-4" />
-                    Mon profil
+                    {t('auth.myProfile')}
                   </Link>
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-1"
                   >
                     <LogOut className="h-4 w-4" />
-                    Déconnexion
+                    {t('auth.logout')}
                   </button>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export function Navigation() {
                 className="btn-secondary text-sm px-4 whitespace-nowrap inline-flex items-center gap-2"
               >
                 <User className="h-4 w-4" />
-                Connexion
+                {t('auth.login')}
               </Link>
             )}
             
@@ -243,7 +243,7 @@ export function Navigation() {
               aria-expanded={isOpen}
               aria-label="Menu principal"
             >
-              <span className="sr-only">Ouvrir le menu principal</span>
+              <span className="sr-only">{t('ui.openMenu')}</span>
               {isOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
               ) : (
@@ -328,7 +328,7 @@ export function Navigation() {
                       className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-[14px] font-semibold text-red-300 bg-red-900/30 rounded-lg active:scale-[0.98] transition-all border border-red-500/30"
                     >
                       <LogOut className="h-4 w-4" />
-                      Déconnexion
+                      {t('auth.logout')}
                     </button>
                   </motion.div>
                 )}
@@ -388,7 +388,7 @@ export function Navigation() {
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                   >
                     <User className="h-5 w-5" />
-                    Connexion / Inscription
+                    {t('auth.loginRegister')}
                   </Link>
                 )}
 
