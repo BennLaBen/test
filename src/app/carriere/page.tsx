@@ -28,7 +28,12 @@ import {
   Shield,
   Lightbulb,
   Building2,
-  Rocket
+  Rocket,
+  Upload,
+  Send,
+  FileText,
+  User,
+  MessageSquare
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -50,6 +55,38 @@ export default function CareersPage() {
   const { t } = useTranslation('careers')
   const [jobs, setJobs] = useState<Job[]>([])
   const [loadingJobs, setLoadingJobs] = useState(true)
+  const [showApplicationForm, setShowApplicationForm] = useState(false)
+  const [applicationData, setApplicationData] = useState({
+    name: '',
+    email: '',
+    position: '',
+    message: '',
+    cv: null as File | null
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const handleApplicationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simuler l'envoi (à remplacer par un vrai appel API)
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    
+    setIsSubmitting(false)
+    setSubmitSuccess(true)
+    
+    // Reset après 3 secondes
+    setTimeout(() => {
+      setSubmitSuccess(false)
+      setShowApplicationForm(false)
+      setApplicationData({ name: '', email: '', position: '', message: '', cv: null })
+    }, 3000)
+  }
+
+  const scrollToJobs = () => {
+    document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     async function fetchJobs() {
@@ -175,6 +212,226 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      {/* ========== SECTION POSTULER - AU-DESSUS DE LA LIGNE DE FLOTTAISON ========== */}
+      <section id="apply-now" className="py-8 sm:py-12 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 opacity-20">
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
+                               radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%)`
+            }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        <div className="container relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <motion.div
+              className="text-center mb-6 sm:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase mb-2" style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.3)' }}>
+                Prêt à nous rejoindre ?
+              </h2>
+              <p className="text-blue-200 text-sm sm:text-base">
+                Postulez en quelques clics ou contactez notre équipe RH
+              </p>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            {!showApplicationForm ? (
+              <motion.div
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {/* Bouton Principal - Déposer ma candidature */}
+                <motion.button
+                  onClick={() => setShowApplicationForm(true)}
+                  className="w-full sm:w-auto relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-900 rounded-xl font-black text-base sm:text-lg uppercase tracking-wider overflow-hidden group touch-manipulation"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ boxShadow: '0 0 40px rgba(255, 255, 255, 0.4)' }}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent"
+                    animate={{ x: ['-200%', '200%'] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  />
+                  <Upload className="h-5 w-5 relative z-10" />
+                  <span className="relative z-10">Déposer ma candidature</span>
+                </motion.button>
+
+                {/* Bouton Secondaire - Contacter l'équipe */}
+                <motion.a
+                  href="mailto:rh@lledo-industries.com"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-white/50 text-white rounded-xl font-bold text-base sm:text-lg uppercase tracking-wider hover:bg-white/10 transition-all touch-manipulation"
+                  whileHover={{ scale: 1.05, y: -3, borderColor: 'rgba(255,255,255,0.8)' }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Mail className="h-5 w-5" />
+                  <span>Contacter l'équipe</span>
+                </motion.a>
+
+                {/* Lien vers les offres */}
+                <motion.button
+                  onClick={scrollToJobs}
+                  className="text-blue-200 hover:text-white text-sm font-semibold flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4 touch-manipulation"
+                  whileHover={{ x: 5 }}
+                >
+                  <span>Voir les offres</span>
+                  <ArrowRight className="h-4 w-4" />
+                </motion.button>
+              </motion.div>
+            ) : (
+              /* Formulaire de candidature */
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-8"
+                style={{ boxShadow: '0 0 60px rgba(59, 130, 246, 0.3)' }}
+              >
+                {submitSuccess ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-8"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", duration: 0.6 }}
+                      className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                    >
+                      <CheckCircle className="h-10 w-10 text-white" />
+                    </motion.div>
+                    <h3 className="text-2xl font-black text-white mb-2">Candidature envoyée !</h3>
+                    <p className="text-blue-200">Nous reviendrons vers vous rapidement.</p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleApplicationSubmit} className="space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-black text-white uppercase">Candidature rapide</h3>
+                      <button
+                        type="button"
+                        onClick={() => setShowApplicationForm(false)}
+                        className="text-white/60 hover:text-white p-2 touch-manipulation"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Nom */}
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
+                        <input
+                          type="text"
+                          placeholder="Votre nom complet"
+                          required
+                          value={applicationData.name}
+                          onChange={(e) => setApplicationData({ ...applicationData, name: e.target.value })}
+                          className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200/60 focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20"
+                        />
+                      </div>
+
+                      {/* Email */}
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
+                        <input
+                          type="email"
+                          placeholder="Votre email"
+                          required
+                          value={applicationData.email}
+                          onChange={(e) => setApplicationData({ ...applicationData, email: e.target.value })}
+                          className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200/60 focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Poste souhaité */}
+                    <div className="relative">
+                      <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
+                      <select
+                        required
+                        value={applicationData.position}
+                        onChange={(e) => setApplicationData({ ...applicationData, position: e.target.value })}
+                        className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 appearance-none"
+                      >
+                        <option value="" className="bg-gray-800">Poste souhaité</option>
+                        <option value="spontanee" className="bg-gray-800">Candidature spontanée</option>
+                        {jobs.map(job => (
+                          <option key={job.id} value={job.title} className="bg-gray-800">{job.title}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Message */}
+                    <div className="relative">
+                      <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-blue-300" />
+                      <textarea
+                        placeholder="Votre message (motivation, disponibilité...)"
+                        rows={3}
+                        value={applicationData.message}
+                        onChange={(e) => setApplicationData({ ...applicationData, message: e.target.value })}
+                        className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200/60 focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 resize-none"
+                      />
+                    </div>
+
+                    {/* Upload CV */}
+                    <div className="relative">
+                      <label className="flex items-center justify-center gap-3 w-full py-4 bg-white/5 border-2 border-dashed border-white/30 rounded-xl cursor-pointer hover:bg-white/10 hover:border-white/50 transition-all touch-manipulation">
+                        <FileText className="h-5 w-5 text-blue-300" />
+                        <span className="text-blue-200 font-medium">
+                          {applicationData.cv ? applicationData.cv.name : 'Joindre votre CV (PDF, DOC)'}
+                        </span>
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx"
+                          className="hidden"
+                          onChange={(e) => setApplicationData({ ...applicationData, cv: e.target.files?.[0] || null })}
+                        />
+                      </label>
+                    </div>
+
+                    {/* Submit */}
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-900 rounded-xl font-black text-lg uppercase tracking-wider disabled:opacity-50 touch-manipulation"
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                      style={{ boxShadow: '0 0 30px rgba(255, 255, 255, 0.3)' }}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin h-5 w-5 border-2 border-blue-900 border-t-transparent rounded-full" />
+                          <span>Envoi en cours...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-5 w-5" />
+                          <span>Envoyer ma candidature</span>
+                        </>
+                      )}
+                    </motion.button>
+                  </form>
+                )}
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </section>
+      {/* ========== FIN SECTION POSTULER ========== */}
 
       {/* Culture Section - Dark Mode */}
       <section id="culture" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
