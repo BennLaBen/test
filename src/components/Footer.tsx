@@ -81,14 +81,14 @@ export function Footer() {
 
       {/* Main Footer */}
       <div className="border-b border-gray-800">
-        <div className="container py-12 lg:py-16">
-          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
+        <div className="container py-8 sm:py-12 lg:py-16">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-6">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
                 <Logo size="small" href={resolveHref('/')} />
               </div>
-              <p className="mb-6 text-sm leading-relaxed">
+              <p className="mb-4 sm:mb-6 text-xs sm:text-sm leading-relaxed">
                 {t('hero.subheadline')}
               </p>
               
@@ -162,7 +162,7 @@ export function Footer() {
 
       {/* Bottom Footer avec certifications */}
       <div className="container py-6">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 sm:gap-6 md:flex-row">
           <div className="text-center text-sm md:text-left">
             <span className="font-semibold text-white">{t('footer.bottom.madeInFrance')}</span>
             <span className="mx-2 text-gray-600">•</span>

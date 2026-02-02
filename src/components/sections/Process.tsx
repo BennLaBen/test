@@ -58,7 +58,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mb-6 text-2xl font-black text-white sm:text-3xl lg:text-4xl xl:text-6xl uppercase"
+            className="text-fluid-3xl font-black text-white mb-4 sm:mb-6 uppercase"
             style={{
               textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
             }}
@@ -71,7 +71,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-gray-300"
+            className="text-fluid-base text-gray-300"
           >
             {t('process.subtitle')}
           </motion.p>
@@ -88,7 +88,7 @@ export function Process() {
             }}
           />
 
-          <div className="space-y-8 sm:space-y-12 lg:space-y-24">
+          <div className="space-y-6 sm:space-y-10 lg:space-y-24">
             {steps.map((step, index) => {
               const Icon = icons[index] || MessageSquare
               const isEven = index % 2 === 0
@@ -104,7 +104,7 @@ export function Process() {
                 >
                   <div className={`lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-12 ${isEven ? '' : 'lg:grid-flow-dense'}`}>
                     <div className={`${isEven ? 'lg:text-right' : 'lg:col-start-2'}`}>
-                      <div className="inline-block w-full max-w-xl rounded-2xl p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 relative overflow-hidden"
+                      <div className="inline-block w-full max-w-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 relative overflow-hidden"
                         style={{
                           boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)'
                         }}

@@ -144,7 +144,7 @@ export function CTA() {
             </motion.div>
 
             <motion.h2
-              className="mb-6 text-2xl font-black text-white sm:text-3xl lg:text-4xl xl:text-6xl uppercase"
+              className="text-fluid-3xl font-black text-white mb-4 sm:mb-6 uppercase"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -157,7 +157,7 @@ export function CTA() {
             </motion.h2>
             
             <motion.p
-              className="mb-10 text-xl text-gray-300 max-w-2xl mx-auto"
+              className="mb-6 sm:mb-10 text-fluid-base text-gray-300 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -167,7 +167,7 @@ export function CTA() {
             </motion.p>
             
             <motion.div
-              className="flex flex-col gap-4 sm:flex-row sm:justify-center"
+              className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -175,7 +175,7 @@ export function CTA() {
             >
               <Link href={resolveHref('/contact')}>
                 <motion.div
-                  className="relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-black text-lg text-white overflow-hidden uppercase tracking-wider"
+                  className="relative inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto px-6 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-black text-sm sm:text-lg text-white overflow-hidden uppercase tracking-wider touch-manipulation"
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   style={{
@@ -220,7 +220,7 @@ export function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="grid gap-6 md:grid-cols-3"
+            className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3"
           >
             {/* Phone */}
             <motion.div

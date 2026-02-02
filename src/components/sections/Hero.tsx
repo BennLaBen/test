@@ -114,7 +114,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-2xl font-black tracking-tight xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mb-6"
+              className="text-fluid-hero font-black tracking-tight mb-4 sm:mb-6"
               style={{
                 textShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
                 lineHeight: '1.3'
@@ -156,7 +156,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-gray-300 leading-relaxed max-w-2xl mb-8"
+              className="text-fluid-base text-gray-300 leading-relaxed max-w-2xl mb-6 sm:mb-8"
             >
               {t('hero.subheadline')}
             </motion.p>
@@ -166,7 +166,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid gap-3 sm:grid-cols-2 mb-8"
+              className="grid grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8"
             >
               <motion.div 
                 className="relative bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-lg px-4 py-3 overflow-hidden group"
@@ -254,11 +254,11 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col gap-5 sm:flex-row"
+              className="flex flex-col gap-3 sm:gap-5 sm:flex-row"
             >
               <Link href="/contact">
                 <motion.div
-                  className="relative inline-flex items-center gap-2 sm:gap-3 px-6 py-4 sm:px-8 sm:py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-xl font-bold text-base sm:text-lg text-white overflow-hidden group cursor-pointer"
+                  className="relative inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3.5 sm:px-8 sm:py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-xl font-bold text-sm sm:text-lg text-white overflow-hidden group cursor-pointer touch-manipulation"
                   whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.98 }}
                   style={{
@@ -280,7 +280,7 @@ export function Hero() {
 
               <Link href="/nos-expertises">
                 <motion.div
-                  className="relative inline-flex items-center gap-2 sm:gap-3 px-6 py-4 sm:px-8 sm:py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl font-bold text-base sm:text-lg text-white overflow-hidden cursor-pointer"
+                  className="relative inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3.5 sm:px-8 sm:py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-xl font-bold text-sm sm:text-lg text-white overflow-hidden cursor-pointer touch-manipulation"
                   whileHover={{ scale: 1.05, y: -3, borderColor: 'rgba(255,255,255,0.6)' }}
                   whileTap={{ scale: 0.98 }}
                   style={{ willChange: 'transform' }}
@@ -325,7 +325,7 @@ export function Hero() {
                 </motion.div>
               </motion.div>
 
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
                 {companies.map((company, index) => (
                   <Link key={company.id} href={`/societes/${company.id}`}>
                     <motion.div
@@ -338,7 +338,7 @@ export function Hero() {
                         rotate: [0, -2, 2, 0]
                       }}
                       whileTap={{ scale: 0.95 }}
-                      className={`relative group cursor-pointer rounded-xl bg-gradient-to-br ${company.color} p-5 overflow-hidden border-2 border-transparent hover:border-white/30 transition-all duration-300`}
+                      className={`relative group cursor-pointer rounded-xl bg-gradient-to-br ${company.color} p-3 sm:p-5 overflow-hidden border-2 border-transparent hover:border-white/30 transition-all duration-300`}
                       style={{
                         boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
                         willChange: 'transform'
@@ -397,13 +397,13 @@ export function Hero() {
 
                       {/* Content */}
                       <div className="relative z-10">
-                        <h4 className="mb-1.5 text-xl font-black text-white uppercase tracking-wide">
+                        <h4 className="mb-1 text-base sm:text-xl font-black text-white uppercase tracking-wide">
                           {company.name}
                         </h4>
-                        <p className="text-sm text-white/95 font-semibold mb-1">
+                        <p className="text-xs sm:text-sm text-white/95 font-semibold mb-0.5 sm:mb-1">
                           {company.desc}
                         </p>
-                        <p className="text-xs text-white/70">
+                        <p className="text-[10px] sm:text-xs text-white/70 hidden xs:block">
                           {company.detail}
                         </p>
 

@@ -99,7 +99,7 @@ export function Features() {
           className="text-center mb-20"
         >
           <motion.h2
-            className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl mb-6 uppercase"
+            className="text-fluid-3xl font-black tracking-tight text-white mb-4 sm:mb-6 uppercase"
             style={{
               textShadow: '0 0 30px rgba(59, 130, 246, 0.8)'
             }}
@@ -114,13 +114,13 @@ export function Features() {
           >
             {t('features.title')}
           </motion.h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-fluid-base text-gray-300 max-w-3xl mx-auto leading-relaxed">
             {t('features.subtitle')}
           </p>
         </motion.div>
 
         {/* Stats Section - Ultra Modern */}
-        <div ref={statsRef} className="mb-16 sm:mb-20 lg:mb-24 grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-4">
+        <div ref={statsRef} className="mb-12 sm:mb-16 lg:mb-24 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
@@ -136,7 +136,7 @@ export function Features() {
                   scale: 1.03,
                   y: -5
                 }}
-                className="relative overflow-hidden p-5 sm:p-8 group cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-2xl"
+                className="relative overflow-hidden p-3 sm:p-5 lg:p-8 group cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/30 rounded-xl sm:rounded-2xl"
                 style={{
                   boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)',
                   willChange: 'transform'
@@ -171,10 +171,10 @@ export function Features() {
                   </div>
                   
                   {/* Animated counter */}
-                  <div className="text-4xl font-black text-white mb-2">
+                  <div className="text-xl sm:text-2xl lg:text-4xl font-black text-white mb-1 sm:mb-2">
                     <AnimatedCounter value={stat.value} duration={2} />
                   </div>
-                  <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-[10px] sm:text-xs lg:text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</div>
                   
                   {/* Progress bar */}
                   <div className="mt-4 h-2 w-full bg-white/10 rounded-full overflow-hidden">
@@ -195,7 +195,7 @@ export function Features() {
         </div>
 
         {/* Grid Features - Toutes les cartes de la même taille */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             return (
               <motion.div
@@ -210,7 +210,7 @@ export function Features() {
                   y: -6,
                   scale: 1.02
                 }}
-                className="group relative overflow-hidden p-5 sm:p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl h-full"
+                className="group relative overflow-hidden p-4 sm:p-6 lg:p-8 cursor-pointer bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl sm:rounded-2xl h-full"
                 style={{
                   boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
                   willChange: 'transform'

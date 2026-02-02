@@ -88,7 +88,7 @@ export function Navigation() {
       }}
     >
       <nav id="navigation" aria-label="Navigation principale" role="navigation" className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between gap-8">
+        <div className="flex h-16 sm:h-20 items-center justify-between gap-4 sm:gap-8">
           {/* Logo - Version moderne */}
           <Logo size="large" href="/" />
 
@@ -213,7 +213,7 @@ export function Navigation() {
           />
 
           {/* Mobile menu button & actions - DARK MODE */}
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-2 sm:gap-3 lg:hidden">
             {/* User Avatar on Mobile */}
             {isAuthenticated && user ? (
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-sm font-bold border-2 border-blue-400/50">
