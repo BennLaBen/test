@@ -22,7 +22,7 @@ interface NavSection {
   directLink?: string
 }
 
-// Structure de navigation par sections
+// Structure de navigation par sections - 100% des liens accessibles
 const mobileNavSections: NavSection[] = [
   {
     id: 'home',
@@ -50,6 +50,7 @@ const mobileNavSections: NavSection[] = [
     items: [
       { key: 'nav.expertises', href: '/nos-expertises' },
       { key: 'nav.caseStudies', href: '/cas-clients' },
+      { key: 'mobileNav.aerotools', href: '/aerotools' },
       { key: 'mobileNav.brochure', href: '/plaquette' },
     ]
   },
