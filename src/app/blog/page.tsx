@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SEO } from '@/components/SEO'
 import { motion } from 'framer-motion'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
@@ -17,7 +18,10 @@ import {
   Star,
   Sparkles,
   Zap,
-  Award
+  Award,
+  Wrench,
+  Coffee,
+  FileText
 } from 'lucide-react'
 
 export default function BlogPage() {
@@ -63,16 +67,30 @@ export default function BlogPage() {
         canonical="/blog"
       />
       
-      {/* Hero Section - Tony Stark */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-24 text-white lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* Hero Section - Tony Stark avec visuel industriel */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-gray-900 py-20 text-white lg:py-28 overflow-hidden">
+        {/* Image de fond industrielle */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-blog.jpg"
+            alt="Atelier industriel LLEDO"
+            fill
+            className="object-cover object-center opacity-20"
+            priority
+            quality={75}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/80 via-gray-900/90 to-gray-900" />
+        </div>
+        
+        {/* Grille technique */}
+        <div className="absolute inset-0 opacity-10 z-10">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }} className="h-full w-full" />
         </div>
         
-        <div className="container relative">
+        <div className="container relative z-20">
           <div className="mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
@@ -330,6 +348,76 @@ export default function BlogPage() {
             </h2>
           </motion.div>
 
+        {/* Empty State - Quand aucun article */}
+        {posts.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto text-center py-16"
+          >
+            <motion.div
+              className="relative mx-auto mb-8 w-32 h-32"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {/* Icône principale */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-2xl border-2 border-blue-400/30 flex items-center justify-center backdrop-blur-sm">
+                  <FileText className="h-12 w-12 text-blue-400" />
+                </div>
+              </div>
+              {/* Icônes décoratives */}
+              <motion.div
+                className="absolute -top-2 -right-2"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              >
+                <Wrench className="h-6 w-6 text-gray-500" />
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-2 -left-2"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Coffee className="h-5 w-5 text-amber-500" />
+              </motion.div>
+            </motion.div>
+
+            <h3 className="text-2xl font-black text-white mb-4 uppercase">
+              Nos rédacteurs sont à l'usinage...
+            </h3>
+            <p className="text-gray-400 text-lg mb-2">
+              Les articles sont en cours de fabrication dans notre atelier éditorial.
+            </p>
+            <p className="text-gray-500 text-sm mb-8">
+              Précision, qualité, délais respectés — même pour le contenu. 🔧
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <motion.div
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold uppercase tracking-wider"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
+                >
+                  <span>Nous contacter</span>
+                  <ArrowRight className="h-4 w-4" />
+                </motion.div>
+              </Link>
+              <Link href="/nos-expertises">
+                <motion.div
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold uppercase tracking-wider"
+                  whileHover={{ scale: 1.05, y: -2, borderColor: 'rgba(255,255,255,0.4)' }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Découvrir nos expertises</span>
+                </motion.div>
+              </Link>
+            </div>
+          </motion.div>
+        ) : (
         <div className="grid gap-4 sm:gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {regularPosts.map((post, index) => (
             <motion.div
@@ -444,6 +532,7 @@ export default function BlogPage() {
             </motion.div>
           ))}
         </div>
+        )}
         </div>
       </section>
     </>
