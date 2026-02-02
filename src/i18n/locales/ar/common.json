@@ -183,7 +183,8 @@
     "learnMore": "معرفة المزيد",
     "submit": "إرسال",
     "openMenu": "فتح القائمة الرئيسية",
-    "closeMenu": "إغلاق القائمة"
+    "closeMenu": "إغلاق القائمة",
+    "pressEscToClose": "اضغط ESC أو المس للإغلاق"
   },
   "clientArea": {
     "title": "مساحتي",

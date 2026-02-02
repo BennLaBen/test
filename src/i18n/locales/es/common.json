@@ -183,7 +183,8 @@
     "learnMore": "Saber más",
     "submit": "Enviar",
     "openMenu": "Abrir menú principal",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "pressEscToClose": "Pulse ESC o toque para cerrar"
   },
   "clientArea": {
     "title": "Mi espacio",

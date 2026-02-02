@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -45,6 +45,16 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Refs pour le focus trap
+  const menuRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const firstFocusableRef = useRef<HTMLAnchorElement>(null)
+
+  // Fermer le menu
+  const closeMenu = useCallback(() => {
+    setIsOpen(false)
+  }, [])
+
   // Bloquer le scroll du body quand le menu est ouvert
   useEffect(() => {
     if (isOpen) {
@@ -52,6 +62,8 @@ export function Navigation() {
       document.body.style.position = 'fixed'
       document.body.style.width = '100%'
       document.body.style.top = `-${window.scrollY}px`
+      // Focus sur le bouton fermer à l'ouverture
+      setTimeout(() => closeButtonRef.current?.focus(), 100)
     } else {
       const scrollY = document.body.style.top
       document.body.style.overflow = ''
@@ -68,6 +80,53 @@ export function Navigation() {
       document.body.style.width = ''
       document.body.style.top = ''
     }
+  }, [isOpen])
+
+  // Gestion de la touche ESC pour fermer le menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu()
+      }
+    }
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, closeMenu])
+
+  // Focus trap - garder le focus dans le menu
+  useEffect(() => {
+    if (!isOpen || !menuRef.current) return
+
+    const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault()
+          lastElement?.focus()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault()
+          firstElement?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleTabKey)
+    return () => document.removeEventListener('keydown', handleTabKey)
   }, [isOpen])
 
   // Si on est sur la partie boutique, on n'affiche pas cette navigation
@@ -253,46 +312,47 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation - DRAWER GAUCHE style Leboncoin */}
+        {/* Mobile Navigation - FULLSCREEN OVERLAY */}
         <AnimatePresence>
           {isOpen && (
             <>
-              {/* Overlay sombre */}
+              {/* Overlay sombre avec blur */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="lg:hidden fixed inset-0 bg-black/70 z-[9998]" style={{ touchAction: 'none' }}
-                onClick={() => setIsOpen(false)}
+                transition={{ duration: 0.2 }}
+                className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998]"
+                style={{ touchAction: 'none' }}
+                onClick={closeMenu}
+                aria-hidden="true"
               />
               
-              {/* Drawer menu moderne full width */}
+              {/* Menu plein écran */}
               <motion.div
-                initial={{ x: '-100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
-                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="lg:hidden fixed inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 z-[9999] overflow-y-auto overscroll-contain"
-                style={{ boxShadow: '0 0 100px rgba(59, 130, 246, 0.5)' }}
+                ref={menuRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menu de navigation"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="lg:hidden fixed inset-0 z-[9999] flex flex-col bg-gradient-to-b from-[#0a0a12] via-[#0d0d18] to-[#0a0a12]"
+                style={{ 
+                  height: '100dvh',
+                  paddingTop: 'env(safe-area-inset-top)',
+                  paddingBottom: 'env(safe-area-inset-bottom)'
+                }}
               >
-              <motion.div 
-                className="flex flex-col h-full"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.15 }}
-              >
-                {/* Header moderne avec bouton fermer */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-blue-500/20">
+                {/* Header fixe */}
+                <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 border-b border-blue-500/20">
                   <Logo size="small" />
                   <button
+                    ref={closeButtonRef}
                     type="button"
-                    onClick={() => setIsOpen(false)}
-                    onTouchEnd={(e) => {
-                      e.preventDefault()
-                      setIsOpen(false)
-                    }}
-                    className="p-3 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 active:scale-95 transition-all touch-manipulation"
+                    onClick={closeMenu}
+                    className="p-3.5 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 active:scale-95 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
                     style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)', WebkitTapHighlightColor: 'transparent' }}
                     aria-label="Fermer le menu"
                   >
@@ -301,109 +361,165 @@ export function Navigation() {
                 </div>
                 
                 {/* Contenu scrollable */}
-                <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4 pb-[env(safe-area-inset-bottom,20px)]">
-                {/* User Profile Section - DARK MODE */}
-                {isAuthenticated && user && (
-                  <motion.div 
-                    className="mb-5 p-4 rounded-xl bg-gray-800/50 border border-blue-500/30 backdrop-blur-sm"
-                    style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.2)' }}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xl font-bold shadow-md border-2 border-blue-400/50">
-                        {user.firstName.charAt(0)}
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-[15px] font-bold text-white">{user.firstName} {user.lastName}</p>
-                        <p className="text-xs text-gray-400">{user.email}</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => {
-                        signOut({ callbackUrl: '/' })
-                        setIsOpen(false)
-                      }}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-[14px] font-semibold text-red-300 bg-red-900/30 rounded-lg active:scale-[0.98] transition-all border border-red-500/30"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      {t('auth.logout')}
-                    </button>
-                  </motion.div>
-                )}
-
-                {/* Navigation Links - Optimisé Mobile */}
-                <div className="space-y-3 mb-8">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.key}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-6 py-4 rounded-2xl transition-all active:scale-[0.98] touch-manipulation ${
-                        isActive(item.href)
-                          ? 'bg-gradient-to-r from-blue-600 to-blue-500 border-2 border-blue-400/50'
-                          : 'bg-gray-800/30 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/10'
-                      }`}
-                      style={{
-                        WebkitTapHighlightColor: 'transparent',
-                        ...(isActive(item.href) && {
-                          boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)'
-                        })
-                      }}
-                    >
-                      <span className={`text-lg font-black uppercase tracking-wider ${
-                        isActive(item.href) ? 'text-white' : 'text-gray-300'
-                      }`}>
-                        {t(item.key)}
-                      </span>
-                      {isActive(item.href) && (
-                        <span className="float-right mt-1.5 w-3 h-3 rounded-full bg-white animate-pulse" />
-                      )}
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Secondary Links - Optimisé Mobile */}
-                <div className="grid grid-cols-2 gap-3 mb-6 pb-6 border-b border-blue-500/20">
-                  {secondaryNavigation.map((item) => (
-                    <Link
-                      key={item.key}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="block rounded-xl px-4 py-4 text-sm font-bold text-center text-white bg-gray-800/50 border border-gray-700 active:border-blue-400/50 active:bg-blue-600/20 transition-all active:scale-95 touch-manipulation"
-                      style={{ WebkitTapHighlightColor: 'transparent' }}
-                    >
-                      {t(item.key)}
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Auth Button - Optimisé Mobile */}
-                {!isAuthenticated && (
-                  <Link
-                    href="/connexion"
-                    onClick={() => setIsOpen(false)}
-                    className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-4 text-[15px] font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] active:bg-blue-500/20 transition-all touch-manipulation"
-                    style={{ WebkitTapHighlightColor: 'transparent' }}
-                  >
-                    <User className="h-5 w-5" />
-                    {t('auth.loginRegister')}
-                  </Link>
-                )}
-
-                {/* CTA Button - Optimisé Mobile */}
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="w-full flex items-center justify-center px-6 py-4 text-[15px] font-black uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl active:scale-[0.98] transition-all touch-manipulation"
-                  style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)', WebkitTapHighlightColor: 'transparent' }}
+                <div 
+                  className="flex-1 overflow-y-auto overscroll-contain"
+                  style={{ WebkitOverflowScrolling: 'touch' }}
                 >
-                  {t('nav.quote')}
-                </Link>
+                  <div className="px-5 py-6 space-y-4">
+                    
+                    {/* User Profile Section */}
+                    {isAuthenticated && user && (
+                      <motion.div 
+                        className="p-5 rounded-2xl bg-gray-800/40 border border-blue-500/30"
+                        style={{ boxShadow: '0 0 25px rgba(59, 130, 246, 0.15)' }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                      >
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xl font-bold shadow-lg border-2 border-blue-400/50">
+                            {user.firstName?.charAt(0) || user.email?.charAt(0) || '?'}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-base font-bold text-white truncate">{user.firstName} {user.lastName}</p>
+                            <p className="text-sm text-gray-400 truncate">{user.email}</p>
+                          </div>
+                        </div>
+                        {user.role === 'ADMIN' && (
+                          <Link
+                            href="/admin"
+                            onClick={closeMenu}
+                            className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-blue-300 bg-blue-900/40 rounded-xl active:scale-[0.98] transition-all border border-blue-500/30 touch-manipulation"
+                            style={{ WebkitTapHighlightColor: 'transparent' }}
+                          >
+                            <User className="h-5 w-5" />
+                            {t('auth.dashboard')}
+                          </Link>
+                        )}
+                        <button
+                          onClick={() => {
+                            signOut({ callbackUrl: '/' })
+                            closeMenu()
+                          }}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-bold text-red-300 bg-red-900/30 rounded-xl active:scale-[0.98] transition-all border border-red-500/30 touch-manipulation"
+                          style={{ WebkitTapHighlightColor: 'transparent' }}
+                        >
+                          <LogOut className="h-5 w-5" />
+                          {t('auth.logout')}
+                        </button>
+                      </motion.div>
+                    )}
+
+                    {/* Navigation principale */}
+                    <nav className="space-y-3" aria-label="Navigation principale">
+                      {navigation.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: 0.05 * index }}
+                        >
+                          <Link
+                            ref={index === 0 ? firstFocusableRef : undefined}
+                            href={item.href}
+                            onClick={closeMenu}
+                            className={`flex items-center justify-between px-6 py-5 rounded-2xl transition-all active:scale-[0.98] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                              isActive(item.href)
+                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 border-2 border-blue-400/50'
+                                : 'bg-gray-800/30 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/10'
+                            }`}
+                            style={{
+                              WebkitTapHighlightColor: 'transparent',
+                              minHeight: '64px',
+                              ...(isActive(item.href) && {
+                                boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)'
+                              })
+                            }}
+                          >
+                            <span className={`text-lg font-black uppercase tracking-wider ${
+                              isActive(item.href) ? 'text-white' : 'text-gray-200'
+                            }`}>
+                              {t(item.key)}
+                            </span>
+                            {isActive(item.href) && (
+                              <span className="w-3 h-3 rounded-full bg-white animate-pulse" />
+                            )}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </nav>
+
+                    {/* Navigation secondaire */}
+                    <div className="grid grid-cols-2 gap-3 pt-2">
+                      {secondaryNavigation.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.2 + 0.05 * index }}
+                        >
+                          <Link
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="flex items-center justify-center rounded-xl px-4 py-4 text-base font-bold text-center text-white bg-gray-800/50 border-2 border-gray-700/50 active:border-blue-400/50 active:bg-blue-600/20 transition-all active:scale-95 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
+                          >
+                            {t(item.key)}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Séparateur */}
+                    <div className="border-t border-blue-500/20 my-4" />
+
+                    {/* Auth Button */}
+                    {!isAuthenticated && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.3 }}
+                      >
+                        <Link
+                          href="/connexion"
+                          onClick={closeMenu}
+                          className="w-full flex items-center justify-center gap-3 px-6 py-5 text-base font-bold text-white bg-gray-800/50 border-2 border-blue-400/30 rounded-xl active:scale-[0.98] active:bg-blue-500/20 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          style={{ WebkitTapHighlightColor: 'transparent', minHeight: '64px' }}
+                        >
+                          <User className="h-6 w-6" />
+                          {t('auth.loginRegister')}
+                        </Link>
+                      </motion.div>
+                    )}
+
+                    {/* CTA principal */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.35 }}
+                    >
+                      <Link
+                        href="/contact"
+                        onClick={closeMenu}
+                        className="w-full flex items-center justify-center px-6 py-5 text-base font-black uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl active:scale-[0.98] transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        style={{ 
+                          boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)', 
+                          WebkitTapHighlightColor: 'transparent',
+                          minHeight: '64px'
+                        }}
+                      >
+                        {t('nav.quote')}
+                      </Link>
+                    </motion.div>
+                  </div>
                 </div>
-                {/* Fin contenu scrollable */}
-              </motion.div>
+
+                {/* Footer avec indication de fermeture */}
+                <div className="flex-shrink-0 px-5 py-4 border-t border-blue-500/20">
+                  <p className="text-center text-xs text-gray-500">
+                    {t('ui.pressEscToClose', 'Appuyez sur ESC ou touchez pour fermer')}
+                  </p>
+                </div>
               </motion.div>
             </>
           )}

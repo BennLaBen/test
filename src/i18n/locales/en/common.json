@@ -183,7 +183,8 @@
     "learnMore": "Learn More",
     "submit": "Submit",
     "openMenu": "Open main menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "pressEscToClose": "Press ESC or tap to close"
   },
   "clientArea": {
     "title": "My Space",
