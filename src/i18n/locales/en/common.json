@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "home": {
+      "title": "LLEDO Industries - Engineering, Machining & Maintenance | Aerospace & Defense",
+      "description": "LLEDO Industries - Integrated industrial group: engineering, precision machining and maintenance for aerospace and defense. 70 employees, ISO 9001 & EN 9100 certified."
+    }
+  },
   "topBar": {
     "products": "Aerotools Products",
     "recruitment": "Careers",
@@ -53,6 +59,12 @@
   "features": {
     "title": "Why Choose LLEDO Industries?",
     "subtitle": "Recognized technical expertise and quality commitment to meet your industrial needs.",
+    "stats": {
+      "team": { "label": "Expert Team", "value": "Know-how" },
+      "capacity": { "label": "Industrial Capacity", "value": "Production" },
+      "reach": { "label": "Global Reach", "value": "International" },
+      "quality": { "label": "Quality Commitment", "value": "Excellence" }
+    },
     "list": [
       {
         "title": "Regulatory Compliance",

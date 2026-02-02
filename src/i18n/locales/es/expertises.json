@@ -121,5 +121,39 @@
     "title": "¿Necesita un socio industrial completo?",
     "subtitle": "Contáctenos para discutir su proyecto y descubrir cómo nuestras especialidades pueden responder a sus necesidades.",
     "button": "Solicitar presupuesto"
+  },
+  "pages": {
+    "common": {
+      "contactUs": "Contáctenos",
+      "getQuote": "Solicitar presupuesto",
+      "ourExpertise": "Nuestra experiencia",
+      "technicalCapabilities": "Capacidades técnicas",
+      "capacity": "Capacidad",
+      "precision": "Precisión",
+      "equipment": "Equipos",
+      "photosComingSoon": "Fotos del taller próximamente",
+      "needQuote": "¿Necesita un presupuesto o información?",
+      "allCompanies": "Todas nuestras empresas"
+    },
+    "mpeb": {
+      "seoTitle": "MPEB - Mecanizado de precisión aeronáutico",
+      "seoDescription": "Especialista en mecanizado de precisión para aeronáutica. Mecanizado de 3, 4 y 5 ejes, torneado y fresado de alta precisión.",
+      "ctaDescription": "Nuestro equipo MPEB está a su disposición para responder a sus necesidades de mecanizado de precisión."
+    },
+    "egi": {
+      "seoTitle": "EGI - Oficina técnica e ingeniería",
+      "seoDescription": "Oficina técnica especializada en diseño mecánico, cálculos de estructuras y desarrollo de soluciones a medida.",
+      "ctaDescription": "Nuestro equipo EGI está a su disposición para responder a sus necesidades de ingeniería."
+    },
+    "frem": {
+      "seoTitle": "FREM - Mantenimiento industrial e instalación",
+      "seoDescription": "Mantenimiento preventivo y correctivo, instalación de equipos en sitio y soporte técnico para la industria.",
+      "ctaDescription": "Nuestro equipo FREM está a su disposición para responder a sus necesidades de mantenimiento."
+    },
+    "mgp": {
+      "seoTitle": "MGP - Calderería, chapa y montaje",
+      "seoDescription": "Especialista en calderería, chapa, soldadura y montaje de elementos mecánicos.",
+      "ctaDescription": "Nuestro equipo MGP está a su disposición para responder a sus necesidades de calderería y chapa."
+    }
   }
 }

@@ -121,5 +121,39 @@
     "title": "Precisa de um parceiro industrial completo?",
     "subtitle": "Entre em contato para discutir seu projeto e descobrir como nossas especialidades podem atender às suas necessidades.",
     "button": "Solicitar orçamento"
+  },
+  "pages": {
+    "common": {
+      "contactUs": "Entre em contato",
+      "getQuote": "Solicitar orçamento",
+      "ourExpertise": "Nossa expertise",
+      "technicalCapabilities": "Capacidades técnicas",
+      "capacity": "Capacidade",
+      "precision": "Precisão",
+      "equipment": "Equipamentos",
+      "photosComingSoon": "Fotos da oficina em breve",
+      "needQuote": "Precisa de um orçamento ou informações?",
+      "allCompanies": "Todas as nossas empresas"
+    },
+    "mpeb": {
+      "seoTitle": "MPEB - Usinagem de precisão aeronáutica",
+      "seoDescription": "Especialista em usinagem de precisão para aeronáutica. Usinagem de 3, 4 e 5 eixos, torneamento e fresamento de alta precisão.",
+      "ctaDescription": "Nossa equipe MPEB está à sua disposição para atender às suas necessidades de usinagem de precisão."
+    },
+    "egi": {
+      "seoTitle": "EGI - Escritório técnico e engenharia",
+      "seoDescription": "Escritório técnico especializado em projeto mecânico, cálculos estruturais e desenvolvimento de soluções sob medida.",
+      "ctaDescription": "Nossa equipe EGI está à sua disposição para atender às suas necessidades de engenharia."
+    },
+    "frem": {
+      "seoTitle": "FREM - Manutenção industrial e instalação",
+      "seoDescription": "Manutenção preventiva e corretiva, instalação de equipamentos no local e suporte técnico para a indústria.",
+      "ctaDescription": "Nossa equipe FREM está à sua disposição para atender às suas necessidades de manutenção."
+    },
+    "mgp": {
+      "seoTitle": "MGP - Caldeiraria, chapas e montagem",
+      "seoDescription": "Especialista em caldeiraria, chapas, soldagem e montagem de elementos mecânicos.",
+      "ctaDescription": "Nossa equipe MGP está à sua disposição para atender às suas necessidades de caldeiraria e chapas."
+    }
   }
 }

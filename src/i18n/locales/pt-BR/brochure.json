@@ -1,5 +1,41 @@
 {
-  "title": "Catálogo LLEDO Industries",
-  "download": "Baixar o catálogo",
-  "description": "Descubra nossa oferta completa de serviços e equipamentos GSE em nosso catálogo corporativo."
+  "badge": "Documentação técnica",
+  "title": "Baixar nosso catálogo",
+  "subtitle": "Acesse toda nossa documentação técnica: parque de máquinas, certificações, meios de controle e capacidades.",
+  "downloadAll": "Baixar o catálogo completo",
+  "items": [
+    {
+      "title": "Parque de máquinas",
+      "description": "Lista completa de nossos equipamentos CNC 3, 4 e 5 eixos, capacidades de usinagem",
+      "size": "PDF - 2.3 Mo"
+    },
+    {
+      "title": "Ferramentas de TI",
+      "description": "Software CAD/CAM, ERP, sistemas de gestão de produção",
+      "size": "PDF - 1.8 Mo"
+    },
+    {
+      "title": "Processo de qualidade",
+      "description": "ISO 9001, EN 9100, Intercambiabilidade AIRBUS, qualificações",
+      "size": "PDF - 3.1 Mo"
+    },
+    {
+      "title": "Meios de controle",
+      "description": "Controle 3D, metrologia, bancadas de teste, equipamentos de medição",
+      "size": "PDF - 2.5 Mo"
+    },
+    {
+      "title": "Capacidades técnicas",
+      "description": "Tolerâncias, materiais usináveis, tratamentos de superfície disponíveis",
+      "size": "PDF - 2.0 Mo"
+    },
+    {
+      "title": "Infraestrutura",
+      "description": "Área das oficinas, zonas de armazenamento, capacidades logísticas",
+      "size": "PDF - 1.5 Mo"
+    }
+  ],
+  "downloadButton": "Baixar",
+  "downloadAlert": "Download de \"{{title}}\" - Função em breve disponível. Os PDFs estarão disponíveis em breve.",
+  "downloadCompleteAlert": "Download do catálogo completo - Função em breve disponível. O PDF estará disponível em breve."
 }

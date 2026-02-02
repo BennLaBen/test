@@ -1,27 +1,27 @@
 {
-  "title": "Cas Clients - LLEDO Industries",
-  "description": "Découvrez comment nos clients utilisent nos équipements GSE et outillage aéronautique. Témoignages et études de cas détaillées.",
+  "title": "Case Studies - LLEDO Industries",
+  "description": "Discover how our clients use our GSE equipment and aeronautical tooling. Testimonials and detailed case studies.",
   "hero": {
-    "badge": "Témoignages clients",
-    "title": "Ils nous font confiance",
-    "subtitle": "Découvrez comment nos clients utilisent nos équipements et services pour optimiser leurs opérations"
+    "badge": "Client testimonials",
+    "title": "They trust us",
+    "subtitle": "Discover how our clients use our equipment and services to optimize their operations"
   },
   "stats": {
-    "clients": "Clients actifs",
-    "satisfaction": "Taux de satisfaction",
-    "experience": "D'expérience",
-    "projects": "Projets réalisés"
+    "clients": "Active clients",
+    "satisfaction": "Satisfaction rate",
+    "experience": "Of experience",
+    "projects": "Completed projects"
   },
   "sections": {
-    "challenge": "Le défi",
-    "solution": "Notre solution",
-    "results": "Résultats obtenus",
-    "keyFigures": "Chiffres clés"
+    "challenge": "The challenge",
+    "solution": "Our solution",
+    "results": "Results achieved",
+    "keyFigures": "Key figures"
   },
   "cta": {
-    "title": "Votre projet nous intéresse",
-    "subtitle": "Contactez notre équipe pour discuter de vos besoins et découvrir comment nous pouvons vous accompagner.",
-    "button": "Nous contacter"
+    "title": "Your project interests us",
+    "subtitle": "Contact our team to discuss your needs and discover how we can support you.",
+    "button": "Contact us"
   },
   "caseStudies": [
     {
@@ -33,16 +33,16 @@
       "challenge": "A major European aerospace manufacturer needed to modernize their fleet of transport trolleys for their light helicopter assembly line. The old system was aging, not ergonomic, and couldn't keep up with increasing production rates. Production teams faced risks of MSDs (Musculoskeletal Disorders) during repeated handling.",
       "solution": "LLEDO AEROTOOLS developed a custom solution with specific adaptations: ergonomic hydraulic control system, reinforced skids for intensive use (3 cycles/day), quick-lock system to reduce preparation time, and anti-scratch coating to preserve helicopter skid conditions.",
       "results": [
-        "40% reduction in aircraft movement time",
-        "Zero work accidents related to handling since commissioning",
-        "25% increase in production rate",
-        "ROI achieved in 14 months",
-        "Order extended to 8 additional units"
+        "Significant reduction in aircraft movement time",
+        "Improved working conditions for teams",
+        "Increased production rate",
+        "Rapid return on investment",
+        "Order extended to additional units"
       ],
       "stats": {
-        "gain": "40%",
-        "roi": "14 months",
-        "units": "12"
+        "gain": "Efficiency",
+        "roi": "Rapid",
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "LLEDO trolleys transformed our production line. Reliability and ergonomics are there. Our teams particularly appreciate the smooth handling.",
@@ -60,16 +60,16 @@
       "challenge": "A government air rescue base needed GSE equipment allowing ultra-fast deployment of intervention helicopters. In the context of emergency operations (fires, mountain rescue, airborne SAMU), every second counts. The old system required 3 operators and 5 minutes of preparation.",
       "solution": "LLEDO DEFENSE designed a special 'Rapid Deploy' transport trolley: instant start hydraulic system, wireless remote safety control, 72h battery autonomy without recharging, universal multi-type skids, and rapid transport kit for mobile detachments.",
       "results": [
-        "Preparation time reduced to 90 seconds",
-        "Operation possible with only 1 qualified operator",
-        "24/7 operational availability guaranteed",
-        "Used in +150 operations without failure",
-        "Adopted by 4 other intervention bases"
+        "Significantly reduced preparation time",
+        "Operation possible with single qualified operator",
+        "Improved operational availability",
+        "Proven reliability in real conditions",
+        "Adopted by other intervention bases"
       ],
       "stats": {
-        "gain": "70%",
+        "gain": "Speed",
         "roi": "Immediate",
-        "units": "5"
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "In emergency operations, speed is vital. The LLEDO system saves us 3 to 4 minutes on each takeoff. That's huge for victims.",
@@ -87,16 +87,16 @@
       "challenge": "A major offshore helicopter operator sought to standardize maintenance equipment across their 3 French bases. The mixed fleet required versatile equipment, resistant to corrosion (marine environment), and compliant with petroleum standards (ATEX).",
       "solution": "LLEDO Industries provided a complete range: modular transport trolleys with interchangeable skids (3 sets per base), 2-5m telescopic access platforms certified offshore, 316L stainless steel maintenance tools (anti-corrosion), IP65 protected equipment transport trolleys, and 5-year preventive maintenance contract.",
       "results": [
-        "Complete standardization across 3 bases",
-        "60% reduction in downtime",
-        "Zero failures in 3 years of operation",
-        "IOGP (International Oil & Gas Producers) certification",
+        "Complete standardization across multiple bases",
+        "Reduced downtime",
+        "Proven reliability over several years of operation",
+        "IOGP certification",
         "Contract extension to international bases"
       ],
       "stats": {
-        "gain": "60%",
-        "roi": "18 months",
-        "units": "24"
+        "gain": "Reliability",
+        "roi": "Proven",
+        "units": "Multi"
       },
       "testimonial": {
         "quote": "The reliability of LLEDO equipment in offshore environments is exceptional. After 3 years, no signs of corrosion. Our fleet availability has significantly improved.",

@@ -1,4 +1,15 @@
 {
+  "seo": {
+    "home": {
+      "title": "LLEDO Industries - Ingeniería, Mecanizado y Mantenimiento | Aeronáutica y Defensa",
+      "description": "LLEDO Industries - Grupo industrial integrado: ingeniería, mecanizado de precisión y mantenimiento para aeronáutica y defensa. 70 colaboradores, certificado ISO 9001 y EN 9100."
+    }
+  },
+  "topBar": {
+    "products": "Productos Aerotools",
+    "recruitment": "Empleo",
+    "brochure": "Catálogo PDF"
+  },
   "nav": {
     "home": "Inicio",
     "expertises": "Grupo LLEDO",
@@ -19,6 +30,15 @@
     "subheadline": "Ingeniería, mecanizado de precisión y mantenimiento industrial para aeronáutica y defensa desde 1989. Un colectivo de expertos que reúne MPEB, EGI, FREM y MGP para gestionar sus proyectos de principio a fin.",
     "ctaPrimary": "Contáctenos",
     "ctaSecondary": "Descubra Nuestras Empresas",
+    "discoverEntities": "Descubra nuestras entidades",
+    "discover": "Descubrir",
+    "scroll": "Scroll",
+    "companies": {
+      "mpeb": { "desc": "Mecanizado de precisión", "detail": "Fabricación de piezas unitarias" },
+      "egi": { "desc": "Oficina técnica", "detail": "Ingeniería integrada" },
+      "frem": { "desc": "Mantenimiento", "detail": "Reactividad e intercambiabilidad" },
+      "mgp": { "desc": "Calderería y chapa", "detail": "Mecanizado de 3 a 5 ejes" }
+    },
     "badges": {
       "compliance": "Fabricación de utillaje e integración industrial",
       "experience": "Intercambiabilidad de componentes",
@@ -39,6 +59,12 @@
   "features": {
     "title": "¿Por qué elegir LLEDO Industries?",
     "subtitle": "Experiencia técnica reconocida y compromiso de calidad para satisfacer sus necesidades industriales.",
+    "stats": {
+      "team": { "label": "Equipo experto", "value": "Saber hacer" },
+      "capacity": { "label": "Capacidad industrial", "value": "Producción" },
+      "reach": { "label": "Alcance", "value": "Internacional" },
+      "quality": { "label": "Compromiso de calidad", "value": "Excelencia" }
+    },
     "list": [
       {
         "title": "Conformidad Normativa",

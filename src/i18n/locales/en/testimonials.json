@@ -57,61 +57,87 @@
   "sectors": [
     {
       "id": "aeronautique",
-      "name": "Aéronautique"
+      "name": "Aerospace"
     },
     {
       "id": "defense",
-      "name": "Défense"
+      "name": "Defense"
     },
     {
       "id": "industrie",
-      "name": "Industrie"
+      "name": "Industry"
     },
     {
       "id": "energie",
-      "name": "Énergie"
+      "name": "Energy"
     }
   ],
   "list": [
     {
       "sector": "aeronautique",
-      "company": "Airbus Helicopters",
+      "company": "Major European aerospace manufacturer",
       "author": "Jean-Marc D.",
-      "role": "Responsable Supply Chain",
-      "content": "Partenaire fiable depuis plus de 10 ans. La qualité des pièces usinées par MPEB et la réactivité du bureau d'études EGI nous permettent de tenir nos délais de production. L'interchangeabilité Airbus est un vrai plus.",
+      "role": "Supply Chain Manager",
+      "content": "Reliable partner for over 10 years. The quality of parts machined by MPEB and the responsiveness of the EGI engineering office enable us to meet our production deadlines. A trusted partner.",
       "rating": 5,
-      "project": "Pièces de précision pour H145"
+      "project": "Precision parts for helicopters"
     },
     {
       "sector": "aeronautique",
-      "company": "Safran Helicopter Engines",
+      "company": "French aerospace engine manufacturer",
       "author": "Claire M.",
-      "role": "Ingénieure Projet",
-      "content": "Le niveau de précision et la traçabilité des pièces sont exemplaires. EGI nous a accompagnés sur des études complexes avec un niveau d'expertise remarquable. Une équipe technique de haut niveau.",
+      "role": "Project Engineer",
+      "content": "The precision level and part traceability are exemplary. EGI supported us on complex studies with remarkable expertise. A high-level technical team.",
       "rating": 5,
-      "project": "Équipements de test moteurs"
+      "project": "Engine test equipment"
     },
     {
       "sector": "defense",
-      "company": "Armée de l'Air et de l'Espace",
+      "company": "French Armed Forces",
       "author": "Colonel Philippe R.",
-      "role": "Chef de projet OPEX",
-      "content": "Équipements robustes et fiables, parfaitement adaptés aux contraintes opérationnelles. Le support de FREM en conditions OPEX est exceptionnel. Disponibilité et réactivité au rendez-vous.",
+      "role": "OPEX Project Manager",
+      "content": "Robust and reliable equipment, perfectly suited to operational constraints. FREM support under OPEX conditions is exceptional. Availability and responsiveness delivered.",
       "rating": 5,
-      "project": "Équipements GSE déployables"
+      "project": "Deployable GSE equipment"
     },
     {
       "sector": "defense",
-      "company": "DGA - Direction Générale de l'Armement",
+      "company": "Government Defense Agency",
       "author": "Marie-Laure B.",
-      "role": "Responsable Qualité Fournisseurs",
-      "content": "LLEDO Industries démontre une maîtrise parfaite des exigences défense. Les certifications sont à jour, les process qualité rigoureux. Un acteur de confiance pour nos projets stratégiques.",
+      "role": "Supplier Quality Manager",
+      "content": "LLEDO Industries demonstrates complete mastery of defense requirements. Certifications are current, quality processes rigorous. A trusted partner for our strategic projects.",
       "rating": 5,
-      "project": "Systèmes mécaniques certifiés"
+      "project": "Certified mechanical systems"
     }
   ],
+  "satisfaction": {
+    "title": "Our quality commitments",
+    "subtitle": "What guides our customer relationship",
+    "stats": [
+      {
+        "label": "Product quality",
+        "value": "Excellence",
+        "description": "High standards on every part"
+      },
+      {
+        "label": "Meeting deadlines",
+        "value": "Rigor",
+        "description": "Planning and tracking"
+      },
+      {
+        "label": "Customer service",
+        "value": "Proximity",
+        "description": "Responsiveness and support"
+      },
+      {
+        "label": "Recommendation",
+        "value": "Trust",
+        "description": "Long-term relationships"
+      }
+    ]
+  },
   "cta": {
-    "title": "Votre projet nous intéresse",
-    "button": "Nous contacter"
+    "title": "Your project interests us",
+    "button": "Contact us"
   }
 }

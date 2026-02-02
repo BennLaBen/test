@@ -22,5 +22,88 @@
     "title": "Su proyecto nos interesa",
     "subtitle": "Contacte con nuestro equipo para discutir sus necesidades y descubrir cómo podemos acompañarle.",
     "button": "Contáctenos"
-  }
+  },
+  "caseStudies": [
+    {
+      "id": "aviation-civile-1",
+      "client": "Gran fabricante aeronáutico europeo",
+      "sector": "Aviación civil",
+      "location": "Francia",
+      "title": "Optimización de la cadena de producción de helicópteros",
+      "challenge": "Un gran fabricante aeronáutico europeo necesitaba modernizar su parque de carros de desplazamiento para su línea de ensamblaje de helicópteros ligeros. El sistema antiguo estaba envejecido, poco ergonómico y no permitía responder a las cadencias de producción crecientes.",
+      "solution": "LLEDO AEROTOOLS desarrolló una solución a medida con adaptaciones específicas: sistema hidráulico con control ergonómico, patines reforzados para uso intensivo, sistema de bloqueo rápido y revestimiento antirrayado.",
+      "results": [
+        "Reducción significativa del tiempo de desplazamiento",
+        "Mejora de las condiciones de trabajo",
+        "Aumento de la cadencia de producción",
+        "Retorno de inversión rápido",
+        "Extensión del pedido a varias unidades adicionales"
+      ],
+      "stats": {
+        "gain": "Eficiencia",
+        "roi": "Rápido",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "Los carros LLEDO han transformado nuestra línea de producción. La fiabilidad y la ergonomía están a la altura.",
+        "author": "Jean-Marc D.",
+        "position": "Responsable de Producción"
+      },
+      "image": "/images/case-studies/aviation.jpg"
+    },
+    {
+      "id": "securite-civile",
+      "client": "Servicio de rescate aéreo gubernamental",
+      "sector": "Rescate y emergencias",
+      "location": "Francia",
+      "title": "Despliegue rápido para intervenciones de emergencia",
+      "challenge": "Una base de rescate aéreo gubernamental necesitaba equipos GSE que permitieran un despliegue ultrarrápido de los helicópteros de intervención.",
+      "solution": "LLEDO DEFENSE diseñó un carro de desplazamiento especial \"Rapid Deploy\": sistema hidráulico de arranque instantáneo, control inalámbrico, autonomía de batería 72h.",
+      "results": [
+        "Tiempo de preparación fuertemente reducido",
+        "Operación posible con un solo operador",
+        "Disponibilidad operacional mejorada",
+        "Fiabilidad probada en condiciones reales",
+        "Adoptado por otras bases de intervención"
+      ],
+      "stats": {
+        "gain": "Rapidez",
+        "roi": "Inmediato",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "En intervención de emergencia, la rapidez es vital. El sistema LLEDO nos hace ganar 3 a 4 minutos en cada despegue.",
+        "author": "Comandante Pierre L.",
+        "position": "Jefe de base de intervención"
+      },
+      "image": "/images/case-studies/urgences.jpg"
+    },
+    {
+      "id": "aviation-offshore",
+      "client": "Operador offshore europeo",
+      "sector": "Aviación offshore",
+      "location": "Francia",
+      "title": "Mantenimiento preventivo para flota offshore",
+      "challenge": "Un operador importante de helicópteros offshore buscaba estandarizar sus equipos de mantenimiento en sus 3 bases francesas.",
+      "solution": "LLEDO Industries proporcionó una gama completa: carros de desplazamiento modulares, plataformas de acceso telescópicas, herramientas de mantenimiento en acero inoxidable 316L.",
+      "results": [
+        "Estandarización completa en varias bases",
+        "Reducción de tiempos de inmovilización",
+        "Fiabilidad probada durante varios años",
+        "Certificación IOGP",
+        "Extensión del contrato a bases internacionales"
+      ],
+      "stats": {
+        "gain": "Fiabilidad",
+        "roi": "Probado",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "La fiabilidad de los equipos LLEDO en entorno offshore es excepcional. Después de 3 años, ningún signo de corrosión.",
+        "author": "Marc S.",
+        "position": "Director de Mantenimiento"
+      },
+      "image": "/images/case-studies/offshore.jpg"
+    }
+  ]
 }

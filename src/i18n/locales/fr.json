@@ -1,0 +1,668 @@
+{
+  "common": {
+    "companyName": "LLEDO Industries",
+    "tagline": "Groupe industriel intégré",
+    "since": "Depuis 1989",
+    "madeInFrance": "Fabriqué en France",
+    "allRightsReserved": "Tous droits réservés",
+    "language": {
+      "switch": "Changer de langue",
+      "current": "Langue actuelle",
+      "fr": "Français",
+      "en": "English",
+      "es": "Español",
+      "ptBr": "Português",
+      "ar": "العربية"
+    },
+    "theme": {
+      "light": "Mode clair",
+      "dark": "Mode sombre",
+      "system": "Système"
+    },
+    "certifications": {
+      "iso9001": "ISO 9001:2015",
+      "en9100": "EN 9100:2018",
+      "en12312": "EN 12312-1",
+      "en1915": "EN 1915",
+      "ce": "Marquage CE",
+      "airbus": "Interchangeabilité AIRBUS"
+    },
+    "entities": {
+      "mpeb": {
+        "name": "MPEB",
+        "tagline": "Usinage de précision",
+        "description": "Fabrication de pièces unitaires et petites séries"
+      },
+      "egi": {
+        "name": "EGI",
+        "tagline": "Bureau d'études",
+        "description": "Ingénierie et conception mécanique"
+      },
+      "frem": {
+        "name": "FREM",
+        "tagline": "Maintenance industrielle",
+        "description": "Réactivité et interchangeabilité"
+      },
+      "mgp": {
+        "name": "MGP",
+        "tagline": "Tôlerie & chaudronnerie",
+        "description": "Usinage 3 à 5 axes"
+      },
+      "aerotools": {
+        "name": "LLEDO Aerotools",
+        "tagline": "Équipements GSE",
+        "description": "Solutions pour hélicoptères"
+      }
+    }
+  },
+  "layout": {
+    "header": {
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu",
+      "skipToContent": "Aller au contenu principal"
+    },
+    "nav": {
+      "home": "Accueil",
+      "group": "Le Groupe LLEDO",
+      "expertises": "Nos Expertises",
+      "vision": "Notre Vision",
+      "testimonials": "Ils nous font confiance",
+      "caseStudies": "Cas clients",
+      "products": "Produits Aerotools",
+      "blog": "Blog",
+      "careers": "Carrières",
+      "contact": "Contact",
+      "quote": "Demander un devis"
+    },
+    "topBar": {
+      "products": "Produits Aerotools",
+      "recruitment": "Recrutement",
+      "brochure": "Plaquette PDF"
+    },
+    "footer": {
+      "company": {
+        "title": "Entreprise",
+        "about": "Notre Vision",
+        "expertises": "Nos Expertises",
+        "careers": "Carrières",
+        "contact": "Contact"
+      },
+      "services": {
+        "title": "Nos Services",
+        "machining": "Usinage de précision",
+        "engineering": "Bureau d'études",
+        "maintenance": "Maintenance industrielle",
+        "sheetMetal": "Tôlerie & chaudronnerie"
+      },
+      "resources": {
+        "title": "Ressources",
+        "blog": "Blog",
+        "caseStudies": "Cas clients",
+        "brochure": "Télécharger la plaquette",
+        "support": "Support technique"
+      },
+      "legal": {
+        "title": "Légal",
+        "legalNotice": "Mentions légales",
+        "privacy": "Politique de confidentialité",
+        "terms": "CGV",
+        "cookies": "Gestion des cookies"
+      },
+      "contact": {
+        "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau",
+        "phone": "+33 4 42 02 96 74",
+        "email": "contact@mpeb13.com"
+      },
+      "copyright": "© {{year}} LLEDO Industries. Tous droits réservés."
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Collectif d'ingénierie",
+      "title": "LLEDO Industries",
+      "subtitle": "Groupe industriel intégré",
+      "description": "Ingénierie, usinage de précision et maintenance industrielle pour l'aéronautique et la défense depuis 1989. Un collectif d'experts réunissant MPEB, EGI, FREM et MGP pour piloter vos projets de bout en bout.",
+      "ctaPrimary": "Nous contacter",
+      "ctaSecondary": "Découvrir nos entreprises",
+      "scroll": "Défiler"
+    },
+    "features": {
+      "title": "Pourquoi choisir LLEDO Industries ?",
+      "subtitle": "Une expertise technique reconnue et un engagement qualité pour répondre à vos besoins industriels.",
+      "compliance": {
+        "title": "Conformité normative",
+        "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
+        "benefits": ["Interchangeabilité des composants", "Traçabilité complète", "Certifications industrielles"]
+      },
+      "machining": {
+        "title": "Usinage de précision",
+        "description": "Usinage de précision 3 à 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
+        "benefits": ["Usinage 3 à 5 axes", "Contrôle qualité", "Expertise technique"]
+      },
+      "delivery": {
+        "title": "Délais respectés",
+        "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
+        "benefits": ["Suivi numérique", "Planification rigoureuse", "Pilotage des opérations"]
+      },
+      "team": {
+        "title": "Équipe experte",
+        "description": "Collaborateurs spécialisés dans la fabrication de pièces élémentaires, l'outillage et les machines spéciales.",
+        "benefits": ["Pièces élémentaires", "Outillage industriel", "Machines spéciales"]
+      },
+      "innovation": {
+        "title": "Innovation continue",
+        "description": "R&D permanente pour développer des solutions techniques de pointe et améliorer nos produits.",
+        "benefits": ["Bureau d'études intégré", "Prototypage", "Amélioration continue"]
+      },
+      "support": {
+        "title": "Accompagnement",
+        "description": "Support technique et formation des équipes clients pour garantir la maîtrise de vos équipements.",
+        "benefits": ["Formation des équipes", "Maintenance sur site", "Support technique"]
+      }
+    },
+    "process": {
+      "badge": "Notre process",
+      "title": "Processus qualité intégré",
+      "subtitle": "De la conception à la mise en service, nous maîtrisons l'ensemble de la chaîne de valeur.",
+      "steps": {
+        "design": { "title": "Conception", "description": "Bureau d'études intégré" },
+        "manufacturing": { "title": "Fabrication", "description": "Usinage de précision" },
+        "control": { "title": "Contrôle", "description": "Tests et certifications" },
+        "service": { "title": "Service", "description": "Support et maintenance" }
+      }
+    },
+    "products": {
+      "badge": "LLEDO AEROTOOLS",
+      "title": "Équipements GSE certifiés",
+      "subtitle": "Barres de remorquage et rollers hydrauliques conçus et fabriqués en France.",
+      "cta": "Découvrir AEROTOOLS"
+    },
+    "trust": {
+      "title": "Ils nous font confiance",
+      "subtitle": "Des clients dans l'aéronautique et la défense nous font confiance pour leurs projets critiques."
+    },
+    "cta": {
+      "title": "Équipez votre flotte avec des solutions certifiées",
+      "subtitle": "Faites confiance à un partenaire industriel engagé dans la qualité et l'accompagnement.",
+      "primary": "Nous contacter",
+      "secondary": "Découvrir nos produits"
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "Questions fréquentes",
+      "subtitle": "Tout ce que vous devez savoir sur nos équipements GSE et services associés.",
+      "items": [
+        {
+          "question": "Quelles certifications possèdent vos équipements ?",
+          "answer": "Tous nos équipements sont conformes à la Directive Machines 2006/42/CE et à la norme EN 12312-1. Chaque produit est livré avec déclaration de conformité UE, certificat de test CMU et notice d'utilisation."
+        },
+        {
+          "question": "Quels sont vos délais de livraison ?",
+          "answer": "Pour les références stockées, comptez 2 à 4 semaines en France métropolitaine. Les productions sur-mesure nécessitent 6 à 10 semaines."
+        },
+        {
+          "question": "Proposez-vous des contrats de maintenance ?",
+          "answer": "Oui, LLEDO Industries propose des contrats de maintenance préventive incluant inspection complète, contrôles hydrauliques, test CMU et remplacement des pièces d'usure."
+        },
+        {
+          "question": "Quelle est la garantie ?",
+          "answer": "La garantie standard est de 24 mois pièces et main d'œuvre. Des extensions jusqu'à 5 ans sont disponibles."
+        }
+      ],
+      "contactCta": "Vous ne trouvez pas la réponse ?",
+      "contactButton": "Nous contacter"
+    }
+  },
+  "services": {
+    "title": "Nos Expertises",
+    "subtitle": "Un collectif de 5 entités complémentaires pour couvrir tous vos besoins en ingénierie industrielle",
+    "mpeb": {
+      "title": "MPEB - Usinage de précision",
+      "tagline": "Usinage de précision et mécanique générale",
+      "description": "Cœur historique du groupe depuis 1989, MPEB est spécialisée dans l'usinage de précision 3, 4 et 5 axes, la fabrication de pièces mécaniques complexes et l'assemblage d'ensembles mécaniques pour l'aéronautique et la défense.",
+      "expertise": [
+        "Usinage de précision sur machines CNC 3, 4 et 5 axes",
+        "Fabrication de pièces unitaires et petites séries",
+        "Assemblage d'ensembles mécaniques complexes",
+        "Contrôle dimensionnel 3D et métrologie",
+        "Électro-érosion à fil et par enfonçage",
+        "Gravure laser"
+      ],
+      "capabilities": {
+        "capacity": "Capacité adaptée à vos besoins",
+        "precision": "Tolérance ±0.01mm",
+        "equipment": "Parc machines CNC moderne"
+      }
+    },
+    "egi": {
+      "title": "EGI - Bureau d'études",
+      "tagline": "Bureau d'études et ingénierie",
+      "description": "EGI apporte son expertise en conception technique, calculs de structures et développement de solutions sur mesure. Notre bureau d'études accompagne nos clients de l'idée initiale jusqu'à la validation du produit fini.",
+      "expertise": [
+        "Conception mécanique et études techniques",
+        "Modélisation 3D et simulations (CAO/DAO)",
+        "Calculs de structures et résistance des matériaux",
+        "Plans d'exécution et documentation technique",
+        "Reverse engineering et amélioration de produits",
+        "Accompagnement certification et homologation"
+      ],
+      "capabilities": {
+        "capacity": "Bureau d'études intégré",
+        "precision": "Logiciels CAO dernière génération",
+        "equipment": "SolidWorks, CATIA V5"
+      }
+    },
+    "frem": {
+      "title": "FREM - Maintenance industrielle",
+      "tagline": "Maintenance industrielle et installation",
+      "description": "FREM assure la maintenance préventive et curative, l'installation d'équipements sur site et le support technique. Notre équipe intervient chez nos clients pour garantir la disponibilité et la performance de leurs équipements.",
+      "expertise": [
+        "Maintenance préventive et curative d'équipements industriels",
+        "Installation et mise en service sur site client",
+        "Support technique et dépannage d'urgence",
+        "Contrôles périodiques et vérifications réglementaires",
+        "Formation des équipes d'exploitation",
+        "Contrats de maintenance sur mesure"
+      ],
+      "capabilities": {
+        "capacity": "Disponibilité 7j/7",
+        "precision": "Intervention sous 48h",
+        "equipment": "Équipes mobiles"
+      }
+    },
+    "mgp": {
+      "title": "MGP - Tôlerie & chaudronnerie",
+      "tagline": "Tôlerie, chaudronnerie et assemblage",
+      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. MGP apporte une expertise complémentaire sur des marchés diversifiés.",
+      "expertise": [
+        "Découpe au jet d'eau haute pression",
+        "Chaudronnerie et travail des métaux",
+        "Soudure tous procédés (TIG, MIG, ARC)",
+        "Usinage",
+        "Tournage",
+        "Fraisage"
+      ],
+      "capabilities": {
+        "capacity": "2000m² d'atelier",
+        "precision": "Soudeurs qualifiés",
+        "equipment": "Laser, presse plieuse, rouleuse"
+      }
+    },
+    "aerotools": {
+      "title": "LLEDO Aerotools - Équipements GSE",
+      "tagline": "Équipements GSE pour hélicoptères",
+      "description": "Division dédiée au développement et à la commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères légers. Barres de remorquage, chariots de levage et outillages spécialisés conformes aux normes aéronautiques.",
+      "expertise": [
+        "Barres de remorquage certifiées EN 12312 et EN 1915",
+        "Chariots de levage et manutention hélicoptères",
+        "Outillages spécialisés maintenance rotor",
+        "Équipements sur mesure selon spécifications client",
+        "Formation à l'utilisation des équipements",
+        "Support technique et SAV"
+      ],
+      "capabilities": {
+        "capacity": "Gamme complète GSE hélicoptères",
+        "precision": "Test 1,25× CMU",
+        "equipment": "Certification CE et aéronautique"
+      }
+    },
+    "cta": {
+      "title": "Besoin d'un partenaire industriel complet ?",
+      "subtitle": "Contactez-nous pour discuter de votre projet et découvrir comment nos expertises peuvent répondre à vos besoins.",
+      "button": "Demander un devis"
+    }
+  },
+  "recruitment": {
+    "title": "Carrières chez LLEDO Industries",
+    "subtitle": "Rejoignez une équipe passionnée et participez à l'innovation dans l'outillage aéronautique et les équipements GSE.",
+    "hero": {
+      "badge": "Rejoignez l'aventure",
+      "title": "Carrières chez LLEDO Industries",
+      "description": "Rejoignez une équipe passionnée et participez à l'innovation dans l'outillage aéronautique."
+    },
+    "stats": {
+      "expertise": { "value": "Expertise", "label": "Savoir-faire reconnu" },
+      "team": { "value": "Équipe", "label": "Collaborateurs engagés" },
+      "quality": { "value": "Qualité", "label": "Excellence opérationnelle" },
+      "evolution": { "value": "Évolution", "label": "Opportunités de carrière" }
+    },
+    "culture": {
+      "badge": "Notre Culture",
+      "title": "Notre culture d'entreprise",
+      "subtitle": "Rejoignez une équipe passionnée par l'excellence et l'innovation",
+      "items": [
+        { "title": "Innovation", "description": "Nous encourageons la créativité et l'innovation pour développer des solutions techniques de pointe." },
+        { "title": "Équipe", "description": "Nous travaillons ensemble dans un environnement collaboratif et bienveillant." },
+        { "title": "Qualité", "description": "Nous nous engageons pour l'excellence et la qualité dans tous nos projets." },
+        { "title": "Formation", "description": "Nous investissons dans la formation et le développement de nos collaborateurs." }
+      ]
+    },
+    "benefits": {
+      "badge": "Avantages",
+      "title": "Nos avantages",
+      "subtitle": "Des conditions de travail optimales pour votre épanouissement professionnel",
+      "list": [
+        "Mutuelle d'entreprise",
+        "Prévoyance",
+        "Tickets restaurant",
+        "Formation continue",
+        "Cadre de travail agréable",
+        "Ambiance chaleureuse"
+      ]
+    },
+    "jobs": {
+      "badge": "Offres d'emploi",
+      "title": "Postes disponibles",
+      "subtitle": "Découvrez nos opportunités de carrière",
+      "loading": "Chargement des offres...",
+      "noOffers": "Aucune offre disponible pour le moment",
+      "apply": "Postuler",
+      "details": "Voir les détails"
+    },
+    "apply": {
+      "title": "Prêt à nous rejoindre ?",
+      "subtitle": "Postulez en quelques clics ou contactez notre équipe RH",
+      "submitApplication": "Déposer ma candidature",
+      "spontaneousApplication": "Candidature spontanée",
+      "applicationSent": "Candidature envoyée !",
+      "applicationSentMessage": "Nous reviendrons vers vous rapidement."
+    },
+    "contact": {
+      "title": "Candidature spontanée",
+      "subtitle": "Vous ne trouvez pas le poste qui vous correspond ? Envoyez-nous votre candidature spontanée.",
+      "button": "Nous contacter"
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Notre équipe d'experts est à votre disposition pour répondre à vos questions et vous accompagner dans vos projets.",
+    "hero": {
+      "title": "Contactez-nous",
+      "description": "Notre équipe d'experts est à votre disposition pour répondre à vos questions."
+    },
+    "info": {
+      "title": "Informations de contact",
+      "phone": {
+        "label": "Téléphone",
+        "value": "+33 4 42 02 96 74",
+        "hours": "Lun-Ven 8h-18h"
+      },
+      "email": {
+        "label": "Email",
+        "value": "contact@mpeb13.com",
+        "response": "Réponse sous 24h"
+      },
+      "address": {
+        "label": "Adresse",
+        "value": "9-11 Boulevard de la Capelane",
+        "city": "13170 Les Pennes-Mirabeau",
+        "country": "France"
+      }
+    },
+    "hours": {
+      "title": "Horaires d'ouverture",
+      "weekdays": "Lundi - Vendredi : 8h00 - 18h00",
+      "saturday": "Samedi : Fermé",
+      "sunday": "Dimanche : Fermé"
+    },
+    "actions": {
+      "viewOnMap": "Voir sur la carte",
+      "callNow": "Appeler maintenant",
+      "sendEmail": "Envoyer un email",
+      "openGoogleMaps": "Ouvrir dans Google Maps"
+    },
+    "companies": {
+      "title": "Nos sociétés du groupe",
+      "subtitle": "Contactez directement la société correspondant à vos besoins"
+    },
+    "cta": {
+      "title": "Besoin de notre plaquette commerciale ?",
+      "subtitle": "Téléchargez notre documentation complète.",
+      "downloadPdf": "Télécharger la plaquette PDF",
+      "discoverExpertises": "Découvrir nos expertises"
+    }
+  },
+  "blog": {
+    "title": "Blog & Actualités",
+    "subtitle": "Découvrez nos articles techniques sur l'usinage de précision, la conception mécanique et la maintenance industrielle.",
+    "hero": {
+      "badge": "Blog LLEDO Industries",
+      "title": "Expertise & Savoir-Faire",
+      "description": "Découvrez nos ateliers, nos équipements et nos réalisations. Articles techniques rédigés par nos experts."
+    },
+    "sections": {
+      "featured": "À la une",
+      "latest": "Derniers articles",
+      "all": "Tous nos articles"
+    },
+    "card": {
+      "readMore": "Lire l'article",
+      "readTime": "{{minutes}} min de lecture",
+      "publishedOn": "Publié le {{date}}"
+    },
+    "categories": {
+      "all": "Toutes les catégories",
+      "machining": "Usinage",
+      "engineering": "Ingénierie",
+      "maintenance": "Maintenance",
+      "gse": "Équipements GSE",
+      "company": "Vie d'entreprise"
+    },
+    "empty": {
+      "title": "Nos rédacteurs sont à l'usinage...",
+      "subtitle": "Les articles sont en cours de fabrication dans notre atelier éditorial.",
+      "description": "Précision, qualité, délais respectés — même pour le contenu.",
+      "cta": "Découvrir nos expertises"
+    },
+    "newsletter": {
+      "title": "Restez informé",
+      "subtitle": "Recevez nos derniers articles et actualités directement dans votre boîte mail.",
+      "placeholder": "Votre adresse email",
+      "subscribe": "S'abonner",
+      "success": "Inscription réussie !",
+      "error": "Une erreur est survenue"
+    }
+  },
+  "forms": {
+    "contact": {
+      "title": "Échangez avec notre équipe",
+      "subtitle": "Remplissez ce formulaire et notre équipe vous répondra dans les plus brefs délais."
+    },
+    "fields": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "company": "Entreprise",
+      "subject": "Sujet",
+      "message": "Message",
+      "cv": "CV (PDF, DOC)",
+      "optional": "optionnel"
+    },
+    "placeholders": {
+      "firstName": "Votre prénom",
+      "lastName": "Votre nom",
+      "email": "votre@email.com",
+      "phone": "+33 6 00 00 00 00",
+      "company": "Nom de votre entreprise",
+      "message": "Décrivez votre projet ou votre demande..."
+    },
+    "subjects": {
+      "select": "Sélectionnez un sujet",
+      "quote": "Demande de devis",
+      "information": "Demande d'information",
+      "support": "Support technique",
+      "partnership": "Partenariat",
+      "recruitment": "Candidature",
+      "other": "Autre"
+    },
+    "consent": {
+      "text": "J'accepte que mes données soient utilisées pour traiter ma demande conformément à la",
+      "privacyPolicy": "politique de confidentialité"
+    },
+    "buttons": {
+      "send": "Envoyer",
+      "sending": "Envoi en cours...",
+      "submit": "Envoyer la demande",
+      "apply": "Postuler",
+      "reset": "Réinitialiser"
+    },
+    "messages": {
+      "success": "Votre message a été envoyé. Merci, nous revenons vers vous sous 24h.",
+      "error": "Une erreur est survenue. Merci de réessayer ou de nous contacter par téléphone.",
+      "required": "Ce champ est requis"
+    }
+  },
+  "errors": {
+    "validation": {
+      "required": "Ce champ est requis",
+      "email": "Adresse email invalide",
+      "phone": "Numéro de téléphone invalide",
+      "minLength": "Minimum {{min}} caractères requis",
+      "maxLength": "Maximum {{max}} caractères autorisés",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+      "consent": "Vous devez accepter la politique de confidentialité"
+    },
+    "auth": {
+      "invalidCredentials": "Email ou mot de passe incorrect",
+      "accountNotFound": "Compte non trouvé",
+      "accountExists": "Un compte existe déjà avec cet email",
+      "sessionExpired": "Votre session a expiré",
+      "accessDenied": "Accès refusé",
+      "adminRequired": "Droits administrateur requis"
+    },
+    "network": {
+      "connectionError": "Erreur de connexion",
+      "serverError": "Erreur serveur",
+      "timeout": "Délai d'attente dépassé",
+      "notFound": "Page non trouvée",
+      "unauthorized": "Non autorisé"
+    },
+    "generic": {
+      "title": "Une erreur est survenue",
+      "description": "Nous nous excusons pour ce désagrément. Veuillez réessayer.",
+      "retry": "Réessayer",
+      "goHome": "Retour à l'accueil"
+    },
+    "404": {
+      "title": "Page non trouvée",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "goHome": "Retour à l'accueil"
+    },
+    "500": {
+      "title": "Erreur serveur",
+      "description": "Une erreur interne est survenue. Nos équipes ont été notifiées.",
+      "retry": "Réessayer"
+    }
+  },
+  "ui": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Attention",
+    "info": "Information",
+    "buttons": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "save": "Enregistrer",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "close": "Fermer",
+      "back": "Retour",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "submit": "Envoyer",
+      "apply": "Appliquer",
+      "reset": "Réinitialiser"
+    },
+    "actions": {
+      "search": "Rechercher",
+      "filter": "Filtrer",
+      "sort": "Trier",
+      "download": "Télécharger",
+      "upload": "Téléverser",
+      "share": "Partager",
+      "copy": "Copier",
+      "print": "Imprimer"
+    },
+    "navigation": {
+      "viewMore": "Voir plus",
+      "viewLess": "Voir moins",
+      "readMore": "Lire la suite",
+      "learnMore": "En savoir plus",
+      "seeAll": "Voir tout",
+      "backToTop": "Retour en haut"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "pending": "En attente",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "draft": "Brouillon",
+      "published": "Publié"
+    },
+    "time": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "tomorrow": "Demain",
+      "now": "Maintenant",
+      "ago": "il y a {{time}}",
+      "in": "dans {{time}}"
+    },
+    "pagination": {
+      "page": "Page {{current}} sur {{total}}",
+      "first": "Première",
+      "last": "Dernière",
+      "next": "Suivante",
+      "previous": "Précédente",
+      "showing": "Affichage de {{from}} à {{to}} sur {{total}} résultats"
+    },
+    "empty": {
+      "noResults": "Aucun résultat",
+      "noData": "Aucune donnée disponible"
+    },
+    "accessibility": {
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu",
+      "expandSection": "Développer la section",
+      "collapseSection": "Réduire la section",
+      "externalLink": "Ouvre dans un nouvel onglet"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "LLEDO Industries | Usinage de Précision & Maintenance Industrielle Aéronautique",
+      "description": "Groupe industriel français spécialisé en usinage de précision, tôlerie-chaudronnerie et équipements GSE pour l'aéronautique et la défense. Certifié ISO 9001 & EN 9100."
+    },
+    "expertises": {
+      "title": "Nos Entreprises | MPEB, EGI, FREM, MGP & LLEDO Aerotools",
+      "description": "5 entités complémentaires : usinage de précision (MPEB), ingénierie (EGI), maintenance (FREM), tôlerie (MGP) et équipements GSE hélicoptères (Aerotools)."
+    },
+    "vision": {
+      "title": "Notre Vision | Groupe LLEDO Industries - Excellence Industrielle Française",
+      "description": "Découvrez la vision du fondateur de LLEDO Industries. Un engagement pour l'excellence technique depuis 1989."
+    },
+    "contact": {
+      "title": "Contact LLEDO Industries | Demande de Devis Outillage Aéronautique",
+      "description": "Contactez notre équipe pour vos projets d'usinage de précision, maintenance industrielle ou équipements GSE."
+    },
+    "careers": {
+      "title": "Carrières chez LLEDO Industries | Rejoignez Notre Équipe Aéronautique",
+      "description": "Rejoignez une équipe passionnée. Découvrez nos offres d'emploi en usinage de précision, ingénierie et maintenance industrielle."
+    },
+    "blog": {
+      "title": "Blog & Articles Techniques | LLEDO Industries",
+      "description": "Articles techniques sur l'usinage de précision, la conception mécanique, la maintenance industrielle et l'outillage aéronautique."
+    },
+    "testimonials": {
+      "title": "Témoignages Clients | Partenaires Aéronautique & Défense",
+      "description": "Découvrez ce que disent nos clients de l'aéronautique et de la défense sur leur collaboration avec LLEDO Industries."
+    },
+    "cases": {
+      "title": "Études de Cas | Projets Aéronautique & Défense",
+      "description": "Études de cas détaillées présentant nos solutions d'usinage de précision, équipements GSE et maintenance industrielle."
+    }
+  }
+}

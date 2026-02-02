@@ -1,6 +1,58 @@
 {
   "title": "شهادات العملاء",
   "subtitle": "يثقون بنا لمشاريعهم الحرجة",
+  "page": {
+    "seoTitle": "يثقون بنا - رضا العملاء",
+    "seoDescription": "اكتشف نتائج استطلاعات رضا العملاء ولماذا تثق بنا أكثر من 150 شركة.",
+    "heroBadge": "رضا العملاء",
+    "heroTitle": "يثقون بنا",
+    "heroSubtitle": "عملاء من قطاعات متعددة يثقون بنا لمشاريعهم الحرجة",
+    "evaluateServices": "تقييم خدماتنا",
+    "loginToEvaluate": "تسجيل الدخول للتقييم",
+    "surveysTitle": "نتائج استطلاعاتنا",
+    "surveysSubtitle": "بناءً على أكثر من 200 إجابة تم جمعها في 2024",
+    "analysisTitle": "تحليل مفصل",
+    "analysisSubtitle": "بيانات في الوقت الفعلي • قاعدة استطلاع 2024",
+    "confidentialityTitle": "السرية مضمونة",
+    "confidentialityText": "احتراماً لعملائنا ولأسباب تتعلق بالسرية، لا نذكر علناً أسماء شركائنا. البيانات أدناه مستمدة من استطلاعات حقيقية أجريت مع عملائنا النشطين.",
+    "sectorsTitle": "قطاعات نشاطنا",
+    "sectorsSubtitle": "عملاء سريون في 4 قطاعات استراتيجية",
+    "satisfied": "راضون",
+    "stats": {
+      "satisfaction": { "label": "رضا العملاء", "value": "التميز" },
+      "recommendation": { "label": "التوصية", "value": "الثقة" },
+      "deadlines": { "label": "الالتزام بالمواعيد", "value": "الموثوقية" },
+      "quality": { "label": "جودة المنتجات", "value": "الخبرة" }
+    },
+    "surveys": {
+      "quality": { "question": "جودة خدماتنا", "score": "ممتاز" },
+      "reactivity": { "question": "سرعة الاستجابة والتواصل", "score": "جيد جداً" },
+      "expertise": { "question": "الخبرة التقنية", "score": "ممتاز" },
+      "value": { "question": "نسبة الجودة/السعر", "score": "جيد جداً" },
+      "support": { "question": "دعم ما بعد البيع", "score": "جيد جداً" }
+    },
+    "sectors": {
+      "aeronautics": { "name": "الطيران", "clients": "عملاء عديدون", "satisfaction": "التميز" },
+      "defense": { "name": "الدفاع", "clients": "شركاء منتظمون", "satisfaction": "الثقة" },
+      "industry": { "name": "الصناعة", "clients": "علاقات دائمة", "satisfaction": "الموثوقية" },
+      "energy": { "name": "الطاقة", "clients": "تعاون راسخ", "satisfaction": "الجودة" }
+    }
+  },
+  "reviewForm": {
+    "thankYou": "شكراً",
+    "submittedMessage": "تم إرسال تقييمك بنجاح. سيتم نشره بعد التحقق من قبل فريقنا.",
+    "shareExperience": "شارك تجربتك",
+    "yourRating": "تقييمك",
+    "sector": "قطاع النشاط",
+    "yourReview": "رأيك",
+    "placeholder": "شارك تجربتك مع LLEDO Industries...",
+    "sending": "جاري الإرسال...",
+    "publish": "نشر تقييمي",
+    "cancel": "إلغاء",
+    "leaveReview": "ترك تقييم",
+    "loginToReview": "تسجيل الدخول لترك تقييم",
+    "project": "المشروع"
+  },
   "filterAll": "جميع القطاعات",
   "sectors": [
     { "id": "aeronautique", "name": "الطيران" },

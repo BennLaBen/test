@@ -1,6 +1,58 @@
 {
   "title": "Depoimentos de clientes",
   "subtitle": "Confiam em nós para seus projetos críticos",
+  "page": {
+    "seoTitle": "Confiam em nós - Satisfação do Cliente",
+    "seoDescription": "Descubra os resultados de nossas pesquisas de satisfação do cliente e por que mais de 150 empresas confiam em nós.",
+    "heroBadge": "Satisfação do Cliente",
+    "heroTitle": "Confiam em nós",
+    "heroSubtitle": "Clientes de muitos setores confiam em nós para seus projetos críticos",
+    "evaluateServices": "Avaliar nossos serviços",
+    "loginToEvaluate": "Fazer login para avaliar",
+    "surveysTitle": "Resultados de nossas pesquisas",
+    "surveysSubtitle": "Baseados em mais de 200 respostas coletadas em 2024",
+    "analysisTitle": "Análise Detalhada",
+    "analysisSubtitle": "Dados em tempo real • Base de pesquisa 2024",
+    "confidentialityTitle": "Confidencialidade garantida",
+    "confidentialityText": "Por respeito aos nossos clientes e por razões de confidencialidade, não mencionamos publicamente os nomes de nossos parceiros. Os dados abaixo vêm de pesquisas reais realizadas com nossos clientes ativos.",
+    "sectorsTitle": "Nossos setores de atividade",
+    "sectorsSubtitle": "Clientes confidenciais em 4 setores estratégicos",
+    "satisfied": "satisfeitos",
+    "stats": {
+      "satisfaction": { "label": "Satisfação do cliente", "value": "Excelência" },
+      "recommendation": { "label": "Recomendação", "value": "Confiança" },
+      "deadlines": { "label": "Cumprimento de prazos", "value": "Confiabilidade" },
+      "quality": { "label": "Qualidade dos produtos", "value": "Expertise" }
+    },
+    "surveys": {
+      "quality": { "question": "Qualidade de nossos serviços", "score": "Excelente" },
+      "reactivity": { "question": "Reatividade e comunicação", "score": "Muito bom" },
+      "expertise": { "question": "Expertise técnica", "score": "Excelente" },
+      "value": { "question": "Relação qualidade/preço", "score": "Muito bom" },
+      "support": { "question": "Suporte pós-venda", "score": "Muito bom" }
+    },
+    "sectors": {
+      "aeronautics": { "name": "Aeronáutica", "clients": "Numerosos clientes", "satisfaction": "Excelência" },
+      "defense": { "name": "Defesa", "clients": "Parceiros regulares", "satisfaction": "Confiança" },
+      "industry": { "name": "Indústria", "clients": "Relações duradouras", "satisfaction": "Confiabilidade" },
+      "energy": { "name": "Energia", "clients": "Colaboração estabelecida", "satisfaction": "Qualidade" }
+    }
+  },
+  "reviewForm": {
+    "thankYou": "Obrigado",
+    "submittedMessage": "Sua avaliação foi enviada com sucesso. Será publicada após validação por nossa equipe.",
+    "shareExperience": "Compartilhe sua experiência",
+    "yourRating": "Sua nota",
+    "sector": "Setor de atividade",
+    "yourReview": "Sua avaliação",
+    "placeholder": "Compartilhe sua experiência com a LLEDO Industries...",
+    "sending": "Enviando...",
+    "publish": "Publicar minha avaliação",
+    "cancel": "Cancelar",
+    "leaveReview": "Deixar uma avaliação",
+    "loginToReview": "Fazer login para deixar uma avaliação",
+    "project": "Projeto"
+  },
   "filterAll": "Todos os setores",
   "sectors": [
     { "id": "aeronautique", "name": "Aeronáutica" },

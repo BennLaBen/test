@@ -22,5 +22,88 @@
     "title": "Seu projeto nos interessa",
     "subtitle": "Entre em contato com nossa equipe para discutir suas necessidades e descobrir como podemos acompanhá-lo.",
     "button": "Entre em contato"
-  }
+  },
+  "caseStudies": [
+    {
+      "id": "aviation-civile-1",
+      "client": "Grande fabricante aeronáutico europeu",
+      "sector": "Aviação civil",
+      "location": "França",
+      "title": "Otimização da cadeia de produção de helicópteros",
+      "challenge": "Um grande fabricante aeronáutico europeu precisava modernizar seu parque de carrinhos de deslocamento para sua linha de montagem de helicópteros leves. O sistema antigo estava envelhecido, pouco ergonômico e não permitia responder às cadências de produção crescentes.",
+      "solution": "LLEDO AEROTOOLS desenvolveu uma solução sob medida com adaptações específicas: sistema hidráulico com controle ergonômico, patins reforçados para uso intensivo, sistema de travamento rápido e revestimento antirrisco.",
+      "results": [
+        "Redução significativa do tempo de deslocamento",
+        "Melhoria das condições de trabalho",
+        "Aumento da cadência de produção",
+        "Retorno de investimento rápido",
+        "Extensão do pedido para várias unidades adicionais"
+      ],
+      "stats": {
+        "gain": "Eficiência",
+        "roi": "Rápido",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "Os carrinhos LLEDO transformaram nossa linha de produção. A confiabilidade e a ergonomia estão à altura.",
+        "author": "Jean-Marc D.",
+        "position": "Responsável de Produção"
+      },
+      "image": "/images/case-studies/aviation.jpg"
+    },
+    {
+      "id": "securite-civile",
+      "client": "Serviço de resgate aéreo governamental",
+      "sector": "Resgate e emergências",
+      "location": "França",
+      "title": "Implantação rápida para intervenções de emergência",
+      "challenge": "Uma base de resgate aéreo governamental precisava de equipamentos GSE que permitissem uma implantação ultrarrápida dos helicópteros de intervenção.",
+      "solution": "LLEDO DEFENSE projetou um carrinho de deslocamento especial \"Rapid Deploy\": sistema hidráulico de partida instantânea, controle sem fio, autonomia de bateria 72h.",
+      "results": [
+        "Tempo de preparação fortemente reduzido",
+        "Operação possível com um único operador",
+        "Disponibilidade operacional melhorada",
+        "Confiabilidade comprovada em condições reais",
+        "Adotado por outras bases de intervenção"
+      ],
+      "stats": {
+        "gain": "Rapidez",
+        "roi": "Imediato",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "Em intervenção de emergência, a rapidez é vital. O sistema LLEDO nos faz ganhar 3 a 4 minutos em cada decolagem.",
+        "author": "Comandante Pierre L.",
+        "position": "Chefe de base de intervenção"
+      },
+      "image": "/images/case-studies/urgences.jpg"
+    },
+    {
+      "id": "aviation-offshore",
+      "client": "Operador offshore europeu",
+      "sector": "Aviação offshore",
+      "location": "França",
+      "title": "Manutenção preventiva para frota offshore",
+      "challenge": "Um operador importante de helicópteros offshore buscava padronizar seus equipamentos de manutenção em suas 3 bases francesas.",
+      "solution": "LLEDO Industries forneceu uma gama completa: carrinhos de deslocamento modulares, plataformas de acesso telescópicas, ferramentas de manutenção em aço inoxidável 316L.",
+      "results": [
+        "Padronização completa em várias bases",
+        "Redução dos tempos de imobilização",
+        "Confiabilidade comprovada durante vários anos",
+        "Certificação IOGP",
+        "Extensão do contrato para bases internacionais"
+      ],
+      "stats": {
+        "gain": "Confiabilidade",
+        "roi": "Comprovado",
+        "units": "Multi"
+      },
+      "testimonial": {
+        "quote": "A confiabilidade dos equipamentos LLEDO em ambiente offshore é excepcional. Após 3 anos, nenhum sinal de corrosão.",
+        "author": "Marc S.",
+        "position": "Diretor de Manutenção"
+      },
+      "image": "/images/case-studies/offshore.jpg"
+    }
+  ]
 }

@@ -1,0 +1,165 @@
+{
+  "common": {
+    "companyName": "LLEDO Industries",
+    "tagline": "مجموعة صناعية متكاملة",
+    "since": "منذ 1989",
+    "madeInFrance": "صنع في فرنسا",
+    "allRightsReserved": "جميع الحقوق محفوظة",
+    "language": {
+      "switch": "تغيير اللغة",
+      "current": "اللغة الحالية",
+      "fr": "Français",
+      "en": "English",
+      "es": "Español",
+      "ptBr": "Português",
+      "ar": "العربية"
+    },
+    "theme": { "light": "الوضع الفاتح", "dark": "الوضع الداكن", "system": "النظام" },
+    "certifications": {
+      "iso9001": "ISO 9001:2015",
+      "en9100": "EN 9100:2018",
+      "en12312": "EN 12312-1",
+      "en1915": "EN 1915",
+      "ce": "علامة CE",
+      "airbus": "قابلية التبادل AIRBUS"
+    },
+    "entities": {
+      "mpeb": { "name": "MPEB", "tagline": "التصنيع الدقيق", "description": "تصنيع القطع الفردية والسلاسل الصغيرة" },
+      "egi": { "name": "EGI", "tagline": "المكتب الهندسي", "description": "الهندسة والتصميم الميكانيكي" },
+      "frem": { "name": "FREM", "tagline": "الصيانة الصناعية", "description": "الاستجابة السريعة وقابلية التبادل" },
+      "mgp": { "name": "MGP", "tagline": "الصفائح المعدنية والغلايات", "description": "التصنيع من 3 إلى 5 محاور" },
+      "aerotools": { "name": "LLEDO Aerotools", "tagline": "معدات GSE", "description": "حلول للمروحيات" }
+    }
+  },
+  "layout": {
+    "header": { "openMenu": "فتح القائمة", "closeMenu": "إغلاق القائمة", "skipToContent": "انتقل إلى المحتوى الرئيسي" },
+    "nav": {
+      "home": "الرئيسية", "group": "مجموعة LLEDO", "expertises": "خبراتنا", "vision": "رؤيتنا",
+      "testimonials": "يثقون بنا", "caseStudies": "دراسات الحالة", "products": "منتجات Aerotools",
+      "blog": "المدونة", "careers": "الوظائف", "contact": "اتصل بنا", "quote": "طلب عرض أسعار"
+    },
+    "topBar": { "products": "منتجات Aerotools", "recruitment": "التوظيف", "brochure": "الكتيب PDF" },
+    "footer": {
+      "company": { "title": "الشركة", "about": "رؤيتنا", "expertises": "خبراتنا", "careers": "الوظائف", "contact": "اتصل بنا" },
+      "services": { "title": "خدماتنا", "machining": "التصنيع الدقيق", "engineering": "المكتب الهندسي", "maintenance": "الصيانة الصناعية", "sheetMetal": "الصفائح المعدنية والغلايات" },
+      "resources": { "title": "الموارد", "blog": "المدونة", "caseStudies": "دراسات الحالة", "brochure": "تحميل الكتيب", "support": "الدعم الفني" },
+      "legal": { "title": "قانوني", "legalNotice": "الإشعار القانوني", "privacy": "سياسة الخصوصية", "terms": "الشروط والأحكام", "cookies": "إعدادات ملفات تعريف الارتباط" },
+      "contact": { "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau", "phone": "+33 4 42 02 96 74", "email": "contact@mpeb13.com" },
+      "copyright": "© {{year}} LLEDO Industries. جميع الحقوق محفوظة."
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "مجموعة هندسية", "title": "LLEDO Industries", "subtitle": "مجموعة صناعية متكاملة",
+      "description": "الهندسة والتصنيع الدقيق والصيانة الصناعية لقطاعي الطيران والدفاع منذ 1989.",
+      "ctaPrimary": "اتصل بنا", "ctaSecondary": "اكتشف شركاتنا", "scroll": "تمرير"
+    },
+    "features": {
+      "title": "لماذا تختار LLEDO Industries؟",
+      "subtitle": "خبرة تقنية معترف بها والتزام بالجودة.",
+      "compliance": { "title": "الامتثال التنظيمي", "description": "جميع معداتنا متوافقة مع معايير EN 12312 و EN 1915 وتوجيه الآلات 2006/42/CE.", "benefits": ["قابلية تبادل المكونات", "تتبع كامل", "شهادات صناعية"] },
+      "machining": { "title": "التصنيع الدقيق", "description": "تصنيع دقيق من 3 إلى 5 محاور وفقاً لمواصفات العميل.", "benefits": ["تصنيع 3-5 محاور", "مراقبة الجودة", "خبرة تقنية"] },
+      "delivery": { "title": "احترام المواعيد", "description": "الالتزام بالمواعيد المتفق عليها.", "benefits": ["متابعة رقمية", "تخطيط دقيق", "إدارة العمليات"] },
+      "team": { "title": "فريق متخصص", "description": "متخصصون في تصنيع القطع والأدوات والآلات الخاصة.", "benefits": ["القطع الأساسية", "الأدوات الصناعية", "الآلات الخاصة"] },
+      "innovation": { "title": "الابتكار المستمر", "description": "البحث والتطوير المستمر لحلول تقنية متطورة.", "benefits": ["مكتب هندسي متكامل", "النماذج الأولية", "التحسين المستمر"] },
+      "support": { "title": "المرافقة", "description": "الدعم الفني وتدريب فرق العملاء.", "benefits": ["تدريب الفرق", "الصيانة في الموقع", "الدعم الفني"] }
+    },
+    "process": {
+      "badge": "عمليتنا", "title": "عملية جودة متكاملة", "subtitle": "من التصميم إلى التسليم، نتحكم في سلسلة القيمة بأكملها.",
+      "steps": {
+        "design": { "title": "التصميم", "description": "مكتب هندسي متكامل" },
+        "manufacturing": { "title": "التصنيع", "description": "التصنيع الدقيق" },
+        "control": { "title": "المراقبة", "description": "الاختبارات والشهادات" },
+        "service": { "title": "الخدمة", "description": "الدعم والصيانة" }
+      }
+    },
+    "products": { "badge": "LLEDO AEROTOOLS", "title": "معدات GSE معتمدة", "subtitle": "قضبان السحب والبكرات الهيدروليكية المصنعة في فرنسا.", "cta": "اكتشف AEROTOOLS" },
+    "trust": { "title": "يثقون بنا", "subtitle": "عملاء الطيران والدفاع يثقون بنا لمشاريعهم الحرجة." },
+    "cta": { "title": "جهز أسطولك بحلول معتمدة", "subtitle": "ثق بشريك صناعي ملتزم بالجودة.", "primary": "اتصل بنا", "secondary": "اكتشف منتجاتنا" },
+    "faq": {
+      "badge": "الأسئلة الشائعة", "title": "الأسئلة المتكررة", "subtitle": "كل ما تحتاج معرفته عن معدات GSE.",
+      "items": [
+        { "question": "ما هي الشهادات التي تمتلكها معداتكم؟", "answer": "الامتثال لتوجيه الآلات 2006/42/CE ومعيار EN 12312-1." },
+        { "question": "ما هي مواعيد التسليم؟", "answer": "2 إلى 4 أسابيع للمخزون، 6 إلى 10 أسابيع للطلبات المخصصة." },
+        { "question": "هل تقدمون عقود صيانة؟", "answer": "نعم، عقود صيانة وقائية شاملة." },
+        { "question": "ما هي الضمانة؟", "answer": "24 شهراً قياسية، تمديدات حتى 5 سنوات متاحة." }
+      ],
+      "contactCta": "لم تجد الإجابة؟", "contactButton": "اتصل بنا"
+    }
+  },
+  "services": {
+    "title": "خبراتنا", "subtitle": "5 كيانات متكاملة لتلبية جميع احتياجاتك في الهندسة الصناعية",
+    "mpeb": { "title": "MPEB - التصنيع الدقيق", "tagline": "التصنيع الدقيق والميكانيكا العامة", "description": "متخصصة في التصنيع الدقيق من 3 و 4 و 5 محاور لقطاعي الطيران والدفاع.", "expertise": ["تصنيع CNC 3-5 محاور", "القطع الفردية", "التجميع الميكانيكي", "القياس ثلاثي الأبعاد", "التآكل الكهربائي", "النقش بالليزر"], "capabilities": { "capacity": "قدرة مكيفة", "precision": "تفاوت ±0.01mm", "equipment": "أسطول CNC حديث" } },
+    "egi": { "title": "EGI - المكتب الهندسي", "tagline": "المكتب الهندسي والتصميم", "description": "خبرة في التصميم التقني والحسابات الهيكلية والحلول المخصصة.", "expertise": ["التصميم الميكانيكي", "النمذجة ثلاثية الأبعاد", "الحسابات الهيكلية", "التوثيق التقني", "الهندسة العكسية", "الشهادات"], "capabilities": { "capacity": "مكتب متكامل", "precision": "برامج CAD حديثة", "equipment": "SolidWorks, CATIA V5" } },
+    "frem": { "title": "FREM - الصيانة الصناعية", "tagline": "الصيانة والتركيب", "description": "الصيانة الوقائية والتصحيحية والتركيب في الموقع والدعم الفني.", "expertise": ["الصيانة الوقائية/التصحيحية", "التركيب في الموقع", "الدعم الفني", "الفحوصات الدورية", "التدريب", "العقود المخصصة"], "capabilities": { "capacity": "توفر 7 أيام", "precision": "استجابة 48 ساعة", "equipment": "فرق متنقلة" } },
+    "mgp": { "title": "MGP - الصفائح المعدنية والغلايات", "tagline": "الصفائح والغلايات والتجميع", "description": "قدرات في الصفائح والغلايات واللحام والتجميع الميكانيكي.", "expertise": ["القطع بنفث الماء", "الغلايات", "اللحام TIG/MIG/ARC", "التصنيع", "الخراطة", "التفريز"], "capabilities": { "capacity": "2,000م² ورشة", "precision": "لحامون مؤهلون", "equipment": "ليزر، مكبس، درفلة" } },
+    "aerotools": { "title": "LLEDO Aerotools - معدات GSE", "tagline": "معدات GSE للمروحيات", "description": "معدات GSE للمروحيات الخفيفة وفقاً للمعايير الجوية.", "expertise": ["قضبان السحب EN 12312/EN 1915", "عربات الرفع", "أدوات الدوار", "معدات مخصصة", "التدريب", "خدمة ما بعد البيع"], "capabilities": { "capacity": "خط GSE كامل", "precision": "اختبار 1.25× CMU", "equipment": "شهادة CE" } },
+    "cta": { "title": "تحتاج شريكاً صناعياً متكاملاً؟", "subtitle": "اتصل بنا لمناقشة مشروعك.", "button": "طلب عرض أسعار" }
+  },
+  "recruitment": {
+    "title": "الوظائف في LLEDO Industries", "subtitle": "انضم إلى فريق شغوف بالابتكار في الأدوات الجوية.",
+    "hero": { "badge": "انضم إلى المغامرة", "title": "الوظائف في LLEDO Industries", "description": "شارك في الابتكار في الأدوات الجوية." },
+    "stats": { "expertise": { "value": "الخبرة", "label": "معرفة معترف بها" }, "team": { "value": "الفريق", "label": "موظفون ملتزمون" }, "quality": { "value": "الجودة", "label": "التميز التشغيلي" }, "evolution": { "value": "التطور", "label": "فرص وظيفية" } },
+    "culture": { "badge": "ثقافتنا", "title": "ثقافة شركتنا", "subtitle": "فريق شغوف بالتميز والابتكار", "items": [{ "title": "الابتكار", "description": "الإبداع لحلول متطورة." }, { "title": "الفريق", "description": "بيئة تعاونية وداعمة." }, { "title": "الجودة", "description": "التميز في جميع المشاريع." }, { "title": "التدريب", "description": "الاستثمار في التطوير." }] },
+    "benefits": { "badge": "المزايا", "title": "مزايانا", "subtitle": "ظروف مثالية لتطورك", "list": ["تأمين صحي", "تأمين على الحياة", "قسائم طعام", "تدريب مستمر", "بيئة عمل ممتعة", "جو ودي"] },
+    "jobs": { "badge": "الوظائف", "title": "المناصب المتاحة", "subtitle": "اكتشف فرصنا", "loading": "جاري التحميل...", "noOffers": "لا توجد وظائف متاحة", "apply": "التقديم", "details": "عرض التفاصيل" },
+    "apply": { "title": "مستعد للانضمام إلينا؟", "subtitle": "قدم طلبك أو اتصل بفريق الموارد البشرية", "submitApplication": "إرسال طلبي", "spontaneousApplication": "طلب تلقائي", "applicationSent": "تم إرسال الطلب!", "applicationSentMessage": "سنتواصل معك قريباً." },
+    "contact": { "title": "طلب تلقائي", "subtitle": "لم تجد الوظيفة المناسبة؟ أرسل طلبك.", "button": "اتصل بنا" }
+  },
+  "contact": {
+    "title": "اتصل بنا", "subtitle": "فريقنا من الخبراء في خدمتك للإجابة على أسئلتك.",
+    "hero": { "title": "اتصل بنا", "description": "فريقنا من الخبراء في خدمتك." },
+    "info": { "title": "معلومات الاتصال", "phone": { "label": "الهاتف", "value": "+33 4 42 02 96 74", "hours": "الإثنين-الجمعة 8ص-6م" }, "email": { "label": "البريد الإلكتروني", "value": "contact@mpeb13.com", "response": "رد خلال 24 ساعة" }, "address": { "label": "العنوان", "value": "9-11 Boulevard de la Capelane", "city": "13170 Les Pennes-Mirabeau", "country": "فرنسا" } },
+    "hours": { "title": "ساعات العمل", "weekdays": "الإثنين - الجمعة: 8:00 - 18:00", "saturday": "السبت: مغلق", "sunday": "الأحد: مغلق" },
+    "actions": { "viewOnMap": "عرض على الخريطة", "callNow": "اتصل الآن", "sendEmail": "إرسال بريد إلكتروني", "openGoogleMaps": "فتح في خرائط Google" },
+    "companies": { "title": "شركات مجموعتنا", "subtitle": "اتصل مباشرة بالشركة المناسبة لاحتياجاتك" },
+    "cta": { "title": "تحتاج كتيبنا؟", "subtitle": "حمل وثائقنا الكاملة.", "downloadPdf": "تحميل الكتيب PDF", "discoverExpertises": "اكتشف خبراتنا" }
+  },
+  "blog": {
+    "title": "المدونة والأخبار", "subtitle": "مقالات تقنية عن التصنيع والتصميم الميكانيكي والصيانة الصناعية.",
+    "hero": { "badge": "مدونة LLEDO Industries", "title": "الخبرة والمعرفة", "description": "اكتشف مقالاتنا التقنية المكتوبة من قبل خبرائنا." },
+    "sections": { "featured": "مميز", "latest": "أحدث المقالات", "all": "جميع مقالاتنا" },
+    "card": { "readMore": "قراءة المقال", "readTime": "{{minutes}} دقيقة قراءة", "publishedOn": "نُشر في {{date}}" },
+    "categories": { "all": "جميع الفئات", "machining": "التصنيع", "engineering": "الهندسة", "maintenance": "الصيانة", "gse": "معدات GSE", "company": "حياة الشركة" },
+    "empty": { "title": "كتابنا في الورشة...", "subtitle": "المقالات قيد التصنيع.", "description": "الدقة والجودة واحترام المواعيد — حتى للمحتوى.", "cta": "اكتشف خبراتنا" },
+    "newsletter": { "title": "ابق على اطلاع", "subtitle": "احصل على مقالاتنا مباشرة في بريدك.", "placeholder": "عنوان بريدك الإلكتروني", "subscribe": "اشترك", "success": "تم الاشتراك!", "error": "حدث خطأ" }
+  },
+  "forms": {
+    "contact": { "title": "تواصل مع فريقنا", "subtitle": "املأ النموذج وسنرد في أقرب وقت." },
+    "fields": { "firstName": "الاسم الأول", "lastName": "اسم العائلة", "email": "البريد الإلكتروني", "phone": "الهاتف", "company": "الشركة", "subject": "الموضوع", "message": "الرسالة", "cv": "السيرة الذاتية (PDF, DOC)", "optional": "اختياري" },
+    "placeholders": { "firstName": "اسمك الأول", "lastName": "اسم عائلتك", "email": "your@email.com", "phone": "+965 0000 0000", "company": "اسم شركتك", "message": "صف مشروعك أو طلبك..." },
+    "subjects": { "select": "اختر موضوعاً", "quote": "طلب عرض أسعار", "information": "طلب معلومات", "support": "الدعم الفني", "partnership": "شراكة", "recruitment": "طلب توظيف", "other": "آخر" },
+    "consent": { "text": "أوافق على استخدام بياناتي وفقاً لـ", "privacyPolicy": "سياسة الخصوصية" },
+    "buttons": { "send": "إرسال", "sending": "جاري الإرسال...", "submit": "إرسال الطلب", "apply": "التقديم", "reset": "إعادة تعيين" },
+    "messages": { "success": "تم إرسال رسالتك. شكراً، سنرد خلال 24 ساعة.", "error": "حدث خطأ. حاول مرة أخرى أو اتصل بنا هاتفياً.", "required": "هذا الحقل مطلوب" }
+  },
+  "errors": {
+    "validation": { "required": "هذا الحقل مطلوب", "email": "عنوان بريد إلكتروني غير صالح", "phone": "رقم هاتف غير صالح", "minLength": "الحد الأدنى {{min}} حرف", "maxLength": "الحد الأقصى {{max}} حرف", "passwordMismatch": "كلمات المرور غير متطابقة", "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل", "consent": "يجب قبول سياسة الخصوصية" },
+    "auth": { "invalidCredentials": "بريد إلكتروني أو كلمة مرور غير صحيحة", "accountNotFound": "الحساب غير موجود", "accountExists": "يوجد حساب بهذا البريد الإلكتروني", "sessionExpired": "انتهت جلستك", "accessDenied": "تم رفض الوصول", "adminRequired": "مطلوب صلاحيات المسؤول" },
+    "network": { "connectionError": "خطأ في الاتصال", "serverError": "خطأ في الخادم", "timeout": "انتهت المهلة", "notFound": "الصفحة غير موجودة", "unauthorized": "غير مصرح" },
+    "generic": { "title": "حدث خطأ", "description": "نعتذر عن الإزعاج. حاول مرة أخرى.", "retry": "إعادة المحاولة", "goHome": "الذهاب للرئيسية" },
+    "404": { "title": "الصفحة غير موجودة", "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.", "goHome": "الذهاب للرئيسية" },
+    "500": { "title": "خطأ في الخادم", "description": "حدث خطأ داخلي. تم إخطار فرقنا.", "retry": "إعادة المحاولة" }
+  },
+  "ui": {
+    "loading": "جاري التحميل...", "error": "خطأ", "success": "نجاح", "warning": "تحذير", "info": "معلومات",
+    "buttons": { "cancel": "إلغاء", "confirm": "تأكيد", "save": "حفظ", "delete": "حذف", "edit": "تعديل", "close": "إغلاق", "back": "رجوع", "next": "التالي", "previous": "السابق", "submit": "إرسال", "apply": "تطبيق", "reset": "إعادة تعيين" },
+    "actions": { "search": "بحث", "filter": "تصفية", "sort": "ترتيب", "download": "تحميل", "upload": "رفع", "share": "مشاركة", "copy": "نسخ", "print": "طباعة" },
+    "navigation": { "viewMore": "عرض المزيد", "viewLess": "عرض أقل", "readMore": "قراءة المزيد", "learnMore": "معرفة المزيد", "seeAll": "عرض الكل", "backToTop": "العودة للأعلى" },
+    "status": { "active": "نشط", "inactive": "غير نشط", "pending": "قيد الانتظار", "completed": "مكتمل", "cancelled": "ملغي", "draft": "مسودة", "published": "منشور" },
+    "time": { "today": "اليوم", "yesterday": "أمس", "tomorrow": "غداً", "now": "الآن", "ago": "منذ {{time}}", "in": "في {{time}}" },
+    "pagination": { "page": "صفحة {{current}} من {{total}}", "first": "الأولى", "last": "الأخيرة", "next": "التالية", "previous": "السابقة", "showing": "عرض {{from}} إلى {{to}} من {{total}} نتيجة" },
+    "empty": { "noResults": "لا توجد نتائج", "noData": "لا توجد بيانات متاحة" },
+    "accessibility": { "openMenu": "فتح القائمة", "closeMenu": "إغلاق القائمة", "expandSection": "توسيع القسم", "collapseSection": "طي القسم", "externalLink": "يفتح في علامة تبويب جديدة" }
+  },
+  "seo": {
+    "home": { "title": "LLEDO Industries | التصنيع الدقيق والصيانة الصناعية للطيران", "description": "مجموعة صناعية فرنسية متخصصة في التصنيع الدقيق والصفائح المعدنية ومعدات GSE للطيران والدفاع. معتمدة ISO 9001 و EN 9100." },
+    "expertises": { "title": "شركاتنا | MPEB, EGI, FREM, MGP و LLEDO Aerotools", "description": "5 كيانات متكاملة: التصنيع (MPEB)، الهندسة (EGI)، الصيانة (FREM)، الصفائح (MGP) ومعدات GSE (Aerotools)." },
+    "vision": { "title": "رؤيتنا | مجموعة LLEDO Industries - التميز الصناعي الفرنسي", "description": "اكتشف رؤية مؤسس LLEDO Industries. التزام بالتميز التقني منذ 1989." },
+    "contact": { "title": "اتصل بـ LLEDO Industries | طلب عرض أسعار للأدوات الجوية", "description": "اتصل بنا لمشاريع التصنيع والصيانة الصناعية أو معدات GSE." },
+    "careers": { "title": "الوظائف في LLEDO Industries | انضم إلى فريقنا الجوي", "description": "انضم إلى فريق شغوف. اكتشف وظائفنا في التصنيع والهندسة والصيانة." },
+    "blog": { "title": "المدونة والمقالات التقنية | LLEDO Industries", "description": "مقالات تقنية عن التصنيع الدقيق والتصميم الميكانيكي والصيانة الصناعية والأدوات الجوية." },
+    "testimonials": { "title": "شهادات العملاء | شركاء الطيران والدفاع", "description": "اكتشف ما يقوله عملاؤنا في الطيران والدفاع عن تعاونهم مع LLEDO Industries." },
+    "cases": { "title": "دراسات الحالة | مشاريع الطيران والدفاع", "description": "دراسات حالة مفصلة تقدم حلولنا في التصنيع ومعدات GSE والصيانة." }
+  }
+}

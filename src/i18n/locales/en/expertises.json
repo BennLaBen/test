@@ -5,153 +5,187 @@
     {
       "id": "mpeb",
       "name": "MPEB",
-      "tagline": "Usinage de précision et mécanique générale",
-      "description": "Cœur historique du groupe depuis 1989, MPEB est spécialisée dans l'usinage de précision 3, 4 et 5 axes, la fabrication de pièces mécaniques complexes et l'assemblage d'ensembles mécaniques pour l'aéronautique et la défense.",
+      "tagline": "Precision machining & general mechanics",
+      "description": "Core entity of the group since 1989, MPEB specializes in 3, 4 and 5-axis precision machining, complex mechanical part manufacturing and mechanical assembly for aerospace and defense sectors.",
       "expertise": [
-        "Usinage de précision sur machines CNC 3, 4 et 5 axes",
-        "Fabrication de pièces unitaires et petites séries",
-        "Assemblage d'ensembles mécaniques complexes",
-        "Contrôle dimensionnel 3D et métrologie",
-        "Électro-érosion à fil et par enfonçage",
-        "Gravure laser"
+        "3, 4 and 5-axis CNC precision machining",
+        "Unit parts and small series manufacturing",
+        "Complex mechanical assembly",
+        "3D dimensional inspection and metrology",
+        "Wire and sinker EDM",
+        "Laser engraving"
       ],
       "capabilities": {
-        "capacity": "100 000 heures/an",
-        "precision": "Tolérance ±0.01mm",
-        "machines": "15+ machines CNC"
+        "capacity": "100,000 hours/year",
+        "precision": "Tolerance ±0.01mm",
+        "machines": "15+ CNC machines"
       },
       "certifications": [
         "ISO 9001:2015",
         "EN 9100:2018",
-        "Interchangeabilité AIRBUS"
+        "AIRBUS interchangeability"
       ],
-      "ctaLabel": "Découvrir MPEB"
+      "ctaLabel": "Discover MPEB"
     },
     {
       "id": "egi",
       "name": "EGI",
-      "tagline": "Bureau d'études et ingénierie",
-      "description": "EGI apporte son expertise en conception technique, calculs de structures et développement de solutions sur mesure. Notre bureau d'études accompagne nos clients de l'idée initiale jusqu'à la validation du produit fini.",
+      "tagline": "Engineering & design office",
+      "description": "EGI provides technical design expertise, structural calculations and custom solution development. Our engineering office supports clients from initial concept through final product validation.",
       "expertise": [
-        "Conception mécanique et études techniques",
-        "Modélisation 3D et simulations (CAO/DAO)",
-        "Calculs de structures et résistance des matériaux",
-        "Plans d'exécution et documentation technique",
-        "Reverse engineering et amélioration de produits",
-        "Accompagnement certification et homologation"
+        "Mechanical design and technical studies",
+        "3D modeling and simulations (CAD/CAM)",
+        "Structural calculations and material strength analysis",
+        "Manufacturing drawings and technical documentation",
+        "Reverse engineering and product improvement",
+        "Certification and approval support"
       ],
       "capabilities": {
-        "capacity": "Bureau d'études intégré",
-        "precision": "Logiciels CAO dernière génération",
+        "capacity": "Integrated design office",
+        "precision": "Latest-generation CAD software",
         "machines": "SolidWorks, CATIA V5"
       },
       "certifications": [
-        "Expertise certifiée",
-        "Agrément Airbus",
-        "Méthodes APQP"
+        "Certified expertise",
+        "Airbus approval",
+        "APQP methods"
       ],
-      "ctaLabel": "Découvrir EGI"
+      "ctaLabel": "Discover EGI"
     },
     {
       "id": "frem",
       "name": "FREM",
-      "tagline": "Maintenance industrielle et installation",
-      "description": "FREM assure la maintenance préventive et curative, l'installation d'équipements sur site et le support technique. Notre équipe intervient chez nos clients pour garantir la disponibilité et la performance de leurs équipements.",
+      "tagline": "Industrial maintenance & installation",
+      "description": "FREM delivers preventive and corrective maintenance, on-site equipment installation and technical support. Our teams work at client facilities to ensure equipment availability and performance.",
       "expertise": [
-        "Maintenance préventive et curative d'équipements industriels",
-        "Installation et mise en service sur site client",
-        "Support technique et dépannage d'urgence",
-        "Contrôles périodiques et vérifications réglementaires",
-        "Formation des équipes d'exploitation",
-        "Contrats de maintenance sur mesure"
+        "Preventive and corrective industrial equipment maintenance",
+        "On-site installation and commissioning",
+        "Technical support and emergency troubleshooting",
+        "Periodic inspections and regulatory compliance checks",
+        "Operations team training",
+        "Custom maintenance contracts"
       ],
       "capabilities": {
-        "capacity": "Disponibilité 7j/7",
-        "precision": "Intervention sous 48h",
-        "machines": "Équipes mobiles"
+        "capacity": "7-day availability",
+        "precision": "48h response time",
+        "machines": "Mobile teams"
       },
       "certifications": [
-        "Techniciens certifiés",
-        "Habilitations électriques",
+        "Certified technicians",
+        "Electrical certifications",
         "CACES"
       ],
-      "ctaLabel": "Découvrir FREM"
+      "ctaLabel": "Discover FREM"
     },
     {
       "id": "mgp",
       "name": "MGP",
-      "tagline": "Tôlerie, chaudronnerie et assemblage",
-      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Basée à Saint-Bauzille-de-Putois, MGP apporte une expertise complémentaire sur des marchés diversifiés avec 50 ans d'expérience.",
+      "tagline": "Sheet metal, boilermaking & assembly",
+      "description": "MGP complements the group's offering with sheet metal, boilermaking, welding and mechanical assembly capabilities. Based in Saint-Bauzille-de-Putois, MGP brings complementary expertise across diversified markets with 50 years of experience.",
       "expertise": [
-        "Découpe au jet d'eau haute pression",
-        "Chaudronnerie et travail des métaux",
-        "Soudure tous procédés (TIG, MIG, ARC)",
-        "Usinage",
-        "Tournage",
-        "Fraisage"
+        "High-pressure waterjet cutting",
+        "Boilermaking and metalwork",
+        "All welding processes (TIG, MIG, ARC)",
+        "Machining",
+        "Turning",
+        "Milling"
       ],
       "capabilities": {
-        "capacity": "2000m² d'atelier",
-        "precision": "8 soudeurs qualifiés",
-        "machines": "Laser, presse plieuse, rouleuse"
+        "capacity": "2,000m² workshop",
+        "precision": "8 qualified welders",
+        "machines": "Laser, press brake, rolling machine"
       },
       "certifications": [
         "ISO 9001",
-        "Soudeurs certifiés EN 287",
-        "Marquage CE"
+        "EN 287 certified welders",
+        "CE marking"
       ],
-      "ctaLabel": "Découvrir MGP"
+      "ctaLabel": "Discover MGP"
     },
     {
       "id": "aerotools",
       "name": "LLEDO Aerotools",
-      "tagline": "Équipements GSE pour hélicoptères",
-      "description": "Division dédiée au développement et à la commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères légers. Barres de remorquage, chariots de levage et outillages spécialisés conformes aux normes aéronautiques.",
+      "tagline": "Helicopter GSE equipment",
+      "description": "Division dedicated to developing and marketing GSE (Ground Support Equipment) for light helicopters. Towbars, lifting trolleys and specialized tooling compliant with aeronautical standards.",
       "expertise": [
-        "Barres de remorquage certifiées EN 12312 et EN 1915",
-        "Chariots de levage et manutention hélicoptères",
-        "Outillages spécialisés maintenance rotor",
-        "Équipements sur mesure selon spécifications client",
-        "Formation à l'utilisation des équipements",
-        "Support technique et SAV"
+        "EN 12312 and EN 1915 certified towbars",
+        "Helicopter lifting and handling trolleys",
+        "Specialized rotor maintenance tooling",
+        "Custom equipment per client specifications",
+        "Equipment operation training",
+        "Technical support and after-sales service"
       ],
       "capabilities": {
-        "capacity": "Gamme complète GSE hélico",
-        "precision": "Test 1,25× CMU",
-        "machines": "Certification CE et aéronautique"
+        "capacity": "Complete helicopter GSE range",
+        "precision": "1.25× SWL tested",
+        "machines": "CE and aeronautical certification"
       },
       "certifications": [
-        "Directive Machines 2006/42/CE",
+        "Machinery Directive 2006/42/EC",
         "EN 12312",
         "EN 1915"
       ],
-      "ctaLabel": "Découvrir LLEDO Aerotools"
+      "ctaLabel": "Discover LLEDO Aerotools"
     }
   ],
   "stats": {
-    "title": "Le Groupe LLEDO en chiffres",
+    "title": "LLEDO Group in figures",
     "list": [
       {
-        "value": "36 ans",
-        "label": "d'expérience"
+        "value": "36 years",
+        "label": "of experience"
       },
       {
         "value": "70",
-        "label": "collaborateurs"
+        "label": "employees"
       },
       {
-        "value": "100 000h",
-        "label": "de production/an"
+        "value": "100,000h",
+        "label": "production/year"
       },
       {
         "value": "5",
-        "label": "entités complémentaires"
+        "label": "complementary entities"
       }
     ]
   },
   "cta": {
-    "title": "Besoin d'un partenaire industriel complet ?",
-    "subtitle": "Contactez-nous pour discuter de votre projet et découvrir comment nos expertises peuvent répondre à vos besoins.",
-    "button": "Demander un devis"
+    "title": "Need a complete industrial partner?",
+    "subtitle": "Contact us to discuss your project and discover how our expertise can meet your needs.",
+    "button": "Request a quote"
+  },
+  "pages": {
+    "common": {
+      "contactUs": "Contact Us",
+      "getQuote": "Get a Quote",
+      "ourExpertise": "Our Expertise",
+      "technicalCapabilities": "Technical Capabilities",
+      "capacity": "Capacity",
+      "precision": "Precision",
+      "equipment": "Equipment",
+      "photosComingSoon": "Workshop photos coming soon",
+      "needQuote": "Need a quote or information?",
+      "allCompanies": "All our companies"
+    },
+    "mpeb": {
+      "seoTitle": "MPEB - Aerospace Precision Machining",
+      "seoDescription": "Precision machining specialist for aerospace. 3, 4 and 5-axis machining, high-precision turning and milling.",
+      "ctaDescription": "Our MPEB team is at your disposal to meet your precision machining needs."
+    },
+    "egi": {
+      "seoTitle": "EGI - Engineering & Design Office",
+      "seoDescription": "Engineering office specialized in mechanical design, structural calculations and custom solutions development.",
+      "ctaDescription": "Our EGI team is at your disposal to meet your engineering needs."
+    },
+    "frem": {
+      "seoTitle": "FREM - Industrial Maintenance & Installation",
+      "seoDescription": "Preventive and corrective maintenance, on-site equipment installation and technical support for industry.",
+      "ctaDescription": "Our FREM team is at your disposal to meet your maintenance needs."
+    },
+    "mgp": {
+      "seoTitle": "MGP - Sheet Metal, Boilermaking & Assembly",
+      "seoDescription": "Specialist in sheet metal, boilermaking, welding and mechanical assembly.",
+      "ctaDescription": "Our MGP team is at your disposal to meet your sheet metal and boilermaking needs."
+    }
   }
 }
