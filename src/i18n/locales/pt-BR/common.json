@@ -305,5 +305,32 @@
       "madeInFrance": "Fabricado na França 🇫🇷",
       "copyright": "© {{year}} LLEDO Industries. Todos os direitos reservados."
     }
+  },
+  "brochure": {
+    "pageTitle": "Folheto - Em breve",
+    "pageDescription": "Nosso folheto de apresentação estará disponível para download em breve.",
+    "backHome": "Voltar ao início",
+    "title": "Folheto",
+    "subtitle": "Em breve",
+    "description": "Nosso folheto de apresentação completo está sendo finalizado. Apresentará todas as nossas especialidades, certificações e referências de clientes.",
+    "inProgress": "Em preparação...",
+    "notifyMe": "Me avise",
+    "feature1": "Formato PDF",
+    "feature2": "Download gratuito"
+  },
+  "aerotools": {
+    "pageTitle": "LLEDO Aerotools - Em breve",
+    "pageDescription": "LLEDO Aerotools, nossa linha de equipamentos GSE para aviação, chegará em breve.",
+    "backToAerotools": "Voltar para Aerotools",
+    "comingSoon": "Em breve",
+    "comingSoonDescription": "Nosso catálogo de equipamentos GSE (Ground Support Equipment) para aviação está em desenvolvimento. Barras de reboque, rolos de manuseio e ferramentas especializadas para helicópteros.",
+    "inDevelopment": "Em desenvolvimento",
+    "notifyMe": "Me avise do lançamento",
+    "feature1Title": "Equipamentos GSE",
+    "feature1Desc": "Barras de reboque e ferramentas certificadas",
+    "feature2Title": "Sob medida",
+    "feature2Desc": "Soluções adaptadas às suas aeronaves",
+    "feature3Title": "Entrega rápida",
+    "feature3Desc": "Envio em 2-4 semanas"
   }
 }

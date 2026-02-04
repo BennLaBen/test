@@ -305,5 +305,32 @@
       "madeInFrance": "Made in France 🇫🇷",
       "copyright": "© {{year}} LLEDO Industries. All rights reserved."
     }
+  },
+  "brochure": {
+    "pageTitle": "Brochure - Coming Soon",
+    "pageDescription": "Our company brochure will be available for download soon.",
+    "backHome": "Back to home",
+    "title": "Brochure",
+    "subtitle": "Coming Soon",
+    "description": "Our complete company brochure is being finalized. It will showcase all our expertise, certifications and client references.",
+    "inProgress": "In preparation...",
+    "notifyMe": "Notify me",
+    "feature1": "PDF format",
+    "feature2": "Free download"
+  },
+  "aerotools": {
+    "pageTitle": "LLEDO Aerotools - Coming Soon",
+    "pageDescription": "LLEDO Aerotools, our range of GSE equipment for aviation, is coming soon.",
+    "backToAerotools": "Back to Aerotools",
+    "comingSoon": "Coming Soon",
+    "comingSoonDescription": "Our GSE (Ground Support Equipment) catalog for aviation is under development. Tow bars, handling rollers and specialized tooling for helicopters.",
+    "inDevelopment": "Under development",
+    "notifyMe": "Notify me at launch",
+    "feature1Title": "GSE Equipment",
+    "feature1Desc": "Certified tow bars and tooling",
+    "feature2Title": "Custom-made",
+    "feature2Desc": "Solutions tailored to your aircraft",
+    "feature3Title": "Fast delivery",
+    "feature3Desc": "Shipping within 2-4 weeks"
   }
 }

@@ -305,6 +305,33 @@
       "madeInFrance": "Fabriqué en France 🇫🇷",
       "copyright": "© {{year}} LLEDO Industries. Tous droits réservés."
     }
+  },
+  "brochure": {
+    "pageTitle": "Plaquette - Bientôt disponible",
+    "pageDescription": "Notre plaquette de présentation sera bientôt disponible au téléchargement.",
+    "backHome": "Retour à l'accueil",
+    "title": "Plaquette",
+    "subtitle": "Bientôt disponible",
+    "description": "Notre plaquette de présentation complète est en cours de finalisation. Elle présentera l'ensemble de nos expertises, nos certifications et nos références clients.",
+    "inProgress": "Préparation en cours...",
+    "notifyMe": "Me prévenir",
+    "feature1": "Format PDF",
+    "feature2": "Téléchargement gratuit"
+  },
+  "aerotools": {
+    "pageTitle": "LLEDO Aerotools - Bientôt disponible",
+    "pageDescription": "LLEDO Aerotools, notre gamme d'équipements GSE pour l'aéronautique, arrive prochainement.",
+    "backToAerotools": "Retour à Aerotools",
+    "comingSoon": "Arrive prochainement",
+    "comingSoonDescription": "Notre catalogue d'équipements GSE (Ground Support Equipment) pour l'aéronautique est en cours de développement. Barres de remorquage, rollers de manutention et outillages spécialisés pour hélicoptères.",
+    "inDevelopment": "En cours de développement",
+    "notifyMe": "Me prévenir du lancement",
+    "feature1Title": "Équipements GSE",
+    "feature1Desc": "Barres de remorquage et outillages certifiés",
+    "feature2Title": "Sur mesure",
+    "feature2Desc": "Solutions adaptées à vos appareils",
+    "feature3Title": "Livraison rapide",
+    "feature3Desc": "Expédition sous 2-4 semaines"
   }
 }
 
