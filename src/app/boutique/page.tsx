@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Bell, Wrench, Clock, Rocket } from 'lucide-react'
+import { ArrowLeft, Bell, Wrench, Clock } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/SEO'
 
@@ -192,7 +192,7 @@ export default function BoutiquePage() {
               transition={{ duration: 2, repeat: Infinity }}
             />
             
-            {/* Icône principale */}
+            {/* Icône principale - Hélicoptère stylisé */}
             <div className="relative w-40 h-40 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border border-blue-400/30 overflow-hidden">
               {/* Effet scan */}
               <motion.div
@@ -201,7 +201,47 @@ export default function BoutiquePage() {
                 transition={{ duration: 2, repeat: Infinity }}
               />
               
-              <Rocket className="h-20 w-20 text-white relative z-10" />
+              {/* SVG Hélicoptère stylisé */}
+              <svg viewBox="0 0 100 80" fill="none" className="h-24 w-24 relative z-10">
+                {/* Rotor principal animé */}
+                <motion.ellipse
+                  cx="50"
+                  cy="15"
+                  rx="40"
+                  ry="3"
+                  fill="white"
+                  opacity="0.8"
+                  animate={{ scaleX: [1, 0.3, 1] }}
+                  transition={{ duration: 0.15, repeat: Infinity }}
+                />
+                
+                {/* Mât du rotor */}
+                <rect x="48" y="15" width="4" height="12" fill="white" opacity="0.9" />
+                
+                {/* Cabine */}
+                <ellipse cx="40" cy="40" rx="22" ry="18" fill="white" opacity="0.95" />
+                <ellipse cx="35" cy="38" rx="14" ry="10" fill="#60a5fa" opacity="0.7" />
+                
+                {/* Corps arrière */}
+                <path d="M55 35 L85 38 L85 42 L55 45 Z" fill="white" opacity="0.9" />
+                
+                {/* Rotor arrière */}
+                <motion.ellipse
+                  cx="88"
+                  cy="40"
+                  rx="2"
+                  ry="8"
+                  fill="white"
+                  opacity="0.8"
+                  animate={{ scaleY: [1, 0.3, 1] }}
+                  transition={{ duration: 0.1, repeat: Infinity }}
+                />
+                
+                {/* Patins */}
+                <rect x="22" y="58" width="36" height="3" rx="1.5" fill="white" opacity="0.85" />
+                <rect x="20" y="55" width="3" height="6" fill="white" opacity="0.85" />
+                <rect x="55" y="55" width="3" height="6" fill="white" opacity="0.85" />
+              </svg>
               
               {/* Badge horloge */}
               <motion.div
@@ -322,7 +362,11 @@ export default function BoutiquePage() {
             
             <div className="flex flex-col items-center p-6 bg-slate-800/30 rounded-2xl border border-blue-500/20 backdrop-blur-sm">
               <div className="w-16 h-16 bg-gradient-to-br from-cyan-600 to-cyan-800 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/20">
-                <Rocket className="h-8 w-8 text-white" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 text-white">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
               </div>
               <h3 className="text-white font-bold mb-2">{t('aerotools.feature2Title')}</h3>
               <p className="text-sm text-gray-400">{t('aerotools.feature2Desc')}</p>
