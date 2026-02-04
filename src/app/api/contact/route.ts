@@ -3,7 +3,14 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import { rateLimit, rateLimitResponse } from '@/lib/rate-limit'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialisation lazy de Resend pour éviter l'erreur au build
+const getResend = () => {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(apiKey)
+}
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'Le prénom est requis'),
@@ -35,6 +42,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const resend = getResend()
     await resend.emails.send({
       from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
       to: process.env.CONTACT_EMAIL || 'contact@mpeb13.com',

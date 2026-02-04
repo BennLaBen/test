@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialisation lazy de Resend pour éviter l'erreur au build
+const getResend = () => {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(apiKey)
+}
 
 // Schéma de validation pour candidature rapide
 const quickApplicationSchema = z.object({
@@ -102,6 +109,7 @@ export async function POST(request: NextRequest) {
     `
 
     // Envoyer l'email via Resend
+    const resend = getResend()
     const { data: emailResult, error: emailError } = await resend.emails.send({
       from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
       to: ['rh@lledo-industries.com'],
