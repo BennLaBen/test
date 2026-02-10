@@ -282,14 +282,14 @@ export default function MGPPage() {
                 />
                 
                 <h3 className="text-2xl font-bold text-muted-strong mb-6 relative z-10">
-                  Capacités techniques
+                  {t('pages.common.technicalCapabilities')}
                 </h3>
 
                 <div className="space-y-4 relative z-10">
                   {[
-                    { icon: Factory, label: 'Capacité', value: expertise.capabilities.capacity },
-                    { icon: Target, label: 'Précision', value: expertise.capabilities.precision },
-                    { icon: Wrench, label: 'Équipements', value: expertise.capabilities.machines }
+                    { icon: Factory, label: t('pages.common.capacity'), value: expertise.capabilities.capacity },
+                    { icon: Target, label: t('pages.common.precision'), value: expertise.capabilities.precision },
+                    { icon: Wrench, label: t('pages.common.equipment'), value: expertise.capabilities.machines }
                   ].map((cap, idx) => (
                     <motion.div 
                       key={idx}

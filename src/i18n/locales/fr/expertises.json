@@ -9,15 +9,15 @@
       "description": "Cœur historique du groupe depuis 1989, MPEB est spécialisée dans l'usinage de précision 3, 4 et 5 axes, la fabrication de pièces mécaniques complexes et l'assemblage d'ensembles mécaniques pour l'aéronautique et la défense.",
       "expertise": [
         "Usinage de précision sur machines CNC 3, 4 et 5 axes",
+        "Rectification plane et cylindrique",
         "Fabrication de pièces unitaires et petites séries",
-        "Assemblage d'ensembles mécaniques complexes",
-        "Contrôle dimensionnel 3D et métrologie",
+        "Alésage de précision",
         "Électro-érosion à fil et par enfonçage",
-        "Gravure laser"
+        "Assemblage et contrôle qualité"
       ],
       "capabilities": {
-        "capacity": "Capacité adaptée",
-        "precision": "Tolérance ±0.01mm",
+        "capacity": "Fabrication de pièces unitaires",
+        "precision": "Rectification plane et cylindrique",
         "machines": "Parc machines CNC"
       },
       "certifications": ["ISO 9001:2015", "EN 9100:2018", "Interchangeabilité AIRBUS"],

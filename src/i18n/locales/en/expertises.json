@@ -9,16 +9,16 @@
       "description": "Core entity of the group since 1989, MPEB specializes in 3, 4 and 5-axis precision machining, complex mechanical part manufacturing and mechanical assembly for aerospace and defense sectors.",
       "expertise": [
         "3, 4 and 5-axis CNC precision machining",
+        "Surface and cylindrical grinding",
         "Unit parts and small series manufacturing",
-        "Complex mechanical assembly",
-        "3D dimensional inspection and metrology",
+        "Precision boring",
         "Wire and sinker EDM",
-        "Laser engraving"
+        "Assembly and quality control"
       ],
       "capabilities": {
-        "capacity": "100,000 hours/year",
-        "precision": "Tolerance ±0.01mm",
-        "machines": "15+ CNC machines"
+        "capacity": "Unit part manufacturing",
+        "precision": "Surface and cylindrical grinding",
+        "machines": "CNC machine fleet"
       },
       "certifications": [
         "ISO 9001:2015",

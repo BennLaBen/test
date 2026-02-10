@@ -29,7 +29,7 @@ export default function MPEBPage() {
   const expertise = {
     name: 'MPEB',
     tagline: 'Usinage de précision',
-    description: 'MPEB est spécialisée dans la fabrication de pièces unitaires et l\'usinage de pièces complexes pour l\'industrie. Notre expertise technique et nos équipements de pointe nous permettent de répondre aux exigences les plus strictes. Il n\'existe pas uniquement des outillages mécaniques : MPEB conçoit et fabrique tout type de solutions adaptées aux environnements industriels.',
+    description: 'MPEB est spécialisée dans la fabrication de pièces unitaires et l\'usinage de pièces complexes pour l\'industrie. Notre expertise technique et nos équipements de pointe nous permettent de répondre aux exigences les plus strictes.\n\nPas uniquement des outillages mécaniques, mais tous types d\'équipements industriels : MPEB conçoit et fabrique des solutions adaptées à chaque environnement de production.',
     capabilities: {
       capacity: 'Fabrication de pièces unitaires',
       precision: 'Rectification plane et cylindrique',
@@ -40,8 +40,8 @@ export default function MPEBPage() {
       'Rectification plane et cylindrique',
       'Alésage de précision',
       'Fabrication de pièces élémentaires',
-      'Assemblage',
-      'Contrôle qualité'
+      'Électro-érosion à fil et par enfonçage',
+      'Assemblage et contrôle qualité'
     ],
     certifications: ['EN 9100', 'ISO 9001', 'NADCAP'],
     stats: [
@@ -296,7 +296,7 @@ export default function MPEBPage() {
                   {[
                     { icon: Factory, label: t('pages.common.capacity'), value: expertise.capabilities.capacity },
                     { icon: Target, label: t('pages.common.precision'), value: expertise.capabilities.precision },
-                    { icon: Settings, label: t('pages.common.equipment'), value: expertise.capabilities.machines }
+                    { icon: Settings, label: t('pages.common.equipment'), value: expertise.capabilities.machines },
                   ].map((cap, idx) => (
                     <motion.div 
                       key={idx}
@@ -352,51 +352,57 @@ export default function MPEBPage() {
 
               {/* Image Carousel */}
               <motion.div
-                className="mt-8 glass-card relative overflow-hidden tech-border"
+                className="mt-8 relative overflow-hidden rounded-2xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-950/80 via-gray-900/90 to-blue-950/80 shadow-[0_0_40px_rgba(59,130,246,0.15)]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="relative h-80 bg-gradient-to-br from-blue-500/10 to-blue-600/5">
+                {/* Top accent bar */}
+                <div className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+
+                <div className="relative h-80 bg-gradient-to-br from-blue-500/5 to-blue-600/10">
                   {/* Placeholder image */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Factory className="h-32 w-32 text-blue-500 opacity-20" />
+                    <div className="relative">
+                      <div className="absolute inset-0 blur-3xl bg-blue-500/10 rounded-full scale-150" />
+                      <Factory className="h-28 w-28 text-blue-400/30 relative z-10" />
+                    </div>
                   </div>
                   
                   {/* Image counter */}
-                  <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm">
+                  <div className="absolute top-4 right-4 bg-blue-950/80 backdrop-blur-md px-4 py-1.5 rounded-full text-blue-200 text-xs font-bold tracking-wider border border-blue-500/20">
                     {currentImage + 1} / {images.length}
                   </div>
 
                   {/* Navigation buttons */}
                   <motion.button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 backdrop-blur-sm p-2 rounded-full text-white hover:bg-black/70 transition-colors"
-                    whileHover={{ scale: 1.1, x: -5 }}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-blue-950/70 backdrop-blur-md p-2.5 rounded-xl text-blue-200 hover:bg-blue-800/70 hover:text-white transition-all border border-blue-500/20"
+                    whileHover={{ scale: 1.1, x: -3 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <ChevronLeft className="h-6 w-6" />
+                    <ChevronLeft className="h-5 w-5" />
                   </motion.button>
 
                   <motion.button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 backdrop-blur-sm p-2 rounded-full text-white hover:bg-black/70 transition-colors"
-                    whileHover={{ scale: 1.1, x: 5 }}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-blue-950/70 backdrop-blur-md p-2.5 rounded-xl text-blue-200 hover:bg-blue-800/70 hover:text-white transition-all border border-blue-500/20"
+                    whileHover={{ scale: 1.1, x: 3 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <ChevronRight className="h-6 w-6" />
+                    <ChevronRight className="h-5 w-5" />
                   </motion.button>
                 </div>
 
                 {/* Carousel indicators */}
-                <div className="flex justify-center gap-2 p-4 bg-gray-50 dark:bg-gray-800">
+                <div className="flex justify-center gap-2.5 py-4 bg-blue-950/50 border-t border-blue-500/10">
                   {images.map((_, idx) => (
                     <motion.button
                       key={idx}
                       onClick={() => setCurrentImage(idx)}
-                      className={`h-2 rounded-full transition-all ${
-                        currentImage === idx ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300 dark:bg-gray-600'
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        currentImage === idx ? 'w-10 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'w-2 bg-blue-800 hover:bg-blue-600'
                       }`}
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
@@ -404,11 +410,14 @@ export default function MPEBPage() {
                   ))}
                 </div>
 
-                <div className="p-4 text-center">
-                  <p className="text-sm text-muted">
-                    📸 {t('pages.common.photosComingSoon')}
+                <div className="px-6 py-3 text-center bg-blue-950/30">
+                  <p className="text-xs text-blue-300/70 font-medium tracking-wide">
+                    {t('pages.common.photosComingSoon')}
                   </p>
                 </div>
+
+                {/* Bottom accent bar */}
+                <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
               </motion.div>
             </motion.div>
           </div>

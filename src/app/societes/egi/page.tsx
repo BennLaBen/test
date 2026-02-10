@@ -280,14 +280,14 @@ export default function EGIPage() {
                 />
                 
                 <h3 className="text-2xl font-bold text-muted-strong mb-6 relative z-10">
-                  Capacités techniques
+                  {t('pages.common.technicalCapabilities')}
                 </h3>
 
                 <div className="space-y-4 relative z-10">
                   {[
-                    { icon: Lightbulb, label: 'CAO/FAO', value: expertise.capabilities.capacity },
-                    { icon: Target, label: 'Simulation', value: expertise.capabilities.precision },
-                    { icon: Settings, label: 'Logiciels', value: expertise.capabilities.machines }
+                    { icon: Lightbulb, label: t('pages.common.capacity'), value: expertise.capabilities.capacity },
+                    { icon: Target, label: t('pages.common.precision'), value: expertise.capabilities.precision },
+                    { icon: Settings, label: t('pages.common.equipment'), value: expertise.capabilities.machines }
                   ].map((cap, idx) => (
                     <motion.div 
                       key={idx}
