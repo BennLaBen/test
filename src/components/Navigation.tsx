@@ -322,7 +322,7 @@ export function Navigation() {
             
             <LanguageToggle />
             
-            {/* Menu Hamburger - STYLE TONY STARK */}
+            {/* Menu Hamburger - 32x32px minimum, animation simple */}
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
@@ -330,17 +330,24 @@ export function Navigation() {
                 e.preventDefault()
                 setIsOpen(!isOpen)
               }}
-              className="inline-flex items-center justify-center rounded-lg p-3 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all touch-manipulation"
-              style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)', WebkitTapHighlightColor: 'transparent' }}
+              className="inline-flex items-center justify-center rounded-xl p-2.5 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all duration-200 touch-manipulation"
+              style={{ 
+                boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)', 
+                WebkitTapHighlightColor: 'transparent',
+                minWidth: '48px',
+                minHeight: '48px'
+              }}
               aria-expanded={isOpen}
               aria-label="Menu principal"
             >
               <span className="sr-only">{t('ui.openMenu')}</span>
-              {isOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
+              {/* Animation rotate + fade */}
+              <span className={`transition-transform duration-200 ${isOpen ? 'rotate-90 opacity-0 absolute' : 'rotate-0 opacity-100'}`}>
+                <Menu className="h-8 w-8" aria-hidden="true" />
+              </span>
+              <span className={`transition-transform duration-200 ${isOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0 absolute'}`}>
+                <X className="h-8 w-8" aria-hidden="true" />
+              </span>
             </button>
           </div>
         </div>
@@ -408,15 +415,21 @@ export function Navigation() {
                 {/* Header fixe */}
                 <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 border-b border-blue-500/20">
                   <Logo size="small" />
+                  {/* Close icon - 44x44px minimum, bien visible top-right */}
                   <button
                     ref={closeButtonRef}
                     type="button"
                     onClick={closeMenu}
-                    className="p-3.5 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 active:scale-95 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)', WebkitTapHighlightColor: 'transparent' }}
+                    className="p-2 rounded-xl bg-red-600/20 border-2 border-red-400/50 hover:bg-red-600/30 active:scale-95 transition-all duration-200 touch-manipulation focus:outline-none focus:ring-2 focus:ring-red-400"
+                    style={{ 
+                      boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)', 
+                      WebkitTapHighlightColor: 'transparent',
+                      minWidth: '44px',
+                      minHeight: '44px'
+                    }}
                     aria-label="Fermer le menu"
                   >
-                    <X className="h-6 w-6 text-white" />
+                    <X className="h-7 w-7 text-white" />
                   </button>
                 </div>
                 

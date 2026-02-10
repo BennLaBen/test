@@ -82,7 +82,8 @@ export function Footer() {
       {/* Main Footer */}
       <div className="border-b border-gray-800">
         <div className="container py-8 sm:py-12 lg:py-16">
-          <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-6">
+          {/* Mobile: colonne unique, Desktop: 6 colonnes */}
+          <div className="grid gap-6 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
@@ -169,23 +170,22 @@ export function Footer() {
             <span>{t('footer.bottom.copyright', { year: new Date().getFullYear() })}</span>
           </div>
 
-          {/* Social Links avec style industriel */}
-          <div className="flex items-center gap-3">
+          {/* Social Links - 40x40px minimum sur mobile */}
+          <div className="flex items-center gap-4">
             {socialLinks.map((social, index) => {
               const Icon = social.icon
               return (
-                <motion.a
+                <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 text-gray-400 transition-all hover:bg-primary-600 hover:text-white hover:shadow-lg tech-corner"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="flex h-10 w-10 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-gray-800 text-gray-400 transition-all duration-200 hover:bg-primary-600 hover:text-white active:scale-95 touch-manipulation"
+                  style={{ minWidth: '40px', minHeight: '40px' }}
                 >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
+                  <Icon className="h-6 w-6" />
+                </a>
               )
             })}
           </div>

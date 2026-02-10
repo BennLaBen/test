@@ -37,6 +37,11 @@
     "candidature": "Candidatura espontánea",
     "devis": "Solicitar presupuesto"
   },
+  "cta": {
+    "call": "Llamar",
+    "email": "Email",
+    "quote": "Presupuesto"
+  },
   "hero": {
     "chip": "Colectivo de Ingeniería",
     "headline": "LLEDO Industries",

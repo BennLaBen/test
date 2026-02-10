@@ -260,7 +260,7 @@ export function MobileMenuAccordion({ onClose, isActive, isAuthenticated, user, 
               <span className={isActive(section.directLink) ? 'text-white' : 'text-blue-400'}>
                 {section.icon}
               </span>
-              <span className={`text-base font-bold uppercase tracking-wide ${
+              <span className={`text-lg font-bold uppercase tracking-wide ${
                 isActive(section.directLink) ? 'text-white' : 'text-gray-200'
               }`}>
                 {t(section.titleKey)}
@@ -285,7 +285,7 @@ export function MobileMenuAccordion({ onClose, isActive, isAuthenticated, user, 
                 <span className={sectionHasActiveItem(section) ? 'text-blue-400' : 'text-blue-400/70'}>
                   {section.icon}
                 </span>
-                <span className={`text-base font-bold uppercase tracking-wide flex-1 text-left ${
+                <span className={`text-lg font-bold uppercase tracking-wide flex-1 text-left ${
                   sectionHasActiveItem(section) ? 'text-white' : 'text-gray-200'
                 }`}>
                   {t(section.titleKey)}
@@ -316,14 +316,14 @@ export function MobileMenuAccordion({ onClose, isActive, isAuthenticated, user, 
                           key={item.key}
                           href={item.href}
                           onClick={onClose}
-                          className={`flex items-center gap-3 px-4 py-3.5 rounded-lg transition-all active:scale-[0.98] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                          className={`flex items-center gap-3 px-4 py-4 rounded-lg transition-all active:scale-[0.98] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                             isActive(item.href)
                               ? 'bg-blue-600/30 text-white border-l-4 border-blue-400'
                               : 'text-gray-300 hover:bg-gray-700/30 active:bg-blue-600/20 border-l-4 border-transparent'
                           }`}
-                          style={{ WebkitTapHighlightColor: 'transparent', minHeight: '48px' }}
+                          style={{ WebkitTapHighlightColor: 'transparent', minHeight: '56px' }}
                         >
-                          <span className={`text-sm font-semibold ${
+                          <span className={`text-lg font-semibold ${
                             isActive(item.href) ? 'text-white' : 'text-gray-300'
                           }`}>
                             {t(item.key)}

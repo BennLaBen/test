@@ -7,6 +7,7 @@ import { SmartNavigator } from '@/components/SmartNavigator'
 import { SectionPagination } from '@/components/SectionPagination'
 import { TopInfoBar } from '@/components/TopInfoBar'
 import { FloatingCTA } from '@/components/FloatingCTA'
+import { MobileStickyFooter } from '@/components/MobileStickyFooter'
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -24,10 +25,11 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
       <SmartNavigator />
       <SectionPagination />
       <FloatingCTA />
-      <main id="main-content" className="flex-1" style={{ paddingTop: 'var(--content-offset)' }}>
+      <main id="main-content" className="flex-1 pb-20 lg:pb-0" style={{ paddingTop: 'var(--content-offset)' }}>
         {children}
       </main>
       <Footer />
+      <MobileStickyFooter />
     </div>
   )
 }

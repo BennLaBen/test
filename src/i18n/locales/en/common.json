@@ -37,6 +37,11 @@
     "candidature": "Spontaneous Application",
     "devis": "Request a Quote"
   },
+  "cta": {
+    "call": "Call",
+    "email": "Email",
+    "quote": "Quote"
+  },
   "hero": {
     "chip": "Engineering Collective",
     "headline": "LLEDO Industries",

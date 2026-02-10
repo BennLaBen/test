@@ -37,6 +37,11 @@
     "candidature": "Candidature spontanée",
     "devis": "Demander un devis"
   },
+  "cta": {
+    "call": "Appeler",
+    "email": "Email",
+    "quote": "Devis"
+  },
   "hero": {
     "chip": "Collectif d'ingénierie",
     "headline": "LLEDO Industries",

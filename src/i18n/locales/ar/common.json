@@ -37,6 +37,11 @@
     "candidature": "ترشيح عفوي",
     "devis": "طلب عرض أسعار"
   },
+  "cta": {
+    "call": "اتصل",
+    "email": "بريد",
+    "quote": "عرض سعر"
+  },
   "hero": {
     "chip": "تجمع هندسي",
     "headline": "LLEDO Industries",
