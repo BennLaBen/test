@@ -22,6 +22,20 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith(route)
   )
 
+  // Routes admin publiques (pas de vérification auth)
+  const adminPublicRoutes = ['/admin/login', '/admin/forgot-password', '/admin/reset-password', '/admin/activate']
+  const isAdminPublicRoute = adminPublicRoutes.some(route => 
+    pathname.startsWith(route)
+  )
+
+  // Routes API admin-auth (pas de vérification middleware)
+  const isAdminAuthAPI = pathname.startsWith('/api/admin-auth')
+
+  // Skip middleware pour les routes admin publiques et API admin-auth
+  if (isAdminPublicRoute || isAdminAuthAPI) {
+    return NextResponse.next()
+  }
+
   // Routes admin nécessitant le rôle ADMIN
   const adminRoutes = ['/admin']
   const isAdminRoute = adminRoutes.some(route => 

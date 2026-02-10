@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
       }
     } else if (admin.twoFactorMethod === 'TOTP' && admin.twoFactorSecret) {
       const secret = decryptTOTPSecret(admin.twoFactorSecret)
-      isValid = verifyTOTP(secret, code)
+      isValid = await verifyTOTP(secret, code)
     } else if (admin.twoFactorMethod === 'EMAIL') {
       const result = await verifyEmailOTP(adminId, code)
       isValid = result.isValid

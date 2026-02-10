@@ -1,4 +1,4 @@
-import { authenticator } from 'otplib'
+import * as otplib from 'otplib'
 import QRCode from 'qrcode'
 import { encrypt, decrypt, generateOTP, hashToken, generateBackupCodes } from './security'
 import { prisma } from '../prisma'
@@ -9,12 +9,6 @@ import { prisma } from '../prisma'
 // ============================================
 
 const TOTP_ISSUER = 'LLEDO Industries Admin'
-const TOTP_WINDOW = 1 // Allow 1 step before/after for clock drift
-
-authenticator.options = {
-  window: TOTP_WINDOW,
-  step: 30, // 30 seconds
-}
 
 export interface TOTPSetup {
   secret: string
@@ -23,8 +17,15 @@ export interface TOTPSetup {
 }
 
 export async function generateTOTPSecret(email: string): Promise<TOTPSetup> {
-  const secret = authenticator.generateSecret()
-  const otpauthUrl = authenticator.keyuri(email, TOTP_ISSUER, secret)
+  const secret = otplib.generateSecret()
+  const otpauthUrl = otplib.generateURI({
+    issuer: TOTP_ISSUER,
+    label: email,
+    secret,
+    algorithm: 'sha1',
+    digits: 6,
+    period: 30,
+  })
   
   const qrCodeDataUrl = await QRCode.toDataURL(otpauthUrl, {
     width: 256,
@@ -42,9 +43,10 @@ export async function generateTOTPSecret(email: string): Promise<TOTPSetup> {
   }
 }
 
-export function verifyTOTP(secret: string, token: string): boolean {
+export async function verifyTOTP(secret: string, token: string): Promise<boolean> {
   try {
-    return authenticator.verify({ token, secret })
+    const result = await otplib.verify({ token, secret })
+    return result.valid
   } catch {
     return false
   }
