@@ -47,19 +47,19 @@
       "id": "frem",
       "name": "FREM",
       "tagline": "Maintenance industrielle et installation",
-      "description": "FREM assure la maintenance préventive et curative, l'installation d'équipements sur site et le support technique. Notre équipe intervient chez nos clients pour garantir la disponibilité et la performance de leurs équipements.",
+      "description": "FREM assure la maintenance préventive et curative avec une réactivité maximale. Notre équipe mobile intervient rapidement chez nos clients pour garantir la disponibilité et la performance de leurs équipements industriels.",
       "expertise": [
-        "Maintenance préventive et curative d'équipements industriels",
-        "Installation et mise en service sur site client",
-        "Support technique et dépannage d'urgence",
-        "Contrôles périodiques et vérifications réglementaires",
-        "Formation des équipes d'exploitation",
-        "Contrats de maintenance sur mesure"
+        "Maintenance préventive et curative",
+        "Intervention rapide sur site",
+        "Grande réactivité",
+        "Interchangeabilité des composants",
+        "Dépannage d'urgence",
+        "Support technique continu"
       ],
       "capabilities": {
-        "capacity": "Disponibilité 7j/7",
-        "precision": "Intervention sous 48h",
-        "machines": "Équipes mobiles"
+        "capacity": "Intervention rapide",
+        "precision": "Grande réactivité",
+        "machines": "Interchangeabilité"
       },
       "certifications": ["Techniciens certifiés", "Habilitations électriques", "CACES"],
       "ctaLabel": "Découvrir FREM"

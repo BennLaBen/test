@@ -47,19 +47,19 @@
       "id": "frem",
       "name": "FREM",
       "tagline": "Manutenção industrial e instalação",
-      "description": "A FREM assegura a manutenção preventiva e corretiva, a instalação de equipamentos no local e o suporte técnico. Nossa equipe intervém nas instalações de nossos clientes para garantir a disponibilidade e o desempenho de seus equipamentos.",
+      "description": "A FREM assegura a manutenção preventiva e corretiva com máxima reatividade. Nossa equipe móvel intervém rapidamente nas instalações de nossos clientes para garantir a disponibilidade e o desempenho de seus equipamentos.",
       "expertise": [
-        "Manutenção preventiva e corretiva de equipamentos industriais",
-        "Instalação e comissionamento no local",
-        "Suporte técnico e reparo de emergência",
-        "Controles periódicos e verificações regulamentares",
-        "Treinamento de equipes de operação",
-        "Contratos de manutenção sob medida"
+        "Manutenção preventiva e corretiva",
+        "Intervenção rápida no local",
+        "Grande reatividade",
+        "Intercambialidade de componentes",
+        "Reparo de emergência",
+        "Suporte técnico contínuo"
       ],
       "capabilities": {
-        "capacity": "Disponibilidade 7/7",
-        "precision": "Intervenção em 48h",
-        "machines": "Equipes móveis"
+        "capacity": "Intervenção rápida",
+        "precision": "Grande reatividade",
+        "machines": "Intercambialidade"
       },
       "certifications": ["Técnicos certificados", "Habilitações elétricas", "CACES"],
       "ctaLabel": "Descobrir FREM"
