@@ -27,19 +27,18 @@
       "id": "egi",
       "name": "EGI",
       "tagline": "Oficina técnica e ingeniería",
-      "description": "EGI aporta su experiencia en diseño técnico, cálculos de estructuras y desarrollo de soluciones a medida. Nuestra oficina técnica acompaña a nuestros clientes desde la idea inicial hasta la validación del producto terminado.",
+      "description": "EGI transforma sus pliegos de condiciones en soluciones técnicas optimizadas. Del análisis funcional a la puesta en producción, nuestra oficina técnica integrada domina toda la cadena de diseño mecánico.",
       "expertise": [
-        "Diseño mecánico y estudios técnicos",
-        "Modelado 3D y simulaciones (CAD/CAM)",
-        "Cálculos de estructuras y resistencia de materiales",
-        "Planos de ejecución y documentación técnica",
-        "Ingeniería inversa y mejora de productos",
-        "Acompañamiento en certificación y homologación"
+        "Diseño 3D paramétrico (CATIA V5, SolidWorks)",
+        "Planos técnicos y acotación funcional",
+        "Cálculos de estructuras por elementos finitos (FEM)",
+        "Diseño 3D",
+        "Plano técnico"
       ],
       "capabilities": {
         "capacity": "Oficina técnica integrada",
-        "precision": "Software CAD de última generación",
-        "machines": "SolidWorks, CATIA V5"
+        "precision": "Simulación por elementos finitos",
+        "machines": "CATIA V5 / SolidWorks"
       },
       "certifications": ["Experiencia certificada", "Acreditación Airbus", "Métodos APQP"],
       "ctaLabel": "Descubrir EGI"

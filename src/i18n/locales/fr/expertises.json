@@ -27,19 +27,18 @@
       "id": "egi",
       "name": "EGI",
       "tagline": "Bureau d'études et ingénierie",
-      "description": "EGI apporte son expertise en conception technique, calculs de structures et développement de solutions sur mesure. Notre bureau d'études accompagne nos clients de l'idée initiale jusqu'à la validation du produit fini.",
+      "description": "EGI transforme vos cahiers des charges en solutions techniques optimisées. De l'analyse fonctionnelle à la mise en production, notre bureau d'études intégré maîtrise l'ensemble de la chaîne de conception mécanique.",
       "expertise": [
-        "Conception mécanique et études techniques",
-        "Modélisation 3D et simulations (CAO/DAO)",
-        "Calculs de structures et résistance des matériaux",
-        "Plans d'exécution et documentation technique",
-        "Reverse engineering et amélioration de produits",
-        "Accompagnement certification et homologation"
+        "Conception 3D paramétrique (CATIA V5, SolidWorks)",
+        "Mise en plan technique et cotation fonctionnelle",
+        "Calculs de structures par éléments finis (FEM)",
+        "Conception 3D",
+        "Mise en plan technique"
       ],
       "capabilities": {
         "capacity": "Bureau d'études intégré",
-        "precision": "Logiciels CAO dernière génération",
-        "machines": "SolidWorks, CATIA V5"
+        "precision": "Simulation éléments finis",
+        "machines": "CATIA V5 / SolidWorks"
       },
       "certifications": ["Expertise certifiée", "Agrément Airbus", "Méthodes APQP"],
       "ctaLabel": "Découvrir EGI"

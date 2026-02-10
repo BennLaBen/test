@@ -27,18 +27,18 @@ export default function EGIPage() {
   const expertise = {
     name: 'EGI',
     tagline: 'Bureau d\'études intégré',
-    description: 'EGI (Études Générales Industrielles) accompagne nos clients de la conception à la réalisation. Notre bureau d\'études intégré conçoit des solutions techniques innovantes et optimisées pour répondre aux cahiers des charges les plus exigeants.',
+    description: 'EGI (Études Générales Industrielles) transforme vos cahiers des charges en solutions techniques optimisées. De l\'analyse fonctionnelle à la mise en production, notre bureau d\'études intégré maîtrise l\'ensemble de la chaîne de conception mécanique.\n\nTrois axes d\'excellence : la modélisation 3D paramétrique, le calcul de structures par éléments finis et la génération de dossiers de définition complets pour la fabrication.',
     capabilities: {
-      capacity: 'CAO/FAO 3D',
-      precision: 'Simulation FEM',
+      capacity: 'Bureau d\'études intégré',
+      precision: 'Simulation éléments finis',
       machines: 'CATIA V5 / SolidWorks'
     },
     expertise: [
+      'Conception 3D paramétrique',
+      'Mise en plan technique et cotation fonctionnelle',
+      'Calculs de structures par éléments finis (FEM)',
       'Conception 3D',
-      'Mise en plan',
-      'Calculs de structures (FEM)',
-      'Documentation technique complète',
-      'Support technique projet'
+      'Mise en plan technique'
     ],
     certifications: ['EN 9100', 'ISO 9001'],
     stats: [

@@ -27,19 +27,18 @@
       "id": "egi",
       "name": "EGI",
       "tagline": "Escritório técnico e engenharia",
-      "description": "A EGI traz sua expertise em design técnico, cálculos de estruturas e desenvolvimento de soluções sob medida. Nosso escritório técnico acompanha nossos clientes da ideia inicial até a validação do produto final.",
+      "description": "A EGI transforma seus cadernos de encargos em soluções técnicas otimizadas. Da análise funcional à produção, nosso escritório técnico integrado domina toda a cadeia de projeto mecânico.",
       "expertise": [
-        "Design mecânico e estudos técnicos",
-        "Modelagem 3D e simulações (CAD/CAM)",
-        "Cálculos de estruturas e resistência de materiais",
-        "Planos de execução e documentação técnica",
-        "Engenharia reversa e melhoria de produtos",
-        "Acompanhamento em certificação e homologação"
+        "Projeto 3D paramétrico (CATIA V5, SolidWorks)",
+        "Desenho técnico e cotagem funcional",
+        "Cálculos de estruturas por elementos finitos (FEM)",
+        "Projeto 3D",
+        "Desenho técnico"
       ],
       "capabilities": {
         "capacity": "Escritório técnico integrado",
-        "precision": "Software CAD de última geração",
-        "machines": "SolidWorks, CATIA V5"
+        "precision": "Simulação por elementos finitos",
+        "machines": "CATIA V5 / SolidWorks"
       },
       "certifications": ["Expertise certificada", "Credenciamento Airbus", "Métodos APQP"],
       "ctaLabel": "Descobrir EGI"

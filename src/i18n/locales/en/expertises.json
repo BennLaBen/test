@@ -31,19 +31,18 @@
       "id": "egi",
       "name": "EGI",
       "tagline": "Engineering & design office",
-      "description": "EGI provides technical design expertise, structural calculations and custom solution development. Our engineering office supports clients from initial concept through final product validation.",
+      "description": "EGI turns your specifications into optimized technical solutions. From functional analysis to production launch, our integrated design office masters the entire mechanical design chain.",
       "expertise": [
-        "Mechanical design and technical studies",
-        "3D modeling and simulations (CAD/CAM)",
-        "Structural calculations and material strength analysis",
-        "Manufacturing drawings and technical documentation",
-        "Reverse engineering and product improvement",
-        "Certification and approval support"
+        "Parametric 3D design (CATIA V5, SolidWorks)",
+        "Technical drawings and functional dimensioning",
+        "Finite element structural analysis (FEM)",
+        "3D design",
+        "Technical drawing"
       ],
       "capabilities": {
         "capacity": "Integrated design office",
-        "precision": "Latest-generation CAD software",
-        "machines": "SolidWorks, CATIA V5"
+        "precision": "Finite element simulation",
+        "machines": "CATIA V5 / SolidWorks"
       },
       "certifications": [
         "Certified expertise",
