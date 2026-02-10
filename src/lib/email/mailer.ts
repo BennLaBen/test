@@ -9,16 +9,17 @@ let _transporter: Transporter | null = null
 
 function getTransporter(): Transporter {
   if (!_transporter) {
-    const pass = process.env.SMTP_PASS
-    console.log(`[mailer] Creating transporter: host=${process.env.SMTP_HOST}, port=${process.env.SMTP_PORT}, user=${process.env.SMTP_USER}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
+    const host = (process.env.SMTP_HOST || '').trim()
+    const port = parseInt((process.env.SMTP_PORT || '587').trim())
+    const secure = (process.env.SMTP_SECURE || '').trim() === 'true'
+    const user = (process.env.SMTP_USER || '').trim()
+    const pass = (process.env.SMTP_PASS || '').trim()
+    console.log(`[mailer] Creating transporter: host=${host}, port=${port}, user=${user}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
     _transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: pass,
-      },
+      host,
+      port,
+      secure,
+      auth: { user, pass },
     })
   }
   return _transporter
@@ -41,8 +42,8 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
       return true
     }
 
-    const fromAddress = process.env.SMTP_FROM || 'noreply@lledo-industries.com'
-    const fromName = process.env.SMTP_FROM_NAME || 'LLEDO Industries'
+    const fromAddress = (process.env.SMTP_FROM || 'noreply@lledo-industries.com').trim()
+    const fromName = (process.env.SMTP_FROM_NAME || 'LLEDO Industries').trim()
 
     await getTransporter().sendMail({
       from: `"${fromName}" <${fromAddress}>`,
