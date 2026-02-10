@@ -194,7 +194,7 @@ export async function logSecurityEvent(params: {
       userAgent: params.userAgent,
       location: params.location,
       status: params.status,
-      details: params.details,
+      details: params.details as any,
     },
   })
 }
