@@ -80,11 +80,7 @@ export default function ContactPage() {
       icon: Clock,
       title: t('hours.title'),
       content: (
-        <>
-          {t('hours.weekdays')}<br />
-          {t('hours.saturday')}<br />
-          {t('hours.sunday')}
-        </>
+        <span className="text-sm">{t('hours.weekdays')} · {t('hours.saturday')}</span>
       ),
       action: null,
       href: null,
