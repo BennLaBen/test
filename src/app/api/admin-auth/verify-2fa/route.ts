@@ -146,10 +146,8 @@ export async function POST(request: NextRequest) {
       details: { with2FA: true, method: admin.twoFactorMethod },
     })
     
-    // Set cookies
-    await setAuthCookies(accessToken, refreshToken)
-    
-    return NextResponse.json({
+    // Build response with cookies set directly on NextResponse
+    const response = NextResponse.json({
       success: true,
       admin: {
         id: admin.id,
@@ -160,6 +158,26 @@ export async function POST(request: NextRequest) {
         role: admin.role,
       },
     })
+
+    const isProduction = process.env.NODE_ENV === 'production'
+    
+    response.cookies.set('admin_access_token', accessToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 8 * 60 * 60,
+    })
+
+    response.cookies.set('admin_refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60,
+    })
+
+    return response
     
   } catch (error) {
     console.error('2FA verification error:', error)

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 // GET /api/applications/[id] - Get single application
@@ -9,19 +10,23 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user) {
+    const adminUser = await getAdminFromRequest()
+    const session = !adminUser ? await auth() : null
+    
+    if (!adminUser && !session?.user) {
       return NextResponse.json(
         { success: false, error: 'Non authentifié' },
         { status: 401 }
       )
     }
 
+    const isAdmin = !!adminUser || session?.user?.role === 'ADMIN'
+
     const application = await prisma.application.findUnique({
       where: { id: params.id },
       include: {
         job: true,
-        user: session.user.role === 'ADMIN' ? {
+        user: isAdmin ? {
           select: { firstName: true, lastName: true, email: true, phone: true }
         } : false
       }
@@ -35,8 +40,7 @@ export async function GET(
     }
 
     // Check access rights
-    const isAdmin = session.user.role === 'ADMIN'
-    const isOwner = application.userId === session.user.id
+    const isOwner = session?.user?.id ? application.userId === session.user.id : false
 
     if (!isAdmin && !isOwner) {
       return NextResponse.json(
@@ -66,8 +70,8 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const adminUser = await getAdminFromRequest()
+    if (!adminUser) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -107,8 +111,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const adminUser = await getAdminFromRequest()
+    if (!adminUser) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }

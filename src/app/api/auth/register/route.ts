@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { z } from 'zod'
+import { sendConfirmationEmail } from '@/lib/auth/client-auth'
 
 const registerSchema = z.object({
   email: z.string().email('Email invalide'),
@@ -53,11 +54,14 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // Envoyer l'email de confirmation
+    await sendConfirmationEmail(user.id)
+
     return NextResponse.json(
       { 
         success: true, 
         user,
-        message: 'Compte créé avec succès'
+        message: 'Compte créé avec succès. Vérifiez votre email pour confirmer votre adresse.'
       },
       { status: 201 }
     )

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 
 // GET /api/admin/users - Get all users (admin only)
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }

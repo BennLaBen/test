@@ -1,20 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 // GET /api/applications - Get applications (admin: all, user: own)
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user) {
+    // Check admin JWT first, then NextAuth session
+    const adminUser = await getAdminFromRequest()
+    const session = !adminUser ? await auth() : null
+    
+    if (!adminUser && !session?.user) {
       return NextResponse.json(
         { success: false, error: 'Non authentifié' },
         { status: 401 }
       )
     }
 
-    const isAdmin = session.user.role === 'ADMIN'
+    const isAdmin = !!adminUser || session?.user?.role === 'ADMIN'
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
     const jobId = searchParams.get('jobId')

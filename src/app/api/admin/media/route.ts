@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
@@ -20,8 +20,8 @@ const ALLOWED_TYPES = [
 // GET /api/admin/media - List all media
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -56,8 +56,8 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/media - Upload new media
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
         height,
         alt,
         folder,
-        uploadedBy: session.user.id,
+        uploadedBy: admin.sub,
       },
     })
 

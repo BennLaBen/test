@@ -162,8 +162,19 @@ export async function POST(request: NextRequest) {
       // If email OTP is the method, send the code
       if (admin.twoFactorMethod === 'EMAIL') {
         const otp = await createEmailOTP(admin.id)
-        // TODO: Send email with OTP
-        console.log(`[DEV] Email OTP for ${admin.email}: ${otp}`)
+        const { sendEmail } = await import('@/lib/email/mailer')
+        const { getEmailOTPEmail } = await import('@/lib/email/templates')
+        const template = getEmailOTPEmail({
+          firstName: admin.firstName,
+          code: otp,
+          expiresIn: '10 minutes',
+        })
+        await sendEmail({
+          to: admin.email,
+          subject: template.subject,
+          html: template.html,
+          text: template.text,
+        })
       }
       
       return NextResponse.json({
@@ -208,15 +219,8 @@ export async function POST(request: NextRequest) {
       status: 'SUCCESS',
     })
     
-    // Set cookies
-    await setAuthCookies(accessToken, refreshToken)
-    
-    // Check for new device/location notification
-    if (admin.notifyNewDevice || admin.notifyNewLocation) {
-      // TODO: Check if this is a new device/location and send notification
-    }
-    
-    return NextResponse.json({
+    // Build response with cookies set directly on NextResponse
+    const response = NextResponse.json({
       success: true,
       admin: {
         id: admin.id,
@@ -227,6 +231,26 @@ export async function POST(request: NextRequest) {
         role: admin.role,
       },
     })
+
+    const isProduction = process.env.NODE_ENV === 'production'
+    
+    response.cookies.set('admin_access_token', accessToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 8 * 60 * 60, // 8 hours
+    })
+
+    response.cookies.set('admin_refresh_token', refreshToken, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60, // 7 days
+    })
+
+    return response
     
   } catch (error) {
     console.error('Login error:', error)

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 // GET /api/admin/companies/[id]
@@ -10,8 +10,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -63,8 +63,8 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -113,8 +113,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }

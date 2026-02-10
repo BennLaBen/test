@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 // GET /api/admin/companies - Get all companies (admin)
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
@@ -51,8 +51,8 @@ const createCompanySchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }

@@ -30,10 +30,13 @@ model User {
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  applications  Application[]
-  reviews       Review[]
-  sessions      Session[]
-  accounts      Account[]
+  applications           Application[]
+  reviews                Review[]
+  sessions               Session[]
+  accounts               Account[]
+  emailConfirmationTokens EmailConfirmationToken[]
+  loginOTPs              ClientLoginOTP[]
+  passwordResets         ClientPasswordReset[]
 
   @@map("users")
 }
@@ -75,6 +78,48 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+// Token de confirmation d'email pour les clients (inscription)
+model EmailConfirmationToken {
+  id         String   @id @default(cuid())
+  userId     String
+  token      String   @unique
+  expires    DateTime
+  used       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_confirmation_tokens")
+}
+
+// OTP de connexion pour les clients (à chaque login)
+model ClientLoginOTP {
+  id        String   @id @default(cuid())
+  userId    String
+  code      String   // 6-digit code
+  expires   DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("client_login_otps")
+}
+
+// Token de réinitialisation de mot de passe pour les clients
+model ClientPasswordReset {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expires   DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("client_password_resets")
 }
 
 enum Role {

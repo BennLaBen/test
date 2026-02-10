@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
+import { jwtVerify } from 'jose'
 
 /**
  * Middleware léger pour Edge Runtime
@@ -42,12 +43,20 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith(route)
   )
 
-  // Si route admin, vérifier le rôle
+  // Si route admin, vérifier le JWT admin (cookie admin_access_token)
   if (isAdminRoute) {
-    if (!token || token.role !== 'ADMIN') {
-      const url = new URL('/connexion', req.url)
-      url.searchParams.set('callbackUrl', pathname)
-      url.searchParams.set('error', 'AccessDenied')
+    const adminToken = req.cookies.get('admin_access_token')?.value
+    
+    if (!adminToken) {
+      const url = new URL('/admin/login', req.url)
+      return NextResponse.redirect(url)
+    }
+
+    try {
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET || '')
+      await jwtVerify(adminToken, secret, { algorithms: ['HS256'] })
+    } catch {
+      const url = new URL('/admin/login', req.url)
       return NextResponse.redirect(url)
     }
   }

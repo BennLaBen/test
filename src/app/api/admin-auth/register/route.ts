@@ -106,8 +106,21 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
     const activationUrl = `${baseUrl}/admin/activate?token=${activationToken}`
     
-    // TODO: Send activation email
-    console.log(`[DEV] Activation URL for ${email}: ${activationUrl}`)
+    // Envoyer l'email d'activation/invitation
+    const { sendEmail } = await import('@/lib/email/mailer')
+    const { getActivationEmail } = await import('@/lib/email/templates')
+    const template = getActivationEmail({
+      firstName,
+      company,
+      activationUrl,
+      expiresIn: '24 heures',
+    })
+    await sendEmail({
+      to: email.toLowerCase(),
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    })
     
     return NextResponse.json({
       success: true,
