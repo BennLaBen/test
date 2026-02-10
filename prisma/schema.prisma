@@ -249,3 +249,206 @@ model Media {
   @@index([mimeType])
   @@map("media")
 }
+
+// ============================================
+// ADMIN AUTHENTICATION - SECURE SYSTEM
+// ============================================
+
+model Admin {
+  id                 String         @id @default(cuid())
+  email              String         @unique
+  passwordHash       String?        // bcrypt 12 rounds - null until activation
+  firstName          String
+  lastName           String
+  company            AdminCompany
+  role               AdminRole      @default(ADMIN)
+  isActive           Boolean        @default(false)
+  emailVerified      Boolean        @default(false)
+  twoFactorEnabled   Boolean        @default(false)
+  twoFactorSecret    String?        // Encrypted TOTP secret
+  twoFactorMethod    TwoFactorMethod? @default(TOTP)
+  backupCodes        String[]       @default([]) // Hashed backup codes
+  lastLogin          DateTime?
+  loginAttempts      Int            @default(0)
+  lockedUntil        DateTime?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  createdBy          String?        // Admin who created this account
+
+  // Relations
+  sessions           AdminSession[]
+  securityLogs       SecurityLog[]
+  passwordResets     PasswordReset[]
+  activationTokens   ActivationToken[]
+
+  // Security notification preferences
+  notifyNewDevice    Boolean        @default(true)
+  notifyNewLocation  Boolean        @default(true)
+  notifyFailedLogin  Boolean        @default(true)
+  notifyPasswordChange Boolean      @default(true)
+  notify2FAChange    Boolean        @default(true)
+
+  @@map("admins")
+}
+
+enum AdminCompany {
+  MPEB
+  EGI
+  FREM
+  MGP
+  Aerotools
+  Groupe
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  VIEWER
+}
+
+enum TwoFactorMethod {
+  TOTP      // Google Authenticator / Authy
+  EMAIL     // Email OTP
+  SMS       // SMS OTP (optional)
+}
+
+// ============================================
+// ADMIN SESSIONS - Track active sessions
+// ============================================
+
+model AdminSession {
+  id            String    @id @default(cuid())
+  adminId       String
+  admin         Admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  tokenHash     String    // Hash of JWT for verification
+  refreshToken  String?   @unique // Refresh token
+  ipAddress     String
+  userAgent     String?
+  location      String?   // City, Country via GeoIP
+  device        String?   // PC, Mobile, Tablet
+  browser       String?   // Chrome, Firefox, Safari
+  isActive      Boolean   @default(true)
+  lastActivity  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime
+
+  @@index([adminId])
+  @@index([tokenHash])
+  @@map("admin_sessions")
+}
+
+// ============================================
+// SECURITY LOGS - Audit trail
+// ============================================
+
+model SecurityLog {
+  id          String          @id @default(cuid())
+  adminId     String?
+  admin       Admin?          @relation(fields: [adminId], references: [id], onDelete: SetNull)
+  eventType   SecurityEvent
+  ipAddress   String?
+  userAgent   String?
+  location    String?
+  status      SecurityStatus
+  details     Json?           // Additional context
+  createdAt   DateTime        @default(now())
+
+  @@index([adminId])
+  @@index([eventType])
+  @@index([createdAt])
+  @@map("security_logs")
+}
+
+enum SecurityEvent {
+  LOGIN
+  LOGOUT
+  FAILED_LOGIN
+  PASSWORD_CHANGE
+  PASSWORD_RESET_REQUEST
+  PASSWORD_RESET_COMPLETE
+  TWO_FACTOR_ENABLED
+  TWO_FACTOR_DISABLED
+  TWO_FACTOR_VERIFIED
+  ACCOUNT_LOCKED
+  ACCOUNT_UNLOCKED
+  ACCOUNT_CREATED
+  ACCOUNT_ACTIVATED
+  SESSION_KILLED
+  BACKUP_CODES_GENERATED
+  SETTINGS_CHANGED
+}
+
+enum SecurityStatus {
+  SUCCESS
+  FAILED
+  BLOCKED
+  PENDING
+}
+
+// ============================================
+// PASSWORD RESET TOKENS
+// ============================================
+
+model PasswordReset {
+  id          String    @id @default(cuid())
+  adminId     String
+  admin       Admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  tokenHash   String    @unique // Hashed token (not stored in plain)
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([adminId])
+  @@map("password_resets")
+}
+
+// ============================================
+// ACTIVATION TOKENS - For new admin accounts
+// ============================================
+
+model ActivationToken {
+  id          String    @id @default(cuid())
+  adminId     String
+  admin       Admin     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  tokenHash   String    @unique
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([adminId])
+  @@map("activation_tokens")
+}
+
+// ============================================
+// RATE LIMITING - Store in DB for distributed systems
+// ============================================
+
+model RateLimitRecord {
+  id          String    @id @default(cuid())
+  key         String    // IP or user identifier
+  endpoint    String    // API endpoint
+  count       Int       @default(1)
+  windowStart DateTime  @default(now())
+  expiresAt   DateTime
+
+  @@unique([key, endpoint])
+  @@index([expiresAt])
+  @@map("rate_limit_records")
+}
+
+// ============================================
+// EMAIL OTP - For 2FA via email
+// ============================================
+
+model EmailOTP {
+  id          String    @id @default(cuid())
+  adminId     String
+  code        String    // 6-digit code (hashed)
+  expiresAt   DateTime
+  attempts    Int       @default(0)
+  usedAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([adminId])
+  @@map("email_otps")
+}
