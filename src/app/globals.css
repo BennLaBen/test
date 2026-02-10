@@ -1224,3 +1224,671 @@ html {
     }
   }
 }
+
+/* ============================================
+   OPTIMISATIONS RESPONSIVE MOBILE AVANCÉES
+   Breakpoints: 320px, 375px, 425px, 768px
+   ============================================ */
+
+/* ===========================================
+   1. BREAKPOINTS & LAYOUT
+   =========================================== */
+
+/* Extra Small - iPhone SE, petits Android (320px) */
+@media (max-width: 320px) {
+  :root {
+    --container-padding: 0.75rem;
+    --section-padding-y: 1.5rem;
+    --card-padding: 0.75rem;
+    --gap-base: 0.5rem;
+  }
+  
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  /* Stack tout en colonne */
+  .flex-row, [class*="flex-row"] {
+    flex-direction: column !important;
+  }
+  
+  .grid-cols-2, .grid-cols-3, .grid-cols-4,
+  [class*="grid-cols-2"], [class*="grid-cols-3"], [class*="grid-cols-4"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Réduire les paddings/margins de 50% */
+  .p-4 { padding: 0.5rem !important; }
+  .p-6 { padding: 0.75rem !important; }
+  .p-8 { padding: 1rem !important; }
+  .px-4 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+  .px-6 { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+  .py-4 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+  .py-6 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+  .py-8 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+  .py-12 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+  .py-16 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+  .py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  
+  .m-4 { margin: 0.5rem !important; }
+  .m-6 { margin: 0.75rem !important; }
+  .my-4 { margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+  .my-6 { margin-top: 0.75rem !important; margin-bottom: 0.75rem !important; }
+  .my-8 { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+  .mb-4 { margin-bottom: 0.5rem !important; }
+  .mb-6 { margin-bottom: 0.75rem !important; }
+  .mb-8 { margin-bottom: 1rem !important; }
+  
+  .gap-4 { gap: 0.5rem !important; }
+  .gap-6 { gap: 0.75rem !important; }
+  .gap-8 { gap: 1rem !important; }
+}
+
+/* Small - iPhone 6/7/8, iPhone SE 2nd gen (375px) */
+@media (min-width: 321px) and (max-width: 375px) {
+  :root {
+    --container-padding: 0.875rem;
+    --section-padding-y: 2rem;
+    --card-padding: 1rem;
+    --gap-base: 0.625rem;
+  }
+  
+  .container {
+    padding-left: 0.875rem !important;
+    padding-right: 0.875rem !important;
+  }
+  
+  /* Stack grids en colonne */
+  .grid-cols-3, .grid-cols-4,
+  [class*="grid-cols-3"], [class*="grid-cols-4"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .grid-cols-2, [class*="grid-cols-2"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Réduire les paddings de 40% */
+  .p-6 { padding: 0.9rem !important; }
+  .p-8 { padding: 1.2rem !important; }
+  .py-8 { padding-top: 1.2rem !important; padding-bottom: 1.2rem !important; }
+  .py-12 { padding-top: 1.8rem !important; padding-bottom: 1.8rem !important; }
+  .py-16 { padding-top: 2.4rem !important; padding-bottom: 2.4rem !important; }
+  .py-20 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+  
+  .gap-6 { gap: 0.9rem !important; }
+  .gap-8 { gap: 1.2rem !important; }
+}
+
+/* Medium Mobile - iPhone Plus, Android standard (425px) */
+@media (min-width: 376px) and (max-width: 425px) {
+  :root {
+    --container-padding: 1rem;
+    --section-padding-y: 2.5rem;
+    --card-padding: 1.25rem;
+    --gap-base: 0.75rem;
+  }
+  
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Grids 2 colonnes max */
+  .grid-cols-3, .grid-cols-4,
+  [class*="grid-cols-3"], [class*="grid-cols-4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Réduire les paddings de 30% */
+  .py-12 { padding-top: 2.1rem !important; padding-bottom: 2.1rem !important; }
+  .py-16 { padding-top: 2.8rem !important; padding-bottom: 2.8rem !important; }
+  .py-20 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+}
+
+/* Tablet (768px) */
+@media (min-width: 426px) and (max-width: 768px) {
+  :root {
+    --container-padding: 1.5rem;
+    --section-padding-y: 3rem;
+    --card-padding: 1.5rem;
+    --gap-base: 1rem;
+  }
+  
+  .container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Grids 2-3 colonnes */
+  .grid-cols-4, [class*="grid-cols-4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Réduire les paddings de 20% */
+  .py-16 { padding-top: 3.2rem !important; padding-bottom: 3.2rem !important; }
+  .py-20 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .py-24 { padding-top: 4.8rem !important; padding-bottom: 4.8rem !important; }
+}
+
+/* ===========================================
+   2. TYPOGRAPHIE MOBILE
+   Réduction 20-30%, min 14px, line-height 1.4
+   =========================================== */
+
+/* Typographie fluide avec clamp() */
+@layer utilities {
+  .text-responsive-xs {
+    font-size: clamp(0.75rem, 2vw + 0.25rem, 0.875rem);
+    line-height: 1.5;
+  }
+  
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 2.5vw + 0.25rem, 1rem);
+    line-height: 1.5;
+  }
+  
+  .text-responsive-base {
+    font-size: clamp(0.9375rem, 3vw + 0.25rem, 1.125rem);
+    line-height: 1.5;
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1rem, 3.5vw + 0.25rem, 1.25rem);
+    line-height: 1.4;
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.125rem, 4vw + 0.25rem, 1.5rem);
+    line-height: 1.4;
+  }
+  
+  .text-responsive-2xl {
+    font-size: clamp(1.25rem, 5vw + 0.25rem, 2rem);
+    line-height: 1.3;
+  }
+  
+  .text-responsive-3xl {
+    font-size: clamp(1.5rem, 6vw + 0.25rem, 2.5rem);
+    line-height: 1.2;
+  }
+  
+  .text-responsive-4xl {
+    font-size: clamp(1.75rem, 7vw + 0.25rem, 3rem);
+    line-height: 1.1;
+  }
+  
+  .text-responsive-5xl {
+    font-size: clamp(2rem, 8vw + 0.25rem, 3.5rem);
+    line-height: 1.1;
+  }
+  
+  .text-responsive-hero {
+    font-size: clamp(1.75rem, 10vw, 4.5rem);
+    line-height: 1.05;
+  }
+}
+
+/* Typographie mobile par breakpoint */
+@media (max-width: 425px) {
+  /* Réduction de 25% sur mobile */
+  h1, .h1, [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"] {
+    font-size: clamp(1.5rem, 7vw, 2.25rem) !important;
+    line-height: 1.15 !important;
+  }
+  
+  h2, .h2, [class*="text-3xl"] {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3, .h3, [class*="text-2xl"] {
+    font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
+    line-height: 1.25 !important;
+  }
+  
+  h4, .h4, [class*="text-xl"] {
+    font-size: clamp(1rem, 3.5vw, 1.25rem) !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Texte de base - minimum 14px */
+  body, p, span, div, li, a {
+    font-size: max(0.875rem, 14px);
+    line-height: 1.5;
+  }
+  
+  /* Petits textes - minimum 12px mais préférer 14px */
+  .text-xs, .text-sm, [class*="text-xs"], [class*="text-sm"] {
+    font-size: max(0.8125rem, 13px) !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 320px) {
+  /* Réduction supplémentaire pour très petits écrans */
+  h1, .h1, [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"] {
+    font-size: clamp(1.375rem, 8vw, 1.75rem) !important;
+  }
+  
+  h2, .h2, [class*="text-3xl"] {
+    font-size: clamp(1.125rem, 6vw, 1.5rem) !important;
+  }
+  
+  h3, .h3, [class*="text-2xl"] {
+    font-size: clamp(1rem, 5vw, 1.25rem) !important;
+  }
+}
+
+/* ===========================================
+   3. IMAGES & MÉDIAS
+   Lazy loading, responsive, max-width 100%
+   =========================================== */
+
+/* Images responsives par défaut */
+img, video, picture, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lazy loading natif */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]:not([src=""]) {
+  opacity: 1;
+}
+
+/* Placeholder pour images en chargement */
+.img-placeholder {
+  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Aspect ratios responsifs */
+@layer utilities {
+  .aspect-mobile-hero {
+    aspect-ratio: 4/3;
+  }
+  
+  .aspect-mobile-card {
+    aspect-ratio: 16/10;
+  }
+  
+  .aspect-mobile-square {
+    aspect-ratio: 1/1;
+  }
+  
+  @media (min-width: 768px) {
+    .aspect-mobile-hero {
+      aspect-ratio: 16/9;
+    }
+    
+    .aspect-mobile-card {
+      aspect-ratio: 16/9;
+    }
+  }
+}
+
+/* Object-fit pour images */
+.img-cover {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.img-contain {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===========================================
+   4. TACTILE - Touch-friendly
+   Boutons 44px min, zones 48x48px, espacement 8px
+   =========================================== */
+
+/* Zones tactiles minimum */
+@layer utilities {
+  .touch-target-sm {
+    min-height: 36px;
+    min-width: 36px;
+  }
+  
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .touch-target-lg {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .touch-target-xl {
+    min-height: 56px;
+    min-width: 56px;
+  }
+}
+
+/* Boutons mobile-friendly */
+@media (max-width: 768px) {
+  button, 
+  [role="button"], 
+  a.btn, 
+  .btn,
+  .btn-primary, 
+  .btn-secondary,
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Espacement entre éléments cliquables */
+  button + button,
+  a + a,
+  .btn + .btn,
+  [role="button"] + [role="button"] {
+    margin-left: 8px;
+  }
+  
+  /* Liens dans les listes */
+  nav a, 
+  .nav-link,
+  ul a,
+  li a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Inputs tactiles */
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+    font-size: 16px !important; /* Empêche le zoom iOS */
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Checkboxes et radios plus grands */
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 8px;
+  }
+}
+
+/* Remplacer hover par active states sur tactile */
+@media (hover: none) and (pointer: coarse) {
+  /* Désactiver les effets hover */
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover,
+  .hover\:-translate-y-1:hover,
+  .hover\:-translate-y-2:hover,
+  .hover\:shadow-lg:hover,
+  .hover\:shadow-xl:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+  
+  /* Activer les états active à la place */
+  .hover\:scale-105:active { transform: scale(1.02) !important; }
+  .hover\:scale-110:active { transform: scale(1.05) !important; }
+  .hover\:-translate-y-1:active { transform: translateY(-2px) !important; }
+  .hover\:-translate-y-2:active { transform: translateY(-4px) !important; }
+  
+  /* Boutons avec feedback visuel */
+  button:active,
+  .btn:active,
+  .btn-primary:active,
+  .btn-secondary:active,
+  [role="button"]:active {
+    transform: scale(0.98) !important;
+    opacity: 0.9;
+  }
+  
+  /* Cards avec feedback */
+  .glass-card:active,
+  [class*="card"]:active {
+    transform: scale(0.99) !important;
+    opacity: 0.95;
+  }
+  
+  /* Liens avec feedback */
+  a:active {
+    opacity: 0.8;
+  }
+  
+  /* Désactiver les animations de hover sur les cards */
+  .glass-card:hover {
+    transform: none !important;
+  }
+}
+
+/* ===========================================
+   5. MENU BURGER ANIMATIONS
+   =========================================== */
+
+/* Animation hamburger → X */
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.hamburger-open .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-open .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Menu slide animation */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay fade */
+.overlay-enter {
+  opacity: 0;
+}
+
+.overlay-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-exit {
+  opacity: 1;
+}
+
+.overlay-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ===========================================
+   6. PERFORMANCE MOBILE
+   =========================================== */
+
+/* Réduire les animations sur mobile pour performance */
+@media (max-width: 768px) {
+  /* Désactiver les animations complexes */
+  .animate-parallax,
+  [class*="parallax"] {
+    animation: none !important;
+  }
+  
+  /* Réduire le blur pour performance */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  
+  /* Optimiser les transitions */
+  * {
+    transition-duration: 0.2s !important;
+  }
+  
+  /* Désactiver les ombres lourdes */
+  .shadow-2xl {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Préférence pour animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================
+   7. UTILITAIRES MOBILE SUPPLÉMENTAIRES
+   =========================================== */
+
+@layer utilities {
+  /* Masquer sur mobile */
+  .hide-mobile {
+    @media (max-width: 768px) {
+      display: none !important;
+    }
+  }
+  
+  /* Afficher uniquement sur mobile */
+  .show-mobile {
+    display: none !important;
+    @media (max-width: 768px) {
+      display: block !important;
+    }
+  }
+  
+  .show-mobile-flex {
+    display: none !important;
+    @media (max-width: 768px) {
+      display: flex !important;
+    }
+  }
+  
+  /* Full width sur mobile */
+  .mobile-full-width {
+    @media (max-width: 768px) {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+  
+  /* Stack sur mobile */
+  .mobile-stack {
+    @media (max-width: 768px) {
+      flex-direction: column !important;
+    }
+  }
+  
+  /* Centrer sur mobile */
+  .mobile-center {
+    @media (max-width: 768px) {
+      text-align: center !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
+  
+  /* Padding réduit sur mobile */
+  .mobile-p-reduced {
+    @media (max-width: 768px) {
+      padding: 1rem !important;
+    }
+  }
+  
+  /* Gap réduit sur mobile */
+  .mobile-gap-reduced {
+    @media (max-width: 768px) {
+      gap: 0.75rem !important;
+    }
+  }
+  
+  /* Texte plus petit sur mobile */
+  .mobile-text-sm {
+    @media (max-width: 768px) {
+      font-size: 0.875rem !important;
+    }
+  }
+  
+  /* Scroll horizontal sur mobile */
+  .mobile-scroll-x {
+    @media (max-width: 768px) {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+  }
+  
+  .mobile-scroll-x::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-scroll-x > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}

@@ -8,12 +8,14 @@ module.exports = {
   darkMode: 'class',
   theme: {
     screens: {
-      'xs': '360px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
+      'xxs': '320px',   // iPhone SE, petits Android
+      'xs': '360px',    // Android standard
+      'xsm': '375px',   // iPhone 6/7/8/SE2
+      'sm': '425px',    // iPhone Plus, grands Android
+      'md': '768px',    // Tablettes
+      'lg': '1024px',   // Tablettes paysage, petits laptops
+      'xl': '1280px',   // Laptops
+      '2xl': '1536px',  // Grands écrans
     },
     extend: {
       colors: {
