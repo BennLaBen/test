@@ -5,12 +5,15 @@ import { Globe, Check } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const languages = [
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'pt-BR', name: 'Português', flag: '🇧🇷' },
-  { code: 'ar', name: 'العربية', flag: '🇸🇦', rtl: true },
+  { code: 'fr', name: 'Français', flag: '🇫🇷', countries: ['FR', 'BE', 'CH', 'CA', 'LU', 'MC', 'SN', 'CI', 'ML', 'BF', 'NE', 'TG', 'BJ', 'GA', 'CG', 'CD', 'MG', 'CM', 'DZ', 'TN', 'MA'] },
+  { code: 'en', name: 'English', flag: '🇬🇧', countries: ['US', 'GB', 'AU', 'NZ', 'IE', 'ZA', 'IN', 'PH', 'SG', 'MY', 'NG', 'KE', 'GH', 'PK'] },
+  { code: 'es', name: 'Español', flag: '🇪🇸', countries: ['ES', 'MX', 'AR', 'CO', 'PE', 'VE', 'CL', 'EC', 'GT', 'CU', 'BO', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY'] },
+  { code: 'pt-BR', name: 'Português', flag: '🇧🇷', countries: ['BR', 'PT', 'AO', 'MZ', 'CV', 'GW', 'ST', 'TL'] },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦', rtl: true, countries: ['SA', 'AE', 'EG', 'IQ', 'JO', 'KW', 'LB', 'LY', 'OM', 'QA', 'SY', 'YE', 'BH', 'PS', 'SD'] },
 ]
+
+const STORAGE_KEY = 'lledo-preferred-language'
+const GEO_DETECTED_KEY = 'lledo-geo-detected'
 
 export function LanguageToggle() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,6 +22,55 @@ export function LanguageToggle() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const currentLanguage = i18n.language
+
+  // Auto-detect language from country on first visit
+  useEffect(() => {
+    const detectLanguage = async () => {
+      // Check if user already has a saved preference
+      const savedLang = localStorage.getItem(STORAGE_KEY)
+      if (savedLang) {
+        const lang = languages.find(l => l.code === savedLang)
+        if (lang && i18n.language !== lang.code) {
+          await i18n.changeLanguage(lang.code)
+          document.documentElement.lang = lang.code
+          document.documentElement.dir = lang.code === 'ar' ? 'rtl' : 'ltr'
+        }
+        return
+      }
+
+      // Check if geo detection already done
+      const geoDetected = localStorage.getItem(GEO_DETECTED_KEY)
+      if (geoDetected) return
+
+      // Detect country from IP for SEO optimization
+      try {
+        const response = await fetch('https://ipapi.co/json/', { 
+          signal: AbortSignal.timeout(3000) 
+        })
+        const data = await response.json()
+        const countryCode = data.country_code
+
+        if (countryCode) {
+          const matchedLang = languages.find(lang => 
+            lang.countries?.includes(countryCode)
+          )
+
+          if (matchedLang && matchedLang.code !== i18n.language) {
+            await i18n.changeLanguage(matchedLang.code)
+            localStorage.setItem(STORAGE_KEY, matchedLang.code)
+            document.documentElement.lang = matchedLang.code
+            document.documentElement.dir = matchedLang.code === 'ar' ? 'rtl' : 'ltr'
+          }
+        }
+
+        localStorage.setItem(GEO_DETECTED_KEY, 'true')
+      } catch (error) {
+        localStorage.setItem(GEO_DETECTED_KEY, 'true')
+      }
+    }
+
+    detectLanguage()
+  }, [i18n])
 
   // Fermer le dropdown au clic extérieur
   useEffect(() => {
@@ -38,33 +90,25 @@ export function LanguageToggle() {
   }, [isOpen])
 
   const changeLanguage = async (langCode: string) => {
-    console.log('🔄 [LanguageToggle] Changement de langue vers:', langCode)
-    console.log('🔄 [LanguageToggle] Current language:', currentLanguage)
-    
     setIsOpen(false)
 
     if (langCode === currentLanguage) {
-      console.log('⚠️ [LanguageToggle] Langue déjà sélectionnée, aucun changement')
       return
     }
 
     setIsChanging(true)
 
-    // Changer la langue dans i18next (SANS navigation)
+    // Save preference to localStorage
+    localStorage.setItem(STORAGE_KEY, langCode)
+
+    // Change language in i18next
     await i18n.changeLanguage(langCode)
-    console.log('✅ [LanguageToggle] Langue changée avec succès vers:', langCode)
 
-    // Gérer RTL pour l'arabe
+    // Handle RTL for Arabic
     const selectedLang = languages.find(l => l.code === langCode)
-    if (selectedLang?.rtl) {
-      document.documentElement.setAttribute('dir', 'rtl')
-      document.documentElement.setAttribute('lang', langCode)
-    } else {
-      document.documentElement.setAttribute('dir', 'ltr')
-      document.documentElement.setAttribute('lang', langCode)
-    }
+    document.documentElement.setAttribute('dir', selectedLang?.rtl ? 'rtl' : 'ltr')
+    document.documentElement.setAttribute('lang', langCode)
 
-    // Réinitialiser après un délai court
     setTimeout(() => setIsChanging(false), 300)
   }
 
