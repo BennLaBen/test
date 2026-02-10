@@ -63,8 +63,8 @@
       },
       {
         "title": "Konstruktion",
-        "description": "Integriertes Ingenieurbüro für technische Konstruktion und Planvalidierung.",
-        "details": ["Technische Zeichnungen", "Festigkeitsberechnungen", "Kundenvalidierung"]
+        "description": "Integriertes Ingenieurbüro für technische Konstruktion und Validierung.",
+        "details": ["3D-Modellierung", "Dimensionale und geometrische Tolerierung", "Numerische Simulation (Finite-Elemente-Analyse)"]
       },
       {
         "title": "Technische Dokumentation und Berechnungsunterlagen",
@@ -74,17 +74,17 @@
       {
         "title": "Fertigung",
         "description": "Präzisionsbearbeitung in zertifizierter Werkstatt mit systematischen Qualitätskontrollen.",
-        "details": ["5-Achs-Bearbeitung", "Zerstörungsfreie Prüfung", "Vollständige Rückverfolgbarkeit"]
+        "details": ["5-Achs-Bearbeitung", "Kesselschmiede", "Bearbeitung und Montage"]
       },
       {
-        "title": "Kontrolle",
-        "description": "Tests und Zertifizierungen gemäß Luftfahrtnormen.",
-        "details": ["CMU 1,25× Tests", "Qualitätskontrolle", "CE-Zertifizierung"]
+        "title": "Validierung",
+        "description": "Tests und Zertifizierungen gemäß industriellen Anforderungen.",
+        "details": ["Statische und dynamische Belastungsprüfung", "Qualität", "Lastnormen"]
       },
       {
-        "title": "Service",
-        "description": "Support und Wartung zur Sicherstellung der Verfügbarkeit Ihrer Ausrüstung.",
-        "details": ["Teamschulung", "Vorbeugende Wartung", "Technischer Support"]
+        "title": "Begleitung",
+        "description": "Kontinuierlicher Support zur Sicherstellung der Verfügbarkeit Ihrer Ausrüstung.",
+        "details": ["Schulung der Kundenteams", "Wartung vor Ort"]
       }
     ],
     "cta": {
