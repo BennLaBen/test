@@ -100,14 +100,6 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        {/* DNS Prefetch pour ressources externes */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
-        {/* Preconnect pour fonts Google (critique) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
         {/* Script pour éviter le flash de contenu - Chargé AVANT tout */}
         <script
           dangerouslySetInnerHTML={{
@@ -128,11 +120,8 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* GTM - Chargé en async/defer */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <script
-            async
-            defer
             dangerouslySetInnerHTML={{
               __html: `
                 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -144,7 +133,6 @@ export default function RootLayout({
             }}
           />
         )}
-        {/* Favicons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

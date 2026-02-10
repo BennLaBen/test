@@ -32,16 +32,10 @@
     "frem": "FREM - Mantenimiento",
     "mgp": "MGP - Calderería",
     "aerotools": "Aerotools - Productos GSE",
-    "outillage": "Fabricación de utillaje e Integración",
     "brochure": "Catálogo PDF",
     "offres": "Ofertas de empleo",
     "candidature": "Candidatura espontánea",
     "devis": "Solicitar presupuesto"
-  },
-  "cta": {
-    "call": "Llamar",
-    "email": "Email",
-    "quote": "Presupuesto"
   },
   "hero": {
     "chip": "Colectivo de Ingeniería",
@@ -92,19 +86,19 @@
         "benefits": ["Intercambiabilidad de componentes", "Trazabilidad completa", "Certificaciones industriales"]
       },
       {
-        "title": "Mecanizado de precisión de 3 a 5 ejes",
-        "description": "Mecanizado de precisión multi-eje y ajuste de piezas mecánicas según las especificaciones más exigentes del cliente.",
-        "benefits": ["Mecanizado de 3, 4 y 5 ejes", "Control de calidad dimensional", "Experiencia técnica certificada"]
+        "title": "Mecanizado de Precisión",
+        "description": "Mecanizado de precisión de 3 a 5 ejes y ajuste de piezas mecánicas según especificaciones del cliente.",
+        "benefits": ["Mecanizado de 3 a 5 ejes", "Control de calidad", "Experiencia técnica"]
       },
       {
         "title": "Plazos Cumplidos",
-        "description": "Cumplimiento de plazos acordados gracias a nuestra organización optimizada, capacidad de producción y seguimiento digital en tiempo real.",
-        "benefits": ["Seguimiento digital en tiempo real", "Gestión ágil y anticipación de hitos", "Gestión de operaciones"]
+        "description": "Cumplimiento de plazos acordados gracias a nuestra organización optimizada y capacidad de producción.",
+        "benefits": ["Seguimiento digital de proyectos", "Planificación rigurosa", "Gestión de operaciones"]
       },
       {
         "title": "Equipo Experto",
-        "description": "Especialistas en fabricación de piezas elementales, utillajes y maquinaria especial para la industria aeronáutica y de defensa.",
-        "benefits": ["Fabricación de piezas elementales", "Utillajes industriales a medida", "Maquinaria especial"]
+        "description": "Especialistas en fabricación de piezas elementales, utillaje y maquinaria especial.",
+        "benefits": ["Fabricación de piezas elementales", "Utillaje industrial", "Maquinaria especial"]
       },
       {
         "title": "Innovación Continua",
@@ -265,8 +259,7 @@
     "ce": "Marcado CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1",
-    "interchangeability": "Intercambiabilidad"
+    "en12312": "EN 12312-1"
   },
   "footer": {
     "company": {

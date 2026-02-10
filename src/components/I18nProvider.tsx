@@ -69,20 +69,7 @@ import arCases from '@/i18n/locales/ar/cases.json'
 import arCareers from '@/i18n/locales/ar/careers.json'
 import arSeo from '@/i18n/locales/ar/seo.json'
 
-// DE
-import deCommon from '@/i18n/locales/de/common.json'
-import deHomepage from '@/i18n/locales/de/homepage.json'
-import deExpertises from '@/i18n/locales/de/expertises.json'
-import deTestimonials from '@/i18n/locales/de/testimonials.json'
-import deBrochure from '@/i18n/locales/de/brochure.json'
-import deVision from '@/i18n/locales/de/vision.json'
-import deContact from '@/i18n/locales/de/contact.json'
-import deBlog from '@/i18n/locales/de/blog.json'
-import deCases from '@/i18n/locales/de/cases.json'
-import deCareers from '@/i18n/locales/de/careers.json'
-import deSeo from '@/i18n/locales/de/seo.json'
-
-export type SupportedLocale = 'fr' | 'en' | 'es' | 'pt-BR' | 'ar' | 'de'
+export type SupportedLocale = 'fr' | 'en' | 'es' | 'pt-BR' | 'ar'
 
 type Props = {
   children: React.ReactNode
@@ -154,19 +141,6 @@ const resources: Resource = {
     cases: arCases,
     careers: arCareers,
     seo: arSeo
-  },
-  de: { 
-    common: deCommon, 
-    homepage: deHomepage,
-    expertises: deExpertises,
-    testimonials: deTestimonials,
-    brochure: deBrochure,
-    vision: deVision,
-    contact: deContact,
-    blog: deBlog,
-    cases: deCases,
-    careers: deCareers,
-    seo: deSeo
   },
 }
 

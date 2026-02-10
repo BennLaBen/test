@@ -1,6 +1,6 @@
 'use client'
 
-import { AuthProvider } from '@/contexts/AuthContext'
+import { SessionProvider } from 'next-auth/react'
 
 export default function EspaceClientLayout({
   children,
@@ -8,8 +8,8 @@ export default function EspaceClientLayout({
   children: React.ReactNode
 }) {
   return (
-    <AuthProvider>
+    <SessionProvider>
       {children}
-    </AuthProvider>
+    </SessionProvider>
   )
 }

@@ -67,11 +67,11 @@
       },
       {
         "title": "Design",
-        "description": "Integrated design office for technical design and validation.",
+        "description": "Integrated design office for technical design and plan validation.",
         "details": [
-          "3D Modeling",
-          "Dimensional and geometric tolerancing",
-          "Numerical simulation (finite element analysis)"
+          "Technical drawings",
+          "Strength calculations",
+          "Client validation"
         ]
       },
       {
@@ -88,25 +88,26 @@
         "description": "Precision machining in certified workshop with systematic quality controls.",
         "details": [
           "5-axis machining",
-          "Boilermaking",
-          "Machining and assembly"
+          "Non-destructive testing",
+          "Full traceability"
         ]
       },
       {
-        "title": "Validation",
-        "description": "Tests and certifications compliant with industrial requirements.",
+        "title": "Control",
+        "description": "Tests and certifications compliant with aerospace standards.",
         "details": [
-          "Static and dynamic load testing",
-          "Quality",
-          "Load standards"
+          "CMU 1.25× tests",
+          "Quality control",
+          "CE certification"
         ]
       },
       {
-        "title": "Support",
-        "description": "Ongoing support to ensure the availability of your equipment.",
+        "title": "Service",
+        "description": "Support and maintenance to ensure the availability of your equipment.",
         "details": [
-          "Client team training",
-          "On-site maintenance"
+          "Team training",
+          "Preventive maintenance",
+          "Technical support"
         ]
       }
     ],

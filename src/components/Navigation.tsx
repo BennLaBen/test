@@ -10,7 +10,7 @@ import { Logo } from '@/components/Logo'
 import { Menu, X, User, LogOut, Phone, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AuthModal } from '@/components/auth/AuthModal'
-import { useAuth } from '@/contexts/AuthContext'
+import { useSession, signOut } from 'next-auth/react'
 import { MobileMenuAccordion } from '@/components/MobileMenuAccordion'
 
 const navigation = [
@@ -31,7 +31,9 @@ export function Navigation() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const pathname = usePathname()
   const { t } = useTranslation('common')
-  const { user, isAuthenticated, logout } = useAuth()
+  const { data: session } = useSession()
+  const isAuthenticated = !!session?.user
+  const user = session?.user
 
   const isActive = (href: string) => pathname === href
 
@@ -236,7 +238,21 @@ export function Navigation() {
                   <div className="px-3 py-2 border-b border-blue-500/20">
                     <p className="text-sm font-bold text-white">{user.firstName} {user.lastName}</p>
                     <p className="text-xs text-gray-400">{user.email}</p>
+                    {user.role === 'ADMIN' && (
+                      <span className="inline-flex items-center px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                        {t('auth.administrator')}
+                      </span>
+                    )}
                   </div>
+                  {user.role === 'ADMIN' && (
+                    <Link
+                      href="/admin"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors mt-1"
+                    >
+                      <User className="h-4 w-4" />
+                      {t('auth.dashboard')}
+                    </Link>
+                  )}
                   <Link
                     href="/espace-client/profil"
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
@@ -245,7 +261,7 @@ export function Navigation() {
                     {t('auth.myProfile')}
                   </Link>
                   <button
-                    onClick={() => logout()}
+                    onClick={() => signOut({ callbackUrl: '/' })}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-1"
                   >
                     <LogOut className="h-4 w-4" />
@@ -306,7 +322,7 @@ export function Navigation() {
             
             <LanguageToggle />
             
-            {/* Menu Hamburger - 32x32px minimum, animation simple */}
+            {/* Menu Hamburger - STYLE TONY STARK */}
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
@@ -314,24 +330,17 @@ export function Navigation() {
                 e.preventDefault()
                 setIsOpen(!isOpen)
               }}
-              className="inline-flex items-center justify-center rounded-xl p-2.5 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all duration-200 touch-manipulation"
-              style={{ 
-                boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)', 
-                WebkitTapHighlightColor: 'transparent',
-                minWidth: '48px',
-                minHeight: '48px'
-              }}
+              className="inline-flex items-center justify-center rounded-lg p-3 text-white bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 focus:outline-none active:scale-95 transition-all touch-manipulation"
+              style={{ boxShadow: '0 0 15px rgba(59, 130, 246, 0.3)', WebkitTapHighlightColor: 'transparent' }}
               aria-expanded={isOpen}
               aria-label="Menu principal"
             >
               <span className="sr-only">{t('ui.openMenu')}</span>
-              {/* Animation rotate + fade */}
-              <span className={`transition-transform duration-200 ${isOpen ? 'rotate-90 opacity-0 absolute' : 'rotate-0 opacity-100'}`}>
-                <Menu className="h-8 w-8" aria-hidden="true" />
-              </span>
-              <span className={`transition-transform duration-200 ${isOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0 absolute'}`}>
-                <X className="h-8 w-8" aria-hidden="true" />
-              </span>
+              {isOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -399,21 +408,15 @@ export function Navigation() {
                 {/* Header fixe */}
                 <div className="flex-shrink-0 flex items-center justify-between px-5 py-4 border-b border-blue-500/20">
                   <Logo size="small" />
-                  {/* Close icon - 44x44px minimum, bien visible top-right */}
                   <button
                     ref={closeButtonRef}
                     type="button"
                     onClick={closeMenu}
-                    className="p-2 rounded-xl bg-red-600/20 border-2 border-red-400/50 hover:bg-red-600/30 active:scale-95 transition-all duration-200 touch-manipulation focus:outline-none focus:ring-2 focus:ring-red-400"
-                    style={{ 
-                      boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)', 
-                      WebkitTapHighlightColor: 'transparent',
-                      minWidth: '44px',
-                      minHeight: '44px'
-                    }}
+                    className="p-3.5 rounded-xl bg-blue-600/20 border-2 border-blue-400/50 hover:bg-blue-600/30 active:scale-95 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    style={{ boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)', WebkitTapHighlightColor: 'transparent' }}
                     aria-label="Fermer le menu"
                   >
-                    <X className="h-7 w-7 text-white" />
+                    <X className="h-6 w-6 text-white" />
                   </button>
                 </div>
                 
@@ -441,9 +444,10 @@ export function Navigation() {
                         email: user.email,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email
+                        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email,
+                        role: user.role
                       } : null}
-                      onLogout={() => logout()}
+                      onLogout={() => signOut({ callbackUrl: '/' })}
                     />
 
                     {/* Auth Button si non connecté */}

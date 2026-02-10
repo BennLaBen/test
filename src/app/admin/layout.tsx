@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { SafeSessionProvider } from '@/components/SafeSessionProvider'
+import { SessionProvider } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { 
@@ -114,7 +114,7 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <SafeSessionProvider>
+    <SessionProvider>
       <ToastProvider>
         <div className="flex min-h-screen">
           {/* Mobile header */}
@@ -135,6 +135,6 @@ export default function AdminLayout({
           </main>
         </div>
       </ToastProvider>
-    </SafeSessionProvider>
+    </SessionProvider>
   )
 }
