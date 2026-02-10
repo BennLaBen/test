@@ -1,0 +1,50 @@
+{
+  "home": {
+    "metaTitle": "LLEDO Industries | Präzisionsbearbeitung & Industrielle Wartung für die Luftfahrt",
+    "metaDescription": "Französische Industriegruppe spezialisiert auf Präzisionsbearbeitung, Blechbearbeitung und GSE-Ausrüstung für Luft- und Raumfahrt sowie Verteidigung. ISO 9001 & EN 9100 zertifiziert. 36 Jahre Expertise.",
+    "h1": "Integrierte Industriegruppe für Luft- & Raumfahrt und Verteidigung",
+    "slug": "/"
+  },
+  "vision": {
+    "metaTitle": "Unsere Vision | LLEDO Industries Gruppe - Französische industrielle Exzellenz",
+    "metaDescription": "Entdecken Sie die Vision von Gérard Lledo, Gründer von LLEDO Industries. 70 Mitarbeiter, 5 Einheiten und ein Engagement für technische Exzellenz seit 1989.",
+    "h1": "Die Vision des Gründers",
+    "slug": "/unsere-vision"
+  },
+  "expertises": {
+    "metaTitle": "Unsere Unternehmen | MPEB, EGI, FREM, MGP & LLEDO Aerotools",
+    "metaDescription": "5 komplementäre Einheiten: Präzisionsbearbeitung (MPEB), Engineering (EGI), Wartung (FREM), Blechbearbeitung (MGP) und Hubschrauber-GSE (Aerotools).",
+    "h1": "Entdecken Sie die Unternehmen der LLEDO Gruppe",
+    "slug": "/unsere-unternehmen"
+  },
+  "contact": {
+    "metaTitle": "Kontakt LLEDO Industries | Angebot für Luftfahrtwerkzeuge anfordern",
+    "metaDescription": "Kontaktieren Sie unser Team für Ihre Projekte in Präzisionsbearbeitung, industrieller Wartung oder GSE-Ausrüstung. Standort: Les Pennes-Mirabeau, Frankreich.",
+    "h1": "Kontaktieren Sie uns",
+    "slug": "/kontakt"
+  },
+  "careers": {
+    "metaTitle": "Karriere bei LLEDO Industries | Treten Sie unserem Luftfahrtteam bei",
+    "metaDescription": "Treten Sie einem leidenschaftlichen Team von 70 Fachleuten bei. Entdecken Sie Stellenangebote in Präzisionsbearbeitung, Engineering und industrieller Wartung.",
+    "h1": "Karriere bei LLEDO Industries",
+    "slug": "/karriere"
+  },
+  "blog": {
+    "metaTitle": "Blog & Technische Einblicke | LLEDO Industries",
+    "metaDescription": "Technische Artikel über Präzisionsbearbeitung, mechanische Konstruktion, industrielle Wartung und Luftfahrtwerkzeuge. Von unseren Experten verfasst.",
+    "h1": "Expertise & Know-how",
+    "slug": "/blog"
+  },
+  "testimonials": {
+    "metaTitle": "Kundenstimmen | Luft- & Raumfahrt- und Verteidigungspartner vertrauen LLEDO",
+    "metaDescription": "Erfahren Sie, was Airbus Helicopters, Safran, Thales und andere Luftfahrtführer über die Zusammenarbeit mit LLEDO Industries sagen.",
+    "h1": "Sie vertrauen uns",
+    "slug": "/kundenstimmen"
+  },
+  "cases": {
+    "metaTitle": "Referenzen | Luft- & Raumfahrt- und Verteidigungsprojekte von LLEDO Industries",
+    "metaDescription": "Detaillierte Referenzen unserer Präzisionsbearbeitungs-, GSE-Ausrüstungs- und industriellen Wartungslösungen für große Luftfahrtkunden.",
+    "h1": "Kundenreferenzen",
+    "slug": "/referenzen"
+  }
+}

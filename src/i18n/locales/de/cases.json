@@ -1,0 +1,67 @@
+{
+  "title": "Referenzen - LLEDO Industries",
+  "description": "Erfahren Sie, wie unsere Kunden unsere GSE-Ausrüstung und Luftfahrtwerkzeuge einsetzen. Erfahrungsberichte und detaillierte Referenzen.",
+  "hero": {
+    "badge": "Kundenstimmen",
+    "title": "Sie vertrauen uns",
+    "subtitle": "Erfahren Sie, wie unsere Kunden unsere Ausrüstung und Dienstleistungen nutzen, um ihre Abläufe zu optimieren"
+  },
+  "stats": {
+    "clients": "Aktive Kunden",
+    "satisfaction": "Zufriedenheitsrate",
+    "experience": "Erfahrung",
+    "projects": "Abgeschlossene Projekte"
+  },
+  "sections": {
+    "challenge": "Die Herausforderung",
+    "solution": "Unsere Lösung",
+    "results": "Erzielte Ergebnisse",
+    "keyFigures": "Schlüsselzahlen"
+  },
+  "cta": {
+    "title": "Ihr Projekt interessiert uns",
+    "subtitle": "Kontaktieren Sie unser Team, um Ihre Anforderungen zu besprechen und zu erfahren, wie wir Sie unterstützen können.",
+    "button": "Kontaktieren Sie uns"
+  },
+  "caseStudies": [
+    {
+      "id": "aviation-civile-1",
+      "client": "Großer europäischer Luftfahrthersteller",
+      "sector": "Zivilluftfahrt",
+      "location": "Frankreich",
+      "title": "Optimierung der Hubschrauber-Produktionslinie",
+      "challenge": "Ein großer europäischer Luftfahrthersteller musste seine Transportwagen-Flotte für die Leichthubschrauber-Montagelinie modernisieren. Das alte System war veraltet, nicht ergonomisch und konnte mit steigenden Produktionsraten nicht Schritt halten.",
+      "solution": "LLEDO AEROTOOLS entwickelte eine maßgeschneiderte Lösung mit spezifischen Anpassungen: ergonomisches Hydrauliksteuerungssystem, verstärkte Kufen für Intensivnutzung, Schnellverriegelungssystem und Kratzschutzbeschichtung.",
+      "results": ["Deutliche Reduzierung der Flugzeugbewegungszeit", "Verbesserte Arbeitsbedingungen", "Erhöhte Produktionsrate", "Schneller Return on Investment", "Bestellung auf weitere Einheiten erweitert"],
+      "stats": { "gain": "Effizienz", "roi": "Schnell", "units": "Multi" },
+      "testimonial": { "quote": "LLEDO-Wagen haben unsere Produktionslinie transformiert. Zuverlässigkeit und Ergonomie sind da.", "author": "Jean-Marc D.", "position": "Produktionsleiter" },
+      "image": "/images/case-studies/aviation.jpg"
+    },
+    {
+      "id": "securite-civile",
+      "client": "Staatlicher Luftrettungsdienst",
+      "sector": "Rettung & Notfall",
+      "location": "Frankreich",
+      "title": "Schnelleinsatz für Notfalloperationen",
+      "challenge": "Eine staatliche Luftrettungsbasis benötigte GSE-Ausrüstung für ultraschnellen Einsatz von Interventionshubschraubern. Bei Notfalloperationen zählt jede Sekunde.",
+      "solution": "LLEDO DEFENSE entwarf einen speziellen 'Rapid Deploy' Transportwagen: Sofortstart-Hydrauliksystem, drahtlose Sicherheitsfernsteuerung, 72h Batterieautonomie, universelle Multi-Typ-Kufen.",
+      "results": ["Deutlich reduzierte Vorbereitungszeit", "Betrieb mit einem qualifizierten Bediener möglich", "Verbesserte operative Verfügbarkeit", "Bewährte Zuverlässigkeit unter Realbedingungen", "Von anderen Interventionsbasen übernommen"],
+      "stats": { "gain": "Geschwindigkeit", "roi": "Sofort", "units": "Multi" },
+      "testimonial": { "quote": "Bei Notfalloperationen ist Geschwindigkeit lebenswichtig. Das LLEDO-System spart uns 3 bis 4 Minuten bei jedem Start.", "author": "Kommandant Pierre L.", "position": "Interventionsbasis-Chef" },
+      "image": "/images/case-studies/urgences.jpg"
+    },
+    {
+      "id": "aviation-offshore",
+      "client": "Europäischer Offshore-Betreiber",
+      "sector": "Offshore-Luftfahrt",
+      "location": "Frankreich",
+      "title": "Vorbeugende Wartung für Offshore-Flotte",
+      "challenge": "Ein großer Offshore-Hubschrauberbetreiber wollte die Wartungsausrüstung über seine 3 französischen Basen standardisieren. Die gemischte Flotte erforderte vielseitige, korrosionsbeständige und ATEX-konforme Ausrüstung.",
+      "solution": "LLEDO Industries lieferte ein komplettes Sortiment: modulare Transportwagen mit austauschbaren Kufen, 2-5m Teleskop-Zugangsplattformen, 316L-Edelstahl-Wartungswerkzeuge, IP65-geschützte Transportwagen und 5-Jahres-Wartungsvertrag.",
+      "results": ["Vollständige Standardisierung über mehrere Basen", "Reduzierte Ausfallzeiten", "Bewährte Zuverlässigkeit über mehrere Betriebsjahre", "IOGP-Zertifizierung", "Vertragsverlängerung auf internationale Basen"],
+      "stats": { "gain": "Zuverlässigkeit", "roi": "Bewährt", "units": "Multi" },
+      "testimonial": { "quote": "Die Zuverlässigkeit der LLEDO-Ausrüstung in Offshore-Umgebungen ist außergewöhnlich. Nach 3 Jahren keine Korrosionszeichen.", "author": "Marc S.", "position": "Wartungsdirektor" },
+      "image": "/images/case-studies/offshore.jpg"
+    }
+  ]
+}

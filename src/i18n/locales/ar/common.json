@@ -32,6 +32,7 @@
     "frem": "FREM - الصيانة",
     "mgp": "MGP - الصفائح المعدنية",
     "aerotools": "Aerotools - منتجات GSE",
+    "outillage": "تصنيع الأدوات والتكامل",
     "brochure": "كتيب PDF",
     "offres": "عروض العمل",
     "candidature": "ترشيح عفوي",
@@ -264,7 +265,8 @@
     "ce": "علامة CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "قابلية التبادل"
   },
   "footer": {
     "company": {

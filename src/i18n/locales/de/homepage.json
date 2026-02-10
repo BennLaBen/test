@@ -1,0 +1,147 @@
+{
+  "products": {
+    "badge": "LLEDO AEROTOOLS",
+    "title": "Zertifizierte GSE-Ausrüstung",
+    "subtitle": "In Frankreich entworfene und hergestellte Schleppstangen und Hydraulikrollen. Konform mit Maschinenrichtlinie 2006/42/EG und ISO 9667.",
+    "cards": [
+      {
+        "id": "rl-r125",
+        "badge": "Referenz",
+        "category": "Schleppstange",
+        "name": "RL125-02",
+        "description": "Hydraulischer Bodentransportwagen für H125/AS350 mit Ø80mm Kufen, Airbus-konform.",
+        "features": [
+          "SWL 3.500 kg getestet bei 4.375 kg",
+          "Zertifizierter 350 bar Hydraulikzylinder",
+          "Ø80mm Airbus-zugelassene Kufen",
+          "EN 12312 & Maschinenrichtlinie konform"
+        ],
+        "link": "/aerotools/rl-r125"
+      },
+      {
+        "id": "platform",
+        "badge": "Neu",
+        "category": "Wartung",
+        "name": "Zugangsplattform",
+        "description": "Ergonomische mobile Plattform für Arbeiten in der Höhe. Einstellbare Höhe 2 bis 4 m mit konformen Geländern.",
+        "features": [
+          "Einstellbare Höhe 2-4 m",
+          "Maximale Last 250 kg",
+          "Gesicherte Geländer",
+          "Arretierbare Lenkrollen"
+        ],
+        "link": "/aerotools"
+      },
+      {
+        "id": "tools-kit",
+        "badge": "",
+        "category": "Wartung",
+        "name": "MRO-Werkzeugset",
+        "description": "Spezialisiertes Luftfahrt-Werkzeugset mit vollständiger Rückverfolgbarkeit und Transportkoffer.",
+        "features": [
+          "Luftfahrt-zertifiziertes Werkzeug",
+          "Vollständige Rückverfolgbarkeit",
+          "Transportkoffer",
+          "Technische Dokumentation inklusive"
+        ],
+        "link": "/aerotools"
+      }
+    ],
+    "cardCta": "Details ansehen",
+    "footerCta": "AEROTOOLS entdecken"
+  },
+  "process": {
+    "badge": "Unser Prozess",
+    "title": "Integrierter Qualitätsprozess",
+    "subtitle": "Von der Konzeption bis zur Inbetriebnahme beherrschen wir die gesamte Wertschöpfungskette, um Qualität und Konformität unserer Lösungen zu gewährleisten.",
+    "stepLabel": "Schritt {{number}}",
+    "steps": [
+      {
+        "title": "Angebot und Spezifikation",
+        "description": "Detaillierte Analyse Ihrer Anforderungen, präzises Angebot und Definition der technischen Spezifikationen.",
+        "details": ["Machbarkeitsstudie", "Detailliertes Angebot", "Lastenheft"]
+      },
+      {
+        "title": "Konstruktion",
+        "description": "Integriertes Ingenieurbüro für technische Konstruktion und Planvalidierung.",
+        "details": ["Technische Zeichnungen", "Festigkeitsberechnungen", "Kundenvalidierung"]
+      },
+      {
+        "title": "Technische Dokumentation und Berechnungsunterlagen",
+        "description": "Erstellung vollständiger technischer Dokumentation und Berechnungsunterlagen zur Validierung.",
+        "details": ["Validierte Berechnungsunterlagen", "Technische Akte", "Normative Dokumentation"]
+      },
+      {
+        "title": "Fertigung",
+        "description": "Präzisionsbearbeitung in zertifizierter Werkstatt mit systematischen Qualitätskontrollen.",
+        "details": ["5-Achs-Bearbeitung", "Zerstörungsfreie Prüfung", "Vollständige Rückverfolgbarkeit"]
+      },
+      {
+        "title": "Kontrolle",
+        "description": "Tests und Zertifizierungen gemäß Luftfahrtnormen.",
+        "details": ["CMU 1,25× Tests", "Qualitätskontrolle", "CE-Zertifizierung"]
+      },
+      {
+        "title": "Service",
+        "description": "Support und Wartung zur Sicherstellung der Verfügbarkeit Ihrer Ausrüstung.",
+        "details": ["Teamschulung", "Vorbeugende Wartung", "Technischer Support"]
+      }
+    ],
+    "cta": {
+      "title": "Bereit, Ihr Projekt zu starten?",
+      "subtitle": "Kontaktieren Sie uns, um Ihre Anforderungen zu besprechen und ein maßgeschneidertes Angebot zu erhalten.",
+      "button": "Projekt starten"
+    }
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Alles, was Sie über unsere GSE-Ausrüstung und zugehörigen Dienstleistungen wissen müssen.",
+    "items": [
+      {
+        "question": "Welche Zertifizierungen haben Ihre Geräte?",
+        "answer": "Alle unsere Geräte entsprechen der Maschinenrichtlinie 2006/42/EG und der Norm EN 12312-1. Jedes Produkt wird mit EU-Konformitätserklärung, SWL-Prüfzertifikat und Bedienungsanleitung geliefert."
+      },
+      {
+        "question": "Ist der RL125-02 mit meinem Hubschrauber kompatibel?",
+        "answer": "Der RL125-02 ist für H125/AS350 (Ø80 mm Kufen) konzipiert. Anpassungen sind für EC120, EC130 und andere Modelle über austauschbare Kufensätze verfügbar."
+      },
+      {
+        "question": "Wie sind Ihre Lieferzeiten?",
+        "answer": "Für Lagerreferenzen (RL125-02, Standardplattformen) rechnen Sie mit 2 bis 4 Wochen. Sonderanfertigungen benötigen 6 bis 10 Wochen."
+      },
+      {
+        "question": "Bieten Sie Wartungsverträge an?",
+        "answer": "Ja, LLEDO Industries bietet vorbeugende Wartungsverträge einschließlich Vollinspektion, Hydraulikprüfung, SWL-Tests und Verschleißteilersatz."
+      },
+      {
+        "question": "Wie ist die Garantie?",
+        "answer": "Standardgarantie beträgt 24 Monate auf Teile und Arbeit. Verlängerungen bis zu 5 Jahren sind möglich, einschließlich vorbeugender Wartung und Leihgeräte."
+      },
+      {
+        "question": "Wie erhalte ich eine individuelle Studie?",
+        "answer": "Kontaktieren Sie uns über das Online-Formular, telefonisch oder per E-Mail. Geben Sie das Hubschraubermodell, die Stückzahl und Ihre betrieblichen Anforderungen an."
+      }
+    ],
+    "contactCta": "Antwort nicht gefunden?",
+    "contactDescription": "Unsere Experten stehen Ihnen für Fragen und Vorführungen zur Verfügung.",
+    "contactButton": "Kontaktieren Sie uns"
+  },
+  "cta": {
+    "title": "Rüsten Sie Ihre Flotte mit zertifizierten Lösungen aus",
+    "subtitle": "Vertrauen Sie einem Industriepartner, der sich für Qualität und Betreuung einsetzt.",
+    "primary": "Kontaktieren Sie uns",
+    "secondary": "Unsere Produkte entdecken",
+    "contacts": {
+      "phone": { "label": "Telefon", "value": "+33 4 42 02 96 74", "info": "Mo-Fr 8-18 Uhr MEZ" },
+      "email": { "label": "E-Mail", "value": "contact@lledo-industries.com", "info": "Schnelle Antwort" },
+      "address": { "label": "Adresse", "value": "9-11 Bd de la Capelane, 13170 Les Pennes-Mirabeau", "info": "Frankreich" }
+    },
+    "stats": [
+      { "label": "Expertise", "value": "Know-how" },
+      { "label": "Erfahrung", "value": "Erfolgsbilanz" },
+      { "label": "Konformität", "value": "Zertifiziert" },
+      { "label": "Qualität", "value": "ISO 9001" }
+    ]
+  }
+}

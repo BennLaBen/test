@@ -32,6 +32,7 @@
     "frem": "FREM - Manutenção",
     "mgp": "MGP - Caldeiraria",
     "aerotools": "Aerotools - Produtos GSE",
+    "outillage": "Fabricação de ferramental e Integração",
     "brochure": "Catálogo PDF",
     "offres": "Vagas de emprego",
     "candidature": "Candidatura espontânea",
@@ -264,7 +265,8 @@
     "ce": "Marcação CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "Intercambialidade"
   },
   "footer": {
     "company": {

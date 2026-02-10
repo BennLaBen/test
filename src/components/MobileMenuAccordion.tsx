@@ -49,6 +49,7 @@ const mobileNavSections: NavSection[] = [
     icon: <Briefcase className="h-5 w-5" />,
     items: [
       { key: 'nav.expertises', href: '/nos-expertises' },
+      { key: 'mobileNav.outillage', href: '/nos-expertises#outillage' },
       { key: 'nav.caseStudies', href: '/cas-clients' },
       { key: 'mobileNav.aerotools', href: '/aerotools' },
       { key: 'mobileNav.brochure', href: '/plaquette' },

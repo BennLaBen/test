@@ -1,0 +1,343 @@
+{
+  "seo": {
+    "home": {
+      "title": "LLEDO Industries - Engineering, Präzisionsbearbeitung & Wartung | Luft- & Raumfahrt & Verteidigung",
+      "description": "LLEDO Industries - Integrierte Industriegruppe: Engineering, Präzisionsbearbeitung und Wartung für die Luft- und Raumfahrt sowie Verteidigung. 70 Mitarbeiter, zertifiziert nach ISO 9001 & EN 9100."
+    }
+  },
+  "topBar": {
+    "products": "Aerotools Produkte",
+    "recruitment": "Karriere",
+    "brochure": "PDF-Broschüre"
+  },
+  "nav": {
+    "home": "Startseite",
+    "expertises": "Die LLEDO Gruppe",
+    "vision": "Unsere Vision",
+    "trust": "Sie vertrauen uns",
+    "blog": "Blog",
+    "products": "Produkte",
+    "contact": "Kontakt",
+    "gerard": "LLEDO Gruppe",
+    "caseStudies": "Kundenbewertungen",
+    "careers": "Karriere",
+    "quote": "Angebot anfordern"
+  },
+  "mobileNav": {
+    "entreprise": "Unternehmen",
+    "services": "Dienstleistungen",
+    "recrutement": "Karriere",
+    "mpeb": "MPEB - Bearbeitung",
+    "egi": "EGI - Ingenieurbüro",
+    "frem": "FREM - Wartung",
+    "mgp": "MGP - Blechbearbeitung",
+    "aerotools": "Aerotools - GSE-Produkte",
+    "outillage": "Werkzeugbau & Integration",
+    "brochure": "PDF-Broschüre",
+    "offres": "Stellenangebote",
+    "candidature": "Initiativbewerbung",
+    "devis": "Angebot anfordern"
+  },
+  "cta": {
+    "call": "Anrufen",
+    "email": "E-Mail",
+    "quote": "Angebot"
+  },
+  "hero": {
+    "chip": "Engineering-Kollektiv",
+    "headline": "LLEDO Industries",
+    "headlineAccent": "integrierte Industriegruppe",
+    "subheadline": "Engineering, Präzisionsbearbeitung und industrielle Wartung für die Luft- und Raumfahrt sowie Verteidigung seit 1989. Ein Expertenkollektiv aus MPEB, EGI, FREM und MGP für die durchgängige Betreuung Ihrer Projekte.",
+    "ctaPrimary": "Kontaktieren Sie uns",
+    "ctaSecondary": "Unsere Unternehmen entdecken",
+    "discoverEntities": "Unsere Einheiten entdecken",
+    "discover": "Entdecken",
+    "scroll": "Scrollen",
+    "companies": {
+      "mpeb": { "desc": "Präzisionsbearbeitung", "detail": "Einzelteilfertigung" },
+      "egi": { "desc": "Ingenieurbüro", "detail": "Integriertes Engineering" },
+      "frem": { "desc": "Wartung", "detail": "Reaktionsfähigkeit und Austauschbarkeit" },
+      "mgp": { "desc": "Blechbearbeitung", "detail": "3- bis 5-Achs-Bearbeitung" }
+    },
+    "badges": {
+      "compliance": "Werkzeugbau und industrielle Integration",
+      "experience": "Austauschbarkeit der Komponenten",
+      "cmu": "Multi-Entity-Gruppe",
+      "certs": "ISO 9001 & EN 9100"
+    },
+    "productLabel": "Division AEROTOOLS – GSE-Expertise",
+    "trust": {
+      "title": "Sie vertrauen uns",
+      "brands": [
+        "Airbus Helicopters",
+        "Safran",
+        "Thales",
+        "Dassault"
+      ]
+    }
+  },
+  "features": {
+    "title": "Warum LLEDO Industries wählen?",
+    "subtitle": "Anerkannte technische Expertise und Qualitätsverpflichtung für Ihre industriellen Anforderungen.",
+    "stats": {
+      "team": { "label": "Expertenteam", "value": "Know-how" },
+      "capacity": { "label": "Industriekapazität", "value": "Produktion" },
+      "reach": { "label": "Reichweite", "value": "International" },
+      "quality": { "label": "Qualitätsverpflichtung", "value": "Exzellenz" }
+    },
+    "list": [
+      {
+        "title": "Normkonformität",
+        "description": "Alle unsere Geräte entsprechen den Normen EN 12312, EN 1915 und der Maschinenrichtlinie 2006/42/EG.",
+        "benefits": ["Austauschbarkeit der Komponenten", "Vollständige Rückverfolgbarkeit", "Industriezertifizierungen"]
+      },
+      {
+        "title": "Präzisionsbearbeitung",
+        "description": "3- bis 5-Achs-Präzisionsbearbeitung und Anpassung mechanischer Teile nach Kundenspezifikationen.",
+        "benefits": ["3- bis 5-Achs-Bearbeitung", "Qualitätskontrolle", "Technische Expertise"]
+      },
+      {
+        "title": "Termingerechte Lieferung",
+        "description": "Einhaltung vereinbarter Fristen dank optimierter Organisation und Produktionskapazität.",
+        "benefits": ["Digitale Projektverfolgung", "Strenge Planung", "Betriebssteuerung"]
+      },
+      {
+        "title": "Expertenteam",
+        "description": "Spezialisierte Mitarbeiter in der Fertigung von Einzelteilen, Werkzeugbau und Sondermaschinen.",
+        "benefits": ["Einzelteilfertigung", "Industriewerkzeugbau", "Sondermaschinen"]
+      },
+      {
+        "title": "Kontinuierliche Innovation",
+        "description": "Permanente F&E zur Entwicklung modernster technischer Lösungen und Produktverbesserung.",
+        "benefits": ["Integriertes Ingenieurbüro", "Prototypenbau", "Kontinuierliche Verbesserung"]
+      },
+      {
+        "title": "Begleitung",
+        "description": "Technischer Support und Schulung der Kundenteams zur Gewährleistung der Gerätekompetenz.",
+        "benefits": ["Teamschulung", "Wartung vor Ort", "Technischer Support"]
+      }
+    ],
+    "process": {
+      "title": "Integrierter Qualitätsprozess",
+      "subtitle": "Von der Konzeption bis zur Inbetriebnahme beherrschen wir die gesamte Wertschöpfungskette, um Qualität und Konformität unserer Lösungen zu gewährleisten.",
+      "steps": [
+        { "title": "Konzeption", "subtitle": "Integriertes Ingenieurbüro" },
+        { "title": "Fertigung", "subtitle": "Präzisionsbearbeitung" },
+        { "title": "Kontrolle", "subtitle": "Tests und Zertifizierungen" },
+        { "title": "Service", "subtitle": "Support und Wartung" }
+      ]
+    }
+  },
+  "language": {
+    "switchLabel": "Sprache wechseln",
+    "current": "Aktuelle Sprache"
+  },
+  "theme": {
+    "industrial": {
+      "label": "Metall-Modus",
+      "description": "Hell & Premium"
+    },
+    "onyx": {
+      "label": "Onyx-Modus",
+      "description": "Nacht-Neon"
+    }
+  },
+  "auth": {
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "register": "Registrieren",
+    "loginRegister": "Anmelden / Registrieren",
+    "myProfile": "Mein Profil",
+    "clientSpace": "Kundenbereich",
+    "dashboard": "Dashboard",
+    "administrator": "Administrator",
+    "createAccount": "Konto erstellen",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "noAccount": "Noch kein Konto?",
+    "loginSuccess": "Anmeldung erfolgreich",
+    "loginError": "Anmeldefehler",
+    "logoutSuccess": "Abmeldung erfolgreich",
+    "invalidCredentials": "E-Mail oder Passwort falsch",
+    "accountCreated": "Ihr Konto wurde erfolgreich erstellt",
+    "canNowLogin": "Sie können sich jetzt anmelden",
+    "accessDenied": "Zugriff verweigert",
+    "adminRequired": "Administratorrechte erforderlich",
+    "connecting": "Verbindung...",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "company": "Unternehmen",
+    "phone": "Telefon",
+    "optional": "optional",
+    "confirmPassword": "Passwort bestätigen",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "passwordTooShort": "Das Passwort muss mindestens 6 Zeichen lang sein",
+    "registerError": "Fehler bei der Registrierung",
+    "creating": "Erstellung...",
+    "loginSubtitle": "Melden Sie sich an, um auf Ihren Bereich zuzugreifen",
+    "registerSubtitle": "Treten Sie unserer Kundengemeinschaft bei",
+    "noAccountSignup": "Noch kein Konto? Registrieren Sie sich",
+    "alreadyHaveAccountLogin": "Bereits ein Konto? Anmelden",
+    "registerSuccess": "Registrierung erfolgreich",
+    "accountCreatedTitle": "Konto erstellt!"
+  },
+  "ui": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "viewMore": "Mehr anzeigen",
+    "viewLess": "Weniger anzeigen",
+    "readMore": "Weiterlesen",
+    "learnMore": "Mehr erfahren",
+    "submit": "Absenden",
+    "openMenu": "Hauptmenü öffnen",
+    "closeMenu": "Menü schließen",
+    "pressEscToClose": "ESC drücken oder tippen zum Schließen"
+  },
+  "clientArea": {
+    "title": "Mein Bereich",
+    "description": "Verwalten Sie Ihr Profil und verfolgen Sie Ihre Bewerbungen",
+    "welcome": "Willkommen",
+    "quickActions": "Schnellaktionen",
+    "viewOffers": "Angebote ansehen",
+    "myApplications": "Meine Bewerbungen",
+    "noApplications": "Sie haben sich noch nicht beworben",
+    "viewJobOffers": "Stellenangebote ansehen"
+  },
+  "profile": {
+    "backToSpace": "Zurück zu meinem Bereich",
+    "updateSuccess": "Profil erfolgreich aktualisiert",
+    "emailCannotBeChanged": "Die E-Mail kann nicht geändert werden",
+    "saving": "Speichern...",
+    "saveChanges": "Änderungen speichern"
+  },
+  "contactForm": {
+    "subject": "Betreff",
+    "selectSubject": "Betreff auswählen",
+    "subjects": {
+      "contact": "Kontaktaufnahme",
+      "information": "Informationsanfrage",
+      "support": "Technischer Support",
+      "partnership": "Partnerschaft",
+      "other": "Sonstiges"
+    },
+    "message": "Nachricht",
+    "messagePlaceholder": "Beschreiben Sie Ihr Projekt oder Ihre Anfrage...",
+    "consent": "Ich stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage gemäß der",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "sending": "Senden...",
+    "submit": "Anfrage senden",
+    "success": "Ihre Nachricht wurde gesendet. Vielen Dank, wir melden uns innerhalb von 24 Stunden.",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.",
+    "errors": {
+      "firstNameRequired": "Vorname ist erforderlich",
+      "lastNameRequired": "Nachname ist erforderlich",
+      "emailInvalid": "Ungültige E-Mail",
+      "subjectRequired": "Betreff ist erforderlich",
+      "messageMinLength": "Die Nachricht muss mindestens 10 Zeichen lang sein",
+      "consentRequired": "Sie müssen die Datenschutzrichtlinie akzeptieren"
+    }
+  },
+  "admin": {
+    "panel": "Verwaltungspanel",
+    "dashboard": "Dashboard",
+    "companies": "Unternehmen",
+    "jobOffers": "Stellenangebote",
+    "applications": "Bewerbungen",
+    "blog": "Blog",
+    "mediaLibrary": "Mediathek",
+    "reviews": "Kundenbewertungen"
+  },
+  "certifications": {
+    "ce": "CE-Kennzeichnung",
+    "iso9001": "ISO 9001:2015",
+    "en9100": "EN 9100",
+    "en12312": "EN 12312-1",
+    "interchangeability": "Austauschbarkeit"
+  },
+  "footer": {
+    "company": {
+      "title": "Unternehmen",
+      "links": {
+        "about": "Unsere Vision",
+        "expertises": "Unsere Expertise",
+        "careers": "Karriere",
+        "contact": "Kontakt"
+      }
+    },
+    "services": {
+      "title": "Unsere Dienstleistungen",
+      "links": {
+        "expertises": "Unsere Expertise",
+        "brochure": "Broschüre herunterladen",
+        "caseStudies": "Referenzen",
+        "quote": "Angebot anfordern"
+      }
+    },
+    "resources": {
+      "title": "Ressourcen",
+      "links": {
+        "blog": "Blog",
+        "caseStudies": "Referenzen",
+        "docs": "Dokumentation",
+        "support": "Technischer Support"
+      }
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "links": {
+        "mentions": "Impressum",
+        "privacy": "Datenschutz",
+        "terms": "AGB",
+        "cookies": "Cookies"
+      }
+    },
+    "address": "9-11 Boulevard de la Capelane, 13170 Les Pennes-Mirabeau",
+    "phone": "+33 4 42 02 96 74",
+    "email": "contact@mpeb13.com",
+    "bottom": {
+      "madeInFrance": "Made in France 🇫🇷",
+      "copyright": "© {{year}} LLEDO Industries. Alle Rechte vorbehalten."
+    }
+  },
+  "brochure": {
+    "pageTitle": "Broschüre - Demnächst verfügbar",
+    "pageDescription": "Unsere Präsentationsbroschüre wird in Kürze zum Download bereitstehen.",
+    "backHome": "Zurück zur Startseite",
+    "title": "Broschüre",
+    "subtitle": "Demnächst verfügbar",
+    "description": "Unsere vollständige Präsentationsbroschüre wird derzeit fertiggestellt. Sie wird alle unsere Fachgebiete, Zertifizierungen und Kundenreferenzen vorstellen.",
+    "inProgress": "In Vorbereitung...",
+    "notifyMe": "Benachrichtigen",
+    "feature1": "PDF-Format",
+    "feature2": "Kostenloser Download"
+  },
+  "aerotools": {
+    "pageTitle": "LLEDO Aerotools - Demnächst verfügbar",
+    "pageDescription": "LLEDO Aerotools, unsere GSE-Ausrüstungsreihe für die Luftfahrt, kommt bald.",
+    "backToAerotools": "Zurück zu Aerotools",
+    "comingSoon": "Demnächst verfügbar",
+    "comingSoonDescription": "Unser GSE-Katalog (Ground Support Equipment) für die Luftfahrt befindet sich in der Entwicklung. Schleppstangen, Handhabungsrollen und spezialisierte Werkzeuge für Hubschrauber.",
+    "inDevelopment": "In Entwicklung",
+    "notifyMe": "Über den Start benachrichtigen",
+    "feature1Title": "GSE-Ausrüstung",
+    "feature1Desc": "Zertifizierte Schleppstangen und Werkzeuge",
+    "feature2Title": "Maßanfertigung",
+    "feature2Desc": "An Ihre Geräte angepasste Lösungen",
+    "feature3Title": "Schnelle Lieferung",
+    "feature3Desc": "Versand innerhalb von 2-4 Wochen"
+  }
+}

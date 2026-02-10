@@ -198,6 +198,7 @@ export function Footer() {
             { icon: '9001', labelKey: 'certifications.iso9001' },
             { icon: '9100', labelKey: 'certifications.en9100' },
             { icon: '12312', labelKey: 'certifications.en12312' },
+            { icon: '⇄', labelKey: 'certifications.interchangeability' },
           ].map((cert, index) => (
             <motion.div
               key={index}

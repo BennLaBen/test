@@ -10,6 +10,7 @@ const languages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'pt-BR', name: 'Português', flag: '🇧🇷' },
   { code: 'ar', name: 'العربية', flag: '🇸🇦', rtl: true },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
 ]
 
 export function LanguageToggle() {

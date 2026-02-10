@@ -1,0 +1,159 @@
+{
+  "title": "Entdecken Sie die Unternehmen der LLEDO Gruppe",
+  "subtitle": "Ein Kollektiv aus 5 komplementären Einheiten für alle Ihre industriellen Engineering-Anforderungen",
+  "list": [
+    {
+      "id": "mpeb",
+      "name": "MPEB",
+      "tagline": "Präzisionsbearbeitung & allgemeiner Maschinenbau",
+      "description": "Kernunternehmen der Gruppe seit 1989, MPEB ist spezialisiert auf 3-, 4- und 5-Achs-Präzisionsbearbeitung, Fertigung komplexer mechanischer Teile und mechanische Montage für die Luft- und Raumfahrt sowie Verteidigung.",
+      "expertise": [
+        "3-, 4- und 5-Achs-CNC-Präzisionsbearbeitung",
+        "Einzelteil- und Kleinserienfertigung",
+        "Komplexe mechanische Montage",
+        "3D-Dimensionskontrolle und Metrologie",
+        "Draht- und Senkerodieren",
+        "Lasergravur"
+      ],
+      "capabilities": {
+        "capacity": "100.000 Stunden/Jahr",
+        "precision": "Toleranz ±0,01mm",
+        "machines": "15+ CNC-Maschinen"
+      },
+      "certifications": ["ISO 9001:2015", "EN 9100:2018", "AIRBUS Austauschbarkeit"],
+      "ctaLabel": "MPEB entdecken"
+    },
+    {
+      "id": "egi",
+      "name": "EGI",
+      "tagline": "Engineering & Konstruktionsbüro",
+      "description": "EGI bietet technische Konstruktionsexpertise, Strukturberechnungen und kundenspezifische Lösungsentwicklung. Unser Ingenieurbüro begleitet Kunden vom Konzept bis zur Produktvalidierung.",
+      "expertise": [
+        "Mechanische Konstruktion und technische Studien",
+        "3D-Modellierung und Simulationen (CAD/CAM)",
+        "Strukturberechnungen und Festigkeitsanalysen",
+        "Fertigungszeichnungen und technische Dokumentation",
+        "Reverse Engineering und Produktverbesserung",
+        "Zertifizierungs- und Zulassungsunterstützung"
+      ],
+      "capabilities": {
+        "capacity": "Integriertes Konstruktionsbüro",
+        "precision": "CAD-Software neuester Generation",
+        "machines": "SolidWorks, CATIA V5"
+      },
+      "certifications": ["Zertifizierte Expertise", "Airbus-Zulassung", "APQP-Methoden"],
+      "ctaLabel": "EGI entdecken"
+    },
+    {
+      "id": "frem",
+      "name": "FREM",
+      "tagline": "Industrielle Wartung & Installation",
+      "description": "FREM bietet vorbeugende und korrektive Wartung, Vor-Ort-Installation und technischen Support. Unsere Teams arbeiten bei Kunden vor Ort, um Verfügbarkeit und Leistung der Ausrüstung sicherzustellen.",
+      "expertise": [
+        "Vorbeugende und korrektive Wartung industrieller Anlagen",
+        "Vor-Ort-Installation und Inbetriebnahme",
+        "Technischer Support und Notfall-Fehlerbehebung",
+        "Periodische Inspektionen und Konformitätsprüfungen",
+        "Schulung der Betriebsteams",
+        "Individuelle Wartungsverträge"
+      ],
+      "capabilities": {
+        "capacity": "7-Tage-Verfügbarkeit",
+        "precision": "48h Reaktionszeit",
+        "machines": "Mobile Teams"
+      },
+      "certifications": ["Zertifizierte Techniker", "Elektrozertifizierungen", "CACES"],
+      "ctaLabel": "FREM entdecken"
+    },
+    {
+      "id": "mgp",
+      "name": "MGP",
+      "tagline": "Blechbearbeitung, Kesselschmiede & Montage",
+      "description": "MGP ergänzt das Gruppenangebot mit Blechbearbeitung, Kesselschmiede, Schweißen und mechanischer Montage. Mit Sitz in Saint-Bauzille-de-Putois bringt MGP 50 Jahre Erfahrung in diversifizierten Märkten ein.",
+      "expertise": [
+        "Hochdruck-Wasserstrahlschneiden",
+        "Kesselschmiede und Metallbau",
+        "Alle Schweißverfahren (WIG, MIG, Lichtbogen)",
+        "Bearbeitung",
+        "Drehen",
+        "Fräsen"
+      ],
+      "capabilities": {
+        "capacity": "2.000m² Werkstatt",
+        "precision": "8 qualifizierte Schweißer",
+        "machines": "Laser, Abkantpresse, Walzmaschine"
+      },
+      "certifications": ["ISO 9001", "EN 287 zertifizierte Schweißer", "CE-Kennzeichnung"],
+      "ctaLabel": "MGP entdecken"
+    },
+    {
+      "id": "aerotools",
+      "name": "LLEDO Aerotools",
+      "tagline": "GSE-Ausrüstung für Hubschrauber",
+      "description": "Division für Entwicklung und Vermarktung von GSE (Ground Support Equipment) für leichte Hubschrauber. Schleppstangen, Hubwagen und spezialisiertes Werkzeug gemäß Luftfahrtnormen.",
+      "expertise": [
+        "EN 12312 und EN 1915 zertifizierte Schleppstangen",
+        "Hub- und Transportwagen für Hubschrauber",
+        "Spezialisiertes Rotor-Wartungswerkzeug",
+        "Kundenspezifische Ausrüstung",
+        "Schulung zur Gerätebedienung",
+        "Technischer Support und Kundendienst"
+      ],
+      "capabilities": {
+        "capacity": "Komplettes Hubschrauber-GSE-Sortiment",
+        "precision": "1,25× SWL getestet",
+        "machines": "CE- und Luftfahrtzertifizierung"
+      },
+      "certifications": ["Maschinenrichtlinie 2006/42/EG", "EN 12312", "EN 1915"],
+      "ctaLabel": "LLEDO Aerotools entdecken"
+    }
+  ],
+  "stats": {
+    "title": "Die LLEDO Gruppe in Zahlen",
+    "list": [
+      { "value": "36 Jahre", "label": "Erfahrung" },
+      { "value": "70", "label": "Mitarbeiter" },
+      { "value": "100.000h", "label": "Produktion/Jahr" },
+      { "value": "5", "label": "komplementäre Einheiten" }
+    ]
+  },
+  "cta": {
+    "title": "Brauchen Sie einen kompletten Industriepartner?",
+    "subtitle": "Kontaktieren Sie uns, um Ihr Projekt zu besprechen und zu erfahren, wie unsere Expertise Ihre Anforderungen erfüllen kann.",
+    "button": "Angebot anfordern"
+  },
+  "pages": {
+    "common": {
+      "contactUs": "Kontaktieren Sie uns",
+      "getQuote": "Angebot anfordern",
+      "ourExpertise": "Unsere Expertise",
+      "technicalCapabilities": "Technische Fähigkeiten",
+      "capacity": "Kapazität",
+      "precision": "Präzision",
+      "equipment": "Ausrüstung",
+      "photosComingSoon": "Werkstattfotos demnächst verfügbar",
+      "needQuote": "Angebot oder Informationen benötigt?",
+      "allCompanies": "Alle unsere Unternehmen"
+    },
+    "mpeb": {
+      "seoTitle": "MPEB - Präzisionsbearbeitung für die Luftfahrt",
+      "seoDescription": "Spezialist für Präzisionsbearbeitung in der Luftfahrt. 3-, 4- und 5-Achs-Bearbeitung, hochpräzises Drehen und Fräsen.",
+      "ctaDescription": "Unser MPEB-Team steht Ihnen für Ihre Präzisionsbearbeitungsanforderungen zur Verfügung."
+    },
+    "egi": {
+      "seoTitle": "EGI - Engineering & Konstruktionsbüro",
+      "seoDescription": "Ingenieurbüro spezialisiert auf mechanische Konstruktion, Strukturberechnungen und kundenspezifische Lösungsentwicklung.",
+      "ctaDescription": "Unser EGI-Team steht Ihnen für Ihre Engineering-Anforderungen zur Verfügung."
+    },
+    "frem": {
+      "seoTitle": "FREM - Industrielle Wartung & Installation",
+      "seoDescription": "Vorbeugende und korrektive Wartung, Vor-Ort-Installation und technischer Support für die Industrie.",
+      "ctaDescription": "Unser FREM-Team steht Ihnen für Ihre Wartungsanforderungen zur Verfügung."
+    },
+    "mgp": {
+      "seoTitle": "MGP - Blechbearbeitung, Kesselschmiede & Montage",
+      "seoDescription": "Spezialist für Blechbearbeitung, Kesselschmiede, Schweißen und mechanische Montage.",
+      "ctaDescription": "Unser MGP-Team steht Ihnen für Ihre Blechbearbeitungs- und Kesselschmiedeanforderungen zur Verfügung."
+    }
+  }
+}

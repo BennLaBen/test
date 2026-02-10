@@ -1,0 +1,49 @@
+{
+  "title": "Kontakt - LLEDO Industries",
+  "description": "Kontaktieren Sie LLEDO Industries für Ihre Luftfahrtwerkzeug- und GSE-Wartungsprojekte. Fachkundige Beratung und persönliche Betreuung.",
+  "hero": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Unser Expertenteam steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten und Sie bei Ihren Projekten zu unterstützen."
+  },
+  "form": {
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Füllen Sie dieses Formular aus und unser Team wird sich schnellstmöglich bei Ihnen melden."
+  },
+  "info": {
+    "title": "Kontaktinformationen",
+    "phone": { "label": "Telefon", "value": "+33 4 42 02 96 74", "hours": "Mo-Fr 8-18 Uhr MEZ" },
+    "email": { "label": "E-Mail", "value": "contact@mpeb13.com", "response": "Garantierte Antwort innerhalb von 24h an Werktagen" },
+    "address": { "label": "Adresse", "value": "9-11 Boulevard de la Capelane", "city": "13170 Les Pennes-Mirabeau", "country": "Frankreich" }
+  },
+  "hours": {
+    "title": "Öffnungszeiten",
+    "weekdays": "Montag - Freitag: 8:00 - 18:00 Uhr",
+    "saturday": "Samstag: Geschlossen",
+    "sunday": "Sonntag: Geschlossen"
+  },
+  "actions": {
+    "viewOnMap": "Auf Karte ansehen",
+    "callNow": "Jetzt anrufen",
+    "sendEmail": "E-Mail senden",
+    "openGoogleMaps": "In Google Maps öffnen",
+    "learnMore": "Mehr erfahren"
+  },
+  "companies": {
+    "title": "Unsere Gruppenunternehmen",
+    "subtitle": "Kontaktieren Sie direkt das Unternehmen, das Ihren Anforderungen entspricht",
+    "mpeb": "Präzisionsbearbeitung",
+    "egi": "Ingenieurbüro",
+    "frem": "Industrielle Wartung",
+    "mgp": "Blechbearbeitung & Kesselschmiede"
+  },
+  "map": {
+    "badge": "Finden Sie uns",
+    "title": "Unser Standort"
+  },
+  "cta": {
+    "title": "Benötigen Sie unsere Unternehmensbroschüre?",
+    "subtitle": "Laden Sie unsere vollständige Dokumentation herunter, um alle unsere Fähigkeiten zu entdecken.",
+    "downloadPdf": "PDF-Broschüre herunterladen",
+    "discoverExpertises": "Unsere Expertise entdecken"
+  }
+}

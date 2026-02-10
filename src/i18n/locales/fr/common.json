@@ -32,6 +32,7 @@
     "frem": "FREM - Maintenance",
     "mgp": "MGP - Tôlerie",
     "aerotools": "Aerotools - Produits GSE",
+    "outillage": "Fabrication d'outillage & Intégration",
     "brochure": "Plaquette PDF",
     "offres": "Offres d'emploi",
     "candidature": "Candidature spontanée",
@@ -264,7 +265,8 @@
     "ce": "Marquage CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "Interchangeabilité"
   },
   "footer": {
     "company": {
