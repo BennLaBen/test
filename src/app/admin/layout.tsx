@@ -15,7 +15,8 @@ import {
   Building2,
   Image as ImageIcon,
   Menu,
-  X
+  X,
+  ShieldCheck
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { ToastProvider } from '@/components/admin/Toast'
@@ -29,6 +30,7 @@ const adminNav = [
   { href: '/admin/blog', labelKey: 'admin.blog', icon: FileText },
   { href: '/admin/medias', labelKey: 'admin.mediaLibrary', icon: ImageIcon },
   { href: '/admin/avis', labelKey: 'admin.reviews', icon: Star },
+  { href: '/admin/admins', labelKey: 'admin.admins', icon: ShieldCheck },
 ]
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -93,7 +95,10 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
           <div className="pt-4 border-t border-gray-700">
             <button
-              onClick={() => signOut({ callbackUrl: '/' })}
+              onClick={async () => {
+                await fetch('/api/admin-auth/logout', { method: 'POST' })
+                window.location.href = '/admin/login'
+              }}
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors w-full"
             >
               <LogOut className="h-5 w-5" />

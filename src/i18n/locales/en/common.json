@@ -255,7 +255,8 @@
     "applications": "Applications",
     "blog": "Blog",
     "mediaLibrary": "Media Library",
-    "reviews": "Client Reviews"
+    "reviews": "Client Reviews",
+    "admins": "Administrators"
   },
   "certifications": {
     "ce": "CE Marking",

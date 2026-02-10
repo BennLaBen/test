@@ -255,7 +255,8 @@
     "applications": "Candidaturas",
     "blog": "Blog",
     "mediaLibrary": "Mediateca",
-    "reviews": "Opiniones de clientes"
+    "reviews": "Opiniones de clientes",
+    "admins": "Administradores"
   },
   "certifications": {
     "ce": "Marcado CE",
