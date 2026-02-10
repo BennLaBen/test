@@ -192,6 +192,18 @@ if (!i18next.isInitialized) {
       },
     })
     
+  // Ensure admin nav keys are always present (workaround for webpack JSON cache)
+  const adminNavKeys = { admins: 'Administrateurs' }
+  const adminNavKeysEn = { admins: 'Administrators' }
+  const adminNavKeysEs = { admins: 'Administradores' }
+  const adminNavKeysPt = { admins: 'Administradores' }
+  const adminNavKeysAr = { admins: 'المسؤولون' }
+  i18next.addResourceBundle('fr', 'common', { admin: adminNavKeys }, true, true)
+  i18next.addResourceBundle('en', 'common', { admin: adminNavKeysEn }, true, true)
+  i18next.addResourceBundle('es', 'common', { admin: adminNavKeysEs }, true, true)
+  i18next.addResourceBundle('pt-BR', 'common', { admin: adminNavKeysPt }, true, true)
+  i18next.addResourceBundle('ar', 'common', { admin: adminNavKeysAr }, true, true)
+
   // Listener global pour les clés manquantes
   if (isDev) {
     i18next.on('missingKey', (lngs, namespace, key) => {

@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   UserPlus, Shield, ShieldCheck, Eye, Loader2, Mail,
   CheckCircle, XCircle, AlertTriangle, X, Building2,
-  Clock, Trash2, MoreVertical
+  Clock, Trash2, MoreVertical, Pencil
 } from 'lucide-react'
 
 interface Admin {
@@ -41,6 +41,13 @@ export default function AdminsPage() {
   const [showInviteModal, setShowInviteModal] = useState(false)
   const [inviting, setInviting] = useState(false)
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null)
+  const [confirmDelete, setConfirmDelete] = useState<Admin | null>(null)
+  const [deleting, setDeleting] = useState(false)
+  const [changeRoleAdmin, setChangeRoleAdmin] = useState<Admin | null>(null)
+  const [newRole, setNewRole] = useState('')
+  const [changingRole, setChangingRole] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   // Form state
   const [formData, setFormData] = useState({
@@ -115,6 +122,60 @@ export default function AdminsPage() {
         return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"><Eye className="w-3 h-3" /> Lecteur</span>
       default:
         return null
+    }
+  }
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpenMenuId(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  async function handleDelete(admin: Admin) {
+    setDeleting(true)
+    try {
+      const res = await fetch(`/api/admin-auth/admins/${admin.id}`, { method: 'DELETE' })
+      const data = await res.json()
+      if (!res.ok) {
+        setToast({ type: 'error', message: data.error || 'Erreur lors de la suppression' })
+        return
+      }
+      setToast({ type: 'success', message: data.message || 'Administrateur supprimé' })
+      setConfirmDelete(null)
+      fetchAdmins()
+    } catch {
+      setToast({ type: 'error', message: 'Erreur de connexion' })
+    } finally {
+      setDeleting(false)
+    }
+  }
+
+  async function handleChangeRole() {
+    if (!changeRoleAdmin || !newRole) return
+    setChangingRole(true)
+    try {
+      const res = await fetch(`/api/admin-auth/admins/${changeRoleAdmin.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: newRole }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setToast({ type: 'error', message: data.error || 'Erreur lors de la modification' })
+        return
+      }
+      setToast({ type: 'success', message: data.message || 'Rôle modifié' })
+      setChangeRoleAdmin(null)
+      fetchAdmins()
+    } catch {
+      setToast({ type: 'error', message: 'Erreur de connexion' })
+    } finally {
+      setChangingRole(false)
     }
   }
 
@@ -228,9 +289,47 @@ export default function AdminsPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     {admin.role !== 'SUPER_ADMIN' && (
-                      <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                        <MoreVertical className="w-4 h-4 text-gray-400" />
-                      </button>
+                      <div className="relative inline-block" ref={openMenuId === admin.id ? menuRef : undefined}>
+                        <button
+                          onClick={() => setOpenMenuId(openMenuId === admin.id ? null : admin.id)}
+                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                        >
+                          <MoreVertical className="w-4 h-4 text-gray-400" />
+                        </button>
+                        <AnimatePresence>
+                          {openMenuId === admin.id && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.95, y: -5 }}
+                              animate={{ opacity: 1, scale: 1, y: 0 }}
+                              exit={{ opacity: 0, scale: 0.95, y: -5 }}
+                              transition={{ duration: 0.15 }}
+                              className="absolute right-0 top-full mt-1 w-52 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 z-20 overflow-hidden"
+                            >
+                              <button
+                                onClick={() => {
+                                  setOpenMenuId(null)
+                                  setChangeRoleAdmin(admin)
+                                  setNewRole(admin.role === 'ADMIN' ? 'VIEWER' : 'ADMIN')
+                                }}
+                                className="flex items-center gap-3 w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                              >
+                                <Pencil className="w-4 h-4 text-blue-500" />
+                                Modifier le rôle
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setOpenMenuId(null)
+                                  setConfirmDelete(admin)
+                                }}
+                                className="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                Supprimer définitivement
+                              </button>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -388,6 +487,163 @@ export default function AdminsPage() {
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Confirm Delete Modal */}
+      <AnimatePresence>
+        {confirmDelete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            onClick={() => !deleting && setConfirmDelete(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6 text-center">
+                <div className="w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Trash2 className="w-7 h-7 text-red-600 dark:text-red-400" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Supprimer définitivement</h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Êtes-vous sûr de vouloir supprimer
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white mb-1">
+                  {confirmDelete.firstName} {confirmDelete.lastName}
+                </p>
+                <p className="text-sm text-gray-400 dark:text-gray-500 mb-6">
+                  ({confirmDelete.email})
+                </p>
+                <p className="text-sm text-red-600 dark:text-red-400 mb-6">
+                  Cette action est irréversible.
+                </p>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    disabled={deleting}
+                    onClick={() => setConfirmDelete(null)}
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium transition-colors"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    type="button"
+                    disabled={deleting}
+                    onClick={() => handleDelete(confirmDelete)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50"
+                  >
+                    {deleting ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Suppression...</>
+                    ) : (
+                      <><Trash2 className="w-4 h-4" /> Supprimer</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Change Role Modal */}
+      <AnimatePresence>
+        {changeRoleAdmin && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            onClick={() => !changingRole && setChangeRoleAdmin(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+                    <Pencil className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Modifier le rôle</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{changeRoleAdmin.firstName} {changeRoleAdmin.lastName}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setChangeRoleAdmin(null)}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-400" />
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <div className="space-y-3">
+                  {ROLES.map(r => {
+                    const Icon = r.icon
+                    const isSelected = newRole === r.value
+                    return (
+                      <button
+                        key={r.value}
+                        onClick={() => setNewRole(r.value)}
+                        className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
+                          isSelected
+                            ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                            : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                        }`}
+                      >
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          isSelected ? 'bg-blue-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
+                        }`}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <div className="text-left">
+                          <p className={`font-semibold ${
+                            isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-white'
+                          }`}>{r.label}</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{r.desc}</p>
+                        </div>
+                        {isSelected && (
+                          <CheckCircle className="w-5 h-5 text-blue-500 ml-auto" />
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+                <div className="flex items-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    disabled={changingRole}
+                    onClick={() => setChangeRoleAdmin(null)}
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium transition-colors"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    type="button"
+                    disabled={changingRole || newRole === changeRoleAdmin.role}
+                    onClick={handleChangeRole}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-medium shadow-lg shadow-blue-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {changingRole ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Modification...</>
+                    ) : (
+                      'Confirmer'
+                    )}
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}

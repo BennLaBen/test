@@ -46,6 +46,20 @@ export default function ConnexionPage() {
     setError('')
 
     try {
+      // Check if this email belongs to an admin account
+      const checkRes = await fetch('/api/admin-auth/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.email }),
+      })
+      const checkData = await checkRes.json()
+
+      if (checkData.isAdmin) {
+        // Redirect to admin login page
+        router.push('/admin/login')
+        return
+      }
+
       const result = await signIn('credentials', {
         email: data.email,
         password: data.password,

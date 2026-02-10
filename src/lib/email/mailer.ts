@@ -1,21 +1,28 @@
 import nodemailer from 'nodemailer'
+import type { Transporter } from 'nodemailer'
 
 // ============================================
 // SMTP EMAIL SERVICE
 // ============================================
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for 587
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-})
+let _transporter: Transporter | null = null
 
-const FROM_ADDRESS = process.env.SMTP_FROM || 'noreply@lledo-industries.com'
-const FROM_NAME = process.env.SMTP_FROM_NAME || 'LLEDO Industries'
+function getTransporter(): Transporter {
+  if (!_transporter) {
+    const pass = process.env.SMTP_PASS
+    console.log(`[mailer] Creating transporter: host=${process.env.SMTP_HOST}, port=${process.env.SMTP_PORT}, user=${process.env.SMTP_USER}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
+    _transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: pass,
+      },
+    })
+  }
+  return _transporter
+}
 
 export interface SendEmailOptions {
   to: string
@@ -31,11 +38,14 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
       console.log(`  To: ${options.to}`)
       console.log(`  Subject: ${options.subject}`)
       console.log(`  Text: ${options.text?.substring(0, 200)}...`)
-      return true // Return true in dev so the flow doesn't break
+      return true
     }
 
-    await transporter.sendMail({
-      from: `"${FROM_NAME}" <${FROM_ADDRESS}>`,
+    const fromAddress = process.env.SMTP_FROM || 'noreply@lledo-industries.com'
+    const fromName = process.env.SMTP_FROM_NAME || 'LLEDO Industries'
+
+    await getTransporter().sendMail({
+      from: `"${fromName}" <${fromAddress}>`,
       to: options.to,
       subject: options.subject,
       html: options.html,
@@ -46,17 +56,20 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
     return true
   } catch (error) {
     console.error('[mailer] Failed to send email:', error)
+    // Reset transporter so it gets recreated on next attempt
+    _transporter = null
     return false
   }
 }
 
 export async function verifyConnection(): Promise<boolean> {
   try {
-    await transporter.verify()
+    await getTransporter().verify()
     console.log('[mailer] SMTP connection verified')
     return true
   } catch (error) {
     console.error('[mailer] SMTP connection failed:', error)
+    _transporter = null
     return false
   }
 }
