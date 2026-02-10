@@ -89,19 +89,19 @@
       "id": "aerotools",
       "name": "LLEDO Aerotools",
       "tagline": "Equipos GSE para helicópteros",
-      "description": "División dedicada al desarrollo y comercialización de equipos GSE (Ground Support Equipment) para helicópteros ligeros. Barras de remolque, carros de elevación y utillajes especializados conformes a las normas aeronáuticas.",
+      "description": "División dedicada al desarrollo y comercialización de equipos GSE (Ground Support Equipment) para helicópteros ligeros. Ergonomía optimizada, entrega rápida y conformidad garantizada.",
       "expertise": [
-        "Barras de remolque certificadas EN 12312 y EN 1915",
-        "Carros de elevación y manipulación de helicópteros",
-        "Utillajes especializados para mantenimiento de rotor",
-        "Equipos a medida según especificaciones del cliente",
-        "Formación en el uso de equipos",
-        "Soporte técnico y servicio postventa"
+        "Barras de remolque certificadas",
+        "Ergonomía y manipulación intuitiva",
+        "Entrega rápida",
+        "Equipos a medida",
+        "Conformidad CE garantizada",
+        "Soporte técnico reactivo"
       ],
       "capabilities": {
-        "capacity": "Gama completa GSE helicópteros",
-        "precision": "Test 1,25× CMU",
-        "machines": "Certificación CE y aeronáutica"
+        "capacity": "Gama completa GSE",
+        "precision": "Ergonomía optimizada",
+        "machines": "Certificación CE"
       },
       "certifications": ["Directiva Máquinas 2006/42/CE", "EN 12312", "EN 1915"],
       "ctaLabel": "Descubrir LLEDO Aerotools"

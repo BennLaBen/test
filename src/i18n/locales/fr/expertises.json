@@ -89,19 +89,19 @@
       "id": "aerotools",
       "name": "LLEDO Aerotools",
       "tagline": "Équipements GSE pour hélicoptères",
-      "description": "Division dédiée au développement et à la commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères légers. Barres de remorquage, chariots de levage et outillages spécialisés conformes aux normes aéronautiques.",
+      "description": "Division dédiée au développement et à la commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères légers. Ergonomie optimisée, livraison rapide et conformité garantie.",
       "expertise": [
-        "Barres de remorquage certifiées EN 12312 et EN 1915",
-        "Chariots de levage et manutention hélicoptères",
-        "Outillages spécialisés maintenance rotor",
-        "Équipements sur mesure selon spécifications client",
-        "Formation à l'utilisation des équipements",
-        "Support technique et SAV"
+        "Barres de remorquage certifiées",
+        "Ergonomie et manipulation intuitive",
+        "Livraison rapide",
+        "Équipements sur mesure",
+        "Conformité CE garantie",
+        "Support technique réactif"
       ],
       "capabilities": {
-        "capacity": "Gamme complète GSE hélico",
-        "precision": "Test 1,25× CMU",
-        "machines": "Certification CE et aéronautique"
+        "capacity": "Gamme complète GSE",
+        "precision": "Ergonomie optimisée",
+        "machines": "Certification CE"
       },
       "certifications": ["Directive Machines 2006/42/CE", "EN 12312", "EN 1915"],
       "ctaLabel": "Découvrir LLEDO Aerotools"

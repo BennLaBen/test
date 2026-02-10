@@ -12,7 +12,9 @@ import {
   Package,
   Shield,
   Award,
-  Truck
+  Truck,
+  Play,
+  CheckCircle
 } from 'lucide-react'
 
 export default function AerotoolsPage() {
@@ -42,9 +44,9 @@ export default function AerotoolsPage() {
   })
 
   const stats = [
-    { label: 'Ergonomie', value: 'Confort' },
-    { label: 'Délais courts', value: 'Réactivité' },
-    { label: 'Logistique maîtrisée', value: 'Livraison' },
+    { label: 'Manipulation intuitive', value: 'Ergonomie' },
+    { label: 'Expédition express', value: 'Livraison rapide' },
+    { label: 'Conformité garantie', value: 'Certifié CE' },
     { label: 'Adaptation client', value: 'Sur-mesure' },
   ]
 
@@ -126,7 +128,7 @@ export default function AerotoolsPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mb-12 text-xl text-gray-300 max-w-3xl mx-auto"
             >
-              Rejoignez plus de 70 opérateurs et centres MRO qui font confiance à LLEDO Industries.
+              Des opérateurs et centres MRO du monde entier font confiance à LLEDO Industries pour leurs équipements GSE.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -214,13 +216,48 @@ export default function AerotoolsPage() {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1 + index * 0.1 }}
-                    className="mb-2 text-4xl font-black text-white sm:text-5xl"
+                    className="mb-2 text-3xl font-black text-white sm:text-4xl"
                   >
                     {stat.value}
                   </motion.p>
                   <p className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</p>
                 </div>
               ))}
+            </motion.div>
+
+            {/* Video Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="mt-16 pt-12 border-t border-white/10"
+            >
+              <h2 className="text-2xl font-black text-white mb-8 uppercase tracking-wide">
+                Découvrez nos équipements en action
+              </h2>
+              <div className="relative aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden border-2 border-blue-500/30 bg-gradient-to-br from-blue-950/80 via-gray-900/90 to-blue-950/80 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+                {/* Video placeholder */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 blur-3xl bg-blue-500/20 rounded-full scale-150" />
+                    <motion.div
+                      className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-blue-600/80 backdrop-blur-sm border-2 border-blue-400/50 cursor-pointer"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }}
+                    >
+                      <Play className="h-8 w-8 text-white ml-1" />
+                    </motion.div>
+                  </div>
+                  <p className="text-blue-300/70 text-sm font-medium tracking-wide">
+                    Vidéo de présentation à venir
+                  </p>
+                </div>
+                {/* Top accent bar */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                {/* Bottom accent bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+              </div>
             </motion.div>
           </div>
         </div>
