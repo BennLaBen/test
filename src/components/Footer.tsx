@@ -1,17 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
 import { Logo } from '@/components/Logo'
-import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react'
-
-interface FooterLink {
-  label: string
-  href: string
-}
+import { Linkedin, Mail, Phone } from 'lucide-react'
 
 export function Footer() {
   const { t } = useTranslation('common')
@@ -34,7 +27,6 @@ export function Footer() {
 
   const companyLinks = t('footer.company.links', { returnObjects: true }) as Record<string, string>
   const servicesLinks = t('footer.services.links', { returnObjects: true }) as Record<string, string>
-  const resourcesLinks = t('footer.resources.links', { returnObjects: true }) as Record<string, string>
   const legalLinks = t('footer.legal.links', { returnObjects: true }) as Record<string, string>
 
   const renderLinks = (links: Record<string, string>, mapping: Record<string, string>) =>
@@ -42,9 +34,8 @@ export function Footer() {
       <li key={key}>
         <Link
           href={resolveHref(mapping[key] ?? '#')}
-          className="group flex items-center text-sm transition-colors hover:text-primary-400"
+          className="text-sm text-gray-400 transition-colors hover:text-white"
         >
-          <span className="mr-2 text-primary-500 opacity-0 transition-opacity group-hover:opacity-100">→</span>
           {label}
         </Link>
       </li>
@@ -59,158 +50,118 @@ export function Footer() {
     quote: '/contact',
     blog: '/blog',
     caseStudies: '/cas-clients',
-    docs: '/#plaquette',
-    support: '/contact',
     mentions: '#',
     privacy: '#',
     terms: '#',
     cookies: '#'
   }
 
-  const socialLinks = [
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/lledo-industries', label: 'LinkedIn' },
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Youtube, href: 'https://www.youtube.com/channel/lledo-industries', label: 'YouTube' }
-  ]
-
   return (
-    <footer className="relative bg-gray-900 text-gray-300 overflow-hidden">
-      {/* Grille industrielle en fond */}
-      <div className="absolute inset-0 opacity-5 industrial-grid pointer-events-none" />
-
+    <footer className="bg-gray-950 text-gray-400">
       {/* Main Footer */}
-      <div className="border-b border-gray-800">
-        <div className="container py-8 sm:py-12 lg:py-16">
-          <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-6">
-            {/* Company Info */}
-            <div className="lg:col-span-2">
-              <div className="mb-6">
-                <Logo size="small" href={resolveHref('/')} />
-              </div>
-              <p className="mb-4 sm:mb-6 text-xs sm:text-sm leading-relaxed">
-                {t('hero.subheadline')}
-              </p>
-              
-              {/* Contact Info simplifié */}
-              <div className="space-y-4 text-sm">
-                <div className="p-3 bg-white/5 rounded-lg border border-blue-400/20">
-                  <div className="font-bold text-white mb-2">MPEB / FREM / EGI</div>
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <Phone className="h-4 w-4 text-primary-400" />
-                    <a href="tel:+33442029674" className="font-mono">04 42 02 96 74</a>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-300 mt-1">
-                    <Mail className="h-4 w-4 text-primary-400" />
-                    <a href="mailto:contact@mpeb13.com">contact@mpeb13.com</a>
-                  </div>
-                </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-blue-400/20">
-                  <div className="font-bold text-white mb-2">MGP</div>
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <Phone className="h-4 w-4 text-primary-400" />
-                    <a href="tel:+33467737090" className="font-mono">04 67 73 70 90</a>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-300 mt-1">
-                    <Mail className="h-4 w-4 text-primary-400" />
-                    <a href="mailto:mega.gen.pro@wanadoo.fr">mega.gen.pro@wanadoo.fr</a>
-                  </div>
-                </div>
-              </div>
+      <div className="container px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="grid gap-10 lg:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+
+          {/* Contacts */}
+          <div className="md:col-span-2 lg:col-span-2">
+            <div className="mb-8">
+              <Logo size="small" href={resolveHref('/')} />
             </div>
 
-            {/* Links Columns avec bordures techniques */}
-            <div>
-              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
-                <span className="mr-2 h-px w-4 bg-primary-500" />
-                {t('footer.company.title')}
-              </h3>
-              <ul className="space-y-3">
-                {renderLinks(companyLinks, linkMapping)}
-              </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* MPEB / FREM / EGI */}
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <h4 className="text-white font-bold text-sm mb-3 tracking-wide">MPEB · FREM · EGI</h4>
+                <a href="tel:+33442029674" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors mb-2">
+                  <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="font-mono">04 42 02 96 74</span>
+                </a>
+                <a href="mailto:contact@mpeb13.com" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors">
+                  <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span>contact@mpeb13.com</span>
+                </a>
+              </div>
+
+              {/* MGP */}
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <h4 className="text-white font-bold text-sm mb-3 tracking-wide">MGP</h4>
+                <a href="tel:+33467737090" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors mb-2">
+                  <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span className="font-mono">04 67 73 70 90</span>
+                </a>
+                <a href="mailto:mega.gen.pro@wanadoo.fr" className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors">
+                  <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <span>mega.gen.pro@wanadoo.fr</span>
+                </a>
+              </div>
             </div>
-            <div>
-              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
-                <span className="mr-2 h-px w-4 bg-primary-500" />
-                {t('footer.services.title')}
-              </h3>
-              <ul className="space-y-3">
-                {renderLinks(servicesLinks, linkMapping)}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
-                <span className="mr-2 h-px w-4 bg-primary-500" />
-                {t('footer.resources.title')}
-              </h3>
-              <ul className="space-y-3">
-                {renderLinks(resourcesLinks, linkMapping)}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 flex items-center text-sm font-semibold uppercase tracking-wider text-white">
-                <span className="mr-2 h-px w-4 bg-primary-500" />
-                {t('footer.legal.title')}
-              </h3>
-              <ul className="space-y-3">
-                {renderLinks(legalLinks, linkMapping)}
-              </ul>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h3 className="text-white text-xs font-bold uppercase tracking-widest mb-4">{t('footer.company.title')}</h3>
+            <ul className="space-y-2.5">
+              {renderLinks(companyLinks, linkMapping)}
+            </ul>
+
+            <h3 className="text-white text-xs font-bold uppercase tracking-widest mb-4 mt-8">{t('footer.services.title')}</h3>
+            <ul className="space-y-2.5">
+              {renderLinks(servicesLinks, linkMapping)}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-white text-xs font-bold uppercase tracking-widest mb-4">{t('footer.legal.title')}</h3>
+            <ul className="space-y-2.5">
+              {renderLinks(legalLinks, linkMapping)}
+            </ul>
+
+            {/* Social */}
+            <div className="mt-8">
+              <a
+                href="https://www.linkedin.com/company/lledo-industries"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.05] text-gray-400 transition-all hover:bg-blue-600 hover:text-white"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Footer avec certifications */}
-      <div className="container py-6">
-        <div className="flex flex-col items-center justify-between gap-4 sm:gap-6 md:flex-row">
-          <div className="text-center text-sm md:text-left">
-            <span className="font-semibold text-white">{t('footer.bottom.madeInFrance')}</span>
-            <span className="mx-2 text-gray-600">•</span>
-            <span>{t('footer.bottom.copyright', { year: new Date().getFullYear() })}</span>
-          </div>
+      {/* Bottom bar */}
+      <div className="border-t border-white/[0.06]">
+        <div className="container px-4 sm:px-6 lg:px-8 py-5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Copyright */}
+            <div className="text-xs text-gray-500">
+              {t('footer.bottom.copyright', { year: new Date().getFullYear() })}
+              <span className="mx-2">·</span>
+              <span className="text-gray-400">{t('footer.bottom.madeInFrance')}</span>
+            </div>
 
-          {/* Social Links avec style industriel */}
-          <div className="flex items-center gap-3">
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon
-              return (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 text-gray-400 transition-all hover:bg-primary-600 hover:text-white hover:shadow-lg tech-corner"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              )
-            })}
+            {/* Certifications */}
+            <div className="flex flex-wrap items-center gap-3">
+              {[
+                { icon: 'CE', labelKey: 'certifications.ce' },
+                { icon: '9001', labelKey: 'certifications.iso9001' },
+                { icon: '9100', labelKey: 'certifications.en9100' },
+                { icon: '12312', labelKey: 'certifications.en12312' },
+                { icon: '⇄', labelKey: 'certifications.interchangeability' },
+              ].map((cert, index) => (
+                <div key={index} className="flex items-center gap-1.5">
+                  <span className="flex h-5 w-5 items-center justify-center rounded bg-white/[0.06] text-[10px] font-bold text-blue-400">
+                    {cert.icon}
+                  </span>
+                  <span className="text-[11px] text-gray-500">{t(cert.labelKey)}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Certifications avec badges industriels */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 border-t border-gray-800 pt-6">
-          {[
-            { icon: 'CE', labelKey: 'certifications.ce' },
-            { icon: '9001', labelKey: 'certifications.iso9001' },
-            { icon: '9100', labelKey: 'certifications.en9100' },
-            { icon: '12312', labelKey: 'certifications.en12312' },
-            { icon: '⇄', labelKey: 'certifications.interchangeability' },
-          ].map((cert, index) => (
-            <motion.div
-              key={index}
-              className="industrial-badge flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded bg-primary-500/20 text-xs font-bold text-primary-400">
-                {cert.icon}
-              </span>
-              <span className="text-xs">{t(cert.labelKey)}</span>
-            </motion.div>
-          ))}
         </div>
       </div>
     </footer>
