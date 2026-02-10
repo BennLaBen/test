@@ -10,7 +10,7 @@ import { Logo } from '@/components/Logo'
 import { Menu, X, User, LogOut, Phone, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AuthModal } from '@/components/auth/AuthModal'
-import { useSession, signOut } from 'next-auth/react'
+import { useAuth } from '@/contexts/AuthContext'
 import { MobileMenuAccordion } from '@/components/MobileMenuAccordion'
 
 const navigation = [
@@ -31,9 +31,7 @@ export function Navigation() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const pathname = usePathname()
   const { t } = useTranslation('common')
-  const { data: session } = useSession()
-  const isAuthenticated = !!session?.user
-  const user = session?.user
+  const { user, isAuthenticated, logout } = useAuth()
 
   const isActive = (href: string) => pathname === href
 
@@ -238,21 +236,7 @@ export function Navigation() {
                   <div className="px-3 py-2 border-b border-blue-500/20">
                     <p className="text-sm font-bold text-white">{user.firstName} {user.lastName}</p>
                     <p className="text-xs text-gray-400">{user.email}</p>
-                    {user.role === 'ADMIN' && (
-                      <span className="inline-flex items-center px-2 py-0.5 mt-1 rounded text-[10px] font-bold uppercase bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                        {t('auth.administrator')}
-                      </span>
-                    )}
                   </div>
-                  {user.role === 'ADMIN' && (
-                    <Link
-                      href="/admin"
-                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors mt-1"
-                    >
-                      <User className="h-4 w-4" />
-                      {t('auth.dashboard')}
-                    </Link>
-                  )}
                   <Link
                     href="/espace-client/profil"
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
@@ -261,7 +245,7 @@ export function Navigation() {
                     {t('auth.myProfile')}
                   </Link>
                   <button
-                    onClick={() => signOut({ callbackUrl: '/' })}
+                    onClick={() => logout()}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors mt-1"
                   >
                     <LogOut className="h-4 w-4" />
@@ -457,10 +441,9 @@ export function Navigation() {
                         email: user.email,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email,
-                        role: user.role
+                        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email
                       } : null}
-                      onLogout={() => signOut({ callbackUrl: '/' })}
+                      onLogout={() => logout()}
                     />
 
                     {/* Auth Button si non connecté */}
