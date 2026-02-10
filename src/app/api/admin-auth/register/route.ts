@@ -115,16 +115,21 @@ export async function POST(request: NextRequest) {
       activationUrl,
       expiresIn: '24 heures',
     })
-    await sendEmail({
+    const emailSent = await sendEmail({
       to: email.toLowerCase(),
       subject: template.subject,
       html: template.html,
       text: template.text,
     })
     
+    console.log(`[register] Email sent to ${email}: ${emailSent}`)
+    
     return NextResponse.json({
       success: true,
-      message: 'Compte créé. Un email d\'activation a été envoyé.',
+      message: emailSent 
+        ? 'Compte créé. Un email d\'activation a été envoyé.'
+        : 'Compte créé mais l\'email n\'a pas pu être envoyé. Vérifiez la configuration SMTP.',
+      emailSent,
       admin: {
         id: admin.id,
         email: admin.email,
