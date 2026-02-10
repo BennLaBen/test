@@ -8,10 +8,10 @@
     "intro": "Desde 1989, mi visión es simple: construir un grupo industrial francés de excelencia, capaz de responder a las necesidades más exigentes de la aeronáutica y la defensa. Hoy, el Grupo LLEDO Industries reúne a 70 colaboradores apasionados en torno a valores comunes.",
     "quote": "Nuestra fuerza reside en la complementariedad de nuestras especialidades y el compromiso de cada colaborador. Juntos, superamos los desafíos técnicos más complejos.",
     "stats": [
-      { "value": "36 años", "label": "De experiencia" },
+      { "value": "Desde 1989", "label": "De experiencia" },
       { "value": "70", "label": "Colaboradores" },
       { "value": "5", "label": "Entidades" },
-      { "value": "~10M€", "label": "Facturación" }
+      { "value": "Grupo", "label": "Industrial integrado" }
     ]
   },
   "values": {

@@ -8,10 +8,10 @@
     "intro": "Since 1989, my vision is simple: to build a French industrial group of excellence, capable of meeting the most demanding needs of the aerospace and defense industries. Today, LLEDO Industries Group brings together 70 passionate employees around shared values.",
     "quote": "Notre force réside dans la complémentarité de nos expertises et l'engagement de chaque collaborateur. Ensemble, nous relevons les défis techniques les plus complexes.",
     "stats": [
-      { "value": "36 years", "label": "Of experience" },
+      { "value": "Since 1989", "label": "Of experience" },
       { "value": "70", "label": "Employees" },
       { "value": "5", "label": "Entities" },
-      { "value": "~10M€", "label": "Revenue" }
+      { "value": "Group", "label": "Integrated industrial" }
     ]
   },
   "values": {

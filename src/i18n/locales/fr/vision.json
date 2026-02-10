@@ -8,10 +8,10 @@
     "intro": "Depuis 1989, ma vision est simple : bâtir un groupe industriel français d'excellence, capable de répondre aux besoins les plus exigeants de l'aéronautique et de la défense. Aujourd'hui, le Groupe LLEDO Industries réunit 70 collaborateurs passionnés autour de valeurs communes.",
     "quote": "Notre force réside dans la complémentarité de nos expertises et l'engagement de chaque collaborateur. Ensemble, nous relevons les défis techniques les plus complexes.",
     "stats": [
-      { "value": "36 ans", "label": "D'expérience" },
+      { "value": "Depuis 1989", "label": "D'expérience" },
       { "value": "70", "label": "Collaborateurs" },
       { "value": "5", "label": "Entités" },
-      { "value": "~10M€", "label": "Chiffre d'affaires" }
+      { "value": "Groupe", "label": "Industriel intégré" }
     ]
   },
   "values": {

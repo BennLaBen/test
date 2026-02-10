@@ -306,8 +306,16 @@ export default function CasClientsPage() {
         </div>
       </section>
 
-      {/* Secteurs d'activité - Dark Mode */}
-      <section id="secteurs" className="bg-gradient-to-b from-gray-900 to-gray-800 py-24 relative overflow-hidden">
+      {/* Témoignages anonymisés */}
+      <Testimonials 
+        externalShowAuthModal={showAuthModal}
+        externalSetShowAuthModal={setShowAuthModal}
+        externalShowReviewForm={showReviewForm}
+        externalSetShowReviewForm={setShowReviewForm}
+      />
+
+      {/* Nos secteurs d'activité */}
+      <section id="secteurs" className="bg-gradient-to-b from-gray-800 to-gray-900 py-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div style={{
             backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
@@ -332,7 +340,7 @@ export default function CasClientsPage() {
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:gap-8 grid-cols-2 lg:grid-cols-4">
             {sectors.map((sector, index) => (
               <motion.div
                 key={index}
@@ -340,38 +348,19 @@ export default function CasClientsPage() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.05, y: -8 }}
-                className="p-8 text-center bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden"
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="p-6 sm:p-8 text-center bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden"
                 style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: index * 1 }}
-                  style={{ willChange: 'transform' }}
-                />
-                
                 <div className="relative z-10">
-                  <div className="mb-4 text-6xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{sector.clients}</div>
-                  <h3 className="mb-4 text-2xl font-black text-white uppercase">{sector.name}</h3>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-green-500/20 backdrop-blur-sm border border-green-400/30 px-5 py-2.5 text-sm font-bold text-green-300">
-                    <ThumbsUp className="h-4 w-4" />
-                    {sector.satisfaction} {t('page.satisfied')}
-                  </div>
+                  <h3 className="mb-3 text-xl sm:text-2xl font-black text-white uppercase">{sector.name}</h3>
+                  <div className="text-sm text-blue-300 font-semibold">{sector.clients}</div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Témoignages anonymisés */}
-      <Testimonials 
-        externalShowAuthModal={showAuthModal}
-        externalSetShowAuthModal={setShowAuthModal}
-        externalShowReviewForm={showReviewForm}
-        externalSetShowReviewForm={setShowReviewForm}
-      />
 
     </>
   )

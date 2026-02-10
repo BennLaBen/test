@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { IndustrialBackground } from '@/components/IndustrialBackground'
 import { TrendingUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +13,10 @@ export function History() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const milestones = t('history.milestones', { returnObjects: true }) as any[]
+
+  const yearsOfExperience = useMemo(() => {
+    return new Date().getFullYear() - 1989
+  }, [])
 
   return (
     <section ref={ref} id="notre-histoire" className="bg-gradient-to-b from-gray-50 to-white py-20 dark:from-gray-800 dark:to-gray-900 lg:py-32 relative overflow-hidden">
@@ -183,7 +187,7 @@ export function History() {
                     }}
                   />
 
-                  <div className="mb-2 text-sm font-semibold text-primary-600 relative z-10 industrial-badge">{milestone.year}</div>
+                  <div className="mb-2 text-lg font-black text-primary-500 relative z-10 industrial-badge tracking-wider">{milestone.year}</div>
                   <h3 className="mb-2 text-lg font-bold text-muted-strong relative z-10">{milestone.event}</h3>
                   <p className="text-sm text-muted relative z-10">{milestone.description}</p>
                 </motion.div>

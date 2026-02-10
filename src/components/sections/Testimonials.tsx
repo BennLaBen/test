@@ -157,23 +157,13 @@ export function Testimonials({
                     className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 p-6 dark:from-primary-900/30 dark:to-primary-800/20"
                   >
                     <div className="relative z-10">
-                      <div className="mb-3 text-5xl font-bold text-primary-600 dark:text-primary-400">
-                        {stat.value}%
+                      <div className="mb-3 text-3xl font-black text-primary-600 dark:text-primary-400">
+                        {stat.value}
                       </div>
                       <div className="mb-2 text-sm font-bold uppercase tracking-wider text-muted-strong">
                         {stat.label}
                       </div>
                       <div className="text-xs text-muted">{stat.description}</div>
-                    </div>
-                    
-                    {/* Progress bar */}
-                    <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${stat.value}%` } : { width: 0 }}
-                        transition={{ duration: 1, delay: 0.5 + index * 0.1, ease: "easeOut" }}
-                        className="h-full rounded-full bg-gradient-to-r from-primary-600 to-primary-400"
-                      />
                     </div>
                   </motion.div>
                 ))}

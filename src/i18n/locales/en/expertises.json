@@ -1,6 +1,6 @@
 {
-  "title": "Discover the companies of the LLEDO group",
-  "subtitle": "A collective of 5 complementary entities to cover all your industrial engineering needs",
+  "title": "Meeting your industrial needs",
+  "subtitle": "A collective of 5 complementary entities to address all your industrial engineering requirements",
   "list": [
     {
       "id": "mpeb",
@@ -129,19 +129,19 @@
     }
   ],
   "stats": {
-    "title": "LLEDO Group in figures",
+    "title": "The LLEDO Group",
     "list": [
       {
-        "value": "36 years",
-        "label": "of experience"
+        "value": "Since 1989",
+        "label": "Recognized expertise"
       },
       {
         "value": "70",
         "label": "employees"
       },
       {
-        "value": "100,000h",
-        "label": "production/year"
+        "value": "Capacity",
+        "label": "production"
       },
       {
         "value": "5",

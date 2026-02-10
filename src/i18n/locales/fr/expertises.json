@@ -1,6 +1,6 @@
 {
-  "title": "Découvrez les entreprises du groupe LLEDO",
-  "subtitle": "Un collectif de 5 entités complémentaires pour couvrir l'ensemble de vos besoins en ingénierie industrielle",
+  "title": "Couvrir vos besoins industriels",
+  "subtitle": "Un collectif de 5 entités complémentaires pour répondre à l'ensemble de vos exigences en ingénierie industrielle",
   "list": [
     {
       "id": "mpeb",
@@ -111,7 +111,7 @@
   "stats": {
     "title": "Le Groupe LLEDO",
     "list": [
-      { "value": "36 ans", "label": "d'expérience" },
+      { "value": "Depuis 1989", "label": "Savoir-faire reconnu" },
       { "value": "70", "label": "collaborateurs" },
       { "value": "Capacité", "label": "de production" },
       { "value": "5", "label": "entités complémentaires" }
