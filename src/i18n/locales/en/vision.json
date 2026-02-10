@@ -88,34 +88,22 @@
     ]
   },
   "industrialVision": {
-    "badge": "Vision Industrielle",
-    "title": "Notre ambition pour l'avenir",
-    "subtitle": "Construire le leader français de l'ingénierie industrielle intégrée",
+    "badge": "Industrial Vision",
+    "title": "Our ambition for the future",
+    "subtitle": "Remaining a partner for all types of industrial players, from the smallest to the most structured, in a relationship built on proximity, trust and continuity",
     "paragraphs": [
-      "Dans un contexte de relocalisation industrielle et de souveraineté technologique, le Groupe LLEDO Industries a un rôle à jouer. Notre ambition est de devenir le partenaire de référence des grands donneurs d'ordres de l'aéronautique et de la défense.",
-      "Nous investissons massivement dans nos équipements : usinage 5 axes dernière génération, outils de métrologie 3D, logiciels de simulation et d'optimisation. Notre objectif : être à la pointe de la technologie pour répondre aux cahiers des charges les plus exigeants.",
-      "Le développement de nos équipes est au cœur de notre stratégie. Formation continue, montée en compétences, transmission des savoir-faire : nous préparons l'avenir en cultivant l'excellence technique de nos collaborateurs.",
-      "Nous développons également une activité de conception et commercialisation d'équipements GSE (Ground Support Equipment) pour hélicoptères sous la marque LLEDO Aerotools, en capitalisant sur notre expertise en mécanique de précision et notre connaissance du secteur aéronautique."
+      "In a context of industrial reshoring and technological sovereignty, LLEDO Industries Group has a role to play. Our ambition is to support contractors in aerospace and defense with a collaborative, accessible approach.",
+      "We invest in our equipment: latest-generation 5-axis machining, 3D metrology tools, simulation and optimization software. Our goal: to be at the forefront of technology to meet the most demanding specifications.",
+      "Developing our teams is at the heart of our strategy. Continuous training, skills development, knowledge transfer: we prepare the future by cultivating the technical excellence of our people.",
+      "We are also developing a design and marketing activity for GSE (Ground Support Equipment) for helicopters under the LLEDO Aerotools brand, leveraging our expertise in precision mechanics and our knowledge of the aerospace sector."
     ],
     "objectives": {
-      "title": "Our strategic objectives",
+      "title": "Our 5-year objectives",
       "list": [
-        {
-          "title": "Croissance organique",
-          "description": "Develop new markets and strengthen our position"
-        },
-        {
-          "title": "Innovation produit",
-          "description": "Développer une gamme complète d'équipements GSE pour hélicoptères"
-        },
-        {
-          "title": "Excellence opérationnelle",
-          "description": "Achieve the highest level of customer service"
-        },
-        {
-          "title": "Développement RH",
-          "description": "Strengthen our teams and develop key skills"
-        }
+        { "title": "Proprietary product development", "description": "Design and market innovative equipment under our own brands" },
+        { "title": "Integration on other machines", "description": "Diversify our industrial integration capabilities" },
+        { "title": "Controlled organic growth", "description": "Develop our business in a sustainable and structured manner" },
+        { "title": "Operational excellence", "description": "Maintain a high level of performance and reliability" }
       ]
     }
   },
