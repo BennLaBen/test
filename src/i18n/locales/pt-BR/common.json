@@ -92,19 +92,19 @@
         "benefits": ["Intercambialidade de componentes", "Rastreabilidade completa", "Certificações industriais"]
       },
       {
-        "title": "Usinagem de Precisão",
-        "description": "Usinagem de precisão de 3 a 5 eixos e ajuste de peças mecânicas conforme especificações do cliente.",
-        "benefits": ["Usinagem de 3 a 5 eixos", "Controle de qualidade", "Expertise técnica"]
+        "title": "Usinagem de precisão de 3 a 5 eixos",
+        "description": "Usinagem de precisão multi-eixo e ajuste de peças mecânicas conforme as especificações mais exigentes do cliente.",
+        "benefits": ["Usinagem de 3, 4 e 5 eixos", "Controle de qualidade dimensional", "Expertise técnica certificada"]
       },
       {
         "title": "Prazos Cumpridos",
-        "description": "Cumprimento dos prazos acordados graças à nossa organização otimizada e capacidade de produção.",
-        "benefits": ["Acompanhamento digital de projetos", "Planejamento rigoroso", "Gestão de operações"]
+        "description": "Cumprimento dos prazos acordados graças à nossa organização otimizada, capacidade de produção e rastreamento digital em tempo real.",
+        "benefits": ["Rastreamento digital em tempo real", "Gestão ágil e antecipação de marcos", "Gestão de operações"]
       },
       {
         "title": "Equipe Especializada",
-        "description": "Especialistas em fabricação de peças elementares, ferramental e máquinas especiais.",
-        "benefits": ["Fabricação de peças elementares", "Ferramental industrial", "Máquinas especiais"]
+        "description": "Especialistas em fabricação de peças elementares, ferramental sob medida e máquinas especiais para a indústria aeronáutica e de defesa.",
+        "benefits": ["Fabricação de peças elementares", "Ferramental industrial sob medida", "Máquinas especiais"]
       },
       {
         "title": "Inovação Contínua",

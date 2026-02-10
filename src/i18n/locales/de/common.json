@@ -92,19 +92,19 @@
         "benefits": ["Austauschbarkeit der Komponenten", "Vollständige Rückverfolgbarkeit", "Industriezertifizierungen"]
       },
       {
-        "title": "Präzisionsbearbeitung",
-        "description": "3- bis 5-Achs-Präzisionsbearbeitung und Anpassung mechanischer Teile nach Kundenspezifikationen.",
-        "benefits": ["3- bis 5-Achs-Bearbeitung", "Qualitätskontrolle", "Technische Expertise"]
+        "title": "3- bis 5-Achs-Präzisionsbearbeitung",
+        "description": "Mehrachs-Präzisionsbearbeitung und Anpassung mechanischer Teile nach den anspruchsvollsten Kundenspezifikationen.",
+        "benefits": ["3-, 4- und 5-Achs-Bearbeitung", "Dimensionale Qualitätskontrolle", "Zertifizierte technische Expertise"]
       },
       {
         "title": "Termingerechte Lieferung",
-        "description": "Einhaltung vereinbarter Fristen dank optimierter Organisation und Produktionskapazität.",
-        "benefits": ["Digitale Projektverfolgung", "Strenge Planung", "Betriebssteuerung"]
+        "description": "Einhaltung vereinbarter Fristen dank optimierter Organisation, Produktionskapazität und digitaler Echtzeitverfolgung.",
+        "benefits": ["Digitale Echtzeitverfolgung", "Agiles Management und Meilenstein-Antizipation", "Betriebssteuerung"]
       },
       {
         "title": "Expertenteam",
-        "description": "Spezialisierte Mitarbeiter in der Fertigung von Einzelteilen, Werkzeugbau und Sondermaschinen.",
-        "benefits": ["Einzelteilfertigung", "Industriewerkzeugbau", "Sondermaschinen"]
+        "description": "Spezialisierte Mitarbeiter in der Fertigung von Einzelteilen, maßgeschneiderten Werkzeugen und Sondermaschinen für die Luft- und Raumfahrt- sowie Verteidigungsindustrie.",
+        "benefits": ["Einzelteilfertigung", "Maßgeschneiderter Industriewerkzeugbau", "Sondermaschinen"]
       },
       {
         "title": "Kontinuierliche Innovation",

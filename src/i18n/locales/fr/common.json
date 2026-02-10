@@ -85,26 +85,26 @@
       "reach": { "label": "Rayonnement", "value": "International" },
       "quality": { "label": "Engagement qualité", "value": "Excellence" }
     },
-        "list": [
+    "list": [
       {
         "title": "Conformité normative",
         "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
         "benefits": ["Interchangeabilité des composants", "Traçabilité complète", "Certifications industrielles"]
       },
       {
-        "title": "Usinage de précision",
-        "description": "Usinage de précision 3 à 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
-        "benefits": ["Usinage 3 à 5 axes", "Contrôle qualité", "Expertise technique"]
+        "title": "Usinage de précision de 3 à 5 axes",
+        "description": "Usinage de précision multi-axes et ajustage de pièces mécaniques selon les spécifications clients les plus exigeantes.",
+        "benefits": ["Usinage 3, 4 et 5 axes", "Contrôle qualité dimensionnel", "Expertise technique certifiée"]
       },
       {
         "title": "Délais respectés",
-        "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
-        "benefits": ["Suivi numérique des projets", "Planification rigoureuse", "Pilotage des opérations"]
+        "description": "Respect des délais convenus grâce à notre organisation optimisée, notre capacité de production et un suivi numérique en temps réel.",
+        "benefits": ["Suivi numérique en temps réel", "Pilotage agile et anticipation des jalons", "Pilotage des opérations"]
       },
       {
         "title": "Équipe experte",
-        "description": "Collaborateurs spécialisés dans la fabrication de pièces élémentaires, l'outillage et les machines spéciales.",
-        "benefits": ["Fabrication de pièces élémentaires", "Outillage industriel", "Machines spéciales"]
+        "description": "Collaborateurs spécialisés dans la fabrication de pièces élémentaires, outillages et machines spéciales pour l'industrie aéronautique et de défense.",
+        "benefits": ["Fabrication de pièces élémentaires", "Outillages industriels sur mesure", "Machines spéciales"]
       },
       {
         "title": "Innovation continue",
