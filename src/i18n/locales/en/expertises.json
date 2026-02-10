@@ -80,19 +80,19 @@
       "id": "mgp",
       "name": "MGP",
       "tagline": "Sheet metal, boilermaking & assembly",
-      "description": "MGP complements the group's offering with sheet metal, boilermaking, welding and mechanical assembly capabilities. Based in Saint-Bauzille-de-Putois, MGP brings complementary expertise across diversified markets with 50 years of experience.",
+      "description": "MGP complements the group's offering with sheet metal, boilermaking, welding and mechanical assembly capabilities. Complementary expertise across diversified markets.",
       "expertise": [
-        "High-pressure waterjet cutting",
+        "3 to 5-axis machining",
         "Boilermaking and metalwork",
         "All welding processes (TIG, MIG, ARC)",
-        "Machining",
-        "Turning",
-        "Milling"
+        "Painting",
+        "Assembly",
+        "Load testing"
       ],
       "capabilities": {
-        "capacity": "2,000m² workshop",
-        "precision": "8 qualified welders",
-        "machines": "Laser, press brake, rolling machine"
+        "capacity": "3 to 5-axis machining",
+        "precision": "Load testing",
+        "machines": "CNC machine fleet"
       },
       "certifications": [
         "ISO 9001",

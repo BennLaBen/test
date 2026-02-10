@@ -68,19 +68,19 @@
       "id": "mgp",
       "name": "MGP",
       "tagline": "Tôlerie, chaudronnerie et assemblage",
-      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Basée à Saint-Bauzille-de-Putois, MGP apporte une expertise complémentaire sur des marchés diversifiés avec 50 ans d'expérience.",
+      "description": "MGP complète l'offre du groupe avec ses compétences en tôlerie, chaudronnerie, soudure et assemblage d'éléments mécaniques. Une expertise complémentaire sur des marchés diversifiés.",
       "expertise": [
-        "Découpe au jet d'eau haute pression",
+        "Usinage 3 à 5 axes",
         "Chaudronnerie et travail des métaux",
         "Soudure tous procédés (TIG, MIG, ARC)",
-        "Usinage",
-        "Tournage",
-        "Fraisage"
+        "Peinture",
+        "Assemblage",
+        "Mise en charge"
       ],
       "capabilities": {
-        "capacity": "2000m² d'atelier",
-        "precision": "8 soudeurs qualifiés",
-        "machines": "Laser, presse plieuse, rouleuse"
+        "capacity": "Usinage 3 à 5 axes",
+        "precision": "Mise en charge",
+        "machines": "Parc machines CNC"
       },
       "certifications": ["ISO 9001", "Soudeurs certifiés EN 287", "Marquage CE"],
       "ctaLabel": "Découvrir MGP"

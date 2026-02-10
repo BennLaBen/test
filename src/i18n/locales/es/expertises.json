@@ -68,19 +68,19 @@
       "id": "mgp",
       "name": "MGP",
       "tagline": "Chapa, calderería y ensamblaje",
-      "description": "MGP completa la oferta del grupo con sus competencias en chapa, calderería, soldadura y ensamblaje de elementos mecánicos. Con sede en Saint-Bauzille-de-Putois, MGP aporta una experiencia complementaria en mercados diversificados con 50 años de experiencia.",
+      "description": "MGP completa la oferta del grupo con sus competencias en chapa, calderería, soldadura y ensamblaje de elementos mecánicos. Experiencia complementaria en mercados diversificados.",
       "expertise": [
-        "Corte por chorro de agua a alta presión",
+        "Mecanizado de 3 a 5 ejes",
         "Calderería y trabajo de metales",
         "Soldadura todos los procesos (TIG, MIG, ARC)",
-        "Mecanizado",
-        "Torneado",
-        "Fresado"
+        "Pintura",
+        "Ensamblaje",
+        "Prueba de carga"
       ],
       "capabilities": {
-        "capacity": "2000m² de taller",
-        "precision": "8 soldadores cualificados",
-        "machines": "Láser, plegadora, curvadora"
+        "capacity": "Mecanizado de 3 a 5 ejes",
+        "precision": "Prueba de carga",
+        "machines": "Parque de máquinas CNC"
       },
       "certifications": ["ISO 9001", "Soldadores certificados EN 287", "Marcado CE"],
       "ctaLabel": "Descubrir MGP"

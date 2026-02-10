@@ -68,19 +68,19 @@
       "id": "mgp",
       "name": "MGP",
       "tagline": "Chaparia, caldeiraria e montagem",
-      "description": "A MGP completa a oferta do grupo com suas competências em chaparia, caldeiraria, solda e montagem de elementos mecânicos. Sediada em Saint-Bauzille-de-Putois, a MGP traz uma expertise complementar em mercados diversificados com 50 anos de experiência.",
+      "description": "A MGP completa a oferta do grupo com suas competências em chaparia, caldeiraria, solda e montagem de elementos mecânicos. Expertise complementar em mercados diversificados.",
       "expertise": [
-        "Corte por jato de água de alta pressão",
+        "Usinagem de 3 a 5 eixos",
         "Caldeiraria e trabalho de metais",
         "Solda todos os processos (TIG, MIG, ARC)",
-        "Usinagem",
-        "Torneamento",
-        "Fresagem"
+        "Pintura",
+        "Montagem",
+        "Teste de carga"
       ],
       "capabilities": {
-        "capacity": "2000m² de oficina",
-        "precision": "8 soldadores qualificados",
-        "machines": "Laser, dobradeira, calandra"
+        "capacity": "Usinagem de 3 a 5 eixos",
+        "precision": "Teste de carga",
+        "machines": "Parque de máquinas CNC"
       },
       "certifications": ["ISO 9001", "Soldadores certificados EN 287", "Marcação CE"],
       "ctaLabel": "Descobrir MGP"
