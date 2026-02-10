@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Design System */
+@import '../styles/design-system.css';
+
 /* ============================================
    HEADER HEIGHT & LAYOUT COMPENSATION
    Solution globale pour éviter que le header cache le contenu
