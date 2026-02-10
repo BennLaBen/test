@@ -83,27 +83,27 @@
     },
     "list": [
       {
-        "title": "Conformidad Normativa",
-        "description": "Todos nuestros equipos cumplen con las normas EN 12312, EN 1915 y la Directiva de Máquinas 2006/42/CE.",
+        "title": "Necesidades industriales",
+        "description": "Respondemos a todas sus necesidades industriales en conformidad con las normas EN 12312, EN 1915 y la Directiva de Máquinas 2006/42/CE.",
         "benefits": ["Intercambiabilidad de componentes", "Trazabilidad completa", "Certificaciones industriales"]
       },
       {
-        "title": "Mecanizado de Precisión",
-        "description": "Mecanizado de precisión de 3 a 5 ejes y ajuste de piezas mecánicas según especificaciones del cliente.",
-        "benefits": ["Mecanizado de 3 a 5 ejes", "Control de calidad", "Experiencia técnica"]
+        "title": "Mecanizado de precisión de 3 a 5 ejes",
+        "description": "Centro de mecanizado de alto rendimiento para la fabricación de piezas complejas y ajuste mecánico según sus especificaciones.",
+        "benefits": ["Fresado y torneado multieje", "Inspección dimensional", "Experiencia técnica avanzada"]
       },
       {
-        "title": "Plazos Cumplidos",
-        "description": "Cumplimiento de plazos acordados gracias a nuestra organización optimizada y capacidad de producción.",
-        "benefits": ["Seguimiento digital de proyectos", "Planificación rigurosa", "Gestión de operaciones"]
+        "title": "Plazos cumplidos",
+        "description": "Cada proyecto cuenta con un seguimiento digital en tiempo real para garantizar el cumplimiento de los compromisos y la transparencia en cada etapa.",
+        "benefits": ["Seguimiento digital en tiempo real", "Programación ágil y anticipada", "Gestión de operaciones"]
       },
       {
-        "title": "Equipo Experto",
-        "description": "Especialistas en fabricación de piezas elementales, utillaje y maquinaria especial.",
-        "benefits": ["Fabricación de piezas elementales", "Utillaje industrial", "Maquinaria especial"]
+        "title": "Equipo experto",
+        "description": "Nuestros especialistas dominan la fabricación de piezas elementales, utillajes y maquinaria especial para soluciones a medida.",
+        "benefits": ["Fabricación de piezas elementales, utillajes y maquinaria especial", "Utillaje industrial de precisión", "Ingeniería dedicada"]
       },
       {
-        "title": "Innovación Continua",
+        "title": "Innovación continua",
         "description": "I+D permanente para desarrollar soluciones técnicas de vanguardia y mejorar nuestros productos.",
         "benefits": ["Oficina técnica integrada", "Prototipado", "Mejora continua"]
       },

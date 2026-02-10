@@ -74,33 +74,33 @@
   },
   "features": {
     "title": "Pourquoi choisir LLEDO Industries ?",
-    "subtitle": "Une expertise technique reconnue et un engagement qualité pour répondre à vos besoins industriels.",
+    "subtitle": "Une expertise technique reconnue et un engagement qualité pour répondre à vos besoins industriels les plus exigeants.",
     "stats": {
       "team": { "label": "Équipe experte", "value": "Savoir-faire" },
       "capacity": { "label": "Capacité industrielle", "value": "Production" },
       "reach": { "label": "Rayonnement", "value": "International" },
       "quality": { "label": "Engagement qualité", "value": "Excellence" }
     },
-        "list": [
+    "list": [
       {
-        "title": "Conformité normative",
-        "description": "Tous nos équipements respectent les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
+        "title": "Besoins industriels",
+        "description": "Nous répondons à l'ensemble de vos besoins industriels en conformité avec les normes EN 12312, EN 1915 et la Directive Machines 2006/42/CE.",
         "benefits": ["Interchangeabilité des composants", "Traçabilité complète", "Certifications industrielles"]
       },
       {
-        "title": "Usinage de précision",
-        "description": "Usinage de précision 3 à 5 axes et ajustage de pièces mécaniques selon les spécifications clients.",
-        "benefits": ["Usinage 3 à 5 axes", "Contrôle qualité", "Expertise technique"]
+        "title": "Usinage de précision de 3 à 5 axes",
+        "description": "Centre d'usinage haute performance pour la réalisation de pièces complexes et l'ajustage mécanique selon vos spécifications.",
+        "benefits": ["Fraisage et tournage multi-axes", "Contrôle dimensionnel", "Expertise technique avancée"]
       },
       {
         "title": "Délais respectés",
-        "description": "Respect des délais convenus grâce à notre organisation optimisée et notre capacité de production.",
-        "benefits": ["Suivi numérique des projets", "Planification rigoureuse", "Pilotage des opérations"]
+        "description": "Chaque projet bénéficie d'un suivi numérique en temps réel pour garantir le respect des engagements et la transparence à chaque étape.",
+        "benefits": ["Suivi numérique en temps réel", "Ordonnancement agile et anticipé", "Pilotage des opérations"]
       },
       {
         "title": "Équipe experte",
-        "description": "Collaborateurs spécialisés dans la fabrication de pièces élémentaires, l'outillage et les machines spéciales.",
-        "benefits": ["Fabrication de pièces élémentaires", "Outillage industriel", "Machines spéciales"]
+        "description": "Nos collaborateurs maîtrisent la fabrication de pièces élémentaires, d'outillages et de machines spéciales pour des solutions sur mesure.",
+        "benefits": ["Fabrication de pièces élémentaires, outillages et machines spéciales", "Outillage industriel de précision", "Ingénierie dédiée"]
       },
       {
         "title": "Innovation continue",

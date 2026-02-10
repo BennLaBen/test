@@ -83,27 +83,27 @@
     },
     "list": [
       {
-        "title": "Conformidade Normativa",
-        "description": "Todos os nossos equipamentos atendem às normas EN 12312, EN 1915 e à Diretiva de Máquinas 2006/42/CE.",
+        "title": "Necessidades industriais",
+        "description": "Atendemos todas as suas necessidades industriais em conformidade com as normas EN 12312, EN 1915 e a Diretiva de Máquinas 2006/42/CE.",
         "benefits": ["Intercambialidade de componentes", "Rastreabilidade completa", "Certificações industriais"]
       },
       {
-        "title": "Usinagem de Precisão",
-        "description": "Usinagem de precisão de 3 a 5 eixos e ajuste de peças mecânicas conforme especificações do cliente.",
-        "benefits": ["Usinagem de 3 a 5 eixos", "Controle de qualidade", "Expertise técnica"]
+        "title": "Usinagem de precisão de 3 a 5 eixos",
+        "description": "Centro de usinagem de alto desempenho para fabricação de peças complexas e ajuste mecânico conforme suas especificações.",
+        "benefits": ["Fresamento e torneamento multieixo", "Inspeção dimensional", "Expertise técnica avançada"]
       },
       {
-        "title": "Prazos Cumpridos",
-        "description": "Cumprimento dos prazos acordados graças à nossa organização otimizada e capacidade de produção.",
-        "benefits": ["Acompanhamento digital de projetos", "Planejamento rigoroso", "Gestão de operações"]
+        "title": "Prazos cumpridos",
+        "description": "Cada projeto conta com monitoramento digital em tempo real para garantir o cumprimento dos compromissos e transparência em cada etapa.",
+        "benefits": ["Monitoramento digital em tempo real", "Programação ágil e antecipada", "Gestão de operações"]
       },
       {
-        "title": "Equipe Especializada",
-        "description": "Especialistas em fabricação de peças elementares, ferramental e máquinas especiais.",
-        "benefits": ["Fabricação de peças elementares", "Ferramental industrial", "Máquinas especiais"]
+        "title": "Equipe especializada",
+        "description": "Nossos especialistas dominam a fabricação de peças elementares, ferramentais e máquinas especiais para soluções sob medida.",
+        "benefits": ["Fabricação de peças elementares, ferramentais e máquinas especiais", "Ferramental industrial de precisão", "Engenharia dedicada"]
       },
       {
-        "title": "Inovação Contínua",
+        "title": "Inovação contínua",
         "description": "P&D permanente para desenvolver soluções técnicas de ponta e melhorar nossos produtos.",
         "benefits": ["Escritório técnico integrado", "Prototipagem", "Melhoria contínua"]
       },

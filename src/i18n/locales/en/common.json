@@ -83,24 +83,24 @@
     },
     "list": [
       {
-        "title": "Regulatory Compliance",
-        "description": "All our equipment complies with EN 12312, EN 1915 standards and the Machinery Directive 2006/42/EC.",
+        "title": "Industrial Needs",
+        "description": "We address all your industrial requirements in compliance with EN 12312, EN 1915 standards and the Machinery Directive 2006/42/EC.",
         "benefits": ["Component interchangeability", "Full traceability", "Industrial certifications"]
       },
       {
-        "title": "Precision Machining",
-        "description": "3 to 5-axis precision machining and mechanical part fitting according to client specifications.",
-        "benefits": ["3 to 5-axis machining", "Quality control", "Technical expertise"]
+        "title": "3 to 5-Axis Precision Machining",
+        "description": "High-performance machining center for complex part production and mechanical fitting to your specifications.",
+        "benefits": ["Multi-axis milling and turning", "Dimensional inspection", "Advanced technical expertise"]
       },
       {
         "title": "On-Time Delivery",
-        "description": "Meeting agreed deadlines through optimized organization and production capacity.",
-        "benefits": ["Digital project tracking", "Rigorous planning", "Operations management"]
+        "description": "Every project benefits from real-time digital monitoring to ensure commitment fulfillment and transparency at every stage.",
+        "benefits": ["Real-time digital tracking", "Agile and proactive scheduling", "Operations management"]
       },
       {
         "title": "Expert Team",
-        "description": "Specialists in elementary part manufacturing, tooling and special machinery.",
-        "benefits": ["Elementary part manufacturing", "Industrial tooling", "Special machinery"]
+        "description": "Our specialists master elementary part manufacturing, tooling and special machinery for tailored solutions.",
+        "benefits": ["Elementary parts, tooling & special machinery manufacturing", "Precision industrial tooling", "Dedicated engineering"]
       },
       {
         "title": "Continuous Innovation",
