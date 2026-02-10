@@ -1892,3 +1892,108 @@ img[loading="lazy"]:not([src=""]) {
     flex-shrink: 0;
   }
 }
+
+/* ============================================
+   OPTIMISATIONS ANIMATIONS MOBILE
+   Désactivation/simplification pour performance
+   ============================================ */
+
+/* Mobile: Simplifier toutes les animations */
+@media (max-width: 768px) {
+  /* Désactiver les animations complexes */
+  *:not(.keep-animation) {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  
+  /* Transitions légères uniquement (max 0.2s) */
+  *:not(.keep-transition) {
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease-out !important;
+  }
+  
+  /* Désactiver parallax complètement */
+  .parallax,
+  [class*="parallax"],
+  .animate-parallax {
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  /* Désactiver les transformations scale > 1.2 */
+  .hover\:scale-125:hover,
+  .hover\:scale-150:hover,
+  .scale-125,
+  .scale-150 {
+    transform: scale(1) !important;
+  }
+  
+  /* GPU acceleration pour éléments animés */
+  .animated,
+  [class*="animate-"],
+  .transition,
+  [class*="transition-"] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  /* Désactiver animations lourdes spécifiques */
+  .gear-rotate,
+  .gear-rotate-reverse,
+  .hologram-effect,
+  .scanline-effect::after,
+  .arc-reactor-glow,
+  .holographic-scan,
+  .loading-bar::after,
+  .tech-indicator::before {
+    animation: none !important;
+  }
+  
+  /* Simplifier les blurs (performance) */
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
+
+/* Préférence utilisateur: Animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Animations performantes (GPU-only) */
+.gpu-accelerated {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Transitions légères globales (max 0.3s) */
+.transition-all {
+  transition-property: transform, opacity !important;
+  transition-duration: 0.2s !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Durées réduites de 50% */
+.duration-300 { transition-duration: 0.15s !important; }
+.duration-500 { transition-duration: 0.25s !important; }
+.duration-700 { transition-duration: 0.3s !important; }
+.duration-1000 { transition-duration: 0.3s !important; }
