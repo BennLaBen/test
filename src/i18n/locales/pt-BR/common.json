@@ -7,6 +7,7 @@
   },
   "topBar": {
     "products": "Produtos Aerotools",
+    "tooling": "Fabricação de ferramentas e Integração",
     "recruitment": "Carreiras",
     "brochure": "Catálogo PDF"
   },
@@ -31,6 +32,7 @@
     "egi": "EGI - Engenharia",
     "frem": "FREM - Manutenção",
     "mgp": "MGP - Caldeiraria",
+    "tooling": "Fabricação de ferramentas e Integração",
     "aerotools": "Aerotools - Produtos GSE",
     "brochure": "Catálogo PDF",
     "offres": "Vagas de emprego",
@@ -259,7 +261,8 @@
     "ce": "Marcação CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "Intercambiabilidade"
   },
   "footer": {
     "company": {

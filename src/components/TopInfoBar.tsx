@@ -15,6 +15,12 @@ export function TopInfoBar() {
 
   const quickLinks = [
     { 
+      icon: Wrench, 
+      label: t('topBar.tooling'), 
+      href: '/nos-expertises#outillage',
+      color: 'from-emerald-500 to-emerald-600'
+    },
+    { 
       icon: Package, 
       label: t('topBar.products'), 
       href: '/aerotools',

@@ -50,6 +50,7 @@ const mobileNavSections: NavSection[] = [
     items: [
       { key: 'nav.expertises', href: '/nos-expertises' },
       { key: 'nav.caseStudies', href: '/cas-clients' },
+      { key: 'mobileNav.tooling', href: '/nos-expertises#outillage' },
       { key: 'mobileNav.aerotools', href: '/aerotools' },
       { key: 'mobileNav.brochure', href: '/plaquette' },
     ]

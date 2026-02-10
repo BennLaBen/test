@@ -7,6 +7,7 @@
   },
   "topBar": {
     "products": "Produits Aerotools",
+    "tooling": "Fabrication d'outillage & Intégration",
     "recruitment": "Recrutement",
     "brochure": "Plaquette PDF"
   },
@@ -31,6 +32,7 @@
     "egi": "EGI - Bureau d'études",
     "frem": "FREM - Maintenance",
     "mgp": "MGP - Tôlerie",
+    "tooling": "Fabrication d'outillage & Intégration",
     "aerotools": "Aerotools - Produits GSE",
     "brochure": "Plaquette PDF",
     "offres": "Offres d'emploi",
@@ -259,7 +261,8 @@
     "ce": "Marquage CE",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "Interchangeabilité"
   },
   "footer": {
     "company": {

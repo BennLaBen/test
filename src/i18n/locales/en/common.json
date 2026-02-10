@@ -7,6 +7,7 @@
   },
   "topBar": {
     "products": "Aerotools Products",
+    "tooling": "Tooling Manufacturing & Integration",
     "recruitment": "Careers",
     "brochure": "PDF Brochure"
   },
@@ -31,6 +32,7 @@
     "egi": "EGI - Engineering",
     "frem": "FREM - Maintenance",
     "mgp": "MGP - Sheet Metal",
+    "tooling": "Tooling Manufacturing & Integration",
     "aerotools": "Aerotools - GSE Products",
     "brochure": "PDF Brochure",
     "offres": "Job Offers",
@@ -259,7 +261,8 @@
     "ce": "CE Marking",
     "iso9001": "ISO 9001:2015",
     "en9100": "EN 9100",
-    "en12312": "EN 12312-1"
+    "en12312": "EN 12312-1",
+    "interchangeability": "Interchangeability"
   },
   "footer": {
     "company": {
