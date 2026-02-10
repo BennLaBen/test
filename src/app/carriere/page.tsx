@@ -38,7 +38,7 @@ import {
 import { useTranslation } from 'react-i18next'
 
 const cultureIcons = [Lightbulb, Users, Award, GraduationCap]
-const benefitIcons = [Shield, Heart, Coffee, GraduationCap, Clock, Car]
+const benefitIcons = [Shield, Heart, Coffee, GraduationCap, Building2, Users]
 
 interface Job {
   id: string
@@ -212,8 +212,8 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* ========== SECTION POSTULER - AU-DESSUS DE LA LIGNE DE FLOTTAISON ========== */}
-      <section id="apply-now" className="py-8 sm:py-12 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 relative overflow-hidden">
+      {/* ========== SECTION OFFRES DISPONIBLES - EN PREMIER ========== */}
+      <section id="jobs" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
         {/* Animated background */}
         <div className="absolute inset-0 opacity-20">
           <motion.div
