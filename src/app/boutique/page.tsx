@@ -71,10 +71,10 @@ function HangarDoors() {
             {/* Logo */}
             <motion.div className="relative w-48 h-20 mx-auto mb-8">
               <Image
-                src="/images/aerotools/lledoaerotols-logo.png"
+                src="/images/aerotools/lledo-aerotools-logo.svg"
                 alt="LLEDO Aerotools"
                 fill
-                className="object-contain rounded-lg drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                className="object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                 priority
               />
             </motion.div>

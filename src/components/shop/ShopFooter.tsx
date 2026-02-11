@@ -11,14 +11,12 @@ export function ShopFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="relative h-20 w-64 mb-6">
-               {/* Fond blanc arrondi pour le logo */}
-               <div className="absolute inset-1 bg-white rounded-lg" />
+            <div className="relative h-14 w-56 mb-6">
                <Image 
-                 src="/images/aerotools/lledoaerotols-logo.png"
-                 alt="LLEDO Aerotools GSE Logo"
+                 src="/images/aerotools/lledo-aerotools-logo.svg"
+                 alt="LLEDO Aerotools"
                  fill
-                 className="object-contain object-left relative z-10 rounded-lg"
+                 className="object-contain object-left"
                />
             </div>
             <p className="text-sm text-gray-500 mb-6 max-w-xs leading-relaxed">
