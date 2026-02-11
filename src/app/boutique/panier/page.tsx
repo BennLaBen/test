@@ -24,14 +24,37 @@ export default function CartPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+      const res = await fetch('/api/shop/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            category: item.category,
+            quantity: item.quantity,
+            price_display: item.price_display,
+          })),
+        }),
+      })
 
-    setIsSuccess(true)
-    setIsSubmitting(false)
-    setTimeout(() => {
-      clearQuote()
-    }, 500)
+      if (!res.ok) {
+        const data = await res.json()
+        alert(data.error || 'Erreur lors de l\'envoi')
+        return
+      }
+
+      setIsSuccess(true)
+      setTimeout(() => {
+        clearQuote()
+      }, 500)
+    } catch {
+      alert('Erreur de connexion. Veuillez réessayer.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSuccess) {
