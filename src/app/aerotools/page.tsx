@@ -139,22 +139,14 @@ export default function AerotoolsPage() {
               className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
               <Link
-                href="/aerotools/helicos"
+                href="/boutique"
                 className="group relative overflow-hidden rounded bg-white text-gray-900 px-8 py-4 font-black uppercase tracking-wider text-sm hover:bg-blue-50 transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.5)]"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Configurateur 3D <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  Accéder au catalogue <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </span>
                 {/* Shine effect */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12" />
-              </Link>
-              
-              <Link
-                href="/aerotools/parts"
-                className="px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-wider text-sm hover:bg-white/10 rounded transition-all flex items-center gap-2"
-              >
-                <Package className="h-5 w-5" />
-                Catalogue pièces
               </Link>
               
               <a
