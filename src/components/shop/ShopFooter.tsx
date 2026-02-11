@@ -22,7 +22,7 @@ export function ShopFooter() {
                />
             </div>
             <p className="text-sm text-gray-500 mb-6 max-w-xs leading-relaxed">
-              Division spécialisée du Groupe LLEDO. Fourniture d'équipements de support au sol (GSE) et d'outillages de maintenance aéronautique certifiés.
+              Équipements de support au sol (GSE) et outillages de maintenance aéronautique certifiés. Conception et fabrication française.
             </p>
             <div className="flex gap-4">
               <span className="px-2 py-1 bg-gray-900 border border-gray-800 rounded text-[10px] uppercase tracking-wider text-gray-500">
@@ -40,8 +40,8 @@ export function ShopFooter() {
             <ul className="space-y-3 text-sm">
               <li><Link href="/boutique" className="hover:text-blue-400 transition-colors">Catalogue Complet</Link></li>
               <li><Link href="/boutique/panier" className="hover:text-blue-400 transition-colors">Demander un Devis</Link></li>
-              <li><Link href="/aerotools" className="hover:text-blue-400 transition-colors">À propos d'Aerotools</Link></li>
-              <li><Link href="/" className="hover:text-blue-400 transition-colors">Groupe LLEDO</Link></li>
+              <li><Link href="/aerotools" className="hover:text-blue-400 transition-colors">À propos</Link></li>
+              <li><Link href="/contact" className="hover:text-blue-400 transition-colors">Support technique</Link></li>
             </ul>
           </div>
 

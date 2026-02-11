@@ -30,15 +30,28 @@
     ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["H160"],
-    "usage": ["civil", "offshore"],
+    "compatibility": [
+      "H160"
+    ],
+    "usage": [
+      "civil",
+      "offshore"
+    ],
     "material": "steel-alu",
     "inStock": true,
     "isNew": true,
     "isFeatured": true,
     "datasheetUrl": null,
-    "certifications": ["CE", "EN 12312-1", "Directive Machines 2006/42/CE"],
-    "standards": ["Airbus Helicopters SB", "EASA Part 145", "EN 1915-1"],
+    "certifications": [
+      "CE",
+      "EN 12312-1",
+      "Directive Machines 2006/42/CE"
+    ],
+    "standards": [
+      "Airbus Helicopters SB",
+      "EASA Part 145",
+      "EN 1915-1"
+    ],
     "applications": [
       "Tractage sur piste et taxiway",
       "Manœuvre en hangar de maintenance",
@@ -61,12 +74,27 @@
     "minOrder": 1,
     "warranty": "24 mois pièces et main-d'œuvre",
     "faq": [
-      { "q": "Ce produit est-il compatible avec le H160M Guépard ?", "a": "Oui. La barre est conçue pour l'ensemble de la famille H160, versions civiles et militaires. Contactez-nous pour les adaptations spécifiques Guépard." },
-      { "q": "Quel est le délai de livraison standard ?", "a": "Le délai standard est de 6 à 8 semaines après validation de commande. Un programme accéléré (4 semaines) est disponible sur demande." },
-      { "q": "Proposez-vous une formation à l'utilisation ?", "a": "Oui. Une formation opérateur (½ journée) est incluse à la première livraison. Des sessions complémentaires sont disponibles sur devis." },
-      { "q": "Le fusible de cisaillement est-il remplaçable sur site ?", "a": "Oui. Le remplacement se fait sans outillage spécifique en moins de 5 minutes. Les fusibles de rechange sont fournis par lot de 5." }
+      {
+        "q": "Ce produit est-il compatible avec le H160M Guépard ?",
+        "a": "Oui. La barre est conçue pour l'ensemble de la famille H160, versions civiles et militaires. Contactez-nous pour les adaptations spécifiques Guépard."
+      },
+      {
+        "q": "Quel est le délai de livraison standard ?",
+        "a": "Le délai standard est de 6 à 8 semaines après validation de commande. Un programme accéléré (4 semaines) est disponible sur demande."
+      },
+      {
+        "q": "Proposez-vous une formation à l'utilisation ?",
+        "a": "Oui. Une formation opérateur (½ journée) est incluse à la première livraison. Des sessions complémentaires sont disponibles sur devis."
+      },
+      {
+        "q": "Le fusible de cisaillement est-il remplaçable sur site ?",
+        "a": "Oui. Le remplacement se fait sans outillage spécifique en moins de 5 minutes. Les fusibles de rechange sont fournis par lot de 5."
+      }
     ],
-    "boughtTogether": ["RL-R125", "MT-KIT-H125"]
+    "boughtTogether": [
+      "RL-R125",
+      "MT-KIT-H125"
+    ]
   },
   {
     "id": "BR-H175",
@@ -94,15 +122,28 @@
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["H175"],
-    "usage": ["civil", "offshore", "sar"],
+    "compatibility": [
+      "H175"
+    ],
+    "usage": [
+      "civil",
+      "offshore",
+      "sar"
+    ],
     "material": "steel",
     "inStock": true,
     "isNew": false,
     "isFeatured": false,
     "datasheetUrl": null,
-    "certifications": ["CE", "EN 1915-1", "Directive Machines 2006/42/CE"],
-    "standards": ["Airbus Helicopters AMM", "EASA Part 145"],
+    "certifications": [
+      "CE",
+      "EN 1915-1",
+      "Directive Machines 2006/42/CE"
+    ],
+    "standards": [
+      "Airbus Helicopters AMM",
+      "EASA Part 145"
+    ],
     "applications": [
       "Tractage sur piste et héliport offshore",
       "Remorquage en hangar de maintenance lourde",
@@ -122,10 +163,19 @@
     "minOrder": 1,
     "warranty": "24 mois pièces et main-d'œuvre",
     "faq": [
-      { "q": "La pompe hydraulique est-elle réparable sur site ?", "a": "Oui. Le kit de maintenance hydraulique (joints, clapets) est disponible et permet une intervention sur site en moins d'une heure." },
-      { "q": "Existe-t-il une version pour navire ?", "a": "Oui. Une version marine avec traitement anti-corrosion renforcé (zingage + peinture marine) est disponible sur commande spécifique." }
+      {
+        "q": "La pompe hydraulique est-elle réparable sur site ?",
+        "a": "Oui. Le kit de maintenance hydraulique (joints, clapets) est disponible et permet une intervention sur site en moins d'une heure."
+      },
+      {
+        "q": "Existe-t-il une version pour navire ?",
+        "a": "Oui. Une version marine avec traitement anti-corrosion renforcé (zingage + peinture marine) est disponible sur commande spécifique."
+      }
     ],
-    "boughtTogether": ["BR-H160", "GSE-GPU-28V"]
+    "boughtTogether": [
+      "BR-H160",
+      "GSE-GPU-28V"
+    ]
   },
   {
     "id": "BR-NH90-01",
@@ -148,19 +198,31 @@
       "Poids": "55 kg",
       "Capacité": "10 tonnes"
     },
-    "image": "/images/products/towbar-nh90.jpg",
+    "image": "/images/products/towbar-nh90.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["NH90"],
-    "usage": ["military", "naval"],
+    "compatibility": [
+      "NH90"
+    ],
+    "usage": [
+      "military",
+      "naval"
+    ],
     "material": "steel-alu",
     "inStock": true,
     "isNew": false,
     "isFeatured": true,
     "datasheetUrl": null,
-    "certifications": ["AQAP 2110", "Directive Machines 2006/42/CE", "STANAG compatible"],
-    "standards": ["NHI AMM/IPC", "NAHEMA GSE Specs"],
+    "certifications": [
+      "AQAP 2110",
+      "Directive Machines 2006/42/CE",
+      "STANAG compatible"
+    ],
+    "standards": [
+      "NHI AMM/IPC",
+      "NAHEMA GSE Specs"
+    ],
     "applications": [
       "Tractage sur pont d'envol (frégate, BPC, porte-hélicoptères)",
       "Manœuvre en hangar naval — espace restreint",
@@ -182,11 +244,23 @@
     "minOrder": 1,
     "warranty": "24 mois — Extension contrat cadre disponible",
     "faq": [
-      { "q": "Ce produit est-il référencé NATO Stock Number ?", "a": "Oui. Le NSN est disponible sur demande. Nous fournissons la documentation OTAN complète (fiche LRU, codification)." },
-      { "q": "La barre est-elle compatible pont d'envol ?", "a": "Oui. Elle est conçue pour résister aux contraintes d'un environnement naval (embruns, vibrations, température -20/+55°C)." },
-      { "q": "Quel conditionnement pour le transport militaire ?", "a": "Caisse bois contreplaqué classe ISPM15, avec mousse PE de calage. Dimensions compatibles palette OTAN 1000x1200." }
+      {
+        "q": "Ce produit est-il référencé NATO Stock Number ?",
+        "a": "Oui. Le NSN est disponible sur demande. Nous fournissons la documentation OTAN complète (fiche LRU, codification)."
+      },
+      {
+        "q": "La barre est-elle compatible pont d'envol ?",
+        "a": "Oui. Elle est conçue pour résister aux contraintes d'un environnement naval (embruns, vibrations, température -20/+55°C)."
+      },
+      {
+        "q": "Quel conditionnement pour le transport militaire ?",
+        "a": "Caisse bois contreplaqué classe ISPM15, avec mousse PE de calage. Dimensions compatibles palette OTAN 1000x1200."
+      }
     ],
-    "boughtTogether": ["GSE-GPU-28V", "GSE-JACK-15T"]
+    "boughtTogether": [
+      "GSE-GPU-28V",
+      "GSE-JACK-15T"
+    ]
   },
   {
     "id": "BR-B332",
@@ -209,12 +283,23 @@
       "Finition": "Jaune Aéro",
       "Poids": "78 kg"
     },
-    "image": "/images/products/towbar-puma.jpg",
+    "image": "/images/products/towbar-puma.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["Super Puma", "Cougar", "Caracal", "AS332", "EC225", "H215"],
-    "usage": ["civil", "military", "offshore"],
+    "compatibility": [
+      "Super Puma",
+      "Cougar",
+      "Caracal",
+      "AS332",
+      "EC225",
+      "H215"
+    ],
+    "usage": [
+      "civil",
+      "military",
+      "offshore"
+    ],
     "material": "steel",
     "inStock": true,
     "isNew": false,
@@ -242,12 +327,18 @@
       "Transport": "Démontable",
       "Capacité": "2.5 tonnes"
     },
-    "image": "/images/products/towbar-gazelle.jpg",
+    "image": "/images/products/towbar-gazelle.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
-    "compatibility": ["Gazelle", "SA341", "SA342"],
-    "usage": ["military"],
+    "compatibility": [
+      "Gazelle",
+      "SA341",
+      "SA342"
+    ],
+    "usage": [
+      "military"
+    ],
     "material": "aluminum",
     "inStock": true,
     "isNew": false,
@@ -275,19 +366,32 @@
       "Matériau": "Acier / Alu",
       "Poids": "35 kg / unité"
     },
-    "image": "/images/products/roller-h125.jpg",
+    "image": "/images/products/roller-h125.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
-    "compatibility": ["H125", "AS350", "AS355", "Ecureuil"],
-    "usage": ["civil"],
+    "compatibility": [
+      "H125",
+      "AS350",
+      "AS355",
+      "Ecureuil"
+    ],
+    "usage": [
+      "civil"
+    ],
     "material": "steel-alu",
     "inStock": true,
     "isNew": false,
     "isFeatured": true,
     "datasheetUrl": null,
-    "certifications": ["CE", "Directive Machines 2006/42/CE"],
-    "standards": ["Airbus Helicopters AMM", "EN 1915-2"],
+    "certifications": [
+      "CE",
+      "Directive Machines 2006/42/CE"
+    ],
+    "standards": [
+      "Airbus Helicopters AMM",
+      "EN 1915-2"
+    ],
     "applications": [
       "Mise sur roues pour maintenance hangar",
       "Déplacement sur aire de stationnement",
@@ -309,10 +413,19 @@
     "minOrder": 1,
     "warranty": "24 mois",
     "faq": [
-      { "q": "Les rollers sont-ils vendus par paire ?", "a": "Oui. Le kit standard comprend une paire de rollers, le timon de direction et la documentation technique. Un kit de pièces de rechange est disponible en option." },
-      { "q": "Peut-on utiliser les rollers sur sol extérieur ?", "a": "Les roues polyuréthane conviennent aux sols lisses (hangar, tarmac). Pour sol non préparé, une option roues gonflables est disponible sur commande." }
+      {
+        "q": "Les rollers sont-ils vendus par paire ?",
+        "a": "Oui. Le kit standard comprend une paire de rollers, le timon de direction et la documentation technique. Un kit de pièces de rechange est disponible en option."
+      },
+      {
+        "q": "Peut-on utiliser les rollers sur sol extérieur ?",
+        "a": "Les roues polyuréthane conviennent aux sols lisses (hangar, tarmac). Pour sol non préparé, une option roues gonflables est disponible sur commande."
+      }
     ],
-    "boughtTogether": ["MT-KIT-H125", "BR-BHHL-01"]
+    "boughtTogether": [
+      "MT-KIT-H125",
+      "BR-BHHL-01"
+    ]
   },
   {
     "id": "RL-R130-02",
@@ -335,12 +448,17 @@
       "Finition": "Zingué / Peint",
       "Poids": "38 kg / unité"
     },
-    "image": "/images/products/roller-h130.jpg",
+    "image": "/images/products/roller-h130.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
-    "compatibility": ["H130", "EC130"],
-    "usage": ["civil"],
+    "compatibility": [
+      "H130",
+      "EC130"
+    ],
+    "usage": [
+      "civil"
+    ],
     "material": "steel",
     "inStock": true,
     "isNew": true,
@@ -368,12 +486,18 @@
       "Kit": "Paire + Timon",
       "Capacité": "2 tonnes"
     },
-    "image": "/images/products/roller-gazelle.jpg",
+    "image": "/images/products/roller-gazelle.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
-    "compatibility": ["Gazelle", "SA341", "SA342"],
-    "usage": ["military"],
+    "compatibility": [
+      "Gazelle",
+      "SA341",
+      "SA342"
+    ],
+    "usage": [
+      "military"
+    ],
     "material": "steel",
     "inStock": false,
     "isNew": false,
@@ -401,19 +525,31 @@
       "Norme": "EN 9100",
       "Calibration": "Certificat inclus"
     },
-    "image": "/images/products/kit-h125.jpg",
+    "image": "/images/products/kit-h125.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
-    "compatibility": ["H125", "AS350", "EC130"],
-    "usage": ["civil"],
+    "compatibility": [
+      "H125",
+      "AS350",
+      "EC130"
+    ],
+    "usage": [
+      "civil"
+    ],
     "material": "composite",
     "inStock": true,
     "isNew": true,
     "isFeatured": true,
     "datasheetUrl": null,
-    "certifications": ["EN 9100", "ISO 9001:2015"],
-    "standards": ["Airbus Helicopters AMM/IPC", "EASA Part 145 App. II"],
+    "certifications": [
+      "EN 9100",
+      "ISO 9001:2015"
+    ],
+    "standards": [
+      "Airbus Helicopters AMM/IPC",
+      "EASA Part 145 App. II"
+    ],
     "applications": [
       "Maintenance de premier niveau (ligne de vol)",
       "Visite périodique 100h / 600h",
@@ -435,11 +571,23 @@
     "minOrder": 1,
     "warranty": "24 mois outils — 12 mois calibration",
     "faq": [
-      { "q": "Le certificat de calibration est-il inclus ?", "a": "Oui. Chaque clé dynamométrique est livrée avec un certificat de calibration traçable. La recalibration annuelle est disponible via notre service métrologie." },
-      { "q": "Peut-on personnaliser le contenu du coffret ?", "a": "Oui. Nous proposons des configurations sur mesure selon votre programme de maintenance. Contactez notre bureau technique pour un devis adapté." },
-      { "q": "Les outils sont-ils remplaçables unitairement ?", "a": "Oui. Chaque outil est référencé individuellement et disponible en pièce de rechange. La mousse de calage peut être recoupée pour intégrer des outils supplémentaires." }
+      {
+        "q": "Le certificat de calibration est-il inclus ?",
+        "a": "Oui. Chaque clé dynamométrique est livrée avec un certificat de calibration traçable. La recalibration annuelle est disponible via notre service métrologie."
+      },
+      {
+        "q": "Peut-on personnaliser le contenu du coffret ?",
+        "a": "Oui. Nous proposons des configurations sur mesure selon votre programme de maintenance. Contactez notre bureau technique pour un devis adapté."
+      },
+      {
+        "q": "Les outils sont-ils remplaçables unitairement ?",
+        "a": "Oui. Chaque outil est référencé individuellement et disponible en pièce de rechange. La mousse de calage peut être recoupée pour intégrer des outils supplémentaires."
+      }
     ],
-    "boughtTogether": ["RL-R125", "MT-STAND-01"]
+    "boughtTogether": [
+      "RL-R125",
+      "MT-STAND-01"
+    ]
   },
   {
     "id": "MT-STAND-01",
@@ -462,12 +610,17 @@
       "Surface": "Plateau caoutchouc",
       "Poids": "28 kg"
     },
-    "image": "/images/products/stand-universal.jpg",
+    "image": "/images/products/stand-universal.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
-    "compatibility": ["Universel"],
-    "usage": ["civil", "military"],
+    "compatibility": [
+      "Universel"
+    ],
+    "usage": [
+      "civil",
+      "military"
+    ],
     "material": "steel",
     "inStock": true,
     "isNew": false,
@@ -495,12 +648,17 @@
       "Poids": "2.5 kg",
       "Couleur": "Gris aéro"
     },
-    "image": "/images/products/blade-protection.jpg",
+    "image": "/images/products/blade-protection.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
-    "compatibility": ["Universel"],
-    "usage": ["civil", "military"],
+    "compatibility": [
+      "Universel"
+    ],
+    "usage": [
+      "civil",
+      "military"
+    ],
     "material": "composite",
     "inStock": true,
     "isNew": false,
@@ -528,12 +686,17 @@
       "Poids": "180 kg",
       "Dimensions": "800 x 500 x 600 mm"
     },
-    "image": "/images/products/gpu-28v.jpg",
+    "image": "/images/products/gpu-28v.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["Universel"],
-    "usage": ["civil", "military"],
+    "compatibility": [
+      "Universel"
+    ],
+    "usage": [
+      "civil",
+      "military"
+    ],
     "material": "steel",
     "inStock": true,
     "isNew": true,
@@ -561,12 +724,20 @@
       "Matériau": "Acier chromé",
       "Poids total": "320 kg"
     },
-    "image": "/images/products/jack-15t.jpg",
+    "image": "/images/products/jack-15t.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
-    "compatibility": ["H175", "H160", "Super Puma", "NH90"],
-    "usage": ["civil", "military"],
+    "compatibility": [
+      "H175",
+      "H160",
+      "Super Puma",
+      "NH90"
+    ],
+    "usage": [
+      "civil",
+      "military"
+    ],
     "material": "steel",
     "inStock": false,
     "isNew": false,

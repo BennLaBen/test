@@ -18,6 +18,23 @@ import { ProductCard } from '@/components/shop/ProductCard'
 const HELICOPTER_IMAGES: Record<string, string> = {
   H160: '/images/aerotools/helicopter-hero.png',
   H175: '/images/aerotools/helicopter-hero1.png',
+  NH90: '/images/aerotools/helicopter-hero2.png',
+  'Super Puma': '/images/aerotools/helicopter-hero1.png',
+  Cougar: '/images/aerotools/helicopter-hero1.png',
+  Caracal: '/images/aerotools/helicopter-hero1.png',
+  AS332: '/images/aerotools/helicopter-hero1.png',
+  EC225: '/images/aerotools/helicopter-hero1.png',
+  H215: '/images/aerotools/helicopter-hero1.png',
+  Gazelle: '/images/aerotools/helicopter-hero.png',
+  SA341: '/images/aerotools/helicopter-hero.png',
+  SA342: '/images/aerotools/helicopter-hero.png',
+  H125: '/images/aerotools/helicopter-hero2.png',
+  AS350: '/images/aerotools/helicopter-hero2.png',
+  AS355: '/images/aerotools/helicopter-hero2.png',
+  Ecureuil: '/images/aerotools/helicopter-hero2.png',
+  H130: '/images/aerotools/helicopter-hero2.png',
+  EC130: '/images/aerotools/helicopter-hero2.png',
+  Universel: '/images/aerotools/helicopter-hero.png',
 }
 
 /* ═══════════════════════════════════════════
