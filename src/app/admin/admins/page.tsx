@@ -206,7 +206,7 @@ export default function AdminsPage() {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
       {/* Toast */}
       <AnimatePresence>
         {toast && (
@@ -233,18 +233,18 @@ export default function AdminsPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between mb-8"
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
       >
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Gestion des administrateurs</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">{admins.length} administrateur{admins.length > 1 ? 's' : ''} enregistré{admins.length > 1 ? 's' : ''}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Gestion des administrateurs</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm sm:text-base">{admins.length} administrateur{admins.length > 1 ? 's' : ''}</p>
         </div>
         <button
           onClick={() => setShowInviteModal(true)}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-medium shadow-lg shadow-blue-500/25 transition-all hover:shadow-blue-500/40"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl font-medium shadow-lg shadow-blue-500/25 transition-all hover:shadow-blue-500/40 w-full sm:w-auto"
         >
           <UserPlus className="w-5 h-5" />
-          Inviter un admin
+          <span>Inviter un admin</span>
         </button>
       </motion.div>
 
@@ -256,7 +256,7 @@ export default function AdminsPage() {
         className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
       >
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[700px]">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Administrateur</th>
@@ -391,8 +391,8 @@ export default function AdminsPage() {
               </div>
 
               {/* Modal Form */}
-              <form onSubmit={handleInvite} className="p-6 space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <form onSubmit={handleInvite} className="p-4 sm:p-6 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Prénom</label>
                     <input
@@ -432,7 +432,7 @@ export default function AdminsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Société</label>
                     <select
