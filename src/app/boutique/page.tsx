@@ -1,387 +1,343 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Bell, Wrench, Clock } from 'lucide-react'
+import { Search, Shield, Award, Truck, Phone, ChevronDown, X, ArrowRight, Zap, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/SEO'
+import { products } from '@/data/aerotools-products'
+import { ProductCard } from '@/components/shop/ProductCard'
+import { CategoryFilter } from '@/components/shop/CategoryFilter'
 
-// --- COMPOSANT HÉLICOPTÈRE ANIMÉ ---
-const AnimatedHelicopter = ({ delay = 0, direction = 1, top = '20%', size = 'md' }: { delay?: number; direction?: number; top?: string; size?: 'sm' | 'md' | 'lg' }) => {
-  const sizes = {
-    sm: 'w-16 h-16',
-    md: 'w-24 h-24',
-    lg: 'w-32 h-32',
-  }
-  
+// ─── HANGAR DOOR COMPONENT ───
+function HangarDoors() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+
+  const leftDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%'])
+  const rightDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '100%'])
+  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1])
+  const contentScale = useTransform(scrollYProgress, [0.3, 0.6], [0.9, 1])
+
   return (
-    <motion.div
-      className={`absolute ${sizes[size]}`}
-      style={{ top }}
-      initial={{ x: direction > 0 ? '-20%' : '120%', opacity: 0 }}
-      animate={{ 
-        x: direction > 0 ? '120vw' : '-20vw',
-        opacity: [0, 1, 1, 1, 0],
-      }}
-      transition={{
-        duration: 12,
-        delay,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-    >
-      <div className={`relative ${direction < 0 ? 'scale-x-[-1]' : ''}`}>
-        <svg viewBox="0 0 100 60" fill="none" className="w-full h-full drop-shadow-[0_10px_30px_rgba(59,130,246,0.3)]">
-          <motion.ellipse
-            cx="50"
-            cy="8"
-            rx="45"
-            ry="3"
-            fill="url(#rotorGradient)"
-            animate={{ scaleX: [1, 0.3, 1] }}
-            transition={{ duration: 0.1, repeat: Infinity }}
-          />
-          <rect x="48" y="8" width="4" height="10" fill="#64748b" />
-          <ellipse cx="35" cy="30" rx="20" ry="15" fill="url(#bodyGradient)" />
-          <ellipse cx="30" cy="28" rx="12" ry="8" fill="#0ea5e9" opacity="0.6" />
-          <path d="M50 25 L85 28 L85 32 L50 35 Z" fill="url(#tailGradient)" />
-          <motion.ellipse
-            cx="88"
-            cy="30"
-            rx="2"
-            ry="8"
-            fill="#94a3b8"
-            animate={{ scaleY: [1, 0.3, 1] }}
-            transition={{ duration: 0.08, repeat: Infinity }}
-          />
-          <rect x="20" y="45" width="30" height="3" rx="1.5" fill="#475569" />
-          <rect x="18" y="42" width="3" height="6" fill="#475569" />
-          <rect x="48" y="42" width="3" height="6" fill="#475569" />
-          <defs>
-            <linearGradient id="rotorGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#cbd5e1" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#94a3b8" stopOpacity="0.3" />
-            </linearGradient>
-            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#1e40af" />
-              <stop offset="100%" stopColor="#1e3a8a" />
-            </linearGradient>
-            <linearGradient id="tailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#1e40af" />
-              <stop offset="100%" stopColor="#3b82f6" />
-            </linearGradient>
-          </defs>
-        </svg>
+    <div ref={ref} className="relative h-[200vh]">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Background - hangar interior */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-slate-900 to-gray-950">
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+          {/* Ambient lights */}
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-500/8 rounded-full blur-[100px]" />
+        </div>
+
+        {/* Content revealed behind doors */}
         <motion.div
-          className="absolute top-1/2 left-1/4 w-2 h-2 bg-red-500 rounded-full"
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        />
+          style={{ opacity: contentOpacity, scale: contentScale }}
+          className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
+        >
+          <div className="text-center">
+            {/* Logo */}
+            <motion.div className="relative w-48 h-20 mx-auto mb-8">
+              <Image
+                src="/images/aerotools/lledoaerotols-logo.jpg"
+                alt="LLEDO Aerotools"
+                fill
+                className="object-contain rounded-lg"
+                priority
+              />
+            </motion.div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter mb-4">
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
+                AEROTOOLS
+              </span>
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+              Outillage aéronautique certifié — Barres de remorquage, rollers hydrauliques et équipements GSE pour hélicoptères civils et militaires.
+            </p>
+            <div className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-blue-400/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+              Catalogue en ligne
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="absolute bottom-16 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ChevronDown className="h-8 w-8 text-blue-400/50" />
+          </motion.div>
+        </motion.div>
+
+        {/* LEFT DOOR */}
         <motion.div
-          className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-green-500 rounded-full"
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
-        />
+          style={{ x: leftDoor }}
+          className="absolute inset-y-0 left-0 w-1/2 z-20"
+        >
+          <div className="h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r-4 border-gray-600 shadow-2xl">
+            {/* Rivets */}
+            <div className="absolute top-8 left-8 grid grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
+              ))}
+            </div>
+            {/* Warning stripes */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
+            {/* Handle */}
+            <div className="absolute top-1/2 right-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
+            {/* Text */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+              <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
+                LLEDO
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* RIGHT DOOR */}
+        <motion.div
+          style={{ x: rightDoor }}
+          className="absolute inset-y-0 right-0 w-1/2 z-20"
+        >
+          <div className="h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l-4 border-gray-600 shadow-2xl">
+            {/* Rivets */}
+            <div className="absolute top-8 right-8 grid grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
+              ))}
+            </div>
+            {/* Warning stripes */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(-45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
+            {/* Handle */}
+            <div className="absolute top-1/2 left-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
+            {/* Text */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+              <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
+                GSE
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
+// ─── TRUST BADGES ───
+function TrustBar() {
+  const badges = [
+    { icon: Shield, text: 'Certifié EN 9100', sub: 'Norme aéronautique' },
+    { icon: Award, text: 'Directive 2006/42/CE', sub: 'Conformité machines' },
+    { icon: Truck, text: 'Livraison mondiale', sub: 'Fret aéronautique' },
+    { icon: Phone, text: 'Support technique', sub: '+33 4 42 02 96 74' },
+  ]
+
+  return (
+    <div className="bg-gray-900/80 border-y border-gray-800">
+      <div className="container mx-auto px-4 py-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {badges.map((b, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-900/30 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <b.icon className="h-5 w-5 text-blue-400" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-white uppercase tracking-wide">{b.text}</p>
+                <p className="text-[10px] text-gray-500">{b.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── MAIN PAGE ───
 export default function BoutiquePage() {
   const { t } = useTranslation('common')
+  const [activeCategory, setActiveCategory] = useState('all')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  const categoryCounts = {
+    towing: products.filter(p => p.category === 'towing').length,
+    handling: products.filter(p => p.category === 'handling').length,
+    maintenance: products.filter(p => p.category === 'maintenance').length,
+  }
+
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = activeCategory === 'all' || p.category === activeCategory
+    const matchesSearch = !searchQuery || 
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.compatibility.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()))
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <>
-      <SEO 
-        title={t('aerotools.pageTitle')} 
-        description={t('aerotools.pageDescription')} 
+      <SEO
+        title="AEROTOOL by LLEDO — Outillage Aéronautique Certifié"
+        description="Catalogue d'outillage aéronautique certifié : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
-        
-        {/* Fond animé avec grille */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-          
-          {/* Nuages/brume animés */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-transparent to-blue-900/20"
-            animate={{ x: ['-50%', '50%'] }}
-            transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
-          />
-          
-          {/* Étoiles/particules */}
-          {[...Array(30)].map((_, i) => (
+      <div className="min-h-screen bg-gray-950 text-white">
+        {/* ═══ HERO — HANGAR OPENING ═══ */}
+        <HangarDoors />
+
+        {/* ═══ TRUST BAR ═══ */}
+        <TrustBar />
+
+        {/* ═══ CATALOGUE SECTION ═══ */}
+        <section id="catalogue" className="relative py-16 sm:py-24">
+          {/* Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900/80 to-transparent" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Section header */}
             <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white/50 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.2, 1, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
-
-          {/* Cercles lumineux */}
-          <motion.div
-            className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{ duration: 10, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{ duration: 8, repeat: Infinity, delay: 2 }}
-          />
-        </div>
-
-        {/* Hélicoptères animés qui traversent l'écran */}
-        <AnimatedHelicopter delay={0} direction={1} top="15%" size="lg" />
-        <AnimatedHelicopter delay={4} direction={-1} top="35%" size="md" />
-        <AnimatedHelicopter delay={8} direction={1} top="55%" size="sm" />
-        <AnimatedHelicopter delay={6} direction={-1} top="75%" size="md" />
-
-        {/* Contenu principal */}
-        <div className="relative z-10 container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center">
-          
-          {/* Bouton retour */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="absolute top-8 left-4 sm:left-8"
-          >
-            <Link
-              href="/aerotools"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
             >
-              <ArrowLeft className="h-4 w-4" />
-              {t('aerotools.backToAerotools')}
-            </Link>
-          </motion.div>
+              <span className="text-xs font-mono uppercase tracking-[0.3em] text-blue-400/60 mb-4 block">
+                Catalogue produits
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight mb-4">
+                <span className="text-white">Équipements </span>
+                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">certifiés</span>
+              </h2>
+              <p className="text-gray-400 max-w-xl mx-auto">
+                Chaque produit est conçu et fabriqué en France, conforme aux normes aéronautiques les plus exigeantes.
+              </p>
+            </motion.div>
 
-          {/* Logo LLEDO Aerotools */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative mb-8"
-          >
-            {/* Cercle pulsant */}
+            {/* Toolbar: Filters + Search */}
             <motion.div
-              className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.5, 0.2, 0.5],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            
-            {/* Icône principale - Hélicoptère stylisé */}
-            <div className="relative w-40 h-40 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border border-blue-400/30 overflow-hidden">
-              {/* Effet scan */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-300/20 to-transparent"
-                animate={{ y: ['-100%', '100%'] }}
-                transition={{ duration: 2, repeat: Infinity }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10"
+            >
+              <CategoryFilter
+                active={activeCategory}
+                onChange={setActiveCategory}
+                counts={categoryCounts}
               />
-              
-              {/* SVG Hélicoptère stylisé */}
-              <svg viewBox="0 0 100 80" fill="none" className="h-24 w-24 relative z-10">
-                {/* Rotor principal animé */}
-                <motion.ellipse
-                  cx="50"
-                  cy="15"
-                  rx="40"
-                  ry="3"
-                  fill="white"
-                  opacity="0.8"
-                  animate={{ scaleX: [1, 0.3, 1] }}
-                  transition={{ duration: 0.15, repeat: Infinity }}
-                />
-                
-                {/* Mât du rotor */}
-                <rect x="48" y="15" width="4" height="12" fill="white" opacity="0.9" />
-                
-                {/* Cabine */}
-                <ellipse cx="40" cy="40" rx="22" ry="18" fill="white" opacity="0.95" />
-                <ellipse cx="35" cy="38" rx="14" ry="10" fill="#60a5fa" opacity="0.7" />
-                
-                {/* Corps arrière */}
-                <path d="M55 35 L85 38 L85 42 L55 45 Z" fill="white" opacity="0.9" />
-                
-                {/* Rotor arrière */}
-                <motion.ellipse
-                  cx="88"
-                  cy="40"
-                  rx="2"
-                  ry="8"
-                  fill="white"
-                  opacity="0.8"
-                  animate={{ scaleY: [1, 0.3, 1] }}
-                  transition={{ duration: 0.1, repeat: Infinity }}
-                />
-                
-                {/* Patins */}
-                <rect x="22" y="58" width="36" height="3" rx="1.5" fill="white" opacity="0.85" />
-                <rect x="20" y="55" width="3" height="6" fill="white" opacity="0.85" />
-                <rect x="55" y="55" width="3" height="6" fill="white" opacity="0.85" />
-              </svg>
-              
-              {/* Badge horloge */}
+
+              {/* Search toggle */}
+              <div className="relative">
+                <AnimatePresence>
+                  {searchOpen ? (
+                    <motion.div
+                      initial={{ width: 40, opacity: 0.5 }}
+                      animate={{ width: 280, opacity: 1 }}
+                      exit={{ width: 40, opacity: 0 }}
+                      className="flex items-center bg-gray-800/60 border border-gray-700 rounded-xl overflow-hidden"
+                    >
+                      <Search className="h-4 w-4 text-gray-400 ml-3 flex-shrink-0" />
+                      <input
+                        type="text"
+                        autoFocus
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Rechercher un produit, hélicoptère..."
+                        className="w-full px-3 py-2.5 bg-transparent text-sm text-white placeholder-gray-500 outline-none"
+                      />
+                      <button
+                        onClick={() => { setSearchOpen(false); setSearchQuery('') }}
+                        className="p-2 text-gray-500 hover:text-white flex-shrink-0"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      onClick={() => setSearchOpen(true)}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-gray-800/50 border border-gray-700/50 rounded-xl text-gray-400 hover:text-white hover:border-gray-600 transition-all text-xs font-bold uppercase tracking-wider"
+                    >
+                      <Search className="h-4 w-4" />
+                      <span className="hidden sm:inline">Rechercher</span>
+                    </motion.button>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+
+            {/* Product Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map((product, idx) => (
+                <ProductCard key={product.id} product={product} index={idx} />
+              ))}
+            </div>
+
+            {/* Empty state */}
+            {filteredProducts.length === 0 && (
               <motion.div
-                className="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg border-2 border-amber-400/50"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-20"
               >
-                <Clock className="h-6 w-6 text-white" />
+                <Search className="h-12 w-12 text-gray-700 mx-auto mb-4" />
+                <p className="text-gray-400 text-lg font-medium mb-2">Aucun produit trouvé</p>
+                <p className="text-gray-600 text-sm">Essayez un autre terme ou changez de catégorie.</p>
               </motion.div>
-            </div>
-          </motion.div>
+            )}
+          </div>
+        </section>
 
-          {/* Titre principal */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-4"
-          >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight mb-2">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
-                LLEDO
-              </span>
-            </h1>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
-                AEROTOOLS
-              </span>
-            </h2>
-          </motion.div>
+        {/* ═══ CTA SECTION ═══ */}
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-900 to-blue-950" />
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
 
-          {/* Sous-titre animé */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-center mb-8"
-          >
-            <motion.p
-              className="text-2xl sm:text-3xl text-blue-300 font-light"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              {t('aerotools.comingSoon')}
-            </motion.p>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-gray-400 text-center max-w-2xl mb-12 text-lg leading-relaxed"
-          >
-            {t('aerotools.comingSoonDescription')}
-          </motion.p>
-
-          {/* Barre de progression animée */}
-          <motion.div
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '100%' }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="w-full max-w-md mb-8"
-          >
-            <div className="h-3 bg-gray-800/50 rounded-full overflow-hidden border border-blue-500/30">
-              <motion.div
-                className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 rounded-full"
-                animate={{
-                  x: ['-100%', '100%'],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                style={{ width: '50%' }}
-              />
-            </div>
-            <p className="text-center text-sm text-blue-400/70 mt-3 font-mono uppercase tracking-widest">
-              {t('aerotools.inDevelopment')}
-            </p>
-          </motion.div>
-
-          {/* Bouton notification */}
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl font-bold uppercase tracking-wider text-white shadow-2xl shadow-blue-500/40 overflow-hidden border border-blue-400/30"
-          >
-            {/* Effet shine */}
+          <div className="container mx-auto px-4 relative z-10 text-center">
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              animate={{ x: ['-200%', '200%'] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-            />
-            
-            <Bell className="h-6 w-6 relative z-10" />
-            <span className="relative z-10 text-lg">{t('aerotools.notifyMe')}</span>
-          </motion.button>
-
-          {/* Features */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center max-w-4xl"
-          >
-            <div className="flex flex-col items-center p-6 bg-slate-800/30 rounded-2xl border border-blue-500/20 backdrop-blur-sm">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/20">
-                <Wrench className="h-8 w-8 text-white" />
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Zap className="h-10 w-10 text-amber-400 mx-auto mb-6" />
+              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight mb-4 text-white">
+                Besoin d'un équipement sur mesure ?
+              </h2>
+              <p className="text-blue-200/70 max-w-xl mx-auto mb-8">
+                Notre bureau d'études conçoit des outillages spécifiques pour votre flotte. Contactez notre équipe pour une étude personnalisée.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-xl font-black uppercase tracking-wider text-sm hover:bg-blue-50 transition-colors shadow-xl"
+                >
+                  Demander un devis
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/aerotools"
+                  className="inline-flex items-center gap-2 px-6 py-4 border border-blue-400/30 text-blue-300 rounded-xl font-bold uppercase tracking-wider text-sm hover:bg-blue-800/30 transition-colors"
+                >
+                  <FileText className="h-4 w-4" />
+                  Voir nos certifications
+                </Link>
               </div>
-              <h3 className="text-white font-bold mb-2">{t('aerotools.feature1Title')}</h3>
-              <p className="text-sm text-gray-400">{t('aerotools.feature1Desc')}</p>
-            </div>
-            
-            <div className="flex flex-col items-center p-6 bg-slate-800/30 rounded-2xl border border-blue-500/20 backdrop-blur-sm">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-600 to-cyan-800 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/20">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 text-white">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              <h3 className="text-white font-bold mb-2">{t('aerotools.feature2Title')}</h3>
-              <p className="text-sm text-gray-400">{t('aerotools.feature2Desc')}</p>
-            </div>
-            
-            <div className="flex flex-col items-center p-6 bg-slate-800/30 rounded-2xl border border-blue-500/20 backdrop-blur-sm">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-purple-500/20">
-                <Clock className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-white font-bold mb-2">{t('aerotools.feature3Title')}</h3>
-              <p className="text-sm text-gray-400">{t('aerotools.feature3Desc')}</p>
-            </div>
-          </motion.div>
-
-        </div>
+            </motion.div>
+          </div>
+        </section>
       </div>
     </>
   )

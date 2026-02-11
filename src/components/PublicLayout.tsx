@@ -11,9 +11,10 @@ import { FloatingCTA } from '@/components/FloatingCTA'
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isAdminPage = pathname?.startsWith('/admin')
+  const isShopPage = pathname?.startsWith('/boutique')
 
-  // Don't show public navigation on admin pages
-  if (isAdminPage) {
+  // Don't show public navigation on admin or shop pages (shop has its own layout)
+  if (isAdminPage || isShopPage) {
     return <>{children}</>
   }
 
