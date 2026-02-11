@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ShoppingBag, Check, Zap } from 'lucide-react'
 import { useQuote } from '@/contexts/QuoteContext'
 import { useState } from 'react'
@@ -84,23 +85,32 @@ export function ProductCard({ product, index = 0 }: { product: CardProduct; inde
               </span>
             </div>
 
-            {/* Center icon placeholder */}
+            {/* Product image or placeholder */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.1, rotate: 2 }}
-                transition={{ type: 'spring', stiffness: 200 }}
-              >
-                <svg viewBox="0 0 100 80" fill="none" className="h-28 w-28 text-gray-600 group-hover:text-blue-400/80 transition-colors duration-700">
-                  <ellipse cx="50" cy="15" rx="40" ry="3" fill="currentColor" opacity="0.4" />
-                  <rect x="48" y="15" width="4" height="12" fill="currentColor" opacity="0.6" />
-                  <ellipse cx="40" cy="40" rx="22" ry="18" fill="currentColor" opacity="0.5" />
-                  <path d="M55 35 L85 38 L85 42 L55 45 Z" fill="currentColor" opacity="0.4" />
-                  <rect x="22" y="58" width="36" height="3" rx="1.5" fill="currentColor" opacity="0.5" />
-                </svg>
-                {/* Glow ring */}
-                <div className="absolute inset-0 -m-8 border border-dashed border-blue-500/0 group-hover:border-blue-500/20 rounded-full transition-all duration-700" />
-              </motion.div>
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              ) : (
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.1, rotate: 2 }}
+                  transition={{ type: 'spring', stiffness: 200 }}
+                >
+                  <svg viewBox="0 0 100 80" fill="none" className="h-28 w-28 text-gray-600 group-hover:text-blue-400/80 transition-colors duration-700">
+                    <ellipse cx="50" cy="15" rx="40" ry="3" fill="currentColor" opacity="0.4" />
+                    <rect x="48" y="15" width="4" height="12" fill="currentColor" opacity="0.6" />
+                    <ellipse cx="40" cy="40" rx="22" ry="18" fill="currentColor" opacity="0.5" />
+                    <path d="M55 35 L85 38 L85 42 L55 45 Z" fill="currentColor" opacity="0.4" />
+                    <rect x="22" y="58" width="36" height="3" rx="1.5" fill="currentColor" opacity="0.5" />
+                  </svg>
+                  <div className="absolute inset-0 -m-8 border border-dashed border-blue-500/0 group-hover:border-blue-500/20 rounded-full transition-all duration-700" />
+                </motion.div>
+              )}
             </div>
 
             {/* Reference tag */}
