@@ -112,8 +112,21 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
     const resetUrl = `${baseUrl}/admin/reset-password?token=${resetToken}`
     
-    // TODO: Send password reset email
-    console.log(`[DEV] Password reset URL for ${email}: ${resetUrl}`)
+    // Send password reset email
+    const { sendEmail } = await import('@/lib/email/mailer')
+    const { getPasswordResetEmail } = await import('@/lib/email/templates')
+    const template = getPasswordResetEmail({
+      firstName: admin.firstName,
+      resetUrl,
+      expiresIn: '1 heure',
+    })
+    const emailSent = await sendEmail({
+      to: admin.email,
+      subject: template.subject,
+      html: template.html,
+      text: template.text,
+    })
+    console.log(`[forgot-password] Email sent to ${email}: ${emailSent}`)
     
     return NextResponse.json({
       success: true,
