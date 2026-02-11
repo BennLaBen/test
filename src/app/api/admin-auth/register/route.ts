@@ -13,8 +13,10 @@ const registerSchema = z.object({
 })
 
 export async function POST(request: NextRequest) {
+  console.log('[register] ===== REGISTER API CALLED =====')
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown'
   const userAgent = request.headers.get('user-agent')
+  console.log(`[register] IP: ${ip}, UA: ${userAgent?.substring(0, 50)}`)
   
   try {
     // Verify super admin authentication

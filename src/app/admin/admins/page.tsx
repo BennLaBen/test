@@ -85,27 +85,35 @@ export default function AdminsPage() {
 
   async function handleInvite(e: React.FormEvent) {
     e.preventDefault()
+    console.log('[DEBUG] handleInvite called, formData:', formData)
     setInviting(true)
 
     try {
+      console.log('[DEBUG] Sending POST to /api/admin-auth/register...')
       const res = await fetch('/api/admin-auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
+      console.log('[DEBUG] Response status:', res.status)
 
       const data = await res.json()
+      console.log('[DEBUG] Response data:', data)
 
       if (!res.ok) {
         setToast({ type: 'error', message: data.error || 'Erreur lors de l\'invitation' })
         return
       }
 
-      setToast({ type: 'success', message: `Invitation envoyée à ${formData.email}` })
+      const msg = data.emailSent 
+        ? `Invitation envoyée à ${formData.email}` 
+        : `Compte créé pour ${formData.email} mais l'email n'a pas pu être envoyé`
+      setToast({ type: data.emailSent ? 'success' : 'error', message: msg })
       setShowInviteModal(false)
       setFormData({ email: '', firstName: '', lastName: '', company: 'MPEB', role: 'ADMIN' })
       fetchAdmins()
-    } catch {
+    } catch (err) {
+      console.error('[DEBUG] Fetch error:', err)
       setToast({ type: 'error', message: 'Erreur de connexion' })
     } finally {
       setInviting(false)
