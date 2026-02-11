@@ -10,16 +10,19 @@ let _transporter: Transporter | null = null
 function getTransporter(): Transporter {
   if (!_transporter) {
     const host = (process.env.SMTP_HOST || '').trim()
-    const port = parseInt((process.env.SMTP_PORT || '587').trim())
-    const secure = (process.env.SMTP_SECURE || '').trim() === 'true'
+    const port = parseInt((process.env.SMTP_PORT || '465').trim())
+    const secure = port === 465 ? true : (process.env.SMTP_SECURE || '').trim() === 'true'
     const user = (process.env.SMTP_USER || '').trim()
     const pass = (process.env.SMTP_PASS || '').trim()
-    console.log(`[mailer] Creating transporter: host=${host}, port=${port}, user=${user}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
+    console.log(`[mailer] Creating transporter: host=${host}, port=${port}, secure=${secure}, user=${user}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
     _transporter = nodemailer.createTransport({
       host,
       port,
       secure,
       auth: { user, pass },
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 15000,
     })
   }
   return _transporter
