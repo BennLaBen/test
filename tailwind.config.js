@@ -86,6 +86,9 @@ module.exports = {
         'slide-down': 'slideDown 0.5s ease-out',
         'scale-in': 'scaleIn 0.3s ease-out',
         'parallax': 'parallax 20s linear infinite',
+        // AEROTOOL marketplace
+        'at-glow-pulse': 'atGlowPulse 2s ease-in-out infinite',
+        'at-scan': 'atScan 3s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -108,10 +111,39 @@ module.exports = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        // AEROTOOL marketplace
+        atGlowPulse: {
+          '0%, 100%': { boxShadow: '0 0 15px rgba(37, 99, 235, 0.15)' },
+          '50%': { boxShadow: '0 0 30px rgba(37, 99, 235, 0.30)' },
+        },
+        atScan: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      // AEROTOOL — Glow box-shadows as Tailwind utilities
+      boxShadow: {
+        'at-sm': '0 1px 3px rgba(0, 0, 0, 0.3)',
+        'at-md': '0 4px 12px rgba(0, 0, 0, 0.4)',
+        'at-lg': '0 10px 30px rgba(0, 0, 0, 0.5)',
+        'at-glow-blue-sm': '0 0 15px rgba(37, 99, 235, 0.15)',
+        'at-glow-blue-md': '0 0 30px rgba(37, 99, 235, 0.20)',
+        'at-glow-blue-lg': '0 0 50px rgba(37, 99, 235, 0.30)',
+        'at-glow-green': '0 0 20px rgba(34, 197, 94, 0.30)',
+        'at-glow-amber': '0 0 20px rgba(245, 158, 11, 0.25)',
+        'at-glow-red': '0 0 20px rgba(239, 68, 68, 0.30)',
+      },
+      // AEROTOOL — Radius aliases
+      borderRadius: {
+        'at-sm': '0.375rem',
+        'at-md': '0.5rem',
+        'at-lg': '0.75rem',
+        'at-xl': '1rem',
+        'at-2xl': '1.25rem',
       },
     },
   },

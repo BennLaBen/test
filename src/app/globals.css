@@ -5,6 +5,10 @@
 /* Import Design System */
 @import '../styles/design-system.css';
 
+/* Import AEROTOOL Marketplace Tokens & Components */
+@import '../styles/aerotool-tokens.css';
+@import '../styles/aerotool-components.css';
+
 /* ============================================
    HEADER HEIGHT & LAYOUT COMPENSATION
    Solution globale pour éviter que le header cache le contenu
