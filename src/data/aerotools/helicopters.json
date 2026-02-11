@@ -1,0 +1,338 @@
+{
+  "manufacturers": [
+    {
+      "id": "airbus",
+      "name": "Airbus Helicopters",
+      "logo": "/images/manufacturers/airbus.svg",
+      "country": "FR"
+    },
+    {
+      "id": "leonardo",
+      "name": "Leonardo Helicopters",
+      "logo": "/images/manufacturers/leonardo.svg",
+      "country": "IT"
+    },
+    {
+      "id": "bell",
+      "name": "Bell Textron",
+      "logo": "/images/manufacturers/bell.svg",
+      "country": "US"
+    },
+    {
+      "id": "sikorsky",
+      "name": "Sikorsky (Lockheed Martin)",
+      "logo": "/images/manufacturers/sikorsky.svg",
+      "country": "US"
+    }
+  ],
+  "helicopters": [
+    {
+      "id": "h160",
+      "slug": "airbus-h160",
+      "manufacturer": "airbus",
+      "name": "H160",
+      "designations": ["H160", "H160M"],
+      "category": "medium",
+      "specs": {
+        "mtow": 6050,
+        "maxSpeed": 325,
+        "range": 850,
+        "passengers": 12,
+        "crew": 2,
+        "engines": 2,
+        "landingGear": "retractable",
+        "length": 14.44,
+        "height": 4.45,
+        "rotorDiameter": 13.25
+      },
+      "zones": [
+        {
+          "id": "nose-gear",
+          "name": "Train avant",
+          "description": "Point d'attache pour barres de remorquage et équipements de manutention avant.",
+          "position": { "x": 85, "y": 75, "z": 2 },
+          "compatibleCategories": ["towbar", "jack", "wheel"]
+        },
+        {
+          "id": "main-gear-left",
+          "name": "Train principal gauche",
+          "description": "Roue principale gauche — vérins, cales, protections.",
+          "position": { "x": 35, "y": 80, "z": -1.5 },
+          "compatibleCategories": ["jack", "wheel", "stand"]
+        },
+        {
+          "id": "main-gear-right",
+          "name": "Train principal droit",
+          "description": "Roue principale droite — vérins, cales, protections.",
+          "position": { "x": 35, "y": 80, "z": 1.5 },
+          "compatibleCategories": ["jack", "wheel", "stand"]
+        },
+        {
+          "id": "tail",
+          "name": "Queue",
+          "description": "Support et protection de la poutre de queue.",
+          "position": { "x": -15, "y": 60, "z": 0 },
+          "compatibleCategories": ["stand", "cover"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/h160-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/h160-1.jpg",
+          "/images/helicopters/h160-2.jpg",
+          "/images/helicopters/h160-3.jpg"
+        ],
+        "model3d": "/models/h160.glb"
+      },
+      "description": "L'Airbus H160 est un hélicoptère biturbine de nouvelle génération, alliant performances, sécurité et faible empreinte environnementale. Son train d'atterrissage rétractable et ses rotors Blue Edge en font une référence du segment medium.",
+      "inService": true
+    },
+    {
+      "id": "h145",
+      "slug": "airbus-h145",
+      "manufacturer": "airbus",
+      "name": "H145",
+      "designations": ["H145", "EC145", "BK117 D2", "EC145 T2"],
+      "category": "light",
+      "specs": {
+        "mtow": 3800,
+        "maxSpeed": 268,
+        "range": 680,
+        "passengers": 9,
+        "crew": 2,
+        "engines": 2,
+        "landingGear": "skid",
+        "length": 13.64,
+        "height": 3.96,
+        "rotorDiameter": 11.0
+      },
+      "zones": [
+        {
+          "id": "front-skid",
+          "name": "Patins avant",
+          "description": "Point d'attache sur les patins avant pour barres et roues de manutention.",
+          "position": { "x": 70, "y": 85, "z": 0 },
+          "compatibleCategories": ["towbar", "wheel", "dolly"]
+        },
+        {
+          "id": "rear-skid",
+          "name": "Patins arrière",
+          "description": "Point d'attache sur les patins arrière.",
+          "position": { "x": 30, "y": 85, "z": 0 },
+          "compatibleCategories": ["wheel", "dolly", "stand"]
+        },
+        {
+          "id": "belly",
+          "name": "Ventre",
+          "description": "Zone centrale pour vérins de levage.",
+          "position": { "x": 50, "y": 90, "z": 0 },
+          "compatibleCategories": ["jack"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/h145-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/h145-1.jpg",
+          "/images/helicopters/h145-2.jpg"
+        ],
+        "model3d": "/models/h145.glb"
+      },
+      "description": "Le H145 est l'hélicoptère léger bimoteur le plus polyvalent d'Airbus. Utilisé pour les missions EMS, offshore et VIP, il dispose de patins permettant une grande flexibilité d'équipement sol.",
+      "inService": true
+    },
+    {
+      "id": "h125",
+      "slug": "airbus-h125",
+      "manufacturer": "airbus",
+      "name": "H125",
+      "designations": ["H125", "AS350", "Écureuil", "AStar"],
+      "category": "light",
+      "specs": {
+        "mtow": 2250,
+        "maxSpeed": 287,
+        "range": 666,
+        "passengers": 5,
+        "crew": 1,
+        "engines": 1,
+        "landingGear": "skid",
+        "length": 12.94,
+        "height": 3.34,
+        "rotorDiameter": 10.69
+      },
+      "zones": [
+        {
+          "id": "front-skid",
+          "name": "Patins avant",
+          "description": "Fixation avant pour barres de remorquage légères.",
+          "position": { "x": 75, "y": 88, "z": 0 },
+          "compatibleCategories": ["towbar", "wheel"]
+        },
+        {
+          "id": "rear-skid",
+          "name": "Patins arrière",
+          "description": "Fixation arrière pour roues et chariots.",
+          "position": { "x": 25, "y": 88, "z": 0 },
+          "compatibleCategories": ["wheel", "dolly"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/h125-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/h125-1.jpg"
+        ],
+        "model3d": "/models/h125.glb"
+      },
+      "description": "L'H125 (ex-AS350 Écureuil) est l'hélicoptère monomoteur le plus vendu au monde. Sa fiabilité légendaire et sa polyvalence en font le choix privilégié pour le travail aérien, le tourisme et les missions utilitaires.",
+      "inService": true
+    },
+    {
+      "id": "h175",
+      "slug": "airbus-h175",
+      "manufacturer": "airbus",
+      "name": "H175",
+      "designations": ["H175", "EC175"],
+      "category": "medium",
+      "specs": {
+        "mtow": 7500,
+        "maxSpeed": 310,
+        "range": 1260,
+        "passengers": 16,
+        "crew": 2,
+        "engines": 2,
+        "landingGear": "retractable",
+        "length": 15.55,
+        "height": 4.96,
+        "rotorDiameter": 14.8
+      },
+      "zones": [
+        {
+          "id": "nose-gear",
+          "name": "Train avant",
+          "description": "Train avant rétractable — barres et vérins spécifiques.",
+          "position": { "x": 88, "y": 78, "z": 2 },
+          "compatibleCategories": ["towbar", "jack"]
+        },
+        {
+          "id": "main-gear-left",
+          "name": "Train principal gauche",
+          "description": "Roue principale gauche.",
+          "position": { "x": 40, "y": 82, "z": -2 },
+          "compatibleCategories": ["jack", "wheel", "stand"]
+        },
+        {
+          "id": "main-gear-right",
+          "name": "Train principal droit",
+          "description": "Roue principale droite.",
+          "position": { "x": 40, "y": 82, "z": 2 },
+          "compatibleCategories": ["jack", "wheel", "stand"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/h175-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/h175-1.jpg"
+        ],
+        "model3d": "/models/h175.glb"
+      },
+      "description": "Le H175 est le fer de lance d'Airbus dans le segment super-medium. Conçu pour l'offshore pétrolier et gazier, il offre une capacité exceptionnelle et une autonomie étendue.",
+      "inService": true
+    },
+    {
+      "id": "aw139",
+      "slug": "leonardo-aw139",
+      "manufacturer": "leonardo",
+      "name": "AW139",
+      "designations": ["AW139"],
+      "category": "medium",
+      "specs": {
+        "mtow": 7000,
+        "maxSpeed": 310,
+        "range": 1060,
+        "passengers": 15,
+        "crew": 2,
+        "engines": 2,
+        "landingGear": "retractable",
+        "length": 16.66,
+        "height": 4.98,
+        "rotorDiameter": 13.8
+      },
+      "zones": [
+        {
+          "id": "nose-gear",
+          "name": "Train avant",
+          "description": "Train avant tricycle rétractable.",
+          "position": { "x": 85, "y": 75, "z": 1.8 },
+          "compatibleCategories": ["towbar", "jack"]
+        },
+        {
+          "id": "main-gear-left",
+          "name": "Train principal gauche",
+          "description": "Train principal gauche.",
+          "position": { "x": 38, "y": 80, "z": -1.8 },
+          "compatibleCategories": ["jack", "stand"]
+        },
+        {
+          "id": "main-gear-right",
+          "name": "Train principal droit",
+          "description": "Train principal droit.",
+          "position": { "x": 38, "y": 80, "z": 1.8 },
+          "compatibleCategories": ["jack", "stand"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/aw139-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/aw139-1.jpg"
+        ],
+        "model3d": "/models/aw139.glb"
+      },
+      "description": "Le Leonardo AW139 est un hélicoptère biturbine medium reconnu pour ses performances et sa polyvalence. Leader du segment offshore et EMS, il équipe de nombreuses flottes civiles et parapubliques.",
+      "inService": true
+    },
+    {
+      "id": "bell412",
+      "slug": "bell-412",
+      "manufacturer": "bell",
+      "name": "Bell 412",
+      "designations": ["412", "412EP", "412EPI", "Subaru Bell 412EPX"],
+      "category": "medium",
+      "specs": {
+        "mtow": 5397,
+        "maxSpeed": 259,
+        "range": 745,
+        "passengers": 13,
+        "crew": 2,
+        "engines": 2,
+        "landingGear": "skid",
+        "length": 17.12,
+        "height": 4.57,
+        "rotorDiameter": 14.02
+      },
+      "zones": [
+        {
+          "id": "front-skid",
+          "name": "Patins avant",
+          "description": "Patins avant — barres et roues.",
+          "position": { "x": 72, "y": 86, "z": 0 },
+          "compatibleCategories": ["towbar", "wheel", "dolly"]
+        },
+        {
+          "id": "rear-skid",
+          "name": "Patins arrière",
+          "description": "Patins arrière.",
+          "position": { "x": 28, "y": 86, "z": 0 },
+          "compatibleCategories": ["wheel", "dolly", "stand"]
+        }
+      ],
+      "images": {
+        "thumbnail": "/images/helicopters/bell412-thumb.jpg",
+        "gallery": [
+          "/images/helicopters/bell412-1.jpg"
+        ],
+        "model3d": "/models/bell412.glb"
+      },
+      "description": "Le Bell 412 est un hélicoptère utilitaire biturbine robuste et éprouvé. Très répandu dans les missions de transport, travail aérien et opérations militaires/parapubliques.",
+      "inService": true
+    }
+  ]
+}
