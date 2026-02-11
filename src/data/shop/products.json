@@ -14,14 +14,20 @@
     ],
     "specs": {
       "Compatibilité": "Airbus H160",
-      "Poids": "45 kg",
-      "Longueur": "4.2 m",
-      "Matériau": "Acier HR / Alu 7075",
-      "Certifications": "CE, EN 12312",
-      "Capacité": "7.5 tonnes"
+      "Poids": "40 kg env.",
+      "Longueur": "3352 mm",
+      "Matériau": "Aluminium aéronautique",
+      "Certifications": "CE, ISO 9667",
+      "Capacité traction": "1720 daN",
+      "Capacité virage": "1865 Nm"
     },
-    "image": "/images/products/towbar-h160.jpg",
-    "gallery": [],
+    "image": "/images/products/barre-h160-01.jpg",
+    "gallery": [
+      "/images/products/barre-h160-02.jpg",
+      "/images/products/barre-h160-03.jpg",
+      "/images/products/barre-h160-04.jpg",
+      "/images/products/barre-h160-05.jpg"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": ["H160"],
@@ -77,13 +83,14 @@
     ],
     "specs": {
       "Compatibilité": "Airbus H175",
-      "Capacité": "8 tonnes",
-      "Type": "Hydraulique",
-      "Matériau": "Acier HR",
-      "Norme": "EN 1915",
-      "Poids": "62 kg"
+      "Poids": "65 kg env.",
+      "Longueur": "3666 mm",
+      "Matériau": "Aluminium aéronautique",
+      "Certifications": "CE, ISO 9667",
+      "Capacité traction": "2000 daN",
+      "Capacité virage": "2500 Nm"
     },
-    "image": "/images/products/towbar-h175.jpg",
+    "image": "/images/products/barre-h175-01.jpg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
