@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { Search, Shield, Award, Truck, Phone, ChevronDown, X, ArrowRight, Zap, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/SEO'
-import { products } from '@/data/aerotools-products'
+import { products, getCategoryCounts } from '@/lib/shop/data'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { CategoryFilter } from '@/components/shop/CategoryFilter'
 
@@ -44,7 +44,7 @@ function HangarDoors() {
             {/* Logo */}
             <motion.div className="relative w-48 h-20 mx-auto mb-8">
               <Image
-                src="/images/aerotools/lledoaerotols-logo.jpg"
+                src="/images/aerotools/lledoaerotols-logo.png"
                 alt="LLEDO Aerotools"
                 fill
                 className="object-contain rounded-lg"
@@ -167,11 +167,7 @@ export default function BoutiquePage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
 
-  const categoryCounts = {
-    towing: products.filter(p => p.category === 'towing').length,
-    handling: products.filter(p => p.category === 'handling').length,
-    maintenance: products.filter(p => p.category === 'maintenance').length,
-  }
+  const categoryCounts = getCategoryCounts(products)
 
   const filteredProducts = products.filter(p => {
     const matchesCategory = activeCategory === 'all' || p.category === activeCategory

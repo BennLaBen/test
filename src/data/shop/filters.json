@@ -1,0 +1,27 @@
+{
+  "usage": [
+    { "id": "civil", "label": "Civil" },
+    { "id": "military", "label": "Militaire" },
+    { "id": "offshore", "label": "Offshore" },
+    { "id": "sar", "label": "SAR / Sauvetage" },
+    { "id": "naval", "label": "Naval" }
+  ],
+  "material": [
+    { "id": "steel", "label": "Acier" },
+    { "id": "aluminum", "label": "Aluminium" },
+    { "id": "steel-alu", "label": "Acier / Alu" },
+    { "id": "composite", "label": "Composite" }
+  ],
+  "priceRange": [
+    { "id": "low", "label": "€" },
+    { "id": "medium", "label": "€€" },
+    { "id": "high", "label": "€€€" }
+  ],
+  "helicopters": [
+    "H125", "H130", "H160", "H175",
+    "AS350", "AS355", "EC130",
+    "Super Puma", "Cougar", "Caracal",
+    "NH90", "Gazelle",
+    "Universel"
+  ]
+}

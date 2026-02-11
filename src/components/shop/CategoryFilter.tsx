@@ -1,13 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Wrench, GitFork, Settings, LayoutGrid } from 'lucide-react'
+import { Wrench, GitFork, Settings, LayoutGrid, Truck } from 'lucide-react'
 
 const categories = [
   { id: 'all', label: 'Tous', icon: LayoutGrid },
   { id: 'towing', label: 'Remorquage', icon: GitFork },
   { id: 'handling', label: 'Manutention', icon: Wrench },
   { id: 'maintenance', label: 'Maintenance', icon: Settings },
+  { id: 'gse', label: 'GSE', icon: Truck },
 ]
 
 interface CategoryFilterProps {

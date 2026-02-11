@@ -43,7 +43,7 @@ export function ShopNavigation() {
                {/* Fond blanc arrondi pour le logo */}
                <div className="absolute inset-1 bg-white rounded-lg" />
                <Image 
-                 src="/images/aerotools/lledoaerotols-logo.jpg"
+                 src="/images/aerotools/lledoaerotols-logo.png"
                  alt="LLEDO Aerotools GSE Logo"
                  fill
                  className="object-contain relative z-10 rounded-lg"
@@ -65,6 +65,12 @@ export function ShopNavigation() {
             <Link 
               href="/boutique" 
               className={`text-sm font-bold uppercase tracking-wider transition-colors ${pathname === '/boutique' ? 'text-cyan-400' : 'text-slate-400 hover:text-white'}`}
+            >
+              Accueil
+            </Link>
+            <Link 
+              href="/boutique/catalogue" 
+              className={`text-sm font-bold uppercase tracking-wider transition-colors ${pathname === '/boutique/catalogue' ? 'text-cyan-400' : 'text-slate-400 hover:text-white'}`}
             >
               Catalogue
             </Link>
@@ -123,7 +129,14 @@ export function ShopNavigation() {
               className="block py-2 text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Catalogue
+              Accueil
+            </Link>
+            <Link 
+              href="/boutique/catalogue" 
+              className="block py-2 text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-white"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Catalogue complet
             </Link>
             <Link 
               href="/boutique/panier" 

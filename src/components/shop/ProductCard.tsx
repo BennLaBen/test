@@ -2,31 +2,52 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ShoppingBag, Check, Zap, ChevronRight } from 'lucide-react'
-import { Product } from '@/data/aerotools-products'
+import { ShoppingBag, Check, Zap } from 'lucide-react'
 import { useQuote } from '@/contexts/QuoteContext'
 import { useState } from 'react'
+
+interface CardProduct {
+  id: string
+  name: string
+  slug?: string
+  category: string
+  description: string
+  shortDescription?: string
+  features: string[]
+  specs: Record<string, string>
+  image: string
+  price_display?: string
+  priceDisplay?: string
+  compatibility: string[]
+  inStock?: boolean
+  isNew?: boolean
+}
 
 const categoryLabels: Record<string, string> = {
   towing: 'REMORQUAGE',
   handling: 'MANUTENTION',
   maintenance: 'MAINTENANCE',
+  gse: 'GSE',
 }
 
 const categoryColors: Record<string, string> = {
   towing: 'from-blue-600 to-blue-800',
   handling: 'from-cyan-600 to-cyan-800',
   maintenance: 'from-amber-600 to-amber-800',
+  gse: 'from-purple-600 to-purple-800',
 }
 
-export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
+export function ProductCard({ product, index = 0 }: { product: CardProduct; index?: number }) {
   const { addItem } = useQuote()
   const [added, setAdded] = useState(false)
+  const priceLabel = product.priceDisplay || product.price_display || 'SUR DEVIS'
+  const linkSlug = product.slug || product.id
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    addItem(product)
+    // Adapt to legacy QuoteContext which expects Product with price_display
+    addItem({ ...product, price_display: priceLabel } as any)
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)
   }
@@ -38,7 +59,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
     >
-      <Link href={`/boutique/${product.id}`} className="group block">
+      <Link href={`/boutique/${linkSlug}`} className="group block">
         <div className="relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.15)]">
           {/* Image / Visual Zone */}
           <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-800/80 to-gray-900/80 overflow-hidden">
@@ -53,8 +74,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
 
             {/* Category badge */}
             <div className="absolute top-3 left-3 z-10 ml-6">
-              <span className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r ${categoryColors[product.category]} rounded-md shadow-lg`}>
-                {categoryLabels[product.category]}
+              {product.isNew && (
+                <span className="mr-1.5 px-2 py-1 text-[10px] font-black uppercase tracking-widest text-white bg-green-600 rounded-md shadow-lg">
+                  NEW
+                </span>
+              )}
+              <span className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-white bg-gradient-to-r ${categoryColors[product.category] || 'from-gray-600 to-gray-800'} rounded-md shadow-lg`}>
+                {categoryLabels[product.category] || product.category.toUpperCase()}
               </span>
             </div>
 
@@ -117,7 +143,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <div className="flex items-center gap-1.5">
                 <Zap className="h-3.5 w-3.5 text-amber-500" />
                 <span className="text-xs font-black uppercase text-amber-400 tracking-wider">
-                  {product.price_display}
+                  {priceLabel}
                 </span>
               </div>
 

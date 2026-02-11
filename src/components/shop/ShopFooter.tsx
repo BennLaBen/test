@@ -15,7 +15,7 @@ export function ShopFooter() {
                {/* Fond blanc arrondi pour le logo */}
                <div className="absolute inset-1 bg-white rounded-lg" />
                <Image 
-                 src="/images/aerotools/lledoaerotols-logo.jpg"
+                 src="/images/aerotools/lledoaerotols-logo.png"
                  alt="LLEDO Aerotools GSE Logo"
                  fill
                  className="object-contain object-left relative z-10 rounded-lg"

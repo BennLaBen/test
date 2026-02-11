@@ -1,0 +1,569 @@
+[
+  {
+    "id": "BR-H160",
+    "slug": "barre-remorquage-h160",
+    "name": "Barre de Remorquage H160",
+    "category": "towing",
+    "description": "Solution de tractage certifiée pour Airbus Helicopters H160. Conception ergonomique et sécurisée pour opérations sur piste et hangar.",
+    "shortDescription": "Tractage certifié H160 — Verrouillage rapide double sécurité",
+    "features": [
+      "Système de verrouillage rapide double sécurité",
+      "Amortisseur de chocs intégré",
+      "Roues pivotantes haute résistance",
+      "Fusible de cisaillement calibré"
+    ],
+    "specs": {
+      "Compatibilité": "Airbus H160",
+      "Poids": "45 kg",
+      "Longueur": "4.2 m",
+      "Matériau": "Acier HR / Alu 7075",
+      "Certifications": "CE, EN 12312",
+      "Capacité": "7.5 tonnes"
+    },
+    "image": "/images/products/towbar-h160.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["H160"],
+    "usage": ["civil", "offshore"],
+    "material": "steel-alu",
+    "inStock": true,
+    "isNew": true,
+    "isFeatured": true,
+    "datasheetUrl": null,
+    "certifications": ["CE", "EN 12312-1", "Directive Machines 2006/42/CE"],
+    "standards": ["Airbus Helicopters SB", "EASA Part 145", "EN 1915-1"],
+    "applications": [
+      "Tractage sur piste et taxiway",
+      "Manœuvre en hangar de maintenance",
+      "Opérations hélistation offshore",
+      "Positionnement précis sur aire de stationnement"
+    ],
+    "tolerances": {
+      "Charge maximale admissible": "7 500 kg ± 2%",
+      "Angle de braquage": "± 45° en continu",
+      "Effort de traction max.": "≤ 35 daN à vide",
+      "Jeu d'attelage": "< 0.5 mm"
+    },
+    "materials": {
+      "Tube principal": "Acier HR S355J2 — soudure qualifiée EN ISO 3834-2",
+      "Tête d'attelage": "Aluminium 7075-T6 — usiné CN",
+      "Roues": "Polyuréthane 95 Shore A sur jante acier",
+      "Traitement surface": "Grenaillage SA 2.5 + primaire époxy + RAL 1003"
+    },
+    "leadTime": "6 à 8 semaines",
+    "minOrder": 1,
+    "warranty": "24 mois pièces et main-d'œuvre",
+    "faq": [
+      { "q": "Ce produit est-il compatible avec le H160M Guépard ?", "a": "Oui. La barre est conçue pour l'ensemble de la famille H160, versions civiles et militaires. Contactez-nous pour les adaptations spécifiques Guépard." },
+      { "q": "Quel est le délai de livraison standard ?", "a": "Le délai standard est de 6 à 8 semaines après validation de commande. Un programme accéléré (4 semaines) est disponible sur demande." },
+      { "q": "Proposez-vous une formation à l'utilisation ?", "a": "Oui. Une formation opérateur (½ journée) est incluse à la première livraison. Des sessions complémentaires sont disponibles sur devis." },
+      { "q": "Le fusible de cisaillement est-il remplaçable sur site ?", "a": "Oui. Le remplacement se fait sans outillage spécifique en moins de 5 minutes. Les fusibles de rechange sont fournis par lot de 5." }
+    ],
+    "boughtTogether": ["RL-R125", "MT-KIT-H125"]
+  },
+  {
+    "id": "BR-H175",
+    "slug": "barre-remorquage-h175",
+    "name": "Barre de Remorquage H175",
+    "category": "towing",
+    "description": "Barre de manœuvre lourde pour H175. Structure renforcée pour opérations offshore et SAR.",
+    "shortDescription": "Manœuvre lourde H175 — Pompe hydraulique intégrée",
+    "features": [
+      "Tube principal en alliage aéronautique",
+      "Pompe hydraulique manuelle de levage",
+      "Indicateur de verrouillage visuel",
+      "Peinture résistante Skydrol"
+    ],
+    "specs": {
+      "Compatibilité": "Airbus H175",
+      "Capacité": "8 tonnes",
+      "Type": "Hydraulique",
+      "Matériau": "Acier HR",
+      "Norme": "EN 1915",
+      "Poids": "62 kg"
+    },
+    "image": "/images/products/towbar-h175.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["H175"],
+    "usage": ["civil", "offshore", "sar"],
+    "material": "steel",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null,
+    "certifications": ["CE", "EN 1915-1", "Directive Machines 2006/42/CE"],
+    "standards": ["Airbus Helicopters AMM", "EASA Part 145"],
+    "applications": [
+      "Tractage sur piste et héliport offshore",
+      "Remorquage en hangar de maintenance lourde",
+      "Opérations SAR — Positionnement rapide"
+    ],
+    "tolerances": {
+      "Charge maximale": "8 000 kg ± 2%",
+      "Pression hydraulique": "250 bar max.",
+      "Effort de traction": "≤ 40 daN à vide"
+    },
+    "materials": {
+      "Structure": "Acier HR S355J2 — soudure EN ISO 3834-2",
+      "Hydraulique": "Circuit inox 316L — joints Viton",
+      "Finition": "Primaire époxy + PU 2K jaune aéro"
+    },
+    "leadTime": "8 à 10 semaines",
+    "minOrder": 1,
+    "warranty": "24 mois pièces et main-d'œuvre",
+    "faq": [
+      { "q": "La pompe hydraulique est-elle réparable sur site ?", "a": "Oui. Le kit de maintenance hydraulique (joints, clapets) est disponible et permet une intervention sur site en moins d'une heure." },
+      { "q": "Existe-t-il une version pour navire ?", "a": "Oui. Une version marine avec traitement anti-corrosion renforcé (zingage + peinture marine) est disponible sur commande spécifique." }
+    ],
+    "boughtTogether": ["BR-H160", "GSE-GPU-28V"]
+  },
+  {
+    "id": "BR-NH90-01",
+    "slug": "barre-remorquage-nh90",
+    "name": "Barre de Remorquage NH90",
+    "category": "towing",
+    "description": "Équipement militaire pour NH90 (TTH/NFH). Conçu pour les environnements sévères et opérations embarquées.",
+    "shortDescription": "Équipement militaire NH90 — Anti-corrosion marine",
+    "features": [
+      "Repliable pour transport aisé",
+      "Traitement anti-corrosion marine",
+      "Anneau de remorquage OTAN",
+      "Maintenance simplifiée sans outils"
+    ],
+    "specs": {
+      "Compatibilité": "NH90 TTH/NFH",
+      "Classe": "Militaire",
+      "Matériau": "Acier HR / Alu 7075",
+      "NATO Stock Number": "Disponible",
+      "Poids": "55 kg",
+      "Capacité": "10 tonnes"
+    },
+    "image": "/images/products/towbar-nh90.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["NH90"],
+    "usage": ["military", "naval"],
+    "material": "steel-alu",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": true,
+    "datasheetUrl": null,
+    "certifications": ["AQAP 2110", "Directive Machines 2006/42/CE", "STANAG compatible"],
+    "standards": ["NHI AMM/IPC", "NAHEMA GSE Specs"],
+    "applications": [
+      "Tractage sur pont d'envol (frégate, BPC, porte-hélicoptères)",
+      "Manœuvre en hangar naval — espace restreint",
+      "Opérations base terrestre en environnement sévère",
+      "Transport déployable — repliable sans outillage"
+    ],
+    "tolerances": {
+      "Charge maximale": "10 000 kg ± 2%",
+      "Résistance corrosion": "Brouillard salin 1000h (ISO 9227)",
+      "Effort de traction": "≤ 45 daN à vide"
+    },
+    "materials": {
+      "Structure": "Acier HR S355J2 + traitement cataphorèse",
+      "Tête d'attelage": "Aluminium 7075-T6 anodisé dur",
+      "Quincaillerie": "Inox A4 (316L) — qualité marine",
+      "Finition": "Peinture PU 2K olive OTAN ou gris marine"
+    },
+    "leadTime": "10 à 14 semaines",
+    "minOrder": 1,
+    "warranty": "24 mois — Extension contrat cadre disponible",
+    "faq": [
+      { "q": "Ce produit est-il référencé NATO Stock Number ?", "a": "Oui. Le NSN est disponible sur demande. Nous fournissons la documentation OTAN complète (fiche LRU, codification)." },
+      { "q": "La barre est-elle compatible pont d'envol ?", "a": "Oui. Elle est conçue pour résister aux contraintes d'un environnement naval (embruns, vibrations, température -20/+55°C)." },
+      { "q": "Quel conditionnement pour le transport militaire ?", "a": "Caisse bois contreplaqué classe ISPM15, avec mousse PE de calage. Dimensions compatibles palette OTAN 1000x1200." }
+    ],
+    "boughtTogether": ["GSE-GPU-28V", "GSE-JACK-15T"]
+  },
+  {
+    "id": "BR-B332",
+    "slug": "barre-super-puma-cougar",
+    "name": "Barre Super Puma / Cougar",
+    "category": "towing",
+    "description": "La référence pour la famille Super Puma (AS332, EC225, H215, H225). Robustesse éprouvée depuis 30 ans.",
+    "shortDescription": "Famille Super Puma — Référence depuis 30 ans",
+    "features": [
+      "Système universel famille Puma",
+      "Roues larges pour terrain sommaire",
+      "Protection tête d'attelage",
+      "Levier d'assistance au levage"
+    ],
+    "specs": {
+      "Compatibilité": "AS332, EC225, H215, H225",
+      "Charge Max": "11 tonnes",
+      "Longueur": "5.5 m",
+      "Matériau": "Acier haute résistance",
+      "Finition": "Jaune Aéro",
+      "Poids": "78 kg"
+    },
+    "image": "/images/products/towbar-puma.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["Super Puma", "Cougar", "Caracal", "AS332", "EC225", "H215"],
+    "usage": ["civil", "military", "offshore"],
+    "material": "steel",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "BR-BHHL-01",
+    "slug": "barre-remorquage-gazelle",
+    "name": "Barre de Remorquage Gazelle",
+    "category": "towing",
+    "description": "Barre légère et maniable pour hélicoptère Gazelle. Idéale pour les espaces exigus.",
+    "shortDescription": "Ultra-légère Gazelle — Opération solo possible",
+    "features": [
+      "Ultra-légère (structure alu)",
+      "Mise en place par un seul opérateur",
+      "Verrouillage mécanique simple",
+      "Poignées ergonomiques"
+    ],
+    "specs": {
+      "Compatibilité": "SA341/342 Gazelle",
+      "Poids": "25 kg",
+      "Type": "Mécanique",
+      "Matériau": "Aluminium 6061",
+      "Transport": "Démontable",
+      "Capacité": "2.5 tonnes"
+    },
+    "image": "/images/products/towbar-gazelle.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "medium",
+    "compatibility": ["Gazelle", "SA341", "SA342"],
+    "usage": ["military"],
+    "material": "aluminum",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "RL-R125",
+    "slug": "rollers-hydrauliques-ecureuil",
+    "name": "Rollers Hydrauliques Écureuil",
+    "category": "handling",
+    "description": "Système de levage et déplacement pour famille Écureuil (H125, AS350, AS355). Indispensable pour la maintenance en hangar.",
+    "shortDescription": "Levage hydraulique Écureuil — Manuel ou électrique",
+    "features": [
+      "Levage hydraulique manuel ou électrique",
+      "Frein de parc positif",
+      "Garde au sol réglable",
+      "Adaptation rapide sur patins"
+    ],
+    "specs": {
+      "Compatibilité": "H125 / AS350 / AS355",
+      "Capacité": "3 tonnes / paire",
+      "Levée": "150 mm",
+      "Roues": "Bandage Polyuréthane",
+      "Matériau": "Acier / Alu",
+      "Poids": "35 kg / unité"
+    },
+    "image": "/images/products/roller-h125.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "medium",
+    "compatibility": ["H125", "AS350", "AS355", "Ecureuil"],
+    "usage": ["civil"],
+    "material": "steel-alu",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": true,
+    "datasheetUrl": null,
+    "certifications": ["CE", "Directive Machines 2006/42/CE"],
+    "standards": ["Airbus Helicopters AMM", "EN 1915-2"],
+    "applications": [
+      "Mise sur roues pour maintenance hangar",
+      "Déplacement sur aire de stationnement",
+      "Repositionnement en espace restreint",
+      "Opérations de pesée hélicoptère"
+    ],
+    "tolerances": {
+      "Capacité par paire": "3 000 kg ± 3%",
+      "Course de levage": "150 mm ± 5 mm",
+      "Pression de service": "200 bar max."
+    },
+    "materials": {
+      "Châssis": "Acier S235JR — traitement anticorrosion",
+      "Vérin": "Acier chromé dur — joints NBR",
+      "Roues": "Polyuréthane 92 Shore A — Ø125 mm",
+      "Finition": "Peinture époxy jaune RAL 1003"
+    },
+    "leadTime": "4 à 6 semaines",
+    "minOrder": 1,
+    "warranty": "24 mois",
+    "faq": [
+      { "q": "Les rollers sont-ils vendus par paire ?", "a": "Oui. Le kit standard comprend une paire de rollers, le timon de direction et la documentation technique. Un kit de pièces de rechange est disponible en option." },
+      { "q": "Peut-on utiliser les rollers sur sol extérieur ?", "a": "Les roues polyuréthane conviennent aux sols lisses (hangar, tarmac). Pour sol non préparé, une option roues gonflables est disponible sur commande." }
+    ],
+    "boughtTogether": ["MT-KIT-H125", "BR-BHHL-01"]
+  },
+  {
+    "id": "RL-R130-02",
+    "slug": "rollers-hydrauliques-h130",
+    "name": "Rollers Hydrauliques H130",
+    "category": "handling",
+    "description": "Roues de manutention spécifiques pour EC130 / H130. Stabilité accrue pour patins larges.",
+    "shortDescription": "Double vérin H130 — Stabilité patins larges",
+    "features": [
+      "Double vérin de levage",
+      "Barre de liaison sécurisée",
+      "Pompe à double vitesse",
+      "Protection anti-dérapante"
+    ],
+    "specs": {
+      "Compatibilité": "EC130 / H130",
+      "Charge": "3.5 tonnes",
+      "Sécurité": "Clapet anti-retour",
+      "Matériau": "Acier traité",
+      "Finition": "Zingué / Peint",
+      "Poids": "38 kg / unité"
+    },
+    "image": "/images/products/roller-h130.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "medium",
+    "compatibility": ["H130", "EC130"],
+    "usage": ["civil"],
+    "material": "steel",
+    "inStock": true,
+    "isNew": true,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "RL-GAZELLE",
+    "slug": "rollers-gazelle",
+    "name": "Rollers Gazelle",
+    "category": "handling",
+    "description": "Dispositif de mise sur roues pour SA341/342. Compact et fiable pour la maintenance en hangar.",
+    "shortDescription": "Système compact Gazelle — Manivelle mécanique",
+    "features": [
+      "Système compact",
+      "Levage mécanique par vis",
+      "Roues jumelées",
+      "Attache rapide sur tubes patins"
+    ],
+    "specs": {
+      "Compatibilité": "SA341/342 Gazelle",
+      "Poids": "15 kg / unité",
+      "Manœuvre": "Manivelle",
+      "Matériau": "Acier / Fonte",
+      "Kit": "Paire + Timon",
+      "Capacité": "2 tonnes"
+    },
+    "image": "/images/products/roller-gazelle.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "low",
+    "compatibility": ["Gazelle", "SA341", "SA342"],
+    "usage": ["military"],
+    "material": "steel",
+    "inStock": false,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "MT-KIT-H125",
+    "slug": "kit-maintenance-ecureuil",
+    "name": "Kit Outillage Maintenance H125",
+    "category": "maintenance",
+    "description": "Coffret d'outillage spécifique pour la maintenance de premier niveau de la famille Écureuil. Conforme aux préconisations constructeur.",
+    "shortDescription": "Coffret maintenance niveau 1 — Conforme Airbus",
+    "features": [
+      "Coffret ABS renforcé IP67",
+      "Outillage calibré et repéré",
+      "Clés dynamométriques incluses",
+      "Mousse de calage découpée sur mesure"
+    ],
+    "specs": {
+      "Compatibilité": "H125 / AS350 / EC130",
+      "Contenu": "47 pièces",
+      "Coffret": "ABS IP67",
+      "Poids total": "18 kg",
+      "Norme": "EN 9100",
+      "Calibration": "Certificat inclus"
+    },
+    "image": "/images/products/kit-h125.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "medium",
+    "compatibility": ["H125", "AS350", "EC130"],
+    "usage": ["civil"],
+    "material": "composite",
+    "inStock": true,
+    "isNew": true,
+    "isFeatured": true,
+    "datasheetUrl": null,
+    "certifications": ["EN 9100", "ISO 9001:2015"],
+    "standards": ["Airbus Helicopters AMM/IPC", "EASA Part 145 App. II"],
+    "applications": [
+      "Maintenance de premier niveau (ligne de vol)",
+      "Visite périodique 100h / 600h",
+      "Dépannage sur site client",
+      "Formation techniciens en atelier-école"
+    ],
+    "tolerances": {
+      "Précision dynamométrique": "± 4% (EN ISO 6789)",
+      "Calibration": "Certificat COFRAC traçable",
+      "Étanchéité coffret": "IP67 — Immersion 1m / 30min"
+    },
+    "materials": {
+      "Coffret": "ABS haute résistance — mousse PE découpée CN",
+      "Outils": "Chrome-vanadium DIN 3113 / DIN 3110",
+      "Dynamométriques": "Acier allié — mécanisme à déclenchement",
+      "Repérage": "Gravure laser + code couleur par fonction"
+    },
+    "leadTime": "3 à 5 semaines",
+    "minOrder": 1,
+    "warranty": "24 mois outils — 12 mois calibration",
+    "faq": [
+      { "q": "Le certificat de calibration est-il inclus ?", "a": "Oui. Chaque clé dynamométrique est livrée avec un certificat de calibration traçable. La recalibration annuelle est disponible via notre service métrologie." },
+      { "q": "Peut-on personnaliser le contenu du coffret ?", "a": "Oui. Nous proposons des configurations sur mesure selon votre programme de maintenance. Contactez notre bureau technique pour un devis adapté." },
+      { "q": "Les outils sont-ils remplaçables unitairement ?", "a": "Oui. Chaque outil est référencé individuellement et disponible en pièce de rechange. La mousse de calage peut être recoupée pour intégrer des outils supplémentaires." }
+    ],
+    "boughtTogether": ["RL-R125", "MT-STAND-01"]
+  },
+  {
+    "id": "MT-STAND-01",
+    "slug": "treteau-maintenance-universel",
+    "name": "Tréteau de Maintenance Universel",
+    "category": "maintenance",
+    "description": "Tréteau réglable en hauteur pour travaux de maintenance sur composants hélicoptère. Structure tubulaire haute résistance.",
+    "shortDescription": "Tréteau réglable universel — Structure HR",
+    "features": [
+      "Hauteur réglable 800-1400 mm",
+      "Plateau rotatif 360°",
+      "Pieds stabilisateurs escamotables",
+      "Charge max 500 kg"
+    ],
+    "specs": {
+      "Compatibilité": "Universel",
+      "Hauteur": "800–1400 mm",
+      "Charge max": "500 kg",
+      "Matériau": "Acier tubulaire",
+      "Surface": "Plateau caoutchouc",
+      "Poids": "28 kg"
+    },
+    "image": "/images/products/stand-universal.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "low",
+    "compatibility": ["Universel"],
+    "usage": ["civil", "military"],
+    "material": "steel",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "MT-BLADE-PROT",
+    "slug": "protection-pales-universelle",
+    "name": "Protection de Pales Universelle",
+    "category": "maintenance",
+    "description": "Housse de protection rembourrée pour pales de rotor principal. Tissu technique résistant UV et intempéries.",
+    "shortDescription": "Housse pales rotor — UV & intempéries",
+    "features": [
+      "Tissu Cordura 1000D",
+      "Mousse EVA haute densité",
+      "Fixation Velcro ajustable",
+      "Sac de rangement inclus"
+    ],
+    "specs": {
+      "Compatibilité": "Pales jusqu'à 6.5 m",
+      "Matériau": "Cordura 1000D / EVA",
+      "Protection": "UV, pluie, poussière",
+      "Fixation": "Velcro + Sangle",
+      "Poids": "2.5 kg",
+      "Couleur": "Gris aéro"
+    },
+    "image": "/images/products/blade-protection.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "low",
+    "compatibility": ["Universel"],
+    "usage": ["civil", "military"],
+    "material": "composite",
+    "inStock": true,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  },
+  {
+    "id": "GSE-GPU-28V",
+    "slug": "groupe-puissance-28v",
+    "name": "Groupe de Puissance 28V DC",
+    "category": "gse",
+    "description": "Alimentation électrique au sol 28V DC pour démarrage et maintenance hélicoptère. Silencieux et compact.",
+    "shortDescription": "GPU 28V DC — Silencieux, démarrage & maintenance",
+    "features": [
+      "Sortie 28V DC stabilisée",
+      "Courant crête 1500A",
+      "Fonctionnement silencieux <65 dB",
+      "Roulettes et timon de transport"
+    ],
+    "specs": {
+      "Tension": "28V DC",
+      "Courant continu": "500A",
+      "Courant crête": "1500A",
+      "Bruit": "< 65 dB",
+      "Poids": "180 kg",
+      "Dimensions": "800 x 500 x 600 mm"
+    },
+    "image": "/images/products/gpu-28v.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["Universel"],
+    "usage": ["civil", "military"],
+    "material": "steel",
+    "inStock": true,
+    "isNew": true,
+    "isFeatured": true,
+    "datasheetUrl": null
+  },
+  {
+    "id": "GSE-JACK-15T",
+    "slug": "verin-levage-15-tonnes",
+    "name": "Vérin de Levage 15 Tonnes",
+    "category": "gse",
+    "description": "Vérin hydraulique tripode pour levage complet d'hélicoptère. Système synchronisé 3 points avec commande centralisée.",
+    "shortDescription": "Tripode hydraulique 15T — Levage synchronisé 3 points",
+    "features": [
+      "Levage synchronisé 3 points",
+      "Commande centralisée hydraulique",
+      "Indicateurs de charge individuels",
+      "Pieds auto-nivelants"
+    ],
+    "specs": {
+      "Capacité": "15 tonnes (3x5T)",
+      "Course": "600 mm",
+      "Hauteur min": "450 mm",
+      "Commande": "Centralisée",
+      "Matériau": "Acier chromé",
+      "Poids total": "320 kg"
+    },
+    "image": "/images/products/jack-15t.jpg",
+    "gallery": [],
+    "priceDisplay": "SUR DEVIS",
+    "priceRange": "high",
+    "compatibility": ["H175", "H160", "Super Puma", "NH90"],
+    "usage": ["civil", "military"],
+    "material": "steel",
+    "inStock": false,
+    "isNew": false,
+    "isFeatured": false,
+    "datasheetUrl": null
+  }
+]

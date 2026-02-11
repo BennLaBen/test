@@ -1,0 +1,34 @@
+[
+  {
+    "id": "towing",
+    "label": "Barres de remorquage",
+    "slug": "barres-remorquage",
+    "description": "Solutions de tractage certifiées pour hélicoptères civils et militaires",
+    "icon": "GitFork",
+    "count": 5
+  },
+  {
+    "id": "handling",
+    "label": "Rollers & Manutention",
+    "slug": "rollers-manutention",
+    "description": "Systèmes de levage et déplacement hydrauliques pour maintenance hangar",
+    "icon": "Wrench",
+    "count": 3
+  },
+  {
+    "id": "maintenance",
+    "label": "Outillage de maintenance",
+    "slug": "outillage-maintenance",
+    "description": "Équipements spécialisés pour la maintenance aéronautique",
+    "icon": "Settings",
+    "count": 3
+  },
+  {
+    "id": "gse",
+    "label": "Ground Support Equipment",
+    "slug": "ground-support",
+    "description": "Équipements de support au sol pour opérations aéroportuaires",
+    "icon": "Truck",
+    "count": 2
+  }
+]

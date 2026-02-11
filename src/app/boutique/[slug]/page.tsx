@@ -1,217 +1,503 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { products } from '@/data/aerotools-products'
-import { useQuote } from '@/contexts/QuoteContext'
-import { ArrowLeft, Check, Shield, Zap, Box, ShoppingBag, FileText, ChevronRight, Activity } from 'lucide-react'
-import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { getProductBySlug, getRelatedProducts, getBoughtTogether } from '@/lib/shop/data'
+import { useQuote } from '@/contexts/QuoteContext'
+import {
+  Check, Shield, ShoppingBag, FileText, ChevronRight, ChevronDown,
+  Package, Phone, Clock, Award, Truck, MessageSquare, ArrowRight,
+  Box, Zap, Activity, Download, Users, Ruler, Layers
+} from 'lucide-react'
+import Link from 'next/link'
+import { Breadcrumbs } from '@/components/shop/Breadcrumbs'
+import { ProductCard } from '@/components/shop/ProductCard'
 
-// Custom Helicopter Icon Component
-const HelicopterIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M3 10h18" /> {/* Rotor */}
-    <path d="M12 10v3" /> {/* Axe */}
-    <path d="M4 15h13a3 3 0 0 0 3-3v-2" /> {/* Queue et Corps haut */}
-    <path d="M7 18h10" /> {/* Patin bas */}
-    <path d="M7 15v3" /> {/* Jambe patin avant */}
-    <path d="M17 15v3" /> {/* Jambe patin arrière */}
-    <path d="M2 12h5" /> {/* Rotor queue gauche */}
-    <path d="M2 10v4" /> {/* Rotor queue vertical */}
-    <path d="M12 13a3 3 0 0 0-3 3v2h6v-2a3 3 0 0 0-3-3z" /> {/* Cockpit vitre */}
-  </svg>
-)
+/* ═══════════════════════════════════════════
+   CATEGORY MAP
+   ═══════════════════════════════════════════ */
+const catLabel: Record<string, string> = {
+  towing: 'Remorquage', handling: 'Manutention', maintenance: 'Maintenance', gse: 'GSE',
+}
 
+/* ═══════════════════════════════════════════
+   FAQ ACCORDION
+   ═══════════════════════════════════════════ */
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border-b border-gray-800 last:border-0">
+      <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full py-4 text-left group">
+        <span className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors pr-4">{q}</span>
+        <ChevronDown className={`h-4 w-4 text-gray-500 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <p className="text-sm text-gray-400 pb-4 leading-relaxed">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   DATA TABLE (specs, tolerances, materials)
+   ═══════════════════════════════════════════ */
+function DataTable({ data, icon, title }: { data: Record<string, string>; icon: React.ReactNode; title: string }) {
+  return (
+    <div className="bg-gray-800/20 border border-gray-800 rounded-xl overflow-hidden">
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800 bg-gray-800/40">
+        {icon}
+        <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">{title}</h3>
+      </div>
+      <table className="w-full">
+        <tbody>
+          {Object.entries(data).map(([key, value], i) => (
+            <tr key={key} className={i % 2 === 0 ? 'bg-gray-800/10' : ''}>
+              <td className="px-5 py-3 text-xs text-gray-500 uppercase tracking-wider font-medium w-2/5 align-top">{key}</td>
+              <td className="px-5 py-3 text-sm text-white font-mono">{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   MAIN PAGE
+   ═══════════════════════════════════════════ */
 export default function ProductDetailPage() {
   const params = useParams()
-  const router = useRouter()
   const { addItem } = useQuote()
   const [added, setAdded] = useState(false)
-  
-  const product = products.find(p => p.id === params.slug)
+
+  const product = getProductBySlug(params.slug as string)
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
         <div className="text-center">
-          <h1 className="text-4xl font-black mb-4">ERREUR 404</h1>
-          <p className="text-gray-400 mb-8">Système non trouvé dans la base de données.</p>
-          <Link href="/boutique" className="text-blue-400 hover:text-blue-300 underline">Retour au catalogue</Link>
+          <h1 className="text-5xl font-black mb-4 text-gray-700">404</h1>
+          <p className="text-gray-500 mb-6">Référence introuvable dans le catalogue.</p>
+          <Link href="/boutique/catalogue" className="text-blue-400 hover:text-blue-300 text-sm font-bold uppercase tracking-wider">
+            Retour au catalogue
+          </Link>
         </div>
       </div>
     )
   }
 
+  const related = getRelatedProducts(product)
+  const boughtTogether = getBoughtTogether(product)
+
   const handleAddToQuote = () => {
-    addItem(product)
+    addItem({ ...product, price_display: product.priceDisplay } as any)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white selection:bg-blue-500/30 overflow-x-hidden pt-20">
+    <div className="min-h-screen bg-gray-950 text-white pt-28 pb-20">
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
         <div className="absolute right-0 top-0 w-1/2 h-full bg-blue-900/5 blur-[150px]" />
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        {/* Breadcrumb / Back */}
-        <button 
-          onClick={() => router.back()}
-          className="group flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="font-mono text-sm uppercase tracking-wider">Retour à la base</span>
-        </button>
+      <div className="container mx-auto px-4 relative z-10">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left Column: Visuals */}
-          <div className="relative">
-             {/* Main Image Container style Blueprint */}
-             <div className="relative aspect-square bg-gray-800/30 rounded-2xl border border-blue-500/30 overflow-hidden group">
-                {/* HUD Corners */}
-                <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-blue-500/50" />
-                <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-blue-500/50" />
-                <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-blue-500/50" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-blue-500/50" />
+        {/* ─── BREADCRUMBS ─── */}
+        <div className="mb-8">
+          <Breadcrumbs items={[
+            { label: 'Catalogue', href: '/boutique/catalogue' },
+            { label: catLabel[product.category] || product.category, href: `/boutique/catalogue?cat=${product.category}` },
+            { label: product.name },
+          ]} />
+        </div>
 
-                {/* Central Visual */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div 
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="relative z-10"
-                  >
-                     {/* Placeholder Icon */}
-                    {product.category === 'towing' ? 
-                       <HelicopterIcon className="h-48 w-48 text-gray-600 group-hover:text-blue-400 transition-colors duration-500" /> :
-                       <Box className="h-48 w-48 text-gray-600 group-hover:text-blue-400 transition-colors duration-500" />
-                    }
-                  </motion.div>
-                  
-                  {/* Rotating Rings */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-[80%] h-[80%] border border-dashed border-gray-700 rounded-full animate-[spin_60s_linear_infinite]" />
-                    <div className="w-[60%] h-[60%] border border-dotted border-blue-500/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-                  </div>
-                </div>
+        {/* ═══════════════════════════════════════
+            SECTION 1 — HERO : VISUAL + INFO + CTA
+           ═══════════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16">
 
-                {/* Tech Specs Overlay */}
-                <div className="absolute bottom-8 left-8 right-8 flex justify-between font-mono text-xs text-blue-300">
-                  <span>SCALE: 1:1</span>
-                  <span>REF: {product.id}</span>
-                </div>
-             </div>
+          {/* ── LEFT: GALLERY ── */}
+          <div className="space-y-4">
+            {/* Main Image */}
+            <div className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden group">
+              {/* HUD corners */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-blue-500/40" />
+              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-blue-500/40" />
+              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-blue-500/40" />
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-blue-500/40" />
 
-             {/* Compatibility Badge */}
-             <div className="mt-6">
-                <h3 className="text-xs font-bold uppercase text-gray-500 mb-2">Compatible avec :</h3>
-                <div className="flex flex-wrap gap-2">
-                   {product.compatibility.map((c, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-blue-900/20 border border-blue-500/30 text-blue-300 text-xs font-bold uppercase rounded">
-                         {c}
-                      </span>
-                   ))}
-                </div>
-             </div>
-          </div>
-
-          {/* Right Column: Info & Action */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-gray-800 border border-gray-700 text-gray-300 text-xs font-bold uppercase tracking-wider rounded">
-                  {product.category === 'towing' ? 'REMORQUAGE' : 'MANUTENTION'}
-                </span>
-                <div className="flex items-center gap-1 text-green-400 text-xs font-bold uppercase">
-                  <Activity className="h-3 w-3" />
-                  Produit Actif
+              {/* Placeholder visual */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Box className="h-40 w-40 text-gray-700 group-hover:text-blue-500/60 transition-colors duration-700" />
+                </motion.div>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-[70%] h-[70%] border border-dashed border-gray-800 rounded-full animate-[spin_60s_linear_infinite]" />
                 </div>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-black uppercase text-white mb-6 leading-tight">
+              {/* Scan effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-[2500ms]" />
+
+              {/* Reference overlay */}
+              <div className="absolute bottom-4 left-5 right-5 flex justify-between font-mono text-[10px] text-gray-600">
+                <span>SCALE 1:1</span>
+                <span>REF {product.id}</span>
+              </div>
+            </div>
+
+            {/* Compliance badges */}
+            <div className="flex flex-wrap gap-2">
+              {(product.certifications || ['CE', 'EN 9100']).map((cert, i) => (
+                <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-800/40 border border-gray-700/50 rounded-lg">
+                  <Shield className="h-3 w-3 text-green-500" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{cert}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT: PRODUCT INFO ── */}
+          <div>
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+
+              {/* Badges row */}
+              <div className="flex items-center gap-2 flex-wrap mb-4">
+                {product.isNew && (
+                  <span className="px-2.5 py-1 bg-green-600/20 border border-green-500/30 text-green-400 text-[10px] font-bold uppercase tracking-wider rounded-md">
+                    Nouveau
+                  </span>
+                )}
+                <span className="px-2.5 py-1 bg-gray-800 border border-gray-700 text-gray-400 text-[10px] font-bold uppercase tracking-wider rounded-md">
+                  {catLabel[product.category] || product.category}
+                </span>
+                <span className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${
+                  product.inStock
+                    ? 'bg-green-900/20 border border-green-500/20 text-green-400'
+                    : 'bg-amber-900/20 border border-amber-500/20 text-amber-400'
+                }`}>
+                  {product.inStock ? <Activity className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
+                  {product.inStock ? 'Disponible' : 'Sur commande'}
+                </span>
+              </div>
+
+              {/* Reference */}
+              <p className="text-[10px] font-mono text-gray-600 uppercase tracking-widest mb-2">
+                Réf. {product.id}
+              </p>
+
+              {/* Title */}
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-black uppercase text-white mb-5 leading-[1.1] tracking-tight">
                 {product.name}
               </h1>
 
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed border-l-4 border-blue-500/30 pl-6">
+              {/* Description */}
+              <p className="text-base text-gray-400 mb-6 leading-relaxed">
                 {product.description}
               </p>
 
-              {/* Technical Specifications Grid */}
-              <div className="bg-gray-800/30 rounded-xl p-6 mb-8 border border-gray-700 backdrop-blur-sm">
-                <h3 className="text-sm font-bold uppercase text-gray-500 mb-4 flex items-center gap-2">
-                  <Zap className="h-4 w-4" /> Spécifications Techniques
-                </h3>
-                <div className="grid grid-cols-2 gap-y-6 gap-x-8">
-                  {Object.entries(product.specs).map(([key, value]) => (
-                    <div key={key} className="flex flex-col border-l-2 border-blue-500/20 pl-3">
-                      <span className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">{key}</span>
-                      <span className="text-sm font-bold text-white font-mono">{value}</span>
-                    </div>
+              {/* Compatibility chips */}
+              <div className="mb-6">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-2">Appareils compatibles</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {product.compatibility.map((c, i) => (
+                    <span key={i} className="px-2.5 py-1 bg-blue-900/20 border border-blue-500/20 text-blue-300 text-xs font-bold uppercase rounded-md">
+                      {c}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              {/* Features List */}
-              <div className="mb-10">
-                <h3 className="text-sm font-bold uppercase text-gray-500 mb-4 flex items-center gap-2">
-                  <Shield className="h-4 w-4" /> Capacités Avancées
-                </h3>
-                <ul className="grid grid-cols-1 gap-3">
-                  {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-3 bg-gray-800/20 p-3 rounded border border-gray-700/50">
-                      <Check className="h-5 w-5 text-blue-500 shrink-0" />
-                      <span className="text-sm text-gray-300 font-medium">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Standards */}
+              {product.standards && product.standards.length > 0 && (
+                <div className="mb-6">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-2">Normes &amp; standards applicables</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {product.standards.map((s, i) => (
+                      <span key={i} className="px-2.5 py-1 bg-gray-800/60 border border-gray-700/50 text-gray-400 text-[10px] font-bold uppercase tracking-wider rounded-md">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Quick info strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 p-4 bg-gray-800/20 border border-gray-800 rounded-xl">
+                <div className="flex items-center gap-2">
+                  <Truck className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-gray-600 uppercase">Délai</p>
+                    <p className="text-xs font-bold text-gray-300">{product.leadTime || '4–8 semaines'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-gray-600 uppercase">Garantie</p>
+                    <p className="text-xs font-bold text-gray-300">{product.warranty || '24 mois'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Package className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-gray-600 uppercase">Qté min.</p>
+                    <p className="text-xs font-bold text-gray-300">{product.minOrder || 1} unité</p>
+                  </div>
+                </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-800">
+              {/* ── PRIMARY CTA ── */}
+              <div className="space-y-3 mb-6">
                 <button
                   onClick={handleAddToQuote}
-                  className={`flex-1 flex items-center justify-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-wider rounded-lg transition-all ${
+                  className={`w-full flex items-center justify-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-wider rounded-xl transition-all ${
                     added
-                      ? 'bg-green-600 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]'
-                      : 'bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:scale-[1.02]'
+                      ? 'bg-green-600 text-white shadow-[0_0_20px_rgba(34,197,94,0.3)]'
+                      : 'bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:scale-[1.01]'
                   }`}
                 >
                   {added ? (
-                    <>
-                      <Check className="h-5 w-5" />
-                      Ajouté au devis
-                    </>
+                    <><Check className="h-5 w-5" /> Ajouté à votre liste de devis</>
                   ) : (
-                    <>
-                      <ShoppingBag className="h-5 w-5" />
-                      Ajouter au devis
-                    </>
+                    <><ShoppingBag className="h-5 w-5" /> Ajouter à la demande de devis</>
                   )}
                 </button>
-                
-                <button className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-800 text-white border border-gray-700 hover:bg-gray-700 rounded-lg font-bold uppercase text-sm transition-all">
-                  <FileText className="h-5 w-5" />
-                  Fiche Tech.
-                </button>
+
+                {/* Secondary CTAs */}
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-white hover:border-gray-600 transition-all"
+                  >
+                    <Phone className="h-3.5 w-3.5" />
+                    Contacter un expert
+                  </Link>
+                  <button className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-xs font-bold uppercase tracking-wider text-gray-300 hover:text-white hover:border-gray-600 transition-all">
+                    <Download className="h-3.5 w-3.5" />
+                    Fiche technique PDF
+                  </button>
+                </div>
               </div>
 
-              <div className="mt-4 text-center">
-                 <Link href="/boutique/panier" className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center justify-center gap-1 group">
-                    Voir ma liste d'équipement <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                 </Link>
-              </div>
+              {/* View cart link */}
+              <Link href="/boutique/panier" className="flex items-center justify-center gap-1 text-[10px] text-gray-600 hover:text-blue-400 uppercase tracking-widest transition-colors">
+                Voir ma liste de devis <ChevronRight className="h-3 w-3" />
+              </Link>
+
             </motion.div>
           </div>
         </div>
+
+        {/* ═══════════════════════════════════════
+            SECTION 2 — SPECS / APPLICATIONS / MATERIALS
+           ═══════════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
+          {/* Specs table */}
+          <DataTable
+            data={product.specs}
+            icon={<Zap className="h-4 w-4 text-blue-400" />}
+            title="Spécifications techniques"
+          />
+
+          {/* Tolerances */}
+          {product.tolerances && Object.keys(product.tolerances).length > 0 && (
+            <DataTable
+              data={product.tolerances}
+              icon={<Ruler className="h-4 w-4 text-cyan-400" />}
+              title="Tolérances &amp; performances"
+            />
+          )}
+
+          {/* Materials */}
+          {product.materials && Object.keys(product.materials).length > 0 && (
+            <DataTable
+              data={product.materials}
+              icon={<Layers className="h-4 w-4 text-amber-400" />}
+              title="Matériaux &amp; traitements"
+            />
+          )}
+
+          {/* Applications */}
+          {product.applications && product.applications.length > 0 && (
+            <div className="bg-gray-800/20 border border-gray-800 rounded-xl overflow-hidden">
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800 bg-gray-800/40">
+                <Users className="h-4 w-4 text-purple-400" />
+                <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">Applications</h3>
+              </div>
+              <ul className="p-5 space-y-3">
+                {product.applications.map((app, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-gray-300">{app}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Features list (always present) */}
+        <div className="mb-16">
+          <h2 className="text-lg font-black uppercase tracking-tight text-white mb-5 flex items-center gap-2">
+            <Shield className="h-5 w-5 text-blue-400" />
+            Caractéristiques clés
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {product.features.map((feature, idx) => (
+              <div key={idx} className="flex items-center gap-3 p-4 bg-gray-800/20 border border-gray-800 rounded-xl">
+                <div className="w-6 h-6 rounded-md bg-blue-600/20 flex items-center justify-center flex-shrink-0">
+                  <Check className="h-3.5 w-3.5 text-blue-400" />
+                </div>
+                <span className="text-sm text-gray-300">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ═══════════════════════════════════════
+            SECTION 3 — BOUGHT TOGETHER
+           ═══════════════════════════════════════ */}
+        {boughtTogether.length > 0 && (
+          <div className="mb-16">
+            <h2 className="text-lg font-black uppercase tracking-tight text-white mb-5 flex items-center gap-2">
+              <ShoppingBag className="h-5 w-5 text-cyan-400" />
+              Souvent commandé ensemble
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {boughtTogether.map((p, idx) => (
+                <ProductCard key={p.id} product={p} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ═══════════════════════════════════════
+            SECTION 4 — FAQ + POLICIES
+           ═══════════════════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
+          {/* FAQ */}
+          {product.faq && product.faq.length > 0 && (
+            <div>
+              <h2 className="text-lg font-black uppercase tracking-tight text-white mb-5 flex items-center gap-2">
+                <MessageSquare className="h-5 w-5 text-blue-400" />
+                Questions fréquentes
+              </h2>
+              <div className="bg-gray-800/20 border border-gray-800 rounded-xl p-5">
+                {product.faq.map((item, i) => (
+                  <FaqItem key={i} q={item.q} a={item.a} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Policies */}
+          <div>
+            <h2 className="text-lg font-black uppercase tracking-tight text-white mb-5 flex items-center gap-2">
+              <FileText className="h-5 w-5 text-blue-400" />
+              Informations pratiques
+            </h2>
+            <div className="bg-gray-800/20 border border-gray-800 rounded-xl divide-y divide-gray-800">
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Truck className="h-4 w-4 text-blue-400" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-300">Délais de livraison</h4>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Délai standard : <strong className="text-gray-300">{product.leadTime || '4 à 8 semaines'}</strong> après validation de commande.
+                  Livraison France métropolitaine et export. Fret aéronautique sur demande.
+                </p>
+              </div>
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Award className="h-4 w-4 text-blue-400" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-300">Garantie constructeur</h4>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  <strong className="text-gray-300">{product.warranty || '24 mois'}</strong> pièces et main-d&apos;œuvre.
+                  Couverture étendue disponible. SAV et pièces détachées garantis 10 ans.
+                </p>
+              </div>
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Shield className="h-4 w-4 text-blue-400" />
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-300">Politique retour B2B</h4>
+                </div>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Retour accepté sous 30 jours pour les produits catalogue, en état neuf et emballage d&apos;origine.
+                  Les produits sur mesure ne sont pas éligibles au retour. Contactez le service commercial.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ═══════════════════════════════════════
+            SECTION 5 — RELATED PRODUCTS
+           ═══════════════════════════════════════ */}
+        {related.length > 0 && (
+          <div className="mb-16">
+            <h2 className="text-lg font-black uppercase tracking-tight text-white mb-5">
+              Équipements associés
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {related.map((p, idx) => (
+                <ProductCard key={p.id} product={p} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ═══════════════════════════════════════
+            SECTION 6 — BOTTOM CTA BAR
+           ═══════════════════════════════════════ */}
+        <div className="bg-gradient-to-r from-blue-950/80 to-blue-900/80 border border-blue-500/20 rounded-2xl p-8 sm:p-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-xl font-black uppercase tracking-tight text-white mb-1">
+                Besoin d&apos;une configuration spécifique ?
+              </h3>
+              <p className="text-sm text-blue-200/60">
+                Notre bureau d&apos;études adapte chaque équipement à vos contraintes opérationnelles.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-blue-50 transition-colors"
+              >
+                Demander un devis personnalisé
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a
+                href="tel:+33442029674"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-blue-400/30 text-blue-300 rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-blue-800/30 transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+                +33 4 42 02 96 74
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )
