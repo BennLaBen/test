@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { Search, Shield, Award, Truck, Phone, ChevronDown, X, ArrowRight, Zap, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/SEO'
-import { products, getCategoryCounts } from '@/lib/shop/data'
+import { products, getCategoryCounts, getHelicopters, getProductsByHelicopter } from '@/lib/shop/data'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { CategoryFilter } from '@/components/shop/CategoryFilter'
 
@@ -163,13 +163,16 @@ function TrustBar() {
 // ─── MAIN PAGE ───
 export default function BoutiquePage() {
   const { t } = useTranslation('common')
+  const [activeHelicopter, setActiveHelicopter] = useState('all')
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
 
-  const categoryCounts = getCategoryCounts(products)
+  const helicopters = getHelicopters()
+  const baseProducts = getProductsByHelicopter(activeHelicopter)
+  const categoryCounts = getCategoryCounts(baseProducts)
 
-  const filteredProducts = products.filter(p => {
+  const filteredProducts = baseProducts.filter(p => {
     const matchesCategory = activeCategory === 'all' || p.category === activeCategory
     const matchesSearch = !searchQuery || 
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -220,7 +223,44 @@ export default function BoutiquePage() {
               </p>
             </motion.div>
 
-            {/* Toolbar: Filters + Search */}
+            {/* ═══ HELICOPTER FILTER ═══ */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-8"
+            >
+              <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-3">
+                Sélectionnez votre hélicoptère
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => { setActiveHelicopter('all'); setActiveCategory('all') }}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                    activeHelicopter === 'all'
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                      : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
+                  }`}
+                >
+                  Tous ({products.length})
+                </button>
+                {helicopters.map((h) => (
+                  <button
+                    key={h.id}
+                    onClick={() => { setActiveHelicopter(h.id); setActiveCategory('all') }}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                      activeHelicopter === h.id
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                        : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
+                    }`}
+                  >
+                    {h.name} ({h.count})
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Toolbar: Category + Search */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

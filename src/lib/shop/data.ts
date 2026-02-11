@@ -68,3 +68,22 @@ export function getCategoryCounts(allProducts: ShopProduct[]): Record<string, nu
   }
   return counts
 }
+
+export function getHelicopters(): { id: string; name: string; count: number }[] {
+  const heliMap = new Map<string, number>()
+  
+  for (const p of products) {
+    for (const h of p.compatibility) {
+      heliMap.set(h, (heliMap.get(h) || 0) + 1)
+    }
+  }
+  
+  return Array.from(heliMap.entries())
+    .map(([id, count]) => ({ id, name: id, count }))
+    .sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export function getProductsByHelicopter(helicopterId: string): ShopProduct[] {
+  if (!helicopterId || helicopterId === 'all') return products
+  return products.filter(p => p.compatibility.includes(helicopterId))
+}
