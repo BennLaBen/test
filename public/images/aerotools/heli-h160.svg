@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky-h160" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="40%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="glow-h160" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="spot-h160" cx="0.5" cy="0.6" r="0.5">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow-h160">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#2563eb" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#sky-h160)"/>
+  <rect width="800" height="500" fill="url(#glow-h160)"/>
+  <ellipse cx="400" cy="320" rx="350" ry="180" fill="url(#spot-h160)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#2563eb" stroke-width="0.5" opacity="0.15"/>
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#2563eb" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- HUD corners -->
+  <polyline points="30,30 30,70 70,70" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,30 770,70 730,70" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="30,470 30,430 70,430" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,470 770,430 730,430" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Helicopter silhouette -->
+  <g transform="translate(50,30) scale(1.05)" filter="url(#shadow-h160)">
+    <path d="M150,280 Q160,240 200,220 L260,210 Q280,208 300,210 L380,215 Q400,216 420,220 L480,240 Q500,250 510,260 L520,270 Q525,280 520,285 L480,290 Q460,292 440,290 L400,285 Q380,283 360,285 L320,290 Q300,292 280,290 L220,285 Q200,283 180,285 L160,288 Q152,290 150,285 Z M300,210 L310,180 Q315,170 320,175 L340,200 M420,220 L500,215 Q520,214 530,218 L560,230 Q570,235 565,240 L530,245 Q520,247 510,245 L480,240 M200,220 L180,215 Q170,213 165,218 L158,230" fill="#2563eb" opacity="0.85" stroke="#60a5fa" stroke-width="1.5"/>
+    <!-- Rotor disc -->
+    <ellipse cx="340" cy="195" rx="180" ry="8" fill="#60a5fa" opacity="0.15"/>
+    <line x1="160" y1="195" x2="520" y2="195" stroke="#60a5fa" stroke-width="1" opacity="0.3"/>
+    <!-- Windows -->
+    <rect x="220" y="225" width="35" height="25" rx="5" fill="#60a5fa" opacity="0.2"/>
+    <rect x="265" y="223" width="35" height="27" rx="5" fill="#60a5fa" opacity="0.2"/>
+  </g>
+
+  <!-- Ground reflection -->
+  <g transform="translate(50,30) scale(1.05)" opacity="0.06">
+    <g transform="translate(0,560) scale(1,-1)">
+      <path d="M150,280 Q160,240 200,220 L260,210 Q280,208 300,210 L380,215 Q400,216 420,220 L480,240 Q500,250 510,260 L520,270 Q525,280 520,285 L480,290 Q460,292 440,290 L400,285 Q380,283 360,285 L320,290 Q300,292 280,290 L220,285 Q200,283 180,285 L160,288 Q152,290 150,285 Z M300,210 L310,180 Q315,170 320,175 L340,200 M420,220 L500,215 Q520,214 530,218 L560,230 Q570,235 565,240 L530,245 Q520,247 510,245 L480,240 M200,220 L180,215 Q170,213 165,218 L158,230" fill="#2563eb"/>
+    </g>
+  </g>
+
+  <!-- Model name -->
+  <text x="400" y="420" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="8" opacity="0.95">H160</text>
+  
+  <!-- Manufacturer -->
+  <text x="400" y="450" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="12" fill="#60a5fa" letter-spacing="5" opacity="0.6">AIRBUS HELICOPTERS</text>
+
+  <!-- LLEDO AERO TOOLS branding top-right -->
+  <rect x="590" y="35" width="170" height="28" rx="4" fill="white" opacity="0.9"/>
+  <text x="675" y="54" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="11" fill="#2563eb" letter-spacing="2">LLEDO AERO TOOLS</text>
+
+  <!-- Top-left model tag -->
+  <rect x="40" y="35" width="80" height="24" rx="4" fill="#2563eb" opacity="0.8"/>
+  <text x="80" y="51" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="white" letter-spacing="1">H160</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="490" width="800" height="10" fill="#2563eb" opacity="0.6"/>
+  <rect x="0" y="0" width="800" height="3" fill="#60a5fa" opacity="0.4"/>
+
+  <!-- Technical data overlay -->
+  <text x="50" y="478" font-family="monospace" font-size="9" fill="white" opacity="0.2" letter-spacing="2">COMPATIBLE EQUIPMENT — LLEDO AEROTOOLS GSE CATALOGUE</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky-gazelle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="40%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="glow-gazelle" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#047857" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#047857" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="spot-gazelle" cx="0.5" cy="0.6" r="0.5">
+      <stop offset="0%" stop-color="#047857" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#047857" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow-gazelle">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#047857" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#sky-gazelle)"/>
+  <rect width="800" height="500" fill="url(#glow-gazelle)"/>
+  <ellipse cx="400" cy="320" rx="350" ry="180" fill="url(#spot-gazelle)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#047857" stroke-width="0.5" opacity="0.15"/>
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#047857" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- HUD corners -->
+  <polyline points="30,30 30,70 70,70" fill="none" stroke="#6ee7b7" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,30 770,70 730,70" fill="none" stroke="#6ee7b7" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="30,470 30,430 70,430" fill="none" stroke="#6ee7b7" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,470 770,430 730,430" fill="none" stroke="#6ee7b7" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Helicopter silhouette -->
+  <g transform="translate(50,30) scale(1.05)" filter="url(#shadow-gazelle)">
+    <path d="M170,275 Q178,245 210,228 L280,218 Q300,216 320,218 L380,222 Q398,224 410,230 L460,252 Q478,262 482,270 L485,278 Q486,284 482,287 L455,292 Q438,294 422,292 L380,288 Q362,286 345,288 L310,292 Q292,294 275,292 L225,288 Q208,286 192,288 L178,290 Q170,292 168,287 Z M320,218 L330,192 Q334,183 340,188 L354,212 M410,230 L485,224 Q505,222 514,228 L540,244 Q548,250 543,255 L515,260 Q505,262 496,258 L460,248 M210,228 L192,224 Q182,222 180,228 L175,240" fill="#047857" opacity="0.85" stroke="#6ee7b7" stroke-width="1.5"/>
+    <!-- Rotor disc -->
+    <ellipse cx="340" cy="195" rx="180" ry="8" fill="#6ee7b7" opacity="0.15"/>
+    <line x1="160" y1="195" x2="520" y2="195" stroke="#6ee7b7" stroke-width="1" opacity="0.3"/>
+    <!-- Windows -->
+    <rect x="220" y="225" width="35" height="25" rx="5" fill="#6ee7b7" opacity="0.2"/>
+    <rect x="265" y="223" width="35" height="27" rx="5" fill="#6ee7b7" opacity="0.2"/>
+  </g>
+
+  <!-- Ground reflection -->
+  <g transform="translate(50,30) scale(1.05)" opacity="0.06">
+    <g transform="translate(0,560) scale(1,-1)">
+      <path d="M170,275 Q178,245 210,228 L280,218 Q300,216 320,218 L380,222 Q398,224 410,230 L460,252 Q478,262 482,270 L485,278 Q486,284 482,287 L455,292 Q438,294 422,292 L380,288 Q362,286 345,288 L310,292 Q292,294 275,292 L225,288 Q208,286 192,288 L178,290 Q170,292 168,287 Z M320,218 L330,192 Q334,183 340,188 L354,212 M410,230 L485,224 Q505,222 514,228 L540,244 Q548,250 543,255 L515,260 Q505,262 496,258 L460,248 M210,228 L192,224 Q182,222 180,228 L175,240" fill="#047857"/>
+    </g>
+  </g>
+
+  <!-- Model name -->
+  <text x="400" y="420" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="8" opacity="0.95">GAZELLE</text>
+  
+  <!-- Manufacturer -->
+  <text x="400" y="450" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="12" fill="#6ee7b7" letter-spacing="5" opacity="0.6">AÉROSPATIALE</text>
+
+  <!-- LLEDO AERO TOOLS branding top-right -->
+  <rect x="590" y="35" width="170" height="28" rx="4" fill="white" opacity="0.9"/>
+  <text x="675" y="54" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="11" fill="#047857" letter-spacing="2">LLEDO AERO TOOLS</text>
+
+  <!-- Top-left model tag -->
+  <rect x="40" y="35" width="80" height="24" rx="4" fill="#047857" opacity="0.8"/>
+  <text x="80" y="51" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="white" letter-spacing="1">GAZELLE</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="490" width="800" height="10" fill="#047857" opacity="0.6"/>
+  <rect x="0" y="0" width="800" height="3" fill="#6ee7b7" opacity="0.4"/>
+
+  <!-- Technical data overlay -->
+  <text x="50" y="478" font-family="monospace" font-size="9" fill="white" opacity="0.2" letter-spacing="2">COMPATIBLE EQUIPMENT — LLEDO AEROTOOLS GSE CATALOGUE</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky-super-puma" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="40%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="glow-super-puma" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="spot-super-puma" cx="0.5" cy="0.6" r="0.5">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow-super-puma">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#b45309" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#sky-super-puma)"/>
+  <rect width="800" height="500" fill="url(#glow-super-puma)"/>
+  <ellipse cx="400" cy="320" rx="350" ry="180" fill="url(#spot-super-puma)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#b45309" stroke-width="0.5" opacity="0.15"/>
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#b45309" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- HUD corners -->
+  <polyline points="30,30 30,70 70,70" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,30 770,70 730,70" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="30,470 30,430 70,430" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+  <polyline points="770,470 770,430 730,430" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Helicopter silhouette -->
+  <g transform="translate(50,30) scale(1.05)" filter="url(#shadow-super-puma)">
+    <path d="M110,290 Q120,230 175,205 L290,190 Q325,188 360,190 L470,198 Q500,200 525,212 L595,248 Q620,262 625,275 L628,286 Q630,295 623,300 L575,306 Q550,308 525,306 L460,300 Q435,298 410,300 L360,306 Q335,308 310,306 L240,300 Q215,298 190,300 L150,304 Q128,306 122,300 Z M360,190 L375,145 Q382,130 390,138 L412,182 M525,212 L625,200 Q655,198 668,207 L705,232 Q715,240 708,248 L665,256 Q652,258 640,254 L595,242 M175,205 L148,198 Q132,196 128,203 L118,222" fill="#b45309" opacity="0.85" stroke="#fbbf24" stroke-width="1.5"/>
+    <!-- Rotor disc -->
+    <ellipse cx="340" cy="195" rx="180" ry="8" fill="#fbbf24" opacity="0.15"/>
+    <line x1="160" y1="195" x2="520" y2="195" stroke="#fbbf24" stroke-width="1" opacity="0.3"/>
+    <!-- Windows -->
+    <rect x="220" y="225" width="35" height="25" rx="5" fill="#fbbf24" opacity="0.2"/>
+    <rect x="265" y="223" width="35" height="27" rx="5" fill="#fbbf24" opacity="0.2"/>
+  </g>
+
+  <!-- Ground reflection -->
+  <g transform="translate(50,30) scale(1.05)" opacity="0.06">
+    <g transform="translate(0,560) scale(1,-1)">
+      <path d="M110,290 Q120,230 175,205 L290,190 Q325,188 360,190 L470,198 Q500,200 525,212 L595,248 Q620,262 625,275 L628,286 Q630,295 623,300 L575,306 Q550,308 525,306 L460,300 Q435,298 410,300 L360,306 Q335,308 310,306 L240,300 Q215,298 190,300 L150,304 Q128,306 122,300 Z M360,190 L375,145 Q382,130 390,138 L412,182 M525,212 L625,200 Q655,198 668,207 L705,232 Q715,240 708,248 L665,256 Q652,258 640,254 L595,242 M175,205 L148,198 Q132,196 128,203 L118,222" fill="#b45309"/>
+    </g>
+  </g>
+
+  <!-- Model name -->
+  <text x="400" y="420" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="8" opacity="0.95">SUPER PUMA</text>
+  
+  <!-- Manufacturer -->
+  <text x="400" y="450" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="12" fill="#fbbf24" letter-spacing="5" opacity="0.6">AIRBUS HELICOPTERS</text>
+
+  <!-- LLEDO AERO TOOLS branding top-right -->
+  <rect x="590" y="35" width="170" height="28" rx="4" fill="white" opacity="0.9"/>
+  <text x="675" y="54" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="11" fill="#b45309" letter-spacing="2">LLEDO AERO TOOLS</text>
+
+  <!-- Top-left model tag -->
+  <rect x="40" y="35" width="80" height="24" rx="4" fill="#b45309" opacity="0.8"/>
+  <text x="80" y="51" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="white" letter-spacing="1">SUPER PUMA</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="490" width="800" height="10" fill="#b45309" opacity="0.6"/>
+  <rect x="0" y="0" width="800" height="3" fill="#fbbf24" opacity="0.4"/>
+
+  <!-- Technical data overlay -->
+  <text x="50" y="478" font-family="monospace" font-size="9" fill="white" opacity="0.2" letter-spacing="2">COMPATIBLE EQUIPMENT — LLEDO AEROTOOLS GSE CATALOGUE</text>
+</svg>
