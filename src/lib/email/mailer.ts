@@ -1,31 +1,18 @@
-import nodemailer from 'nodemailer'
-import type { Transporter } from 'nodemailer'
+import { Resend } from 'resend'
 
 // ============================================
-// SMTP EMAIL SERVICE
+// EMAIL SERVICE (Resend API - works on serverless)
 // ============================================
 
-let _transporter: Transporter | null = null
+let _resend: Resend | null = null
 
-function getTransporter(): Transporter {
-  if (!_transporter) {
-    const host = (process.env.SMTP_HOST || '').trim()
-    const port = parseInt((process.env.SMTP_PORT || '465').trim())
-    const secure = port === 465 ? true : (process.env.SMTP_SECURE || '').trim() === 'true'
-    const user = (process.env.SMTP_USER || '').trim()
-    const pass = (process.env.SMTP_PASS || '').trim()
-    console.log(`[mailer] Creating transporter: host=${host}, port=${port}, secure=${secure}, user=${user}, pass=${pass ? pass.substring(0, 3) + '***' : 'MISSING'}`)
-    _transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure,
-      auth: { user, pass },
-      connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 15000,
-    })
+function getResend(): Resend {
+  if (!_resend) {
+    const apiKey = (process.env.RESEND_API_KEY || '').trim()
+    console.log(`[mailer] Creating Resend client: apiKey=${apiKey ? apiKey.substring(0, 8) + '***' : 'MISSING'}`)
+    _resend = new Resend(apiKey)
   }
-  return _transporter
+  return _resend
 }
 
 export interface SendEmailOptions {
@@ -36,44 +23,49 @@ export interface SendEmailOptions {
 }
 
 export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
-  try {
-    if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
-      console.warn('[mailer] SMTP not configured, logging email instead:')
-      console.log(`  To: ${options.to}`)
-      console.log(`  Subject: ${options.subject}`)
-      console.log(`  Text: ${options.text?.substring(0, 200)}...`)
-      return true
-    }
+  const apiKey = (process.env.RESEND_API_KEY || '').trim()
+  
+  if (!apiKey) {
+    console.warn('[mailer] RESEND_API_KEY not configured, logging email instead:')
+    console.log(`  To: ${options.to}`)
+    console.log(`  Subject: ${options.subject}`)
+    console.log(`  Text: ${options.text?.substring(0, 200)}...`)
+    return true
+  }
 
-    const fromAddress = (process.env.SMTP_FROM || 'noreply@lledo-industries.com').trim()
+  try {
+    const fromAddress = (process.env.SMTP_FROM || 'onboarding@resend.dev').trim()
     const fromName = (process.env.SMTP_FROM_NAME || 'LLEDO Industries').trim()
 
-    await getTransporter().sendMail({
-      from: `"${fromName}" <${fromAddress}>`,
-      to: options.to,
+    console.log(`[mailer] Sending email via Resend to ${options.to}...`)
+    
+    const { data, error } = await getResend().emails.send({
+      from: `${fromName} <${fromAddress}>`,
+      to: [options.to],
       subject: options.subject,
       html: options.html,
       text: options.text,
     })
 
-    console.log(`[mailer] Email sent to ${options.to}: ${options.subject}`)
+    if (error) {
+      console.error('[mailer] Resend error:', error)
+      return false
+    }
+
+    console.log(`[mailer] Email sent successfully via Resend: id=${data?.id}`)
     return true
   } catch (error) {
     console.error('[mailer] Failed to send email:', error)
-    // Reset transporter so it gets recreated on next attempt
-    _transporter = null
     return false
   }
 }
 
 export async function verifyConnection(): Promise<boolean> {
-  try {
-    await getTransporter().verify()
-    console.log('[mailer] SMTP connection verified')
-    return true
-  } catch (error) {
-    console.error('[mailer] SMTP connection failed:', error)
-    _transporter = null
+  const apiKey = (process.env.RESEND_API_KEY || '').trim()
+  if (!apiKey) {
+    console.warn('[mailer] RESEND_API_KEY not configured')
     return false
   }
+  console.log('[mailer] Resend API key configured')
+  return true
 }
