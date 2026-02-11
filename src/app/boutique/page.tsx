@@ -21,18 +21,45 @@ function HangarDoors() {
 
   const leftDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%'])
   const rightDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '100%'])
-  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1])
-  const contentScale = useTransform(scrollYProgress, [0.3, 0.6], [0.9, 1])
+  const contentOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1])
+  const contentScale = useTransform(scrollYProgress, [0.2, 0.5], [0.92, 1])
+  const imageZoom = useTransform(scrollYProgress, [0, 0.8], [1.15, 1])
+  const imageBrightness = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.8])
+  const overlayOpacity = useTransform(scrollYProgress, [0.4, 0.7], [0.7, 0.3])
 
   return (
     <div ref={ref} className="relative h-[200vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background - hangar interior */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-slate-900 to-gray-950">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
-          {/* Ambient lights */}
-          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-500/8 rounded-full blur-[100px]" />
+        {/* Background — REAL HANGAR IMAGE with helicopters */}
+        <motion.div className="absolute inset-0" style={{ scale: imageZoom }}>
+          <Image
+            src="/images/aerotools/helicopter-hero2.png"
+            alt="Hangar LLEDO Aero Tools — Hélicoptères"
+            fill
+            className="object-cover"
+            style={{ filter: `brightness(var(--img-b, 0.4))` }}
+            priority
+            sizes="100vw"
+          />
+          {/* Dynamic brightness via CSS variable driven by scroll */}
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)',
+            }}
+          />
+        </motion.div>
+
+        {/* Dark overlay that fades as doors open */}
+        <motion.div
+          className="absolute inset-0 bg-gray-950 z-[5]"
+          style={{ opacity: overlayOpacity }}
+        />
+
+        {/* Ambient glow effects over image */}
+        <div className="absolute inset-0 z-[6] pointer-events-none">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/8 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-500/6 rounded-full blur-[100px]" />
         </div>
 
         {/* Content revealed behind doors */}
@@ -47,20 +74,20 @@ function HangarDoors() {
                 src="/images/aerotools/lledoaerotols-logo.png"
                 alt="LLEDO Aerotools"
                 fill
-                className="object-contain rounded-lg"
+                className="object-contain rounded-lg drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                 priority
               />
             </motion.div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter mb-4">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">
                 AEROTOOLS
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-6 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               Outillage aéronautique certifié — Barres de remorquage, rollers hydrauliques et équipements GSE pour hélicoptères civils et militaires.
             </p>
-            <div className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-blue-400/60">
+            <div className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-blue-400/80">
               <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
               Catalogue en ligne
             </div>
@@ -81,17 +108,26 @@ function HangarDoors() {
           style={{ x: leftDoor }}
           className="absolute inset-y-0 left-0 w-1/2 z-20"
         >
-          <div className="h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r-4 border-gray-600 shadow-2xl">
-            {/* Rivets */}
+          <div className="h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r-4 border-gray-600 shadow-[8px_0_30px_rgba(0,0,0,0.5)]">
+            {/* Rivets top-left */}
             <div className="absolute top-8 left-8 grid grid-cols-3 gap-4">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
+              ))}
+            </div>
+            {/* Rivets bottom-right */}
+            <div className="absolute bottom-24 right-16 grid grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={`br-${i}`} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
               ))}
             </div>
             {/* Warning stripes */}
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
             {/* Handle */}
             <div className="absolute top-1/2 right-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
+            {/* Horizontal beams */}
+            <div className="absolute top-1/3 left-0 right-0 h-1 bg-gray-600/50" />
+            <div className="absolute top-2/3 left-0 right-0 h-1 bg-gray-600/50" />
             {/* Text */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
               <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
@@ -106,17 +142,26 @@ function HangarDoors() {
           style={{ x: rightDoor }}
           className="absolute inset-y-0 right-0 w-1/2 z-20"
         >
-          <div className="h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l-4 border-gray-600 shadow-2xl">
-            {/* Rivets */}
+          <div className="h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l-4 border-gray-600 shadow-[-8px_0_30px_rgba(0,0,0,0.5)]">
+            {/* Rivets top-right */}
             <div className="absolute top-8 right-8 grid grid-cols-3 gap-4">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
+              ))}
+            </div>
+            {/* Rivets bottom-left */}
+            <div className="absolute bottom-24 left-16 grid grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={`bl-${i}`} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
               ))}
             </div>
             {/* Warning stripes */}
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(-45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
             {/* Handle */}
             <div className="absolute top-1/2 left-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
+            {/* Horizontal beams */}
+            <div className="absolute top-1/3 left-0 right-0 h-1 bg-gray-600/50" />
+            <div className="absolute top-2/3 left-0 right-0 h-1 bg-gray-600/50" />
             {/* Text */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
               <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
