@@ -33,31 +33,51 @@ export async function sendEmail(options: SendEmailOptions): Promise<boolean> {
     return true
   }
 
-  try {
-    const fromAddress = (process.env.SMTP_FROM || 'onboarding@resend.dev').trim()
-    const fromName = (process.env.SMTP_FROM_NAME || 'LLEDO Industries').trim()
+  const fromAddress = (process.env.SMTP_FROM || 'onboarding@resend.dev').trim()
+  const fromName = (process.env.SMTP_FROM_NAME || 'LLEDO Industries').trim()
+  const FALLBACK_FROM = 'onboarding@resend.dev'
 
-    console.log(`[mailer] Sending email via Resend to ${options.to}...`)
-    
-    const { data, error } = await getResend().emails.send({
-      from: `${fromName} <${fromAddress}>`,
-      to: [options.to],
-      subject: options.subject,
-      html: options.html,
-      text: options.text,
-    })
+  // Try sending with configured address first, fallback to resend default
+  const fromAddresses = [fromAddress]
+  if (fromAddress !== FALLBACK_FROM) {
+    fromAddresses.push(FALLBACK_FROM)
+  }
 
-    if (error) {
-      console.error('[mailer] Resend error:', error)
+  for (const sender of fromAddresses) {
+    try {
+      const from = `${fromName} <${sender}>`
+      console.log(`[mailer] Sending email via Resend to ${options.to} from ${from}...`)
+      
+      const { data, error } = await getResend().emails.send({
+        from,
+        to: [options.to],
+        subject: options.subject,
+        html: options.html,
+        text: options.text,
+      })
+
+      if (error) {
+        console.error(`[mailer] Resend error with sender ${sender}:`, JSON.stringify(error))
+        if (sender !== FALLBACK_FROM) {
+          console.log('[mailer] Retrying with fallback sender...')
+          continue
+        }
+        return false
+      }
+
+      console.log(`[mailer] Email sent successfully via Resend: id=${data?.id}, from=${sender}`)
+      return true
+    } catch (error) {
+      console.error(`[mailer] Failed to send email with sender ${sender}:`, error)
+      if (sender !== FALLBACK_FROM) {
+        console.log('[mailer] Retrying with fallback sender...')
+        continue
+      }
       return false
     }
-
-    console.log(`[mailer] Email sent successfully via Resend: id=${data?.id}`)
-    return true
-  } catch (error) {
-    console.error('[mailer] Failed to send email:', error)
-    return false
   }
+
+  return false
 }
 
 export async function verifyConnection(): Promise<boolean> {
