@@ -150,6 +150,11 @@ export default function ConnexionPage() {
                 {errors.password && (
                   <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
                 )}
+                <div className="text-right mt-1">
+                  <Link href="/mot-de-passe-oublie" className="text-sm text-primary-600 hover:text-primary-700 hover:underline">
+                    Mot de passe oublié ?
+                  </Link>
+                </div>
               </div>
 
               <button

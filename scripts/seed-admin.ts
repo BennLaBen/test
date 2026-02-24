@@ -18,8 +18,8 @@ const BCRYPT_ROUNDS = 12
 // CONFIGURATION DU SUPER-ADMIN
 // ============================================
 const SUPER_ADMIN = {
-  email: 'admin@lledo-industries.com',
-  password: 'Lledo@Admin2024!',  // Mot de passe temporaire - À CHANGER
+  email: (process.env.ADMIN_EMAIL || 'webmaster@mpeb13.com').toLowerCase(),
+  password: process.env.ADMIN_PASSWORD || 'AAS+DE$x3Zgf',
   firstName: 'Rayan',
   lastName: 'CARRE',
   company: 'MPEB' as const,
