@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: emailSent 
         ? 'Compte créé. Un email d\'activation a été envoyé.'
-        : 'Compte créé mais l\'email n\'a pas pu être envoyé. Vérifiez la configuration SMTP.',
+        : 'Compte créé mais l\'email n\'a pas pu être envoyé. Utilisez le lien d\'activation ci-dessous.',
       emailSent,
       admin: {
         id: admin.id,
@@ -140,8 +140,8 @@ export async function POST(request: NextRequest) {
         company: admin.company,
         role: admin.role,
       },
-      // Only in dev mode
-      ...(process.env.NODE_ENV === 'development' && { activationUrl }),
+      // Show activation URL if email failed (so admin can share it manually)
+      ...(!emailSent && { activationUrl }),
     })
     
   } catch (error) {

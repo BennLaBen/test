@@ -41,6 +41,7 @@ export default function AdminsPage() {
   const [showInviteModal, setShowInviteModal] = useState(false)
   const [inviting, setInviting] = useState(false)
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+  const [activationLink, setActivationLink] = useState<{ url: string; email: string } | null>(null)
   const [openMenuId, setOpenMenuId] = useState<string | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<Admin | null>(null)
   const [deleting, setDeleting] = useState(false)
@@ -105,10 +106,13 @@ export default function AdminsPage() {
         return
       }
 
-      const msg = data.emailSent 
-        ? `Invitation envoyée à ${formData.email}` 
-        : `Compte créé pour ${formData.email} mais l'email n'a pas pu être envoyé`
-      setToast({ type: data.emailSent ? 'success' : 'error', message: msg })
+      if (data.emailSent) {
+        setToast({ type: 'success', message: `Invitation envoyée à ${formData.email}` })
+      } else {
+        // Show activation link modal when email fails
+        setActivationLink({ url: data.activationUrl, email: formData.email })
+        setToast({ type: 'success', message: `Compte créé pour ${formData.email}` })
+      }
       setShowInviteModal(false)
       setFormData({ email: '', firstName: '', lastName: '', company: 'MPEB', role: 'ADMIN' })
       fetchAdmins()
@@ -651,6 +655,66 @@ export default function AdminsPage() {
                     )}
                   </button>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Activation Link Modal (when email fails) */}
+      <AnimatePresence>
+        {activationLink && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            onClick={() => setActivationLink(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6">
+                <div className="w-14 h-14 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="w-7 h-7 text-amber-600 dark:text-amber-400" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white text-center mb-2">
+                  Email non envoyé
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 text-center text-sm mb-4">
+                  Le compte de <strong>{activationLink.email}</strong> a été créé mais l'email d'activation n'a pas pu être envoyé.
+                  Copiez le lien ci-dessous et envoyez-le manuellement.
+                </p>
+                <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-3 mb-4">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Lien d'activation (expire dans 24h) :</p>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={activationLink.url}
+                      className="flex-1 text-xs bg-transparent text-gray-700 dark:text-gray-300 border-0 outline-none font-mono"
+                    />
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(activationLink.url)
+                        setToast({ type: 'success', message: 'Lien copié !' })
+                      }}
+                      className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg font-medium transition-colors whitespace-nowrap"
+                    >
+                      Copier
+                    </button>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setActivationLink(null)}
+                  className="w-full px-4 py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-xl font-medium transition-colors"
+                >
+                  Fermer
+                </button>
               </div>
             </motion.div>
           </motion.div>
