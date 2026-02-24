@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
-import { auth } from '@/lib/auth'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 // Force dynamic to ensure fresh data on each request
@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
     const includeUnpublished = searchParams.get('all') === 'true'
     
     // Check if admin for unpublished jobs
-    const session = await auth()
-    const isAdmin = session?.user?.role === 'ADMIN'
+    const admin = await getAdminFromRequest()
+    const isAdmin = !!admin
 
     const jobs = await prisma.job.findMany({
       where: includeUnpublished && isAdmin ? {} : { published: true },
@@ -54,8 +54,8 @@ const createJobSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth()
-    if (!session?.user || session.user.role !== 'ADMIN') {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { success: false, error: 'Accès non autorisé' },
         { status: 403 }
