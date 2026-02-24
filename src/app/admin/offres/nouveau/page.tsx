@@ -16,7 +16,6 @@ import {
 
 const jobSchema = z.object({
   title: z.string().min(1, 'Le titre est requis'),
-  slug: z.string().min(1, 'Le slug est requis'),
   type: z.string().min(1, 'Le type est requis'),
   location: z.string().min(1, 'La localisation est requise'),
   department: z.string().optional(),
@@ -60,10 +59,11 @@ export default function NouvelleOffrePage() {
     setError('')
 
     try {
+      const slug = generateSlug(data.title)
       const res = await fetch('/api/jobs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ ...data, slug })
       })
 
       const result = await res.json()
@@ -105,30 +105,14 @@ export default function NouvelleOffrePage() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Titre *</label>
-                <input
-                  {...register('title')}
-                  onChange={(e) => {
-                    register('title').onChange(e)
-                    setValue('slug', generateSlug(e.target.value))
-                  }}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
-                  placeholder="Ex: Ingénieur Mécanique"
-                />
-                {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Slug *</label>
-                <input
-                  {...register('slug')}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
-                  placeholder="ingenieur-mecanique"
-                />
-                {errors.slug && <p className="text-red-500 text-sm mt-1">{errors.slug.message}</p>}
-              </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Titre du poste *</label>
+              <input
+                {...register('title')}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                placeholder="Ex: Ingénieur Mécanique"
+              />
+              {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
