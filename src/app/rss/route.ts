@@ -13,7 +13,7 @@ function escapeXml(unsafe: string) {
 }
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lledo-industries.com'
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://lledo-industries.com').trim()
   
   // Récupérer tous les posts
   const allPosts = getAllPosts()

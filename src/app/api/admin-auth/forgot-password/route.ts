@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
     })
     
     // Generate reset URL
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
     const resetUrl = `${baseUrl}/admin/reset-password?token=${resetToken}`
     
     // Send password reset email

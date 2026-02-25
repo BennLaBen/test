@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
     })
     
     // Generate activation URL
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
     const activationUrl = `${baseUrl}/admin/activate?token=${activationToken}`
     
     // Envoyer l'email d'activation/invitation

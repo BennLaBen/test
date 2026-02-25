@@ -9,7 +9,7 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
     })
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.lledo-industries.com'
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'https://www.lledo-industries.com').trim()
 
     const feed = {
       publisher: 'LLEDO Industries',
