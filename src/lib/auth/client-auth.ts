@@ -9,7 +9,7 @@ import {
 import crypto from 'crypto'
 import bcrypt from 'bcryptjs'
 
-const APP_URL = process.env.NEXTAUTH_URL || process.env.APP_URL || 'http://localhost:3000'
+const APP_URL = (process.env.NEXTAUTH_URL || process.env.APP_URL || 'http://localhost:3000').trim()
 const BCRYPT_ROUNDS = 12
 
 // ============================================

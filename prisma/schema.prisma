@@ -209,17 +209,19 @@ model BlogPost {
 // ============================================
 
 model Review {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  rating    Int      // 1-5
-  content   String   @db.Text
-  company   String?
-  sector    String?  // Aéronautique, Défense, Industrie, Énergie
-  approved  Boolean  @default(false)
-  featured  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  authorName String?  // For manually added reviews (no user account)
+  authorRole String?  // e.g. "Technicien CNC", "Responsable qualité"
+  rating     Int      // 1-5
+  content    String   @db.Text
+  company    String?
+  sector     String?  // Aéronautique, Défense, Industrie, Énergie
+  approved   Boolean  @default(false)
+  featured   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("reviews")
 }

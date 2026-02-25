@@ -139,7 +139,9 @@ export default function AdminMediaPage() {
       >
         <div>
           <h1 className="text-3xl font-bold text-muted-strong">Médiathèque</h1>
-          <p className="text-muted mt-1">{media.length} fichier(s)</p>
+          <p className="text-muted mt-1">
+            {media.length} fichier(s) — Uploadez vos images et documents ici, puis copiez l'URL pour les utiliser dans le blog, les offres d'emploi ou les pages entreprises.
+          </p>
         </div>
         
         <div className="flex items-center gap-4">
@@ -174,15 +176,15 @@ export default function AdminMediaPage() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Rechercher..."
-            className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            placeholder="Rechercher un fichier..."
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
           />
         </div>
 
         <select
           value={selectedFolder}
           onChange={(e) => setSelectedFolder(e.target.value)}
-          className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:border-blue-500"
+          className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
         >
           <option value="">Tous les dossiers</option>
           {FOLDERS.map(folder => (
@@ -190,16 +192,16 @@ export default function AdminMediaPage() {
           ))}
         </select>
 
-        <div className="flex items-center bg-gray-800 rounded-lg border border-gray-700 p-1">
+        <div className="flex items-center bg-white dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-600 p-1">
           <button
             onClick={() => setViewMode('grid')}
-            className={`p-2 rounded ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}`}
+            className={`p-2 rounded ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white'}`}
           >
             <Grid className="h-4 w-4" />
           </button>
           <button
             onClick={() => setViewMode('list')}
-            className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}`}
+            className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white'}`}
           >
             <List className="h-4 w-4" />
           </button>

@@ -118,6 +118,56 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // Notify all active admins by email
+    try {
+      const { sendEmail } = await import('@/lib/email/mailer')
+      const activeAdmins = await prisma.admin.findMany({
+        where: { isActive: true },
+        select: { email: true, firstName: true }
+      })
+      const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
+      
+      for (const admin of activeAdmins) {
+        await sendEmail({
+          to: admin.email,
+          subject: `Nouvelle candidature : ${data.firstName} ${data.lastName} - ${application.job.title}`,
+          html: `
+            <!DOCTYPE html>
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937;">
+              <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="text-align: center; padding: 30px 0; background: linear-gradient(135deg, #0047FF 0%, #002d99 100%); border-radius: 12px 12px 0 0;">
+                  <h2 style="color: white; margin: 0;">📋 Nouvelle candidature</h2>
+                </div>
+                <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb;">
+                  <p>Bonjour ${admin.firstName},</p>
+                  <p>Une nouvelle candidature a été reçue :</p>
+                  <div style="background: #f3f4f6; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                    <p style="margin: 4px 0;"><strong>Candidat :</strong> ${data.firstName} ${data.lastName}</p>
+                    <p style="margin: 4px 0;"><strong>Email :</strong> ${data.email}</p>
+                    ${data.phone ? `<p style="margin: 4px 0;"><strong>Téléphone :</strong> ${data.phone}</p>` : ''}
+                    <p style="margin: 4px 0;"><strong>Poste :</strong> ${application.job.title}</p>
+                    ${data.message ? `<p style="margin: 4px 0;"><strong>Message :</strong> ${data.message}</p>` : ''}
+                  </div>
+                  <div style="text-align: center; margin: 20px 0;">
+                    <a href="${baseUrl}/admin/candidatures" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #0047FF 0%, #002d99 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;">Voir les candidatures</a>
+                  </div>
+                </div>
+                <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; border-radius: 0 0 12px 12px;">
+                  <p>© ${new Date().getFullYear()} LLEDO Industries</p>
+                </div>
+              </div>
+            </body>
+            </html>
+          `,
+          text: `Nouvelle candidature de ${data.firstName} ${data.lastName} pour le poste "${application.job.title}". Email: ${data.email}. Voir: ${baseUrl}/admin/candidatures`,
+        })
+      }
+      console.log(`[applications] Notified ${activeAdmins.length} admins about new application`)
+    } catch (emailErr) {
+      console.error('[applications] Failed to notify admins:', emailErr)
+    }
+
     return NextResponse.json(
       { 
         success: true, 

@@ -31,7 +31,8 @@ export async function GET() {
     // Transform to include author name
     const formattedReviews = reviews.map(r => ({
       id: r.id,
-      authorName: `${r.user.firstName} ${r.user.lastName}`.trim(),
+      authorName: r.user ? `${r.user.firstName} ${r.user.lastName}`.trim() : (r.authorName || 'Client'),
+      authorRole: r.authorRole || undefined,
       authorCompany: r.company || 'Client LLEDO',
       rating: r.rating,
       content: r.content,

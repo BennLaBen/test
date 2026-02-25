@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Star, 
   Check, 
@@ -11,7 +11,9 @@ import {
   Building2,
   Calendar,
   Loader2,
-  Filter
+  Filter,
+  Plus,
+  MessageSquarePlus
 } from 'lucide-react'
 
 interface Review {
@@ -20,20 +22,32 @@ interface Review {
   content: string
   company?: string
   sector?: string
+  authorName?: string
+  authorRole?: string
   approved: boolean
   featured: boolean
   createdAt: string
-  user: {
+  user?: {
     firstName: string
     lastName: string
     email: string
-  }
+  } | null
 }
 
 export default function AdminAvisPage() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved'>('all')
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [creating, setCreating] = useState(false)
+  const [newReview, setNewReview] = useState({
+    authorName: '',
+    authorRole: '',
+    rating: 5,
+    content: '',
+    company: '',
+    sector: '',
+  })
 
   useEffect(() => {
     fetchReviews()
@@ -84,6 +98,28 @@ export default function AdminAvisPage() {
     }
   }
 
+  async function createReview(e: React.FormEvent) {
+    e.preventDefault()
+    setCreating(true)
+    try {
+      const res = await fetch('/api/admin/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview)
+      })
+      const data = await res.json()
+      if (data.success) {
+        setShowAddModal(false)
+        setNewReview({ authorName: '', authorRole: '', rating: 5, content: '', company: '', sector: '' })
+        fetchReviews()
+      }
+    } catch (err) {
+      console.error('Error creating review:', err)
+    } finally {
+      setCreating(false)
+    }
+  }
+
   const filteredReviews = reviews.filter(r => {
     if (filter === 'pending') return !r.approved
     if (filter === 'approved') return r.approved
@@ -106,17 +142,26 @@ export default function AdminAvisPage() {
           </p>
         </div>
         
-        <div className="flex items-center gap-2">
-          <Filter className="h-5 w-5 text-gray-400" />
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value as any)}
-            className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Filter className="h-5 w-5 text-gray-400" />
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as any)}
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+            >
+              <option value="all">Tous les avis</option>
+              <option value="pending">En attente ({pendingCount})</option>
+              <option value="approved">Approuvés</option>
+            </select>
+          </div>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="btn-primary flex items-center gap-2"
           >
-            <option value="all">Tous les avis</option>
-            <option value="pending">En attente ({pendingCount})</option>
-            <option value="approved">Approuvés</option>
-          </select>
+            <Plus className="h-5 w-5" />
+            Ajouter un avis
+          </button>
         </div>
       </motion.div>
 
@@ -164,7 +209,8 @@ export default function AdminAvisPage() {
                   <div className="flex items-center gap-6 text-sm text-muted">
                     <span className="flex items-center gap-1">
                       <User className="h-4 w-4" />
-                      {review.user.firstName} {review.user.lastName}
+                      {review.user ? `${review.user.firstName} ${review.user.lastName}` : review.authorName || 'Anonyme'}
+                      {review.authorRole && <span className="text-xs text-gray-400 ml-1">— {review.authorRole}</span>}
                     </span>
                     {review.company && (
                       <span className="flex items-center gap-1">
@@ -228,6 +274,137 @@ export default function AdminAvisPage() {
           ))}
         </div>
       )}
+
+      {/* Add Review Modal */}
+      <AnimatePresence>
+        {showAddModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            onClick={() => setShowAddModal(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
+                    <MessageSquarePlus className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Ajouter un avis</h3>
+                </div>
+                <button onClick={() => setShowAddModal(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                  <X className="w-5 h-5 text-gray-400" />
+                </button>
+              </div>
+              <form onSubmit={createReview} className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Nom complet *</label>
+                    <input
+                      required
+                      value={newReview.authorName}
+                      onChange={(e) => setNewReview({ ...newReview, authorName: e.target.value })}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                      placeholder="Jean Dupont"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Poste / Rôle</label>
+                    <input
+                      value={newReview.authorRole}
+                      onChange={(e) => setNewReview({ ...newReview, authorRole: e.target.value })}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                      placeholder="Technicien CNC"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Entreprise</label>
+                    <select
+                      value={newReview.company}
+                      onChange={(e) => setNewReview({ ...newReview, company: e.target.value })}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                    >
+                      <option value="">Sélectionner</option>
+                      <option value="MPEB">MPEB</option>
+                      <option value="EGI">EGI</option>
+                      <option value="FREM">FREM</option>
+                      <option value="MGP">MGP</option>
+                      <option value="LLEDO Aerotools">LLEDO Aerotools</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Secteur</label>
+                    <select
+                      value={newReview.sector}
+                      onChange={(e) => setNewReview({ ...newReview, sector: e.target.value })}
+                      className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm"
+                    >
+                      <option value="">Sélectionner</option>
+                      <option value="Aéronautique">Aéronautique</option>
+                      <option value="Défense">Défense</option>
+                      <option value="Industrie">Industrie</option>
+                      <option value="Énergie">Énergie</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Note *</label>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setNewReview({ ...newReview, rating: star })}
+                        className="p-1"
+                      >
+                        <Star className={`h-7 w-7 transition-colors ${star <= newReview.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-300'}`} />
+                      </button>
+                    ))}
+                    <span className="ml-2 text-sm text-gray-500">{newReview.rating}/5</span>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Contenu de l'avis *</label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={newReview.content}
+                    onChange={(e) => setNewReview({ ...newReview, content: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm resize-none"
+                    placeholder="Excellent travail, pièces de qualité..."
+                  />
+                </div>
+                <div className="flex items-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium transition-colors"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={creating}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-xl font-medium transition-all disabled:opacity-50"
+                  >
+                    {creating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
+                    {creating ? 'Création...' : 'Publier l\'avis'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

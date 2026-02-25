@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -11,7 +11,8 @@ import {
   ArrowLeft,
   Save,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  MapPin
 } from 'lucide-react'
 
 const jobSchema = z.object({
@@ -19,7 +20,6 @@ const jobSchema = z.object({
   type: z.string().min(1, 'Le type est requis'),
   location: z.string().min(1, 'La localisation est requise'),
   department: z.string().optional(),
-  salary: z.string().optional(),
   description: z.string().min(10, 'La description est requise'),
   requirements: z.string().min(10, 'Les prérequis sont requis'),
   benefits: z.string().optional(),
@@ -29,10 +29,22 @@ const jobSchema = z.object({
 
 type JobForm = z.infer<typeof jobSchema>
 
+interface CitySuggestion {
+  label: string
+  city: string
+  postcode: string
+  context: string
+}
+
 export default function NouvelleOffrePage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [locationQuery, setLocationQuery] = useState('')
+  const [suggestions, setSuggestions] = useState<CitySuggestion[]>([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const suggestionsRef = useRef<HTMLDivElement>(null)
+  const debounceRef = useRef<NodeJS.Timeout | null>(null)
 
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<JobForm>({
     resolver: zodResolver(jobSchema),
@@ -41,6 +53,49 @@ export default function NouvelleOffrePage() {
       featured: false,
     }
   })
+
+  // City autocomplete using api-adresse.data.gouv.fr (free, no API key)
+  const searchCities = useCallback(async (query: string) => {
+    if (query.length < 2) { setSuggestions([]); return }
+    try {
+      const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&type=municipality&limit=6`)
+      const data = await res.json()
+      const results: CitySuggestion[] = data.features?.map((f: any) => ({
+        label: `${f.properties.name} (${f.properties.postcode})`,
+        city: f.properties.city || f.properties.name,
+        postcode: f.properties.postcode,
+        context: f.properties.context,
+      })) || []
+      setSuggestions(results)
+      setShowSuggestions(results.length > 0)
+    } catch { setSuggestions([]) }
+  }, [])
+
+  const handleLocationInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setLocationQuery(val)
+    setValue('location', val)
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => searchCities(val), 300)
+  }
+
+  const selectCity = (s: CitySuggestion) => {
+    const formatted = `${s.city} (${s.postcode})`
+    setLocationQuery(formatted)
+    setValue('location', formatted)
+    setShowSuggestions(false)
+  }
+
+  // Close suggestions on click outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
   const title = watch('title')
 
@@ -131,18 +186,42 @@ export default function NouvelleOffrePage() {
                 {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>}
               </div>
 
-              <div>
+              <div className="relative" ref={suggestionsRef}>
                 <label className="block text-sm font-medium mb-2">Localisation *</label>
-                <input
-                  {...register('location')}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
-                  placeholder="Les Pennes-Mirabeau (13)"
-                />
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={locationQuery}
+                    onChange={handleLocationInput}
+                    onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                    placeholder="Tapez une ville..."
+                    autoComplete="off"
+                  />
+                </div>
+                {showSuggestions && (
+                  <div className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                    {suggestions.map((s, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => selectCity(s)}
+                        className="w-full text-left px-4 py-2.5 hover:bg-blue-50 dark:hover:bg-gray-700 flex items-center gap-2 text-sm transition-colors"
+                      >
+                        <MapPin className="h-3.5 w-3.5 text-blue-500 flex-shrink-0" />
+                        <span className="font-medium">{s.city}</span>
+                        <span className="text-gray-400 text-xs">({s.postcode})</span>
+                        <span className="text-gray-400 text-xs ml-auto">{s.context}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Département</label>
+                <label className="block text-sm font-medium mb-2">Entreprise</label>
                 <select
                   {...register('department')}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
@@ -152,17 +231,9 @@ export default function NouvelleOffrePage() {
                   <option value="MGP">MGP</option>
                   <option value="EGI">EGI</option>
                   <option value="FREM">FREM</option>
+                  <option value="LLEDO Aerotools">LLEDO Aerotools</option>
                 </select>
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">Salaire</label>
-              <input
-                {...register('salary')}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
-                placeholder="35-45K€"
-              />
             </div>
 
             <div>
