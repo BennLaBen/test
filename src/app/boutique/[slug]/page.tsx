@@ -14,43 +14,44 @@ import {
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/shop/Breadcrumbs'
 import { ProductCard } from '@/components/shop/ProductCard'
+import { ModelViewer3D } from '@/components/shop/ModelViewer3D'
 
 const HELICOPTER_IMAGES: Record<string, string> = {
-  H160: '/images/aerotools/heli-h160.svg',
-  H175: '/images/aerotools/heli-h175.svg',
-  NH90: '/images/aerotools/heli-nh90-real.png',
-  'Super Puma': '/images/aerotools/heli-super-puma.svg',
-  Cougar: '/images/aerotools/heli-super-puma.svg',
-  Caracal: '/images/aerotools/heli-caracal.png',
-  AS332: '/images/aerotools/heli-super-puma.svg',
-  AS532: '/images/aerotools/heli-super-puma.svg',
-  EC225: '/images/aerotools/heli-caracal.png',
-  EC725: '/images/aerotools/heli-caracal.png',
-  H215: '/images/aerotools/heli-super-puma.svg',
-  H225: '/images/aerotools/heli-caracal.png',
-  Gazelle: '/images/aerotools/heli-gazelle.svg',
-  SA341: '/images/aerotools/heli-gazelle.svg',
-  SA342: '/images/aerotools/heli-gazelle.svg',
-  H125: '/images/aerotools/heli-h125.svg',
-  H120: '/images/aerotools/heli-h125.svg',
-  EC120: '/images/aerotools/heli-h125.svg',
-  AS350: '/images/aerotools/heli-h125.svg',
-  AS355: '/images/aerotools/heli-h125.svg',
-  Ecureuil: '/images/aerotools/heli-h125.svg',
-  H130: '/images/aerotools/heli-h130-real.png',
-  EC130: '/images/aerotools/heli-h130-real.png',
-  H135: '/images/aerotools/heli-h125.svg',
-  H145: '/images/aerotools/heli-h125.svg',
-  SA365: '/images/aerotools/heli-dauphin-real.png',
-  Dauphin: '/images/aerotools/heli-dauphin-real.png',
-  AS565: '/images/aerotools/heli-dauphin-real.png',
-  Panther: '/images/aerotools/heli-dauphin-real.png',
-  SA330: '/images/aerotools/heli-super-puma.svg',
-  Puma: '/images/aerotools/heli-super-puma.svg',
-  AW139: '/images/aerotools/heli-aw139-real.png',
-  AW109: '/images/aerotools/heli-aw139-real.png',
-  AW119: '/images/aerotools/heli-aw139-real.png',
-  Universel: '/images/aerotools/helicopter-hero.png',
+  H160: '/images/aerotools/helicopters/h160.jpg',
+  H175: '/images/aerotools/helicopters/h160.jpg',
+  NH90: '/images/aerotools/helicopters/nh90.jpg',
+  'Super Puma': '/images/aerotools/helicopters/as332.jpg',
+  Cougar: '/images/aerotools/helicopters/as532.jpg',
+  Caracal: '/images/aerotools/helicopters/h225m.jpg',
+  AS332: '/images/aerotools/helicopters/as332.jpg',
+  AS532: '/images/aerotools/helicopters/as532.jpg',
+  EC225: '/images/aerotools/helicopters/h225.jpg',
+  EC725: '/images/aerotools/helicopters/h225m.jpg',
+  H215: '/images/aerotools/helicopters/h215.jpg',
+  H225: '/images/aerotools/helicopters/h225.jpg',
+  Gazelle: '/images/aerotools/helicopters/gazelle.jpg',
+  SA341: '/images/aerotools/helicopters/gazelle.jpg',
+  SA342: '/images/aerotools/helicopters/gazelle.jpg',
+  H125: '/images/aerotools/helicopters/h125.jpg',
+  H120: '/images/aerotools/helicopters/h120.jpg',
+  EC120: '/images/aerotools/helicopters/h120.jpg',
+  AS350: '/images/aerotools/helicopters/h125.jpg',
+  AS355: '/images/aerotools/helicopters/h125.jpg',
+  Ecureuil: '/images/aerotools/helicopters/h125.jpg',
+  H130: '/images/aerotools/helicopters/h130.jpg',
+  EC130: '/images/aerotools/helicopters/h130.jpg',
+  H135: '/images/aerotools/helicopters/h135.jpg',
+  H145: '/images/aerotools/helicopters/h145.jpg',
+  SA365: '/images/aerotools/helicopters/sa365.jpg',
+  Dauphin: '/images/aerotools/helicopters/sa365.jpg',
+  AS565: '/images/aerotools/helicopters/as565.jpg',
+  Panther: '/images/aerotools/helicopters/as565.jpg',
+  SA330: '/images/aerotools/helicopters/sa330.jpg',
+  Puma: '/images/aerotools/helicopters/sa330.jpg',
+  AW139: '/images/aerotools/helicopters/aw139.jpg',
+  AW109: '/images/aerotools/helicopters/aw109.jpg',
+  AW119: '/images/aerotools/helicopters/aw119.jpg',
+  Universel: '/images/aerotools/helicopters/h225.jpg',
 }
 
 /* ═══════════════════════════════════════════
@@ -119,6 +120,8 @@ function ProductGallery({ product }: { product: any }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [zoomed, setZoomed] = useState(false)
   const [showEquipped, setShowEquipped] = useState(false)
+  const [show3D, setShow3D] = useState(false)
+  const has3D = !!product.model3d
 
   const heliImage = product.compatibility?.[0] ? HELICOPTER_IMAGES[product.compatibility[0]] : null
   const allImages = [product.image, ...(product.gallery || [])].filter(Boolean)
@@ -280,6 +283,44 @@ function ProductGallery({ product }: { product: any }) {
         <div className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden flex items-center justify-center">
           <Box className="h-40 w-40 text-gray-700" />
         </div>
+      )}
+
+      {/* 3D / Photo toggle */}
+      {has3D && (
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShow3D(false)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              !show3D
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 border border-blue-400/50'
+                : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
+            }`}
+          >
+            <Eye className="h-4 w-4" />
+            Photos
+          </button>
+          <button
+            onClick={() => setShow3D(true)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              show3D
+                ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30 border border-cyan-400/50'
+                : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
+            }`}
+          >
+            <Box className="h-4 w-4" />
+            Vue 3D
+          </button>
+        </div>
+      )}
+
+      {/* 3D Viewer */}
+      {has3D && show3D && (
+        <ModelViewer3D
+          src={product.model3d}
+          alt={`${product.name} — Vue 3D`}
+          poster={product.image}
+          className="aspect-[4/3]"
+        />
       )}
 
       {/* Compliance badges */}
