@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { put, list } from '@vercel/blob'
-import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import type { ShopProduct } from '@/lib/shop/types'
 
 const IS_VERCEL = !!process.env.VERCEL
@@ -54,15 +53,6 @@ export async function GET() {
 // POST /api/products - Save products (called from admin panel)
 export async function POST(request: NextRequest) {
   try {
-    // Soft auth check — log but don't block (products are public data)
-    let adminEmail = 'unknown'
-    try {
-      const admin = await getAdminFromRequest()
-      if (admin) adminEmail = admin.email
-    } catch {
-      // Auth check failed — continue anyway
-    }
-
     const body = await request.json()
     const products = body?.products as ShopProduct[] | undefined
     if (!Array.isArray(products) || products.length === 0) {
@@ -78,21 +68,22 @@ export async function POST(request: NextRequest) {
         addRandomSuffix: false,
         contentType: 'application/json',
       })
-      console.log(`[products] PUT OK by ${adminEmail} — ${products.length} products saved to blob: ${blob.url}`)
+      console.log(`[products] POST OK — ${products.length} products saved to blob: ${blob.url}`)
     } else {
       // Dev: save to local override file
       const fs = await import('fs/promises')
       const path = await import('path')
       const overridePath = path.join(process.cwd(), 'src', 'data', 'shop', 'products-override.json')
       await fs.writeFile(overridePath, jsonStr, 'utf-8')
-      console.log(`[products] PUT OK by ${adminEmail} — ${products.length} products saved to ${overridePath}`)
+      console.log(`[products] POST OK — ${products.length} products saved to ${overridePath}`)
     }
 
     return NextResponse.json({ success: true, count: products.length })
-  } catch (error) {
-    console.error('[products] PUT error:', error)
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error)
+    console.error('[products] POST error:', msg)
     return NextResponse.json(
-      { success: false, error: 'Erreur sauvegarde produits' },
+      { success: false, error: msg },
       { status: 500 }
     )
   }
