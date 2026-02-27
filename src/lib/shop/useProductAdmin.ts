@@ -111,10 +111,20 @@ export function useProductAdmin() {
     setLoaded(true)
   }, [])
 
-  // Persist to localStorage on change
+  // Persist to localStorage + server API on change
   useEffect(() => {
     if (loaded && products.length > 0) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
+
+      // Debounced server sync (saves to Vercel Blob in prod, file in dev)
+      const timer = setTimeout(() => {
+        fetch('/api/products', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ products }),
+        }).catch(err => console.warn('[useProductAdmin] Server sync failed:', err))
+      }, 1000)
+      return () => clearTimeout(timer)
     }
   }, [products, loaded])
 

@@ -5,6 +5,7 @@ import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { getProductBySlug, getRelatedProducts, getBoughtTogether } from '@/lib/shop/data'
+import { useProducts } from '@/lib/shop/useProducts'
 import { useQuote } from '@/contexts/QuoteContext'
 import {
   Check, Shield, ShoppingBag, FileText, ChevronRight, ChevronDown, ChevronLeft,
@@ -390,10 +391,11 @@ function ProductGallery({ product }: { product: any }) {
    ═══════════════════════════════════════════ */
 export default function ProductDetailPage() {
   const params = useParams()
+  const { products } = useProducts()
   const { addItem } = useQuote()
   const [added, setAdded] = useState(false)
 
-  const product = getProductBySlug(params.slug as string)
+  const product = getProductBySlug(params.slug as string, products)
 
   if (!product) {
     return (
@@ -409,8 +411,8 @@ export default function ProductDetailPage() {
     )
   }
 
-  const related = getRelatedProducts(product)
-  const boughtTogether = getBoughtTogether(product)
+  const related = getRelatedProducts(product, 3, products)
+  const boughtTogether = getBoughtTogether(product, products)
 
   const handleAddToQuote = () => {
     addItem({ ...product, price_display: product.priceDisplay } as any)

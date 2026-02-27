@@ -7,7 +7,8 @@ import Link from 'next/link'
 import { Search, Shield, Award, Truck, Phone, ChevronDown, X, ArrowRight, Zap, FileText } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/SEO'
-import { products, getCategoryCounts, getHelicopters, getProductsByHelicopter } from '@/lib/shop/data'
+import { getCategoryCounts, getHelicopters, getProductsByHelicopter } from '@/lib/shop/data'
+import { useProducts } from '@/lib/shop/useProducts'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { CategoryFilter } from '@/components/shop/CategoryFilter'
 import { HangarInterior } from '@/components/shop/HangarInterior'
@@ -209,13 +210,14 @@ function TrustBar() {
 // ─── MAIN PAGE ───
 export default function BoutiquePage() {
   const { t } = useTranslation('common')
+  const { products } = useProducts()
   const [activeHelicopter, setActiveHelicopter] = useState('all')
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
 
-  const helicopters = getHelicopters()
-  const baseProducts = getProductsByHelicopter(activeHelicopter)
+  const helicopters = getHelicopters(products)
+  const baseProducts = getProductsByHelicopter(activeHelicopter, products)
   const categoryCounts = getCategoryCounts(baseProducts)
 
   const filteredProducts = baseProducts.filter(p => {

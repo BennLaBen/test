@@ -7,17 +7,20 @@ export const products: ShopProduct[] = productsData as ShopProduct[]
 export const categories: ShopCategory[] = categoriesData as ShopCategory[]
 export const filters: ShopFilters = filtersData as ShopFilters
 
-export function getProductBySlug(slug: string): ShopProduct | undefined {
-  return products.find(p => p.slug === slug || p.id === slug)
+export function getProductBySlug(slug: string, source?: ShopProduct[]): ShopProduct | undefined {
+  const list = source || products
+  return list.find(p => p.slug === slug || p.id === slug)
 }
 
-export function getProductsByCategory(categoryId: string): ShopProduct[] {
-  if (categoryId === 'all') return products
-  return products.filter(p => p.category === categoryId)
+export function getProductsByCategory(categoryId: string, source?: ShopProduct[]): ShopProduct[] {
+  const list = source || products
+  if (categoryId === 'all') return list
+  return list.filter(p => p.category === categoryId)
 }
 
-export function getRelatedProducts(product: ShopProduct, limit = 3): ShopProduct[] {
-  return products
+export function getRelatedProducts(product: ShopProduct, limit = 3, source?: ShopProduct[]): ShopProduct[] {
+  const list = source || products
+  return list
     .filter(p => p.id !== product.id && (
       p.category === product.category ||
       p.compatibility.some(c => product.compatibility.includes(c))
@@ -25,10 +28,11 @@ export function getRelatedProducts(product: ShopProduct, limit = 3): ShopProduct
     .slice(0, limit)
 }
 
-export function getBoughtTogether(product: ShopProduct): ShopProduct[] {
+export function getBoughtTogether(product: ShopProduct, source?: ShopProduct[]): ShopProduct[] {
+  const list = source || products
   if (!product.boughtTogether?.length) return []
   return product.boughtTogether
-    .map(id => products.find(p => p.id === id))
+    .map(id => list.find(p => p.id === id))
     .filter((p): p is ShopProduct => !!p)
 }
 
@@ -69,10 +73,11 @@ export function getCategoryCounts(allProducts: ShopProduct[]): Record<string, nu
   return counts
 }
 
-export function getHelicopters(): { id: string; name: string; count: number }[] {
+export function getHelicopters(source?: ShopProduct[]): { id: string; name: string; count: number }[] {
+  const list = source || products
   const heliMap = new Map<string, number>()
   
-  for (const p of products) {
+  for (const p of list) {
     for (const h of p.compatibility) {
       heliMap.set(h, (heliMap.get(h) || 0) + 1)
     }
@@ -83,7 +88,8 @@ export function getHelicopters(): { id: string; name: string; count: number }[] 
     .sort((a, b) => a.name.localeCompare(b.name))
 }
 
-export function getProductsByHelicopter(helicopterId: string): ShopProduct[] {
-  if (!helicopterId || helicopterId === 'all') return products
-  return products.filter(p => p.compatibility.includes(helicopterId))
+export function getProductsByHelicopter(helicopterId: string, source?: ShopProduct[]): ShopProduct[] {
+  const list = source || products
+  if (!helicopterId || helicopterId === 'all') return list
+  return list.filter(p => p.compatibility.includes(helicopterId))
 }

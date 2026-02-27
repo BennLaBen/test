@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { products, filters as filtersData, filterProducts, getCategoryCounts } from '@/lib/shop/data'
+import { filters as filtersData, filterProducts, getCategoryCounts } from '@/lib/shop/data'
+import { useProducts } from '@/lib/shop/useProducts'
 import type { ActiveFilters } from '@/lib/shop/types'
 import { defaultFilters } from '@/lib/shop/types'
 import { ProductCard } from '@/components/shop/ProductCard'
@@ -11,11 +12,12 @@ import { Breadcrumbs } from '@/components/shop/Breadcrumbs'
 import { Search, LayoutGrid, List } from 'lucide-react'
 
 export default function CataloguePage() {
+  const { products } = useProducts()
   const [active, setActive] = useState<ActiveFilters>(defaultFilters)
   const [view, setView] = useState<'grid' | 'list'>('grid')
 
-  const filtered = useMemo(() => filterProducts(products, active), [active])
-  const counts = useMemo(() => getCategoryCounts(products), [])
+  const filtered = useMemo(() => filterProducts(products, active), [products, active])
+  const counts = useMemo(() => getCategoryCounts(products), [products])
 
   return (
     <div className="min-h-screen bg-gray-950 text-white pt-28 pb-20">

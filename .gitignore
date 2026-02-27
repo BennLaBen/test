@@ -35,6 +35,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local product data override (dev only)
+products-override.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
