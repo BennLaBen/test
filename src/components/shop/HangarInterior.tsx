@@ -84,6 +84,12 @@ function ImmersiveWelcome() {
   // Parallax floor perspective
   const floorY = useTransform(scrollYProgress, [0, 1], ['60%', '30%'])
 
+  // Ceiling light beam opacity (extracted from map callback)
+  const beamOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 0.4])
+
+  // BG overlay opacity
+  const bgOverlayOpacity = useTransform(bgBrightness, (v) => 1 - v)
+
   // Scroll hint
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0])
 
@@ -101,7 +107,7 @@ function ImmersiveWelcome() {
           />
           <motion.div
             className="absolute inset-0 bg-gray-950"
-            style={{ opacity: useTransform(bgBrightness, (v) => 1 - v) }}
+            style={{ opacity: bgOverlayOpacity }}
           />
         </motion.div>
 
@@ -129,7 +135,7 @@ function ImmersiveWelcome() {
               key={i}
               className="w-px h-40"
               style={{
-                opacity: useTransform(scrollYProgress, [0.2, 0.4], [0, 0.4]),
+                opacity: beamOpacity,
                 background: 'linear-gradient(to bottom, rgba(59,130,246,0.5), transparent)',
               }}
             />
