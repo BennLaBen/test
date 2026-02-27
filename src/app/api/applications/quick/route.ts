@@ -1,15 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
-
-// Initialisation lazy de Resend pour éviter l'erreur au build
-const getResend = () => {
-  const apiKey = process.env.RESEND_API_KEY
-  if (!apiKey) {
-    throw new Error('RESEND_API_KEY is not configured')
-  }
-  return new Resend(apiKey)
-}
+import { writeFile, mkdir } from 'fs/promises'
+import { existsSync } from 'fs'
+import path from 'path'
 
 // Schéma de validation pour candidature rapide
 const quickApplicationSchema = z.object({
@@ -34,153 +28,162 @@ export async function POST(request: NextRequest) {
     // Validation
     const validated = quickApplicationSchema.parse(data)
     
-    // Récupérer le fichier CV si présent
+    // Récupérer et sauvegarder le fichier CV si présent
     const cvFile = formData.get('cv') as File | null
-    let cvInfo = 'Aucun CV joint'
+    let cvUrl = ''
+    let cvName = ''
     
     if (cvFile && cvFile.size > 0) {
-      cvInfo = `CV joint: ${cvFile.name} (${(cvFile.size / 1024).toFixed(1)} Ko)`
+      // Validate file type
+      const allowedTypes = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      ]
+      if (!allowedTypes.includes(cvFile.type)) {
+        return NextResponse.json(
+          { success: false, error: 'Type de fichier non autorisé. Formats acceptés : PDF, DOC, DOCX' },
+          { status: 400 }
+        )
+      }
+
+      // Validate file size (10MB max)
+      if (cvFile.size > 10 * 1024 * 1024) {
+        return NextResponse.json(
+          { success: false, error: 'Fichier trop volumineux. Taille maximale : 10 Mo' },
+          { status: 400 }
+        )
+      }
+
+      // Save file to disk
+      const timestamp = Date.now()
+      const safeName = cvFile.name.replace(/[^a-zA-Z0-9.-]/g, '_').slice(0, 50)
+      const filename = `${timestamp}-${safeName}`
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'cvs')
+
+      if (!existsSync(uploadDir)) {
+        await mkdir(uploadDir, { recursive: true })
+      }
+
+      const bytes = await cvFile.arrayBuffer()
+      const buffer = Buffer.from(bytes)
+      await writeFile(path.join(uploadDir, filename), buffer)
+
+      cvUrl = `/uploads/cvs/${filename}`
+      cvName = cvFile.name
     }
 
-    // Construire le contenu de l'email
-    const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <style>
-          body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-          .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-          .header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 30px; text-align: center; }
-          .header h1 { margin: 0; font-size: 24px; }
-          .content { padding: 30px; }
-          .field { margin-bottom: 20px; }
-          .label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-          .value { font-size: 16px; color: #1f2937; padding: 12px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #3b82f6; }
-          .message-box { background: #eff6ff; padding: 20px; border-radius: 8px; margin-top: 20px; }
-          .footer { background: #f9fafb; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; }
-          .badge { display: inline-block; background: #3b82f6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>📋 Nouvelle Candidature</h1>
-            <p style="margin: 10px 0 0; opacity: 0.9;">Via le formulaire rapide</p>
-          </div>
-          <div class="content">
-            <div class="field">
-              <div class="label">Candidat</div>
-              <div class="value">${validated.name}</div>
-            </div>
-            <div class="field">
-              <div class="label">Email</div>
-              <div class="value"><a href="mailto:${validated.email}" style="color: #3b82f6;">${validated.email}</a></div>
-            </div>
-            <div class="field">
-              <div class="label">Poste souhaité</div>
-              <div class="value"><span class="badge">${validated.position === 'spontanee' ? 'Candidature spontanée' : validated.position}</span></div>
-            </div>
-            <div class="field">
-              <div class="label">CV</div>
-              <div class="value">${cvInfo}</div>
-            </div>
-            ${validated.message ? `
-            <div class="message-box">
-              <div class="label">Message</div>
-              <p style="margin: 10px 0 0; color: #374151; line-height: 1.6;">${validated.message}</p>
-            </div>
-            ` : ''}
-          </div>
-          <div class="footer">
-            <p>Candidature reçue le ${new Date().toLocaleDateString('fr-FR', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}</p>
-            <p>LLEDO Industries - Groupe Industriel</p>
-          </div>
-        </div>
-      </body>
-      </html>
-    `
+    // Extraire prénom et nom depuis le champ name
+    const nameParts = validated.name.trim().split(/\s+/)
+    const firstName = nameParts[0] || validated.name
+    const lastName = nameParts.slice(1).join(' ') || '-'
 
-    // Envoyer l'email via Resend
-    const resend = getResend()
-    const { data: emailResult, error: emailError } = await resend.emails.send({
-      from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
-      to: ['rh@lledo-industries.com'],
-      replyTo: validated.email,
-      subject: `[Candidature] ${validated.name} - ${validated.position === 'spontanee' ? 'Candidature spontanée' : validated.position}`,
-      html: emailHtml,
-    })
-
-    if (emailError) {
-      console.error('Resend error:', emailError)
-      return NextResponse.json(
-        { success: false, error: 'Erreur lors de l\'envoi de l\'email' },
-        { status: 500 }
-      )
+    // Chercher un job correspondant au poste sélectionné (optionnel)
+    let jobId: string | null = null
+    if (validated.position && validated.position !== 'spontanee') {
+      const job = await prisma.job.findFirst({
+        where: { title: validated.position, published: true }
+      })
+      if (job) jobId = job.id
     }
 
-    // Envoyer un email de confirmation au candidat
-    await resend.emails.send({
-      from: process.env.SMTP_FROM || 'noreply@mpeb13.com',
-      to: [validated.email],
-      subject: 'Confirmation de votre candidature - LLEDO Industries',
-      html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
-            .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-            .header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; text-align: center; }
-            .header h1 { margin: 0; font-size: 28px; }
-            .content { padding: 40px; text-align: center; }
-            .checkmark { width: 80px; height: 80px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-            .footer { background: #f9fafb; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>✅ Candidature reçue !</h1>
-            </div>
-            <div class="content">
-              <p style="font-size: 18px; color: #374151; margin-bottom: 20px;">
-                Bonjour <strong>${validated.name}</strong>,
-              </p>
-              <p style="color: #6b7280; line-height: 1.8;">
-                Nous avons bien reçu votre candidature pour le poste de <strong>${validated.position === 'spontanee' ? 'Candidature spontanée' : validated.position}</strong>.
-              </p>
-              <p style="color: #6b7280; line-height: 1.8;">
-                Notre équipe RH examinera votre profil et reviendra vers vous dans les meilleurs délais.
-              </p>
-              <p style="margin-top: 30px; color: #374151;">
-                À très bientôt,<br>
-                <strong>L'équipe LLEDO Industries</strong>
-              </p>
-            </div>
-            <div class="footer">
-              <p>LLEDO Industries - Groupe Industriel</p>
-              <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `,
+    // Si pas de job trouvé, chercher ou créer un job "Candidature spontanée"
+    if (!jobId) {
+      let spontaneousJob = await prisma.job.findFirst({
+        where: { slug: 'candidature-spontanee' }
+      })
+      if (!spontaneousJob) {
+        spontaneousJob = await prisma.job.create({
+          data: {
+            title: 'Candidature spontanée',
+            slug: 'candidature-spontanee',
+            type: 'Spontanée',
+            location: 'Aix-en-Provence',
+            department: 'Général',
+            description: 'Candidature spontanée reçue via le formulaire rapide.',
+            requirements: 'Aucun prérequis spécifique.',
+            published: false,
+          }
+        })
+      }
+      jobId = spontaneousJob.id
+    }
+
+    // Sauvegarder la candidature en base de données
+    const application = await prisma.application.create({
+      data: {
+        jobId,
+        firstName,
+        lastName,
+        email: validated.email,
+        phone: null,
+        message: validated.message || null,
+        cvUrl: cvUrl || '',
+        cvName: cvName || null,
+      },
+      include: {
+        job: { select: { title: true } }
+      }
     })
+
+    // Notifier les admins par email (en background, ne bloque pas la réponse)
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
+    const positionLabel = validated.position === 'spontanee' ? 'Candidature spontanée' : validated.position
+
+    try {
+      const { sendEmail } = await import('@/lib/email/mailer')
+      const activeAdmins = await prisma.admin.findMany({
+        where: { isActive: true },
+        select: { email: true, firstName: true }
+      })
+
+      for (const admin of activeAdmins) {
+        await sendEmail({
+          to: admin.email,
+          subject: `[Candidature rapide] ${validated.name} - ${positionLabel}`,
+          html: `
+            <!DOCTYPE html>
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937;">
+              <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="text-align: center; padding: 30px 0; background: linear-gradient(135deg, #0047FF 0%, #002d99 100%); border-radius: 12px 12px 0 0;">
+                  <h2 style="color: white; margin: 0;">📋 Nouvelle candidature rapide</h2>
+                </div>
+                <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb;">
+                  <p>Bonjour ${admin.firstName},</p>
+                  <p>Une nouvelle candidature a été reçue via le formulaire rapide :</p>
+                  <div style="background: #f3f4f6; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                    <p style="margin: 4px 0;"><strong>Candidat :</strong> ${validated.name}</p>
+                    <p style="margin: 4px 0;"><strong>Email :</strong> ${validated.email}</p>
+                    <p style="margin: 4px 0;"><strong>Poste :</strong> ${positionLabel}</p>
+                    ${cvUrl ? `<p style="margin: 4px 0;"><strong>CV :</strong> <a href="${baseUrl}${cvUrl}">${cvName}</a></p>` : '<p style="margin: 4px 0;"><strong>CV :</strong> Non joint</p>'}
+                    ${validated.message ? `<p style="margin: 4px 0;"><strong>Message :</strong> ${validated.message}</p>` : ''}
+                  </div>
+                  <div style="text-align: center; margin: 20px 0;">
+                    <a href="${baseUrl}/admin/candidatures" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #0047FF 0%, #002d99 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600;">Voir les candidatures</a>
+                  </div>
+                </div>
+                <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; border-radius: 0 0 12px 12px;">
+                  <p>© ${new Date().getFullYear()} LLEDO Industries</p>
+                </div>
+              </div>
+            </body>
+            </html>
+          `,
+          text: `Nouvelle candidature rapide de ${validated.name} pour "${positionLabel}". Email: ${validated.email}. Voir: ${baseUrl}/admin/candidatures`,
+        })
+      }
+      console.log(`[quick-apply] Notified ${activeAdmins.length} admins`)
+    } catch (emailErr) {
+      // Email failure should NOT block the application submission
+      console.error('[quick-apply] Failed to notify admins:', emailErr)
+    }
 
     return NextResponse.json(
       { 
         success: true, 
         message: 'Votre candidature a été envoyée avec succès',
-        emailId: emailResult?.id
+        applicationId: application.id,
       },
       { status: 201 }
     )

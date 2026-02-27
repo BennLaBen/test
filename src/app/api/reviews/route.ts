@@ -7,6 +7,7 @@ const createReviewSchema = z.object({
   rating: z.number().min(1).max(5),
   content: z.string().min(10),
   company: z.string().optional(),
+  sector: z.string().optional(),
 })
 
 export async function GET() {
@@ -73,9 +74,11 @@ export async function POST(request: NextRequest) {
     const review = await prisma.review.create({
       data: {
         userId: session.user.id,
+        authorName: user ? `${user.firstName} ${user.lastName}`.trim() : undefined,
         rating: validatedData.rating,
         content: validatedData.content,
         company: validatedData.company || user?.company,
+        sector: validatedData.sector,
         approved: false, // Needs admin approval
       },
     })

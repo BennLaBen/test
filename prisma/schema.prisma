@@ -488,6 +488,29 @@ model RateLimitRecord {
 // EMAIL OTP - For 2FA via email
 // ============================================
 
+// ============================================
+// ANALYTICS — Page Views
+// ============================================
+
+model PageView {
+  id         String   @id @default(cuid())
+  path       String   // e.g. /contact, /carriere
+  referrer   String?  // e.g. https://google.com
+  country    String?  // e.g. FR, US
+  city       String?  // e.g. Paris
+  device     String?  // desktop, mobile, tablet
+  browser    String?  // Chrome, Firefox, Safari
+  os         String?  // Windows, macOS, Linux, iOS, Android
+  sessionId  String?  // fingerprint to count unique visitors
+  duration   Int?     // seconds spent on page (updated later)
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([path])
+  @@index([sessionId])
+  @@map("page_views")
+}
+
 model EmailOTP {
   id          String    @id @default(cuid())
   adminId     String

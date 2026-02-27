@@ -16,21 +16,25 @@ import {
   Image as ImageIcon,
   Menu,
   X,
-  ShieldCheck
+  ShieldCheck,
+  Wrench,
+  BarChart3
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { ToastProvider } from '@/components/admin/Toast'
 import { useTranslation } from 'react-i18next'
 
 const adminNav = [
-  { href: '/admin', labelKey: 'admin.dashboard', icon: LayoutDashboard },
-  { href: '/admin/entreprises', labelKey: 'admin.companies', icon: Building2 },
-  { href: '/admin/offres', labelKey: 'admin.jobOffers', icon: Briefcase },
-  { href: '/admin/candidatures', labelKey: 'admin.applications', icon: Users },
-  { href: '/admin/blog', labelKey: 'admin.blog', icon: FileText },
-  { href: '/admin/medias', labelKey: 'admin.mediaLibrary', icon: ImageIcon },
-  { href: '/admin/avis', labelKey: 'admin.reviews', icon: Star },
-  { href: '/admin/admins', labelKey: 'admin.admins', icon: ShieldCheck },
+  { href: '/admin', label: 'Tableau de bord', icon: LayoutDashboard },
+  { href: '/admin/entreprises', label: 'Entreprises', icon: Building2 },
+  { href: '/admin/offres', label: 'Offres d\'emploi', icon: Briefcase },
+  { href: '/admin/candidatures', label: 'Candidatures', icon: Users },
+  { href: '/admin/blog', label: 'Blog', icon: FileText },
+  { href: '/admin/medias', label: 'Médiathèque', icon: ImageIcon },
+  { href: '/admin/avis', label: 'Avis clients', icon: Star },
+  { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/admin/aerotools', label: 'LLEDO Aerotools', icon: Wrench },
+  { href: '/admin/admins', label: 'Administrateurs', icon: ShieldCheck },
 ]
 
 function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -87,7 +91,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                   }`}
                 >
                   <Icon className="h-5 w-5" />
-                  {t(item.labelKey)}
+                  {item.label}
                 </Link>
               )
             })}

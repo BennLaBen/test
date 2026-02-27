@@ -221,9 +221,13 @@
     "saveChanges": "Save changes"
   },
   "contactForm": {
+    "targetCompany": "Target company",
+    "selectCompany": "Select a company",
+    "generalInquiry": "General inquiry",
     "subject": "Subject",
     "selectSubject": "Select a subject",
     "subjects": {
+      "quote": "Quote request",
       "contact": "Contact request",
       "information": "Information request",
       "support": "Technical support",
@@ -244,6 +248,7 @@
       "emailInvalid": "Invalid email",
       "subjectRequired": "Subject is required",
       "messageMinLength": "Message must be at least 10 characters",
+      "companyRequired": "Please select a company",
       "consentRequired": "You must accept the privacy policy"
     }
   },
@@ -256,6 +261,8 @@
     "blog": "Blog",
     "mediaLibrary": "Media Library",
     "reviews": "Client Reviews",
+    "analytics": "Analytics",
+    "aerotools": "LLEDO Aerotools",
     "admins": "Administrators"
   },
   "certifications": {

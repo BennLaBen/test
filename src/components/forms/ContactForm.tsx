@@ -37,7 +37,7 @@ export function ContactForm() {
     email: z.string().email(t('contactForm.errors.emailInvalid')),
     userCompany: z.string().optional(),
     phone: z.string().optional(),
-    targetCompany: z.string().min(1, t('contactForm.errors.companyRequired') || 'Veuillez sélectionner une société'),
+    targetCompany: z.string().min(1, 'Veuillez sélectionner une société'),
     subject: z.string().min(1, t('contactForm.errors.subjectRequired')),
     message: z.string().min(10, t('contactForm.errors.messageMinLength')),
     consent: z.literal(true, { errorMap: () => ({ message: t('contactForm.errors.consentRequired') }) }),
@@ -88,20 +88,20 @@ export function ContactForm() {
       <div>
         <label htmlFor="targetCompany" className="block text-sm font-medium text-gray-300 mb-1">
           <Building2 className="inline h-4 w-4 mr-1" />
-          {t('contactForm.targetCompany') || 'Société concernée'} *
+          Société concernée *
         </label>
         <select 
           id="targetCompany" 
           className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-white"
           {...register('targetCompany')}
         >
-          <option value="">{t('contactForm.selectCompany') || 'Sélectionnez une société'}</option>
+          <option value="">Sélectionnez une société</option>
           <option value="mpeb">MPEB - Usinage de précision</option>
           <option value="egi">EGI - Bureau d'études</option>
           <option value="frem">FREM - Maintenance industrielle</option>
           <option value="mgp">MGP - Tôlerie & chaudronnerie</option>
           <option value="aerotools">LLEDO Aerotools - Équipements GSE</option>
-          <option value="general">{t('contactForm.generalInquiry') || 'Demande générale'}</option>
+          <option value="general">Demande générale</option>
         </select>
         {errors.targetCompany && <p className="mt-1 text-sm text-red-500">{errors.targetCompany.message}</p>}
         
@@ -181,7 +181,7 @@ export function ContactForm() {
           {...register('subject')}
         >
           <option value="">{t('contactForm.selectSubject')}</option>
-          <option value="quote">{t('contactForm.subjects.quote') || 'Demande de devis'}</option>
+          <option value="quote">Demande de devis</option>
           <option value="information">{t('contactForm.subjects.information')}</option>
           <option value="support">{t('contactForm.subjects.support')}</option>
           <option value="partnership">{t('contactForm.subjects.partnership')}</option>

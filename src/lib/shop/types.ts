@@ -18,6 +18,7 @@ export interface ShopProduct {
   isNew: boolean
   isFeatured: boolean
   datasheetUrl: string | null
+  model3d?: string | null
   // Extended B2B fields (optional for backward compat)
   certifications?: string[]
   standards?: string[]

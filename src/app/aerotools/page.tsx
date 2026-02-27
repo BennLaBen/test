@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { SEO } from '@/components/SEO'
 import { generateJsonLd } from '@/lib/jsonLd'
@@ -17,28 +16,6 @@ import {
   Play,
   CheckCircle
 } from 'lucide-react'
-
-const helicopterFleet = [
-  { id: 'h120', name: 'H120', subtitle: 'EC120 Colibri', type: 'civil', image: '/images/aerotools/helicopters/h120.jpg' },
-  { id: 'h125', name: 'H125', subtitle: 'AS350 Écureuil', type: 'civil', image: '/images/aerotools/helicopters/h125.jpg' },
-  { id: 'h130', name: 'H130', subtitle: 'EC130', type: 'civil', image: '/images/aerotools/helicopters/h130.jpg' },
-  { id: 'h135', name: 'H135', subtitle: 'EC135', type: 'civil', image: '/images/aerotools/helicopters/h135.jpg' },
-  { id: 'h145', name: 'H145', subtitle: 'EC145', type: 'civil', image: '/images/aerotools/helicopters/h145.jpg' },
-  { id: 'h160', name: 'H160', subtitle: 'Airbus H160', type: 'civil', image: '/images/aerotools/helicopters/h160.jpg' },
-  { id: 'h215', name: 'H215', subtitle: 'Super Puma', type: 'civil', image: '/images/aerotools/helicopters/h215.jpg' },
-  { id: 'h225', name: 'H225', subtitle: 'EC225 Super Puma', type: 'civil', image: '/images/aerotools/helicopters/h225.jpg' },
-  { id: 'sa330', name: 'SA330', subtitle: 'Puma', type: 'civil', image: '/images/aerotools/helicopters/sa330.jpg' },
-  { id: 'as332', name: 'AS332', subtitle: 'Super Puma', type: 'civil', image: '/images/aerotools/helicopters/as332.jpg' },
-  { id: 'sa365', name: 'SA365', subtitle: 'Dauphin', type: 'civil', image: '/images/aerotools/helicopters/sa365.jpg' },
-  { id: 'aw109', name: 'AW109', subtitle: 'Leonardo', type: 'civil', image: '/images/aerotools/helicopters/aw109.jpg' },
-  { id: 'aw119', name: 'AW119', subtitle: 'Koala', type: 'civil', image: '/images/aerotools/helicopters/aw119.jpg' },
-  { id: 'aw139', name: 'AW139', subtitle: 'Leonardo', type: 'civil', image: '/images/aerotools/helicopters/aw139.jpg' },
-  { id: 'gazelle', name: 'Gazelle', subtitle: 'SA341/342', type: 'militaire', image: '/images/aerotools/helicopters/gazelle.jpg' },
-  { id: 'nh90', name: 'NH90', subtitle: 'NATO Helicopter', type: 'militaire', image: '/images/aerotools/helicopters/nh90.jpg' },
-  { id: 'as532', name: 'AS532', subtitle: 'Cougar', type: 'militaire', image: '/images/aerotools/helicopters/as532.jpg' },
-  { id: 'as565', name: 'AS565', subtitle: 'Panther', type: 'militaire', image: '/images/aerotools/helicopters/as565.jpg' },
-  { id: 'h225m', name: 'H225M', subtitle: 'Caracal', type: 'militaire', image: '/images/aerotools/helicopters/h225m.jpg' },
-]
 
 export default function AerotoolsPage() {
   const jsonLd = generateJsonLd({
@@ -294,117 +271,6 @@ export default function AerotoolsPage() {
               className="text-white dark:text-gray-900"
             />
           </svg>
-        </div>
-      </section>
-
-      {/* ═══ HELICOPTER FLEET SECTION ═══ */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-primary-600 mb-4 block">
-              Flotte compatible
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight mb-4 text-muted-strong">
-              Hélicoptères{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                supportés
-              </span>
-            </h2>
-            <p className="text-muted max-w-2xl mx-auto text-lg">
-              Nos équipements GSE sont conçus et certifiés pour les principaux hélicoptères civils et militaires en service.
-            </p>
-          </motion.div>
-
-          {/* Civil */}
-          <div className="mb-12">
-            <h3 className="text-sm font-black uppercase tracking-widest text-primary-600 mb-6 flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              Hélicoptères civils
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {helicopterFleet.filter(h => h.type === 'civil').map((heli, idx) => (
-                <motion.div
-                  key={heli.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="group relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:shadow-lg hover:border-blue-400 dark:hover:border-blue-500 transition-all"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={heli.image}
-                      alt={`${heli.name} - ${heli.subtitle}`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white font-black text-sm uppercase tracking-wider">{heli.name}</p>
-                    <p className="text-white/70 text-xs">{heli.subtitle}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Military */}
-          <div>
-            <h3 className="text-sm font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-6 flex items-center gap-2">
-              <Award className="h-4 w-4" />
-              Hélicoptères militaires
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {helicopterFleet.filter(h => h.type === 'militaire').map((heli, idx) => (
-                <motion.div
-                  key={heli.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="group relative rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:shadow-lg hover:border-amber-400 dark:hover:border-amber-500 transition-all"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={heli.image}
-                      alt={`${heli.name} - ${heli.subtitle}`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white font-black text-sm uppercase tracking-wider">{heli.name}</p>
-                    <p className="text-white/70 text-xs">{heli.subtitle}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-muted mb-4">Votre hélicoptère n'est pas listé ? Contactez-nous pour une étude sur-mesure.</p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-bold uppercase tracking-wider text-sm hover:bg-primary-700 transition-colors"
-            >
-              Demander un devis
-            </Link>
-          </motion.div>
         </div>
       </section>
     </>

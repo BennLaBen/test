@@ -64,7 +64,7 @@ const applicationSchema = z.object({
   email: z.string().email('Email invalide'),
   phone: z.string().optional(),
   message: z.string().optional(),
-  cvUrl: z.string().url('URL du CV invalide'),
+  cvUrl: z.string().min(1, 'Le CV est requis'),
   cvName: z.string().optional(),
 })
 

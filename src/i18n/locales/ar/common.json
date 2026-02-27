@@ -221,9 +221,13 @@
     "saveChanges": "حفظ التغييرات"
   },
   "contactForm": {
+    "targetCompany": "الشركة المستهدفة",
+    "selectCompany": "اختر شركة",
+    "generalInquiry": "استفسار عام",
     "subject": "الموضوع",
     "selectSubject": "اختر موضوعاً",
     "subjects": {
+      "quote": "طلب عرض سعر",
       "contact": "طلب اتصال",
       "information": "طلب معلومات",
       "support": "الدعم الفني",
@@ -244,6 +248,7 @@
       "emailInvalid": "بريد إلكتروني غير صالح",
       "subjectRequired": "الموضوع مطلوب",
       "messageMinLength": "يجب أن تحتوي الرسالة على 10 أحرف على الأقل",
+      "companyRequired": "يرجى اختيار شركة",
       "consentRequired": "يجب قبول سياسة الخصوصية"
     }
   },
@@ -256,6 +261,8 @@
     "blog": "المدونة",
     "mediaLibrary": "مكتبة الوسائط",
     "reviews": "آراء العملاء",
+    "analytics": "Analytics",
+    "aerotools": "LLEDO Aerotools",
     "admins": "المسؤولون"
   },
   "certifications": {

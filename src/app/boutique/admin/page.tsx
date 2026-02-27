@@ -390,7 +390,44 @@ function ProductForm({ product, onSave, onCancel }: {
           <div className="space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-blue-400 border-b border-gray-800 pb-2">Média</h3>
             {field('image', 'Image principale (URL)', 'text', { placeholder: '/images/products/towbar-h160.jpg' })}
+            
+            {/* Gallery editor */}
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Galerie d'images (URLs)</p>
+              <div className="space-y-1.5 mb-2">
+                {draft.gallery.map((url, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-gray-800/30 rounded-lg px-3 py-2">
+                    <span className="text-[10px] text-gray-600 font-mono flex-shrink-0">#{i + 1}</span>
+                    <input
+                      type="text"
+                      value={url}
+                      onChange={e => {
+                        const next = [...draft.gallery]
+                        next[i] = e.target.value
+                        set('gallery', next)
+                      }}
+                      placeholder="/images/products/photo.jpg"
+                      className="flex-1 px-2 py-1 bg-gray-900 border border-gray-700 rounded text-xs text-white placeholder-gray-600 outline-none focus:border-blue-500"
+                    />
+                    <button
+                      onClick={() => set('gallery', draft.gallery.filter((_, j) => j !== i))}
+                      className="text-gray-600 hover:text-red-400 flex-shrink-0"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => set('gallery', [...draft.gallery, ''])}
+                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 border-dashed rounded-lg text-xs font-bold text-gray-500 hover:text-blue-400 hover:border-blue-500/30 transition-colors"
+              >
+                + Ajouter une image
+              </button>
+            </div>
+
             {field('datasheetUrl', 'Fiche technique PDF (URL)' as any, 'text', { placeholder: '/docs/towbar-h160.pdf' })}
+            {field('model3d', 'Modèle 3D (URL)' as any, 'text', { placeholder: '/models/towbar.glb' })}
           </div>
         </div>
 

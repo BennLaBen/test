@@ -7,6 +7,7 @@ import { SmartNavigator } from '@/components/SmartNavigator'
 import { SectionPagination } from '@/components/SectionPagination'
 import { TopInfoBar } from '@/components/TopInfoBar'
 import { FloatingCTA } from '@/components/FloatingCTA'
+import { AnalyticsTracker } from '@/components/AnalyticsTracker'
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -18,8 +19,10 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
     return <>{children}</>
   }
 
+
   return (
     <div className="flex min-h-screen flex-col">
+      <AnalyticsTracker />
       <Navigation />
       <TopInfoBar />
       <SmartNavigator />

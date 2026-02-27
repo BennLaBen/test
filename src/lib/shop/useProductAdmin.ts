@@ -5,6 +5,8 @@ import type { ShopProduct } from './types'
 import productsData from '@/data/shop/products.json'
 
 const STORAGE_KEY = 'aerotool-admin-products'
+const STORAGE_VERSION_KEY = 'aerotool-admin-version'
+const CURRENT_VERSION = '2' // bump to force re-merge with source JSON
 
 function generateSlug(name: string): string {
   return name
@@ -74,12 +76,32 @@ export function useProductAdmin() {
   const [products, setProducts] = useState<ShopProduct[]>([])
   const [loaded, setLoaded] = useState(false)
 
-  // Load from localStorage or fallback to JSON
+  // Load from localStorage, merging with source JSON to recover missing fields
   useEffect(() => {
     try {
+      const storedVersion = localStorage.getItem(STORAGE_VERSION_KEY)
+
+      // If version mismatch, force re-merge to pick up new images/gallery from source
+      if (storedVersion !== CURRENT_VERSION) {
+        localStorage.removeItem(STORAGE_KEY)
+        localStorage.setItem(STORAGE_VERSION_KEY, CURRENT_VERSION)
+      }
+
       const stored = localStorage.getItem(STORAGE_KEY)
       if (stored) {
-        setProducts(JSON.parse(stored))
+        const storedProducts = JSON.parse(stored) as ShopProduct[]
+        const sourceMap = new Map((productsData as ShopProduct[]).map(p => [p.id, p]))
+        const merged = storedProducts.map(sp => {
+          const source = sourceMap.get(sp.id)
+          if (!source) return sp
+          return {
+            ...source,
+            ...sp,
+            image: sp.image || source.image || '',
+            gallery: (sp.gallery && sp.gallery.length > 0) ? sp.gallery : (source.gallery || []),
+          }
+        })
+        setProducts(merged)
       } else {
         setProducts(productsData as ShopProduct[])
       }

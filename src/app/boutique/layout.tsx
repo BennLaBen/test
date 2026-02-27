@@ -1,6 +1,8 @@
 'use client'
 
-import { usePathname, redirect } from 'next/navigation'
+import { ShopNavigation } from '@/components/shop/ShopNavigation'
+import { ShopFooter } from '@/components/shop/ShopFooter'
+import { usePathname } from 'next/navigation'
 
 export default function ShopLayout({
   children,
@@ -9,10 +11,24 @@ export default function ShopLayout({
 }) {
   const pathname = usePathname()
   
-  // Redirect all sub-routes to the main coming soon page
-  if (pathname !== '/boutique') {
-    redirect('/boutique')
-  }
+  // Petite astuce pour ajuster le padding top selon la page si besoin
+  // Mais ici on garde une structure simple
+  
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-900">
+      <ShopNavigation />
+      
+      {/* 
+        Le RootLayout met déjà un pt-32 sur le main wrapper.
+        Pour la boutique, on veut parfois contrôler ce padding nous-mêmes ou l'utiliser.
+        Le ShopNavigation est fixed h-20 (approx 80px).
+        Le pt-32 du root layout (128px) laisse 48px de marge sous la nav. C'est correct.
+      */}
+      <div className="flex-1 w-full">
+        {children}
+      </div>
 
-  return <>{children}</>
+      <ShopFooter />
+    </div>
+  )
 }

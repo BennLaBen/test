@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Star, Quote, Plane, Shield, Factory, Zap, MessageSquarePlus, Lock } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/contexts/AuthContext'
@@ -49,9 +49,32 @@ export function Testimonials({
   const { isAuthenticated, user } = useAuth()
 
   const sectors = t('sectors', { returnObjects: true }) as any[]
-  const testimonials = t('list', { returnObjects: true }) as any[]
+  const staticTestimonials = t('list', { returnObjects: true }) as any[]
   const satisfactionData = t('satisfaction', { returnObjects: true }) as any
-  
+
+  // Fetch approved reviews from database
+  const [dbReviews, setDbReviews] = useState<any[]>([])
+  useEffect(() => {
+    fetch('/api/reviews')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && Array.isArray(data.reviews)) {
+          setDbReviews(data.reviews.map((r: any) => ({
+            author: r.authorName || 'Client',
+            role: r.authorRole || '',
+            company: r.authorCompany || 'Client LLEDO',
+            rating: r.rating,
+            content: r.content,
+            sector: r.sector || 'industrie',
+            fromDb: true,
+          })))
+        }
+      })
+      .catch(() => {})
+  }, [submitSuccess])
+
+  const testimonials = [...staticTestimonials, ...dbReviews]
+
   const filteredTestimonials = activeSector === 'all' 
     ? testimonials 
     : testimonials.filter((t: any) => t.sector === activeSector)

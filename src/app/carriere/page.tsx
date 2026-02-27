@@ -132,12 +132,7 @@ export default function CareersPage() {
   const culture = t('culture.items', { returnObjects: true }) as { title: string; description: string }[]
   const benefits = t('benefits.list', { returnObjects: true }) as string[]
 
-  const stats = [
-    { value: t('stats.expertise.value'), label: t('stats.expertise.label') },
-    { value: t('stats.team.value'), label: t('stats.team.label') },
-    { value: t('stats.quality.value'), label: t('stats.quality.label') },
-    { value: t('stats.evolution.value'), label: t('stats.evolution.label') }
-  ]
+  // Stats removed per user request
   
   return (
     <>
@@ -190,72 +185,17 @@ export default function CareersPage() {
               {t('hero.subtitle')}
             </motion.p>
 
-            <motion.div 
-              className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={index} 
-                  className="text-center relative p-4 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-xl"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  style={{ boxShadow: '0 4px 20px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
-                >
-                  <div className="text-4xl font-black relative z-10 text-white">{stat.value}</div>
-                  <div className="mt-2 text-sm font-semibold uppercase tracking-wider text-gray-400 relative z-10">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== SECTION OFFRES DISPONIBLES - EN PREMIER ========== */}
-      <section id="jobs" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
-        {/* Animated background */}
-        <div className="absolute inset-0 opacity-20">
-          <motion.div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
-                               radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.4) 0%, transparent 50%)`
-            }}
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-
-        <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto">
-            {/* Header */}
-            <motion.div
-              className="text-center mb-6 sm:mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase mb-2" style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.3)' }}>
-                {t('apply.title')}
-              </h2>
-              <p className="text-blue-200 text-sm sm:text-base">
-                {t('apply.subtitle')}
-              </p>
-            </motion.div>
-
-            {/* CTA Buttons */}
+            {/* CTA Buttons or Application Form */}
             {!showApplicationForm ? (
               <motion.div
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
               >
-                {/* Bouton Principal - Déposer ma candidature */}
                 <motion.button
                   onClick={() => setShowApplicationForm(true)}
-                  className="w-full sm:w-auto relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-900 rounded-xl font-black text-base sm:text-lg uppercase tracking-wider overflow-hidden group touch-manipulation"
+                  className="px-10 py-5 bg-white text-blue-900 rounded-xl font-black text-lg uppercase tracking-wider relative overflow-hidden group"
                   whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.98 }}
                   style={{ boxShadow: '0 0 40px rgba(255, 255, 255, 0.4)' }}
@@ -263,40 +203,31 @@ export default function CareersPage() {
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent"
                     animate={{ x: ['-200%', '200%'] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                   />
-                  <Upload className="h-5 w-5 relative z-10" />
-                  <span className="relative z-10">{t('apply.submitApplication')}</span>
+                  <span className="relative z-10 flex items-center gap-3">
+                    <Upload className="h-6 w-6" />
+                    {t('apply.submitApplication')}
+                  </span>
                 </motion.button>
-
-                {/* Bouton Secondaire - Contacter l'équipe */}
                 <motion.a
                   href="mailto:rh@lledo-industries.com"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-white/50 text-white rounded-xl font-bold text-base sm:text-lg uppercase tracking-wider hover:bg-white/10 transition-all touch-manipulation"
-                  whileHover={{ scale: 1.05, y: -3, borderColor: 'rgba(255,255,255,0.8)' }}
+                  className="px-10 py-5 border-2 border-white/50 text-white rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-white/10 transition-all"
+                  whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Mail className="h-5 w-5" />
-                  <span>{t('apply.contactTeam')}</span>
+                  <span className="flex items-center gap-3">
+                    <Mail className="h-6 w-6" />
+                    {t('apply.spontaneousApplication')}
+                  </span>
                 </motion.a>
-
-                {/* Lien vers les offres */}
-                <motion.button
-                  onClick={scrollToJobs}
-                  className="text-blue-200 hover:text-white text-sm font-semibold flex items-center gap-2 mt-2 sm:mt-0 sm:ml-4 touch-manipulation"
-                  whileHover={{ x: 5 }}
-                >
-                  <span>{t('apply.viewOffers')}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </motion.button>
               </motion.div>
             ) : (
-              /* Formulaire de candidature */
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-8"
+                className="mt-8 max-w-2xl mx-auto bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-8"
                 style={{ boxShadow: '0 0 60px rgba(59, 130, 246, 0.3)' }}
               >
                 {submitSuccess ? (
@@ -330,7 +261,6 @@ export default function CareersPage() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Nom */}
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
                         <input
@@ -342,8 +272,6 @@ export default function CareersPage() {
                           className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-200/60 focus:outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20"
                         />
                       </div>
-
-                      {/* Email */}
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
                         <input
@@ -357,7 +285,6 @@ export default function CareersPage() {
                       </div>
                     </div>
 
-                    {/* Poste souhaité */}
                     <div className="relative">
                       <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-blue-300" />
                       <select
@@ -374,7 +301,6 @@ export default function CareersPage() {
                       </select>
                     </div>
 
-                    {/* Message */}
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-blue-300" />
                       <textarea
@@ -386,7 +312,6 @@ export default function CareersPage() {
                       />
                     </div>
 
-                    {/* Upload CV */}
                     <div className="relative">
                       <label className="flex items-center justify-center gap-3 w-full py-4 bg-white/5 border-2 border-dashed border-white/30 rounded-xl cursor-pointer hover:bg-white/10 hover:border-white/50 transition-all touch-manipulation">
                         <FileText className="h-5 w-5 text-blue-300" />
@@ -402,7 +327,6 @@ export default function CareersPage() {
                       </label>
                     </div>
 
-                    {/* Submit */}
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
@@ -430,7 +354,113 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
-      {/* ========== FIN SECTION POSTULER ========== */}
+
+      {/* ========== OFFRES D'EMPLOI - Juste après Postuler ========== */}
+      <section id="jobs" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900">
+        <div className="absolute inset-0 opacity-5">
+          <div style={{
+            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} className="h-full w-full" />
+        </div>
+        
+        <div className="container relative z-10">
+          <motion.div 
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
+              <Briefcase className="h-5 w-5 text-blue-300" />
+              <span className="font-black text-white text-sm uppercase tracking-widest">{t('jobs.badge')}</span>
+            </div>
+            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
+              {t('jobs.title')}
+            </h2>
+            <p className="mx-auto max-w-2xl text-xl text-gray-300">
+              {t('jobs.subtitle')}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            {loadingJobs ? (
+              <div className="text-center py-12">
+                <div className="animate-spin h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
+                <p className="text-gray-400">{t('jobs.loading')}</p>
+              </div>
+            ) : jobs.length === 0 ? (
+              <div className="text-center py-12 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl">
+                <Briefcase className="h-12 w-12 text-gray-500 mx-auto mb-4" />
+                <p className="text-gray-400">{t('jobs.noOffers')}</p>
+              </div>
+            ) : (
+              jobs.map((job, index) => (
+                <Link href={`/carriere/${job.slug}`} key={job.id}>
+                  <motion.div 
+                    className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group cursor-pointer"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                    whileHover={{ scale: 1.03, y: -8 }}
+                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent)' }}
+                    />
+                    
+                    <div className="flex items-start gap-6 relative z-10">
+                      <motion.div 
+                        className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl"
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Briefcase className="h-8 w-8" />
+                      </motion.div>
+                      
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
+                          {job.title}
+                        </h3>
+                        <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-400">
+                          <span className="flex items-center gap-1.5 font-semibold">
+                            <Calendar className="h-4 w-4" />
+                            {job.type}
+                          </span>
+                          <span className="flex items-center gap-1.5 font-semibold">
+                            <MapPin className="h-4 w-4" />
+                            {job.location}
+                          </span>
+                          {job.department && (
+                            <span className="flex items-center gap-1.5 font-semibold">
+                              <Building2 className="h-4 w-4" />
+                              {job.department}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-300 line-clamp-2">
+                          {job.description.substring(0, 150)}...
+                        </p>
+                      </div>
+                      
+                      <motion.div
+                        whileHover={{ x: 8 }}
+                        className="flex items-center text-blue-400"
+                      >
+                        <ArrowRight className="h-7 w-7" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Culture Section - Dark Mode */}
       <section id="culture" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
@@ -622,113 +652,6 @@ export default function CareersPage() {
                 </motion.div>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Job Openings Section - Dark Mode */}
-      <section id="jobs" className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
-        <div className="absolute inset-0 opacity-5">
-          <div style={{
-            backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }} className="h-full w-full" />
-        </div>
-        
-        <div className="container relative z-10">
-          <motion.div 
-            className="mb-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-6 inline-flex items-center gap-2 px-5 py-2 bg-blue-500/20 backdrop-blur-xl border-2 border-blue-400/50 rounded-full">
-              <Briefcase className="h-5 w-5 text-blue-300" />
-              <span className="font-black text-white text-sm uppercase tracking-widest">{t('jobs.badge')}</span>
-            </div>
-            <h2 className="mb-6 text-4xl font-black text-white lg:text-6xl uppercase" style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.8)' }}>
-              {t('jobs.title')}
-            </h2>
-            <p className="mx-auto max-w-2xl text-xl text-gray-300">
-              {t('jobs.subtitle')}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            {loadingJobs ? (
-              <div className="text-center py-12">
-                <div className="animate-spin h-8 w-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
-                <p className="text-gray-400">{t('jobs.loading')}</p>
-              </div>
-            ) : jobs.length === 0 ? (
-              <div className="text-center py-12 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl">
-                <Briefcase className="h-12 w-12 text-gray-500 mx-auto mb-4" />
-                <p className="text-gray-400">{t('jobs.noOffers')}</p>
-              </div>
-            ) : (
-              jobs.map((job, index) => (
-                <Link href={`/carriere/${job.slug}`} key={job.id}>
-                  <motion.div 
-                    className="p-8 bg-white/5 backdrop-blur-sm border border-blue-400/20 rounded-2xl relative overflow-hidden group cursor-pointer"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.15 }}
-                    whileHover={{ scale: 1.03, y: -8 }}
-                    style={{ boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)', willChange: 'transform' }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 opacity-0"
-                      whileHover={{ opacity: 1 }}
-                      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.03), transparent)' }}
-                    />
-                    
-                    <div className="flex items-start gap-6 relative z-10">
-                      <motion.div 
-                        className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-xl"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        <Briefcase className="h-8 w-8" />
-                      </motion.div>
-                      
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-black text-white mb-3 uppercase group-hover:text-blue-300 transition-colors">
-                          {job.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-400">
-                          <span className="flex items-center gap-1.5 font-semibold">
-                            <Calendar className="h-4 w-4" />
-                            {job.type}
-                          </span>
-                          <span className="flex items-center gap-1.5 font-semibold">
-                            <MapPin className="h-4 w-4" />
-                            {job.location}
-                          </span>
-                          {job.department && (
-                            <span className="flex items-center gap-1.5 font-semibold">
-                              <Building2 className="h-4 w-4" />
-                              {job.department}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-gray-300 line-clamp-2">
-                          {job.description.substring(0, 150)}...
-                        </p>
-                      </div>
-                      
-                      <motion.div
-                        whileHover={{ x: 8 }}
-                        className="flex items-center text-blue-400"
-                      >
-                        <ArrowRight className="h-7 w-7" />
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </Link>
-              ))
-            )}
           </div>
         </div>
       </section>

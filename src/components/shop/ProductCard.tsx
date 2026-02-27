@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ShoppingBag, Check, Zap } from 'lucide-react'
+import { ShoppingBag, Check, Zap, Box } from 'lucide-react'
 import { useQuote } from '@/contexts/QuoteContext'
 import { useState } from 'react'
 
@@ -22,6 +22,7 @@ interface CardProduct {
   compatibility: string[]
   inStock?: boolean
   isNew?: boolean
+  model3d?: string | null
 }
 
 const categoryLabels: Record<string, string> = {
@@ -112,6 +113,14 @@ export function ProductCard({ product, index = 0 }: { product: CardProduct; inde
                 </motion.div>
               )}
             </div>
+
+            {/* 3D badge */}
+            {product.model3d && (
+              <div className="absolute top-3 right-3 z-10 mr-6 flex items-center gap-1 px-2 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-md">
+                <Box className="h-3 w-3 text-cyan-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-cyan-300">3D</span>
+              </div>
+            )}
 
             {/* Reference tag */}
             <div className="absolute bottom-3 left-3 ml-6 font-mono text-[10px] text-gray-500 group-hover:text-blue-400/60 transition-colors">
