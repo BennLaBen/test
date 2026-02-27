@@ -119,7 +119,7 @@ export function useProductAdmin() {
       // Debounced server sync (saves to Vercel Blob in prod, file in dev)
       const timer = setTimeout(() => {
         fetch('/api/products', {
-          method: 'PUT',
+          method: 'POST',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ products }),

@@ -51,8 +51,8 @@ export async function GET() {
   }
 }
 
-// PUT /api/products - Save products (called from admin panel)
-export async function PUT(request: NextRequest) {
+// POST /api/products - Save products (called from admin panel)
+export async function POST(request: NextRequest) {
   try {
     // Soft auth check — log but don't block (products are public data)
     let adminEmail = 'unknown'
