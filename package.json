@@ -6,7 +6,7 @@
     "dev": "next dev",
     "dev:fresh": "powershell -Command \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; npm run dev\"",
     "dev:kill": "powershell -Command \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue\"",
-    "build": "npm run i18n:strict && prisma generate && next build",
+    "build": "npm run i18n:strict && prisma db push --skip-generate --accept-data-loss && prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:i18n": "eslint src --ext .tsx,.ts --rule 'react/jsx-no-literals: error'",
