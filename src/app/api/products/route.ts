@@ -66,6 +66,7 @@ export async function POST(request: NextRequest) {
       const blob = await put(BLOB_PATH, jsonStr, {
         access: 'public',
         addRandomSuffix: false,
+        allowOverwrite: true,
         contentType: 'application/json',
       })
       console.log(`[products] POST OK — ${products.length} products saved to blob: ${blob.url}`)
