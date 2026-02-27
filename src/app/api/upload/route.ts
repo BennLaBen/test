@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { existsSync } from 'fs'
-import path from 'path'
+import { put } from '@vercel/blob'
+
+const IS_VERCEL = !!process.env.VERCEL
 
 // POST /api/upload - Upload files (CVs, images, aerotools media)
 export async function POST(request: NextRequest) {
@@ -59,28 +59,39 @@ export async function POST(request: NextRequest) {
     const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_').slice(0, 50)
     const filename = `${timestamp}-${safeName}`
 
-    // Determine upload directory
+    // Determine upload sub-path
     const dirMap: Record<string, string> = {
       cv: 'cvs',
       image: 'images',
       aerotools: 'aerotools',
     }
     const subDir = dirMap[type] || 'images'
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', subDir)
 
-    // Create directory if it doesn't exist
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true })
+    let url: string
+
+    if (IS_VERCEL) {
+      // Production: use Vercel Blob storage
+      const blob = await put(`uploads/${subDir}/${filename}`, file, {
+        access: 'public',
+        addRandomSuffix: false,
+      })
+      url = blob.url
+    } else {
+      // Local dev: write to filesystem
+      const { writeFile, mkdir } = await import('fs/promises')
+      const { existsSync } = await import('fs')
+      const path = await import('path')
+
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', subDir)
+      if (!existsSync(uploadDir)) {
+        await mkdir(uploadDir, { recursive: true })
+      }
+
+      const bytes = await file.arrayBuffer()
+      const buffer = Buffer.from(bytes)
+      await writeFile(path.join(uploadDir, filename), buffer)
+      url = `/uploads/${subDir}/${filename}`
     }
-
-    // Write file
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    const filePath = path.join(uploadDir, filename)
-    await writeFile(filePath, buffer)
-
-    // Return URL
-    const url = `/uploads/${subDir}/${filename}`
 
     // Detect if file is a video
     const isVideo = file.type.startsWith('video/')

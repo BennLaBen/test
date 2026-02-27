@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
-import { writeFile, mkdir } from 'fs/promises'
-import { existsSync } from 'fs'
-import path from 'path'
+import { put } from '@vercel/blob'
+
+const IS_VERCEL = !!process.env.VERCEL
 
 // Schéma de validation pour candidature rapide
 const quickApplicationSchema = z.object({
@@ -55,21 +55,34 @@ export async function POST(request: NextRequest) {
         )
       }
 
-      // Save file to disk
+      // Save file
       const timestamp = Date.now()
       const safeName = cvFile.name.replace(/[^a-zA-Z0-9.-]/g, '_').slice(0, 50)
       const filename = `${timestamp}-${safeName}`
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'cvs')
 
-      if (!existsSync(uploadDir)) {
-        await mkdir(uploadDir, { recursive: true })
+      if (IS_VERCEL) {
+        // Production: Vercel Blob storage
+        const blob = await put(`uploads/cvs/${filename}`, cvFile, {
+          access: 'public',
+          addRandomSuffix: false,
+        })
+        cvUrl = blob.url
+      } else {
+        // Local dev: filesystem
+        const { writeFile, mkdir } = await import('fs/promises')
+        const { existsSync } = await import('fs')
+        const path = await import('path')
+
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'cvs')
+        if (!existsSync(uploadDir)) {
+          await mkdir(uploadDir, { recursive: true })
+        }
+
+        const bytes = await cvFile.arrayBuffer()
+        const buffer = Buffer.from(bytes)
+        await writeFile(path.join(uploadDir, filename), buffer)
+        cvUrl = `/uploads/cvs/${filename}`
       }
-
-      const bytes = await cvFile.arrayBuffer()
-      const buffer = Buffer.from(bytes)
-      await writeFile(path.join(uploadDir, filename), buffer)
-
-      cvUrl = `/uploads/cvs/${filename}`
       cvName = cvFile.name
     }
 
