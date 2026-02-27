@@ -97,8 +97,8 @@ export function useProductAdmin() {
           return {
             ...source,
             ...sp,
-            image: sp.image || source.image || '',
-            gallery: (sp.gallery && sp.gallery.length > 0) ? sp.gallery : (source.gallery || []),
+            image: sp.image !== undefined ? sp.image : (source.image || ''),
+            gallery: sp.gallery !== undefined ? sp.gallery : (source.gallery || []),
           }
         })
         setProducts(merged)
