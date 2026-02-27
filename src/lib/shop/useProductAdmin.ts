@@ -120,9 +120,16 @@ export function useProductAdmin() {
       const timer = setTimeout(() => {
         fetch('/api/products', {
           method: 'PUT',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ products }),
-        }).catch(err => console.warn('[useProductAdmin] Server sync failed:', err))
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) console.log(`[sync] ✅ ${data.count} produits synchronisés`)
+            else console.warn('[sync] ❌ Échec:', data.error)
+          })
+          .catch(err => console.warn('[sync] ❌ Erreur réseau:', err))
       }, 1000)
       return () => clearTimeout(timer)
     }

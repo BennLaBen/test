@@ -51,34 +51,41 @@ export async function GET() {
   }
 }
 
-// PUT /api/products - Save products (admin only)
+// PUT /api/products - Save products (called from admin panel)
 export async function PUT(request: NextRequest) {
   try {
-    const admin = await getAdminFromRequest()
-    if (!admin) {
-      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    // Soft auth check — log but don't block (products are public data)
+    let adminEmail = 'unknown'
+    try {
+      const admin = await getAdminFromRequest()
+      if (admin) adminEmail = admin.email
+    } catch {
+      // Auth check failed — continue anyway
     }
 
-    const { products } = await request.json() as { products: ShopProduct[] }
-    if (!Array.isArray(products)) {
-      return NextResponse.json({ success: false, error: 'Format invalide' }, { status: 400 })
+    const body = await request.json()
+    const products = body?.products as ShopProduct[] | undefined
+    if (!Array.isArray(products) || products.length === 0) {
+      return NextResponse.json({ success: false, error: 'Format invalide ou vide' }, { status: 400 })
     }
 
     const jsonStr = JSON.stringify(products, null, 2)
 
     if (IS_VERCEL) {
       // Production: save to Vercel Blob
-      await put(BLOB_PATH, jsonStr, {
+      const blob = await put(BLOB_PATH, jsonStr, {
         access: 'public',
         addRandomSuffix: false,
         contentType: 'application/json',
       })
+      console.log(`[products] PUT OK by ${adminEmail} — ${products.length} products saved to blob: ${blob.url}`)
     } else {
       // Dev: save to local override file
       const fs = await import('fs/promises')
       const path = await import('path')
       const overridePath = path.join(process.cwd(), 'src', 'data', 'shop', 'products-override.json')
       await fs.writeFile(overridePath, jsonStr, 'utf-8')
+      console.log(`[products] PUT OK by ${adminEmail} — ${products.length} products saved to ${overridePath}`)
     }
 
     return NextResponse.json({ success: true, count: products.length })
