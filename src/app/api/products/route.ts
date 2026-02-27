@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { put, list } from '@vercel/blob'
 import type { ShopProduct } from '@/lib/shop/types'
 
+// Force dynamic — never cache this route
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const IS_VERCEL = !!process.env.VERCEL
 const BLOB_PATH = 'data/products.json'
 
@@ -16,7 +20,10 @@ export async function GET() {
           const response = await fetch(blobs[0].url, { cache: 'no-store' })
           if (response.ok) {
             const products = await response.json()
-            return NextResponse.json({ success: true, products, source: 'blob' })
+            console.log(`[products] GET — ${products.length} products from blob`)
+            return NextResponse.json({ success: true, products, source: 'blob' }, {
+              headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+            })
           }
         }
       } catch {
@@ -31,7 +38,9 @@ export async function GET() {
         if (fs.existsSync(overridePath)) {
           const data = fs.readFileSync(overridePath, 'utf-8')
           const products = JSON.parse(data)
-          return NextResponse.json({ success: true, products, source: 'override' })
+          return NextResponse.json({ success: true, products, source: 'override' }, {
+            headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+          })
         }
       } catch {
         // No override file — fall through to static
@@ -40,7 +49,9 @@ export async function GET() {
 
     // Fallback: return static products.json
     const productsData = (await import('@/data/shop/products.json')).default
-    return NextResponse.json({ success: true, products: productsData, source: 'static' })
+    return NextResponse.json({ success: true, products: productsData, source: 'static' }, {
+      headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+    })
   } catch (error) {
     console.error('[products] GET error:', error)
     return NextResponse.json(
