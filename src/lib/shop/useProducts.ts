@@ -20,10 +20,13 @@ export function useProducts() {
       .then(data => {
         if (!cancelled && data.success && Array.isArray(data.products) && data.products.length > 0) {
           setProducts(data.products as ShopProduct[])
+          console.log(`[boutique] ✅ ${data.products.length} produits chargés depuis: ${data.source}`)
+        } else {
+          console.warn('[boutique] ⚠️ API pas de données, fallback statique')
         }
       })
-      .catch(() => {
-        // API failed — keep static data
+      .catch((err) => {
+        console.warn('[boutique] ❌ API erreur, fallback statique:', err)
       })
       .finally(() => {
         if (!cancelled) setLoaded(true)
