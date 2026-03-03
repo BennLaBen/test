@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import type { ShopProduct } from './types'
 import productsData from '@/data/shop/products.json'
 
@@ -73,7 +73,6 @@ export function validateProduct(p: ShopProduct): ValidationErrors {
 export function useProductAdmin() {
   const [products, setProducts] = useState<ShopProduct[]>([])
   const [loaded, setLoaded] = useState(false)
-  const readyToSync = useRef(false)
 
   // Load from API (Vercel Blob = source of truth), fallback to localStorage, then static
   useEffect(() => {
@@ -121,33 +120,22 @@ export function useProductAdmin() {
     return () => { cancelled = true }
   }, [])
 
-  // Persist to localStorage + server API on change (skip the first render after load)
-  useEffect(() => {
-    if (!loaded || products.length === 0) return
-    if (!readyToSync.current) {
-      readyToSync.current = true
-      return
-    }
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
-
-    // Debounced server sync (saves to Vercel Blob in prod, file in dev)
-    const timer = setTimeout(() => {
-      fetch('/api/products', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ products }),
+  // Sync products to server (Vercel Blob)
+  const syncToServer = useCallback((data: ShopProduct[]) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    fetch('/api/products', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: data }),
+    })
+      .then(res => res.json())
+      .then(r => {
+        if (r.success) console.log(`[sync] ✅ ${r.count} produits synchronisés`)
+        else console.warn('[sync] ❌ Échec:', r.error)
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) console.log(`[sync] ✅ ${data.count} produits synchronisés`)
-          else console.warn('[sync] ❌ Échec:', data.error)
-        })
-        .catch(err => console.warn('[sync] ❌ Erreur réseau:', err))
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [products, loaded])
+      .catch(err => console.warn('[sync] ❌ Erreur réseau:', err))
+  }, [])
 
   const addProduct = useCallback((product: ShopProduct) => {
     const newProduct = {
@@ -155,17 +143,29 @@ export function useProductAdmin() {
       id: product.id || generateId(product.category),
       slug: product.slug || generateSlug(product.name),
     }
-    setProducts(prev => [...prev, newProduct])
+    setProducts(prev => {
+      const next = [...prev, newProduct]
+      syncToServer(next)
+      return next
+    })
     return newProduct
-  }, [])
+  }, [syncToServer])
 
   const updateProduct = useCallback((id: string, updates: Partial<ShopProduct>) => {
-    setProducts(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p))
-  }, [])
+    setProducts(prev => {
+      const next = prev.map(p => p.id === id ? { ...p, ...updates } : p)
+      syncToServer(next)
+      return next
+    })
+  }, [syncToServer])
 
   const deleteProduct = useCallback((id: string) => {
-    setProducts(prev => prev.filter(p => p.id !== id))
-  }, [])
+    setProducts(prev => {
+      const next = prev.filter(p => p.id !== id)
+      syncToServer(next)
+      return next
+    })
+  }, [syncToServer])
 
   const duplicateProduct = useCallback((id: string) => {
     setProducts(prev => {
@@ -177,9 +177,11 @@ export function useProductAdmin() {
         slug: source.slug + '-copie',
         name: source.name + ' (copie)',
       }
-      return [...prev, copy]
+      const next = [...prev, copy]
+      syncToServer(next)
+      return next
     })
-  }, [])
+  }, [syncToServer])
 
   const reorderProduct = useCallback((id: string, direction: 'up' | 'down') => {
     setProducts(prev => {
@@ -189,9 +191,10 @@ export function useProductAdmin() {
       if (target < 0 || target >= prev.length) return prev
       const next = [...prev]
       ;[next[idx], next[target]] = [next[target], next[idx]]
+      syncToServer(next)
       return next
     })
-  }, [])
+  }, [syncToServer])
 
   const exportJSON = useCallback(() => {
     const json = JSON.stringify(products, null, 2)
@@ -209,16 +212,18 @@ export function useProductAdmin() {
       const parsed = JSON.parse(jsonString)
       if (!Array.isArray(parsed)) throw new Error('Format invalide')
       setProducts(parsed as ShopProduct[])
+      syncToServer(parsed as ShopProduct[])
       return true
     } catch {
       return false
     }
-  }, [])
+  }, [syncToServer])
 
   const resetToDefaults = useCallback(() => {
-    localStorage.removeItem(STORAGE_KEY)
-    setProducts(productsData as ShopProduct[])
-  }, [])
+    const defaults = productsData as ShopProduct[]
+    setProducts(defaults)
+    syncToServer(defaults)
+  }, [syncToServer])
 
   return {
     products, loaded,
