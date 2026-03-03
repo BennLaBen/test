@@ -27,8 +27,8 @@
     <line x1="38" y1="24" x2="28" y2="34" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
   </g>
 
-  <!-- LLEDO text -->
-  <text x="82" y="38" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="30" fill="url(#text-grad)" letter-spacing="3">LLEDO</text>
+  <!-- LLEO text -->
+  <text x="82" y="38" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="30" fill="url(#text-grad)" letter-spacing="3">LLEO</text>
 
   <!-- AEROTOOLS text -->
   <text x="82" y="62" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="18" fill="url(#cyan-grad)" letter-spacing="5">AEROTOOLS</text>
