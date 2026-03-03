@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
+import { jwtVerify } from 'jose'
 import { auth } from '@/lib/auth'
 
 const JWT_SECRET = process.env.JWT_SECRET || ''
@@ -20,10 +21,29 @@ interface AdminPayload {
  * Retourne les infos admin ou null si non authentifié.
  */
 export async function getAdminFromRequest(): Promise<AdminPayload | null> {
-  // 1. Vérifier le JWT admin cookie
   const cookieStore = await cookies()
-  const adminToken = cookieStore.get('admin_access_token')?.value
 
+  // 1. Vérifier le JWT v2 cookie (session-token) — nouveau système
+  const sessionToken = cookieStore.get('session-token')?.value
+  if (sessionToken) {
+    try {
+      const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET || 'lledo-industries-secret-key-2026')
+      const { payload } = await jwtVerify(sessionToken, secret, { algorithms: ['HS256'] })
+      if (payload.userId && payload.role === 'ADMIN') {
+        return {
+          sub: payload.userId as string,
+          email: (payload.email as string) || '',
+          role: 'SUPER_ADMIN',
+          company: '',
+        }
+      }
+    } catch (e) {
+      console.error('[admin-guard] v2 JWT verify error:', (e as Error).message)
+    }
+  }
+
+  // 2. Vérifier le JWT admin cookie (admin_access_token) — ancien système
+  const adminToken = cookieStore.get('admin_access_token')?.value
   if (adminToken) {
     try {
       const secret = process.env.JWT_SECRET || ''
@@ -36,7 +56,7 @@ export async function getAdminFromRequest(): Promise<AdminPayload | null> {
     }
   }
 
-  // 2. Fallback: vérifier la session NextAuth
+  // 3. Fallback: vérifier la session NextAuth
   const session = await auth()
   if (session?.user?.role === 'ADMIN') {
     return {
