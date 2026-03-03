@@ -117,35 +117,4 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-/**
- * Utility: Dispatch webhook events to registered endpoints.
- * Called internally by other API routes when events occur.
- */
-export async function dispatchWebhook(event: string, payload: any) {
-  const hooks = Array.from(webhookStore.values()).filter(
-    h => h.active && h.events.includes(event)
-  )
-
-  for (const hook of hooks) {
-    try {
-      const body = JSON.stringify({ event, timestamp: new Date().toISOString(), data: payload })
-      const signature = crypto.createHmac('sha256', hook.secret).update(body).digest('hex')
-
-      await fetch(hook.url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Webhook-Event': event,
-          'X-Webhook-Signature': `sha256=${signature}`,
-          'X-Webhook-Id': hook.id,
-        },
-        body,
-        signal: AbortSignal.timeout(10000),
-      })
-
-      console.log(`[Webhook] ${event} → ${hook.url} ✅`)
-    } catch (err) {
-      console.error(`[Webhook] ${event} → ${hook.url} ❌`, err)
-    }
-  }
-}
+// Note: dispatchWebhook utility moved to @/lib/webhooks.ts
