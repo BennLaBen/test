@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { userId, type, title, message, link, metadata } = body
+    const { userId, type, title, message, link } = body
 
     if (!userId || !type || !title) {
       return NextResponse.json({ error: 'userId, type et title requis' }, { status: 400 })
@@ -55,9 +55,8 @@ export async function POST(request: NextRequest) {
         userId,
         type,
         title,
-        message: message || null,
+        message: message || '',
         link: link || null,
-        metadata: metadata || null,
       },
     })
 
@@ -76,8 +75,8 @@ export async function PATCH(request: NextRequest) {
 
     if (markAllRead && userId) {
       await prisma.notification.updateMany({
-        where: { userId, readAt: null },
-        data: { readAt: new Date() },
+        where: { userId, read: false },
+        data: { read: true },
       })
       return NextResponse.json({ success: true })
     }
@@ -85,7 +84,7 @@ export async function PATCH(request: NextRequest) {
     if (ids && Array.isArray(ids)) {
       await prisma.notification.updateMany({
         where: { id: { in: ids } },
-        data: { readAt: new Date() },
+        data: { read: true },
       })
       return NextResponse.json({ success: true })
     }
