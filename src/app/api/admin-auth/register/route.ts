@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { generateSecureToken, hashToken, logSecurityEvent } from '@/lib/auth/security'
-import { validateSession, getAccessTokenFromCookie } from '@/lib/auth/jwt'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 import { z } from 'zod'
 
 const registerSchema = z.object({
@@ -19,25 +19,17 @@ export async function POST(request: NextRequest) {
   console.log(`[register] IP: ${ip}, UA: ${userAgent?.substring(0, 50)}`)
   
   try {
-    // Verify super admin authentication
-    const accessToken = await getAccessTokenFromCookie()
-    if (!accessToken) {
+    // Verify admin authentication (supports v2 session-token + legacy admin_access_token)
+    const admin = await getAdminFromRequest()
+    if (!admin) {
       return NextResponse.json(
         { error: 'Authentification requise' },
         { status: 401 }
       )
     }
     
-    const session = await validateSession(accessToken)
-    if (!session.isValid || !session.admin) {
-      return NextResponse.json(
-        { error: 'Session invalide' },
-        { status: 401 }
-      )
-    }
-    
     // Only super admins can create new admin accounts
-    if (session.admin.role !== 'SUPER_ADMIN') {
+    if (admin.role !== 'SUPER_ADMIN') {
       return NextResponse.json(
         { error: 'Droits insuffisants. Seul un super-admin peut créer des comptes.' },
         { status: 403 }
@@ -69,7 +61,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Create the admin account (inactive until email verification)
-    const admin = await prisma.admin.create({
+    const newAdmin = await prisma.admin.create({
       data: {
         email: email.toLowerCase(),
         firstName,
@@ -78,7 +70,7 @@ export async function POST(request: NextRequest) {
         role,
         isActive: false,
         emailVerified: false,
-        createdBy: session.admin.id,
+        createdBy: admin.sub,
       },
     })
     
@@ -88,7 +80,7 @@ export async function POST(request: NextRequest) {
     
     await prisma.activationToken.create({
       data: {
-        adminId: admin.id,
+        adminId: newAdmin.id,
         tokenHash,
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
       },
@@ -96,12 +88,12 @@ export async function POST(request: NextRequest) {
     
     // Log the event
     await logSecurityEvent({
-      adminId: admin.id,
+      adminId: newAdmin.id,
       eventType: 'ACCOUNT_CREATED',
       ipAddress: ip,
       userAgent: userAgent || undefined,
       status: 'SUCCESS',
-      details: { createdBy: session.admin.email, company, role },
+      details: { createdBy: admin.email, company, role },
     })
     
     // Generate activation URL
@@ -133,12 +125,12 @@ export async function POST(request: NextRequest) {
         : 'Compte créé mais l\'email n\'a pas pu être envoyé. Utilisez le lien d\'activation ci-dessous.',
       emailSent,
       admin: {
-        id: admin.id,
-        email: admin.email,
-        firstName: admin.firstName,
-        lastName: admin.lastName,
-        company: admin.company,
-        role: admin.role,
+        id: newAdmin.id,
+        email: newAdmin.email,
+        firstName: newAdmin.firstName,
+        lastName: newAdmin.lastName,
+        company: newAdmin.company,
+        role: newAdmin.role,
       },
       // Show activation URL if email failed (so admin can share it manually)
       ...(!emailSent && { activationUrl }),
