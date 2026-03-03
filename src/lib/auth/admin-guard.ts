@@ -57,14 +57,18 @@ export async function getAdminFromRequest(): Promise<AdminPayload | null> {
   }
 
   // 3. Fallback: vérifier la session NextAuth
-  const session = await auth()
-  if (session?.user?.role === 'ADMIN') {
-    return {
-      sub: session.user.id,
-      email: session.user.email || '',
-      role: 'ADMIN',
-      company: '',
+  try {
+    const session = await auth()
+    if (session?.user?.role === 'ADMIN') {
+      return {
+        sub: session.user.id,
+        email: session.user.email || '',
+        role: 'SUPER_ADMIN',
+        company: '',
+      }
     }
+  } catch (e) {
+    console.error('[admin-guard] NextAuth session error:', (e as Error).message)
   }
 
   return null

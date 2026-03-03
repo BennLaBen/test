@@ -86,37 +86,41 @@ export async function POST(request: NextRequest) {
       },
     })
     
-    // Log the event
-    await logSecurityEvent({
+    // Generate activation URL
+    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
+    const activationUrl = `${baseUrl}/admin/activate?token=${activationToken}`
+
+    // Log the event (non-blocking)
+    logSecurityEvent({
       adminId: newAdmin.id,
       eventType: 'ACCOUNT_CREATED',
       ipAddress: ip,
       userAgent: userAgent || undefined,
       status: 'SUCCESS',
       details: { createdBy: admin.email, company, role },
-    })
+    }).catch(err => console.error('[register] Security log error:', err))
     
-    // Generate activation URL
-    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').trim()
-    const activationUrl = `${baseUrl}/admin/activate?token=${activationToken}`
-    
-    // Envoyer l'email d'activation/invitation
-    const { sendEmail } = await import('@/lib/email/mailer')
-    const { getActivationEmail } = await import('@/lib/email/templates')
-    const template = getActivationEmail({
-      firstName,
-      company,
-      activationUrl,
-      expiresIn: '24 heures',
-    })
-    const emailSent = await sendEmail({
-      to: email.toLowerCase(),
-      subject: template.subject,
-      html: template.html,
-      text: template.text,
-    })
-    
-    console.log(`[register] Email sent to ${email}: ${emailSent}`)
+    // Send activation email (non-blocking)
+    let emailSent = false
+    try {
+      const { sendEmail } = await import('@/lib/email/mailer')
+      const { getActivationEmail } = await import('@/lib/email/templates')
+      const template = getActivationEmail({
+        firstName,
+        company,
+        activationUrl,
+        expiresIn: '24 heures',
+      })
+      emailSent = await sendEmail({
+        to: email.toLowerCase(),
+        subject: template.subject,
+        html: template.html,
+        text: template.text,
+      })
+      console.log(`[register] Email sent to ${email}: ${emailSent}`)
+    } catch (emailErr) {
+      console.error('[register] Email error:', emailErr)
+    }
     
     return NextResponse.json({
       success: true,
@@ -132,14 +136,14 @@ export async function POST(request: NextRequest) {
         company: newAdmin.company,
         role: newAdmin.role,
       },
-      // Show activation URL if email failed (so admin can share it manually)
-      ...(!emailSent && { activationUrl }),
+      // Always show activation URL as fallback
+      activationUrl,
     })
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Register error:', error)
     return NextResponse.json(
-      { error: 'Erreur serveur. Veuillez réessayer.' },
+      { error: `Erreur serveur: ${error.message || 'Veuillez réessayer.'}` },
       { status: 500 }
     )
   }
