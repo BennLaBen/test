@@ -10,8 +10,9 @@ export function TopInfoBar() {
   const { t } = useTranslation('common')
   const pathname = usePathname()
 
-  // Ne rien afficher sur la boutique
-  if (pathname?.startsWith('/boutique')) return null
+  // Ne rien afficher sur la boutique/marketplace
+  const shopPrefixes = ['/boutique', '/marketplace', '/rfq', '/certifications', '/traceability', '/compliance', '/documentation', '/support', '/dashboard/buyer']
+  if (shopPrefixes.some(p => pathname === p || pathname?.startsWith(p + '/'))) return null
 
   const quickLinks = [
     { 

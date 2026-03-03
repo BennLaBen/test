@@ -311,7 +311,7 @@ export function AdminLoginForm() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/admin-auth/login', {
+      const response = await fetch('/api/v2/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -322,24 +322,7 @@ export function AdminLoginForm() {
       if (!response.ok) {
         setFailedAttempts(prev => prev + 1)
         triggerShake()
-        
-        if (result.locked) {
-          addToast('warning', result.error || 'Compte bloqué pour 30 minutes')
-        } else {
-          addToast('error', result.error || 'Email ou mot de passe incorrect')
-        }
-        return
-      }
-
-      if (result.requires2FA) {
-        setTwoFactor({
-          required: true,
-          method: result.method,
-          tempToken: result.tempToken,
-          message: result.message,
-        })
-        setOtpExpired(false)
-        addToast('success', 'Code de vérification envoyé')
+        addToast('error', result.error || 'Email ou mot de passe incorrect')
         return
       }
 
@@ -409,19 +392,7 @@ export function AdminLoginForm() {
     setIsLoading(true)
     try {
       const data = loginForm.getValues()
-      const response = await fetch('/api/admin-auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      
-      const result = await response.json()
-      if (result.requires2FA) {
-        setTwoFactor(prev => prev ? { ...prev, tempToken: result.tempToken } : null)
-        setOtpExpired(false)
-        setOtpValue('')
-        addToast('success', 'Nouveau code envoyé par email')
-      }
+      addToast('warning', 'Fonctionnalité non disponible avec la nouvelle authentification')
     } catch {
       addToast('error', 'Erreur lors de l\'envoi du code')
     } finally {

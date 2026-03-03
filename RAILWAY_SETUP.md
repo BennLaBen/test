@@ -149,11 +149,56 @@ vercel --prod --force
 ## 📊 RÉSUMÉ
 
 - [x] Code sur GitHub ✅
-- [ ] Railway PostgreSQL créé
-- [ ] DATABASE_URL récupérée
-- [ ] Base de données initialisée
-- [ ] Variables Vercel configurées
+- [x] Railway PostgreSQL créé (projet: **aerotools-marketplace**)
+- [x] DATABASE_URL récupérée et configurée dans `.env.local`
+- [x] Base de données initialisée (schema marketplace poussé)
+- [x] 24 produits + 4 catégories migrés de JSON vers PostgreSQL
+- [ ] Variables Vercel configurées avec Railway URL
 - [ ] Site redéployé
 - [ ] Tests OK
 
 **Temps total:** ~10 minutes
+
+---
+
+## 🚀 PROJET RAILWAY MARKETPLACE
+
+- **Nom:** aerotools-marketplace
+- **ID:** 77815f03-db01-411b-b157-5c7d6b06f7c4
+- **URL:** https://railway.com/project/77815f03-db01-411b-b157-5c7d6b06f7c4
+- **DB Host:** interchange.proxy.rlwy.net:26967
+- **DB Name:** railway
+
+### Modèles marketplace ajoutés au schema Prisma:
+- `MarketProduct` — Produits en base (remplace le JSON)
+- `MarketCategory` — Catégories produits
+- `ProductDocument` — Fiches techniques, certificats PDF
+- `Organization` — Comptes entreprise B2B
+- `OrganizationUser` — Liaison user ↔ entreprise
+- `OrgAddress` — Adresses entreprise
+- `Quote` + `QuoteItem` — Devis / RFQ
+- `Order` + `OrderItem` — Commandes
+- `SerialNumber` — Traçabilité pièces
+- `Notification` — Notifications in-app
+
+### API v2 créées:
+- `GET/POST /api/v2/products` — Liste + filtres + pagination
+- `GET/PATCH/DELETE /api/v2/products/:id` — Produit individuel (slug/id/sku)
+- `GET /api/v2/products/categories` — Catégories avec compteurs
+- `GET/POST /api/v2/quotes` — Devis RFQ
+- `GET/PATCH /api/v2/quotes/:id` — Détail + changement statut
+- `GET/POST /api/v2/orders` — Commandes
+- `GET /api/v2/traceability?serial=XXX` — Traçabilité
+
+### Pages front créées:
+- `/rfq` — Formulaire de demande de devis structuré
+- `/certifications` — Page certifications avec PDFs
+- `/traceability` — Recherche par numéro de série
+- `/dashboard/buyer` — Espace acheteur (devis + commandes)
+- `/admin/quotes` — Dashboard admin gestion devis
+
+### Commande seed:
+```powershell
+$env:DATABASE_URL="postgresql://postgres:XXX@interchange.proxy.rlwy.net:26967/railway"
+npx tsx prisma/seed-marketplace.ts
+```

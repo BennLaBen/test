@@ -12,7 +12,7 @@ import { Breadcrumbs } from '@/components/shop/Breadcrumbs'
 import { Search, LayoutGrid, List } from 'lucide-react'
 
 export default function CataloguePage() {
-  const { products } = useProducts()
+  const { products, loaded } = useProducts()
   const [active, setActive] = useState<ActiveFilters>(defaultFilters)
   const [view, setView] = useState<'grid' | 'list'>('grid')
 
@@ -34,7 +34,7 @@ export default function CataloguePage() {
               Catalogue
             </h1>
             <p className="text-sm text-gray-500">
-              {filtered.length} produit{filtered.length > 1 ? 's' : ''} — Outillage aéronautique certifié
+              {!loaded ? 'Chargement...' : `${filtered.length} produit${filtered.length > 1 ? 's' : ''} — Outillage aéronautique certifié`}
             </p>
           </div>
           <div className="flex items-center gap-2">

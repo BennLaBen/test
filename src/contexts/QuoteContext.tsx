@@ -3,13 +3,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { Product } from '@/data/aerotools-products'
 
+// Accept both old Product (price_display) and new ShopProduct (priceDisplay)
+type AnyProduct = Product & { priceDisplay?: string; slug?: string; shortDescription?: string }
+
 interface QuoteItem extends Product {
   quantity: number
+  slug?: string
+  priceDisplay?: string
+  shortDescription?: string
 }
 
 interface QuoteContextType {
   items: QuoteItem[]
-  addItem: (product: Product) => void
+  addItem: (product: AnyProduct) => void
   removeItem: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
   clearQuote: () => void

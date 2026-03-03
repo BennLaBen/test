@@ -30,6 +30,10 @@ export interface ShopProduct {
   warranty?: string
   faq?: { q: string; a: string }[]
   boughtTogether?: string[]
+  // Admin-only DB fields (not displayed in frontend)
+  _dbId?: string
+  _categoryId?: string
+  _sku?: string
 }
 
 export interface ShopCategory {

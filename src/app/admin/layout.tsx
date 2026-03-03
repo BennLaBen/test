@@ -18,7 +18,9 @@ import {
   X,
   ShieldCheck,
   Wrench,
-  BarChart3
+  BarChart3,
+  Receipt,
+  Package
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { ToastProvider } from '@/components/admin/Toast'
@@ -34,6 +36,8 @@ const adminNav = [
   { href: '/admin/avis', label: 'Avis clients', icon: Star },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/admin/aerotools', label: 'LLEDO Aerotools', icon: Wrench },
+  { href: '/admin/quotes', label: 'Devis (RFQ)', icon: Receipt },
+  { href: '/admin/marketplace', label: 'Analytics Marketplace', icon: BarChart3 },
   { href: '/admin/admins', label: 'Administrateurs', icon: ShieldCheck },
 ]
 
@@ -100,7 +104,7 @@ function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           <div className="pt-4 border-t border-gray-700">
             <button
               onClick={async () => {
-                await fetch('/api/admin-auth/logout', { method: 'POST' })
+                await fetch('/api/v2/auth/logout', { method: 'POST' })
                 window.location.href = '/admin/login'
               }}
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors w-full"

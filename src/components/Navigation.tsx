@@ -162,8 +162,9 @@ export function Navigation() {
     return () => document.removeEventListener('keydown', handleTabKey)
   }, [isOpen])
 
-  // Si on est sur la partie boutique, on n'affiche pas cette navigation
-  if (pathname?.startsWith('/boutique')) return null
+  // Si on est sur la partie boutique/marketplace, on n'affiche pas cette navigation
+  const shopPrefixes = ['/boutique', '/marketplace', '/rfq', '/certifications', '/traceability', '/compliance', '/documentation', '/support', '/dashboard/buyer']
+  if (shopPrefixes.some(p => pathname === p || pathname?.startsWith(p + '/'))) return null
 
   return (
     <motion.header

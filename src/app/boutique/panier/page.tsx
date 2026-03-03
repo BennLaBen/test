@@ -4,6 +4,7 @@ import { useQuote } from '@/contexts/QuoteContext'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Trash2, Send, ArrowRight, ShoppingBag, AlertTriangle, CheckCircle, Package, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export default function CartPage() {
@@ -25,17 +26,20 @@ export default function CartPage() {
     setIsSubmitting(true)
 
     try {
-      const res = await fetch('/api/shop/quote', {
+      // Submit to v2 API for proper quote creation in PostgreSQL
+      const res = await fetch('/api/v2/quotes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          contactName: formData.name,
+          contactEmail: formData.email,
+          contactPhone: formData.phone,
+          contactCompany: formData.company,
+          notes: formData.message,
           items: items.map(item => ({
-            id: item.id,
-            name: item.name,
-            category: item.category,
+            productId: item.id,
             quantity: item.quantity,
-            price_display: item.price_display,
+            notes: '',
           })),
         }),
       })
@@ -130,9 +134,15 @@ export default function CartPage() {
                     exit={{ opacity: 0, x: -50 }}
                     className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 bg-gray-800/30 border border-gray-700 rounded-xl hover:border-blue-500/30 transition-colors group"
                   >
-                    {/* Image Placeholder */}
-                    <div className="w-24 h-24 bg-gray-900 rounded-lg flex items-center justify-center shrink-0 border border-gray-700">
-                      <Package className="h-10 w-10 text-gray-600 group-hover:text-blue-500 transition-colors" />
+                    {/* Product Image */}
+                    <div className="w-24 h-24 bg-gray-900 rounded-lg shrink-0 border border-gray-700 relative overflow-hidden">
+                      {item.image ? (
+                        <Image src={item.image} alt={item.name} fill className="object-contain p-2" />
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <Package className="h-10 w-10 text-gray-600 group-hover:text-blue-500 transition-colors" />
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex-1 w-full">
@@ -168,7 +178,7 @@ export default function CartPage() {
                           </button>
                         </div>
                         <span className="text-xs text-blue-400 font-bold uppercase bg-blue-900/20 px-3 py-1 rounded border border-blue-500/20">
-                          {item.price_display}
+                          {item.priceDisplay || item.price_display || 'SUR DEVIS'}
                         </span>
                       </div>
                     </div>

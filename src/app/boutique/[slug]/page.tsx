@@ -60,6 +60,8 @@ const HELICOPTER_IMAGES: Record<string, string> = {
    ═══════════════════════════════════════════ */
 const catLabel: Record<string, string> = {
   towing: 'Remorquage', handling: 'Manutention', maintenance: 'Maintenance', gse: 'GSE',
+  'barres-remorquage': 'Barres de remorquage', 'rollers-manutention': 'Rollers & Manutention',
+  'outillage-maintenance': 'Outillage de maintenance', 'ground-support': 'Ground Support Equipment',
 }
 
 /* ═══════════════════════════════════════════

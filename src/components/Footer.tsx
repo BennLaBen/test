@@ -10,8 +10,9 @@ export function Footer() {
   const { t } = useTranslation('common')
   const pathname = usePathname()
 
-  // Si on est sur la partie boutique, on n'affiche pas ce footer
-  if (pathname?.startsWith('/boutique')) return null
+  // Si on est sur la partie boutique/marketplace, on n'affiche pas ce footer
+  const shopPrefixes = ['/boutique', '/marketplace', '/rfq', '/certifications', '/traceability', '/compliance', '/documentation', '/support', '/dashboard/buyer']
+  if (shopPrefixes.some(p => pathname === p || pathname?.startsWith(p + '/'))) return null
 
   const locale = pathname?.startsWith('/en') ? 'en' : 'fr'
   const localePrefix = locale === 'en' ? '/en' : ''

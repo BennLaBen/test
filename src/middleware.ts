@@ -43,18 +43,24 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith(route)
   )
 
-  // Si route admin, vérifier le JWT admin (cookie admin_access_token)
+  // Si route admin, vérifier le JWT v2 (cookie session-token)
   if (isAdminRoute) {
-    const adminToken = req.cookies.get('admin_access_token')?.value
+    const sessionToken = req.cookies.get('session-token')?.value
     
-    if (!adminToken) {
+    if (!sessionToken) {
       const url = new URL('/admin/login', req.url)
       return NextResponse.redirect(url)
     }
 
     try {
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET || '')
-      await jwtVerify(adminToken, secret, { algorithms: ['HS256'] })
+      const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET || 'lledo-industries-secret-key-2026')
+      const { payload } = await jwtVerify(sessionToken, secret, { algorithms: ['HS256'] })
+      
+      // Verify user is ADMIN
+      if (payload.role !== 'ADMIN') {
+        const url = new URL('/connexion', req.url)
+        return NextResponse.redirect(url)
+      }
     } catch {
       const url = new URL('/admin/login', req.url)
       return NextResponse.redirect(url)

@@ -4,15 +4,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingBag, Search, Menu, X, Phone, FileText } from 'lucide-react'
+import { ShoppingBag, Search, Menu, X, Phone, FileText, Shield, Send } from 'lucide-react'
 import { useQuote } from '@/contexts/QuoteContext'
 import { useState } from 'react'
 
 const navLinks = [
   { href: '/boutique', label: 'Accueil' },
   { href: '/boutique/catalogue', label: 'Catalogue' },
-  { href: '/boutique/panier', label: 'Devis' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/boutique/configurateur', label: 'Configurateur' },
+  { href: '/boutique/comparer', label: 'Comparer' },
+  { href: '/boutique/devis', label: 'Devis' },
+  { href: '/boutique/support', label: 'Support' },
 ]
 
 export function ShopNavigation() {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,7 +11,6 @@ import { getCategoryCounts, getHelicopters, getProductsByHelicopter } from '@/li
 import { useProducts } from '@/lib/shop/useProducts'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { CategoryFilter } from '@/components/shop/CategoryFilter'
-import { HangarInterior } from '@/components/shop/HangarInterior'
 
 // ─── HANGAR DOOR COMPONENT ───
 function HangarDoors() {
@@ -26,43 +25,32 @@ function HangarDoors() {
   const contentOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1])
   const contentScale = useTransform(scrollYProgress, [0.2, 0.5], [0.92, 1])
   const imageZoom = useTransform(scrollYProgress, [0, 0.8], [1.15, 1])
-  const imageBrightness = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.8])
   const overlayOpacity = useTransform(scrollYProgress, [0.4, 0.7], [0.7, 0.3])
 
   return (
     <div ref={ref} className="relative h-[200vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background — REAL HANGAR IMAGE with helicopters */}
+        {/* Background image */}
         <motion.div className="absolute inset-0" style={{ scale: imageZoom }}>
           <Image
             src="/images/aerotools/helicopter-hero2.png"
             alt="Hangar LLEDO Aero Tools — Hélicoptères"
             fill
-            className="object-cover"
-            style={{ filter: `brightness(var(--img-b, 0.4))` }}
+            className="object-cover brightness-[0.4]"
             priority
             sizes="100vw"
           />
-          {/* Dynamic brightness via CSS variable driven by scroll */}
-          <motion.div
+          <div
             className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)',
-            }}
+            style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)' }}
           />
         </motion.div>
 
-        {/* Dark overlay that fades as doors open */}
+        {/* Dark overlay */}
         <motion.div
           className="absolute inset-0 bg-gray-950 z-[5]"
           style={{ opacity: overlayOpacity }}
         />
-
-        {/* Ambient glow effects over image */}
-        <div className="absolute inset-0 z-[6] pointer-events-none">
-          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-blue-600/8 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-500/6 rounded-full blur-[100px]" />
-        </div>
 
         {/* Content revealed behind doors */}
         <motion.div
@@ -70,7 +58,6 @@ function HangarDoors() {
           className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
         >
           <div className="text-center">
-            {/* Logo */}
             <motion.div className="relative w-48 h-20 mx-auto mb-8">
               <Image
                 src="/images/aerotools/lledo-aerotools-logo.svg"
@@ -207,6 +194,209 @@ function TrustBar() {
   )
 }
 
+// ─── HELICOPTER FAMILIES ───
+const HELI_FAMILIES: { label: string; prefixes: string[] }[] = [
+  { label: 'Airbus Helicopters', prefixes: ['H1', 'H2', 'AS', 'EC', 'DAUPHIN', 'ECUREUIL', 'PANTHER', 'SUPER PUMA', 'CARACAL', 'COUGAR', 'GAZELLE'] },
+  { label: 'Leonardo', prefixes: ['AW'] },
+  { label: 'NH Industries', prefixes: ['NH'] },
+  { label: 'Sikorsky', prefixes: ['S7', 'S9', 'UH', 'BLACK'] },
+  { label: 'Bell', prefixes: ['BELL', '2', '4', '5'] },
+  { label: 'Puma / SA', prefixes: ['SA', 'PUMA'] },
+]
+
+function groupHelicoptersByFamily(helicopters: { id: string; name: string; count: number }[]) {
+  const groups: { label: string; items: typeof helicopters }[] = []
+  const used = new Set<string>()
+
+  for (const family of HELI_FAMILIES) {
+    const items = helicopters.filter(h => {
+      const upper = h.name.toUpperCase()
+      return family.prefixes.some(p => upper.startsWith(p))
+    })
+    if (items.length > 0) {
+      items.forEach(i => used.add(i.id))
+      groups.push({ label: family.label, items })
+    }
+  }
+
+  const others = helicopters.filter(h => !used.has(h.id))
+  if (others.length > 0) {
+    groups.push({ label: 'Autres', items: others })
+  }
+
+  return groups
+}
+
+function HelicopterSelector({
+  helicopters,
+  active,
+  totalCount,
+  onSelect,
+}: {
+  helicopters: { id: string; name: string; count: number }[]
+  active: string
+  totalCount: number
+  onSelect: (id: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const ref = useRef<HTMLDivElement>(null)
+
+  const groups = groupHelicoptersByFamily(helicopters)
+
+  const filteredGroups = search
+    ? groups.map(g => ({
+        ...g,
+        items: g.items.filter(h => h.name.toLowerCase().includes(search.toLowerCase())),
+      })).filter(g => g.items.length > 0)
+    : groups
+
+  const activeName = active === 'all'
+    ? `Tous les hélicoptères (${totalCount})`
+    : helicopters.find(h => h.id === active)?.name || active
+
+  // Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mb-8"
+      ref={ref}
+    >
+      <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-3">
+        Sélectionnez votre hélicoptère
+      </p>
+
+      {/* Dropdown trigger */}
+      <div className="relative max-w-md">
+        <button
+          onClick={() => setOpen(!open)}
+          className={`w-full flex items-center justify-between px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
+            active !== 'all'
+              ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
+              : 'bg-gray-800/60 text-white border border-gray-700 hover:border-gray-600'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            <svg className="w-5 h-5 flex-shrink-0 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+              <path d="M12 19l-7-7 3-3 4 4 8-8 3 3-11 11z" />
+              <circle cx="5" cy="8" r="1.5" />
+            </svg>
+            <span className="uppercase tracking-wider truncate">{activeName}</span>
+          </div>
+          <ChevronDown className={`h-4 w-4 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+        </button>
+
+        {/* Dropdown panel */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -8, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl shadow-black/50 z-50 overflow-hidden"
+            >
+              {/* Search */}
+              <div className="p-3 border-b border-gray-800">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-500" />
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    placeholder="Rechercher un hélicoptère..."
+                    autoFocus
+                    className="w-full pl-9 pr-4 py-2.5 bg-gray-800/80 border border-gray-700 rounded-lg text-xs text-white placeholder-gray-500 outline-none focus:border-blue-500 transition-colors"
+                  />
+                  {search && (
+                    <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
+                      <X className="h-3 w-3" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Options */}
+              <div className="max-h-72 overflow-y-auto overscroll-contain">
+                {/* "Tous" option */}
+                <button
+                  onClick={() => { onSelect('all'); setOpen(false); setSearch('') }}
+                  className={`w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-between ${
+                    active === 'all'
+                      ? 'bg-blue-600/20 text-blue-400'
+                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                  }`}
+                >
+                  <span>Tous les hélicoptères</span>
+                  <span className="text-gray-600 font-mono">{totalCount}</span>
+                </button>
+
+                {/* Grouped helicopters */}
+                {filteredGroups.map(group => (
+                  <div key={group.label}>
+                    <div className="px-4 py-2 bg-gray-800/40 border-y border-gray-800/60">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{group.label}</span>
+                    </div>
+                    {group.items.map(h => (
+                      <button
+                        key={h.id}
+                        onClick={() => { onSelect(h.id); setOpen(false); setSearch('') }}
+                        className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${
+                          active === h.id
+                            ? 'bg-blue-600/20 text-blue-400 font-bold'
+                            : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                        }`}
+                      >
+                        <span className="uppercase tracking-wider">{h.name}</span>
+                        <span className="text-gray-600 font-mono text-[10px]">{h.count}</span>
+                      </button>
+                    ))}
+                  </div>
+                ))}
+
+                {filteredGroups.length === 0 && (
+                  <div className="px-4 py-6 text-center text-xs text-gray-600">
+                    Aucun hélicoptère trouvé
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Active filter chip (when not "all") */}
+      {active !== 'all' && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 border border-blue-500/20 rounded-lg"
+        >
+          <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">
+            Filtré : {activeName}
+          </span>
+          <button
+            onClick={() => onSelect('all')}
+            className="text-blue-500/50 hover:text-blue-300 transition-colors"
+          >
+            <X className="h-3 w-3" />
+          </button>
+        </motion.div>
+      )}
+    </motion.div>
+  )
+}
+
 // ─── MAIN PAGE ───
 export default function BoutiquePage() {
   const { t } = useTranslation('common')
@@ -240,9 +430,6 @@ export default function BoutiquePage() {
         {/* ═══ HERO — HANGAR OPENING ═══ */}
         <HangarDoors />
 
-        {/* ═══ IMMERSIVE HANGAR INTERIOR ═══ */}
-        <HangarInterior />
-
         {/* ═══ TRUST BAR ═══ */}
         <TrustBar />
 
@@ -275,41 +462,12 @@ export default function BoutiquePage() {
             </motion.div>
 
             {/* ═══ HELICOPTER FILTER ═══ */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-8"
-            >
-              <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-3">
-                Sélectionnez votre hélicoptère
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => { setActiveHelicopter('all'); setActiveCategory('all') }}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-                    activeHelicopter === 'all'
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                      : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
-                  }`}
-                >
-                  Tous ({products.length})
-                </button>
-                {helicopters.map((h) => (
-                  <button
-                    key={h.id}
-                    onClick={() => { setActiveHelicopter(h.id); setActiveCategory('all') }}
-                    className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-                      activeHelicopter === h.id
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                        : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
-                    }`}
-                  >
-                    {h.name} ({h.count})
-                  </button>
-                ))}
-              </div>
-            </motion.div>
+            <HelicopterSelector
+              helicopters={helicopters}
+              active={activeHelicopter}
+              totalCount={products.length}
+              onSelect={(id) => { setActiveHelicopter(id); setActiveCategory('all') }}
+            />
 
             {/* Toolbar: Category + Search */}
             <motion.div

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { SEO } from '@/components/SEO'
-import { signIn, getSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -46,40 +45,30 @@ export default function ConnexionPage() {
     setError('')
 
     try {
-      // Check if this email belongs to an admin account
-      const checkRes = await fetch('/api/admin-auth/check-email', {
+      // Login via secure v2 API (Railway PostgreSQL + JWT sessions)
+      const res = await fetch('/api/v2/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: data.email }),
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
       })
-      const checkData = await checkRes.json()
 
-      if (checkData.isAdmin) {
-        // Redirect to admin login page
-        router.push('/admin/login')
+      const result = await res.json()
+
+      if (!res.ok || !result.success) {
+        setError(result.error || t('auth.invalidCredentials'))
         return
       }
 
-      const result = await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        setError(t('auth.invalidCredentials'))
-      } else {
-        // Get session to check user role
-        const session = await getSession()
-        
-        // Redirect admin users to admin dashboard
-        if (session?.user?.role === 'ADMIN') {
-          router.push('/admin')
-        } else {
-          router.push(callbackUrl)
-        }
-        router.refresh()
+      // Redirect based on user role
+      if (result.user?.role === 'ADMIN') {
+        window.location.href = '/admin/login'
+        return
       }
+      router.push(callbackUrl)
+      router.refresh()
     } catch (err) {
       setError(t('ui.error'))
     } finally {

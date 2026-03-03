@@ -38,6 +38,11 @@ model User {
   loginOTPs              ClientLoginOTP[]
   passwordResets         ClientPasswordReset[]
 
+  // Marketplace relations
+  organizationUsers      OrganizationUser[]
+  quotes                 Quote[]
+  orders                 Order[]
+
   @@map("users")
 }
 
@@ -522,4 +527,320 @@ model EmailOTP {
 
   @@index([adminId])
   @@map("email_otps")
+}
+
+// ============================================
+// MARKETPLACE — PRODUCTS (replaces JSON)
+// ============================================
+
+model MarketProduct {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  sku              String   @unique // Part Number
+  name             String
+  categoryId       String
+  category         MarketCategory @relation(fields: [categoryId], references: [id])
+  description      String   @db.Text
+  shortDescription String
+  features         String[] @default([])
+  specs            Json     @default("{}")
+  tolerances       Json?
+  materialsData    Json?
+  image            String
+  gallery          String[] @default([])
+  priceDisplay     String?  // "SUR DEVIS" or display price
+  priceNet         Decimal? // Real net price (hidden or visible)
+  priceTiers       Json?    // [{qty: 5, price: 1200}, ...]
+  compatibility    String[] @default([]) // Helicopter types
+  usage            String[] @default([])
+  material         String   @default("")
+  inStock          Boolean  @default(true)
+  stockQuantity    Int      @default(0)
+  minOrder         Int      @default(1)
+  leadTime         String?
+  warranty         String?
+  weight           Decimal?
+  dimensions       Json?    // {length, width, height}
+  isNew            Boolean  @default(false)
+  isFeatured       Boolean  @default(false)
+  published        Boolean  @default(true)
+  model3d          String?
+  boughtTogether   String[] @default([])
+  faq              Json?    // [{q, a}, ...]
+  certifications   String[] @default([])
+  standards        String[] @default([])
+  applications     String[] @default([])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  documents   ProductDocument[]
+  quoteItems  QuoteItem[]
+  orderItems  OrderItem[]
+  serialNumbers SerialNumber[]
+
+  @@index([categoryId])
+  @@index([published])
+  @@map("market_products")
+}
+
+model MarketCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  label       String
+  description String?
+  icon        String?
+  order       Int      @default(0)
+  products    MarketProduct[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("market_categories")
+}
+
+model ProductDocument {
+  id          String       @id @default(cuid())
+  productId   String
+  product     MarketProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  type        DocType
+  title       String
+  url         String
+  fileSize    Int?
+  createdAt   DateTime     @default(now())
+
+  @@index([productId])
+  @@map("product_documents")
+}
+
+enum DocType {
+  DATASHEET
+  CERTIFICATE
+  MANUAL
+  DRAWING
+  TEST_REPORT
+  DECLARATION_OF_CONFORMITY
+}
+
+// ============================================
+// MARKETPLACE — ORGANIZATIONS (B2B accounts)
+// ============================================
+
+model Organization {
+  id            String   @id @default(cuid())
+  name          String
+  siret         String?  @unique
+  vatNumber     String?
+  industry      String?
+  size          String?  // PME, ETI, GE
+  creditTerms   String?  // Net30, Net60
+  creditLimit   Decimal?
+  logoUrl       String?
+  website       String?
+  notes         String?  @db.Text
+  users         OrganizationUser[]
+  addresses     OrgAddress[]
+  quotes        Quote[]
+  orders        Order[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("organizations")
+}
+
+model OrganizationUser {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           OrgRole      @default(BUYER)
+  createdAt      DateTime     @default(now())
+
+  @@unique([organizationId, userId])
+  @@map("organization_users")
+}
+
+enum OrgRole {
+  ORG_ADMIN
+  BUYER
+  VIEWER
+}
+
+model OrgAddress {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  label          String       // "Siège", "Usine", "Livraison"
+  street         String
+  city           String
+  postalCode     String
+  country        String       @default("FR")
+  isDefault      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId])
+  @@map("org_addresses")
+}
+
+// ============================================
+// MARKETPLACE — QUOTES (RFQ)
+// ============================================
+
+model Quote {
+  id             String       @id @default(cuid())
+  reference      String       @unique // QUO-2026-0001
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  status         QuoteStatus  @default(DRAFT)
+  items          QuoteItem[]
+  notes          String?      @db.Text
+  internalNotes  String?      @db.Text // Admin-only notes
+  validUntil     DateTime?
+  totalAmount    Decimal?
+  currency       String       @default("EUR")
+  // Contact info (for anonymous quotes)
+  contactName    String?
+  contactEmail   String?
+  contactPhone   String?
+  contactCompany String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([status])
+  @@map("quotes")
+}
+
+enum QuoteStatus {
+  DRAFT
+  SUBMITTED
+  IN_REVIEW
+  QUOTED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CONVERTED
+}
+
+model QuoteItem {
+  id        String        @id @default(cuid())
+  quoteId   String
+  quote     Quote         @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  productId String
+  product   MarketProduct @relation(fields: [productId], references: [id])
+  quantity  Int
+  unitPrice Decimal?
+  notes     String?
+  createdAt DateTime      @default(now())
+
+  @@index([quoteId])
+  @@map("quote_items")
+}
+
+// ============================================
+// MARKETPLACE — ORDERS
+// ============================================
+
+model Order {
+  id              String       @id @default(cuid())
+  reference       String       @unique // ORD-2026-0001
+  quoteId         String?      // Link to original quote
+  organizationId  String?
+  organization    Organization? @relation(fields: [organizationId], references: [id])
+  userId          String
+  user            User         @relation(fields: [userId], references: [id])
+  status          OrderStatus  @default(PENDING)
+  items           OrderItem[]
+  shippingAddress Json?
+  billingAddress  Json?
+  totalAmount     Decimal
+  currency        String       @default("EUR")
+  paymentMethod   String?      // PO, WIRE, CB
+  poNumber        String?      // Client purchase order number
+  trackingNumber  String?
+  internalNotes   String?      @db.Text
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([status])
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  IN_PRODUCTION
+  READY_TO_SHIP
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id            String        @id @default(cuid())
+  orderId       String
+  order         Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  product       MarketProduct @relation(fields: [productId], references: [id])
+  quantity      Int
+  unitPrice     Decimal
+  serialNumbers SerialNumber[]
+  createdAt     DateTime      @default(now())
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
+// ============================================
+// MARKETPLACE — TRACEABILITY
+// ============================================
+
+model SerialNumber {
+  id             String        @id @default(cuid())
+  serial         String        @unique
+  productId      String
+  product        MarketProduct @relation(fields: [productId], references: [id])
+  orderItemId    String?
+  orderItem      OrderItem?    @relation(fields: [orderItemId], references: [id])
+  batchNumber    String?
+  manufacturedAt DateTime?
+  status         SNStatus      @default(IN_STOCK)
+  createdAt      DateTime      @default(now())
+
+  @@index([productId])
+  @@index([orderItemId])
+  @@map("serial_numbers")
+}
+
+enum SNStatus {
+  IN_STOCK
+  RESERVED
+  SOLD
+  RETURNED
+  SCRAPPED
+}
+
+// ============================================
+// MARKETPLACE — NOTIFICATIONS
+// ============================================
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // QUOTE_STATUS, ORDER_STATUS, STOCK_ALERT, NEW_PRODUCT
+  title     String
+  message   String
+  link      String?  // URL to navigate to
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read])
+  @@index([createdAt])
+  @@map("notifications")
 }

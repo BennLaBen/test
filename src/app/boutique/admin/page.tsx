@@ -9,14 +9,16 @@ import {
 import { useProductAdmin, emptyProduct, validateProduct } from '@/lib/shop/useProductAdmin'
 import type { ShopProduct } from '@/lib/shop/types'
 import { ProductCard } from '@/components/shop/ProductCard'
+import Image from 'next/image'
 
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_AEROTOOL_ADMIN_PWD || 'aerotool2026'
 
-const CATEGORIES = [
-  { id: 'towing', label: 'Remorquage' },
-  { id: 'handling', label: 'Manutention' },
-  { id: 'maintenance', label: 'Maintenance' },
-  { id: 'gse', label: 'GSE' },
+// Fallback categories if DB fetch fails
+const FALLBACK_CATEGORIES = [
+  { id: 'barres-remorquage', slug: 'barres-remorquage', label: 'Barres de remorquage' },
+  { id: 'rollers-manutention', slug: 'rollers-manutention', label: 'Rollers & Manutention' },
+  { id: 'outillage-maintenance', slug: 'outillage-maintenance', label: 'Outillage de maintenance' },
+  { id: 'ground-support', slug: 'ground-support', label: 'Ground Support Equipment' },
 ]
 
 const MATERIALS = [
@@ -183,10 +185,11 @@ function TagEditor({ tags, onChange, label, placeholder }: { tags: string[]; onC
 /* ═══════════════════════════════════════
    PRODUCT FORM
    ═══════════════════════════════════════ */
-function ProductForm({ product, onSave, onCancel }: {
+function ProductForm({ product, onSave, onCancel, categories }: {
   product: ShopProduct
   onSave: (p: ShopProduct) => void
   onCancel: () => void
+  categories: { id: string; slug: string; label: string }[]
 }) {
   const [draft, setDraft] = useState<ShopProduct>({ ...product })
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -311,7 +314,7 @@ function ProductForm({ product, onSave, onCancel }: {
                 <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1 block">Catégorie *</label>
                 <select value={draft.category} onChange={e => set('category', e.target.value)}
                   className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white outline-none focus:border-blue-500">
-                  {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+                  {categories.map(c => <option key={c.slug} value={c.slug}>{c.label}</option>)}
                 </select>
               </div>
               <div>
@@ -389,41 +392,100 @@ function ProductForm({ product, onSave, onCancel }: {
           {/* ── MEDIA ── */}
           <div className="space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-blue-400 border-b border-gray-800 pb-2">Média</h3>
-            {field('image', 'Image principale (URL)', 'text', { placeholder: '/images/products/towbar-h160.jpg' })}
             
-            {/* Gallery editor */}
+            {/* Main image with upload */}
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Galerie d'images (URLs)</p>
-              <div className="space-y-1.5 mb-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Image principale</p>
+              <div className="flex items-start gap-3">
+                <div className="w-24 h-24 bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center overflow-hidden flex-shrink-0">
+                  {draft.image ? (
+                    <Image src={draft.image} alt="Preview" width={96} height={96} className="object-contain w-full h-full" />
+                  ) : (
+                    <Package className="h-8 w-8 text-gray-600" />
+                  )}
+                </div>
+                <div className="flex-1 space-y-2">
+                  <input
+                    type="text"
+                    value={draft.image || ''}
+                    onChange={e => set('image', e.target.value)}
+                    placeholder="/images/products/towbar-h160.jpg"
+                    className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-xs text-white placeholder-gray-600 outline-none focus:border-blue-500"
+                  />
+                  <label className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-500/30 rounded-lg text-xs font-bold text-blue-400 cursor-pointer hover:bg-blue-600/30 transition-colors w-fit">
+                    <Upload className="h-3.5 w-3.5" />
+                    Uploader une image
+                    <input type="file" accept="image/*" className="hidden" onChange={async (e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      const fd = new FormData()
+                      fd.append('file', file)
+                      try {
+                        const res = await fetch('/api/v2/upload', { method: 'POST', body: fd })
+                        const data = await res.json()
+                        if (data.success) set('image', data.url)
+                        else alert(data.error)
+                      } catch { alert('Erreur upload') }
+                      e.target.value = ''
+                    }} />
+                  </label>
+                  {draft.image && (
+                    <button onClick={() => set('image', '')} className="text-[10px] text-red-400 hover:text-red-300">Supprimer l&apos;image</button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Gallery editor with upload */}
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Galerie d&apos;images</p>
+              <div className="grid grid-cols-4 gap-2 mb-2">
                 {draft.gallery.map((url, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-gray-800/30 rounded-lg px-3 py-2">
-                    <span className="text-[10px] text-gray-600 font-mono flex-shrink-0">#{i + 1}</span>
-                    <input
-                      type="text"
-                      value={url}
-                      onChange={e => {
-                        const next = [...draft.gallery]
-                        next[i] = e.target.value
-                        set('gallery', next)
-                      }}
-                      placeholder="/images/products/photo.jpg"
-                      className="flex-1 px-2 py-1 bg-gray-900 border border-gray-700 rounded text-xs text-white placeholder-gray-600 outline-none focus:border-blue-500"
-                    />
+                  <div key={i} className="relative group">
+                    <div className="aspect-square bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+                      {url ? (
+                        <Image src={url} alt={`Gallery ${i}`} width={120} height={120} className="object-contain w-full h-full" />
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-gray-600 text-[10px]">Vide</div>
+                      )}
+                    </div>
                     <button
                       onClick={() => set('gallery', draft.gallery.filter((_, j) => j !== i))}
-                      className="text-gray-600 hover:text-red-400 flex-shrink-0"
+                      className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                      <X className="h-3.5 w-3.5" />
+                      <X className="h-3 w-3 text-white" />
                     </button>
                   </div>
                 ))}
               </div>
-              <button
-                onClick={() => set('gallery', [...draft.gallery, ''])}
-                className="w-full px-3 py-2 bg-gray-800 border border-gray-700 border-dashed rounded-lg text-xs font-bold text-gray-500 hover:text-blue-400 hover:border-blue-500/30 transition-colors"
-              >
-                + Ajouter une image
-              </button>
+              <div className="flex gap-2">
+                <label className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 border-dashed rounded-lg text-xs font-bold text-gray-500 hover:text-blue-400 hover:border-blue-500/30 transition-colors cursor-pointer text-center">
+                  <Upload className="h-3.5 w-3.5 inline mr-1" />
+                  Uploader
+                  <input type="file" accept="image/*" multiple className="hidden" onChange={async (e) => {
+                    const files = e.target.files
+                    if (!files) return
+                    const urls: string[] = []
+                    for (const file of Array.from(files)) {
+                      const fd = new FormData()
+                      fd.append('file', file)
+                      try {
+                        const res = await fetch('/api/v2/upload', { method: 'POST', body: fd })
+                        const data = await res.json()
+                        if (data.success) urls.push(data.url)
+                      } catch { /* skip */ }
+                    }
+                    if (urls.length) set('gallery', [...draft.gallery, ...urls])
+                    e.target.value = ''
+                  }} />
+                </label>
+                <button
+                  onClick={() => set('gallery', [...draft.gallery, ''])}
+                  className="px-3 py-2 bg-gray-800 border border-gray-700 border-dashed rounded-lg text-xs font-bold text-gray-500 hover:text-blue-400 hover:border-blue-500/30 transition-colors"
+                >
+                  + URL
+                </button>
+              </div>
             </div>
 
             {field('datasheetUrl', 'Fiche technique PDF (URL)' as any, 'text', { placeholder: '/docs/towbar-h160.pdf' })}
@@ -461,7 +523,8 @@ export default function AdminCataloguePage() {
 }
 
 function AdminDashboard() {
-  const { products, loaded, addProduct, updateProduct, deleteProduct, duplicateProduct, reorderProduct, exportJSON, importJSON, resetToDefaults } = useProductAdmin()
+  const { products, categories, loaded, addProduct, updateProduct, deleteProduct, duplicateProduct, reorderProduct, exportJSON, importJSON, resetToDefaults } = useProductAdmin()
+  const ADMIN_CATS = categories.length > 0 ? categories : FALLBACK_CATEGORIES
   const [search, setSearch] = useState('')
   const [catFilter, setCatFilter] = useState('all')
   const [editing, setEditing] = useState<ShopProduct | null>(null)
@@ -476,7 +539,7 @@ function AdminDashboard() {
 
   const filtered = useMemo(() => {
     return products.filter(p => {
-      if (catFilter !== 'all' && p.category !== catFilter) return false
+      if (catFilter !== 'all' && p.category !== catFilter && p._categoryId !== catFilter) return false
       if (search) {
         const q = search.toLowerCase()
         return p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.slug.toLowerCase().includes(q)
@@ -552,7 +615,7 @@ function AdminDashboard() {
               className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white placeholder-gray-600 outline-none focus:border-blue-500" />
           </div>
           <div className="flex gap-1.5">
-            {[{ id: 'all', label: 'Tous' }, ...CATEGORIES].map(c => (
+            {[{ id: 'all', slug: 'all', label: 'Tous' }, ...ADMIN_CATS].map(c => (
               <button key={c.id} onClick={() => setCatFilter(c.id)}
                 className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
                   catFilter === c.id ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'bg-gray-800 text-gray-500 border border-gray-700 hover:text-white'
@@ -591,7 +654,7 @@ function AdminDashboard() {
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
                     <span className="px-2 py-1 bg-gray-800 border border-gray-700 rounded text-[10px] font-bold uppercase text-gray-400">
-                      {CATEGORIES.find(c => c.id === p.category)?.label || p.category}
+                      {ADMIN_CATS.find(c => c.slug === p.category)?.label || p.category}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-center hidden sm:table-cell">
@@ -636,7 +699,7 @@ function AdminDashboard() {
       {/* Edit panel */}
       <AnimatePresence>
         {editing && (
-          <ProductForm product={editing} onSave={handleSave} onCancel={() => setEditing(null)} />
+          <ProductForm product={editing} onSave={handleSave} onCancel={() => setEditing(null)} categories={ADMIN_CATS} />
         )}
       </AnimatePresence>
 
