@@ -72,17 +72,27 @@ export async function POST(request: NextRequest) {
     // Hash the new password
     const passwordHash = await hashPassword(password)
     
-    // Update admin password and mark token as used
-    await prisma.$transaction([
-      prisma.admin.update({
+    // Update admin password, mark token as used, and sync to User table (v2 auth)
+    const adminEmail = resetToken.admin.email.toLowerCase()
+
+    await prisma.$transaction(async (tx) => {
+      await tx.admin.update({
         where: { id: resetToken.adminId },
         data: { passwordHash },
-      }),
-      prisma.passwordReset.update({
+      })
+      await tx.passwordReset.update({
         where: { id: resetToken.id },
         data: { usedAt: new Date() },
-      }),
-    ])
+      })
+      // Sync password to User table (used by v2 auth login)
+      const userRecord = await tx.user.findUnique({ where: { email: adminEmail } })
+      if (userRecord) {
+        await tx.user.update({
+          where: { email: adminEmail },
+          data: { password: passwordHash },
+        })
+      }
+    })
     
     // Invalidate all active sessions for security
     const invalidatedCount = await invalidateAllSessions(resetToken.adminId)

@@ -79,21 +79,42 @@ export async function POST(request: NextRequest) {
     // Hash the password
     const passwordHash = await hashPassword(password)
     
-    // Update admin and mark token as used
-    await prisma.$transaction([
-      prisma.admin.update({
+    // Update admin, mark token as used, and sync to User table (v2 auth)
+    const adminEmail = activationToken.admin.email.toLowerCase()
+
+    await prisma.$transaction(async (tx) => {
+      await tx.admin.update({
         where: { id: activationToken.adminId },
         data: {
           passwordHash,
           isActive: true,
           emailVerified: true,
         },
-      }),
-      prisma.activationToken.update({
+      })
+      await tx.activationToken.update({
         where: { id: activationToken.id },
         data: { usedAt: new Date() },
-      }),
-    ])
+      })
+      // Sync password to User table (used by v2 auth login)
+      const userRecord = await tx.user.findUnique({ where: { email: adminEmail } })
+      if (userRecord) {
+        await tx.user.update({
+          where: { email: adminEmail },
+          data: { password: passwordHash, role: 'ADMIN' },
+        })
+      } else {
+        await tx.user.create({
+          data: {
+            email: adminEmail,
+            password: passwordHash,
+            firstName: activationToken.admin.firstName,
+            lastName: activationToken.admin.lastName,
+            role: 'ADMIN',
+            company: activationToken.admin.company || 'LLEDO Industries',
+          },
+        })
+      }
+    })
     
     // Log the event
     await logSecurityEvent({
