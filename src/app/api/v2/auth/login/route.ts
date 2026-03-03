@@ -83,9 +83,48 @@ export async function POST(request: NextRequest) {
     })
 
     console.log(`[auth] ✅ User logged in: ${user.email}`)
+
+    // Send login notification email for ADMIN users (async, don't block response)
+    if (user.role === 'ADMIN') {
+      const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || 'IP inconnue'
+      const ua = request.headers.get('user-agent') || ''
+      const now = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'full', timeStyle: 'short' })
+
+      // Parse user-agent for device/browser
+      const browser = ua.includes('Edg/') ? 'Microsoft Edge'
+        : ua.includes('Chrome/') ? 'Google Chrome'
+        : ua.includes('Firefox/') ? 'Mozilla Firefox'
+        : ua.includes('Safari/') ? 'Safari'
+        : 'Navigateur inconnu'
+      const device = ua.includes('Mobile') ? 'Mobile' : ua.includes('Tablet') ? 'Tablette' : 'Ordinateur'
+
+      sendLoginNotification(user.email, user.firstName, now, ip, browser, device).catch(err =>
+        console.error('[auth] Failed to send login notification email:', err)
+      )
+    }
+
     return response
   } catch (error) {
     console.error('[API v2] POST /auth/login error:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
+}
+
+async function sendLoginNotification(email: string, firstName: string, datetime: string, ip: string, browser: string, device: string) {
+  const { sendEmail } = await import('@/lib/email/mailer')
+  const { getNewLoginEmail } = await import('@/lib/email/templates')
+
+  const template = getNewLoginEmail({
+    firstName,
+    datetime,
+    city: 'Non disponible',
+    country: 'France',
+    device,
+    browser,
+    ip,
+    viewSessionsUrl: 'https://www.lledo-industries.com/admin',
+  })
+
+  await sendEmail({ to: email, subject: template.subject, html: template.html, text: template.text })
+  console.log(`[auth] 📧 Login notification sent to ${email}`)
 }
