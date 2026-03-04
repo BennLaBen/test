@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LLEDO Aerotools — Render Turntable</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; padding: 24px; }
+    h1 { font-size: 20px; margin-bottom: 8px; }
+    .subtitle { color: #888; font-size: 13px; margin-bottom: 24px; }
+    .controls { display: flex; gap: 16px; align-items: end; flex-wrap: wrap; margin-bottom: 24px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.1em; }
+    .field input, .field select { background: #222; border: 1px solid #444; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 14px; }
+    button { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-primary:disabled { background: #333; color: #666; cursor: not-allowed; }
+    .btn-secondary { background: #333; color: #ccc; }
+    .btn-secondary:hover { background: #444; }
+    #preview { border: 1px solid #333; border-radius: 8px; display: block; margin-bottom: 16px; background: #1a1a1a; }
+    .progress-bar { width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden; margin: 12px 0; }
+    .progress-fill { height: 100%; background: #2563eb; transition: width 0.1s; width: 0%; }
+    #status { font-size: 13px; color: #888; min-height: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 16px; }
+    .grid img { width: 100%; border-radius: 4px; border: 1px solid #333; }
+    .grid .frame-label { font-size: 9px; color: #666; text-align: center; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <h1>🔄 LLEDO Aerotools — Turntable Renderer</h1>
+  <p class="subtitle">Génère les images pré-rendues pour le viewer sécurisé (style Mercedes-Benz)</p>
+
+  <div class="controls">
+    <div class="field">
+      <label>Fichier GLB</label>
+      <input type="file" id="glbFile" accept=".glb,.gltf">
+    </div>
+    <div class="field">
+      <label>Slug produit</label>
+      <input type="text" id="slug" value="roller-h125" placeholder="roller-h125">
+    </div>
+    <div class="field">
+      <label>Frames horizontaux</label>
+      <select id="hFrames">
+        <option value="24">24 (15° chaque)</option>
+        <option value="36" selected>36 (10° chaque)</option>
+        <option value="72">72 (5° chaque — HD)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Niveaux verticaux</label>
+      <select id="vLevels">
+        <option value="1">1 (vue unique)</option>
+        <option value="3" selected>3 (bas, milieu, haut)</option>
+        <option value="5">5 (ultra-fluide)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Résolution</label>
+      <select id="resolution">
+        <option value="800">800×800</option>
+        <option value="1200" selected>1200×1200</option>
+        <option value="1600">1600×1600</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Format</label>
+      <select id="format">
+        <option value="webp" selected>WebP (recommandé)</option>
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button id="renderBtn" class="btn-primary" disabled>Charger un GLB d'abord</button>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button id="downloadBtn" class="btn-secondary" disabled>📦 Télécharger ZIP</button>
+    </div>
+  </div>
+
+  <canvas id="preview" width="1200" height="1200"></canvas>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="status">En attente du fichier GLB...</div>
+
+  <div id="gallery" class="grid"></div>
+
+  <script type="module">
+    import * as THREE from 'three'
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
+    const canvas = document.getElementById('preview')
+    const statusEl = document.getElementById('status')
+    const progressFill = document.getElementById('progressFill')
+    const renderBtn = document.getElementById('renderBtn')
+    const downloadBtn = document.getElementById('downloadBtn')
+    const galleryEl = document.getElementById('gallery')
+
+    let scene, camera, renderer, model, renderedFrames = []
+
+    // ─── Setup Three.js scene ───
+    function setupScene(size) {
+      scene = new THREE.Scene()
+      scene.background = new THREE.Color(0xe0e0e4)
+
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true })
+      renderer.setSize(size, size)
+      renderer.setPixelRatio(1)
+      renderer.toneMapping = THREE.ACESFilmicToneMapping
+      renderer.toneMappingExposure = 1.1
+      renderer.shadowMap.enabled = true
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+      camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000)
+
+      // Studio lighting
+      const ambient = new THREE.AmbientLight(0xffffff, 0.6)
+      scene.add(ambient)
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.2)
+      keyLight.position.set(5, 8, 5)
+      keyLight.castShadow = true
+      keyLight.shadow.mapSize.set(2048, 2048)
+      scene.add(keyLight)
+
+      const fillLight = new THREE.DirectionalLight(0xeeeeff, 0.5)
+      fillLight.position.set(-3, 4, -2)
+      scene.add(fillLight)
+
+      const rimLight = new THREE.DirectionalLight(0xffffff, 0.3)
+      rimLight.position.set(0, 2, -5)
+      scene.add(rimLight)
+
+      // Ground plane with shadow
+      const groundGeo = new THREE.CircleGeometry(10, 64)
+      const groundMat = new THREE.ShadowMaterial({ opacity: 0.15 })
+      const ground = new THREE.Mesh(groundGeo, groundMat)
+      ground.rotation.x = -Math.PI / 2
+      ground.position.y = 0
+      ground.receiveShadow = true
+      scene.add(ground)
+
+      // Ground ring (Mercedes-style)
+      const ringGeo = new THREE.RingGeometry(3.8, 4.0, 64)
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0xc8c8cc, side: THREE.DoubleSide })
+      const ring = new THREE.Mesh(ringGeo, ringMat)
+      ring.rotation.x = -Math.PI / 2
+      ring.position.y = 0.001
+      scene.add(ring)
+    }
+
+    // ─── Load GLB ───
+    function loadGLB(arrayBuffer) {
+      return new Promise((resolve, reject) => {
+        const loader = new GLTFLoader()
+        loader.parse(arrayBuffer, '', (gltf) => {
+          model = gltf.scene
+
+          // Auto-scale & center
+          const box = new THREE.Box3().setFromObject(model)
+          const center = box.getCenter(new THREE.Vector3())
+          const size = box.getSize(new THREE.Vector3())
+          const maxDim = Math.max(size.x, size.y, size.z)
+          const scale = 3 / maxDim
+          model.scale.setScalar(scale)
+          model.position.sub(center.multiplyScalar(scale))
+          model.position.y -= (box.min.y * scale)
+
+          // Enable shadows
+          model.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true
+              child.receiveShadow = true
+            }
+          })
+
+          scene.add(model)
+          resolve()
+        }, reject)
+      })
+    }
+
+    // ─── Render single frame ───
+    function renderFrame(hAngle, elevation, distance) {
+      const theta = THREE.MathUtils.degToRad(hAngle)
+      const phi = THREE.MathUtils.degToRad(elevation)
+
+      camera.position.set(
+        distance * Math.sin(theta) * Math.cos(phi),
+        distance * Math.sin(phi),
+        distance * Math.cos(theta) * Math.cos(phi)
+      )
+      camera.lookAt(0, 0.8, 0)
+
+      renderer.render(scene, camera)
+    }
+
+    // ─── Render all frames ───
+    async function renderAllFrames() {
+      const hFrames = parseInt(document.getElementById('hFrames').value)
+      const vLevels = parseInt(document.getElementById('vLevels').value)
+      const resolution = parseInt(document.getElementById('resolution').value)
+      const format = document.getElementById('format').value
+      const slug = document.getElementById('slug').value
+
+      renderer.setSize(resolution, resolution)
+      canvas.style.width = Math.min(resolution, 600) + 'px'
+      canvas.style.height = Math.min(resolution, 600) + 'px'
+
+      const elevations = vLevels === 1 ? [55]
+        : vLevels === 3 ? [35, 55, 75]
+        : [25, 40, 55, 70, 85]
+
+      const distance = 8
+      const totalFrames = hFrames * vLevels
+      let current = 0
+      renderedFrames = []
+      galleryEl.innerHTML = ''
+
+      const mimeType = format === 'webp' ? 'image/webp' : format === 'png' ? 'image/png' : 'image/jpeg'
+      const quality = format === 'png' ? undefined : 0.92
+
+      for (let v = 0; v < elevations.length; v++) {
+        for (let h = 0; h < hFrames; h++) {
+          const hAngle = (360 / hFrames) * h
+          const elevation = elevations[v]
+
+          renderFrame(hAngle, elevation, distance)
+
+          const dataUrl = canvas.toDataURL(mimeType, quality)
+          const filename = `${slug}_e${v}_h${String(h).padStart(3, '0')}.${format}`
+
+          renderedFrames.push({ dataUrl, filename, elevation, hAngle })
+
+          // Show in gallery
+          const div = document.createElement('div')
+          div.innerHTML = `<img src="${dataUrl}" alt="${filename}"><div class="frame-label">${filename}</div>`
+          galleryEl.appendChild(div)
+
+          current++
+          progressFill.style.width = ((current / totalFrames) * 100) + '%'
+          statusEl.textContent = `Rendu ${current}/${totalFrames} — E${v} H${h} (${elevation}° / ${hAngle.toFixed(0)}°)`
+
+          // Yield to UI
+          await new Promise(r => setTimeout(r, 10))
+        }
+      }
+
+      statusEl.textContent = `✅ ${totalFrames} images rendues ! Cliquez "Télécharger ZIP" pour sauvegarder.`
+      downloadBtn.disabled = false
+    }
+
+    // ─── Download as ZIP (using JSZip from CDN) ───
+    async function downloadZip() {
+      statusEl.textContent = 'Création du ZIP...'
+      downloadBtn.disabled = true
+
+      // Load JSZip dynamically
+      if (!window.JSZip) {
+        const script = document.createElement('script')
+        script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'
+        document.head.appendChild(script)
+        await new Promise(r => script.onload = r)
+      }
+
+      const zip = new JSZip()
+      const slug = document.getElementById('slug').value
+      const folder = zip.folder(slug)
+
+      for (const frame of renderedFrames) {
+        const base64 = frame.dataUrl.split(',')[1]
+        folder.file(frame.filename, base64, { base64: true })
+      }
+
+      // Generate metadata
+      const hFrames = parseInt(document.getElementById('hFrames').value)
+      const vLevels = parseInt(document.getElementById('vLevels').value)
+      const format = document.getElementById('format').value
+      const elevations = vLevels === 1 ? [35]
+        : vLevels === 3 ? [35, 55, 75]
+        : [25, 40, 55, 70, 85]
+
+      const metadata = {
+        slug,
+        hFrames,
+        vLevels,
+        elevations,
+        format,
+        totalFrames: renderedFrames.length,
+        generatedAt: new Date().toISOString(),
+        filePattern: `${slug}_e{elevation}_h{angle}.${format}`,
+      }
+      folder.file('metadata.json', JSON.stringify(metadata, null, 2))
+
+      const blob = await zip.generateAsync({ type: 'blob' }, (meta) => {
+        progressFill.style.width = meta.percent.toFixed(0) + '%'
+      })
+
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${slug}-turntable-360.zip`
+      a.click()
+      URL.revokeObjectURL(url)
+
+      statusEl.textContent = `✅ ZIP téléchargé (${(blob.size / 1024 / 1024).toFixed(1)} Mo)`
+      downloadBtn.disabled = false
+    }
+
+    // ─── File input handler ───
+    document.getElementById('glbFile').addEventListener('change', async (e) => {
+      const file = e.target.files[0]
+      if (!file) return
+
+      statusEl.textContent = `Chargement de ${file.name}...`
+      const resolution = parseInt(document.getElementById('resolution').value)
+      setupScene(resolution)
+
+      const buffer = await file.arrayBuffer()
+      await loadGLB(buffer)
+
+      // Preview render
+      renderFrame(45, 55, 8)
+      statusEl.textContent = `✅ ${file.name} chargé — prêt à rendre`
+      renderBtn.disabled = false
+      renderBtn.textContent = '🎬 Lancer le rendu'
+    })
+
+    renderBtn.addEventListener('click', async () => {
+      renderBtn.disabled = true
+      renderBtn.textContent = 'Rendu en cours...'
+      await renderAllFrames()
+      renderBtn.disabled = false
+      renderBtn.textContent = '🎬 Re-rendre'
+    })
+
+    downloadBtn.addEventListener('click', downloadZip)
+  </script>
+</body>
+</html>

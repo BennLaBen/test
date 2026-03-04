@@ -1,0 +1,15 @@
+# Large files
+3d-pipeline/*.stl
+3d-pipeline/*.STL
+models/*.glb
+models/*.stl
+
+# Dev tools
+3d-pipeline/generate-turntable.js
+3d-pipeline/render-turntable.html
+3d-pipeline/viewer.html
+
+# Other
+.next
+node_modules
+*.bak

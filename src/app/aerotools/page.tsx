@@ -43,11 +43,11 @@ export default function AerotoolsPage() {
     },
   })
 
-  const stats = [
-    { label: 'Manipulation intuitive', value: 'Ergonomie' },
-    { label: 'Expédition express', value: 'Livraison rapide' },
-    { label: 'Conformité garantie', value: 'Certifié CE' },
-    { label: 'Adaptation client', value: 'Sur-mesure' },
+  const trustBadges = [
+    { icon: Shield, label: 'Certifié CE & ISO 9667', desc: 'Conformité garantie' },
+    { icon: Truck, label: 'Livraison mondiale', desc: 'Expédition express' },
+    { icon: Award, label: 'Qualité aéronautique', desc: 'Depuis 1986' },
+    { icon: CheckCircle, label: 'Sur-mesure', desc: 'Adaptation client' },
   ]
 
   const contactCards = [
@@ -203,26 +203,33 @@ export default function AerotoolsPage() {
               })}
             </div>
 
-            {/* Stats */}
+            {/* Trust Badges */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="grid grid-cols-2 gap-8 border-t border-white/10 pt-12 md:grid-cols-4"
+              className="grid grid-cols-2 gap-6 border-t border-white/10 pt-12 md:grid-cols-4"
             >
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <motion.p
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
+              {trustBadges.map((badge, index) => {
+                const Icon = badge.icon
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1 + index * 0.1 }}
-                    className="mb-2 text-3xl font-black text-white sm:text-4xl"
+                    className="flex flex-col items-center gap-3 text-center"
                   >
-                    {stat.value}
-                  </motion.p>
-                  <p className="text-sm text-gray-400 font-semibold uppercase tracking-wider">{stat.label}</p>
-                </div>
-              ))}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/15 border border-blue-400/20">
+                      <Icon className="h-5 w-5 text-blue-300" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">{badge.label}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{badge.desc}</p>
+                    </div>
+                  </motion.div>
+                )
+              })}
             </motion.div>
 
             {/* Video Section */}

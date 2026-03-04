@@ -62,3 +62,9 @@ Thumbs.db
 .turbo
 
 /generated/prisma
+
+# 3D pipeline - large binary files
+models/*.glb
+models/*.stl
+3d-pipeline/*.stl
+3d-pipeline/*.STL

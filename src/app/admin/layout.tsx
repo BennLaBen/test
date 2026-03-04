@@ -20,7 +20,8 @@ import {
   Wrench,
   BarChart3,
   Receipt,
-  Package
+  Package,
+  Box
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { ToastProvider } from '@/components/admin/Toast'
@@ -36,6 +37,7 @@ const adminNav = [
   { href: '/admin/avis', label: 'Avis clients', icon: Star },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/admin/aerotools', label: 'LLEDO Aerotools', icon: Wrench },
+  { href: '/admin/aerotools/viewer-3d', label: 'Viewer 3D Produits', icon: Box },
   { href: '/admin/quotes', label: 'Devis (RFQ)', icon: Receipt },
   { href: '/admin/marketplace', label: 'Analytics Marketplace', icon: BarChart3 },
   { href: '/admin/admins', label: 'Administrateurs', icon: ShieldCheck },
