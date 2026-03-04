@@ -16,7 +16,7 @@ const MODEL_MAP: Record<string, string> = {
 /**
  * Generate a time-limited access token for a model
  */
-export function generateModelToken(slug: string): string {
+function generateModelToken(slug: string): string {
   const timestamp = Math.floor(Date.now() / 1000)
   // Token valid for 10 minutes
   const payload = `${slug}:${timestamp}`
