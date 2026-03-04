@@ -16,11 +16,15 @@ const hFrames = parseInt(process.argv[3]) || 36
 const vLevels = parseInt(process.argv[4]) || 3
 const resolution = parseInt(process.argv[5]) || 1200
 
+// Auto-detect file: try .stl first, then .glb
+const stlPath = path.resolve(__dirname, '..', 'models', `${slug}.stl`)
 const glbPath = path.resolve(__dirname, '..', 'models', `${slug}.glb`)
+const modelPath = fs.existsSync(stlPath) ? stlPath : glbPath
+const isSTL = modelPath.endsWith('.stl')
 const outputDir = path.resolve(__dirname, '..', 'public', 'images', 'aerotools', '360', slug)
 
-if (!fs.existsSync(glbPath)) {
-  console.error(`❌ GLB file not found: ${glbPath}`)
+if (!fs.existsSync(modelPath)) {
+  console.error(`❌ Model file not found: ${stlPath} or ${glbPath}`)
   process.exit(1)
 }
 
@@ -48,7 +52,9 @@ const htmlContent = `<!DOCTYPE html>
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 
+const IS_STL = ${isSTL};
 const canvas = document.getElementById('c');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xe0e0e4);
@@ -111,31 +117,41 @@ window.__renderFrame = function(hAngle, elevation, distance) {
 };
 
 try {
-  const res = await fetch('/glb-file');
+  const res = await fetch('/model-file');
   const buffer = await res.arrayBuffer();
-  const loader = new GLTFLoader();
-  loader.parse(buffer, '', (gltf) => {
-    const model = gltf.scene;
-    const box = new THREE.Box3().setFromObject(model);
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const s = 3 / maxDim;
-    model.scale.setScalar(s);
-    model.position.sub(center.multiplyScalar(s));
-    model.position.y -= (box.min.y * s);
+  let model;
+
+  if (IS_STL) {
+    const stlLoader = new STLLoader();
+    const geometry = stlLoader.parse(buffer);
+    geometry.computeVertexNormals();
+    const material = new THREE.MeshStandardMaterial({ color: 0x404045, metalness: 0.4, roughness: 0.5 });
+    model = new THREE.Mesh(geometry, material);
+    model.castShadow = true;
+    model.receiveShadow = true;
+  } else {
+    const gltfLoader = new GLTFLoader();
+    const gltf = await new Promise((resolve, reject) => { gltfLoader.parse(buffer, '', resolve, reject); });
+    model = gltf.scene;
     model.traverse((child) => {
       if (child.isMesh) { child.castShadow = true; child.receiveShadow = true; }
     });
-    scene.add(model);
-    window.__renderFrame(45, 55, 8);
-    window.__modelReady = true;
-    console.log('MODEL_READY');
-  }, (err) => {
-    console.error('PARSE_ERROR', err);
-  });
+  }
+
+  const box = new THREE.Box3().setFromObject(model);
+  const center = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3());
+  const maxDim = Math.max(size.x, size.y, size.z);
+  const s = 3 / maxDim;
+  model.scale.setScalar(s);
+  model.position.sub(center.multiplyScalar(s));
+  model.position.y -= (box.min.y * s);
+  scene.add(model);
+  window.__renderFrame(45, 25, 8);
+  window.__modelReady = true;
+  console.log('MODEL_READY');
 } catch(err) {
-  console.error('FETCH_ERROR', err);
+  console.error('LOAD_ERROR', err);
 }
 </script>
 </body>
@@ -148,12 +164,14 @@ async function main() {
   console.log(`   Resolution: ${resolution}×${resolution}`)
   console.log(`   Output: ${outputDir}\n`)
 
-  // Start a tiny HTTP server to serve HTML + GLB
-  const glbBuffer = fs.readFileSync(glbPath)
+  // Start a tiny HTTP server to serve HTML + model
+  const modelBuffer = fs.readFileSync(modelPath)
+  console.log(`   Model: ${path.basename(modelPath)} (${isSTL ? 'STL' : 'GLB'}, ${(modelBuffer.length / 1024 / 1024).toFixed(1)} MB)`)
   const server = http.createServer((req, res) => {
-    if (req.url === '/glb-file') {
-      res.writeHead(200, { 'Content-Type': 'model/gltf-binary', 'Content-Length': glbBuffer.length })
-      res.end(glbBuffer)
+    if (req.url === '/model-file') {
+      const ct = isSTL ? 'application/octet-stream' : 'model/gltf-binary'
+      res.writeHead(200, { 'Content-Type': ct, 'Content-Length': modelBuffer.length })
+      res.end(modelBuffer)
     } else {
       res.writeHead(200, { 'Content-Type': 'text/html' })
       res.end(htmlContent)

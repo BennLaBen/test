@@ -23,11 +23,13 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = useCallback(async (file: File) => {
-    if (!file.name.endsWith('.glb') && !file.name.endsWith('.gltf')) {
-      setError('Seuls les fichiers .glb et .gltf sont acceptés')
+    const ext = file.name.split('.').pop()?.toLowerCase()
+    if (!['glb', 'gltf', 'stl'].includes(ext || '')) {
+      setError('Formats acceptés : .stl, .glb, .gltf')
       setStatus('error')
       return
     }
+    const isSTL = ext === 'stl'
 
     try {
       // Step 1: Load Three.js
@@ -37,6 +39,7 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
 
       const THREE = await import('three')
       const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
+      const { STLLoader } = await import('three/examples/jsm/loaders/STLLoader.js')
 
       // Step 2: Setup renderer
       const canvas = canvasRef.current
@@ -101,18 +104,40 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       ring.position.y = 0.001
       scene.add(ring)
 
-      // Step 3: Load GLB
+      // Step 3: Load model (STL or GLB)
       setStatus('loading-model')
-      setProgressLabel('Chargement du modèle 3D...')
+      setProgressLabel(isSTL ? 'Chargement du fichier STL...' : 'Chargement du modèle 3D...')
 
       const buffer = await file.arrayBuffer()
-      const loader = new GLTFLoader()
+      let model: InstanceType<typeof THREE.Object3D>
 
-      const gltf = await new Promise<any>((resolve, reject) => {
-        loader.parse(buffer, '', resolve, reject)
-      })
+      if (isSTL) {
+        const stlLoader = new STLLoader()
+        const geometry = stlLoader.parse(buffer)
+        geometry.computeVertexNormals()
+        const material = new THREE.MeshStandardMaterial({
+          color: 0x404045,
+          metalness: 0.4,
+          roughness: 0.5,
+        })
+        const mesh = new THREE.Mesh(geometry, material)
+        mesh.castShadow = true
+        mesh.receiveShadow = true
+        model = mesh
+      } else {
+        const gltfLoader = new GLTFLoader()
+        const gltf = await new Promise<any>((resolve, reject) => {
+          gltfLoader.parse(buffer, '', resolve, reject)
+        })
+        model = gltf.scene
+        model.traverse((child: any) => {
+          if (child.isMesh) {
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+      }
 
-      const model = gltf.scene
       const box = new THREE.Box3().setFromObject(model)
       const center = box.getCenter(new THREE.Vector3())
       const size = box.getSize(new THREE.Vector3())
@@ -121,12 +146,6 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       model.scale.setScalar(s)
       model.position.sub(center.multiplyScalar(s))
       model.position.y -= box.min.y * s
-      model.traverse((child: any) => {
-        if (child.isMesh) {
-          child.castShadow = true
-          child.receiveShadow = true
-        }
-      })
       scene.add(model)
 
       // Render helper
@@ -235,7 +254,7 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       <div>
         <p className="text-sm font-bold text-white mb-1">Vue 360° Turntable</p>
         <p className="text-xs text-gray-500 mb-3">
-          Glissez un fichier GLB pour générer automatiquement {H_FRAMES * V_LEVELS} images de présentation sécurisées.
+          Glissez un fichier STL, GLB ou GLTF pour générer automatiquement {H_FRAMES * V_LEVELS} images de présentation sécurisées.
         </p>
       </div>
 
@@ -248,12 +267,12 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
           className="border-2 border-dashed border-gray-600 rounded-2xl p-12 text-center cursor-pointer hover:border-blue-500/50 hover:bg-blue-600/5 transition-all"
         >
           <Upload className="h-10 w-10 text-gray-500 mx-auto mb-4" />
-          <p className="text-sm font-bold text-gray-300 mb-1">Glissez votre fichier GLB ici</p>
-          <p className="text-xs text-gray-500">ou cliquez pour parcourir • .glb uniquement</p>
+          <p className="text-sm font-bold text-gray-300 mb-1">Glissez votre fichier STL, GLB ou GLTF ici</p>
+          <p className="text-xs text-gray-500">ou cliquez pour parcourir • .stl .glb .gltf</p>
           <input
             ref={fileInputRef}
             type="file"
-            accept=".glb,.gltf"
+            accept=".stl,.glb,.gltf"
             onChange={handleInputChange}
             className="hidden"
           />
