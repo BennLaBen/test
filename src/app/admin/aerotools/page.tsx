@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { useProductAdmin, emptyProduct, validateProduct } from '@/lib/shop/useProductAdmin'
 import type { ShopProduct } from '@/lib/shop/types'
+import { TurntableGenerator } from '@/components/aerotools/TurntableGenerator'
 import Link from 'next/link'
 
 /* ═══════════════════════════════════════════════════════
@@ -738,6 +739,7 @@ function ProductForm({ product, onSave, onCancel }: {
     { label: '3. Caractéristiques', icon: Check },
     { label: '4. Données techniques', icon: Settings2 },
     { label: '5. Photos', icon: ImageIcon },
+    { label: '6. Vue 3D', icon: Film },
   ]
 
   return (
@@ -975,6 +977,47 @@ function ProductForm({ product, onSave, onCancel }: {
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white placeholder-gray-600 outline-none focus:border-blue-500"
                 />
               </div>
+            </div>
+          )}
+
+          {/* ═══ ÉTAPE 6 : Vue 3D Turntable ═══ */}
+          {step === 5 && (
+            <div className="space-y-6">
+              {draft.slug ? (
+                <TurntableGenerator
+                  slug={draft.slug}
+                  onComplete={(config) => {
+                    set('turntable' as any, {
+                      enabled: true,
+                      hFrames: config.hFrames,
+                      vLevels: config.vLevels,
+                      format: config.format,
+                    })
+                  }}
+                />
+              ) : (
+                <div className="bg-amber-900/20 border border-amber-700/50 rounded-2xl p-6">
+                  <div className="flex items-center gap-3">
+                    <AlertTriangle className="h-5 w-5 text-amber-400" />
+                    <div>
+                      <p className="text-sm font-bold text-amber-300">Slug requis</p>
+                      <p className="text-xs text-amber-500">Remplissez d&apos;abord le nom et le slug du produit (étape 1) avant de générer la vue 3D.</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {draft.turntable?.enabled && (
+                <div className="bg-green-900/20 border border-green-700/50 rounded-xl p-4 flex items-center gap-3">
+                  <Check className="h-5 w-5 text-green-400" />
+                  <div>
+                    <p className="text-sm font-bold text-green-300">Vue 360° active</p>
+                    <p className="text-xs text-green-500">
+                      {draft.turntable.hFrames} angles × {draft.turntable.vLevels} élévations • Format {draft.turntable.format}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

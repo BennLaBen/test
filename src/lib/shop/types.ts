@@ -19,6 +19,12 @@ export interface ShopProduct {
   isFeatured: boolean
   datasheetUrl: string | null
   model3d?: string | null
+  turntable?: {
+    enabled: boolean
+    hFrames: number
+    vLevels: number
+    format: string
+  } | null
   // Extended B2B fields (optional for backward compat)
   certifications?: string[]
   standards?: string[]
