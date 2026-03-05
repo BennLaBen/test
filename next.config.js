@@ -59,7 +59,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://vercel.live https://*.vercel.app",
+              "connect-src 'self' blob: https://vercel.live https://*.vercel.app",
               "frame-src 'self' https://www.openstreetmap.org https://www.google.com https://maps.google.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",

@@ -66,5 +66,9 @@ Thumbs.db
 # 3D pipeline - large binary files
 models/*.glb
 models/*.stl
+models/*_decimated.*
 3d-pipeline/*.stl
 3d-pipeline/*.STL
+public/models/products/*.stl
+public/models/products/*.STL
+public/models/products/*.glb

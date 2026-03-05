@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLEDO Aerotools — 3D Viewer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0f;
+      color: #fff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* ─── Canvas ─── */
+    #canvas-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ─── Header bar ─── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), transparent);
+      pointer-events: none;
+    }
+
+    .header > * { pointer-events: auto; }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-area .badge {
+      padding: 4px 10px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #60a5fa;
+    }
+
+    .logo-area h1 {
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ─── Info panel ─── */
+    .info-panel {
+      position: fixed;
+      bottom: 24px; left: 24px;
+      z-index: 100;
+      padding: 16px 20px;
+      background: rgba(15, 15, 25, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(20px);
+      font-size: 11px;
+      color: #9ca3af;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .info-panel .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+
+    .info-panel .stat .label { color: #6b7280; }
+    .info-panel .stat .value { color: #d1d5db; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+    /* ─── Loading overlay ─── */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1000;
+      background: #0a0a0f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-spinner {
+      width: 48px; height: 48px;
+      border: 3px solid rgba(59, 130, 246, 0.2);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #60a5fa;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .loading-sub {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #4b5563;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── Controls hint ─── */
+    .controls-hint {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+    }
+
+    .controls-hint .hint {
+      padding: 6px 12px;
+      background: rgba(15, 15, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      font-size: 10px;
+      color: #6b7280;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls-hint .hint kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #9ca3af;
+      margin: 0 2px;
+    }
+
+    /* ─── Disable right-click menu ─── */
+    .no-context { pointer-events: all; }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Chargement du modèle 3D</div>
+    <div class="loading-sub">LLEDO Aerotools — Viewer sécurisé</div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <h1>LLEDO Aerotools</h1>
+      <span class="badge">3D Viewer</span>
+    </div>
+  </div>
+
+  <!-- 3D Canvas -->
+  <div id="canvas-container"></div>
+
+  <!-- Info panel -->
+  <div class="info-panel" id="info-panel" style="display:none;">
+    <div class="stat">
+      <span class="label">Composants</span>
+      <span class="value" id="stat-meshes">—</span>
+    </div>
+    <div class="stat">
+      <span class="label">Triangles</span>
+      <span class="value" id="stat-triangles">—</span>
+    </div>
+    <div class="stat">
+      <span class="label">Taille fichier</span>
+      <span class="value" id="stat-size">—</span>
+    </div>
+  </div>
+
+  <!-- Controls hint -->
+  <div class="controls-hint">
+    <div class="hint"><kbd>LMB</kbd> Rotation</div>
+    <div class="hint"><kbd>Scroll</kbd> Zoom</div>
+    <div class="hint"><kbd>MMB</kbd> Pan</div>
+  </div>
+
+  <!-- Three.js (ES module imports from CDN) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+
+    // ─── CONFIG ─────────────────────────────────────────────────────────────
+    const GLB_URL = './output.glb';
+    const AUTH_TOKEN = 'lledo-3d-viewer-token-2024';  // Simulated auth token
+
+    // ─── RENDERER ───────────────────────────────────────────────────────────
+    const container = document.getElementById('canvas-container');
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: false,
+      powerPreference: 'high-performance',
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+
+    // ─── SCENE ──────────────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+
+    // Dark industrial gradient background
+    const bgCanvas = document.createElement('canvas');
+    bgCanvas.width = 2;
+    bgCanvas.height = 512;
+    const bgCtx = bgCanvas.getContext('2d');
+    const gradient = bgCtx.createLinearGradient(0, 0, 0, 512);
+    gradient.addColorStop(0, '#0f1219');
+    gradient.addColorStop(0.5, '#0a0d14');
+    gradient.addColorStop(1, '#060810');
+    bgCtx.fillStyle = gradient;
+    bgCtx.fillRect(0, 0, 2, 512);
+    const bgTexture = new THREE.CanvasTexture(bgCanvas);
+    scene.background = bgTexture;
+
+    // Subtle fog
+    scene.fog = new THREE.FogExp2(0x0a0d14, 0.015);
+
+    // ─── CAMERA ─────────────────────────────────────────────────────────────
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 1000);
+    camera.position.set(3, 2, 5);
+
+    // ─── CONTROLS ───────────────────────────────────────────────────────────
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enablePan = true;
+    controls.panSpeed = 0.8;
+    controls.rotateSpeed = 0.6;
+    controls.zoomSpeed = 1.0;
+    controls.minDistance = 0.5;
+    controls.maxDistance = 50;
+    controls.enableZoom = true;
+    // Block right-click context menu but allow right-click for pan
+    controls.mouseButtons = {
+      LEFT: THREE.MOUSE.ROTATE,
+      MIDDLE: THREE.MOUSE.PAN,
+      RIGHT: THREE.MOUSE.PAN,
+    };
+
+    // ─── 3-POINT LIGHTING ───────────────────────────────────────────────────
+
+    // Key light (warm, strong)
+    const keyLight = new THREE.DirectionalLight(0xfff5e6, 3.0);
+    keyLight.position.set(5, 8, 5);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 0.5;
+    keyLight.shadow.camera.far = 50;
+    keyLight.shadow.bias = -0.0001;
+    scene.add(keyLight);
+
+    // Fill light (cool, softer)
+    const fillLight = new THREE.DirectionalLight(0xb0c4ff, 1.5);
+    fillLight.position.set(-4, 4, -3);
+    scene.add(fillLight);
+
+    // Rim / Back light (accent)
+    const rimLight = new THREE.DirectionalLight(0x60a5fa, 2.0);
+    rimLight.position.set(0, 3, -8);
+    scene.add(rimLight);
+
+    // Ambient for shadow fill
+    const ambient = new THREE.AmbientLight(0x1a1a2e, 0.8);
+    scene.add(ambient);
+
+    // Hemisphere for natural sky/ground bounce
+    const hemi = new THREE.HemisphereLight(0x3b82f6, 0x1e1b4b, 0.4);
+    scene.add(hemi);
+
+    // ─── GROUND PLANE (subtle reflection) ───────────────────────────────────
+    const groundGeo = new THREE.PlaneGeometry(100, 100);
+    const groundMat = new THREE.MeshStandardMaterial({
+      color: 0x0a0d14,
+      metalness: 0.8,
+      roughness: 0.6,
+    });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.01;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // ─── GLB LOADER (with auth token) ───────────────────────────────────────
+
+    async function loadModel() {
+      const loadingEl = document.getElementById('loading');
+
+      try {
+        // Fetch GLB with authorization header
+        const response = await fetch(GLB_URL, {
+          headers: {
+            'Authorization': `Bearer ${AUTH_TOKEN}`,
+            'X-Viewer-Source': 'lledo-3d-viewer',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const arrayBuffer = await response.arrayBuffer();
+        const fileSize = arrayBuffer.byteLength;
+
+        // Setup Draco decoder
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/libs/draco/');
+
+        // Parse GLB
+        const loader = new GLTFLoader();
+        loader.setDRACOLoader(dracoLoader);
+
+        loader.parse(arrayBuffer, '', (gltf) => {
+          const model = gltf.scene;
+
+          // Enable shadows on all meshes
+          let meshCount = 0;
+          let triangleCount = 0;
+
+          model.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              meshCount++;
+
+              if (child.geometry) {
+                const geo = child.geometry;
+                if (geo.index) {
+                  triangleCount += geo.index.count / 3;
+                } else if (geo.attributes.position) {
+                  triangleCount += geo.attributes.position.count / 3;
+                }
+              }
+            }
+          });
+
+          // Center and scale model
+          const box = new THREE.Box3().setFromObject(model);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z);
+
+          // Normalize to ~3 units
+          const scale = 3 / maxDim;
+          model.scale.setScalar(scale);
+          model.position.sub(center.multiplyScalar(scale));
+
+          // Lift slightly above ground
+          const newBox = new THREE.Box3().setFromObject(model);
+          model.position.y -= newBox.min.y;
+
+          scene.add(model);
+
+          // Update ground position
+          ground.position.y = newBox.min.y - 0.01;
+
+          // Point camera at center
+          const modelCenter = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
+          controls.target.copy(modelCenter);
+          camera.position.set(
+            modelCenter.x + 3,
+            modelCenter.y + 2,
+            modelCenter.z + 4
+          );
+          controls.update();
+
+          // Update stats
+          document.getElementById('stat-meshes').textContent = meshCount.toLocaleString();
+          document.getElementById('stat-triangles').textContent = triangleCount.toLocaleString();
+          document.getElementById('stat-size').textContent = (fileSize / (1024 * 1024)).toFixed(2) + ' MB';
+          document.getElementById('info-panel').style.display = 'block';
+
+          // Hide loading
+          loadingEl.classList.add('hidden');
+
+          console.log(`[LLEDO 3D] Loaded: ${meshCount} meshes, ${triangleCount} triangles`);
+
+        }, (error) => {
+          console.error('[LLEDO 3D] GLB parse error:', error);
+          showError('Erreur de parsing du fichier GLB');
+        });
+
+      } catch (err) {
+        console.error('[LLEDO 3D] Load error:', err);
+        showError(`Impossible de charger le modèle: ${err.message}`);
+      }
+    }
+
+    function showError(msg) {
+      const loadingEl = document.getElementById('loading');
+      loadingEl.innerHTML = `
+        <div style="color: #ef4444; font-size: 14px; font-weight: 600; text-align: center;">
+          <div style="font-size: 48px; margin-bottom: 16px;">⚠</div>
+          ${msg}
+          <div style="color: #6b7280; font-size: 11px; margin-top: 12px;">
+            Vérifiez que le fichier GLB est disponible à l'URL configurée.
+          </div>
+        </div>
+      `;
+    }
+
+    // ─── ANIMATION LOOP ─────────────────────────────────────────────────────
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // ─── RESIZE ─────────────────────────────────────────────────────────────
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ─── SECURITY: Block downloads ──────────────────────────────────────────
+    // Disable right-click
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Disable drag
+    document.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // Disable keyboard shortcuts for save/download
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
+
+    // ─── START ──────────────────────────────────────────────────────────────
+    animate();
+    loadModel();
+  </script>
+</body>
+</html>

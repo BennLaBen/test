@@ -1,16 +1,12 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Search, Shield, Award, Truck, Phone, ChevronDown, X, ArrowRight, Zap, FileText } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/navigation'
+import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle, Star, Target, Wrench, Globe, Users, Clock } from 'lucide-react'
 import { SEO } from '@/components/SEO'
-import { getCategoryCounts, getHelicopters, getProductsByHelicopter } from '@/lib/shop/data'
-import { useProducts } from '@/lib/shop/useProducts'
-import { ProductCard } from '@/components/shop/ProductCard'
-import { CategoryFilter } from '@/components/shop/CategoryFilter'
 
 // ─── HANGAR DOOR COMPONENT ───
 function HangarDoors() {
@@ -194,236 +190,51 @@ function TrustBar() {
   )
 }
 
-// ─── HELICOPTER FAMILIES ───
-const HELI_FAMILIES: { label: string; prefixes: string[] }[] = [
-  { label: 'Airbus Helicopters', prefixes: ['H1', 'H2', 'AS', 'EC', 'DAUPHIN', 'ECUREUIL', 'PANTHER', 'SUPER PUMA', 'CARACAL', 'COUGAR', 'GAZELLE'] },
-  { label: 'Leonardo', prefixes: ['AW'] },
-  { label: 'NH Industries', prefixes: ['NH'] },
-  { label: 'Sikorsky', prefixes: ['S7', 'S9', 'UH', 'BLACK'] },
-  { label: 'Bell', prefixes: ['BELL', '2', '4', '5'] },
-  { label: 'Puma / SA', prefixes: ['SA', 'PUMA'] },
+// ─── MARKETING STATS ───
+const STATS = [
+  { value: '30+', label: 'Années d\'expertise', icon: Clock },
+  { value: '50+', label: 'Pays livrés', icon: Globe },
+  { value: '500+', label: 'Clients satisfaits', icon: Users },
+  { value: '100%', label: 'Made in France', icon: Star },
 ]
 
-function groupHelicoptersByFamily(helicopters: { id: string; name: string; count: number }[]) {
-  const groups: { label: string; items: typeof helicopters }[] = []
-  const used = new Set<string>()
-
-  for (const family of HELI_FAMILIES) {
-    const items = helicopters.filter(h => {
-      const upper = h.name.toUpperCase()
-      return family.prefixes.some(p => upper.startsWith(p))
-    })
-    if (items.length > 0) {
-      items.forEach(i => used.add(i.id))
-      groups.push({ label: family.label, items })
-    }
-  }
-
-  const others = helicopters.filter(h => !used.has(h.id))
-  if (others.length > 0) {
-    groups.push({ label: 'Autres', items: others })
-  }
-
-  return groups
-}
-
-function HelicopterSelector({
-  helicopters,
-  active,
-  totalCount,
-  onSelect,
-}: {
-  helicopters: { id: string; name: string; count: number }[]
-  active: string
-  totalCount: number
-  onSelect: (id: string) => void
-}) {
-  const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const ref = useRef<HTMLDivElement>(null)
-
-  const groups = groupHelicoptersByFamily(helicopters)
-
-  const filteredGroups = search
-    ? groups.map(g => ({
-        ...g,
-        items: g.items.filter(h => h.name.toLowerCase().includes(search.toLowerCase())),
-      })).filter(g => g.items.length > 0)
-    : groups
-
-  const activeName = active === 'all'
-    ? `Tous les hélicoptères (${totalCount})`
-    : helicopters.find(h => h.id === active)?.name || active
-
-  // Close on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="mb-8"
-      ref={ref}
-    >
-      <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-3">
-        Sélectionnez votre hélicoptère
-      </p>
-
-      {/* Dropdown trigger */}
-      <div className="relative max-w-md">
-        <button
-          onClick={() => setOpen(!open)}
-          className={`w-full flex items-center justify-between px-5 py-3.5 rounded-xl text-sm font-bold transition-all ${
-            active !== 'all'
-              ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
-              : 'bg-gray-800/60 text-white border border-gray-700 hover:border-gray-600'
-          }`}
-        >
-          <div className="flex items-center gap-3">
-            <svg className="w-5 h-5 flex-shrink-0 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-              <path d="M12 19l-7-7 3-3 4 4 8-8 3 3-11 11z" />
-              <circle cx="5" cy="8" r="1.5" />
-            </svg>
-            <span className="uppercase tracking-wider truncate">{activeName}</span>
-          </div>
-          <ChevronDown className={`h-4 w-4 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
-        </button>
-
-        {/* Dropdown panel */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -8, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.97 }}
-              transition={{ duration: 0.15 }}
-              className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl shadow-black/50 z-50 overflow-hidden"
-            >
-              {/* Search */}
-              <div className="p-3 border-b border-gray-800">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-500" />
-                  <input
-                    type="text"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    placeholder="Rechercher un hélicoptère..."
-                    autoFocus
-                    className="w-full pl-9 pr-4 py-2.5 bg-gray-800/80 border border-gray-700 rounded-lg text-xs text-white placeholder-gray-500 outline-none focus:border-blue-500 transition-colors"
-                  />
-                  {search && (
-                    <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
-                      <X className="h-3 w-3" />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Options */}
-              <div className="max-h-72 overflow-y-auto overscroll-contain">
-                {/* "Tous" option */}
-                <button
-                  onClick={() => { onSelect('all'); setOpen(false); setSearch('') }}
-                  className={`w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-between ${
-                    active === 'all'
-                      ? 'bg-blue-600/20 text-blue-400'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <span>Tous les hélicoptères</span>
-                  <span className="text-gray-600 font-mono">{totalCount}</span>
-                </button>
-
-                {/* Grouped helicopters */}
-                {filteredGroups.map(group => (
-                  <div key={group.label}>
-                    <div className="px-4 py-2 bg-gray-800/40 border-y border-gray-800/60">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{group.label}</span>
-                    </div>
-                    {group.items.map(h => (
-                      <button
-                        key={h.id}
-                        onClick={() => { onSelect(h.id); setOpen(false); setSearch('') }}
-                        className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${
-                          active === h.id
-                            ? 'bg-blue-600/20 text-blue-400 font-bold'
-                            : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-                        }`}
-                      >
-                        <span className="uppercase tracking-wider">{h.name}</span>
-                        <span className="text-gray-600 font-mono text-[10px]">{h.count}</span>
-                      </button>
-                    ))}
-                  </div>
-                ))}
-
-                {filteredGroups.length === 0 && (
-                  <div className="px-4 py-6 text-center text-xs text-gray-600">
-                    Aucun hélicoptère trouvé
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Active filter chip (when not "all") */}
-      {active !== 'all' && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 border border-blue-500/20 rounded-lg"
-        >
-          <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400">
-            Filtré : {activeName}
-          </span>
-          <button
-            onClick={() => onSelect('all')}
-            className="text-blue-500/50 hover:text-blue-300 transition-colors"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        </motion.div>
-      )}
-    </motion.div>
-  )
-}
+// ─── MARKETING FEATURES ───
+const FEATURES = [
+  {
+    icon: Target,
+    title: 'Précision Aéronautique',
+    description: 'Chaque équipement est usiné avec une tolérance de ±0.1mm, garantissant une parfaite compatibilité avec votre flotte.',
+  },
+  {
+    icon: Shield,
+    title: 'Certifications Internationales',
+    description: 'EN 9100, ISO 9001, Directive Machines 2006/42/CE — Nos produits répondent aux normes les plus strictes.',
+  },
+  {
+    icon: Wrench,
+    title: 'Bureau d\'Études Intégré',
+    description: 'Notre équipe d\'ingénieurs conçoit des solutions sur-mesure adaptées à vos besoins opérationnels spécifiques.',
+  },
+  {
+    icon: Zap,
+    title: 'Réactivité Garantie',
+    description: 'Délais de fabrication optimisés et support technique disponible 24/7 pour les urgences opérationnelles.',
+  },
+]
 
 // ─── MAIN PAGE ───
 export default function BoutiquePage() {
-  const { t } = useTranslation('common')
-  const { products } = useProducts()
-  const [activeHelicopter, setActiveHelicopter] = useState('all')
-  const [activeCategory, setActiveCategory] = useState('all')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchOpen, setSearchOpen] = useState(false)
+  const router = useRouter()
 
-  const helicopters = getHelicopters(products)
-  const baseProducts = getProductsByHelicopter(activeHelicopter, products)
-  const categoryCounts = getCategoryCounts(baseProducts)
-
-  const filteredProducts = baseProducts.filter(p => {
-    const matchesCategory = activeCategory === 'all' || p.category === activeCategory
-    const matchesSearch = !searchQuery || 
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.compatibility.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()))
-    return matchesCategory && matchesSearch
-  })
+  const handleCatalogueClick = () => {
+    router.push('/boutique/catalogue')
+  }
 
   return (
     <>
       <SEO
-        title="AEROTOOL by LLEDO — Outillage Aéronautique Certifié"
-        description="Catalogue d'outillage aéronautique certifié : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
+        title="LLEDO Aerotools — Outillage Aéronautique Certifié"
+        description="Leader français de l'outillage aéronautique certifié : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
       />
 
       <div className="min-h-screen bg-gray-950 text-white">
@@ -433,119 +244,156 @@ export default function BoutiquePage() {
         {/* ═══ TRUST BAR ═══ */}
         <TrustBar />
 
-        {/* ═══ CATALOGUE SECTION ═══ */}
-        <section id="catalogue" className="relative py-16 sm:py-24">
-          {/* Background */}
+        {/* ═══ MARKETING SECTION — WHY LLEDO ═══ */}
+        <section className="relative py-20 sm:py-32 overflow-hidden">
+          {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
-            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-900/80 to-transparent" />
+            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px]" />
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-cyan-600/5 rounded-full blur-[120px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             {/* Section header */}
             <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <motion.span
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-widest text-blue-400 mb-6"
+              >
+                <Star className="h-3 w-3" />
+                Leader Français depuis 1994
+              </motion.span>
+
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight mb-6">
+                <span className="text-white">L'excellence </span>
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  aéronautique
+                </span>
+                <br />
+                <span className="text-white">à votre service</span>
+              </h2>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+              >
+                LLEDO Aerotools conçoit et fabrique en France des équipements de manutention hélicoptère 
+                reconnus par les plus grandes forces armées et opérateurs civils du monde entier.
+              </motion.p>
+            </motion.div>
+
+            {/* Stats grid */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
             >
-              <span className="text-xs font-mono uppercase tracking-[0.3em] text-blue-400/60 mb-4 block">
-                Catalogue produits
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight mb-4">
-                <span className="text-white">Équipements </span>
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">certifiés</span>
-              </h2>
-              <p className="text-gray-400 max-w-xl mx-auto">
-                Chaque produit est conçu et fabriqué en France, conforme aux normes aéronautiques les plus exigeantes.
-              </p>
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-cyan-600/5 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-0 group-hover:opacity-100" />
+                  <div className="relative bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/30 transition-colors">
+                    <stat.icon className="h-6 w-6 text-blue-400 mx-auto mb-3" />
+                    <p className="text-3xl sm:text-4xl font-black text-white mb-1">{stat.value}</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
 
-            {/* ═══ HELICOPTER FILTER ═══ */}
-            <HelicopterSelector
-              helicopters={helicopters}
-              active={activeHelicopter}
-              totalCount={products.length}
-              onSelect={(id) => { setActiveHelicopter(id); setActiveCategory('all') }}
-            />
-
-            {/* Toolbar: Category + Search */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10"
-            >
-              <CategoryFilter
-                active={activeCategory}
-                onChange={setActiveCategory}
-                counts={categoryCounts}
-              />
-
-              {/* Search toggle */}
-              <div className="relative">
-                <AnimatePresence>
-                  {searchOpen ? (
-                    <motion.div
-                      initial={{ width: 40, opacity: 0.5 }}
-                      animate={{ width: 280, opacity: 1 }}
-                      exit={{ width: 40, opacity: 0 }}
-                      className="flex items-center bg-gray-800/60 border border-gray-700 rounded-xl overflow-hidden"
-                    >
-                      <Search className="h-4 w-4 text-gray-400 ml-3 flex-shrink-0" />
-                      <input
-                        type="text"
-                        autoFocus
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Rechercher un produit, hélicoptère..."
-                        className="w-full px-3 py-2.5 bg-transparent text-sm text-white placeholder-gray-500 outline-none"
-                      />
-                      <button
-                        onClick={() => { setSearchOpen(false); setSearchQuery('') }}
-                        className="p-2 text-gray-500 hover:text-white flex-shrink-0"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </motion.div>
-                  ) : (
-                    <motion.button
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      onClick={() => setSearchOpen(true)}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-gray-800/50 border border-gray-700/50 rounded-xl text-gray-400 hover:text-white hover:border-gray-600 transition-all text-xs font-bold uppercase tracking-wider"
-                    >
-                      <Search className="h-4 w-4" />
-                      <span className="hidden sm:inline">Rechercher</span>
-                    </motion.button>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Product Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map((product, idx) => (
-                <ProductCard key={product.id} product={product} index={idx} />
+            {/* Features grid */}
+            <div className="grid md:grid-cols-2 gap-6 mb-20">
+              {FEATURES.map((feature, i) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
+                  className="group relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative flex gap-5 p-6 bg-gray-900/30 border border-gray-800/50 rounded-2xl hover:border-gray-700 transition-colors">
+                    <div className="flex-shrink-0 w-12 h-12 bg-blue-600/10 border border-blue-500/20 rounded-xl flex items-center justify-center">
+                      <feature.icon className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
 
-            {/* Empty state */}
-            {filteredProducts.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-20"
+            {/* ═══ BIG CTA BUTTON ═══ */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-center"
+            >
+              <motion.button
+                onClick={handleCatalogueClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative inline-flex items-center gap-4 px-12 py-6 sm:px-16 sm:py-8 overflow-hidden"
               >
-                <Search className="h-12 w-12 text-gray-700 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg font-medium mb-2">Aucun produit trouvé</p>
-                <p className="text-gray-600 text-sm">Essayez un autre terme ou changez de catégorie.</p>
-              </motion.div>
-            )}
+                {/* Button background with gradient animation */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Animated shine effect */}
+                <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                  <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shine" />
+                </div>
+
+                {/* Glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
+
+                {/* Button content */}
+                <span className="relative text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
+                  Accéder au Catalogue
+                </span>
+                <ArrowRight className="relative h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:translate-x-2 transition-transform duration-300" />
+              </motion.button>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+                className="mt-6 text-sm text-gray-500"
+              >
+                <CheckCircle className="inline h-4 w-4 text-green-500 mr-2" />
+                Plus de 50 références disponibles — Devis en ligne instantané
+              </motion.p>
+            </motion.div>
           </div>
         </section>
 
-        {/* ═══ CTA SECTION ═══ */}
+        {/* ═══ CTA SECTION — CUSTOM EQUIPMENT ═══ */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-900 to-blue-950" />
           <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
@@ -576,7 +424,7 @@ export default function BoutiquePage() {
                   href="/aerotools"
                   className="inline-flex items-center gap-2 px-6 py-4 border border-blue-400/30 text-blue-300 rounded-xl font-bold uppercase tracking-wider text-sm hover:bg-blue-800/30 transition-colors"
                 >
-                  <FileText className="h-4 w-4" />
+                  <Award className="h-4 w-4" />
                   Voir nos certifications
                 </Link>
               </div>

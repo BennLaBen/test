@@ -89,6 +89,7 @@ module.exports = {
         // AEROTOOL marketplace
         'at-glow-pulse': 'atGlowPulse 2s ease-in-out infinite',
         'at-scan': 'atScan 3s linear infinite',
+        'shine': 'shine 1.5s ease-in-out',
       },
       keyframes: {
         fadeIn: {
@@ -119,6 +120,10 @@ module.exports = {
         atScan: {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100%)' },
+        },
+        shine: {
+          '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+          '100%': { transform: 'translateX(200%) skewX(-12deg)' },
         },
       },
       backgroundImage: {

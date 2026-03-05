@@ -62,60 +62,87 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
       const scene = new THREE.Scene()
-      scene.background = new THREE.Color(0x0f172a)
+      scene.background = new THREE.Color(0x1a1f2e)
+      scene.fog = new THREE.Fog(0x1a1f2e, 15, 35)
 
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000)
 
-      // LLEDO Studio lighting — blue-tinted
-      scene.add(new THREE.AmbientLight(0x4466aa, 0.5))
-      const keyLight = new THREE.DirectionalLight(0xddeeff, 1.4)
-      keyLight.position.set(5, 8, 5)
-      keyLight.castShadow = true
-      keyLight.shadow.mapSize.set(2048, 2048)
-      keyLight.shadow.camera.near = 0.1
-      keyLight.shadow.camera.far = 50
-      keyLight.shadow.camera.left = -10
-      keyLight.shadow.camera.right = 10
-      keyLight.shadow.camera.top = 10
-      keyLight.shadow.camera.bottom = -10
-      scene.add(keyLight)
+      // Hangar lighting — warm overhead industrial
+      scene.add(new THREE.AmbientLight(0xc4b8a0, 0.35))
 
-      const fill = new THREE.DirectionalLight(0x3366cc, 0.6)
-      fill.position.set(-3, 4, -2)
-      scene.add(fill)
+      const mainLight = new THREE.DirectionalLight(0xfff5e6, 1.6)
+      mainLight.position.set(3, 10, 4)
+      mainLight.castShadow = true
+      mainLight.shadow.mapSize.set(2048, 2048)
+      mainLight.shadow.camera.near = 0.1
+      mainLight.shadow.camera.far = 50
+      mainLight.shadow.camera.left = -10
+      mainLight.shadow.camera.right = 10
+      mainLight.shadow.camera.top = 10
+      mainLight.shadow.camera.bottom = -10
+      mainLight.shadow.bias = -0.001
+      scene.add(mainLight)
 
-      const rim = new THREE.DirectionalLight(0xe61e2b, 0.35)
-      rim.position.set(0, 2, -5)
-      scene.add(rim)
+      const secondLight = new THREE.DirectionalLight(0xe8e0d0, 0.8)
+      secondLight.position.set(-4, 8, -2)
+      secondLight.castShadow = true
+      secondLight.shadow.mapSize.set(1024, 1024)
+      scene.add(secondLight)
 
-      // Subtle blue point light from below
-      const underLight = new THREE.PointLight(0x0047ff, 0.3, 15)
-      underLight.position.set(0, -1, 3)
-      scene.add(underLight)
+      const fillLight = new THREE.DirectionalLight(0xd4e5ff, 0.4)
+      fillLight.position.set(-6, 3, 0)
+      scene.add(fillLight)
 
-      // Ground — dark reflective surface
-      const groundGeo = new THREE.CircleGeometry(10, 64)
-      const groundMat = new THREE.MeshStandardMaterial({ color: 0x0a1628, metalness: 0.8, roughness: 0.3 })
-      const ground = new THREE.Mesh(groundGeo, groundMat)
-      ground.rotation.x = -Math.PI / 2
-      ground.receiveShadow = true
-      scene.add(ground)
+      const accentLight = new THREE.PointLight(0x0047ff, 0.15, 12)
+      accentLight.position.set(0, 0.1, 3)
+      scene.add(accentLight)
 
-      // Ground ring — LLEDO blue glow
-      const ringGeo = new THREE.RingGeometry(3.8, 4.0, 64)
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x0047ff, side: THREE.DoubleSide })
-      const ring = new THREE.Mesh(ringGeo, ringMat)
-      ring.rotation.x = -Math.PI / 2
-      ring.position.y = 0.001
-      scene.add(ring)
+      const workshopLight = new THREE.PointLight(0xffaa44, 0.3, 10)
+      workshopLight.position.set(4, 3, -2)
+      scene.add(workshopLight)
 
-      // Inner accent ring — LLEDO red
-      const innerRingGeo = new THREE.RingGeometry(3.6, 3.65, 64)
-      const innerRingMat = new THREE.MeshBasicMaterial({ color: 0xe61e2b, side: THREE.DoubleSide })
-      const innerRing = new THREE.Mesh(innerRingGeo, innerRingMat)
-      innerRing.rotation.x = -Math.PI / 2
-      innerRing.position.y = 0.002
-      scene.add(innerRing)
+      // Hangar floor — concrete
+      const floorGeo = new THREE.PlaneGeometry(30, 30)
+      const floorMat = new THREE.MeshStandardMaterial({ color: 0x8a8a82, metalness: 0.1, roughness: 0.85 })
+      const floor = new THREE.Mesh(floorGeo, floorMat)
+      floor.rotation.x = -Math.PI / 2
+      floor.receiveShadow = true
+      scene.add(floor)
+
+      // Concrete joint lines
+      for (let i = -3; i <= 3; i++) {
+        const lineMat = new THREE.MeshBasicMaterial({ color: 0x6e6e66, side: THREE.DoubleSide })
+        const lineH = new THREE.Mesh(new THREE.PlaneGeometry(30, 0.02), lineMat)
+        lineH.rotation.x = -Math.PI / 2
+        lineH.position.set(0, 0.001, i * 2)
+        scene.add(lineH)
+        const lineV = new THREE.Mesh(new THREE.PlaneGeometry(0.02, 30), lineMat)
+        lineV.rotation.x = -Math.PI / 2
+        lineV.position.set(i * 2, 0.001, 0)
+        scene.add(lineV)
+      }
+
+      // Yellow safety line on floor
+      const safetyGeo = new THREE.RingGeometry(4.0, 4.06, 64)
+      const safetyMat = new THREE.MeshBasicMaterial({ color: 0xf9a800, side: THREE.DoubleSide, transparent: true, opacity: 0.5 })
+      const safetyLine = new THREE.Mesh(safetyGeo, safetyMat)
+      safetyLine.rotation.x = -Math.PI / 2
+      safetyLine.position.y = 0.002
+      scene.add(safetyLine)
+
+      // Back wall
+      const wallMat = new THREE.MeshStandardMaterial({ color: 0x3a3d45, metalness: 0.3, roughness: 0.7 })
+      const backWall = new THREE.Mesh(new THREE.PlaneGeometry(30, 12), wallMat)
+      backWall.position.set(0, 6, -12)
+      scene.add(backWall)
+
+      // LLEDO blue stripe on wall
+      const blueStripe = new THREE.Mesh(new THREE.PlaneGeometry(30, 0.15), new THREE.MeshBasicMaterial({ color: 0x0047ff }))
+      blueStripe.position.set(0, 2.5, -11.99)
+      scene.add(blueStripe)
+      const redStripe = new THREE.Mesh(new THREE.PlaneGeometry(30, 0.05), new THREE.MeshBasicMaterial({ color: 0xe61e2b }))
+      redStripe.position.set(0, 2.3, -11.99)
+      scene.add(redStripe)
 
       // Step 3: Load model (STL or GLB)
       setStatus('loading-model')
@@ -128,11 +155,12 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         const stlLoader = new STLLoader()
         const geometry = stlLoader.parse(buffer)
         geometry.computeVertexNormals()
+        // RAL 1003 Signal Yellow — realistic industrial paint
         const material = new THREE.MeshStandardMaterial({
-          color: 0x0047ff,
-          metalness: 0.6,
-          roughness: 0.35,
-          envMapIntensity: 1.2,
+          color: 0xf9a800,
+          metalness: 0.25,
+          roughness: 0.45,
+          envMapIntensity: 0.8,
         })
         const mesh = new THREE.Mesh(geometry, material)
         mesh.castShadow = true
@@ -152,39 +180,30 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         })
       }
 
+      // Auto-orient: lay product flat on ground
       const box = new THREE.Box3().setFromObject(model)
-      const center = box.getCenter(new THREE.Vector3())
       const size = box.getSize(new THREE.Vector3())
-      const maxDim = Math.max(size.x, size.y, size.z)
-      const s = 3 / maxDim
-      model.scale.setScalar(s)
-      model.position.sub(center.multiplyScalar(s))
-      model.position.y -= box.min.y * s
-      scene.add(model)
+      const dims = [
+        { axis: 'x' as const, val: size.x },
+        { axis: 'y' as const, val: size.y },
+        { axis: 'z' as const, val: size.z },
+      ].sort((a, b) => a.val - b.val)
+      const shortest = dims[0].axis
+      if (shortest === 'x') model.rotation.z = Math.PI / 2
+      else if (shortest === 'z') model.rotation.x = Math.PI / 2
 
-      // Branded text overlay helper
-      const drawBranding = () => {
-        const ctx = canvas.getContext('2d')
-        if (!ctx) return
-        // Top bar — "LLEDO Aerotools · 3D Viewer"
-        ctx.save()
-        ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, sans-serif'
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)'
-        ctx.textAlign = 'center'
-        ctx.fillText('LLEDO AEROTOOLS', RESOLUTION / 2, 50)
-        ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif'
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)'
-        ctx.fillText('3D VIEWER', RESOLUTION / 2, 74)
-        // Red accent line under text
-        ctx.fillStyle = '#E61E2B'
-        ctx.fillRect(RESOLUTION / 2 - 40, 82, 80, 2)
-        // Bottom watermark
-        ctx.font = '11px -apple-system, BlinkMacSystemFont, sans-serif'
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'
-        ctx.textAlign = 'center'
-        ctx.fillText('\u00A9 LLEDO Industries — Image prot\u00E9g\u00E9e', RESOLUTION / 2, RESOLUTION - 20)
-        ctx.restore()
-      }
+      const box2 = new THREE.Box3().setFromObject(model)
+      const size2 = box2.getSize(new THREE.Vector3())
+      const maxDim = Math.max(size2.x, size2.y, size2.z)
+      const s = 3 / maxDim
+      model.scale.multiplyScalar(s)
+
+      const box3 = new THREE.Box3().setFromObject(model)
+      const center3 = box3.getCenter(new THREE.Vector3())
+      model.position.x -= center3.x
+      model.position.z -= center3.z
+      model.position.y -= box3.min.y
+      scene.add(model)
 
       // Render helper
       const renderFrame = (hAngle: number, elevation: number, distance: number) => {
@@ -192,12 +211,11 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         const phi = THREE.MathUtils.degToRad(elevation)
         camera.position.set(
           distance * Math.sin(theta) * Math.cos(phi),
-          distance * Math.sin(phi),
+          distance * Math.sin(phi) + 0.5,
           distance * Math.cos(theta) * Math.cos(phi)
         )
-        camera.lookAt(0, 0.8, 0)
+        camera.lookAt(0, 1.0, 0)
         renderer.render(scene, camera)
-        drawBranding()
       }
 
       // Preview render
