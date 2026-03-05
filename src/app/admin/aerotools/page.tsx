@@ -1313,7 +1313,16 @@ export default function AdminAerotoolsPage() {
                 <button onClick={() => setConfirmDelete(null)} className="flex-1 py-3 border border-gray-700 text-gray-300 rounded-xl text-sm font-bold hover:bg-gray-800 transition-colors">
                   Annuler
                 </button>
-                <button onClick={() => { deleteProduct(confirmDelete); setConfirmDelete(null); showToast('Produit supprimé') }}
+                <button onClick={async () => {
+                    const id = confirmDelete
+                    setConfirmDelete(null)
+                    const result = await deleteProduct(id)
+                    if (result.success) {
+                      showToast('Produit supprimé avec succès')
+                    } else {
+                      showToast(`Erreur : ${result.error}`)
+                    }
+                  }}
                   className="flex-1 py-3 bg-red-600 text-white rounded-xl text-sm font-bold hover:bg-red-500 transition-colors">
                   Supprimer
                 </button>
@@ -1327,8 +1336,14 @@ export default function AdminAerotoolsPage() {
       <AnimatePresence>
         {toast && (
           <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 50, opacity: 0 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 bg-green-900/90 border border-green-700 rounded-xl shadow-2xl">
-            <Check className="h-5 w-5 text-green-400" />
+            className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-2xl ${
+              toast.startsWith('Erreur') ? 'bg-red-900/90 border border-red-700' : 'bg-green-900/90 border border-green-700'
+            }`}>
+            {toast.startsWith('Erreur') ? (
+              <AlertTriangle className="h-5 w-5 text-red-400" />
+            ) : (
+              <Check className="h-5 w-5 text-green-400" />
+            )}
             <span className="text-sm font-bold text-white">{toast}</span>
           </motion.div>
         )}

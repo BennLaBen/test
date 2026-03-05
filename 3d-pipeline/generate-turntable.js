@@ -59,12 +59,11 @@ const canvas = document.getElementById('c');
 const scene = new THREE.Scene();
 
 // ═══════════════════════════════════════════════════════════════
-// HANGAR LLEDO AEROTOOLS — Helicopter maintenance hangar
+// HANGAR LLEDO AEROTOOLS — Closed hangar doors environment
 // ═══════════════════════════════════════════════════════════════
 
-// Gradient background — dark industrial hangar
-scene.background = new THREE.Color(0x1a1f2e);
-scene.fog = new THREE.Fog(0x1a1f2e, 15, 35);
+scene.background = new THREE.Color(0x2a2d35);
+scene.fog = new THREE.Fog(0x2a2d35, 18, 40);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
 renderer.setSize(${resolution}, ${resolution});
@@ -77,12 +76,10 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000);
 
-// ── Hangar Lighting ──
-// Warm overhead industrial lights (like halogen hangar lamps)
-scene.add(new THREE.AmbientLight(0xc4b8a0, 0.35));
+// ── Hangar Lighting — warm industrial overhead ──
+scene.add(new THREE.AmbientLight(0xd4cbb8, 0.45));
 
-// Main overhead hangar light — warm white
-const mainLight = new THREE.DirectionalLight(0xfff5e6, 1.6);
+const mainLight = new THREE.DirectionalLight(0xfff5e6, 1.5);
 mainLight.position.set(3, 10, 4);
 mainLight.castShadow = true;
 mainLight.shadow.mapSize.set(2048, 2048);
@@ -95,84 +92,116 @@ mainLight.shadow.camera.bottom = -10;
 mainLight.shadow.bias = -0.001;
 scene.add(mainLight);
 
-// Secondary overhead light — slightly cooler
-const secondLight = new THREE.DirectionalLight(0xe8e0d0, 0.8);
+const secondLight = new THREE.DirectionalLight(0xe8e0d0, 0.7);
 secondLight.position.set(-4, 8, -2);
 secondLight.castShadow = true;
-secondLight.shadow.mapSize.set(1024, 1024);
 scene.add(secondLight);
 
-// Fill light from the side — simulate hangar door light
-const fillLight = new THREE.DirectionalLight(0xd4e5ff, 0.4);
-fillLight.position.set(-6, 3, 0);
-scene.add(fillLight);
+// Slight cool fill from the sides
+const fillL = new THREE.DirectionalLight(0xd4e5ff, 0.3);
+fillL.position.set(-6, 3, 0);
+scene.add(fillL);
+const fillR = new THREE.DirectionalLight(0xd4e5ff, 0.2);
+fillR.position.set(6, 3, 0);
+scene.add(fillR);
 
-// Subtle LLEDO blue accent from below (brand touch)
-const accentLight = new THREE.PointLight(0x0047ff, 0.15, 12);
-accentLight.position.set(0, 0.1, 3);
-scene.add(accentLight);
-
-// Warm point light — simulates nearby workshop lamp
-const workshopLight = new THREE.PointLight(0xffaa44, 0.3, 10);
-workshopLight.position.set(4, 3, -2);
+// Warm workshop lamp
+const workshopLight = new THREE.PointLight(0xffaa44, 0.25, 12);
+workshopLight.position.set(4, 4, -2);
 scene.add(workshopLight);
 
-// ── Hangar Floor — Concrete ──
-const floorGeo = new THREE.PlaneGeometry(30, 30);
+// ── Hangar Floor — Epoxy-coated concrete (gray-green industrial) ──
+const floorGeo = new THREE.PlaneGeometry(40, 40);
 const floorMat = new THREE.MeshStandardMaterial({
-  color: 0x8a8a82,
-  metalness: 0.1,
-  roughness: 0.85,
+  color: 0x7a7d72,
+  metalness: 0.05,
+  roughness: 0.75,
 });
 const floor = new THREE.Mesh(floorGeo, floorMat);
 floor.rotation.x = -Math.PI / 2;
 floor.receiveShadow = true;
 scene.add(floor);
 
-// Concrete texture lines (subtle joints)
-for (let i = -3; i <= 3; i++) {
-  const lineGeo = new THREE.PlaneGeometry(30, 0.02);
-  const lineMat = new THREE.MeshBasicMaterial({ color: 0x6e6e66, side: THREE.DoubleSide });
-  const line = new THREE.Mesh(lineGeo, lineMat);
-  line.rotation.x = -Math.PI / 2;
-  line.position.set(0, 0.001, i * 2);
-  scene.add(line);
-  // Cross lines
-  const lineGeo2 = new THREE.PlaneGeometry(0.02, 30);
-  const line2 = new THREE.Mesh(lineGeo2, lineMat);
-  line2.rotation.x = -Math.PI / 2;
-  line2.position.set(i * 2, 0.001, 0);
-  scene.add(line2);
+// Concrete joints (subtle grid)
+const jointMat = new THREE.MeshBasicMaterial({ color: 0x65685e, side: THREE.DoubleSide });
+for (let i = -4; i <= 4; i++) {
+  const jh = new THREE.Mesh(new THREE.PlaneGeometry(40, 0.015), jointMat);
+  jh.rotation.x = -Math.PI / 2; jh.position.set(0, 0.001, i * 2.5);
+  scene.add(jh);
+  const jv = new THREE.Mesh(new THREE.PlaneGeometry(0.015, 40), jointMat);
+  jv.rotation.x = -Math.PI / 2; jv.position.set(i * 2.5, 0.001, 0);
+  scene.add(jv);
 }
 
-// Yellow safety line on floor (industrial)
-const safetyLineGeo = new THREE.RingGeometry(4.0, 4.06, 64);
-const safetyLineMat = new THREE.MeshBasicMaterial({ color: 0xf9a800, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
-const safetyLine = new THREE.Mesh(safetyLineGeo, safetyLineMat);
-safetyLine.rotation.x = -Math.PI / 2;
-safetyLine.position.y = 0.002;
+// Yellow safety marking on floor
+const safetyGeo = new THREE.RingGeometry(4.2, 4.28, 64);
+const safetyMat = new THREE.MeshBasicMaterial({ color: 0xf9a800, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
+const safetyLine = new THREE.Mesh(safetyGeo, safetyMat);
+safetyLine.rotation.x = -Math.PI / 2; safetyLine.position.y = 0.002;
 scene.add(safetyLine);
 
-// ── Back Wall (distant, dark) ──
-const wallGeo = new THREE.PlaneGeometry(30, 12);
-const wallMat = new THREE.MeshStandardMaterial({ color: 0x3a3d45, metalness: 0.3, roughness: 0.7 });
-const backWall = new THREE.Mesh(wallGeo, wallMat);
-backWall.position.set(0, 6, -12);
-scene.add(backWall);
+// ═══════════════════════════════════════════════════════════════
+// CLOSED HANGAR DOORS — 360° surround (ribbed metal panels)
+// ═══════════════════════════════════════════════════════════════
 
-// LLEDO blue stripe on wall
-const stripeGeo = new THREE.PlaneGeometry(30, 0.15);
-const stripeMat = new THREE.MeshBasicMaterial({ color: 0x0047ff });
-const stripe = new THREE.Mesh(stripeGeo, stripeMat);
-stripe.position.set(0, 2.5, -11.99);
-scene.add(stripe);
+function createHangarWall(width, height, posX, posZ, rotY) {
+  const group = new THREE.Group();
 
-// Red accent stripe below
-const redStripeGeo = new THREE.PlaneGeometry(30, 0.05);
-const redStripeMat = new THREE.MeshBasicMaterial({ color: 0xe61e2b });
-const redStripe = new THREE.Mesh(redStripeGeo, redStripeMat);
-redStripe.position.set(0, 2.3, -11.99);
-scene.add(redStripe);
+  // Main door panel — dark gray metal
+  const panelMat = new THREE.MeshStandardMaterial({ color: 0x4a4e55, metalness: 0.6, roughness: 0.4 });
+  const panel = new THREE.Mesh(new THREE.PlaneGeometry(width, height), panelMat);
+  panel.position.y = height / 2;
+  group.add(panel);
+
+  // Horizontal ribs (corrugated metal door look)
+  const ribMat = new THREE.MeshStandardMaterial({ color: 0x3e4248, metalness: 0.7, roughness: 0.35 });
+  for (let y = 0.4; y < height; y += 0.6) {
+    const rib = new THREE.Mesh(new THREE.BoxGeometry(width, 0.08, 0.04), ribMat);
+    rib.position.set(0, y, 0.02);
+    group.add(rib);
+  }
+
+  // Vertical divider — center seam (two-panel door)
+  const seamMat = new THREE.MeshStandardMaterial({ color: 0x35383e, metalness: 0.7, roughness: 0.3 });
+  const seam = new THREE.Mesh(new THREE.BoxGeometry(0.06, height, 0.05), seamMat);
+  seam.position.set(0, height / 2, 0.025);
+  group.add(seam);
+
+  // Bottom rail (door track)
+  const railMat = new THREE.MeshStandardMaterial({ color: 0x555860, metalness: 0.8, roughness: 0.25 });
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(width + 0.5, 0.12, 0.08), railMat);
+  rail.position.set(0, 0.06, 0.04);
+  group.add(rail);
+
+  // LLEDO blue stripe across the door (mid-height)
+  const blueMat = new THREE.MeshBasicMaterial({ color: 0x0047ff });
+  const blueStripe = new THREE.Mesh(new THREE.PlaneGeometry(width, 0.2), blueMat);
+  blueStripe.position.set(0, height * 0.42, 0.01);
+  group.add(blueStripe);
+
+  // Red accent line below
+  const redMat = new THREE.MeshBasicMaterial({ color: 0xe61e2b });
+  const redLine = new THREE.Mesh(new THREE.PlaneGeometry(width, 0.06), redMat);
+  redLine.position.set(0, height * 0.42 - 0.18, 0.01);
+  group.add(redLine);
+
+  group.position.set(posX, 0, posZ);
+  group.rotation.y = rotY;
+  return group;
+}
+
+const wallDist = 10;
+const wallH = 8;
+const wallW = 22;
+
+// Back wall (always visible)
+scene.add(createHangarWall(wallW, wallH, 0, -wallDist, 0));
+// Left wall
+scene.add(createHangarWall(wallW, wallH, -wallDist, 0, Math.PI / 2));
+// Right wall
+scene.add(createHangarWall(wallW, wallH, wallDist, 0, -Math.PI / 2));
+// Front wall (behind camera usually)
+scene.add(createHangarWall(wallW, wallH, 0, wallDist, Math.PI));
 
 // ═══════════════════════════════════════════════════════════════
 // RENDER FUNCTIONS
@@ -204,12 +233,11 @@ try {
     const geometry = stlLoader.parse(buffer);
     geometry.computeVertexNormals();
 
-    // RAL 1003 Signal Yellow — realistic industrial paint
+    // Realistic brushed aluminum / industrial metal
     const material = new THREE.MeshStandardMaterial({
-      color: 0xf9a800,
-      metalness: 0.25,
-      roughness: 0.45,
-      envMapIntensity: 0.8,
+      color: 0xb8bcc4,
+      metalness: 0.55,
+      roughness: 0.35,
     });
     model = new THREE.Mesh(geometry, material);
     model.castShadow = true;
@@ -223,47 +251,30 @@ try {
     });
   }
 
-  // ── Auto-orient: lay product flat on ground ──
+  // ── Standard CAD orientation: Z-up → Y-up ──
+  // Most CAD STL exports use Z as the up axis; Three.js uses Y-up
+  // Rotate -90° on X to convert
+  if (IS_STL) {
+    model.rotation.x = -Math.PI / 2;
+  }
+
+  // Compute bounding box after rotation
   const box = new THREE.Box3().setFromObject(model);
   const size = box.getSize(new THREE.Vector3());
-  const center = box.getCenter(new THREE.Vector3());
-
-  // Find the shortest axis — that should be the vertical (height)
-  // If Y is already shortest → product is already flat
-  // If X is shortest → rotate so X becomes Y
-  // If Z is shortest → rotate so Z becomes Y
-  const dims = [
-    { axis: 'x', val: size.x },
-    { axis: 'y', val: size.y },
-    { axis: 'z', val: size.z },
-  ].sort((a, b) => a.val - b.val);
-  const shortest = dims[0].axis;
-
-  if (shortest === 'x') {
-    model.rotation.z = Math.PI / 2;
-  } else if (shortest === 'z') {
-    model.rotation.x = Math.PI / 2;
-  }
-  // If Y is already shortest, no rotation needed
-
-  // Re-compute box after rotation
-  const box2 = new THREE.Box3().setFromObject(model);
-  const center2 = box2.getCenter(new THREE.Vector3());
-  const size2 = box2.getSize(new THREE.Vector3());
-  const maxDim = Math.max(size2.x, size2.y, size2.z);
+  const maxDim = Math.max(size.x, size.y, size.z);
 
   // Scale to fit ~3 units
   const s = 3 / maxDim;
   model.scale.multiplyScalar(s);
 
   // Recompute after scale
-  const box3 = new THREE.Box3().setFromObject(model);
-  const center3 = box3.getCenter(new THREE.Vector3());
+  const box2 = new THREE.Box3().setFromObject(model);
+  const center2 = box2.getCenter(new THREE.Vector3());
 
   // Center horizontally, sit on ground (y=0)
-  model.position.x -= center3.x;
-  model.position.z -= center3.z;
-  model.position.y -= box3.min.y;
+  model.position.x -= center2.x;
+  model.position.z -= center2.z;
+  model.position.y -= box2.min.y;
 
   scene.add(model);
   window.__renderFrame(45, 25, 8);

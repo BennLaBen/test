@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,11 +18,16 @@ export async function GET(request: NextRequest) {
     const helicopter = searchParams.get('helicopter')
     const inStock = searchParams.get('inStock')
     const featured = searchParams.get('featured')
-    const admin = searchParams.get('admin') // admin=true → include unpublished
+    const adminFlag = searchParams.get('admin') // admin=true → include unpublished
     const sort = searchParams.get('sort') || 'name' // name, newest, price
 
-    // Build where clause
-    const where: any = admin === 'true' ? {} : { published: true }
+    // Build where clause — admin=true requires actual admin auth
+    let showAll = false
+    if (adminFlag === 'true') {
+      const admin = await getAdminFromRequest()
+      showAll = !!admin
+    }
+    const where: any = showAll ? {} : { published: true }
 
     if (category && category !== 'all') {
       where.category = { slug: category }
@@ -87,14 +93,19 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/v2/products — Create a new product (admin)
+// POST /api/v2/products — Create a new product (admin only)
 export async function POST(request: NextRequest) {
   try {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
+      return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+    }
+
     const body = await request.json()
 
     const { name, slug, sku, categoryId, description, shortDescription, image } = body
     if (!name || !slug || !sku || !categoryId) {
-      return NextResponse.json({ error: 'Champs requis: name, slug, sku, categoryId' }, { status: 400 })
+      return NextResponse.json({ success: false, error: 'Champs requis: name, slug, sku, categoryId' }, { status: 400 })
     }
 
     const product = await prisma.marketProduct.create({

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 
 export const dynamic = 'force-dynamic'
 
@@ -77,7 +78,11 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    // TODO: Add admin auth check
+    const admin = await getAdminFromRequest()
+    if (!admin) {
+      return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+    }
+
     const body = await request.json()
     const { id } = params
 
@@ -88,9 +93,12 @@ export async function PATCH(
     })
 
     return NextResponse.json({ success: true, data: product })
-  } catch (error) {
+  } catch (error: any) {
     console.error('[API v2] PATCH /products/:id error:', error)
-    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
+    if (error?.code === 'P2025') {
+      return NextResponse.json({ success: false, error: 'Produit introuvable' }, { status: 404 })
+    }
+    return NextResponse.json({ success: false, error: 'Erreur lors de la mise à jour du produit' }, { status: 500 })
   }
 }
 
@@ -100,11 +108,44 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    // TODO: Add admin auth check
-    await prisma.marketProduct.delete({ where: { id: params.id } })
-    return NextResponse.json({ success: true })
-  } catch (error) {
+    const admin = await getAdminFromRequest()
+    if (!admin) {
+      return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+    }
+
+    const { id } = params
+
+    // Verify product exists before attempting delete
+    const product = await prisma.marketProduct.findUnique({ where: { id } })
+    if (!product) {
+      return NextResponse.json({ success: false, error: 'Produit introuvable' }, { status: 404 })
+    }
+
+    // Use a transaction to delete related records first, then the product
+    // (QuoteItem, OrderItem, SerialNumber, ProductDocument don't all have onDelete: Cascade)
+    await prisma.$transaction(async (tx) => {
+      // Delete related serial numbers
+      await tx.serialNumber.deleteMany({ where: { productId: id } })
+      // Delete related order items
+      await tx.orderItem.deleteMany({ where: { productId: id } })
+      // Delete related quote items
+      await tx.quoteItem.deleteMany({ where: { productId: id } })
+      // Delete related documents (has cascade but explicit for safety)
+      await tx.productDocument.deleteMany({ where: { productId: id } })
+      // Finally delete the product
+      await tx.marketProduct.delete({ where: { id } })
+    })
+
+    console.log(`[API v2] ✅ Product deleted: ${product.name} (${id})`)
+    return NextResponse.json({ success: true, message: `Produit "${product.name}" supprimé avec succès` })
+  } catch (error: any) {
     console.error('[API v2] DELETE /products/:id error:', error)
-    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
+    if (error?.code === 'P2025') {
+      return NextResponse.json({ success: false, error: 'Produit introuvable' }, { status: 404 })
+    }
+    if (error?.code === 'P2003') {
+      return NextResponse.json({ success: false, error: 'Impossible de supprimer : ce produit est référencé par des commandes ou devis existants' }, { status: 409 })
+    }
+    return NextResponse.json({ success: false, error: 'Erreur lors de la suppression du produit' }, { status: 500 })
   }
 }

@@ -269,18 +269,21 @@ export function useProductAdmin() {
     }
   }, [getCategoryId])
 
-  const deleteProduct = useCallback(async (id: string) => {
+  const deleteProduct = useCallback(async (id: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const res = await fetch(`/api/v2/products/${id}`, { method: 'DELETE' })
       const data = await res.json()
       if (data.success) {
         setProducts(prev => prev.filter(p => p.id !== id))
         console.log(`[admin] ✅ Produit supprimé: ${id}`)
+        return { success: true }
       } else {
-        alert(`Erreur: ${data.error}`)
+        console.error('[admin] ❌ Erreur suppression:', data.error)
+        return { success: false, error: data.error || 'Erreur inconnue' }
       }
     } catch (err) {
-      console.error('[admin] ❌ Erreur suppression:', err)
+      console.error('[admin] ❌ Erreur réseau suppression:', err)
+      return { success: false, error: 'Erreur réseau — impossible de contacter le serveur' }
     }
   }, [])
 
