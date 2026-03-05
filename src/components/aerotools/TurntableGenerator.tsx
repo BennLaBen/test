@@ -62,94 +62,64 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
       const scene = new THREE.Scene()
-      scene.background = new THREE.Color(0x2a2d35)
-      scene.fog = new THREE.Fog(0x2a2d35, 18, 40)
+      scene.background = new THREE.Color(0xd8dce2)
 
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000)
 
-      // Hangar lighting — warm industrial overhead
-      scene.add(new THREE.AmbientLight(0xd4cbb8, 0.45))
-      const mainLight = new THREE.DirectionalLight(0xfff5e6, 1.5)
-      mainLight.position.set(3, 10, 4)
-      mainLight.castShadow = true
-      mainLight.shadow.mapSize.set(2048, 2048)
-      mainLight.shadow.camera.near = 0.1
-      mainLight.shadow.camera.far = 50
-      mainLight.shadow.camera.left = -10
-      mainLight.shadow.camera.right = 10
-      mainLight.shadow.camera.top = 10
-      mainLight.shadow.camera.bottom = -10
-      mainLight.shadow.bias = -0.001
-      scene.add(mainLight)
-      const secondLight = new THREE.DirectionalLight(0xe8e0d0, 0.7)
-      secondLight.position.set(-4, 8, -2)
-      secondLight.castShadow = true
-      scene.add(secondLight)
-      const fillL = new THREE.DirectionalLight(0xd4e5ff, 0.3)
-      fillL.position.set(-6, 3, 0)
-      scene.add(fillL)
-      const fillR = new THREE.DirectionalLight(0xd4e5ff, 0.2)
-      fillR.position.set(6, 3, 0)
-      scene.add(fillR)
-      const workshopLight = new THREE.PointLight(0xffaa44, 0.25, 12)
-      workshopLight.position.set(4, 4, -2)
-      scene.add(workshopLight)
+      // Studio 3-point lighting
+      const keyLight = new THREE.DirectionalLight(0xfff8f0, 1.8)
+      keyLight.position.set(5, 12, 6)
+      keyLight.castShadow = true
+      keyLight.shadow.mapSize.set(2048, 2048)
+      keyLight.shadow.camera.near = 0.1
+      keyLight.shadow.camera.far = 50
+      keyLight.shadow.camera.left = -8
+      keyLight.shadow.camera.right = 8
+      keyLight.shadow.camera.top = 8
+      keyLight.shadow.camera.bottom = -8
+      keyLight.shadow.bias = -0.0005
+      keyLight.shadow.radius = 4
+      scene.add(keyLight)
+      const fillLight = new THREE.DirectionalLight(0xe8eeff, 0.6)
+      fillLight.position.set(-6, 6, 4)
+      scene.add(fillLight)
+      const rimLight = new THREE.DirectionalLight(0xffffff, 0.9)
+      rimLight.position.set(0, 8, -6)
+      scene.add(rimLight)
+      scene.add(new THREE.AmbientLight(0xe0e4ea, 0.5))
+      const topLight = new THREE.PointLight(0xffffff, 0.3, 20)
+      topLight.position.set(0, 10, 0)
+      scene.add(topLight)
 
-      // Hangar floor — epoxy concrete
-      const floorGeo = new THREE.PlaneGeometry(40, 40)
-      const floorMat = new THREE.MeshStandardMaterial({ color: 0x7a7d72, metalness: 0.05, roughness: 0.75 })
-      const floor = new THREE.Mesh(floorGeo, floorMat)
-      floor.rotation.x = -Math.PI / 2
-      floor.receiveShadow = true
-      scene.add(floor)
-
-      // Concrete joints
-      const jointMat = new THREE.MeshBasicMaterial({ color: 0x65685e, side: THREE.DoubleSide })
-      for (let i = -4; i <= 4; i++) {
-        const jh = new THREE.Mesh(new THREE.PlaneGeometry(40, 0.015), jointMat)
-        jh.rotation.x = -Math.PI / 2; jh.position.set(0, 0.001, i * 2.5)
-        scene.add(jh)
-        const jv = new THREE.Mesh(new THREE.PlaneGeometry(0.015, 40), jointMat)
-        jv.rotation.x = -Math.PI / 2; jv.position.set(i * 2.5, 0.001, 0)
-        scene.add(jv)
-      }
-
-      // Yellow safety marking
-      const safetyLine = new THREE.Mesh(
-        new THREE.RingGeometry(4.2, 4.28, 64),
-        new THREE.MeshBasicMaterial({ color: 0xf9a800, side: THREE.DoubleSide, transparent: true, opacity: 0.4 })
-      )
-      safetyLine.rotation.x = -Math.PI / 2; safetyLine.position.y = 0.002
-      scene.add(safetyLine)
-
-      // Closed hangar doors (360°)
-      const createHangarWall = (width: number, height: number, posX: number, posZ: number, rotY: number) => {
-        const g = new THREE.Group()
-        const panelMat = new THREE.MeshStandardMaterial({ color: 0x4a4e55, metalness: 0.6, roughness: 0.4 })
-        const panel = new THREE.Mesh(new THREE.PlaneGeometry(width, height), panelMat)
-        panel.position.y = height / 2; g.add(panel)
-        const ribMat = new THREE.MeshStandardMaterial({ color: 0x3e4248, metalness: 0.7, roughness: 0.35 })
-        for (let y = 0.4; y < height; y += 0.6) {
-          const rib = new THREE.Mesh(new THREE.BoxGeometry(width, 0.08, 0.04), ribMat)
-          rib.position.set(0, y, 0.02); g.add(rib)
+      // Seamless cyclorama backdrop
+      const cSegs = 40; const cR = 18; const cCols = 60
+      const cGeo = new THREE.BufferGeometry()
+      const cV: number[] = []; const cU: number[] = []; const cI: number[] = []
+      for (let j = 0; j <= cSegs; j++) {
+        const t = j / cSegs; const a = t * Math.PI * 0.5
+        const cy = Math.sin(a) * cR; const cz = -(Math.cos(a) * cR - cR)
+        for (let i = 0; i <= cCols; i++) {
+          cV.push((i / cCols - 0.5) * 40, cy, cz - 8); cU.push(i / cCols, t)
         }
-        const seam = new THREE.Mesh(new THREE.BoxGeometry(0.06, height, 0.05),
-          new THREE.MeshStandardMaterial({ color: 0x35383e, metalness: 0.7, roughness: 0.3 }))
-        seam.position.set(0, height / 2, 0.025); g.add(seam)
-        const rail = new THREE.Mesh(new THREE.BoxGeometry(width + 0.5, 0.12, 0.08),
-          new THREE.MeshStandardMaterial({ color: 0x555860, metalness: 0.8, roughness: 0.25 }))
-        rail.position.set(0, 0.06, 0.04); g.add(rail)
-        const blueS = new THREE.Mesh(new THREE.PlaneGeometry(width, 0.2), new THREE.MeshBasicMaterial({ color: 0x0047ff }))
-        blueS.position.set(0, height * 0.42, 0.01); g.add(blueS)
-        const redS = new THREE.Mesh(new THREE.PlaneGeometry(width, 0.06), new THREE.MeshBasicMaterial({ color: 0xe61e2b }))
-        redS.position.set(0, height * 0.42 - 0.18, 0.01); g.add(redS)
-        g.position.set(posX, 0, posZ); g.rotation.y = rotY
-        return g
       }
-      scene.add(createHangarWall(22, 8, 0, -10, 0))
-      scene.add(createHangarWall(22, 8, -10, 0, Math.PI / 2))
-      scene.add(createHangarWall(22, 8, 10, 0, -Math.PI / 2))
-      scene.add(createHangarWall(22, 8, 0, 10, Math.PI))
+      for (let j = 0; j < cSegs; j++) for (let i = 0; i < cCols; i++) {
+        const aa = j * (cCols + 1) + i; const bb = aa + cCols + 1
+        cI.push(aa, bb, aa + 1, bb, bb + 1, aa + 1)
+      }
+      cGeo.setAttribute('position', new THREE.Float32BufferAttribute(cV, 3))
+      cGeo.setAttribute('uv', new THREE.Float32BufferAttribute(cU, 2))
+      cGeo.setIndex(cI); cGeo.computeVertexNormals()
+      scene.add(new THREE.Mesh(cGeo, new THREE.MeshStandardMaterial({
+        color: 0xd8dce2, metalness: 0.0, roughness: 0.95, side: THREE.DoubleSide
+      })))
+
+      // Floor
+      const floorMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(40, 40),
+        new THREE.MeshStandardMaterial({ color: 0xc8ccd4, metalness: 0.15, roughness: 0.6 })
+      )
+      floorMesh.rotation.x = -Math.PI / 2; floorMesh.receiveShadow = true
+      scene.add(floorMesh)
 
       // Step 3: Load model (STL or GLB)
       setStatus('loading-model')
@@ -210,10 +180,10 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         const phi = THREE.MathUtils.degToRad(elevation)
         camera.position.set(
           distance * Math.sin(theta) * Math.cos(phi),
-          distance * Math.sin(phi) + 0.5,
+          distance * Math.sin(phi) + 0.3,
           distance * Math.cos(theta) * Math.cos(phi)
         )
-        camera.lookAt(0, 1.0, 0)
+        camera.lookAt(0, 0.8, 0)
         renderer.render(scene, camera)
       }
 

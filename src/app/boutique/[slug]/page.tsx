@@ -10,12 +10,18 @@ import { useQuote } from '@/contexts/QuoteContext'
 import {
   Check, Shield, ShoppingBag, FileText, ChevronRight, ChevronDown, ChevronLeft,
   Package, Phone, Clock, Award, Truck, MessageSquare, ArrowRight,
-  Box, Zap, Activity, Download, Users, Ruler, Layers, ZoomIn, X, Eye, EyeOff
+  Box, Zap, Activity, Download, Users, Ruler, Layers, ZoomIn, X, Eye, EyeOff, RotateCw
 } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/shop/Breadcrumbs'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { ModelViewer3D } from '@/components/shop/ModelViewer3D'
+
+const SecureTurntableViewer = dynamic(
+  () => import('@/components/aerotools/SecureTurntableViewer').then(mod => ({ default: mod.SecureTurntableViewer })),
+  { ssr: false }
+)
 
 const HELICOPTER_IMAGES: Record<string, string> = {
   H120: '/images/aerotools/helicopters/h120.jpg',
@@ -123,8 +129,9 @@ function ProductGallery({ product }: { product: any }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [zoomed, setZoomed] = useState(false)
   const [showEquipped, setShowEquipped] = useState(false)
-  const [show3D, setShow3D] = useState(false)
+  const [viewMode, setViewMode] = useState<'photos' | '360' | '3d'>('photos')
   const has3D = !!product.model3d
+  const hasTurntable = !!product.turntable?.enabled
 
   const heliImage = product.compatibility?.[0] ? HELICOPTER_IMAGES[product.compatibility[0]] : null
   const allImages = [product.image, ...(product.gallery || [])].filter(Boolean)
@@ -288,13 +295,13 @@ function ProductGallery({ product }: { product: any }) {
         </div>
       )}
 
-      {/* 3D / Photo toggle */}
-      {has3D && (
+      {/* Photos / 360° / 3D toggle */}
+      {(hasTurntable || has3D) && (
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setShow3D(false)}
+            onClick={() => setViewMode('photos')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-              !show3D
+              viewMode === 'photos'
                 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 border border-blue-400/50'
                 : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
             }`}
@@ -302,22 +309,51 @@ function ProductGallery({ product }: { product: any }) {
             <Eye className="h-4 w-4" />
             Photos
           </button>
-          <button
-            onClick={() => setShow3D(true)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-              show3D
-                ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30 border border-cyan-400/50'
-                : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
-            }`}
-          >
-            <Box className="h-4 w-4" />
-            Vue 3D
-          </button>
+          {hasTurntable && (
+            <button
+              onClick={() => setViewMode('360')}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                viewMode === '360'
+                  ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/30 border border-cyan-400/50'
+                  : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
+              }`}
+            >
+              <RotateCw className="h-4 w-4" />
+              Vue 360°
+            </button>
+          )}
+          {has3D && (
+            <button
+              onClick={() => setViewMode('3d')}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                viewMode === '3d'
+                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30 border border-purple-400/50'
+                  : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
+              }`}
+            >
+              <Box className="h-4 w-4" />
+              Vue 3D
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Turntable 360° Viewer */}
+      {hasTurntable && viewMode === '360' && (
+        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-gray-700/50">
+          <SecureTurntableViewer
+            slug={product.slug}
+            productName={product.name}
+            hFrames={product.turntable?.hFrames || 36}
+            vLevels={product.turntable?.vLevels || 3}
+            format={product.turntable?.format || 'webp'}
+            className="w-full h-full"
+          />
         </div>
       )}
 
       {/* 3D Viewer */}
-      {has3D && show3D && (
+      {has3D && viewMode === '3d' && (
         <ModelViewer3D
           src={product.model3d}
           alt={`${product.name} — Vue 3D`}
