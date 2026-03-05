@@ -4,15 +4,24 @@ import { useState, useEffect } from 'react'
 import type { ShopProduct } from './types'
 import staticProducts from '@/data/shop/products.json'
 
+// Map DB category slugs to UI category ids
+const CATEGORY_SLUG_TO_ID: Record<string, string> = {
+  'barres-remorquage': 'towing',
+  'rollers-manutention': 'handling',
+  'outillage-maintenance': 'maintenance',
+  'ground-support': 'gse',
+}
+
 /**
  * Convert a v2 API product to the existing ShopProduct interface
  */
 function toShopProduct(p: any): ShopProduct {
+  const rawCat = p.category?.slug || p.categoryId || ''
   return {
     id: p.sku || p.id,
     slug: p.slug,
     name: p.name,
-    category: p.category?.slug || p.categoryId || '',
+    category: CATEGORY_SLUG_TO_ID[rawCat] || rawCat,
     description: p.description || '',
     shortDescription: p.shortDescription || '',
     features: p.features || [],

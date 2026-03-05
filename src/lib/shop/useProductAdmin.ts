@@ -25,12 +25,21 @@ function generateSku(category: string): string {
 /**
  * Convert a v2 API product (PostgreSQL) to the ShopProduct interface used by the admin UI
  */
+// Map DB category slugs to admin UI category ids
+const CATEGORY_SLUG_TO_ID: Record<string, string> = {
+  'barres-remorquage': 'towing',
+  'rollers-manutention': 'handling',
+  'outillage-maintenance': 'maintenance',
+  'ground-support': 'gse',
+}
+
 function apiToShopProduct(p: any): ShopProduct {
+  const rawCat = p.category?.slug || p.categoryId || ''
   return {
     id: p.id,
     slug: p.slug,
     name: p.name,
-    category: p.category?.slug || p.categoryId || '',
+    category: CATEGORY_SLUG_TO_ID[rawCat] || rawCat,
     description: p.description || '',
     shortDescription: p.shortDescription || '',
     features: Array.isArray(p.features) ? p.features : (typeof p.features === 'string' ? p.features.split('\n').filter(Boolean) : []),

@@ -45,16 +45,25 @@ interface V2Product {
   _count: { quoteItems: number }
 }
 
+// Map DB category slugs to UI category ids
+const CATEGORY_SLUG_TO_ID: Record<string, string> = {
+  'barres-remorquage': 'towing',
+  'rollers-manutention': 'handling',
+  'outillage-maintenance': 'maintenance',
+  'ground-support': 'gse',
+}
+
 /**
  * Convert a V2 API product to the existing ShopProduct interface
  * so all existing components work without changes
  */
 function toShopProduct(p: V2Product): ShopProduct {
+  const rawCat = p.category?.slug || ''
   return {
     id: p.sku || p.id,
     slug: p.slug,
     name: p.name,
-    category: p.category?.slug || '',
+    category: CATEGORY_SLUG_TO_ID[rawCat] || rawCat,
     description: p.description,
     shortDescription: p.shortDescription,
     features: p.features,
