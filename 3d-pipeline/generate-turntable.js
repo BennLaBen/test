@@ -57,7 +57,7 @@ import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 const IS_STL = ${isSTL};
 const canvas = document.getElementById('c');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xe0e0e4);
+scene.background = new THREE.Color(0x0f172a);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
 renderer.setSize(${resolution}, ${resolution});
@@ -69,8 +69,9 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000);
 
-scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+// LLEDO Studio lighting — blue-tinted
+scene.add(new THREE.AmbientLight(0x4466aa, 0.5));
+const keyLight = new THREE.DirectionalLight(0xddeeff, 1.4);
 keyLight.position.set(5, 8, 5);
 keyLight.castShadow = true;
 keyLight.shadow.mapSize.set(2048, 2048);
@@ -82,27 +83,61 @@ keyLight.shadow.camera.top = 10;
 keyLight.shadow.camera.bottom = -10;
 scene.add(keyLight);
 
-const fill = new THREE.DirectionalLight(0xeeeeff, 0.5);
+const fill = new THREE.DirectionalLight(0x3366cc, 0.6);
 fill.position.set(-3, 4, -2);
 scene.add(fill);
 
-const rim = new THREE.DirectionalLight(0xffffff, 0.3);
+const rim = new THREE.DirectionalLight(0xe61e2b, 0.35);
 rim.position.set(0, 2, -5);
 scene.add(rim);
 
+const underLight = new THREE.PointLight(0x0047ff, 0.3, 15);
+underLight.position.set(0, -1, 3);
+scene.add(underLight);
+
+// Ground — dark reflective
 const groundGeo = new THREE.CircleGeometry(10, 64);
-const groundMat = new THREE.ShadowMaterial({ opacity: 0.15 });
+const groundMat = new THREE.MeshStandardMaterial({ color: 0x0a1628, metalness: 0.8, roughness: 0.3 });
 const ground = new THREE.Mesh(groundGeo, groundMat);
 ground.rotation.x = -Math.PI / 2;
 ground.receiveShadow = true;
 scene.add(ground);
 
+// Blue ring
 const ringGeo = new THREE.RingGeometry(3.8, 4.0, 64);
-const ringMat = new THREE.MeshBasicMaterial({ color: 0xc8c8cc, side: THREE.DoubleSide });
+const ringMat = new THREE.MeshBasicMaterial({ color: 0x0047ff, side: THREE.DoubleSide });
 const ring = new THREE.Mesh(ringGeo, ringMat);
 ring.rotation.x = -Math.PI / 2;
 ring.position.y = 0.001;
 scene.add(ring);
+
+// Red accent ring
+const innerRingGeo = new THREE.RingGeometry(3.6, 3.65, 64);
+const innerRingMat = new THREE.MeshBasicMaterial({ color: 0xe61e2b, side: THREE.DoubleSide });
+const innerRing = new THREE.Mesh(innerRingGeo, innerRingMat);
+innerRing.rotation.x = -Math.PI / 2;
+innerRing.position.y = 0.002;
+scene.add(innerRing);
+
+// Branded overlay
+function drawBranding() {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.save();
+  ctx.font = 'bold 28px sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.textAlign = 'center';
+  ctx.fillText('LLEDO AEROTOOLS', ${resolution}/2, 50);
+  ctx.font = '16px sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.fillText('3D VIEWER', ${resolution}/2, 74);
+  ctx.fillStyle = '#E61E2B';
+  ctx.fillRect(${resolution}/2 - 40, 82, 80, 2);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.fillText('\u00A9 LLEDO Industries \u2014 Image prot\u00E9g\u00E9e', ${resolution}/2, ${resolution} - 20);
+  ctx.restore();
+}
 
 window.__renderFrame = function(hAngle, elevation, distance) {
   const theta = THREE.MathUtils.degToRad(hAngle);
@@ -114,6 +149,7 @@ window.__renderFrame = function(hAngle, elevation, distance) {
   );
   camera.lookAt(0, 0.8, 0);
   renderer.render(scene, camera);
+  drawBranding();
 };
 
 try {
@@ -125,7 +161,7 @@ try {
     const stlLoader = new STLLoader();
     const geometry = stlLoader.parse(buffer);
     geometry.computeVertexNormals();
-    const material = new THREE.MeshStandardMaterial({ color: 0x404045, metalness: 0.4, roughness: 0.5 });
+    const material = new THREE.MeshStandardMaterial({ color: 0x0047ff, metalness: 0.6, roughness: 0.35 });
     model = new THREE.Mesh(geometry, material);
     model.castShadow = true;
     model.receiveShadow = true;
@@ -184,7 +220,13 @@ async function main() {
 
   const browser = await puppeteer.launch({
     headless: false,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--enable-webgl', '--window-size=800,800']
+    args: [
+      '--no-sandbox', '--disable-setuid-sandbox', '--enable-webgl',
+      '--window-size=800,800',
+      '--js-flags=--max-old-space-size=8192',
+      '--disable-dev-shm-usage',
+      '--disable-gpu-sandbox',
+    ]
   })
 
   const page = await browser.newPage()
@@ -201,7 +243,7 @@ async function main() {
 
   // Navigate to our local server
   console.log('⏳ Loading page...')
-  await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle2', timeout: 60000 })
+  await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle2', timeout: 300000 })
   console.log('   Page loaded, waiting for Three.js scripts...')
 
   // Wait a bit for scripts to execute
@@ -209,7 +251,7 @@ async function main() {
 
   // Wait for model to load
   console.log('⏳ Loading model...')
-  await page.waitForFunction('window.__modelReady === true', { timeout: 60000 })
+  await page.waitForFunction('window.__modelReady === true', { timeout: 300000 })
   console.log('✅ Model loaded\n')
 
   // Render all frames
@@ -218,23 +260,28 @@ async function main() {
 
   for (let v = 0; v < elevations.length; v++) {
     for (let h = 0; h < hFrames; h++) {
-      const hAngle = (360 / hFrames) * h
-      const elevation = elevations[v]
-
-      await page.evaluate((a, e, d) => window.__renderFrame(a, e, d), hAngle, elevation, distance)
-
-      // Delay for render to complete (avoid context destruction)
-      await new Promise(r => setTimeout(r, 150))
-
       const filename = `${slug}_e${v}_h${String(h).padStart(3, '0')}.webp`
       const filepath = path.join(outputDir, filename)
 
       // Skip if already exists (resume support)
       if (fs.existsSync(filepath)) { count++; continue }
 
-      // Screenshot the canvas
-      const canvasEl = await page.$('#c')
-      await canvasEl.screenshot({ path: filepath, type: 'webp', quality: 90 })
+      const hAngle = (360 / hFrames) * h
+      const elevation = elevations[v]
+
+      try {
+        await page.evaluate((a, e, d) => window.__renderFrame(a, e, d), hAngle, elevation, distance)
+
+        // Delay for render to complete (longer for large STL files)
+        await new Promise(r => setTimeout(r, 500))
+
+        // Screenshot the canvas
+        const canvasEl = await page.$('#c')
+        await canvasEl.screenshot({ path: filepath, type: 'webp', quality: 90 })
+      } catch (err) {
+        console.log(`\n⚠️  Frame ${count+1} failed, re-run script to resume.`)
+        throw err
+      }
 
       count++
       const pct = ((count / totalFrames) * 100).toFixed(0)
