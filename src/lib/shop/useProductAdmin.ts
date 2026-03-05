@@ -47,6 +47,7 @@ function apiToShopProduct(p: any): ShopProduct {
     isFeatured: p.isFeatured ?? false,
     datasheetUrl: p.documents?.find((d: any) => d.type === 'DATASHEET')?.url || null,
     model3d: p.model3d || null,
+    turntable: p.turntable || undefined,
     certifications: Array.isArray(p.certifications) ? p.certifications : (typeof p.certifications === 'string' ? p.certifications.split('\n').filter(Boolean) : []),
     standards: Array.isArray(p.standards) ? p.standards : (typeof p.standards === 'string' ? p.standards.split('\n').filter(Boolean) : []),
     applications: Array.isArray(p.applications) ? p.applications : (typeof p.applications === 'string' ? p.applications.split('\n').filter(Boolean) : []),
@@ -187,6 +188,7 @@ export function useProductAdmin() {
       isFeatured: product.isFeatured,
       published: true,
       model3d: product.model3d,
+      turntable: product.turntable || undefined,
       boughtTogether: product.boughtTogether,
       faq: product.faq,
       certifications: product.certifications,
@@ -242,6 +244,7 @@ export function useProductAdmin() {
     if (updates.isNew !== undefined) body.isNew = updates.isNew
     if (updates.isFeatured !== undefined) body.isFeatured = updates.isFeatured
     if (updates.model3d !== undefined) body.model3d = updates.model3d
+    if ((updates as any).turntable !== undefined) body.turntable = (updates as any).turntable
     if (updates.certifications !== undefined) body.certifications = updates.certifications
     if (updates.standards !== undefined) body.standards = updates.standards
     if (updates.applications !== undefined) body.applications = updates.applications

@@ -62,13 +62,14 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
       const scene = new THREE.Scene()
-      scene.background = new THREE.Color(0xd8dce2)
+      scene.background = new THREE.Color(0x1a1d24)
+      scene.fog = new THREE.Fog(0x1a1d24, 20, 45)
 
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000)
 
-      // Studio 3-point lighting
-      const keyLight = new THREE.DirectionalLight(0xfff8f0, 1.8)
-      keyLight.position.set(5, 12, 6)
+      // Industrial hangar lighting
+      const keyLight = new THREE.DirectionalLight(0xfff0dd, 1.6)
+      keyLight.position.set(4, 12, 5)
       keyLight.castShadow = true
       keyLight.shadow.mapSize.set(2048, 2048)
       keyLight.shadow.camera.near = 0.1
@@ -78,48 +79,87 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       keyLight.shadow.camera.top = 8
       keyLight.shadow.camera.bottom = -8
       keyLight.shadow.bias = -0.0005
-      keyLight.shadow.radius = 4
+      keyLight.shadow.radius = 3
       scene.add(keyLight)
-      const fillLight = new THREE.DirectionalLight(0xe8eeff, 0.6)
-      fillLight.position.set(-6, 6, 4)
-      scene.add(fillLight)
-      const rimLight = new THREE.DirectionalLight(0xffffff, 0.9)
-      rimLight.position.set(0, 8, -6)
-      scene.add(rimLight)
-      scene.add(new THREE.AmbientLight(0xe0e4ea, 0.5))
-      const topLight = new THREE.PointLight(0xffffff, 0.3, 20)
-      topLight.position.set(0, 10, 0)
-      scene.add(topLight)
+      const secondLight = new THREE.DirectionalLight(0xffe8cc, 0.8)
+      secondLight.position.set(-3, 10, -2)
+      secondLight.castShadow = true
+      secondLight.shadow.mapSize.set(1024, 1024)
+      scene.add(secondLight)
+      const fillL = new THREE.DirectionalLight(0xc8d8f0, 0.35)
+      fillL.position.set(-7, 4, 2)
+      scene.add(fillL)
+      const fillR = new THREE.DirectionalLight(0xc8d8f0, 0.25)
+      fillR.position.set(7, 4, 2)
+      scene.add(fillR)
+      scene.add(new THREE.AmbientLight(0x404858, 0.5))
+      const logoSpot = new THREE.SpotLight(0x3366cc, 0.6, 25, Math.PI / 4, 0.5, 1)
+      logoSpot.position.set(0, 6, -4)
+      logoSpot.target.position.set(0, 3, -12)
+      scene.add(logoSpot); scene.add(logoSpot.target)
 
-      // Seamless cyclorama backdrop
-      const cSegs = 40; const cR = 18; const cCols = 60
-      const cGeo = new THREE.BufferGeometry()
-      const cV: number[] = []; const cU: number[] = []; const cI: number[] = []
-      for (let j = 0; j <= cSegs; j++) {
-        const t = j / cSegs; const a = t * Math.PI * 0.5
-        const cy = Math.sin(a) * cR; const cz = -(Math.cos(a) * cR - cR)
-        for (let i = 0; i <= cCols; i++) {
-          cV.push((i / cCols - 0.5) * 40, cy, cz - 8); cU.push(i / cCols, t)
-        }
-      }
-      for (let j = 0; j < cSegs; j++) for (let i = 0; i < cCols; i++) {
-        const aa = j * (cCols + 1) + i; const bb = aa + cCols + 1
-        cI.push(aa, bb, aa + 1, bb, bb + 1, aa + 1)
-      }
-      cGeo.setAttribute('position', new THREE.Float32BufferAttribute(cV, 3))
-      cGeo.setAttribute('uv', new THREE.Float32BufferAttribute(cU, 2))
-      cGeo.setIndex(cI); cGeo.computeVertexNormals()
-      scene.add(new THREE.Mesh(cGeo, new THREE.MeshStandardMaterial({
-        color: 0xd8dce2, metalness: 0.0, roughness: 0.95, side: THREE.DoubleSide
-      })))
-
-      // Floor
+      // Dark epoxy floor
       const floorMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(40, 40),
-        new THREE.MeshStandardMaterial({ color: 0xc8ccd4, metalness: 0.15, roughness: 0.6 })
+        new THREE.PlaneGeometry(50, 50),
+        new THREE.MeshStandardMaterial({ color: 0x3a3d42, metalness: 0.2, roughness: 0.55 })
       )
       floorMesh.rotation.x = -Math.PI / 2; floorMesh.receiveShadow = true
       scene.add(floorMesh)
+      const jMat = new THREE.MeshBasicMaterial({ color: 0x2e3035, side: THREE.DoubleSide })
+      for (let ii = -5; ii <= 5; ii++) {
+        const jh = new THREE.Mesh(new THREE.PlaneGeometry(50, 0.01), jMat)
+        jh.rotation.x = -Math.PI / 2; jh.position.set(0, 0.001, ii * 3)
+        scene.add(jh)
+        const jv = new THREE.Mesh(new THREE.PlaneGeometry(0.01, 50), jMat)
+        jv.rotation.x = -Math.PI / 2; jv.position.set(ii * 3, 0.001, 0)
+        scene.add(jv)
+      }
+
+      // Side walls
+      const wMat = new THREE.MeshStandardMaterial({ color: 0x2a2d33, metalness: 0.3, roughness: 0.6 })
+      const wL = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), wMat)
+      wL.position.set(-12, 5, 0); wL.rotation.y = Math.PI / 2; scene.add(wL)
+      const wR = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), wMat)
+      wR.position.set(12, 5, 0); wR.rotation.y = -Math.PI / 2; scene.add(wR)
+
+      // Logo wall via canvas texture
+      const lc = document.createElement('canvas')
+      lc.width = 2048; lc.height = 1024
+      const lx = lc.getContext('2d')!
+      lx.fillStyle = '#22252b'; lx.fillRect(0, 0, 2048, 1024)
+      lx.strokeStyle = '#2a2d33'; lx.lineWidth = 1
+      for (let yy = 0; yy < 1024; yy += 64) { lx.beginPath(); lx.moveTo(0, yy); lx.lineTo(2048, yy); lx.stroke() }
+      const lcx = 1024, lcy = 380, isc = 2.2
+      lx.save(); lx.translate(lcx - 120 * isc, lcy - 60 * isc); lx.scale(isc, isc)
+      const bg = lx.createLinearGradient(0, 0, 0, 120)
+      bg.addColorStop(0, '#5BA3E8'); bg.addColorStop(0.25, '#1E5FAA')
+      bg.addColorStop(0.5, '#0D3A6E'); bg.addColorStop(0.75, '#1E5FAA'); bg.addColorStop(1, '#5BA3E8')
+      lx.fillStyle = bg; lx.beginPath()
+      lx.moveTo(0,0);lx.lineTo(90,0);lx.lineTo(90,30);lx.lineTo(30,30);lx.lineTo(30,120)
+      lx.lineTo(90,120);lx.lineTo(90,90);lx.lineTo(60,90);lx.lineTo(60,60);lx.lineTo(90,60)
+      lx.lineTo(90,120);lx.lineTo(0,120);lx.closePath();lx.fill()
+      lx.strokeStyle='#b0b8c8';lx.lineWidth=1.5;lx.stroke()
+      const rg = lx.createLinearGradient(0,0,0,120)
+      rg.addColorStop(0,'#E85B5B');rg.addColorStop(0.25,'#C41E1E')
+      rg.addColorStop(0.5,'#8B0000');rg.addColorStop(0.75,'#C41E1E');rg.addColorStop(1,'#E85B5B')
+      lx.fillStyle=rg;lx.beginPath()
+      lx.moveTo(36,36);lx.lineTo(54,36);lx.lineTo(54,84);lx.lineTo(84,84);lx.lineTo(84,114);lx.lineTo(36,114)
+      lx.closePath();lx.fill();lx.strokeStyle='#d0d8e0';lx.lineWidth=0.8;lx.stroke()
+      lx.restore()
+      lx.save();lx.font='bold 110px Arial Black, Arial, sans-serif';lx.textAlign='center';lx.textBaseline='middle'
+      const tg = lx.createLinearGradient(0,lcy+100,0,lcy+200)
+      tg.addColorStop(0,'#6BB3F8');tg.addColorStop(0.5,'#2E7AD1');tg.addColorStop(1,'#6BB3F8')
+      lx.fillStyle='#000';lx.globalAlpha=0.4;lx.fillText('LLEDO',lcx+3,lcy+158)
+      lx.globalAlpha=1;lx.fillStyle=tg;lx.fillText('LLEDO',lcx,lcy+155)
+      lx.strokeStyle='#a0b0c8';lx.lineWidth=1.5;lx.strokeText('LLEDO',lcx,lcy+155);lx.restore()
+      lx.save();lx.font='bold 48px Arial, sans-serif';lx.textAlign='center'
+      lx.fillStyle='#4A90D9';lx.fillText('AERO TOOLS',lcx,lcy+230)
+      lx.strokeStyle='#4A90D9';lx.lineWidth=2;lx.globalAlpha=0.5
+      lx.beginPath();lx.moveTo(lcx-200,lcy+185);lx.lineTo(lcx+200,lcy+185);lx.stroke();lx.restore()
+      const lt = new THREE.CanvasTexture(lc); lt.colorSpace = THREE.SRGBColorSpace
+      const lw = new THREE.Mesh(new THREE.PlaneGeometry(20, 10),
+        new THREE.MeshStandardMaterial({ map: lt, metalness: 0.1, roughness: 0.7 }))
+      lw.position.set(0, 5, -12); scene.add(lw)
 
       // Step 3: Load model (STL or GLB)
       setStatus('loading-model')

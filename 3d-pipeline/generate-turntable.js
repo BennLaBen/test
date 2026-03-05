@@ -59,27 +59,28 @@ const canvas = document.getElementById('c');
 const scene = new THREE.Scene();
 
 // ═══════════════════════════════════════════════════════════════
-// PROFESSIONAL STUDIO — Clean infinite backdrop
+// HANGAR LLEDO AEROTOOLS — Dark showroom with logo wall
 // ═══════════════════════════════════════════════════════════════
 
-scene.background = new THREE.Color(0xd8dce2);
+scene.background = new THREE.Color(0x1a1d24);
+scene.fog = new THREE.Fog(0x1a1d24, 20, 45);
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
 renderer.setSize(${resolution}, ${resolution});
 renderer.setPixelRatio(1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.1;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000);
 
-// ── Studio 3-point lighting ──
+// ── Industrial hangar lighting ──
 
-// Key light — main, slightly warm, from upper right
-const keyLight = new THREE.DirectionalLight(0xfff8f0, 1.8);
-keyLight.position.set(5, 12, 6);
+// Overhead key — slightly warm sodium vapor feel
+const keyLight = new THREE.DirectionalLight(0xfff0dd, 1.6);
+keyLight.position.set(4, 12, 5);
 keyLight.castShadow = true;
 keyLight.shadow.mapSize.set(2048, 2048);
 keyLight.shadow.camera.near = 0.1;
@@ -89,81 +90,197 @@ keyLight.shadow.camera.right = 8;
 keyLight.shadow.camera.top = 8;
 keyLight.shadow.camera.bottom = -8;
 keyLight.shadow.bias = -0.0005;
-keyLight.shadow.radius = 4;
+keyLight.shadow.radius = 3;
 scene.add(keyLight);
 
-// Fill light — softer, from left, cool tone
-const fillLight = new THREE.DirectionalLight(0xe8eeff, 0.6);
-fillLight.position.set(-6, 6, 4);
-scene.add(fillLight);
+// Secondary overhead
+const secondLight = new THREE.DirectionalLight(0xffe8cc, 0.8);
+secondLight.position.set(-3, 10, -2);
+secondLight.castShadow = true;
+secondLight.shadow.mapSize.set(1024, 1024);
+scene.add(secondLight);
 
-// Rim/back light — highlights edges, from behind
-const rimLight = new THREE.DirectionalLight(0xffffff, 0.9);
-rimLight.position.set(0, 8, -6);
-scene.add(rimLight);
+// Cool fill from sides
+const fillL = new THREE.DirectionalLight(0xc8d8f0, 0.35);
+fillL.position.set(-7, 4, 2);
+scene.add(fillL);
+const fillR = new THREE.DirectionalLight(0xc8d8f0, 0.25);
+fillR.position.set(7, 4, 2);
+scene.add(fillR);
 
-// Ambient — soft overall fill
-scene.add(new THREE.AmbientLight(0xe0e4ea, 0.5));
+// Ambient — low, to keep shadows dramatic
+scene.add(new THREE.AmbientLight(0x404858, 0.5));
 
-// Top light — soft overhead
-const topLight = new THREE.PointLight(0xffffff, 0.3, 20);
-topLight.position.set(0, 10, 0);
-scene.add(topLight);
+// Spot on the logo wall — subtle blue wash
+const logoSpot = new THREE.SpotLight(0x3366cc, 0.6, 25, Math.PI / 4, 0.5, 1);
+logoSpot.position.set(0, 6, -4);
+logoSpot.target.position.set(0, 3, -12);
+scene.add(logoSpot);
+scene.add(logoSpot.target);
 
-// ── Studio Floor — Seamless cyclorama ──
-
-// Curved backdrop (quarter-cylinder) that blends floor into background
-const curveSegments = 40;
-const curveRadius = 18;
-const curveHeight = 14;
-const curveGeo = new THREE.BufferGeometry();
-const verts = [];
-const uvs = [];
-const indices = [];
-const cols = 60;
-for (let j = 0; j <= curveSegments; j++) {
-  const t = j / curveSegments;
-  const angle = t * Math.PI * 0.5;
-  const y = Math.sin(angle) * curveRadius;
-  const z = -(Math.cos(angle) * curveRadius - curveRadius);
-  for (let i = 0; i <= cols; i++) {
-    const x = (i / cols - 0.5) * 40;
-    verts.push(x, y, z - 8);
-    uvs.push(i / cols, t);
-  }
-}
-for (let j = 0; j < curveSegments; j++) {
-  for (let i = 0; i < cols; i++) {
-    const a = j * (cols + 1) + i;
-    const b = a + cols + 1;
-    indices.push(a, b, a + 1, b, b + 1, a + 1);
-  }
-}
-curveGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-curveGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-curveGeo.setIndex(indices);
-curveGeo.computeVertexNormals();
-
-const curveMat = new THREE.MeshStandardMaterial({
-  color: 0xd8dce2,
-  metalness: 0.0,
-  roughness: 0.95,
-  side: THREE.DoubleSide,
-});
-const curve = new THREE.Mesh(curveGeo, curveMat);
-scene.add(curve);
-
-// Floor — smooth, slightly reflective
-const floorGeo = new THREE.PlaneGeometry(40, 40);
+// ── Hangar Floor — Dark epoxy concrete ──
+const floorGeo = new THREE.PlaneGeometry(50, 50);
 const floorMat = new THREE.MeshStandardMaterial({
-  color: 0xc8ccd4,
-  metalness: 0.15,
-  roughness: 0.6,
+  color: 0x3a3d42,
+  metalness: 0.2,
+  roughness: 0.55,
 });
 const floor = new THREE.Mesh(floorGeo, floorMat);
 floor.rotation.x = -Math.PI / 2;
 floor.receiveShadow = true;
 scene.add(floor);
+
+// Floor joint lines (subtle)
+const jointMat = new THREE.MeshBasicMaterial({ color: 0x2e3035, side: THREE.DoubleSide });
+for (let i = -5; i <= 5; i++) {
+  const jh = new THREE.Mesh(new THREE.PlaneGeometry(50, 0.01), jointMat);
+  jh.rotation.x = -Math.PI / 2; jh.position.set(0, 0.001, i * 3);
+  scene.add(jh);
+  const jv = new THREE.Mesh(new THREE.PlaneGeometry(0.01, 50), jointMat);
+  jv.rotation.x = -Math.PI / 2; jv.position.set(i * 3, 0.001, 0);
+  scene.add(jv);
+}
+
+// ── Hangar Walls — Dark panels ──
+const wallMat = new THREE.MeshStandardMaterial({ color: 0x2a2d33, metalness: 0.3, roughness: 0.6 });
+
+// Side walls
+const sideWallL = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), wallMat);
+sideWallL.position.set(-12, 5, 0); sideWallL.rotation.y = Math.PI / 2;
+scene.add(sideWallL);
+const sideWallR = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), wallMat);
+sideWallR.position.set(12, 5, 0); sideWallR.rotation.y = -Math.PI / 2;
+scene.add(sideWallR);
+
+// ── LOGO WALL — Back wall with LLEDO AEROTOOLS branding ──
+// Create canvas texture for the logo
+const logoCanvas = document.createElement('canvas');
+logoCanvas.width = 2048;
+logoCanvas.height = 1024;
+const ctx = logoCanvas.getContext('2d');
+
+// Dark wall background
+ctx.fillStyle = '#22252b';
+ctx.fillRect(0, 0, 2048, 1024);
+
+// Subtle horizontal panel lines
+ctx.strokeStyle = '#2a2d33';
+ctx.lineWidth = 1;
+for (let y = 0; y < 1024; y += 64) {
+  ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(2048, y); ctx.stroke();
+}
+
+// ─── Draw the LLEDO Industries-style icon (centered, large) ───
+const cx = 1024, cy = 380;
+const iconScale = 2.2;
+
+// Blue outer "L" shape
+ctx.save();
+ctx.translate(cx - 120 * iconScale, cy - 60 * iconScale);
+ctx.scale(iconScale, iconScale);
+
+// Outer blue L
+const blueGrad = ctx.createLinearGradient(0, 0, 0, 120);
+blueGrad.addColorStop(0, '#5BA3E8');
+blueGrad.addColorStop(0.25, '#1E5FAA');
+blueGrad.addColorStop(0.5, '#0D3A6E');
+blueGrad.addColorStop(0.75, '#1E5FAA');
+blueGrad.addColorStop(1, '#5BA3E8');
+
+ctx.fillStyle = blueGrad;
+ctx.beginPath();
+ctx.moveTo(0, 0); ctx.lineTo(90, 0); ctx.lineTo(90, 30);
+ctx.lineTo(30, 30); ctx.lineTo(30, 120); ctx.lineTo(90, 120);
+ctx.lineTo(90, 90); ctx.lineTo(60, 90); ctx.lineTo(60, 60);
+ctx.lineTo(90, 60); ctx.lineTo(90, 120); ctx.lineTo(0, 120);
+ctx.closePath();
+ctx.fill();
+
+// Silver outline
+ctx.strokeStyle = '#b0b8c8';
+ctx.lineWidth = 1.5;
+ctx.stroke();
+
+// Inner red accent
+const redGrad = ctx.createLinearGradient(0, 0, 0, 120);
+redGrad.addColorStop(0, '#E85B5B');
+redGrad.addColorStop(0.25, '#C41E1E');
+redGrad.addColorStop(0.5, '#8B0000');
+redGrad.addColorStop(0.75, '#C41E1E');
+redGrad.addColorStop(1, '#E85B5B');
+
+ctx.fillStyle = redGrad;
+ctx.beginPath();
+ctx.moveTo(36, 36); ctx.lineTo(54, 36); ctx.lineTo(54, 84);
+ctx.lineTo(84, 84); ctx.lineTo(84, 114); ctx.lineTo(36, 114);
+ctx.closePath();
+ctx.fill();
+ctx.strokeStyle = '#d0d8e0';
+ctx.lineWidth = 0.8;
+ctx.stroke();
+
+ctx.restore();
+
+// ─── "LLEDO" text ───
+ctx.save();
+ctx.font = 'bold 110px Arial Black, Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+
+// Blue metallic text gradient
+const textGrad = ctx.createLinearGradient(0, cy + 100, 0, cy + 200);
+textGrad.addColorStop(0, '#6BB3F8');
+textGrad.addColorStop(0.5, '#2E7AD1');
+textGrad.addColorStop(1, '#6BB3F8');
+
+// Shadow
+ctx.fillStyle = '#000';
+ctx.globalAlpha = 0.4;
+ctx.fillText('LLEDO', cx + 3, cy + 155 + 3);
+ctx.globalAlpha = 1.0;
+
+// Main text
+ctx.fillStyle = textGrad;
+ctx.fillText('LLEDO', cx, cy + 155);
+
+// Silver outline
+ctx.strokeStyle = '#a0b0c8';
+ctx.lineWidth = 1.5;
+ctx.strokeText('LLEDO', cx, cy + 155);
+ctx.restore();
+
+// ─── "AERO TOOLS" subtitle ───
+ctx.save();
+ctx.font = 'bold 48px Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.letterSpacing = '12px';
+ctx.fillStyle = '#4A90D9';
+ctx.fillText('AERO TOOLS', cx, cy + 230);
+
+// Decorative line
+ctx.strokeStyle = '#4A90D9';
+ctx.lineWidth = 2;
+ctx.globalAlpha = 0.5;
+ctx.beginPath();
+ctx.moveTo(cx - 200, cy + 185);
+ctx.lineTo(cx + 200, cy + 185);
+ctx.stroke();
+ctx.restore();
+
+// Create texture from canvas
+const logoTexture = new THREE.CanvasTexture(logoCanvas);
+logoTexture.colorSpace = THREE.SRGBColorSpace;
+
+// Logo wall — large plane behind the product
+const logoWallGeo = new THREE.PlaneGeometry(20, 10);
+const logoWallMat = new THREE.MeshStandardMaterial({
+  map: logoTexture,
+  metalness: 0.1,
+  roughness: 0.7,
+});
+const logoWall = new THREE.Mesh(logoWallGeo, logoWallMat);
+logoWall.position.set(0, 5, -12);
+scene.add(logoWall);
 
 // ═══════════════════════════════════════════════════════════════
 // RENDER FUNCTIONS

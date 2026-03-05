@@ -565,6 +565,7 @@ model MarketProduct {
   isFeatured       Boolean  @default(false)
   published        Boolean  @default(true)
   model3d          String?
+  turntable        Json?    // {enabled, hFrames, vLevels, format}
   boughtTogether   String[] @default([])
   faq              Json?    // [{q, a}, ...]
   certifications   String[] @default([])

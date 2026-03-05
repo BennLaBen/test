@@ -136,6 +136,7 @@ export async function POST(request: NextRequest) {
         isFeatured: body.isFeatured ?? false,
         published: body.published ?? true,
         model3d: body.model3d || undefined,
+        turntable: body.turntable || undefined,
         boughtTogether: body.boughtTogether || [],
         faq: body.faq || undefined,
         certifications: body.certifications || [],

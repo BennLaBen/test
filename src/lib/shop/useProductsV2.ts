@@ -35,6 +35,7 @@ interface V2Product {
   isFeatured: boolean
   published: boolean
   model3d: string | null
+  turntable: { enabled: boolean; hFrames: number; vLevels: number; format: string } | null
   boughtTogether: string[]
   faq: { q: string; a: string }[] | null
   certifications: string[]
@@ -70,6 +71,7 @@ function toShopProduct(p: V2Product): ShopProduct {
     isFeatured: p.isFeatured,
     datasheetUrl: p.documents?.find(d => d.type === 'DATASHEET')?.url || null,
     model3d: p.model3d,
+    turntable: p.turntable || undefined,
     certifications: p.certifications,
     standards: p.standards,
     applications: p.applications,

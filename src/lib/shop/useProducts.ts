@@ -29,6 +29,7 @@ function toShopProduct(p: any): ShopProduct {
     isFeatured: p.isFeatured ?? false,
     datasheetUrl: p.documents?.find((d: any) => d.type === 'DATASHEET')?.url || null,
     model3d: p.model3d || null,
+    turntable: p.turntable || undefined,
     certifications: p.certifications || [],
     standards: p.standards || [],
     applications: p.applications || [],
