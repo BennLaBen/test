@@ -11,7 +11,11 @@ public/models/**/*.glb
 3d-pipeline/generate-turntable.js
 3d-pipeline/render-turntable.html
 3d-pipeline/viewer.html
-scripts/
+scripts/pdf-extract/
+scripts/convert-images.py
+scripts/download-helicopter-photos.py
+scripts/extract-pdf*.py
+scripts/generate-helicopters-gemini.py
 
 # Other
 .next
