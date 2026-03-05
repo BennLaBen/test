@@ -33,6 +33,13 @@ const CATEGORY_SLUG_TO_ID: Record<string, string> = {
   'ground-support': 'gse',
 }
 
+const CATEGORY_ID_TO_SLUG: Record<string, string> = {
+  'towing': 'barres-remorquage',
+  'handling': 'rollers-manutention',
+  'maintenance': 'outillage-maintenance',
+  'gse': 'ground-support',
+}
+
 function apiToShopProduct(p: any): ShopProduct {
   const rawCat = p.category?.slug || p.categoryId || ''
   return {
@@ -78,7 +85,7 @@ export const emptyProduct: ShopProduct = {
   id: '',
   slug: '',
   name: '',
-  category: 'barres-remorquage',
+  category: 'towing',
   description: '',
   shortDescription: '',
   features: [],
@@ -166,7 +173,8 @@ export function useProductAdmin() {
 
   // Helper: get categoryId from slug
   const getCategoryId = useCallback((slug: string) => {
-    const cat = categoriesCache.find(c => c.slug === slug || c.id === slug)
+    const dbSlug = CATEGORY_ID_TO_SLUG[slug] || slug
+    const cat = categoriesCache.find(c => c.slug === dbSlug || c.id === dbSlug || c.slug === slug || c.id === slug)
     return cat?.id || slug
   }, [])
 
