@@ -13,11 +13,6 @@ const TurntableGenerator = dynamic(
   { ssr: false }
 )
 
-const SecureTurntableViewer = dynamic(
-  () => import('@/components/aerotools/SecureTurntableViewer').then(mod => ({ default: mod.SecureTurntableViewer })),
-  { ssr: false }
-)
-
 interface Product {
   id: string
   slug: string
@@ -35,6 +30,7 @@ export default function AdminViewer3DPage() {
   const [generationDone, setGenerationDone] = useState(false)
   const [linking, setLinking] = useState(false)
   const [linked, setLinked] = useState(false)
+  const [turntableBaseUrl, setTurntableBaseUrl] = useState('')
 
   // Fetch all products
   useEffect(() => {
@@ -68,8 +64,9 @@ export default function AdminViewer3DPage() {
 
   const productsWithTurntable = products.filter(p => p.turntable?.enabled)
 
-  const handleGenerationComplete = useCallback((config: { hFrames: number; vLevels: number; format: string }) => {
+  const handleGenerationComplete = useCallback((config: { hFrames: number; vLevels: number; format: string; baseUrl: string }) => {
     setGenerationDone(true)
+    setTurntableBaseUrl(config.baseUrl)
   }, [])
 
   const handleLinkToProduct = useCallback(async () => {
@@ -80,7 +77,7 @@ export default function AdminViewer3DPage() {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          turntable: { enabled: true, hFrames: 36, vLevels: 3, format: 'webp' },
+          turntable: { enabled: true, hFrames: 36, vLevels: 3, format: 'webp', baseUrl: turntableBaseUrl },
         }),
       })
       const data = await res.json()
@@ -100,13 +97,14 @@ export default function AdminViewer3DPage() {
     } finally {
       setLinking(false)
     }
-  }, [selectedProduct])
+  }, [selectedProduct, turntableBaseUrl])
 
   const resetAll = useCallback(() => {
     setSelectedProduct(null)
     setGenerationDone(false)
     setLinked(false)
     setSearch('')
+    setTurntableBaseUrl('')
   }, [])
 
   return (

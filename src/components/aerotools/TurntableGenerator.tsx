@@ -5,7 +5,7 @@ import { Upload, Loader2, Check, AlertTriangle, RotateCw, Image as ImageIcon } f
 
 interface TurntableGeneratorProps {
   slug: string
-  onComplete?: (config: { hFrames: number; vLevels: number; format: string }) => void
+  onComplete?: (config: { hFrames: number; vLevels: number; format: string; baseUrl: string }) => void
 }
 
 const H_FRAMES = 36
@@ -278,9 +278,9 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         setProgressLabel(`Upload ${i + 1}/${frames.length}`)
       }
 
-      // Step 6: Save metadata
+      // Step 6: Save metadata + get baseUrl
       setProgressLabel('Sauvegarde des métadonnées...')
-      await fetch('/api/aerotools/turntable', {
+      const metaRes = await fetch('/api/aerotools/turntable', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -292,11 +292,13 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
           resolution: RESOLUTION,
         }),
       })
+      const metaData = await metaRes.json()
+      const baseUrl = metaData.baseUrl || `/images/aerotools/360/${slug}`
 
       setProgress(100)
       setStatus('done')
       setProgressLabel('Terminé !')
-      onComplete?.({ hFrames: H_FRAMES, vLevels: V_LEVELS, format: 'webp' })
+      onComplete?.({ hFrames: H_FRAMES, vLevels: V_LEVELS, format: 'webp', baseUrl })
     } catch (err) {
       console.error('Turntable generation error:', err)
       setError(err instanceof Error ? err.message : 'Erreur de génération')

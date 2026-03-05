@@ -347,6 +347,7 @@ function ProductGallery({ product }: { product: any }) {
             hFrames={product.turntable?.hFrames || 36}
             vLevels={product.turntable?.vLevels || 3}
             format={product.turntable?.format || 'webp'}
+            baseUrl={(product.turntable as any)?.baseUrl}
             className="w-full h-full"
           />
         </div>

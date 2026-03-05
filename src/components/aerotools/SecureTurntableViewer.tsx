@@ -11,6 +11,7 @@ interface SecureTurntableViewerProps {
   hFrames?: number       // nombre de frames horizontaux (ex: 36)
   vLevels?: number       // nombre de niveaux verticaux (ex: 3)
   format?: string        // webp | png | jpeg
+  baseUrl?: string       // URL de base pour les images (Vercel Blob ou local)
   className?: string
 }
 
@@ -28,6 +29,7 @@ export function SecureTurntableViewer({
   hFrames = 36,
   vLevels = 3,
   format = 'webp',
+  baseUrl,
   className = '',
 }: SecureTurntableViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -60,7 +62,8 @@ export function SecureTurntableViewer({
         const levelFrames: FrameData[] = []
         for (let h = 0; h < hFrames; h++) {
           const filename = `${slug}_e${v}_h${String(h).padStart(3, '0')}.${format}`
-          const url = `/images/aerotools/360/${slug}/${filename}`
+          const resolvedBase = baseUrl || `/images/aerotools/360/${slug}`
+          const url = `${resolvedBase}/${filename}`
 
           const img = await new Promise<HTMLImageElement>((resolve, reject) => {
             const image = new Image()
@@ -88,7 +91,7 @@ export function SecureTurntableViewer({
       setError(err instanceof Error ? err.message : 'Erreur de chargement des images')
       setLoading(false)
     }
-  }, [slug, hFrames, vLevels, format])
+  }, [slug, hFrames, vLevels, format, baseUrl])
 
   useEffect(() => {
     loadFrames()

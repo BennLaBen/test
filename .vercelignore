@@ -1,15 +1,20 @@
-# Large files
+# Large files (STL/GLB models)
 3d-pipeline/*.stl
 3d-pipeline/*.STL
 models/*.glb
 models/*.stl
+public/models/**/*.stl
+public/models/**/*.STL
+public/models/**/*.glb
 
 # Dev tools
 3d-pipeline/generate-turntable.js
 3d-pipeline/render-turntable.html
 3d-pipeline/viewer.html
+scripts/
 
 # Other
 .next
 node_modules
 *.bak
+generated_media/
