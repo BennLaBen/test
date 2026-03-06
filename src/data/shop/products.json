@@ -19,8 +19,11 @@
       "Norme": "ISO 9667",
       "Conformité": "Directive Machine 2006/42/CE"
     },
-    "image": "/images/products/towbar-h160.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b160-01/main.webp",
+    "gallery": [
+      "/images/gallery/br-b160-01/01.webp",
+      "/images/gallery/br-b160-01/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -70,8 +73,11 @@
       "Type": "Démontable",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-h160.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b160-02/main.webp",
+    "gallery": [
+      "/images/gallery/br-b160-02/01.webp",
+      "/images/gallery/br-b160-02/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -121,8 +127,11 @@
       "Type": "Repliable",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-h160.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b160-03/main.webp",
+    "gallery": [
+      "/images/gallery/br-b160-03/01.webp",
+      "/images/gallery/br-b160-03/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -171,8 +180,10 @@
       "Compatibilité": "Airbus H160 (FLYR)",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-h160.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b160-04/main.webp",
+    "gallery": [
+      "/images/gallery/br-b160-04/01.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -222,8 +233,13 @@
       "Type": "Démontable",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-h160.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b160-05/main.webp",
+    "gallery": [
+      "/images/gallery/br-b160-05/01.webp",
+      "/images/gallery/br-b160-05/02.webp",
+      "/images/gallery/br-b160-05/03.webp",
+      "/images/gallery/br-b160-05/04.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -273,8 +289,12 @@
       "Compatibilité": "Airbus H145 / EC145",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-h145.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b175-01/main.webp",
+    "gallery": [
+      "/images/gallery/br-b175-01/01.webp",
+      "/images/gallery/br-b175-01/02.webp",
+      "/images/gallery/br-b175-01/03.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -376,8 +396,13 @@
       "Compatibilité": "AS332 Super Puma",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-puma.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b332-01-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-b332-01-000/01.webp",
+      "/images/gallery/br-b332-01-000/02.webp",
+      "/images/gallery/br-b332-01-000/03.webp",
+      "/images/gallery/br-b332-01-000/04.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -427,8 +452,11 @@
       "Compatibilité": "AS332/AS532/EC225/EC725/H215/H225",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-puma.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b332-03-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-b332-03-000/01.webp",
+      "/images/gallery/br-b332-03-000/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -481,8 +509,12 @@
       "Compatibilité": "NH90 TTH/NFH",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-nh90.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-nh90-01-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-nh90-01-000/01.webp",
+      "/images/gallery/br-nh90-01-000/02.webp",
+      "/images/gallery/br-nh90-01-000/03.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -533,8 +565,10 @@
       "Poids": "55 kg",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-nh90.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-nh90-02-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-nh90-02-000/01.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -585,8 +619,11 @@
       "Poids": "31 kg",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-dauphin.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b365-01-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-b365-01-000/01.webp",
+      "/images/gallery/br-b365-01-000/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -637,8 +674,10 @@
       "Poids": "32 kg",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-dauphin.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b365-02-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-b365-02-000/01.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -690,8 +729,11 @@
       "Poids": "60 kg",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/towbar-aw139.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-b139-01-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-b139-01-000/01.webp",
+      "/images/gallery/br-b139-01-000/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -743,8 +785,13 @@
       "Matériau": "Aluminium aéronautique",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/barre-bhhl.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-bhhl-01-000/main.webp",
+    "gallery": [
+      "/images/gallery/br-bhhl-01-000/01.webp",
+      "/images/gallery/br-bhhl-01-000/02.webp",
+      "/images/gallery/br-bhhl-01-000/03.webp",
+      "/images/gallery/br-bhhl-01-000/04.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "high",
     "compatibility": [
@@ -896,8 +943,11 @@
       "Type": "Anneau de réduction",
       "Matériau": "Acier usiné"
     },
-    "image": "/images/products/accessoire-timon.svg",
-    "gallery": [],
+    "image": "/images/gallery/br-coo16-01-k01/main.webp",
+    "gallery": [
+      "/images/gallery/br-coo16-01-k01/01.webp",
+      "/images/gallery/br-coo16-01-k01/02.webp"
+    ],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
     "compatibility": [],
