@@ -166,6 +166,8 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       setProgressLabel(isSTL ? 'Chargement du fichier STL...' : 'Chargement du modèle 3D...')
 
       const buffer = await file.arrayBuffer()
+      console.log('[TurntableGenerator] File:', file.name, 'Size:', buffer.byteLength, 'bytes')
+
       const TARGET_SIZE = 3.5
       const pivot = new THREE.Group()
       let lookAtY = 1.0
@@ -173,12 +175,29 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
 
       if (isSTL) {
         const stlLoader = new STLLoader()
-        const geometry = stlLoader.parse(buffer)
 
-        // Validate geometry
-        const posAttr = geometry.attributes.position
+        // Try parsing — STLLoader auto-detects binary vs ASCII,
+        // but some files confuse the detector. Try ArrayBuffer first, then text fallback.
+        let geometry = stlLoader.parse(buffer)
+        let posAttr = geometry.attributes.position
+
         if (!posAttr || posAttr.count === 0) {
-          throw new Error('Le fichier STL ne contient aucune géométrie (0 vertices)')
+          console.warn('[TurntableGenerator] Binary parse returned 0 vertices, trying ASCII text fallback...')
+          const text = new TextDecoder('utf-8').decode(new Uint8Array(buffer))
+          geometry = stlLoader.parse(text)
+          posAttr = geometry.attributes.position
+        }
+
+        if (!posAttr || posAttr.count === 0) {
+          // Last resort: try reading as ASCII with latin1 encoding
+          console.warn('[TurntableGenerator] UTF-8 text parse also failed, trying latin1...')
+          const textLatin = new TextDecoder('iso-8859-1').decode(new Uint8Array(buffer))
+          geometry = stlLoader.parse(textLatin)
+          posAttr = geometry.attributes.position
+        }
+
+        if (!posAttr || posAttr.count === 0) {
+          throw new Error(`Le fichier STL ne contient aucune géométrie (0 vertices, taille fichier: ${buffer.byteLength} octets). Vérifiez que le fichier est un STL valide.`)
         }
         console.log('[TurntableGenerator] STL vertices:', posAttr.count)
 
