@@ -129,9 +129,9 @@ function ProductGallery({ product }: { product: any }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [zoomed, setZoomed] = useState(false)
   const [showEquipped, setShowEquipped] = useState(false)
-  const [viewMode, setViewMode] = useState<'photos' | '360' | '3d'>('photos')
   const has3D = !!product.model3d
   const hasTurntable = !!product.turntable?.enabled
+  const [viewMode, setViewMode] = useState<'photos' | '360' | '3d'>(hasTurntable ? '360' : 'photos')
 
   const heliImage = product.compatibility?.[0] ? HELICOPTER_IMAGES[product.compatibility[0]] : null
   const allImages = [product.image, ...(product.gallery || [])].filter(Boolean)
@@ -146,169 +146,187 @@ function ProductGallery({ product }: { product: any }) {
   }, [allImages.length])
 
   return (
-    <div className="space-y-4">
-      {/* ── HERO: Hélicoptère + overlay équipement ── */}
-      {heliImage && (
-        <div className="relative aspect-[16/10] rounded-2xl border border-gray-700/50 overflow-hidden group bg-gradient-to-br from-gray-800/80 to-gray-900/80">
-          {/* Helicopter background */}
-          <Image
-            src={heliImage}
-            alt={`Hélicoptère ${product.compatibility[0]}`}
-            fill
-            className={`object-cover transition-all duration-700 ${showEquipped ? 'brightness-50 scale-105' : 'brightness-75'}`}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
+    <div className="space-y-3">
+
+      {/* ═══ HERO SECTION — 3D Turntable or Photo Carousel ═══ */}
+      {hasTurntable && viewMode === '360' ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative rounded-2xl overflow-hidden border border-cyan-500/20 shadow-[0_0_40px_rgba(6,182,212,0.08)]"
+        >
+          {/* Glow effect behind */}
+          <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10 rounded-2xl blur-xl -z-10" />
+
+          <div className="aspect-[4/3]">
+            <SecureTurntableViewer
+              slug={product.slug}
+              productName={product.name}
+              hFrames={product.turntable?.hFrames || 36}
+              vLevels={product.turntable?.vLevels || 3}
+              format={product.turntable?.format || 'webp'}
+              baseUrl={(product.turntable as any)?.baseUrl}
+              className="w-full h-full"
+            />
+          </div>
+
+          {/* 3D badge */}
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-400/30 rounded-full">
+            <RotateCw className="h-3 w-3 text-cyan-400" />
+            <span className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Vue 360°</span>
+          </div>
+        </motion.div>
+      ) : has3D && viewMode === '3d' ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative rounded-2xl overflow-hidden border border-purple-500/20"
+        >
+          <ModelViewer3D
+            src={product.model3d}
+            alt={`${product.name} — Vue 3D`}
+            poster={product.image}
+            className="aspect-[4/3]"
           />
+        </motion.div>
+      ) : (
+        <>
+          {/* ── HERO: Hélicoptère + overlay équipement ── */}
+          {heliImage && (
+            <div className="relative aspect-[16/10] rounded-2xl border border-gray-700/50 overflow-hidden group bg-gradient-to-br from-gray-800/80 to-gray-900/80">
+              <Image
+                src={heliImage}
+                alt={`Hélicoptère ${product.compatibility[0]}`}
+                fill
+                className={`object-cover transition-all duration-700 ${showEquipped ? 'brightness-50 scale-105' : 'brightness-75'}`}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
 
-          {/* Equipment overlay when toggled */}
-          <AnimatePresence>
-            {showEquipped && product.image && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                className="absolute inset-0 flex items-center justify-center z-10"
+              <AnimatePresence>
+                {showEquipped && product.image && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                    className="absolute inset-0 flex items-center justify-center z-10"
+                  >
+                    <div className="relative w-[80%] h-[60%] drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+                      <Image src={product.image} alt={product.name} fill className="object-contain filter brightness-110" sizes="(max-width: 1024px) 80vw, 40vw" />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-blue-500/40 z-20" />
+              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-blue-500/40 z-20" />
+              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-blue-500/40 z-20" />
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-blue-500/40 z-20" />
+
+              <button
+                onClick={() => setShowEquipped(!showEquipped)}
+                className="absolute top-4 right-14 z-20 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-gray-600/50 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white hover:bg-black/80 transition-all"
               >
-                <div className="relative w-[80%] h-[60%] drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-contain filter brightness-110"
-                    sizes="(max-width: 1024px) 80vw, 40vw"
-                  />
+                {showEquipped ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                {showEquipped ? 'Masquer' : 'Voir équipé'}
+              </button>
+
+              <div className="absolute bottom-4 left-5 right-5 flex justify-between items-end z-20">
+                <div>
+                  <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest">
+                    {showEquipped ? 'CONFIGURATION ÉQUIPÉE' : 'APPAREIL COMPATIBLE'}
+                  </p>
+                  <p className="text-sm font-black text-white uppercase tracking-wider">
+                    Airbus {product.compatibility[0]}
+                  </p>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <span className="font-mono text-[10px] text-white/40">REF {product.id}</span>
+              </div>
 
-          {/* HUD corners */}
-          <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-blue-500/40 z-20" />
-          <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-blue-500/40 z-20" />
-          <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-blue-500/40 z-20" />
-          <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-blue-500/40 z-20" />
-
-          {/* Toggle button */}
-          <button
-            onClick={() => setShowEquipped(!showEquipped)}
-            className="absolute top-4 right-14 z-20 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-gray-600/50 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white hover:bg-black/80 transition-all"
-          >
-            {showEquipped ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-            {showEquipped ? 'Masquer' : 'Voir équipé'}
-          </button>
-
-          {/* Label overlay */}
-          <div className="absolute bottom-4 left-5 right-5 flex justify-between items-end z-20">
-            <div>
-              <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest">
-                {showEquipped ? 'CONFIGURATION ÉQUIPÉE' : 'APPAREIL COMPATIBLE'}
-              </p>
-              <p className="text-sm font-black text-white uppercase tracking-wider">
-                Airbus {product.compatibility[0]}
-              </p>
-            </div>
-            <span className="font-mono text-[10px] text-white/40">REF {product.id}</span>
-          </div>
-
-          {/* Scan effect */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-[2500ms] z-10" />
-        </div>
-      )}
-
-      {/* ── CARROUSEL: Photos équipement ── */}
-      {allImages.length > 0 && (
-        <div className="relative">
-          {/* Main image */}
-          <div
-            className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden cursor-pointer group"
-            onClick={() => setZoomed(true)}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -30 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={allImages[activeIndex]}
-                  alt={`${product.name} — vue ${activeIndex + 1}`}
-                  fill
-                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Zoom hint */}
-            <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-black/40 backdrop-blur-sm rounded-lg text-[10px] text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
-              <ZoomIn className="h-3 w-3" />
-              Agrandir
-            </div>
-
-            {/* Counter */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-[10px] font-mono text-white/70">
-              {activeIndex + 1} / {allImages.length}
-            </div>
-
-            {/* Navigation arrows */}
-            {hasGallery && (
-              <>
-                <button onClick={(e) => { e.stopPropagation(); goPrev() }} className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button onClick={(e) => { e.stopPropagation(); goNext() }} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </>
-            )}
-          </div>
-
-          {/* Thumbnails */}
-          {hasGallery && (
-            <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
-              {allImages.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${
-                    i === activeIndex
-                      ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]'
-                      : 'border-gray-700/50 opacity-60 hover:opacity-100'
-                  }`}
-                >
-                  <Image src={img} alt={`Vue ${i + 1}`} fill className="object-contain p-1" sizes="64px" />
-                </button>
-              ))}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-[2500ms] z-10" />
             </div>
           )}
-        </div>
+
+          {/* ── CARROUSEL: Photos équipement ── */}
+          {allImages.length > 0 && (
+            <div className="relative">
+              <div
+                className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden cursor-pointer group"
+                onClick={() => setZoomed(true)}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={allImages[activeIndex]}
+                      alt={`${product.name} — vue ${activeIndex + 1}`}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-black/40 backdrop-blur-sm rounded-lg text-[10px] text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ZoomIn className="h-3 w-3" /> Agrandir
+                </div>
+
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-[10px] font-mono text-white/70">
+                  {activeIndex + 1} / {allImages.length}
+                </div>
+
+                {hasGallery && (
+                  <>
+                    <button onClick={(e) => { e.stopPropagation(); goPrev() }} className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); goNext() }} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {hasGallery && (
+                <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
+                  {allImages.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveIndex(i)}
+                      className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                        i === activeIndex
+                          ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]'
+                          : 'border-gray-700/50 opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <Image src={img} alt={`Vue ${i + 1}`} fill className="object-contain p-1" sizes="64px" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {!heliImage && allImages.length === 0 && (
+            <div className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden flex items-center justify-center">
+              <Box className="h-40 w-40 text-gray-700" />
+            </div>
+          )}
+        </>
       )}
 
-      {/* Fallback if no helicopter image and no gallery */}
-      {!heliImage && allImages.length === 0 && (
-        <div className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden flex items-center justify-center">
-          <Box className="h-40 w-40 text-gray-700" />
-        </div>
-      )}
-
-      {/* Photos / 360° / 3D toggle */}
+      {/* ═══ VIEW MODE TABS ═══ */}
       {(hasTurntable || has3D) && (
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setViewMode('photos')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-              viewMode === 'photos'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 border border-blue-400/50'
-                : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
-            }`}
-          >
-            <Eye className="h-4 w-4" />
-            Photos
-          </button>
           {hasTurntable && (
             <button
               onClick={() => setViewMode('360')}
@@ -322,6 +340,17 @@ function ProductGallery({ product }: { product: any }) {
               Vue 360°
             </button>
           )}
+          <button
+            onClick={() => setViewMode('photos')}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              viewMode === 'photos'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 border border-blue-400/50'
+                : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-gray-600 hover:text-gray-200'
+            }`}
+          >
+            <Eye className="h-4 w-4" />
+            Photos
+          </button>
           {has3D && (
             <button
               onClick={() => setViewMode('3d')}
@@ -336,31 +365,6 @@ function ProductGallery({ product }: { product: any }) {
             </button>
           )}
         </div>
-      )}
-
-      {/* Turntable 360° Viewer */}
-      {hasTurntable && viewMode === '360' && (
-        <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-gray-700/50">
-          <SecureTurntableViewer
-            slug={product.slug}
-            productName={product.name}
-            hFrames={product.turntable?.hFrames || 36}
-            vLevels={product.turntable?.vLevels || 3}
-            format={product.turntable?.format || 'webp'}
-            baseUrl={(product.turntable as any)?.baseUrl}
-            className="w-full h-full"
-          />
-        </div>
-      )}
-
-      {/* 3D Viewer */}
-      {has3D && viewMode === '3d' && (
-        <ModelViewer3D
-          src={product.model3d}
-          alt={`${product.name} — Vue 3D`}
-          poster={product.image}
-          className="aspect-[4/3]"
-        />
       )}
 
       {/* Compliance badges */}
@@ -397,7 +401,6 @@ function ProductGallery({ product }: { product: any }) {
               />
             </div>
 
-            {/* Nav in lightbox */}
             {hasGallery && (
               <>
                 <button onClick={(e) => { e.stopPropagation(); goPrev() }} className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all">

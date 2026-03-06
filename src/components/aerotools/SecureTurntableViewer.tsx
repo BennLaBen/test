@@ -123,21 +123,23 @@ export function SecureTurntableViewer({
     // Clear
     ctx.clearRect(0, 0, rect.width, rect.height)
 
-    // Draw image fitted (contain)
+    // Draw image fitted (cover — fills entire canvas, no borders)
     const imgAspect = img.width / img.height
     const canAspect = rect.width / rect.height
     let drawW, drawH, drawX, drawY
 
     if (imgAspect > canAspect) {
-      drawW = rect.width
-      drawH = rect.width / imgAspect
-      drawX = 0
-      drawY = (rect.height - drawH) / 2
-    } else {
+      // Image wider than canvas: fill height, crop sides
       drawH = rect.height
       drawW = rect.height * imgAspect
       drawX = (rect.width - drawW) / 2
       drawY = 0
+    } else {
+      // Image taller than canvas: fill width, crop top/bottom
+      drawW = rect.width
+      drawH = rect.width / imgAspect
+      drawX = 0
+      drawY = (rect.height - drawH) / 2
     }
 
     ctx.drawImage(img, drawX, drawY, drawW, drawH)
@@ -279,7 +281,7 @@ export function SecureTurntableViewer({
       ref={containerRef}
       className={`relative overflow-hidden select-none ${className}`}
       style={{
-        background: 'linear-gradient(180deg, #e8e8ec 0%, #d5d5db 30%, #c8c8d0 60%, #bbbbc4 100%)',
+        background: 'linear-gradient(180deg, #1a1a2e 0%, #16162a 30%, #121226 60%, #0e0e1e 100%)',
         userSelect: 'none',
         touchAction: 'none',
         cursor: isDragging ? 'grabbing' : 'grab',
@@ -287,28 +289,28 @@ export function SecureTurntableViewer({
     >
       {/* ── Loading ── */}
       {loading && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center" style={{ background: 'linear-gradient(180deg, #e8e8ec 0%, #d0d0d6 100%)' }}>
-          <Loader2 className="h-8 w-8 text-gray-400 animate-spin mb-4" />
-          <p className="text-[11px] text-gray-400 uppercase tracking-[0.3em] mb-3">Chargement</p>
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center" style={{ background: 'linear-gradient(180deg, #1a1a2e 0%, #0e0e1e 100%)' }}>
+          <Loader2 className="h-8 w-8 text-blue-400/60 animate-spin mb-4" />
+          <p className="text-[11px] text-gray-500 uppercase tracking-[0.3em] mb-3">Chargement 3D</p>
           {/* Progress bar */}
-          <div className="w-48 h-1 bg-gray-300 rounded-full overflow-hidden">
+          <div className="w-48 h-1 bg-gray-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gray-500 rounded-full transition-all duration-200"
+              className="h-full bg-blue-500/60 rounded-full transition-all duration-200"
               style={{ width: `${loadProgress}%` }}
             />
           </div>
-          <p className="text-[10px] text-gray-400 mt-2">{loadProgress}%</p>
+          <p className="text-[10px] text-gray-600 mt-2">{loadProgress}%</p>
         </div>
       )}
 
       {/* ── Error ── */}
       {error && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ background: 'linear-gradient(180deg, #e8e8ec 0%, #d0d0d6 100%)' }}>
+        <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ background: 'linear-gradient(180deg, #1a1a2e 0%, #0e0e1e 100%)' }}>
           <div className="text-center">
-            <Shield className="h-10 w-10 text-gray-400 mx-auto mb-4" />
-            <p className="text-sm text-gray-500 mb-2">{error}</p>
-            <p className="text-xs text-gray-400 mb-4">Les images turntable n&apos;ont pas encore été générées pour ce produit.</p>
-            <button onClick={loadFrames} className="px-4 py-2 text-xs uppercase tracking-wider text-gray-600 border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+            <Shield className="h-10 w-10 text-gray-600 mx-auto mb-4" />
+            <p className="text-sm text-gray-400 mb-2">{error}</p>
+            <p className="text-xs text-gray-600 mb-4">Les images turntable n&apos;ont pas encore été générées pour ce produit.</p>
+            <button onClick={loadFrames} className="px-4 py-2 text-xs uppercase tracking-wider text-gray-400 border border-gray-700 rounded hover:bg-gray-800 transition-colors">
               Réessayer
             </button>
           </div>
@@ -327,29 +329,11 @@ export function SecureTurntableViewer({
       />
 
 
-      {/* ── Frame indicator (subtle) ── */}
+      {/* ── Product label ── */}
       {!loading && !error && (
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex gap-0.5 pointer-events-none">
-          {Array.from({ length: Math.min(hFrames, 36) }).map((_, i) => {
-            const frameIndex = hFrames > 36 ? Math.round(i * (hFrames / 36)) : i
-            return (
-              <div
-                key={i}
-                className="w-1 h-1 rounded-full transition-colors duration-100"
-                style={{
-                  backgroundColor: frameIndex === currentH ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
-                }}
-              />
-            )
-          })}
-        </div>
-      )}
-
-      {/* ── Product label (Mercedes-style) ── */}
-      {!loading && !error && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-          <div className="bg-white/70 backdrop-blur-sm px-6 py-2 rounded-full border border-gray-200/80 shadow-sm">
-            <span className="text-[11px] text-gray-600 font-medium tracking-wider uppercase">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+          <div className="bg-black/40 backdrop-blur-sm px-5 py-1.5 rounded-full border border-white/10">
+            <span className="text-[10px] text-white/60 font-medium tracking-wider uppercase">
               {productName}
             </span>
           </div>
@@ -357,16 +341,16 @@ export function SecureTurntableViewer({
       )}
 
       {/* ── Security badge ── */}
-      <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-2.5 py-1 bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-full pointer-events-none">
-        <Shield className="h-3 w-3 text-green-500/60" />
-        <span className="text-[9px] uppercase tracking-wider text-gray-400 font-medium">Protégé</span>
+      <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2 py-1 bg-black/30 backdrop-blur-sm border border-white/10 rounded-full pointer-events-none">
+        <Shield className="h-3 w-3 text-green-400/60" />
+        <span className="text-[9px] uppercase tracking-wider text-white/40 font-medium">Protégé</span>
       </div>
 
       {/* ── Drag hint ── */}
       {!loading && !error && !isDragging && (
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-pulse">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-black/5 rounded-full">
-            <span className="text-[10px] text-gray-400">↔ Glissez pour tourner</span>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-pulse">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+            <span className="text-[10px] text-white/40">↔ Glissez pour tourner</span>
           </div>
         </div>
       )}
