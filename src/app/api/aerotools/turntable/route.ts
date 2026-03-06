@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
       const blob = await put(`turntable/${safeSlug}/${filename}`, image, {
         access: 'public',
         addRandomSuffix: false,
+        allowOverwrite: true,
         contentType: 'image/webp',
       })
       url = blob.url
@@ -73,6 +74,7 @@ export async function PUT(req: NextRequest) {
       }), {
         access: 'public',
         addRandomSuffix: false,
+        allowOverwrite: true,
         contentType: 'application/json',
       })
       // Base URL is the blob URL without the filename
