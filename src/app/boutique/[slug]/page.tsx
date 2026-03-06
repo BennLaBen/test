@@ -10,7 +10,7 @@ import { useQuote } from '@/contexts/QuoteContext'
 import {
   Check, Shield, ShoppingBag, FileText, ChevronRight, ChevronDown, ChevronLeft,
   Package, Phone, Clock, Award, Truck, MessageSquare, ArrowRight,
-  Box, Zap, Activity, Download, Users, Ruler, Layers, ZoomIn, X, Eye, EyeOff, RotateCw
+  Box, Zap, Activity, Download, Users, Ruler, Layers, ZoomIn, X, Eye, RotateCw
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -128,13 +128,16 @@ function DataTable({ data, icon, title }: { data: Record<string, string>; icon: 
 function ProductGallery({ product }: { product: any }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [zoomed, setZoomed] = useState(false)
-  const [showEquipped, setShowEquipped] = useState(false)
   const has3D = !!product.model3d
   const hasTurntable = !!product.turntable?.enabled
   const [viewMode, setViewMode] = useState<'photos' | '360' | '3d'>(hasTurntable ? '360' : 'photos')
 
-  const heliImage = product.compatibility?.[0] ? HELICOPTER_IMAGES[product.compatibility[0]] : null
-  const allImages = [product.image, ...(product.gallery || [])].filter(Boolean)
+  // Build carousel: helicopter images first, then product images
+  const heliImages = (product.compatibility || [])
+    .map((c: string) => HELICOPTER_IMAGES[c])
+    .filter((img: string | undefined, i: number, arr: (string | undefined)[]) => img && arr.indexOf(img) === i) as string[]
+  const productImages = [product.image, ...(product.gallery || [])].filter(Boolean)
+  const allImages = [...heliImages, ...productImages]
   const hasGallery = allImages.length > 1
 
   const goNext = useCallback(() => {
@@ -144,6 +147,9 @@ function ProductGallery({ product }: { product: any }) {
   const goPrev = useCallback(() => {
     setActiveIndex((i) => (i - 1 + allImages.length) % allImages.length)
   }, [allImages.length])
+
+  // Is current image a helicopter image?
+  const isHeliImage = activeIndex < heliImages.length
 
   return (
     <div className="space-y-3">
@@ -193,68 +199,15 @@ function ProductGallery({ product }: { product: any }) {
         </motion.div>
       ) : (
         <>
-          {/* ── HERO: Hélicoptère + overlay équipement ── */}
-          {heliImage && (
-            <div className="relative aspect-[16/10] rounded-2xl border border-gray-700/50 overflow-hidden group bg-gradient-to-br from-gray-800/80 to-gray-900/80">
-              <Image
-                src={heliImage}
-                alt={`Hélicoptère ${product.compatibility[0]}`}
-                fill
-                className={`object-cover transition-all duration-700 ${showEquipped ? 'brightness-50 scale-105' : 'brightness-75'}`}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
-
-              <AnimatePresence>
-                {showEquipped && product.image && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="absolute inset-0 flex items-center justify-center z-10"
-                  >
-                    <div className="relative w-[80%] h-[60%] drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]">
-                      <Image src={product.image} alt={product.name} fill className="object-contain filter brightness-110" sizes="(max-width: 1024px) 80vw, 40vw" />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-blue-500/40 z-20" />
-              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-blue-500/40 z-20" />
-              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-blue-500/40 z-20" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-blue-500/40 z-20" />
-
-              <button
-                onClick={() => setShowEquipped(!showEquipped)}
-                className="absolute top-4 right-14 z-20 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-gray-600/50 rounded-lg text-[10px] font-bold uppercase tracking-wider text-white hover:bg-black/80 transition-all"
-              >
-                {showEquipped ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-                {showEquipped ? 'Masquer' : 'Voir équipé'}
-              </button>
-
-              <div className="absolute bottom-4 left-5 right-5 flex justify-between items-end z-20">
-                <div>
-                  <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest">
-                    {showEquipped ? 'CONFIGURATION ÉQUIPÉE' : 'APPAREIL COMPATIBLE'}
-                  </p>
-                  <p className="text-sm font-black text-white uppercase tracking-wider">
-                    Airbus {product.compatibility[0]}
-                  </p>
-                </div>
-                <span className="font-mono text-[10px] text-white/40">REF {product.id}</span>
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-400/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-[2500ms] z-10" />
-            </div>
-          )}
-
-          {/* ── CARROUSEL: Photos équipement ── */}
-          {allImages.length > 0 && (
+          {/* ── CARROUSEL UNIFIÉ: Hélicoptères + Photos produit ── */}
+          {allImages.length > 0 ? (
             <div className="relative">
               <div
-                className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden cursor-pointer group"
+                className={`relative aspect-[4/3] rounded-2xl border overflow-hidden cursor-pointer group ${
+                  isHeliImage
+                    ? 'border-blue-500/20 bg-gradient-to-br from-gray-800/80 to-gray-900/80'
+                    : 'border-gray-700/50 bg-gray-800/30'
+                }`}
                 onClick={() => setZoomed(true)}
               >
                 <AnimatePresence mode="wait">
@@ -268,34 +221,64 @@ function ProductGallery({ product }: { product: any }) {
                   >
                     <Image
                       src={allImages[activeIndex]}
-                      alt={`${product.name} — vue ${activeIndex + 1}`}
+                      alt={isHeliImage ? `Appareil compatible — ${product.compatibility[activeIndex]}` : `${product.name} — vue ${activeIndex - heliImages.length + 1}`}
                       fill
-                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                      className={isHeliImage ? 'object-cover brightness-90' : 'object-contain p-4 group-hover:scale-105 transition-transform duration-500'}
                       sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={activeIndex === 0}
                     />
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-black/40 backdrop-blur-sm rounded-lg text-[10px] text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ZoomIn className="h-3 w-3" /> Agrandir
-                </div>
+                {/* Helicopter overlay label */}
+                {isHeliImage && (
+                  <div className="absolute bottom-4 left-5 right-5 flex justify-between items-end z-20">
+                    <div>
+                      <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest">Appareil compatible</p>
+                      <p className="text-sm font-black text-white uppercase tracking-wider">
+                        Airbus {product.compatibility[activeIndex] || product.compatibility[0]}
+                      </p>
+                    </div>
+                    <span className="font-mono text-[10px] text-white/40">REF {product.id}</span>
+                  </div>
+                )}
 
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-[10px] font-mono text-white/70">
+                {/* HUD corners on helicopter images */}
+                {isHeliImage && (
+                  <>
+                    <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-blue-500/40 z-20" />
+                    <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-blue-500/40 z-20" />
+                    <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-blue-500/40 z-20" />
+                    <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-blue-500/40 z-20" />
+                  </>
+                )}
+
+                {/* Zoom hint (product photos only) */}
+                {!isHeliImage && (
+                  <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-black/40 backdrop-blur-sm rounded-lg text-[10px] text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ZoomIn className="h-3 w-3" /> Agrandir
+                  </div>
+                )}
+
+                {/* Counter */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-[10px] font-mono text-white/70 z-20">
                   {activeIndex + 1} / {allImages.length}
                 </div>
 
+                {/* Navigation arrows */}
                 {hasGallery && (
                   <>
-                    <button onClick={(e) => { e.stopPropagation(); goPrev() }} className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
+                    <button onClick={(e) => { e.stopPropagation(); goPrev() }} className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all z-20">
                       <ChevronLeft className="h-4 w-4" />
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); goNext() }} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all">
+                    <button onClick={(e) => { e.stopPropagation(); goNext() }} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/40 hover:bg-black/70 backdrop-blur-sm rounded-full text-white transition-all z-20">
                       <ChevronRight className="h-4 w-4" />
                     </button>
                   </>
                 )}
               </div>
 
+              {/* Thumbnails */}
               {hasGallery && (
                 <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
                   {allImages.map((img, i) => (
@@ -308,15 +291,13 @@ function ProductGallery({ product }: { product: any }) {
                           : 'border-gray-700/50 opacity-60 hover:opacity-100'
                       }`}
                     >
-                      <Image src={img} alt={`Vue ${i + 1}`} fill className="object-contain p-1" sizes="64px" />
+                      <Image src={img} alt={`Vue ${i + 1}`} fill className={i < heliImages.length ? 'object-cover' : 'object-contain p-1'} sizes="64px" />
                     </button>
                   ))}
                 </div>
               )}
             </div>
-          )}
-
-          {!heliImage && allImages.length === 0 && (
+          ) : (
             <div className="relative aspect-[4/3] bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden flex items-center justify-center">
               <Box className="h-40 w-40 text-gray-700" />
             </div>
