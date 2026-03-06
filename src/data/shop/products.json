@@ -843,7 +843,7 @@
       "Compatibilité": "BR-BHHL-01-000",
       "Poids": "40 kg"
     },
-    "image": "/images/products/barre-bhhl.svg",
+    "image": "/images/gallery/br-bhhl-01-000/main.webp",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
@@ -892,7 +892,7 @@
     "specs": {
       "Compatibilité": "BR-BHHL-01-000 + Rollers"
     },
-    "image": "/images/products/barre-bhhl.svg",
+    "image": "/images/gallery/br-bhhl-01-000/main.webp",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "low",
@@ -1135,7 +1135,7 @@
       "Compatible": "Panniers DART",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/roller-h125-petit.svg",
+    "image": "/images/products/roller-h125.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
@@ -1188,7 +1188,7 @@
       "Encombrement": "412 x 363 x 308 mm",
       "Norme": "ISO 9667"
     },
-    "image": "/images/products/roller-mecanique.svg",
+    "image": "/images/products/roller-h125.svg",
     "gallery": [],
     "priceDisplay": "SUR DEVIS",
     "priceRange": "medium",
