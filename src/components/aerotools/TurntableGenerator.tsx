@@ -166,19 +166,38 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       setProgressLabel(isSTL ? 'Chargement du fichier STL...' : 'Chargement du modèle 3D...')
 
       const buffer = await file.arrayBuffer()
-
-      // Use a Group wrapper for clean transform handling
+      const TARGET_SIZE = 3.5
       const pivot = new THREE.Group()
+      let lookAtY = 1.0
+      let camDistance = 8
 
       if (isSTL) {
         const stlLoader = new STLLoader()
         const geometry = stlLoader.parse(buffer)
+
+        // Validate geometry
+        const posAttr = geometry.attributes.position
+        if (!posAttr || posAttr.count === 0) {
+          throw new Error('Le fichier STL ne contient aucune géométrie (0 vertices)')
+        }
+        console.log('[TurntableGenerator] STL vertices:', posAttr.count)
+
         geometry.computeVertexNormals()
-        // Center geometry at origin BEFORE any transforms
         geometry.computeBoundingBox()
+
         const geoBox = geometry.boundingBox!
+        const geoSize = geoBox.getSize(new THREE.Vector3())
         const geoCenter = geoBox.getCenter(new THREE.Vector3())
-        geometry.translate(-geoCenter.x, -geoCenter.y, -geoCenter.z)
+
+        console.log('[TurntableGenerator] STL geo size:', geoSize.x.toFixed(2), geoSize.y.toFixed(2), geoSize.z.toFixed(2),
+          'center:', geoCenter.x.toFixed(2), geoCenter.y.toFixed(2), geoCenter.z.toFixed(2))
+
+        const maxDim = Math.max(geoSize.x, geoSize.y, geoSize.z)
+        if (maxDim === 0 || !isFinite(maxDim)) {
+          throw new Error(`Dimensions invalides (maxDim=${maxDim}, vertices=${posAttr.count})`)
+        }
+
+        const s = TARGET_SIZE / maxDim
 
         const material = new THREE.MeshStandardMaterial({
           color: 0xb8bcc4,
@@ -189,10 +208,28 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         const mesh = new THREE.Mesh(geometry, material)
         mesh.castShadow = true
         mesh.receiveShadow = true
-        pivot.add(mesh)
 
-        // STL Z-up → Y-up: rotate the pivot, not the mesh
-        pivot.rotation.x = -Math.PI / 2
+        // Center geometry at mesh origin via mesh position offset (don't mutate geometry)
+        mesh.position.set(-geoCenter.x, -geoCenter.y, -geoCenter.z)
+
+        pivot.add(mesh)
+        pivot.rotation.x = -Math.PI / 2   // STL Z-up → Three.js Y-up
+        pivot.scale.setScalar(s)
+
+        // Compute camera params analytically (no setFromObject needed)
+        // After Z→Y rotation: world height = geoSize.z * s, width = geoSize.x * s, depth = geoSize.y * s
+        const worldHeight = geoSize.z * s
+        const worldWidth = geoSize.x * s
+        const worldDepth = geoSize.y * s
+        pivot.position.y = worldHeight / 2   // place bottom on floor
+
+        lookAtY = worldHeight / 2
+        const fovRad = THREE.MathUtils.degToRad(30)
+        const fitDist = (Math.max(worldWidth, worldHeight, worldDepth) / 2) / Math.tan(fovRad / 2)
+        camDistance = Math.max(fitDist * 1.5, 6)
+
+        console.log('[TurntableGenerator] World dims:', worldWidth.toFixed(2), worldHeight.toFixed(2), worldDepth.toFixed(2),
+          'camDist:', camDistance.toFixed(2), 'lookAtY:', lookAtY.toFixed(2))
       } else {
         const gltfLoader = new GLTFLoader()
         const gltf = await new Promise<any>((resolve, reject) => {
@@ -206,53 +243,32 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
           }
         })
         pivot.add(model)
+
+        scene.add(pivot)
+        renderer.render(scene, camera) // force matrix update
+
+        const box = new THREE.Box3().setFromObject(pivot)
+        const size = box.getSize(new THREE.Vector3())
+        const center = box.getCenter(new THREE.Vector3())
+        const maxDim = Math.max(size.x, size.y, size.z)
+
+        if (maxDim === 0 || !isFinite(maxDim)) throw new Error('Modèle GLB vide')
+
+        const s = TARGET_SIZE / maxDim
+        pivot.scale.setScalar(s)
+        pivot.position.set(-center.x * s, -box.min.y * s, -center.z * s)
+
+        renderer.render(scene, camera)
+        const box2 = new THREE.Box3().setFromObject(pivot)
+        const c2 = box2.getCenter(new THREE.Vector3())
+        lookAtY = c2.y
+
+        const fovRad = THREE.MathUtils.degToRad(30)
+        const fitDist = (Math.max(size.x, size.y) * s / 2) / Math.tan(fovRad / 2)
+        camDistance = Math.max(fitDist * 1.5, 6)
       }
 
-      scene.add(pivot)
-
-      // Force world matrix update before measuring
-      pivot.updateMatrixWorld(true)
-
-      // Compute world-space bounding box
-      const box = new THREE.Box3().setFromObject(pivot)
-      const size = box.getSize(new THREE.Vector3())
-      const center = box.getCenter(new THREE.Vector3())
-      const maxDim = Math.max(size.x, size.y, size.z)
-
-      console.log('[TurntableGenerator] Raw bounds:', { size: { x: size.x, y: size.y, z: size.z }, center: { x: center.x, y: center.y, z: center.z }, maxDim })
-
-      if (maxDim === 0 || !isFinite(maxDim)) throw new Error('Le modèle a des dimensions invalides')
-
-      // Scale to fit within target size
-      const TARGET_SIZE = 3.5
-      const s = TARGET_SIZE / maxDim
-      pivot.scale.setScalar(s)
-
-      // Recompute after scale
-      pivot.updateMatrixWorld(true)
-      const box2 = new THREE.Box3().setFromObject(pivot)
-      const center2 = box2.getCenter(new THREE.Vector3())
-
-      // Center horizontally, place bottom on floor (y=0)
-      pivot.position.set(
-        pivot.position.x - center2.x,
-        pivot.position.y - box2.min.y,
-        pivot.position.z - center2.z
-      )
-
-      // Final measurements for camera
-      pivot.updateMatrixWorld(true)
-      const finalBox = new THREE.Box3().setFromObject(pivot)
-      const finalCenter = finalBox.getCenter(new THREE.Vector3())
-      const finalSize = finalBox.getSize(new THREE.Vector3())
-      const lookAtY = finalCenter.y
-
-      // Compute optimal camera distance so model fills ~60% of frame
-      const fovRad = THREE.MathUtils.degToRad(30) // camera FOV
-      const fitDistance = (Math.max(finalSize.x, finalSize.y) / 2) / Math.tan(fovRad / 2)
-      const camDistance = Math.max(fitDistance * 1.6, 6)
-
-      console.log('[TurntableGenerator] Final:', { finalSize: { x: finalSize.x.toFixed(2), y: finalSize.y.toFixed(2), z: finalSize.z.toFixed(2) }, lookAtY: lookAtY.toFixed(2), camDistance: camDistance.toFixed(2) })
+      if (!pivot.parent) scene.add(pivot)
 
       // Render helper — camera targets model center, distance adapts to model
       const renderFrame = (hAngle: number, elevation: number, dist: number) => {
