@@ -389,7 +389,10 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
         formData.append('image', frame.blob, `${slug}_e${frame.v}_h${String(frame.h).padStart(3, '0')}.webp`)
 
         const res = await fetch('/api/aerotools/turntable', { method: 'POST', body: formData })
-        if (!res.ok) throw new Error(`Upload failed for frame ${i}`)
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}))
+          throw new Error(`Upload frame ${i} failed: ${errData.error || res.statusText} ${errData.detail || ''}`)
+        }
 
         setProgress(50 + Math.round(((i + 1) / frames.length) * 45))
         setProgressLabel(`Upload ${i + 1}/${frames.length}`)

@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ ok: true, filename, url })
-  } catch (err) {
-    console.error('Turntable upload error:', err)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  } catch (err: any) {
+    console.error('Turntable upload error:', err?.message || err, err?.stack?.slice(0, 500))
+    return NextResponse.json({ error: err?.message || 'Server error', detail: String(err) }, { status: 500 })
   }
 }
 
@@ -91,8 +91,8 @@ export async function PUT(req: NextRequest) {
     }
 
     return NextResponse.json({ ok: true, baseUrl })
-  } catch (err) {
-    console.error('Metadata save error:', err)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  } catch (err: any) {
+    console.error('Metadata save error:', err?.message || err)
+    return NextResponse.json({ error: err?.message || 'Server error', detail: String(err) }, { status: 500 })
   }
 }
