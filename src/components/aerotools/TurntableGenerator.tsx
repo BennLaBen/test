@@ -174,30 +174,73 @@ export function TurntableGenerator({ slug, onComplete }: TurntableGeneratorProps
       let camDistance = 8
 
       if (isSTL) {
-        const stlLoader = new STLLoader()
+        // Detect binary vs ASCII: ASCII files start with "solid"
+        const header = new Uint8Array(buffer, 0, Math.min(80, buffer.byteLength))
+        const headerStr = String.fromCharCode.apply(null, Array.from(header.slice(0, 5)))
+        const isAscii = headerStr === 'solid'
 
-        // Try parsing — STLLoader auto-detects binary vs ASCII,
-        // but some files confuse the detector. Try ArrayBuffer first, then text fallback.
-        let geometry = stlLoader.parse(buffer)
-        let posAttr = geometry.attributes.position
+        let geometry: any
 
-        if (!posAttr || posAttr.count === 0) {
-          console.warn('[TurntableGenerator] Binary parse returned 0 vertices, trying ASCII text fallback...')
-          const text = new TextDecoder('utf-8').decode(new Uint8Array(buffer))
-          geometry = stlLoader.parse(text)
-          posAttr = geometry.attributes.position
+        if (!isAscii) {
+          // Binary STL — use Three.js loader directly
+          console.log('[TurntableGenerator] Detected binary STL')
+          const stlLoader = new STLLoader()
+          geometry = stlLoader.parse(buffer)
+        } else {
+          // ASCII STL — custom chunked parser (Three.js regex crashes on large files)
+          console.log('[TurntableGenerator] Detected ASCII STL, using chunked parser...')
+          setProgressLabel('Parsing ASCII STL (peut prendre un moment pour les gros fichiers)...')
+
+          const positions: number[] = []
+          const normals: number[] = []
+          let nx = 0, ny = 0, nz = 0
+
+          const bytes = new Uint8Array(buffer)
+          const CHUNK = 64 * 1024 * 1024  // 64 MB chunks
+          const decoder = new TextDecoder('utf-8')
+          let leftover = ''
+
+          for (let offset = 0; offset < bytes.length; offset += CHUNK) {
+            const end = Math.min(offset + CHUNK, bytes.length)
+            const chunk = decoder.decode(bytes.subarray(offset, end), { stream: end < bytes.length })
+            const text = leftover + chunk
+
+            const lastNL = text.lastIndexOf('\n')
+            const processable = lastNL >= 0 ? text.substring(0, lastNL) : text
+            leftover = lastNL >= 0 ? text.substring(lastNL + 1) : ''
+
+            const lines = processable.split('\n')
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i].trim()
+              if (line.length < 6) continue
+
+              if (line.charCodeAt(0) === 118 /* 'v' */ && line.startsWith('vertex')) {
+                const parts = line.substring(7).trim().split(/\s+/)
+                positions.push(+(parts[0]) || 0, +(parts[1]) || 0, +(parts[2]) || 0)
+                normals.push(nx, ny, nz)
+              } else if (line.charCodeAt(0) === 102 /* 'f' */ && line.startsWith('facet normal')) {
+                const parts = line.substring(13).trim().split(/\s+/)
+                nx = +(parts[0]) || 0
+                ny = +(parts[1]) || 0
+                nz = +(parts[2]) || 0
+              }
+            }
+
+            // Progress feedback for large files
+            const pct = Math.round((end / bytes.length) * 100)
+            setProgressLabel(`Parsing STL... ${pct}% (${(positions.length / 3)|0} triangles)`)
+          }
+
+          console.log('[TurntableGenerator] ASCII parse done:', (positions.length / 3), 'vertices,', (positions.length / 9)|0, 'triangles')
+
+          geometry = new THREE.BufferGeometry()
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(positions), 3))
+          geometry.setAttribute('normal', new THREE.Float32BufferAttribute(new Float32Array(normals), 3))
         }
 
+        const posAttr = geometry.attributes.position
         if (!posAttr || posAttr.count === 0) {
-          // Last resort: try reading as ASCII with latin1 encoding
-          console.warn('[TurntableGenerator] UTF-8 text parse also failed, trying latin1...')
-          const textLatin = new TextDecoder('iso-8859-1').decode(new Uint8Array(buffer))
-          geometry = stlLoader.parse(textLatin)
-          posAttr = geometry.attributes.position
-        }
-
-        if (!posAttr || posAttr.count === 0) {
-          throw new Error(`Le fichier STL ne contient aucune géométrie (0 vertices, taille fichier: ${buffer.byteLength} octets). Vérifiez que le fichier est un STL valide.`)
+          throw new Error(`Le fichier STL ne contient aucune géométrie (0 vertices, taille: ${(buffer.byteLength / 1024 / 1024).toFixed(1)} Mo). Vérifiez que c'est un STL valide.`)
         }
         console.log('[TurntableGenerator] STL vertices:', posAttr.count)
 
