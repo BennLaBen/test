@@ -63,6 +63,19 @@ Thumbs.db
 
 /generated/prisma
 
+# Raw photo archives (3GB+) — do NOT push to GitHub
+public/images/*.JPG
+public/images/*.jpg
+public/images/*.jpeg
+public/images/*.docx
+public/images/*.zip
+public/images/00-*/
+public/images/20*/
+public/images/ESSAI*/
+public/images/PROTO*/
+public/images/H175*/
+public/images/NH90*
+
 # 3D pipeline - large binary files
 models/*.glb
 models/*.stl
