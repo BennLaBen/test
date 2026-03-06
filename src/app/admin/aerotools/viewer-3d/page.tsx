@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import {
   Box, ArrowLeft, Check, Loader2, Search, Upload,
-  RotateCw, ChevronDown, Image as ImageIcon, Link2, Eye, Zap
+  RotateCw, ChevronDown, Image as ImageIcon, Link2, Eye, Zap, Trash2
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -41,6 +41,7 @@ export default function AdminViewer3DPage() {
   const [turntableBaseUrl, setTurntableBaseUrl] = useState('')
   const [previewSlug, setPreviewSlug] = useState<string | null>(null)
   const [quickSlug, setQuickSlug] = useState('')
+  const [removing, setRemoving] = useState<string | null>(null)
 
   // Fetch all products
   useEffect(() => {
@@ -109,6 +110,32 @@ export default function AdminViewer3DPage() {
       setLinking(false)
     }
   }, [selectedProduct, turntableBaseUrl])
+
+  const handleRemoveTurntable = useCallback(async (product: Product) => {
+    if (!confirm(`Supprimer la vue 360° de « ${product.name} » ?\n\nLes images resteront sur le serveur mais ne seront plus affichées sur la boutique.`)) return
+    setRemoving(product.id)
+    try {
+      const res = await fetch(`/api/v2/products/${product.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ turntable: null }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setProducts(prev => prev.map(p =>
+          p.id === product.id ? { ...p, turntable: null } : p
+        ))
+        alert(`Vue 360° supprimée pour « ${product.name} »`)
+      } else {
+        alert('Erreur: ' + (data.error || 'Impossible de supprimer'))
+      }
+    } catch (err) {
+      console.error('Remove turntable error:', err)
+      alert('Erreur réseau')
+    } finally {
+      setRemoving(null)
+    }
+  }, [])
 
   const resetAll = useCallback(() => {
     setSelectedProduct(null)
@@ -430,8 +457,19 @@ export default function AdminViewer3DPage() {
                     <p className="text-sm font-medium text-gray-900 dark:text-white">{p.name}</p>
                     <p className="text-xs text-gray-500">{p.sku} &bull; {p.turntable?.hFrames || 36} angles &times; {p.turntable?.vLevels || 3} élévations</p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <Link href={`/boutique/${p.slug}`} target="_blank" className="text-xs text-blue-500 hover:underline">Voir</Link>
+                    <button
+                      onClick={() => handleRemoveTurntable(p)}
+                      disabled={removing === p.id}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg text-xs font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors disabled:opacity-50"
+                    >
+                      {removing === p.id
+                        ? <Loader2 className="h-3 w-3 animate-spin" />
+                        : <Trash2 className="h-3 w-3" />
+                      }
+                      Supprimer
+                    </button>
                     <span className="w-2 h-2 rounded-full bg-green-400" />
                   </div>
                 </div>

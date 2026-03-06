@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getAdminFromRequest } from '@/lib/auth/admin-guard'
 
@@ -86,9 +87,18 @@ export async function PATCH(
     const body = await request.json()
     const { id } = params
 
+    // Handle nullable JSON fields — Prisma requires DbNull instead of plain null
+    const data = { ...body }
+    const jsonFields = ['turntable', 'specs', 'tolerances', 'materialsData', 'faq', 'priceTiers']
+    for (const field of jsonFields) {
+      if (field in data && data[field] === null) {
+        data[field] = Prisma.DbNull
+      }
+    }
+
     const product = await prisma.marketProduct.update({
       where: { id },
-      data: body,
+      data,
       include: { category: true, documents: true },
     })
 
