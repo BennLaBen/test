@@ -17,7 +17,7 @@
     "i18n:types": "npx tsx scripts/generate-i18n-types.ts",
     "i18n:check": "npm run i18n:strict && npm run lint:i18n",
     "i18n:report": "npm run i18n:strict:fix",
-    "prebuild": "npm run i18n:strict",
+    "prebuild": "npm run i18n:strict && npm run validate:images",
     "type-check": "tsc --noEmit",
     "postbuild": "next-sitemap",
     "translate": "node scripts/translate.js",
@@ -27,7 +27,8 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "npx tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "validate:images": "node --experimental-vm-modules scripts/validate-product-images.mjs"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
