@@ -3,10 +3,11 @@ import { list } from '@vercel/blob'
 
 export async function GET(req: NextRequest) {
   const slug = req.nextUrl.searchParams.get('slug')
-  const mode = req.nextUrl.searchParams.get('mode') // 'folders' = list unique slugs only
+  const mode = req.nextUrl.searchParams.get('mode') // 'folders' = list unique slugs, 'all' = all prefixes
+  const folder = req.nextUrl.searchParams.get('folder') // override prefix (e.g. 'products/')
   
   try {
-    const prefix = slug ? `turntable/${slug}/` : 'turntable/'
+    const prefix = folder ? folder : (slug ? `turntable/${slug}/` : 'turntable/')
     
     if (mode === 'folders') {
       // List all blobs and extract unique folder names (product slugs)
