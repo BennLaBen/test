@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle, Star, Target, Wrench, Globe, Users, Clock } from 'lucide-react'
+import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 
 // ─── HANGAR DOOR COMPONENT ───
@@ -190,41 +190,41 @@ function TrustBar() {
   )
 }
 
-// ─── MARKETING STATS ───
-const STATS = [
-  { value: '30+', label: 'Années d\'expertise', icon: Clock },
-  { value: '50+', label: 'Pays livrés', icon: Globe },
-  { value: '500+', label: 'Clients satisfaits', icon: Users },
-  { value: '100%', label: 'Made in France', icon: Star },
-]
-
-// ─── MARKETING FEATURES ───
-const FEATURES = [
+// ─── ANIMATED TEXT SECTIONS DATA ───
+const STORY_SECTIONS = [
   {
-    icon: Target,
-    title: 'Précision Aéronautique',
-    description: 'Chaque équipement est usiné avec une tolérance de ±0.1mm, garantissant une parfaite compatibilité avec votre flotte.',
+    text: 'LLEDO Aerotools est la référence mondiale en outillage de manutention pour hélicoptères.',
+    highlight: 'référence mondiale',
   },
   {
-    icon: Shield,
-    title: 'Certifications Internationales',
-    description: 'EN 9100, ISO 9001, Directive Machines 2006/42/CE — Nos produits répondent aux normes les plus strictes.',
+    text: 'Chaque pièce est conçue, usinée et assemblée en France avec une exigence de qualité absolue.',
+    highlight: 'qualité absolue',
   },
   {
-    icon: Wrench,
-    title: 'Bureau d\'Études Intégré',
-    description: 'Notre équipe d\'ingénieurs conçoit des solutions sur-mesure adaptées à vos besoins opérationnels spécifiques.',
+    text: 'Nos équipements sont certifiés aux plus hauts standards internationaux : EN 9100, ISO 9001, Directive Machines 2006/42/CE.',
+    highlight: 'plus hauts standards internationaux',
   },
   {
-    icon: Zap,
-    title: 'Réactivité Garantie',
-    description: 'Délais de fabrication optimisés et support technique disponible 24/7 pour les urgences opérationnelles.',
+    text: 'Les forces armées et opérateurs civils de plus de 50 pays nous font confiance pour la sécurité de leurs flottes.',
+    highlight: 'plus de 50 pays',
+  },
+  {
+    text: 'Livraison mondiale, support technique dédié, délais optimisés — nous garantissons une réactivité sans faille.',
+    highlight: 'réactivité sans faille',
   },
 ]
 
 // ─── MAIN PAGE ───
 export default function BoutiquePage() {
   const router = useRouter()
+  const storyRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress: storyProgress } = useScroll({
+    target: storyRef,
+    offset: ['start end', 'end start'],
+  })
+
+  const lineHeight = useTransform(storyProgress, [0.1, 0.9], ['0%', '100%'])
 
   const handleCatalogueClick = () => {
     router.push('/boutique/catalogue')
@@ -244,152 +244,161 @@ export default function BoutiquePage() {
         {/* ═══ TRUST BAR ═══ */}
         <TrustBar />
 
-        {/* ═══ MARKETING SECTION — WHY LLEDO ═══ */}
-        <section className="relative py-20 sm:py-32 overflow-hidden">
+        {/* ═══ STORY SECTION — TEXT-ONLY WITH SCROLL ANIMATIONS ═══ */}
+        <section ref={storyRef} className="relative py-24 sm:py-40 overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
-            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px]" />
-            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-cyan-600/5 rounded-full blur-[120px]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-600/[0.03] rounded-full blur-[200px]" />
+            <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-cyan-600/[0.03] rounded-full blur-[180px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            {/* Section header */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <motion.span
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-widest text-blue-400 mb-6"
+            {/* Animated vertical line */}
+            <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-gray-800/50 hidden lg:block">
+              <motion.div
+                className="w-full bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-500 origin-top"
+                style={{ height: lineHeight }}
+              />
+            </div>
+
+            <div className="max-w-4xl mx-auto space-y-24 sm:space-y-32">
+              {/* Opening statement */}
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="text-center"
               >
-                <Star className="h-3 w-3" />
-                Leader Français depuis 1994
-              </motion.span>
+                <motion.p
+                  initial={{ opacity: 0, letterSpacing: '0.3em' }}
+                  whileInView={{ opacity: 1, letterSpacing: '0.2em' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, delay: 0.2 }}
+                  className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-blue-400 mb-8"
+                >
+                  L'excellence n'est pas une option
+                </motion.p>
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95]">
+                  <motion.span
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="block text-white"
+                  >
+                    Le meilleur
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent"
+                  >
+                    outillage aéronautique
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                    className="block text-white"
+                  >
+                    au monde.
+                  </motion.span>
+                </h2>
+              </motion.div>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight mb-6">
-                <span className="text-white">L'excellence </span>
-                <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  aéronautique
-                </span>
-                <br />
-                <span className="text-white">à votre service</span>
-              </h2>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-              >
-                LLEDO Aerotools conçoit et fabrique en France des équipements de manutention hélicoptère 
-                reconnus par les plus grandes forces armées et opérateurs civils du monde entier.
-              </motion.p>
-            </motion.div>
-
-            {/* Stats grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-            >
-              {STATS.map((stat, i) => (
+              {/* Story text blocks — each reveals on scroll */}
+              {STORY_SECTIONS.map((section, i) => (
                 <motion.div
-                  key={stat.label}
+                  key={i}
+                  initial={{ opacity: 0, y: 80, filter: 'blur(8px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.1,
+                  }}
+                  className={`text-center ${i % 2 === 0 ? 'lg:text-left lg:pr-24' : 'lg:text-right lg:pl-24'}`}
+                >
+                  <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-300 leading-relaxed">
+                    {section.text.split(section.highlight).map((part, j, arr) => (
+                      <span key={j}>
+                        {part}
+                        {j < arr.length - 1 && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="font-black text-white"
+                            style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.4)' }}
+                          >
+                            {section.highlight}
+                          </motion.span>
+                        )}
+                      </span>
+                    ))}
+                  </p>
+
+                  {/* Subtle separator dot */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className={`mt-8 ${i % 2 === 0 ? 'lg:text-left' : 'lg:text-right'} text-center`}
+                  >
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+                  </motion.div>
+                </motion.div>
+              ))}
+
+              {/* ═══ FINAL CTA — VOIR CATALOGUE ═══ */}
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="text-center pt-8"
+              >
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="text-lg sm:text-xl text-gray-500 mb-10 font-light"
+                >
+                  Découvrez notre catalogue complet d'équipements certifiés.
+                </motion.p>
+
+                <motion.button
+                  onClick={handleCatalogueClick}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.1 }}
-                  className="relative group"
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group relative inline-flex items-center gap-4 px-14 py-7 sm:px-20 sm:py-8 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-cyan-600/5 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-0 group-hover:opacity-100" />
-                  <div className="relative bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/30 transition-colors">
-                    <stat.icon className="h-6 w-6 text-blue-400 mx-auto mb-3" />
-                    <p className="text-3xl sm:text-4xl font-black text-white mb-1">{stat.value}</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</p>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                    <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shine" />
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
 
-            {/* Features grid */}
-            <div className="grid md:grid-cols-2 gap-6 mb-20">
-              {FEATURES.map((feature, i) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
-                  className="group relative"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative flex gap-5 p-6 bg-gray-900/30 border border-gray-800/50 rounded-2xl hover:border-gray-700 transition-colors">
-                    <div className="flex-shrink-0 w-12 h-12 bg-blue-600/10 border border-blue-500/20 rounded-xl flex items-center justify-center">
-                      <feature.icon className="h-6 w-6 text-blue-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  <span className="relative text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
+                    Voir le Catalogue
+                  </span>
+                  <ArrowRight className="relative h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:translate-x-2 transition-transform duration-300" />
+                </motion.button>
+              </motion.div>
             </div>
-
-            {/* ═══ BIG CTA BUTTON ═══ */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-center"
-            >
-              <motion.button
-                onClick={handleCatalogueClick}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative inline-flex items-center gap-4 px-12 py-6 sm:px-16 sm:py-8 overflow-hidden"
-              >
-                {/* Button background with gradient animation */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Animated shine effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                  <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shine" />
-                </div>
-
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
-
-                {/* Button content */}
-                <span className="relative text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
-                  Accéder au Catalogue
-                </span>
-                <ArrowRight className="relative h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:translate-x-2 transition-transform duration-300" />
-              </motion.button>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7 }}
-                className="mt-6 text-sm text-gray-500"
-              >
-                <CheckCircle className="inline h-4 w-4 text-green-500 mr-2" />
-                Plus de 50 références disponibles — Devis en ligne instantané
-              </motion.p>
-            </motion.div>
           </div>
         </section>
 
