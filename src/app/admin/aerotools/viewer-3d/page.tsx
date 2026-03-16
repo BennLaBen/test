@@ -83,7 +83,12 @@ export default function AdminViewer3DPage() {
   const handleLinkToProduct = useCallback(async (baseUrlOverride?: string) => {
     if (!selectedProduct) return
     setLinking(true)
-    const finalBaseUrl = baseUrlOverride || turntableBaseUrl || `/images/aerotools/360/${selectedProduct.slug}`
+    const finalBaseUrl = baseUrlOverride || turntableBaseUrl
+    if (!finalBaseUrl) {
+      alert('Erreur: baseUrl manquant. Veuillez regénérer le turntable d\'abord.')
+      setLinking(false)
+      return
+    }
     try {
       const res = await fetch(`/api/v2/products/${selectedProduct.id}`, {
         method: 'PATCH',

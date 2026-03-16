@@ -992,6 +992,7 @@ function ProductForm({ product, onSave, onCancel }: {
                       hFrames: config.hFrames,
                       vLevels: config.vLevels,
                       format: config.format,
+                      baseUrl: config.baseUrl,
                     })
                   }}
                 />
