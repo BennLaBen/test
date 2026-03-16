@@ -1,0 +1,11 @@
+# Railway deployment config for LLEDO Industries + Aerotools
+# Repo: BennLaBen/test
+
+[build]
+buildCommand = "npm run i18n:strict && prisma db push --accept-data-loss && prisma generate && next build"
+
+[deploy]
+startCommand = "npx next start -p ${PORT:-3000}"
+healthcheckPath = "/"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

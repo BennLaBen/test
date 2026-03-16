@@ -1,204 +1,143 @@
-# 🚂 CONFIGURATION RAILWAY - ÉTAPE PAR ÉTAPE
+# 🚂 RAILWAY — Setup complet (LLEDO Industries + Aerotools)
 
-## 1️⃣ CRÉER LA BASE DE DONNÉES (2 min)
-
-### Actions à faire:
-1. Aller sur **https://railway.app**
-2. Se connecter / Créer un compte
-3. Cliquer sur **"New Project"**
-4. Sélectionner **"Provision PostgreSQL"**
-5. Attendre 30 secondes (création automatique)
+> **Repo GitHub:** `BennLaBen/test`
+> **Tout est dans un seul projet Railway** — app + base de données
 
 ---
 
-## 2️⃣ RÉCUPÉRER L'URL DE CONNEXION (1 min)
+## 🏗️ ÉTAPE 1 — Créer le projet Railway (5 min)
 
-### Dans Railway Dashboard:
-1. Cliquer sur votre **PostgreSQL** (icône violette)
-2. Aller dans l'onglet **"Connect"**
-3. Copier la **"Postgres Connection URL"**
-
-**Format de l'URL:**
-```
-postgresql://postgres:XXXXX@containers-us-west-123.railway.app:5432/railway
-```
-
-⚠️ **IMPORTANT:** Garde cette URL, tu en auras besoin pour Vercel !
+1. Aller sur **https://railway.app** → Se connecter
+2. **New Project** → **Deploy from GitHub repo** → sélectionner `BennLaBen/test`
+3. Railway va créer un service "test" automatiquement
+4. **Ajouter PostgreSQL** dans le même projet :
+   - Cliquer **"+ New"** dans le projet → **"Database"** → **"PostgreSQL"**
+   - Railway crée la DB et injecte automatiquement `DATABASE_URL`
 
 ---
 
-## 3️⃣ INITIALISER LA BASE DE DONNÉES (2 min)
+## 🔧 ÉTAPE 2 — Variables d'environnement
 
-### Depuis PowerShell (dans d:\MPEB):
-
-```powershell
-# Remplacer TON_URL_RAILWAY par l'URL copiée
-$env:DATABASE_URL="postgresql://postgres:XXXXX@containers-us-west-123.railway.app:5432/railway"
-
-# Créer les tables
-npx prisma db push
-
-# Ajouter les données de test (admin + exemples)
-npm run db:seed
-```
-
-### Vérifier que ça marche:
-```powershell
-# Ouvrir Prisma Studio pour voir les données
-npx prisma studio
-```
-
-Tu devrais voir:
-- ✅ Table `User` avec admin
-- ✅ Table `Post` avec articles
-- ✅ Table `Job` avec offres
-- ✅ Table `Company` avec entreprises
-
----
-
-## 4️⃣ CONFIGURER VERCEL (3 min)
-
-### Vercel devrait déjà être connecté à ton GitHub
-
-1. Aller sur **https://vercel.com/dashboard**
-2. Ton projet "test" devrait apparaître
-3. Cliquer dessus → **Settings** → **Environment Variables**
-
-### Ajouter ces variables:
+Dans le service **test** → onglet **Variables**, ajouter :
 
 ```env
-# Base de données (copier depuis Railway)
-DATABASE_URL=postgresql://postgres:XXXXX@containers-us-west-123.railway.app:5432/railway
+# ── Database (AUTO si PostgreSQL ajouté au projet) ──
+DATABASE_URL=${{Postgres.DATABASE_URL}}
 
-# NextAuth (IMPORTANT)
-NEXTAUTH_URL=https://test-xxx.vercel.app
-NEXTAUTH_SECRET=GENERER_UN_SECRET
+# ── Auth ──
+JWT_SECRET=changer-ce-secret-en-production-64-chars-minimum
+ENCRYPTION_KEY=changer-32-characters-encryption
 
-# Site
-NEXT_PUBLIC_SITE_URL=https://test-xxx.vercel.app
+# ── Site ──
+NEXT_PUBLIC_APP_URL=https://lledo-industries.com
+NODE_ENV=production
+
+# ── Email (SMTP) ──
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your-email@example.com
+SMTP_PASSWORD=your-email-password
+SMTP_FROM=noreply@lledo-industries.com
+
+# ── SendGrid (optionnel) ──
+SENDGRID_API_KEY=SG.xxxxxxxxxxxx
+
+# ── Vercel Blob (pour turntable 3D) ──
+BLOB_READ_WRITE_TOKEN=vercel_blob_xxxxx
+
+# ── Seed secret (pour initialiser la DB) ──
+SEED_SECRET=lledo-seed-2026
 ```
 
-### Générer NEXTAUTH_SECRET:
-```powershell
-[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
-```
+> ⚠️ Si tu as déjà un PostgreSQL Railway existant, utilise son URL directement au lieu de la référence `${{Postgres.DATABASE_URL}}`
 
 ---
 
-## 5️⃣ REDÉPLOYER VERCEL (1 min)
+## 🚀 ÉTAPE 3 — Deploy & Seed
 
-### Après avoir ajouté les variables:
+Railway va build automatiquement grâce au `railway.toml` :
+- `prisma db push` → crée les tables
+- `prisma generate` → génère le client
+- `next build` → build l'app
 
-1. Aller dans **Deployments**
-2. Cliquer sur le dernier déploiement
-3. Cliquer sur **"Redeploy"**
+### Après le premier deploy réussi, initialiser les données :
 
-Ou depuis PowerShell:
-```powershell
-vercel --prod
+Ouvrir dans le navigateur :
 ```
+https://TON-URL-RAILWAY/api/setup/seed-all?key=lledo-seed-2026
+```
+
+Cela va créer :
+- ✅ 1 admin user (`admin@lledo-industries.com` / `Admin123!`)
+- ✅ 4 entreprises (MPEB, MGP, EGI, FREM)
+- ✅ 2 offres d'emploi
+- ✅ 1 article de blog
+- ✅ 4 catégories marketplace
+- ✅ 23 produits Aerotools
 
 ---
 
 ## ✅ VÉRIFICATIONS
 
-### Tester le site:
-```
-https://test-xxx.vercel.app
-```
-
-### Tester la connexion admin:
-```
-URL: https://test-xxx.vercel.app/connexion
-Email: admin@lledo.com
-Password: Admin123!
-```
-
-### Vérifier l'admin:
-```
-https://test-xxx.vercel.app/admin
-```
+| Test | URL |
+|------|-----|
+| Site | `https://TON-URL/` |
+| Boutique | `https://TON-URL/boutique` |
+| Admin login | `https://TON-URL/connexion` → `admin@lledo-industries.com` / `Admin123!` |
+| API produits | `https://TON-URL/api/v2/products` |
 
 ---
 
-## 🚨 SI PROBLÈME
+## � CONTENU DU PROJET
 
-### "Database connection failed"
+### Base de données (30+ modèles Prisma) :
+- **Auth** : User, Session, Account, EmailConfirmation, LoginOTP, PasswordReset
+- **Admin** : Admin, AdminSession, SecurityLog, ActivationToken, EmailOTP
+- **CMS** : BlogPost, Review, Company, ContactRequest, Media, Job, Application
+- **Marketplace** : MarketProduct, MarketCategory, ProductDocument
+- **B2B** : Organization, OrganizationUser, OrgAddress, Quote, QuoteItem, Order, OrderItem
+- **Traçabilité** : SerialNumber, Notification
+- **Analytics** : PageView, RateLimitRecord
+
+### API (78 routes) :
+- `/api/v2/products` — Produits marketplace (CRUD + filtres)
+- `/api/v2/quotes` — Devis RFQ
+- `/api/v2/orders` — Commandes
+- `/api/v2/traceability` — Traçabilité par numéro de série
+- `/api/admin/*` — Admin CMS (blog, reviews, companies, media)
+- `/api/admin-auth/*` — Auth admin (login, 2FA, sessions)
+- `/api/auth/*` — Auth client (register, login OTP, reset password)
+- `/api/aerotools/*` — Turntable 3D, modèles STL
+- `/api/contact` — Formulaire de contact
+- `/api/analytics/*` — Tracking analytics
+
+### Pages front :
+- `/boutique` — Catalogue Aerotools
+- `/boutique/[slug]` — Fiche produit (3D viewer, 360°, photos)
+- `/rfq` — Demande de devis structurée
+- `/certifications` — Page certifications
+- `/traceability` — Recherche par n° de série
+- `/dashboard/buyer` — Espace acheteur
+- `/admin/*` — Dashboard admin complet
+
+---
+
+## 🚨 DÉPANNAGE
+
+### Build failed
+```
+Vérifier que DATABASE_URL est défini dans les variables Railway
+```
+
+### Database connection error
 ```powershell
-# Vérifier que DATABASE_URL est correct dans Vercel
-# Tester depuis local:
-$env:DATABASE_URL="ton_url"
+# Tester depuis local :
+$env:DATABASE_URL="postgresql://postgres:XXX@HOST:PORT/railway"
 npx prisma db push
+npx prisma studio
 ```
 
-### "NextAuth error"
+### Re-seed la base
 ```
-Vérifier que:
-- NEXTAUTH_URL = URL exacte Vercel (avec https://)
-- NEXTAUTH_SECRET est défini
-```
-
-### "Build failed"
-```powershell
-# Forcer rebuild
-vercel --prod --force
-```
-
----
-
-## 📊 RÉSUMÉ
-
-- [x] Code sur GitHub ✅
-- [x] Railway PostgreSQL créé (projet: **aerotools-marketplace**)
-- [x] DATABASE_URL récupérée et configurée dans `.env.local`
-- [x] Base de données initialisée (schema marketplace poussé)
-- [x] 24 produits + 4 catégories migrés de JSON vers PostgreSQL
-- [ ] Variables Vercel configurées avec Railway URL
-- [ ] Site redéployé
-- [ ] Tests OK
-
-**Temps total:** ~10 minutes
-
----
-
-## 🚀 PROJET RAILWAY MARKETPLACE
-
-- **Nom:** aerotools-marketplace
-- **ID:** 77815f03-db01-411b-b157-5c7d6b06f7c4
-- **URL:** https://railway.com/project/77815f03-db01-411b-b157-5c7d6b06f7c4
-- **DB Host:** interchange.proxy.rlwy.net:26967
-- **DB Name:** railway
-
-### Modèles marketplace ajoutés au schema Prisma:
-- `MarketProduct` — Produits en base (remplace le JSON)
-- `MarketCategory` — Catégories produits
-- `ProductDocument` — Fiches techniques, certificats PDF
-- `Organization` — Comptes entreprise B2B
-- `OrganizationUser` — Liaison user ↔ entreprise
-- `OrgAddress` — Adresses entreprise
-- `Quote` + `QuoteItem` — Devis / RFQ
-- `Order` + `OrderItem` — Commandes
-- `SerialNumber` — Traçabilité pièces
-- `Notification` — Notifications in-app
-
-### API v2 créées:
-- `GET/POST /api/v2/products` — Liste + filtres + pagination
-- `GET/PATCH/DELETE /api/v2/products/:id` — Produit individuel (slug/id/sku)
-- `GET /api/v2/products/categories` — Catégories avec compteurs
-- `GET/POST /api/v2/quotes` — Devis RFQ
-- `GET/PATCH /api/v2/quotes/:id` — Détail + changement statut
-- `GET/POST /api/v2/orders` — Commandes
-- `GET /api/v2/traceability?serial=XXX` — Traçabilité
-
-### Pages front créées:
-- `/rfq` — Formulaire de demande de devis structuré
-- `/certifications` — Page certifications avec PDFs
-- `/traceability` — Recherche par numéro de série
-- `/dashboard/buyer` — Espace acheteur (devis + commandes)
-- `/admin/quotes` — Dashboard admin gestion devis
-
-### Commande seed:
-```powershell
-$env:DATABASE_URL="postgresql://postgres:XXX@interchange.proxy.rlwy.net:26967/railway"
-npx tsx prisma/seed-marketplace.ts
+https://TON-URL/api/setup/seed-all?key=lledo-seed-2026
 ```
