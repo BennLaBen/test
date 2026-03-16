@@ -52,8 +52,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('[Analytics] Track error:', error)
-    return NextResponse.json({ success: false }, { status: 500 })
+    // Fail silently — analytics should never break the user experience
+    console.error('[Analytics] Track error:', (error as Error).message)
+    return NextResponse.json({ success: true, tracked: false })
   }
 }
 
