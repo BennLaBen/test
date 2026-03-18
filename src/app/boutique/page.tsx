@@ -56,11 +56,12 @@ function HangarDoors() {
           <div className="text-center">
             <motion.div className="relative w-64 h-24 mx-auto mb-8">
               <Image
-                src="/images/aerotools/lledo-aerotools-logo.svg?v=3"
+                src="/images/aerotools/lledo-aerotools-logo.svg"
                 alt="LLEDO Aero Distribution"
                 fill
                 className="object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                 priority
+                unoptimized
               />
             </motion.div>
 

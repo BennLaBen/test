@@ -13,10 +13,11 @@ export function ShopFooter() {
           <div className="col-span-1 md:col-span-2">
             <div className="relative h-14 w-64 mb-6">
                <Image 
-                 src="/images/aerotools/lledo-aerotools-logo.svg?v=3"
+                 src="/images/aerotools/lledo-aerotools-logo.svg"
                  alt="LLEDO Aero Distribution"
                  fill
                  className="object-contain object-left"
+                 unoptimized
                />
             </div>
             <p className="text-sm text-gray-500 mb-6 max-w-xs leading-relaxed">
