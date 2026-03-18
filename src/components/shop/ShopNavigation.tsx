@@ -61,10 +61,10 @@ export function ShopNavigation() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/boutique" className="flex items-center group flex-shrink-0">
-              <div className="relative h-10 w-44">
+              <div className="relative h-10 w-52">
                 <Image 
-                  src="/images/aerotools/lledo-aerotools-logo.svg"
-                  alt="LLEDO Aerotools"
+                  src="/images/aerotools/lledo-aerotools-logo.svg?v=2"
+                  alt="LLEDO Aero Distribution"
                   fill
                   className="object-contain group-hover:scale-[1.03] transition-transform"
                   priority
