@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" width="400" height="60">
+  <!-- LLEDO text -->
+  <text x="8" y="38" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="32" fill="#2E7AD1" letter-spacing="2">LLEDO</text>
+  
+  <!-- AERO DISTRIBUTION subtitle -->
+  <text x="8" y="54" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#60A5FA" letter-spacing="4">AERO DISTRIBUTION</text>
+  
+  <!-- Decorative line -->
+  <line x1="8" y1="42" x2="145" y2="42" stroke="#06B6D4" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Helicopter icon -->
+  <g transform="translate(280, 8)">
+    <!-- Rotor disc -->
+    <ellipse cx="50" cy="8" rx="45" ry="2.5" fill="#60A5FA" opacity="0.4"/>
+    <line x1="5" y1="8" x2="95" y2="8" stroke="#60A5FA" stroke-width="1.5" opacity="0.6"/>
+    
+    <!-- Rotor mast -->
+    <line x1="50" y1="8" x2="50" y2="18" stroke="#94A3B8" stroke-width="2"/>
+    
+    <!-- Main fuselage -->
+    <path d="M15,28 Q20,20 30,18 L50,16 Q60,15 70,17 L85,22 Q95,26 98,32 L100,36 Q102,40 98,42 L80,44 Q70,45 60,44 L40,42 Q30,41 22,42 L18,43 Q14,44 13,40 Z" fill="#2E7AD1" stroke="#94A3B8" stroke-width="1"/>
+    
+    <!-- Tail boom -->
+    <path d="M15,28 L2,30 Q0,31 0,34 L1,37 Q2,39 5,38 L15,35" fill="#2E7AD1" stroke="#94A3B8" stroke-width="0.8"/>
+    
+    <!-- Tail rotor -->
+    <circle cx="2" cy="34" r="3" fill="none" stroke="#60A5FA" stroke-width="1"/>
+    
+    <!-- Cockpit windows -->
+    <rect x="35" y="24" width="12" height="10" rx="2" fill="#60A5FA" opacity="0.5"/>
+    <rect x="52" y="23" width="12" height="11" rx="2" fill="#60A5FA" opacity="0.5"/>
+    
+    <!-- Landing skids -->
+    <path d="M25,42 Q27,46 30,47 L80,47 Q83,46 85,42" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <line x1="32" y1="40" x2="30" y2="47" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="78" y1="40" x2="80" y2="47" stroke="#94A3B8" stroke-width="1.5"/>
+  </g>
+</svg>
