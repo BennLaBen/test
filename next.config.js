@@ -26,6 +26,12 @@ const nextConfig = {
     
     return config
   },
+  async redirects() {
+    return [
+      { source: '/les-moyens', destination: '/', permanent: true },
+      { source: '/egi', destination: '/societes/egi', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
