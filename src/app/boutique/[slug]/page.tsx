@@ -414,11 +414,19 @@ function ProductGallery({ product }: { product: any }) {
    ═══════════════════════════════════════════ */
 export default function ProductDetailPage() {
   const params = useParams()
-  const { products } = useProducts()
+  const { products, loaded } = useProducts()
   const { addItem } = useQuote()
   const [added, setAdded] = useState(false)
 
   const product = getProductBySlug(params.slug as string, products)
+
+  if (!loaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
+        <p className="text-gray-500">Chargement...</p>
+      </div>
+    )
+  }
 
   if (!product) {
     return (

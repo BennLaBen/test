@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import type { ShopProduct } from './types'
-import staticProducts from '@/data/shop/products.json'
 
 // Map DB category slugs to UI category ids
 const CATEGORY_SLUG_TO_ID: Record<string, string> = {
@@ -57,7 +56,7 @@ function toShopProduct(p: any): ShopProduct {
  * Falls back to static products.json if API fails.
  */
 export function useProducts() {
-  const [products, setProducts] = useState<ShopProduct[]>(staticProducts as ShopProduct[])
+  const [products, setProducts] = useState<ShopProduct[]>([])
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
@@ -66,15 +65,15 @@ export function useProducts() {
     fetch('/api/v2/products?limit=100', { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
-        if (!cancelled && data.success && Array.isArray(data.data) && data.data.length > 0) {
+        if (!cancelled && data.success && Array.isArray(data.data)) {
           setProducts(data.data.map(toShopProduct))
           console.log(`[boutique] ✅ ${data.data.length} produits chargés depuis Railway PostgreSQL`)
         } else {
-          console.warn('[boutique] ⚠️ API v2 pas de données, fallback statique')
+          console.warn('[boutique] ⚠️ API v2 pas de données')
         }
       })
       .catch((err) => {
-        console.warn('[boutique] ❌ API v2 erreur, fallback statique:', err)
+        console.error('[boutique] ❌ API v2 erreur:', err)
       })
       .finally(() => {
         if (!cancelled) setLoaded(true)
