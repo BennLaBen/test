@@ -135,6 +135,7 @@ export function useProductAdmin() {
   const [products, setProducts] = useState<ShopProduct[]>([])
   const [categories, setCategories] = useState<{ id: string; slug: string; label: string }[]>([])
   const [loaded, setLoaded] = useState(false)
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null) // null = checking, true/false = result
 
   // Load products from Railway PostgreSQL via API v2
   useEffect(() => {
@@ -142,6 +143,13 @@ export function useProductAdmin() {
 
     async function load() {
       try {
+        // Check admin session first
+        const sessionRes = await fetch('/api/v2/auth/session', { cache: 'no-store' })
+        const sessionData = await sessionRes.json()
+        const hasAdminSession = sessionData.authenticated && sessionData.user?.role === 'ADMIN'
+
+        if (!cancelled) setIsAdmin(hasAdminSession)
+
         const [prodRes, catRes] = await Promise.all([
           fetch('/api/v2/products?limit=100&admin=true', { cache: 'no-store' }),
           fetch('/api/v2/products/categories', { cache: 'no-store' }),
@@ -163,7 +171,10 @@ export function useProductAdmin() {
         }
       } catch (err) {
         console.error('[admin] ❌ Erreur chargement:', err)
-        if (!cancelled) setLoaded(true)
+        if (!cancelled) {
+          setIsAdmin(false)
+          setLoaded(true)
+        }
       }
     }
 
@@ -178,7 +189,7 @@ export function useProductAdmin() {
     return cat?.id || slug
   }, [])
 
-  const addProduct = useCallback(async (product: ShopProduct) => {
+  const addProduct = useCallback(async (product: ShopProduct): Promise<{ success: boolean; error?: string }> => {
     const sku = (product as any)._sku || generateSku(product.category)
     const body = {
       name: product.name,
@@ -224,19 +235,18 @@ export function useProductAdmin() {
         const newProd = apiToShopProduct(data.data)
         setProducts(prev => [...prev, newProd])
         console.log(`[admin] ✅ Produit créé en DB: ${newProd.name}`)
-        return newProd
+        return { success: true }
       } else {
         console.error('[admin] ❌ Erreur création:', data.error)
-        alert(`Erreur: ${data.error}`)
+        return { success: false, error: data.error || 'Erreur inconnue' }
       }
     } catch (err) {
       console.error('[admin] ❌ Erreur réseau:', err)
-      alert('Erreur réseau lors de la création')
+      return { success: false, error: 'Erreur réseau — impossible de contacter le serveur' }
     }
-    return product
   }, [getCategoryId])
 
-  const updateProduct = useCallback(async (id: string, updates: Partial<ShopProduct>) => {
+  const updateProduct = useCallback(async (id: string, updates: Partial<ShopProduct>): Promise<{ success: boolean; error?: string }> => {
     const dbId = (updates as any)._dbId || id
     const body: any = {}
 
@@ -280,12 +290,14 @@ export function useProductAdmin() {
         const updated = apiToShopProduct(data.data)
         setProducts(prev => prev.map(p => p.id === id ? updated : p))
         console.log(`[admin] ✅ Produit mis à jour: ${updated.name}`)
+        return { success: true }
       } else {
         console.error('[admin] ❌ Erreur mise à jour:', data.error)
-        alert(`Erreur: ${data.error}`)
+        return { success: false, error: data.error || 'Erreur inconnue' }
       }
     } catch (err) {
       console.error('[admin] ❌ Erreur réseau:', err)
+      return { success: false, error: 'Erreur réseau — impossible de contacter le serveur' }
     }
   }, [getCategoryId])
 
@@ -354,7 +366,7 @@ export function useProductAdmin() {
   }, [])
 
   return {
-    products, categories, loaded,
+    products, categories, loaded, isAdmin,
     addProduct, updateProduct, deleteProduct, duplicateProduct, reorderProduct,
     exportJSON, importJSON, resetToDefaults,
   }

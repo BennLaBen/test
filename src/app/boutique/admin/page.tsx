@@ -11,8 +11,6 @@ import type { ShopProduct } from '@/lib/shop/types'
 import { ProductCard } from '@/components/shop/ProductCard'
 import Image from 'next/image'
 
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_AEROTOOL_ADMIN_PWD || 'aerotool2026'
-
 // Fallback categories if DB fetch fails
 const FALLBACK_CATEGORIES = [
   { id: 'barres-remorquage', slug: 'barres-remorquage', label: 'Barres de remorquage' },
@@ -35,57 +33,6 @@ const PRICE_RANGES = [
   { id: 'high', label: '€€€' },
 ]
 
-/* ═══════════════════════════════════════
-   AUTH GATE
-   ═══════════════════════════════════════ */
-function AuthGate({ onAuth }: { onAuth: () => void }) {
-  const [pwd, setPwd] = useState('')
-  const [error, setError] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (pwd === ADMIN_PASSWORD) {
-      sessionStorage.setItem('aerotool-admin', '1')
-      onAuth()
-    } else {
-      setError(true)
-      setTimeout(() => setError(false), 2000)
-    }
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="w-full max-w-sm bg-gray-900 border border-gray-800 rounded-2xl p-8"
-      >
-        <div className="flex items-center justify-center mb-6">
-          <div className="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center">
-            <Lock className="h-7 w-7 text-blue-400" />
-          </div>
-        </div>
-        <h1 className="text-xl font-black uppercase text-center text-white mb-1">Admin Catalogue</h1>
-        <p className="text-xs text-gray-500 text-center mb-6">AEROTOOL by LLEDO — Accès restreint</p>
-        <input
-          type="password"
-          value={pwd}
-          onChange={e => setPwd(e.target.value)}
-          placeholder="Mot de passe"
-          autoFocus
-          className={`w-full px-4 py-3 bg-gray-800 border rounded-xl text-sm text-white placeholder-gray-600 outline-none transition-colors mb-4 ${
-            error ? 'border-red-500' : 'border-gray-700 focus:border-blue-500'
-          }`}
-        />
-        {error && <p className="text-xs text-red-400 mb-3 text-center">Mot de passe incorrect</p>}
-        <button type="submit" className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-blue-500 transition-colors">
-          Accéder
-        </button>
-      </motion.form>
-    </div>
-  )
-}
 
 /* ═══════════════════════════════════════
    KEY-VALUE EDITOR (specs, tolerances, materials)
@@ -513,17 +460,11 @@ function ProductForm({ product, onSave, onCancel, categories }: {
    MAIN ADMIN PAGE
    ═══════════════════════════════════════ */
 export default function AdminCataloguePage() {
-  const [authed, setAuthed] = useState(() => {
-    if (typeof window !== 'undefined') return sessionStorage.getItem('aerotool-admin') === '1'
-    return false
-  })
-
-  if (!authed) return <AuthGate onAuth={() => setAuthed(true)} />
   return <AdminDashboard />
 }
 
 function AdminDashboard() {
-  const { products, categories, loaded, addProduct, updateProduct, deleteProduct, duplicateProduct, reorderProduct, exportJSON, importJSON, resetToDefaults } = useProductAdmin()
+  const { products, categories, loaded, isAdmin, addProduct, updateProduct, deleteProduct, duplicateProduct, reorderProduct, exportJSON, importJSON, resetToDefaults } = useProductAdmin()
   const ADMIN_CATS = categories.length > 0 ? categories : FALLBACK_CATEGORIES
   const [search, setSearch] = useState('')
   const [catFilter, setCatFilter] = useState('all')
@@ -548,13 +489,21 @@ function AdminDashboard() {
     })
   }, [products, search, catFilter])
 
-  const handleSave = (p: ShopProduct) => {
+  const handleSave = async (p: ShopProduct) => {
     if (editing?.id && products.some(x => x.id === editing.id)) {
-      updateProduct(editing.id, p)
-      showToast(`"${p.name}" mis à jour`)
+      const result = await updateProduct(editing.id, p)
+      if (result.success) {
+        showToast(`"${p.name}" mis à jour`)
+      } else {
+        showToast(`Erreur : ${result.error}`)
+      }
     } else {
-      addProduct(p)
-      showToast(`"${p.name}" ajouté au catalogue`)
+      const result = await addProduct(p)
+      if (result.success) {
+        showToast(`"${p.name}" ajouté au catalogue`)
+      } else {
+        showToast(`Erreur : ${result.error}`)
+      }
     }
     setEditing(null)
   }
@@ -573,6 +522,25 @@ function AdminDashboard() {
 
   if (!loaded) {
     return <div className="min-h-screen bg-gray-950 flex items-center justify-center text-gray-500">Chargement...</div>
+  }
+
+  if (isAdmin === false) {
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+        <div className="w-full max-w-sm bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-14 h-14 bg-red-600/20 rounded-xl flex items-center justify-center">
+              <Lock className="h-7 w-7 text-red-400" />
+            </div>
+          </div>
+          <h1 className="text-xl font-black uppercase text-white mb-2">Accès refusé</h1>
+          <p className="text-sm text-gray-400 mb-6">Vous devez être connecté en tant qu&apos;administrateur LLEDO pour accéder à cette page.</p>
+          <a href="/admin/login" className="inline-block w-full py-3 bg-blue-600 text-white rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-blue-500 transition-colors">
+            Se connecter
+          </a>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -724,7 +692,16 @@ function AdminDashboard() {
                 <button onClick={() => setConfirmDelete(null)} className="flex-1 py-2.5 border border-gray-700 text-gray-300 rounded-xl text-xs font-bold uppercase hover:bg-gray-800 transition-colors">
                   Annuler
                 </button>
-                <button onClick={() => { deleteProduct(confirmDelete); setConfirmDelete(null); showToast('Produit supprimé') }}
+                <button onClick={async () => {
+                    const id = confirmDelete
+                    setConfirmDelete(null)
+                    const result = await deleteProduct(id!)
+                    if (result.success) {
+                      showToast('Produit supprimé avec succès')
+                    } else {
+                      showToast(`Erreur : ${result.error}`)
+                    }
+                  }}
                   className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-xs font-bold uppercase hover:bg-red-500 transition-colors">
                   Supprimer
                 </button>

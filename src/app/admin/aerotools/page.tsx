@@ -1084,13 +1084,21 @@ export default function AdminAerotoolsPage() {
     })
   }, [products, search, catFilter])
 
-  const handleSave = (p: ShopProduct) => {
+  const handleSave = async (p: ShopProduct) => {
     if (editing?.id && products.some(x => x.id === editing.id)) {
-      updateProduct(editing.id, p)
-      showToast(`"${p.name}" mis à jour`)
+      const result = await updateProduct(editing.id, p)
+      if (result.success) {
+        showToast(`"${p.name}" mis à jour`)
+      } else {
+        showToast(`Erreur : ${result.error}`)
+      }
     } else {
-      addProduct(p)
-      showToast(`"${p.name}" ajouté au catalogue`)
+      const result = await addProduct(p)
+      if (result.success) {
+        showToast(`"${p.name}" ajouté au catalogue`)
+      } else {
+        showToast(`Erreur : ${result.error}`)
+      }
     }
     setEditing(null)
   }
