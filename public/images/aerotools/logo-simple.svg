@@ -1,65 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 68" width="400" height="68">
-  <defs>
-    <!-- Metallic Blue Gradient -->
-    <linearGradient id="metal-blue" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#4B91F7"/>
-      <stop offset="40%" stop-color="#1A56B3"/>
-      <stop offset="50%" stop-color="#0F3981"/>
-      <stop offset="60%" stop-color="#1A56B3"/>
-      <stop offset="100%" stop-color="#4B91F7"/>
-    </linearGradient>
-    
-    <!-- Metallic Red Gradient -->
-    <linearGradient id="metal-red" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FF4D4D"/>
-      <stop offset="40%" stop-color="#D11A1A"/>
-      <stop offset="50%" stop-color="#8B0000"/>
-      <stop offset="60%" stop-color="#D11A1A"/>
-      <stop offset="100%" stop-color="#FF4D4D"/>
-    </linearGradient>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 150" width="420" height="150">
+   <defs>
+     <linearGradient id="metal-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+       <stop offset="0%" stop-color="#6CC0FF"/>
+       <stop offset="20%" stop-color="#2D86F5"/>
+       <stop offset="55%" stop-color="#134AAB"/>
+       <stop offset="100%" stop-color="#0A2D6F"/>
+     </linearGradient>
+     <linearGradient id="metal-red" x1="0%" y1="0%" x2="0%" y2="100%">
+       <stop offset="0%" stop-color="#FF7272"/>
+       <stop offset="18%" stop-color="#FF3B3B"/>
+       <stop offset="55%" stop-color="#C91515"/>
+       <stop offset="100%" stop-color="#740909"/>
+     </linearGradient>
+     <linearGradient id="silver-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+       <stop offset="0%" stop-color="#FFFFFF"/>
+       <stop offset="22%" stop-color="#DCE3EC"/>
+       <stop offset="50%" stop-color="#8B98AA"/>
+       <stop offset="74%" stop-color="#F9FBFD"/>
+       <stop offset="100%" stop-color="#667487"/>
+     </linearGradient>
+     <linearGradient id="silver-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+       <stop offset="0%" stop-color="#F5F7FA"/>
+       <stop offset="20%" stop-color="#BFC8D4"/>
+       <stop offset="50%" stop-color="#677383"/>
+       <stop offset="78%" stop-color="#E2E8EF"/>
+       <stop offset="100%" stop-color="#4B5563"/>
+     </linearGradient>
+     <radialGradient id="hub-core" cx="50%" cy="50%" r="55%">
+       <stop offset="0%" stop-color="#F8FBFD"/>
+       <stop offset="28%" stop-color="#AEB9C7"/>
+       <stop offset="68%" stop-color="#4E5A69"/>
+       <stop offset="100%" stop-color="#232A33"/>
+     </radialGradient>
+   </defs>
 
-    <!-- Silver/Chrome Edge -->
-    <linearGradient id="silver-edge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="20%" stop-color="#BCC6D5"/>
-      <stop offset="50%" stop-color="#F8FAFC"/>
-      <stop offset="80%" stop-color="#94A3B8"/>
-      <stop offset="100%" stop-color="#FFFFFF"/>
-    </linearGradient>
-  </defs>
+   <g transform="translate(108,10)">
+     <text x="0" y="40" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="#081A37" opacity="0.6">LLEDO</text>
+     <text x="2" y="38" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#metal-blue)">LLEDO</text>
+     <text x="7" y="35" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#metal-red)">LLEDO</text>
+     <text x="7" y="35" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="none" stroke="url(#silver-edge)" stroke-width="1.8">LLEDO</text>
+     <text x="10" y="62" font-family="Arial Black, Arial, sans-serif" font-weight="800" font-size="15" fill="#161C24" opacity="0.45" letter-spacing="2.4">AERO DISTRIBUTION</text>
+     <text x="9" y="60" font-family="Arial Black, Arial, sans-serif" font-weight="800" font-size="15" fill="url(#silver-fill)" letter-spacing="2.4">AERO DISTRIBUTION</text>
+   </g>
 
-  <!-- LLEDO EMBLEM (Faithful Brand Form) -->
-  <g transform="translate(15, 10)">
-    <!-- Outer Blue "C" Shape (Slanted) -->
-    <path d="M12,0 L95,0 L104,12 L104,20 L80,20 L76,12 L24,12 L30,28 L76,28 L80,36 L84,44 L0,44 L-8,32 L-8,12 Z" 
-          fill="url(#metal-blue)" stroke="url(#silver-edge)" stroke-width="1.2"/>
-    
-    <!-- Inner Red Part (Slanted) -->
-    <path d="M35,16 L88,16 L92,24 L92,30 L88,38 L32,38 L28,30 L28,24 Z" 
-          fill="url(#metal-red)" stroke="url(#silver-edge)" stroke-width="1"/>
-    
-    <!-- Highlights -->
-    <path d="M15,3 L92,3" stroke="white" stroke-width="0.5" opacity="0.4"/>
-    <path d="M38,19 L85,19" stroke="white" stroke-width="0.4" opacity="0.3"/>
-  </g>
+   <g transform="translate(31,72)">
+     <path d="M34,16 C20,30 8,35 0,36 C10,39 23,44 38,52 C60,46 80,40 101,37 C76,31 53,24 34,16 Z" fill="url(#silver-fill)" stroke="url(#silver-edge)" stroke-width="1.5"/>
+     <path d="M44,28 C26,35 14,39 8,40 C19,43 32,47 48,54 C67,49 82,45 97,42 C78,38 60,33 44,28 Z" fill="#3B4654" opacity="0.45"/>
+     <path d="M44,6 C60,18 82,28 108,35 C89,28 73,14 62,0 Z" fill="url(#silver-fill)" stroke="url(#silver-edge)" stroke-width="1.2"/>
 
-  <!-- TEXT SECTION -->
-  <g transform="translate(130, 14)">
-    <!-- LLEDO Main Title -->
-    <text x="0" y="24" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="30" fill="url(#metal-blue)" letter-spacing="1">LLEDO</text>
-    <text x="0" y="24" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="30" fill="none" stroke="url(#silver-edge)" stroke-width="0.4" letter-spacing="1">LLEDO</text>
-    
-    <!-- Subtitle -->
-    <g transform="translate(0, 32)">
-      <rect x="0" y="0" width="240" height="15" rx="2" fill="#0B1220" opacity="0.85"/>
-      <text x="5" y="11.5" font-family="Arial, sans-serif" font-weight="800" font-size="11.5" fill="#A9D4FF" letter-spacing="3">AERO DISTRIBUTION</text>
-      <line x1="0" y1="0" x2="220" y2="0" stroke="#3B82F6" stroke-width="2" opacity="0.9"/>
-    </g>
-  </g>
+     <path d="M324,16 C338,30 350,35 358,36 C348,39 335,44 320,52 C298,46 278,40 257,37 C282,31 305,24 324,16 Z" fill="url(#silver-fill)" stroke="url(#silver-edge)" stroke-width="1.5"/>
+     <path d="M314,28 C332,35 344,39 350,40 C339,43 326,47 310,54 C291,49 276,45 261,42 C280,38 298,33 314,28 Z" fill="#3B4654" opacity="0.45"/>
+     <path d="M314,6 C298,18 276,28 250,35 C269,28 285,14 296,0 Z" fill="url(#silver-fill)" stroke="url(#silver-edge)" stroke-width="1.2"/>
 
-  <!-- Integrated Helicopter Silhouette (Aero Context) -->
-  <g transform="translate(365, 12) scale(0.32)">
-     <path d="M15,28 Q20,20 30,18 L50,16 Q60,15 70,17 L85,22 Q95,26 98,32 L100,36 Q102,40 98,42 L80,44 Q70,45 60,44 L40,42 Q30,41 22,42 L18,43 Q14,44 13,40 Z" fill="url(#metal-blue)" stroke="url(#silver-edge)" stroke-width="2"/>
-     <path d="M15,28 L2,30 Q0,31 0,34 L1,37 Q2,39 5,38 L15,35" fill="url(#metal-red)" stroke="url(#silver-edge)" stroke-width="1.5"/>
-  </g>
-</svg>
+     <circle cx="179" cy="47" r="46" fill="url(#silver-fill)" stroke="url(#silver-edge)" stroke-width="2"/>
+     <circle cx="179" cy="47" r="34" fill="#2A313B" stroke="#A7B3C2" stroke-width="1.2"/>
+     <circle cx="179" cy="47" r="20" fill="url(#hub-core)" stroke="url(#silver-edge)" stroke-width="1.5"/>
+     <circle cx="179" cy="47" r="10" fill="#6C7786" opacity="0.45"/>
+
+     <path d="M179,14 L184,31 L179,47 L174,31 Z" fill="url(#silver-fill)"/>
+     <path d="M202,21 L193,35 L179,47 L188,29 Z" fill="url(#silver-fill)"/>
+     <path d="M212,42 L196,43 L179,47 L196,52 Z" fill="url(#silver-fill)"/>
+     <path d="M204,67 L191,56 L179,47 L187,66 Z" fill="url(#silver-fill)"/>
+     <path d="M179,80 L174,63 L179,47 L184,63 Z" fill="url(#silver-fill)"/>
+     <path d="M154,68 L167,56 L179,47 L171,66 Z" fill="url(#silver-fill)"/>
+     <path d="M146,42 L162,43 L179,47 L162,52 Z" fill="url(#silver-fill)"/>
+     <path d="M155,21 L165,35 L179,47 L170,29 Z" fill="url(#silver-fill)"/>
+     <circle cx="179" cy="47" r="42" fill="none" stroke="#4A5564" stroke-width="1" opacity="0.35"/>
+   </g>
+ </svg>
