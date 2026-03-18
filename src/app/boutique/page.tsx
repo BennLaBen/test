@@ -54,10 +54,10 @@ function HangarDoors() {
           className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
         >
           <div className="text-center">
-            <motion.div className="relative w-48 h-20 mx-auto mb-8">
+            <motion.div className="relative w-64 h-24 mx-auto mb-8">
               <Image
-                src="/images/aerotools/lledo-aerotools-logo.svg"
-                alt="LLEDO Aerotools"
+                src="/images/aerotools/lledo-aerotools-logo.svg?v=2"
+                alt="LLEDO Aero Distribution"
                 fill
                 className="object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                 priority
@@ -240,9 +240,6 @@ export default function BoutiquePage() {
       <div className="min-h-screen bg-gray-950 text-white">
         {/* ═══ HERO — HANGAR OPENING ═══ */}
         <HangarDoors />
-
-        {/* ═══ TRUST BAR ═══ */}
-        <TrustBar />
 
         {/* ═══ HIGHLIGHTS — ANIMATED CARDS AFTER HANGAR ═══ */}
         <section className="relative py-20 sm:py-28 overflow-hidden">
