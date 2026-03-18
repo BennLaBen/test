@@ -298,7 +298,7 @@ export function generateOrganizationJsonLd() {
       name: 'LLEDO Industries',
       url: 'https://lledo-industries.com',
       logo: 'https://lledo-industries.com/images/logo.png',
-      description: 'LLEDO Industries, leader français de l\'outillage aéronautique et des équipements GSE pour hélicoptères.',
+      description: 'LLEDO Industries, fabricant français d\'outillage aéronautique et d\'équipements GSE pour hélicoptères.',
       address: {
         streetAddress: '9-11 Boulevard de la Capelane',
         addressLocality: 'Les Pennes-Mirabeau',
@@ -380,7 +380,7 @@ export function generateLocalBusinessJsonLd() {
       name: 'LLEDO Industries',
       url: 'https://lledo-industries.com',
       logo: 'https://lledo-industries.com/images/logo.png',
-      description: 'LLEDO Industries, leader français des OUTILLAGES aéronautiques et des équipements GSE pour HÉLICOPTÈRES.',
+      description: 'LLEDO Industries, fabricant français d\'outillage aéronautique et d\'équipements GSE pour hélicoptères.',
       priceRange: '€€€',
       address: {
         streetAddress: '9-11 Boulevard de la Capelane',

@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle } from 'lucide-react'
+import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle, Wrench, Plane } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 
 // ─── HANGAR DOOR COMPONENT ───
@@ -193,24 +193,24 @@ function TrustBar() {
 // ─── ANIMATED TEXT SECTIONS DATA ───
 const STORY_SECTIONS = [
   {
-    text: 'LLEDO Aerotools est la référence mondiale en outillage de manutention pour hélicoptères.',
-    highlight: 'référence mondiale',
+    text: 'LLEDO Aerotools conçoit et fabrique en France de l\u2019outillage de manutention pour hélicoptères, reconnu par les professionnels du secteur.',
+    highlight: 'reconnu par les professionnels',
   },
   {
-    text: 'Chaque pièce est conçue, usinée et assemblée en France avec une exigence de qualité absolue.',
-    highlight: 'qualité absolue',
+    text: 'Chaque pièce est usinée et assemblée dans nos ateliers avec un haut niveau d\u2019exigence et de traçabilité.',
+    highlight: 'haut niveau d\u2019exigence',
   },
   {
-    text: 'Nos équipements sont certifiés aux plus hauts standards internationaux : EN 9100, ISO 9001, Directive Machines 2006/42/CE.',
-    highlight: 'plus hauts standards internationaux',
+    text: 'Nos équipements sont certifiés selon les standards aéronautiques en vigueur : EN 9100, ISO 9001, Directive Machines 2006/42/CE.',
+    highlight: 'standards aéronautiques en vigueur',
   },
   {
-    text: 'Les forces armées et opérateurs civils de plus de 50 pays nous font confiance pour la sécurité de leurs flottes.',
-    highlight: 'plus de 50 pays',
+    text: 'Des opérateurs civils et militaires à travers le monde nous font confiance pour la maintenance de leurs flottes.',
+    highlight: 'à travers le monde',
   },
   {
-    text: 'Livraison mondiale, support technique dédié, délais optimisés — nous garantissons une réactivité sans faille.',
-    highlight: 'réactivité sans faille',
+    text: 'Livraison internationale, support technique dédié, délais maîtrisés — nous mettons un point d\u2019honneur à être réactifs.',
+    highlight: 'réactifs',
   },
 ]
 
@@ -234,7 +234,7 @@ export default function BoutiquePage() {
     <>
       <SEO
         title="LLEDO Aerotools — Outillage Aéronautique Certifié"
-        description="Leader français de l'outillage aéronautique certifié : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
+        description="Outillage aéronautique certifié, conçu et fabriqué en France : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
       />
 
       <div className="min-h-screen bg-gray-950 text-white">
@@ -243,6 +243,50 @@ export default function BoutiquePage() {
 
         {/* ═══ TRUST BAR ═══ */}
         <TrustBar />
+
+        {/* ═══ HIGHLIGHTS — ANIMATED CARDS AFTER HANGAR ═══ */}
+        <section className="relative py-20 sm:py-28 overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/[0.04] rounded-full blur-[160px]" />
+          </div>
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7 }}
+              className="text-center text-xs font-bold uppercase tracking-[0.25em] text-gray-500 mb-14"
+            >
+              Pourquoi travailler avec nous
+            </motion.p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { icon: Wrench, title: 'Fabrication française', desc: 'Conception, usinage et assemblage dans nos ateliers en Provence.' },
+                { icon: Shield, title: 'Certifications reconnues', desc: 'EN 9100, ISO 9001, Directive Machines 2006/42/CE.' },
+                { icon: Plane, title: 'Multi-flottes', desc: 'Compatible H160, H145, NH90, Super Puma, Dauphin, Gazelle, AW139.' },
+                { icon: Truck, title: 'Livraison internationale', desc: 'Expédition fret aéronautique, suivi dédié, délais maîtrisés.' },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative bg-gray-900/60 border border-gray-800/60 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-gray-900/80 transition-all duration-500"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative">
+                    <div className="w-11 h-11 bg-blue-900/40 border border-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-900/60 transition-colors">
+                      <item.icon className="h-5 w-5 text-blue-400" />
+                    </div>
+                    <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">{item.title}</h3>
+                    <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* ═══ STORY SECTION — TEXT-ONLY WITH SCROLL ANIMATIONS ═══ */}
         <section ref={storyRef} className="relative py-24 sm:py-40 overflow-hidden">
@@ -277,7 +321,7 @@ export default function BoutiquePage() {
                   transition={{ duration: 1.2, delay: 0.2 }}
                   className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-blue-400 mb-8"
                 >
-                  L'excellence n'est pas une option
+                  Conçu et fabriqué en France
                 </motion.p>
                 <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95]">
                   <motion.span
@@ -287,7 +331,7 @@ export default function BoutiquePage() {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="block text-white"
                   >
-                    Le meilleur
+                    Un savoir-faire
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 40 }}
@@ -296,7 +340,7 @@ export default function BoutiquePage() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent"
                   >
-                    outillage aéronautique
+                    aéronautique
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0, y: 40 }}
@@ -305,7 +349,7 @@ export default function BoutiquePage() {
                     transition={{ duration: 0.8, delay: 0.7 }}
                     className="block text-white"
                   >
-                    au monde.
+                    depuis 1987.
                   </motion.span>
                 </h2>
               </motion.div>
