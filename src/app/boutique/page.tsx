@@ -1,488 +1,191 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Shield, Award, Truck, Phone, ChevronDown, ArrowRight, Zap, CheckCircle, Wrench, Plane } from 'lucide-react'
-import { SEO } from '@/components/SEO'
+import { Phone, Mail, Wrench } from 'lucide-react'
 
-// ─── HANGAR DOOR COMPONENT ───
-function HangarDoors() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-
-  const leftDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%'])
-  const rightDoor = useTransform(scrollYProgress, [0, 0.5], ['0%', '100%'])
-  const contentOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1])
-  const contentScale = useTransform(scrollYProgress, [0.2, 0.5], [0.92, 1])
-  const imageZoom = useTransform(scrollYProgress, [0, 0.8], [1.15, 1])
-  const overlayOpacity = useTransform(scrollYProgress, [0.4, 0.7], [0.7, 0.3])
-
+function HelicopterSVG({ flipped = false }: { flipped?: boolean }) {
   return (
-    <div ref={ref} className="relative h-[200vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background image */}
-        <motion.div className="absolute inset-0" style={{ scale: imageZoom }}>
-          <Image
-            src="/images/aerotools/helicopter-hero2.png"
-            alt="Hangar LLEDO Aero Tools — Hélicoptères"
-            fill
-            className="object-cover brightness-[0.4]"
-            priority
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)' }}
-          />
-        </motion.div>
-
-        {/* Dark overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gray-950 z-[5]"
-          style={{ opacity: overlayOpacity }}
-        />
-
-        {/* Content revealed behind doors */}
-        <motion.div
-          style={{ opacity: contentOpacity, scale: contentScale }}
-          className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
-        >
-          <div className="text-center">
-            <motion.div className="relative w-96 h-36 mx-auto mb-8">
-              <Image
-                src="/images/aerotools/logo-aero-distribution.png?v=local-11"
-                alt="LLEDO Aero Distribution"
-                fill
-                className="object-contain"
-                priority
-                unoptimized
-              />
-            </motion.div>
-
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter mb-4">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-                AEROTOOLS
-              </span>
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-6 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              Outillage aéronautique certifié — Barres de remorquage, rollers hydrauliques et équipements GSE pour hélicoptères civils et militaires.
-            </p>
-            <div className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-blue-400/80">
-              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-              Catalogue en ligne
-            </div>
-          </div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-16 left-1/2 -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ChevronDown className="h-8 w-8 text-blue-400/50" />
-          </motion.div>
-        </motion.div>
-
-        {/* LEFT DOOR */}
-        <motion.div
-          style={{ x: leftDoor }}
-          className="absolute inset-y-0 left-0 w-1/2 z-20"
-        >
-          <div className="h-full bg-gradient-to-r from-gray-800 to-gray-700 border-r-4 border-gray-600 shadow-[8px_0_30px_rgba(0,0,0,0.5)]">
-            {/* Rivets top-left */}
-            <div className="absolute top-8 left-8 grid grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
-              ))}
-            </div>
-            {/* Rivets bottom-right */}
-            <div className="absolute bottom-24 right-16 grid grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={`br-${i}`} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
-              ))}
-            </div>
-            {/* Warning stripes */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
-            {/* Handle */}
-            <div className="absolute top-1/2 right-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
-            {/* Horizontal beams */}
-            <div className="absolute top-1/3 left-0 right-0 h-1 bg-gray-600/50" />
-            <div className="absolute top-2/3 left-0 right-0 h-1 bg-gray-600/50" />
-            {/* Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-              <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
-                LLEDO
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* RIGHT DOOR */}
-        <motion.div
-          style={{ x: rightDoor }}
-          className="absolute inset-y-0 right-0 w-1/2 z-20"
-        >
-          <div className="h-full bg-gradient-to-l from-gray-800 to-gray-700 border-l-4 border-gray-600 shadow-[-8px_0_30px_rgba(0,0,0,0.5)]">
-            {/* Rivets top-right */}
-            <div className="absolute top-8 right-8 grid grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
-              ))}
-            </div>
-            {/* Rivets bottom-left */}
-            <div className="absolute bottom-24 left-16 grid grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={`bl-${i}`} className="w-3 h-3 rounded-full bg-gray-600 shadow-inner" />
-              ))}
-            </div>
-            {/* Warning stripes */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[repeating-linear-gradient(-45deg,#f59e0b_0,#f59e0b_20px,#111827_20px,#111827_40px)] opacity-60" />
-            {/* Handle */}
-            <div className="absolute top-1/2 left-8 -translate-y-1/2 w-4 h-32 bg-gray-500 rounded-full shadow-lg" />
-            {/* Horizontal beams */}
-            <div className="absolute top-1/3 left-0 right-0 h-1 bg-gray-600/50" />
-            <div className="absolute top-2/3 left-0 right-0 h-1 bg-gray-600/50" />
-            {/* Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-              <p className="text-6xl sm:text-8xl font-black text-gray-600/40 tracking-tighter select-none">
-                GSE
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </div>
+    <svg
+      viewBox="0 0 220 80"
+      fill="currentColor"
+      className="w-full h-full"
+      style={{ transform: flipped ? 'scaleX(-1)' : undefined }}
+    >
+      <rect x="55" y="5" width="90" height="5" rx="2.5" />
+      <circle cx="100" cy="7" r="5" />
+      <ellipse cx="82" cy="38" rx="22" ry="15" />
+      <ellipse cx="79" cy="34" rx="13" ry="10" fill="rgba(96,165,250,0.25)" />
+      <path d="M62 32 Q105 22 148 36 L153 52 Q118 62 62 52 Z" />
+      <path d="M148 44 L192 33 L192 40 L148 51 Z" />
+      <rect x="188" y="21" width="5" height="24" rx="2.5" />
+      <line x1="70" y1="58" x2="66" y2="70" stroke="currentColor" strokeWidth="3" />
+      <line x1="94" y1="58" x2="94" y2="70" stroke="currentColor" strokeWidth="3" />
+      <line x1="66" y1="70" x2="94" y2="70" stroke="currentColor" strokeWidth="3" />
+      <line x1="122" y1="56" x2="119" y2="68" stroke="currentColor" strokeWidth="3" />
+      <line x1="142" y1="54" x2="142" y2="68" stroke="currentColor" strokeWidth="3" />
+      <line x1="119" y1="68" x2="142" y2="68" stroke="currentColor" strokeWidth="3" />
+    </svg>
   )
 }
 
-// ─── TRUST BADGES ───
-function TrustBar() {
-  const badges = [
-    { icon: Shield, text: 'Certifié EN 9100', sub: 'Norme aéronautique' },
-    { icon: Award, text: 'Directive 2006/42/CE', sub: 'Conformité machines' },
-    { icon: Truck, text: 'Livraison mondiale', sub: 'Fret aéronautique' },
-    { icon: Phone, text: 'Support technique', sub: '+33 4 42 02 96 74' },
-  ]
-
+function FlyingHelicopter({
+  delay = 0,
+  top = '30%',
+  scale = 1,
+  opacity = 0.4,
+  flipped = false,
+}: {
+  delay?: number
+  top?: string
+  scale?: number
+  opacity?: number
+  flipped?: boolean
+}) {
+  const duration = 16 + delay * 3
   return (
-    <div className="bg-gray-900/80 border-y border-gray-800">
-      <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {badges.map((b, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-900/30 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <b.icon className="h-5 w-5 text-blue-400" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-white uppercase tracking-wide">{b.text}</p>
-                <p className="text-[10px] text-gray-500">{b.sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <motion.div
+      className="absolute text-blue-400 pointer-events-none"
+      style={{ top, width: 200 * scale, height: 76 * scale, opacity }}
+      initial={{ x: flipped ? '110vw' : '-250px' }}
+      animate={{ x: flipped ? '-250px' : '110vw' }}
+      transition={{ duration, repeat: Infinity, delay, ease: 'linear' }}
+    >
+      <HelicopterSVG flipped={flipped} />
+    </motion.div>
   )
 }
 
-// ─── ANIMATED TEXT SECTIONS DATA ───
-const STORY_SECTIONS = [
-  {
-    text: 'LLEDO Aerotools conçoit et fabrique en France de l\u2019outillage de manutention pour hélicoptères, reconnu par les professionnels du secteur.',
-    highlight: 'reconnu par les professionnels',
-  },
-  {
-    text: 'Chaque pièce est usinée et assemblée dans nos ateliers avec un haut niveau d\u2019exigence et de traçabilité.',
-    highlight: 'haut niveau d\u2019exigence',
-  },
-  {
-    text: 'Nos équipements sont certifiés selon les standards aéronautiques en vigueur : EN 9100, ISO 9001, Directive Machines 2006/42/CE.',
-    highlight: 'standards aéronautiques en vigueur',
-  },
-  {
-    text: 'Des opérateurs civils et militaires à travers le monde nous font confiance pour la maintenance de leurs flottes.',
-    highlight: 'à travers le monde',
-  },
-  {
-    text: 'Livraison internationale, support technique dédié, délais maîtrisés — nous mettons un point d\u2019honneur à être réactifs.',
-    highlight: 'réactifs',
-  },
-]
-
-// ─── MAIN PAGE ───
 export default function BoutiquePage() {
-  const router = useRouter()
-  const storyRef = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress: storyProgress } = useScroll({
-    target: storyRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const lineHeight = useTransform(storyProgress, [0.1, 0.9], ['0%', '100%'])
-
-  const handleCatalogueClick = () => {
-    router.push('/boutique/catalogue')
-  }
-
   return (
-    <>
-      <SEO
-        title="LLEDO Aerotools — Outillage Aéronautique Certifié"
-        description="Outillage aéronautique certifié, conçu et fabriqué en France : barres de remorquage, rollers hydrauliques et GSE pour hélicoptères Airbus, NH90, Super Puma, Gazelle."
-      />
+    <div className="relative min-h-screen bg-gray-950 text-white overflow-hidden flex flex-col items-center justify-center">
 
-      <div className="min-h-screen bg-gray-950 text-white">
-        {/* ═══ HERO — HANGAR OPENING ═══ */}
-        <HangarDoors />
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
-        {/* ═══ HIGHLIGHTS — ANIMATED CARDS AFTER HANGAR ═══ */}
-        <section className="relative py-20 sm:py-28 overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/[0.04] rounded-full blur-[160px]" />
+      {/* Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-700/10 rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Warning stripes */}
+      <div className="absolute bottom-0 left-0 right-0 h-10 bg-[repeating-linear-gradient(45deg,rgba(245,158,11,0.2)_0,rgba(245,158,11,0.2)_14px,transparent_14px,transparent_28px)]" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600" />
+
+      {/* Flying helicopters */}
+      <FlyingHelicopter delay={0}  top="10%"  scale={0.7} opacity={0.30} />
+      <FlyingHelicopter delay={6}  top="70%"  scale={0.5} opacity={0.20} flipped />
+      <FlyingHelicopter delay={11} top="40%"  scale={0.9} opacity={0.22} />
+      <FlyingHelicopter delay={3}  top="83%"  scale={0.4} opacity={0.15} flipped />
+      <FlyingHelicopter delay={8}  top="25%"  scale={1.0} opacity={0.18} flipped />
+
+      {/* Main content */}
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl">
+
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-80 h-28 mb-10"
+        >
+          <Image
+            src="/images/aerotools/logo-aero-distribution.png?v=local-11"
+            alt="LLEDO Aero Distribution"
+            fill
+            className="object-contain"
+            priority
+            unoptimized
+          />
+        </motion.div>
+
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center gap-3 mb-6 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full"
+        >
+          <Wrench className="h-4 w-4 text-amber-400 animate-pulse" />
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400">
+            Hangar en cours de fabrication
+          </span>
+        </motion.div>
+
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.35 }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95] mb-6"
+        >
+          <span className="block text-white">Boutique</span>
+          <span className="block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
+            AEROTOOLS
+          </span>
+          <span className="block text-white">à venir.</span>
+        </motion.h1>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55 }}
+          className="text-gray-400 text-lg leading-relaxed mb-10 max-w-xl"
+        >
+          Nos équipes préparent le hangar. La boutique en ligne d&apos;outillage
+          aéronautique certifié ouvrira ses portes très prochainement.
+        </motion.p>
+
+        {/* Progress bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="w-full max-w-md mb-10"
+        >
+          <div className="flex justify-between text-[10px] uppercase tracking-widest text-gray-500 mb-2">
+            <span>Progression</span>
+            <span>Ouverture prochaine</span>
           </div>
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7 }}
-              className="text-center text-xs font-bold uppercase tracking-[0.25em] text-gray-500 mb-14"
-            >
-              Pourquoi travailler avec nous
-            </motion.p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { icon: Wrench, title: 'Fabrication française', desc: 'Conception, usinage et assemblage dans nos ateliers en Provence.' },
-                { icon: Shield, title: 'Certifications reconnues', desc: 'EN 9100, ISO 9001, Directive Machines 2006/42/CE.' },
-                { icon: Plane, title: 'Multi-flottes', desc: 'Compatible H160, H145, NH90, Super Puma, Dauphin, Gazelle, AW139.' },
-                { icon: Truck, title: 'Livraison internationale', desc: 'Expédition fret aéronautique, suivi dédié, délais maîtrisés.' },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative bg-gray-900/60 border border-gray-800/60 rounded-2xl p-6 hover:border-blue-500/30 hover:bg-gray-900/80 transition-all duration-500"
-                >
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative">
-                    <div className="w-11 h-11 bg-blue-900/40 border border-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-900/60 transition-colors">
-                      <item.icon className="h-5 w-5 text-blue-400" />
-                    </div>
-                    <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">{item.title}</h3>
-                    <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ STORY SECTION — TEXT-ONLY WITH SCROLL ANIMATIONS ═══ */}
-        <section ref={storyRef} className="relative py-24 sm:py-40 overflow-hidden">
-          {/* Background effects */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-600/[0.03] rounded-full blur-[200px]" />
-            <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-cyan-600/[0.03] rounded-full blur-[180px]" />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            {/* Animated vertical line */}
-            <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-gray-800/50 hidden lg:block">
-              <motion.div
-                className="w-full bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-500 origin-top"
-                style={{ height: lineHeight }}
-              />
-            </div>
-
-            <div className="max-w-4xl mx-auto space-y-24 sm:space-y-32">
-              {/* Opening statement */}
-              <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="text-center"
-              >
-                <motion.p
-                  initial={{ opacity: 0, letterSpacing: '0.3em' }}
-                  whileInView={{ opacity: 1, letterSpacing: '0.2em' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, delay: 0.2 }}
-                  className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-blue-400 mb-8"
-                >
-                  Conçu et fabriqué en France
-                </motion.p>
-                <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.95]">
-                  <motion.span
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="block text-white"
-                  >
-                    Un savoir-faire
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent"
-                  >
-                    aéronautique
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.7 }}
-                    className="block text-white"
-                  >
-                    depuis 1987.
-                  </motion.span>
-                </h2>
-              </motion.div>
-
-              {/* Story text blocks — each reveals on scroll */}
-              {STORY_SECTIONS.map((section, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 80, filter: 'blur(8px)' }}
-                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{
-                    duration: 0.9,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.1,
-                  }}
-                  className={`text-center ${i % 2 === 0 ? 'lg:text-left lg:pr-24' : 'lg:text-right lg:pl-24'}`}
-                >
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-300 leading-relaxed">
-                    {section.text.split(section.highlight).map((part, j, arr) => (
-                      <span key={j}>
-                        {part}
-                        {j < arr.length - 1 && (
-                          <motion.span
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="font-black text-white"
-                            style={{ textShadow: '0 0 30px rgba(59, 130, 246, 0.4)' }}
-                          >
-                            {section.highlight}
-                          </motion.span>
-                        )}
-                      </span>
-                    ))}
-                  </p>
-
-                  {/* Subtle separator dot */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className={`mt-8 ${i % 2 === 0 ? 'lg:text-left' : 'lg:text-right'} text-center`}
-                  >
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
-                  </motion.div>
-                </motion.div>
-              ))}
-
-              {/* ═══ FINAL CTA — VOIR CATALOGUE ═══ */}
-              <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="text-center pt-8"
-              >
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="text-lg sm:text-xl text-gray-500 mb-10 font-light"
-                >
-                  Découvrez notre catalogue complet d'équipements certifiés.
-                </motion.p>
-
-                <motion.button
-                  onClick={handleCatalogueClick}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="group relative inline-flex items-center gap-4 px-14 py-7 sm:px-20 sm:py-8 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                    <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:animate-shine" />
-                  </div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
-
-                  <span className="relative text-xl sm:text-2xl font-black uppercase tracking-wider text-white">
-                    Voir le Catalogue
-                  </span>
-                  <ArrowRight className="relative h-6 w-6 sm:h-8 sm:w-8 text-white group-hover:translate-x-2 transition-transform duration-300" />
-                </motion.button>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══ CTA SECTION — CUSTOM EQUIPMENT ═══ */}
-        <section className="relative py-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-900 to-blue-950" />
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
-
-          <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Zap className="h-10 w-10 text-amber-400 mx-auto mb-6" />
-              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight mb-4 text-white">
-                Besoin d'un équipement sur mesure ?
-              </h2>
-              <p className="text-blue-200/70 max-w-xl mx-auto mb-8">
-                Notre bureau d'études conçoit des outillages spécifiques pour votre flotte. Contactez notre équipe pour une étude personnalisée.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-xl font-black uppercase tracking-wider text-sm hover:bg-blue-50 transition-colors shadow-xl"
-                >
-                  Demander un devis
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href="/aerotools"
-                  className="inline-flex items-center gap-2 px-6 py-4 border border-blue-400/30 text-blue-300 rounded-xl font-bold uppercase tracking-wider text-sm hover:bg-blue-800/30 transition-colors"
-                >
-                  <Award className="h-4 w-4" />
-                  Voir nos certifications
-                </Link>
-              </div>
-            </motion.div>
+              className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"
+              initial={{ width: '0%' }}
+              animate={{ width: '72%' }}
+              transition={{ duration: 1.5, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            />
           </div>
-        </section>
+        </motion.div>
+
+        {/* Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+          className="flex flex-col sm:flex-row items-center gap-4"
+        >
+          <Link
+            href="tel:+33442029674"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition-colors"
+          >
+            <Phone className="h-4 w-4" />
+            +33 4 42 02 96 74
+          </Link>
+          <Link
+            href="mailto:contact@lledo.fr"
+            className="flex items-center gap-2 px-6 py-3 border border-gray-700 hover:border-blue-500/50 text-gray-300 hover:text-white rounded-xl font-bold text-sm transition-colors"
+          >
+            <Mail className="h-4 w-4" />
+            Nous contacter
+          </Link>
+          <Link
+            href="/"
+            className="text-sm text-gray-500 hover:text-gray-300 transition-colors underline underline-offset-4"
+          >
+            Retour au site
+          </Link>
+        </motion.div>
       </div>
-    </>
+    </div>
   )
 }
