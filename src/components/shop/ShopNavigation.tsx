@@ -58,12 +58,12 @@ export function ShopNavigation() {
       {/* Main navbar */}
       <div className="bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-black/20">
         <div className="container mx-auto px-4">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <Link href="/boutique" className="flex items-center group flex-shrink-0">
-              <div className="relative h-10 w-52">
+              <div className="relative h-20 w-96">
                 <Image 
-                  src="/images/aerotools/logo-simple.svg"
+                  src="/images/aerotools/logo-aero-distribution.png?v=local-11"
                   alt="LLEDO Aero Distribution"
                   fill
                   className="object-contain group-hover:scale-[1.03] transition-transform"

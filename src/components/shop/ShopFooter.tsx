@@ -11,9 +11,9 @@ export function ShopFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <div className="relative h-14 w-64 mb-6">
+            <div className="relative h-20 w-80 mb-6">
                <Image 
-                 src="/images/aerotools/logo-simple.svg"
+                 src="/images/aerotools/logo-aero-distribution.png?v=local-11"
                  alt="LLEDO Aero Distribution"
                  fill
                  className="object-contain object-left"
